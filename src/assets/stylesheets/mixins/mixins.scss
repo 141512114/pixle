@@ -1,0 +1,29 @@
+// Default mixins
+@mixin clickable($bool: false) {
+  @if ($bool == true) {
+    pointer-events: all;
+  } @else {
+    pointer-events: none;
+  }
+}
+
+@mixin alignment_old($xoff:50%, $yoff:50%, $xoff_counter:-$xoff, $yoff_counter:-$yoff) {
+  position: absolute;
+  top: $xoff;
+  left: $yoff;
+  transform: translate($xoff_counter, $yoff_counter);
+}
+
+@mixin flexbox($halign:center, $valign:center, $dir:column) {
+  display: flex;
+  flex-direction: $dir;
+  justify-content: $halign;
+  align-items: $valign;
+}
+
+@mixin grid($tmp_r:unset, $tmp_c:auto auto auto, $gap: 0) {
+  display: grid;
+  grid-template-rows: $tmp_r;
+  grid-template-columns: $tmp_c;
+  grid-gap: $gap;
+}

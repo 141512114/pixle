@@ -1,0 +1,15 @@
+<div class="component-pix-grid">
+  <div class="pix-grid-wrapper">
+    <div class="pix-grid-row" *ngFor="let row of pixle_image">
+      <div class="pix-grid-col" *ngFor="let col of row">
+        <app-pix-grid-element [pixle_emoji]="col" [receive_chosen_emoji]="chosen_emoji"></app-pix-grid-element>
+      </div>
+    </div>
+  </div>
+  <div class="pix-emoji-list-wrapper">
+    <div class="pix-grid-row" *ngFor="let row of pixle_emoji_list">
+      <app-pix-grid-element [pixle_emoji]="row" [grid_element_type]="1"
+                            (sendIconCodePoint)="receiveIconCodePoint($event)"></app-pix-grid-element>
+    </div>
+  </div>
+</div>

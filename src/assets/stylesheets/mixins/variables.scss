@@ -1,0 +1,14 @@
+@use "sass:map";
+
+// Default color maps
+$dark-theme: (
+  main-background: #101114,
+  second-background: #1b1c21,
+  light-background: #32374d,
+  dark-background: #08090a,
+  main-text: white
+);
+
+// Default variables
+$standard-pixle-size: 550px;
+$tile-size: 110px;

@@ -1,0 +1,124 @@
+@use "sass:map";
+
+// Import default "libraries"
+@import 'src/assets/stylesheets/mixins/fonts';
+@import 'src/assets/stylesheets/mixins/variables';
+
+// Default settings
+* {
+  margin: 0;
+  padding: 0;
+}
+
+html,
+body {
+  background-color: map.get($dark-theme, main-background);
+}
+
+section {
+  width: 100%;
+  min-height: 100vh;
+  height: auto;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+p,
+a {
+  font-weight: 400;
+  color: map.get($dark-theme, main-text);
+}
+
+h1,
+h2,
+h3,
+h4,
+h5 {
+  font-family: $main-header;
+}
+
+p,
+a {
+  font-family: $main-font;
+}
+
+input,
+textarea {
+  padding: 4px 12px;
+  font-family: $main-font;
+  font-size: 18px;
+  font-weight: 400;
+  outline: none;
+}
+
+input:focus,
+input:active,
+textarea:focus,
+textarea:active {
+  outline: none;
+}
+
+button {
+  padding: 4px 12px;
+  font-weight: 400;
+  border: none;
+  outline: none;
+  user-select: none;
+}
+
+button:focus {
+  outline: none;
+}
+
+a:hover,
+button:hover {
+  cursor: pointer;
+}
+
+div.user-popup {
+  width: $standard-pixle-size;
+  opacity: 1;
+  transition: top 700ms, opacity 550ms, visibility 300ms;
+
+  &.close {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+  }
+
+  input,
+  button {
+    display: block;
+    width: 100%;
+    margin-bottom: 12px;
+    padding: 21px 32px;
+    font-size: 21px;
+    letter-spacing: 2px;
+    color: white;
+    border: 4px solid map.get($dark-theme, main-background);
+    border-radius: 100px;
+    background-color: map.get($dark-theme, second-background);
+    transition: background-color 300ms, border-color 300ms, color 300ms;
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+
+  button {
+    color: grey;
+  }
+
+  input:focus,
+  button:hover {
+    color: map.get($dark-theme, main-text);
+    border-color: map.get($dark-theme, light-background);
+  }
+
+  button:active {
+    background-color: map.get($dark-theme, light-background);
+  }
+}

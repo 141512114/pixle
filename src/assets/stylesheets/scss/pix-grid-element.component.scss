@@ -1,0 +1,45 @@
+@use "sass:map";
+
+@import 'src/assets/stylesheets/mixins/variables';
+@import 'src/assets/stylesheets/mixins/mixins';
+
+$background-offset: 20px;
+$background-offset-hover: 10px;
+
+// pix-grid-element component stylesheet
+div.component-pix-grid-element {
+  position: relative;
+  width: $tile-size;
+  height: $tile-size;
+
+  &::before {
+    content: '';
+    @include alignment_old();
+    width: $tile-size - $background-offset;
+    height: $tile-size - $background-offset;
+    border-radius: 17px;
+    background-color: rgba(map.get($dark-theme, main-background), .5);
+    transition: width 300ms, height 300ms, background-color 200ms, border-radius 200ms;
+    z-index: 10;
+  }
+
+  p.icon-container {
+    position: relative;
+    width: 100%;
+    font-size: 44px;
+    text-align: center;
+    line-height: $tile-size;
+    z-index: 20;
+  }
+
+  &:hover {
+    cursor: pointer;
+
+    &::before {
+      width: $tile-size - $background-offset-hover;
+      height: $tile-size - $background-offset-hover;
+      border-radius: 22px;
+      background-color: rgba(map.get($dark-theme, main-background), .65);
+    }
+  }
+}
