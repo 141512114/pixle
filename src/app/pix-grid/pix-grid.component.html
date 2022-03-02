@@ -1,15 +1,22 @@
 <div class="component-pix-grid">
-  <div class="pix-grid-wrapper">
-    <div class="pix-grid-row" *ngFor="let row of pixle_image">
-      <div class="pix-grid-col" *ngFor="let col of row">
-        <app-pix-grid-element [pixle_emoji]="col" [receive_chosen_emoji]="chosen_emoji"></app-pix-grid-element>
+  <div class="playground-wrapper" *ngIf="pixle_image != null || undefined; else elsePixleGrid">
+    <div class="pix-grid-wrapper">
+      <div class="pix-grid-row" *ngFor="let row of pixle_image">
+        <div class="pix-grid-col" *ngFor="let col of row">
+          <app-pix-grid-element [pixle_emoji]="col" [receive_chosen_emoji]="chosen_emoji"></app-pix-grid-element>
+        </div>
       </div>
     </div>
-  </div>
-  <div class="pix-emoji-list-wrapper">
-    <div class="pix-grid-row" *ngFor="let row of pixle_emoji_list">
-      <app-pix-grid-element [pixle_emoji]="row" [grid_element_type]="1"
-                            (sendIconCodePoint)="receiveIconCodePoint($event)"></app-pix-grid-element>
+    <div class="pix-emoji-list-wrapper">
+      <div class="pix-grid-row" *ngFor="let row of pixle_emoji_list">
+        <app-pix-grid-element [pixle_emoji]="row" [grid_element_type]="1"
+                              (sendIconCodePoint)="receiveIconCodePoint($event)"></app-pix-grid-element>
+      </div>
     </div>
+    <button (click)="validatePixleOnClick()" type="button">Validate</button>
+    <app-pix-popup-message #match_status></app-pix-popup-message>
   </div>
+  <ng-template #elsePixleGrid>
+    <app-pix-popup-message #missing_pixle [message]="missing_pixle_msg"></app-pix-popup-message>
+  </ng-template>
 </div>

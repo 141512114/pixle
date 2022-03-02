@@ -5,6 +5,8 @@
 
 $background-offset: 20px;
 $background-offset-hover: 10px;
+$background-opacity: .45;
+$background-opacity-hover: .65;
 
 // pix-grid-element component stylesheet
 div.component-pix-grid-element {
@@ -18,7 +20,7 @@ div.component-pix-grid-element {
     width: $tile-size - $background-offset;
     height: $tile-size - $background-offset;
     border-radius: 17px;
-    background-color: rgba(map.get($dark-theme, main-background), .5);
+    background-color: rgba(map.get($dark-theme, main-background), $background-opacity);
     transition: width 300ms, height 300ms, background-color 200ms, border-radius 200ms;
     z-index: 10;
   }
@@ -32,14 +34,44 @@ div.component-pix-grid-element {
     z-index: 20;
   }
 
+  &.grid-element-status {
+    &__solved::before {
+      background-color: rgba(green, $background-opacity);
+    }
+
+    &__2::before {
+      background-color: rgba(yellow, $background-opacity);
+    }
+
+    &__1::before {
+      background-color: rgba(orange, $background-opacity);
+    }
+
+    &__failed::before {
+      background-color: rgba(red, $background-opacity);
+    }
+  }
+
   &:hover {
     cursor: pointer;
 
-    &::before {
-      width: $tile-size - $background-offset-hover;
-      height: $tile-size - $background-offset-hover;
-      border-radius: 22px;
-      background-color: rgba(map.get($dark-theme, main-background), .65);
+    &:not(.grid-element-status__solved, .grid-element-status__failed) {
+      &::before {
+        width: $tile-size - $background-offset-hover;
+        height: $tile-size - $background-offset-hover;
+        border-radius: 22px;
+        background-color: rgba(map.get($dark-theme, main-background), $background-opacity-hover);
+      }
+
+      &.grid-element-status {
+        &__2::before {
+          background-color: rgba(yellow, $background-opacity-hover);
+        }
+
+        &__1::before {
+          background-color: rgba(orange, $background-opacity-hover);
+        }
+      }
     }
   }
 }

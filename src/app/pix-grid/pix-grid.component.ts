@@ -1,28 +1,47 @@
-import {Component, OnInit} from '@angular/core';
+import {AfterViewInit, Component, OnInit, QueryList, ViewChild, ViewChildren} from '@angular/core';
 import {IPixle} from '../interface/pixle.interface';
 import {PIXLEARTS} from '../database/pix-arts-database';
-import {PIXLE_ICONS, REDCROSS} from '../database/emoji-database';
+import {PIXLE_ICONS, REDCROSS, WHITE_QUESTIONMARK} from '../database/emoji-database';
+import {PixGridElementComponent} from '../pix-grid-element/pix-grid-element.component';
+import {PixPopupMessageComponent} from '../pix-popup-message/pix-popup-message.component';
+import {IPopUp} from '../interface/popup-message.interface';
 
 @Component({
   selector: 'app-pix-grid',
   templateUrl: './pix-grid.component.html',
   styleUrls: ['../../assets/stylesheets/css/minified/pix-grid.component.min.css']
 })
-export class PixGridComponent implements OnInit {
+export class PixGridComponent implements OnInit, AfterViewInit {
+  @ViewChildren(PixGridElementComponent) private pixGridElementComponents!: QueryList<PixGridElementComponent>;
+  @ViewChild('match_status') private match_status_msg!: PixPopupMessageComponent;
   pixle_arts: IPixle[] = PIXLEARTS; // <-- pulled database
+  missing_pixle_msg: IPopUp = {
+    headline: 'Missing pixle data!',
+    subline: 'There was a mistake retrieving a pixle from the database.',
+    message_body: 'If this issue occurs more than it should, report this bug to the team.'
+  };
 
   empty_emoji_slot: number = REDCROSS;
+  hidden_pixle_tile: number = WHITE_QUESTIONMARK;
 
-  pixle_id: number = 0;
+  pixle_id: number = -1;
   pixle_image?: number[][];
   pixle_image_width: number = 0;
   pixle_image_height: number = 0;
   pixle_emoji_list: number[] = [];
+  pixle_solved: boolean = false;
 
+  game_started: boolean = false;
   chosen_emoji: number = -1;
 
   ngOnInit(): void {
     this.searchRandomPixleArt();
+  }
+
+  ngAfterViewInit(): void {
+    setTimeout(() => {
+      this.hidePixle();
+    }, 2000);
   }
 
   /**
@@ -35,15 +54,26 @@ export class PixGridComponent implements OnInit {
   }
 
   /**
+   * After clicking on a button, validate the pixle created by the player
+   */
+  public validatePixleOnClick(): void {
+    this.pixle_solved = this.validatePixle();
+    if (!this.pixle_solved) return;
+    this.match_status_msg.openPopUp();
+  }
+
+  /**
    * Search for any pixle art from the database (get a random one)
    * Emit an event, which sends the chosen pixle object out to be received by other components
    *
    * @private
    */
   private searchRandomPixleArt(): void {
+    if (this.pixle_arts == undefined || null) return;
     let rand: number = PixGridComponent.generateRandomInteger(this.pixle_arts.length - 1);
 
     let selected_pixle_art: IPixle = this.pixle_arts[rand];
+    if (selected_pixle_art == undefined || null) return;
     let pixle_art_tiles: number[][] = selected_pixle_art.tiles;
 
     // Go through the pixle image --> contains only emoji ids --> convert them to codepoints
@@ -102,6 +132,53 @@ export class PixGridComponent implements OnInit {
   }
 
   /**
+   * Hide the pixle --> swap emojis on all tiles
+   *
+   * @private
+   */
+  private hidePixle(): void {
+    let temp_pix_grid_comps: PixGridElementComponent[] = this.pixGridElementComponents.toArray();
+    if (temp_pix_grid_comps == undefined || null) return;
+    for (let i: number = 0; i < temp_pix_grid_comps.length; i++) {
+      if (temp_pix_grid_comps[i].grid_element_type === 1) continue;
+      temp_pix_grid_comps[i].changeElementIcon(this.hidden_pixle_tile);
+    }
+    this.game_started = true;
+  }
+
+  /**
+   * Validate the pixle
+   * Easy version: go through every tile and check its validity separately
+   * @todo What it should be --> hashed version of player pixle has to be the same as the hashed version of the original
+   *
+   * @private
+   */
+  private validatePixle(): boolean {
+    if (!this.game_started) return false;
+    let temp_pix_grid_comps: PixGridElementComponent[] = this.pixGridElementComponents.toArray();
+    if (temp_pix_grid_comps == undefined || null) return false;
+
+    let total_count: number = 0;
+    let pixle_convert: number[] = this.convertPixleIntoNormalArray();
+    if (pixle_convert.length <= 0) return false;
+    // Check every pixle tile if its valid --> emoji at the exact same position as in the original pixle
+    for (let i: number = 0; i < pixle_convert.length; i++) {
+      if (temp_pix_grid_comps[i].pixle_tile_solved) {
+        total_count++;
+        continue;
+      }
+      if (temp_pix_grid_comps[i].pixle_emoji_codepoint !== pixle_convert[i]) {
+        temp_pix_grid_comps[i].updateTileStatus(false);
+        continue;
+      }
+      temp_pix_grid_comps[i].updateTileStatus(true);
+      total_count++;
+    }
+
+    return total_count >= pixle_convert.length;
+  }
+
+  /**
    * Convert the pixle array (two-dimensional) into a "normal" array (one-dimensional)
    * This makes it easier to compare every entry with each other and find duplicates
    *
@@ -112,8 +189,8 @@ export class PixGridComponent implements OnInit {
 
     // Make sure a pixle tile array was assigned
     if (this.pixle_image == undefined || null) return [];
-    for (let i: number = 0; i < this.pixle_image.length; i++) {
-      for (let j: number = 0; j < this.pixle_image[i].length; j++) {
+    for (let i: number = 0; i < this.pixle_image_height; i++) {
+      for (let j: number = 0; j < this.pixle_image_width; j++) {
         pixle_convert.push(this.pixle_image[i][j]);
       }
     }

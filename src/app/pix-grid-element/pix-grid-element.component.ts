@@ -1,4 +1,5 @@
 import {AfterViewInit, Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild} from '@angular/core';
+import {WHITE_QUESTIONMARK} from '../database/emoji-database';
 
 @Component({
   selector: 'app-pix-grid-element',
@@ -17,6 +18,10 @@ export class PixGridElementComponent implements OnInit, AfterViewInit {
   @Input() grid_element_type: number = 0;
   @Output() sendIconCodePoint: EventEmitter<number> = new EventEmitter<number>();
 
+  pixle_emoji_default: number = WHITE_QUESTIONMARK;
+
+  pixle_tile_lives: number = 3;
+  pixle_tile_solved: boolean = false;
   pixle_emoji_text: string = '';
   pixle_emoji_codepoint: number = -1;
 
@@ -49,7 +54,7 @@ export class PixGridElementComponent implements OnInit, AfterViewInit {
    * @param emoji_codepoint
    */
   public revealOnClick(emoji_codepoint: number): void {
-    if (emoji_codepoint === -1) return;
+    if (emoji_codepoint === -1 || this.pixle_tile_solved || this.pixle_tile_lives <= 0) return;
     this.changeElementIcon(emoji_codepoint);
   }
 
@@ -57,11 +62,34 @@ export class PixGridElementComponent implements OnInit, AfterViewInit {
    * Change the grid elements icon
    *
    * @param emoji_codepoint
-   * @private
    */
-  private changeElementIcon(emoji_codepoint: number): void {
+  public changeElementIcon(emoji_codepoint: number): void {
     if ((emoji_codepoint == undefined || null) || (this.pixle_emoji_codepoint === emoji_codepoint)) return;
     this.pixle_emoji_text = String.fromCodePoint(emoji_codepoint);
     this.pixle_emoji_codepoint = emoji_codepoint;
+  }
+
+  /**
+   * Update the status of this particular grid element / pixle tile
+   *
+   * @param solved
+   */
+  public updateTileStatus(solved: boolean): void {
+    if (this.grid_element_type === 1 || this.pixle_tile_solved || this.pixle_tile_lives <= 0) return;
+    let grid_native_element: HTMLElement = this.component_grid_element.nativeElement;
+
+    if (!solved) {
+      this.changeElementIcon(this.pixle_emoji_default);
+      this.pixle_tile_lives--;
+      // Add class which represents the current health status
+      if (this.pixle_tile_lives <= 0) {
+        grid_native_element.classList.add('grid-element-status__failed');
+      } else {
+        grid_native_element.classList.add('grid-element-status__' + this.pixle_tile_lives);
+      }
+    } else {
+      grid_native_element.classList.add('grid-element-status__solved');
+      this.pixle_tile_solved = solved;
+    }
   }
 }
