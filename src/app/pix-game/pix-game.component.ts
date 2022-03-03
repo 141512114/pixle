@@ -15,6 +15,12 @@ const SUCCESSMSG: IPopUp = {
   message_body: 'But do not worry, there are many more to come! Look forward for your next pixle!'
 };
 
+const FAILEDMSG: IPopUp = {
+  headline: 'Something\'s not right!',
+  subline: 'You didn\'t solve today\'s pixle!',
+  message_body: 'Keep it up! There is still time left to give it another shot.'
+};
+
 @Component({
   selector: 'app-pix-game',
   templateUrl: './pix-game.component.html',
@@ -32,6 +38,9 @@ export class PixGameComponent {
     switch (status) {
       case 100:
         this.match_status_msg.openPopUp(SUCCESSMSG);
+        break;
+      case 200:
+        this.match_status_msg.openPopUp(FAILEDMSG);
         break;
       case 500:
         this.match_status_msg.openPopUp(MISSINGPIXLEMSG);

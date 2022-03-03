@@ -55,10 +55,7 @@ export class PixGridComponent implements OnInit, AfterViewInit {
    * After clicking on a button, validate the pixle created by the player
    */
   public validatePixleOnClick(): void {
-    if (!this.game_started) return;
-    this.pixle_solved = this.validatePixle();
-    if (!this.pixle_solved) return;
-    this.sendMatchStatus.emit(100);
+    this.validatePixle();
   }
 
   /**
@@ -152,19 +149,19 @@ export class PixGridComponent implements OnInit, AfterViewInit {
    *
    * @private
    */
-  private validatePixle(): boolean {
-    if (!this.game_started) return false;
+  private validatePixle(): void {
+    if (!this.game_started || this.pixle_solved) return;
     let temp_pix_grid_comps: PixGridElementComponent[] = this.pixGridElementComponents.toArray();
-    if (temp_pix_grid_comps == undefined || null) return false;
+    if (temp_pix_grid_comps == undefined || null) return;
 
     let total_count: number = 0;
     let pixle_convert: number[] = this.convertPixleIntoNormalArray();
-    if (pixle_convert.length <= 0) return false;
+    if (pixle_convert.length <= 0) return;
     // Check every pixle tile if its valid --> emoji at the exact same position as in the original pixle
     for (let i: number = 0; i < pixle_convert.length; i++) {
-      if (temp_pix_grid_comps[i].pixle_tile_solved) {
-        total_count++;
-        continue;
+      if (temp_pix_grid_comps[i].pixle_tile_lives <= 0) {
+        this.sendMatchStatus.emit(200);
+        break;
       }
       if (temp_pix_grid_comps[i].pixle_emoji_codepoint !== pixle_convert[i]) {
         temp_pix_grid_comps[i].updateTileStatus(false);
@@ -174,7 +171,10 @@ export class PixGridComponent implements OnInit, AfterViewInit {
       total_count++;
     }
 
-    return total_count >= pixle_convert.length;
+    if (total_count >= pixle_convert.length) {
+      this.pixle_solved = true;
+      this.sendMatchStatus.emit(100);
+    }
   }
 
   /**
