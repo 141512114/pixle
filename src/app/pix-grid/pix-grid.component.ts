@@ -47,6 +47,7 @@ export class PixGridComponent implements OnInit, AfterViewInit {
    * @param emoji_codepoint
    */
   public receiveIconCodePoint(emoji_codepoint: number): void {
+    if (!this.game_started) return;
     this.chosen_emoji = emoji_codepoint;
   }
 
@@ -54,6 +55,7 @@ export class PixGridComponent implements OnInit, AfterViewInit {
    * After clicking on a button, validate the pixle created by the player
    */
   public validatePixleOnClick(): void {
+    if (!this.game_started) return;
     this.pixle_solved = this.validatePixle();
     if (!this.pixle_solved) return;
     this.sendMatchStatus.emit(100);
