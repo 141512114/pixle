@@ -30,7 +30,9 @@ export class PixGridComponent implements OnInit, AfterViewInit {
   chosen_emoji: number = -1;
 
   ngOnInit(): void {
-    this.searchRandomPixleArt();
+    if (!this.searchRandomPixleArt()) {
+      this.sendMatchStatus.emit(500);
+    }
   }
 
   ngAfterViewInit(): void {
@@ -63,12 +65,12 @@ export class PixGridComponent implements OnInit, AfterViewInit {
    *
    * @private
    */
-  private searchRandomPixleArt(): void {
-    if (this.pixle_arts == undefined || null) return;
+  private searchRandomPixleArt(): boolean {
+    if (this.pixle_arts == undefined || null) return false;
     let rand: number = PixGameComponent.generateRandomInteger(this.pixle_arts.length - 1);
 
     let selected_pixle_art: IPixle = this.pixle_arts[rand];
-    if (selected_pixle_art == undefined || null) return;
+    if (selected_pixle_art == undefined || null) return false;
     let pixle_art_tiles: number[][] = selected_pixle_art.tiles;
 
     // Go through the pixle image --> contains only emoji ids --> convert them to codepoints
@@ -80,11 +82,11 @@ export class PixGridComponent implements OnInit, AfterViewInit {
     this.pixle_id = selected_pixle_art.id;
 
     // Make sure a pixle tile array was assigned
-    if (this.pixle_image == undefined || null) return;
+    if (this.pixle_image == undefined || null) return false;
     this.pixle_image_height = this.pixle_image.length;
     this.pixle_image_width = this.pixle_image[0].length;
 
-    this.getEmojiList();
+    return this.getEmojiList();
   }
 
   /**
@@ -92,12 +94,12 @@ export class PixGridComponent implements OnInit, AfterViewInit {
    *
    * @private
    */
-  private getEmojiList(): void {
+  private getEmojiList(): boolean {
     // Make sure a pixle tile array was assigned
-    if (this.pixle_image == undefined || null) return;
+    if (this.pixle_image == undefined || null) return false;
 
     let pixle_convert: number[] = this.convertPixleIntoNormalArray();
-    if (pixle_convert.length <= 0) return;
+    if (pixle_convert.length <= 0) return false;
 
     let temp_emoji_list: number[] = [];
     for (let i: number = 0; i < pixle_convert.length; i++) {
@@ -124,6 +126,7 @@ export class PixGridComponent implements OnInit, AfterViewInit {
     }
 
     this.pixle_emoji_list = temp_emoji_list;
+    return true;
   }
 
   /**

@@ -2,9 +2,9 @@ import {Component, ElementRef, Input, ViewChild} from '@angular/core';
 import {IPopUp} from '../interface/popup-message.interface';
 
 const DEFAULT_POPUP: IPopUp = {
-  headline: "Hmm..., this isn't supposed to be shown already...",
-  subline: "",
-  message_body: "Did you try something??"
+  headline: 'Hmm..., this isn\'t supposed to be shown already...',
+  subline: '',
+  message_body: 'Did you try something??'
 };
 
 @Component({
@@ -19,7 +19,8 @@ export class PixPopupMessageComponent {
   /**
    * Open pop up
    */
-  openPopUp(): void {
+  public openPopUp(msg_object: IPopUp = DEFAULT_POPUP): void {
+    this.message = msg_object;
     this.match_closing_message.nativeElement.classList.remove('close');
   }
 }

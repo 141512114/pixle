@@ -3,6 +3,18 @@ import {PIXLE_ICONS} from '../database/emoji-database';
 import {IPopUp} from '../interface/popup-message.interface';
 import {PixPopupMessageComponent} from '../pix-popup-message/pix-popup-message.component';
 
+const MISSINGPIXLEMSG: IPopUp = {
+  headline: 'Missing pixle data!',
+  subline: 'There was a mistake retrieving a pixle from the database.',
+  message_body: 'If this issue occurs more than it should, report this bug to the team.'
+};
+
+const SUCCESSMSG: IPopUp = {
+  headline: 'Congratulations!',
+  subline: 'You solved today\'s pixle!',
+  message_body: 'But do not worry, there are many more to come! Look forward for your next pixle!'
+};
+
 @Component({
   selector: 'app-pix-game',
   templateUrl: './pix-game.component.html',
@@ -10,11 +22,6 @@ import {PixPopupMessageComponent} from '../pix-popup-message/pix-popup-message.c
 })
 export class PixGameComponent {
   @ViewChild('match_status') private match_status_msg!: PixPopupMessageComponent;
-  missing_pixle_msg: IPopUp = {
-    headline: 'Missing pixle data!',
-    subline: 'There was a mistake retrieving a pixle from the database.',
-    message_body: 'If this issue occurs more than it should, report this bug to the team.'
-  };
 
   /**
    * Receive the current status of the ongoing match and evaluate the status number
@@ -24,7 +31,10 @@ export class PixGameComponent {
   public receiveMatchStatus(status: number): void {
     switch (status) {
       case 100:
-        this.match_status_msg.openPopUp();
+        this.match_status_msg.openPopUp(SUCCESSMSG);
+        break;
+      case 500:
+        this.match_status_msg.openPopUp(MISSINGPIXLEMSG);
         break;
       default:
         break;
