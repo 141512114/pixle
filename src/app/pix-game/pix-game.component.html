@@ -1,5 +1,6 @@
 <section class="component-pix-game">
   <div class="pix-grid-wrapper">
-    <app-pix-grid></app-pix-grid>
+    <app-pix-grid (sendMatchStatus)="receiveMatchStatus($event)"></app-pix-grid>
+    <app-pix-popup-message #match_status></app-pix-popup-message>
   </div>
 </section>

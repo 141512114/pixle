@@ -1,10 +1,9 @@
-import {AfterViewInit, Component, OnInit, QueryList, ViewChild, ViewChildren} from '@angular/core';
+import {AfterViewInit, Component, EventEmitter, OnInit, Output, QueryList, ViewChildren} from '@angular/core';
 import {IPixle} from '../interface/pixle.interface';
 import {PIXLEARTS} from '../database/pix-arts-database';
-import {PIXLE_ICONS, REDCROSS, WHITE_QUESTIONMARK} from '../database/emoji-database';
+import {REDCROSS, WHITE_QUESTIONMARK} from '../database/emoji-database';
 import {PixGridElementComponent} from '../pix-grid-element/pix-grid-element.component';
-import {PixPopupMessageComponent} from '../pix-popup-message/pix-popup-message.component';
-import {IPopUp} from '../interface/popup-message.interface';
+import {PixGameComponent} from '../pix-game/pix-game.component';
 
 @Component({
   selector: 'app-pix-grid',
@@ -13,13 +12,9 @@ import {IPopUp} from '../interface/popup-message.interface';
 })
 export class PixGridComponent implements OnInit, AfterViewInit {
   @ViewChildren(PixGridElementComponent) private pixGridElementComponents!: QueryList<PixGridElementComponent>;
-  @ViewChild('match_status') private match_status_msg!: PixPopupMessageComponent;
   pixle_arts: IPixle[] = PIXLEARTS; // <-- pulled database
-  missing_pixle_msg: IPopUp = {
-    headline: 'Missing pixle data!',
-    subline: 'There was a mistake retrieving a pixle from the database.',
-    message_body: 'If this issue occurs more than it should, report this bug to the team.'
-  };
+
+  @Output() sendMatchStatus: EventEmitter<number> = new EventEmitter<number>();
 
   empty_emoji_slot: number = REDCROSS;
   hidden_pixle_tile: number = WHITE_QUESTIONMARK;
@@ -59,7 +54,7 @@ export class PixGridComponent implements OnInit, AfterViewInit {
   public validatePixleOnClick(): void {
     this.pixle_solved = this.validatePixle();
     if (!this.pixle_solved) return;
-    this.match_status_msg.openPopUp();
+    this.sendMatchStatus.emit(100);
   }
 
   /**
@@ -70,7 +65,7 @@ export class PixGridComponent implements OnInit, AfterViewInit {
    */
   private searchRandomPixleArt(): void {
     if (this.pixle_arts == undefined || null) return;
-    let rand: number = PixGridComponent.generateRandomInteger(this.pixle_arts.length - 1);
+    let rand: number = PixGameComponent.generateRandomInteger(this.pixle_arts.length - 1);
 
     let selected_pixle_art: IPixle = this.pixle_arts[rand];
     if (selected_pixle_art == undefined || null) return;
@@ -79,7 +74,7 @@ export class PixGridComponent implements OnInit, AfterViewInit {
     // Go through the pixle image --> contains only emoji ids --> convert them to codepoints
     let temp_pixle_image: number[][] = [];
     for (let i: number = 0; i < pixle_art_tiles.length; i++) {
-      temp_pixle_image.push(PixGridComponent.getIconsFromListById(pixle_art_tiles[i]));
+      temp_pixle_image.push(PixGameComponent.getIconsFromListById(pixle_art_tiles[i]));
     }
     this.pixle_image = temp_pixle_image;
     this.pixle_id = selected_pixle_art.id;
@@ -149,7 +144,6 @@ export class PixGridComponent implements OnInit, AfterViewInit {
   /**
    * Validate the pixle
    * Easy version: go through every tile and check its validity separately
-   * @todo What it should be --> hashed version of player pixle has to be the same as the hashed version of the original
    *
    * @private
    */
@@ -196,36 +190,5 @@ export class PixGridComponent implements OnInit, AfterViewInit {
     }
 
     return pixle_convert;
-  }
-
-  /**
-   * Generate a random integer between two limiter values --> min and max
-   * The parameter min is by default 0
-   *
-   * @param max
-   * @param min
-   * @private
-   */
-  private static generateRandomInteger(max: number, min: number = 0): number {
-    return Math.floor(Math.random() * (max - min + 1) + min);
-  }
-
-  /**
-   * Get the emoji by its id --> search it in the emoji collection
-   * Return an array of codepoints
-   *
-   * @param emoji_ids
-   * @private
-   */
-  private static getIconsFromListById(emoji_ids: number[]): number[] {
-    if (emoji_ids == undefined || null) return [];
-
-    let temp_emoji_codepoints: number[] = [];
-    for (let i: number = 0; i < emoji_ids.length; i++) {
-      let emoji_codepoint: number = PIXLE_ICONS[emoji_ids[i]];
-      temp_emoji_codepoints.push(emoji_codepoint);
-    }
-
-    return temp_emoji_codepoints;
   }
 }

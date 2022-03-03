@@ -1,5 +1,5 @@
 <div class="component-pix-grid">
-  <div class="playground-wrapper" *ngIf="pixle_image != null || undefined; else elsePixleGrid">
+  <div class="playground-wrapper" *ngIf="pixle_image != null || undefined">
     <div class="pix-grid-wrapper">
       <div class="pix-grid-row" *ngFor="let row of pixle_image">
         <div class="pix-grid-col" *ngFor="let col of row">
@@ -14,9 +14,5 @@
       </div>
     </div>
     <button (click)="validatePixleOnClick()" type="button">Validate</button>
-    <app-pix-popup-message #match_status></app-pix-popup-message>
   </div>
-  <ng-template #elsePixleGrid>
-    <app-pix-popup-message #missing_pixle [message]="missing_pixle_msg"></app-pix-popup-message>
-  </ng-template>
 </div>
