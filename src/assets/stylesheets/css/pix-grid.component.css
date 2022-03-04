@@ -9,7 +9,6 @@ div.component-pix-grid div.pix-emoji-list-wrapper {
   width: auto;
   height: auto;
   padding: 20px;
-  border-radius: 32px;
   background-color: #1b1c21;
   -webkit-user-select: none;
      -moz-user-select: none;
@@ -43,7 +42,6 @@ div.component-pix-grid div.validate-button-wrapper button {
   position: relative;
   width: 100%;
   border: none;
-  border-radius: 22px;
 }
 div.component-pix-grid div.validate-button-wrapper button::before {
   content: "";

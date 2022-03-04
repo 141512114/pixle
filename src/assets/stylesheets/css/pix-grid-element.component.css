@@ -1,3 +1,47 @@
+.row {
+  display: block;
+  padding-bottom: 7px;
+}
+.row:last-child {
+  padding-bottom: 0;
+}
+
+.col {
+  display: inline-block;
+  padding-right: 7px;
+}
+.col:last-child {
+  padding-right: 0;
+}
+
+/**** Classes ****/
+.p-0 {
+  padding-top: 0;
+  padding-left: 0;
+  padding-right: 0;
+  padding-bottom: 0;
+}
+
+.mr-5 {
+  margin-right: 32px;
+}
+
+.mb-5 {
+  margin-bottom: 32px;
+}
+
+.rounded-5 {
+  border-radius: 32px;
+}
+
+.rounded-4, div.component-pix-grid-element:hover:not(.grid-element-status__solved, .grid-element-status__failed)::before {
+  border-radius: 22px;
+}
+
+.rounded-3, div.component-pix-grid-element::before {
+  border-radius: 17px;
+}
+
 div.component-pix-grid-element {
   position: relative;
   width: 110px;
@@ -13,7 +57,6 @@ div.component-pix-grid-element::before {
           transform: translate(-50%, -50%);
   width: 90px;
   height: 90px;
-  border-radius: 17px;
   background-color: rgba(16, 17, 20, 0.45);
   -webkit-transition: width 300ms, height 300ms, background-color 200ms, border-radius 200ms;
   -o-transition: width 300ms, height 300ms, background-color 200ms, border-radius 200ms;
@@ -46,7 +89,6 @@ div.component-pix-grid-element:hover {
 div.component-pix-grid-element:hover:not(.grid-element-status__solved, .grid-element-status__failed)::before {
   width: 100px;
   height: 100px;
-  border-radius: 22px;
   background-color: rgba(16, 17, 20, 0.65);
 }
 div.component-pix-grid-element:hover:not(.grid-element-status__solved, .grid-element-status__failed).grid-element-status__2::before {

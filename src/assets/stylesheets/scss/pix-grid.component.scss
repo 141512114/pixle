@@ -3,9 +3,6 @@
 @import 'src/assets/stylesheets/mixins/variables';
 @import 'src/assets/stylesheets/mixins/mixins';
 
-$col-offset: 7px;
-$row-offset: $col-offset;
-
 // pix-grid component stylesheet
 div.component-pix-grid {
   position: relative;
@@ -18,7 +15,6 @@ div.component-pix-grid {
     width: auto;
     height: auto;
     padding: 20px;
-    border-radius: 32px;
     background-color: map.get($dark-theme, second-background);
     user-select: none;
     vertical-align: top;
@@ -34,7 +30,6 @@ div.component-pix-grid {
       position: relative;
       width: 100%;
       border: none;
-      border-radius: 22px;
       @include box-shadow($shadow_color:map.get($dark-theme, dark-background));
 
       &:hover {

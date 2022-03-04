@@ -1,6 +1,6 @@
 @use "sass:map";
 
-@import 'src/assets/stylesheets/mixins/variables';
+@import 'src/assets/stylesheets/mixins/bottleneck';
 @import 'src/assets/stylesheets/mixins/mixins';
 
 $background-offset: 20px;
@@ -19,7 +19,7 @@ div.component-pix-grid-element {
     @include alignment_old();
     width: $tile-size - $background-offset;
     height: $tile-size - $background-offset;
-    border-radius: 17px;
+    @extend .rounded-3;
     background-color: rgba(map.get($dark-theme, main-background), $background-opacity);
     transition: width 300ms, height 300ms, background-color 200ms, border-radius 200ms;
     z-index: 10;
@@ -59,7 +59,7 @@ div.component-pix-grid-element {
       &::before {
         width: $tile-size - $background-offset-hover;
         height: $tile-size - $background-offset-hover;
-        border-radius: 22px;
+        @extend .rounded-4;
         background-color: rgba(map.get($dark-theme, main-background), $background-opacity-hover);
       }
 

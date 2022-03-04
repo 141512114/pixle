@@ -95,7 +95,7 @@ button:hover {
     letter-spacing: 2px;
     color: white;
     border: 4px solid map.get($dark-theme, main-background);
-    border-radius: 100px;
+    @extend .rounded-5;
     background-color: map.get($dark-theme, second-background);
     transition: background-color 300ms, border-color 300ms, color 300ms;
 
