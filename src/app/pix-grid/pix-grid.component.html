@@ -1,18 +1,24 @@
 <div class="component-pix-grid">
   <div class="playground-wrapper" *ngIf="pixle_image != null || undefined">
-    <div class="pix-grid-wrapper">
-      <div class="pix-grid-row" *ngFor="let row of pixle_image">
-        <div class="pix-grid-col" *ngFor="let col of row">
-          <app-pix-grid-element [pixle_emoji]="col" [receive_chosen_emoji]="chosen_emoji"></app-pix-grid-element>
+    <div class="container">
+      <div class="row p-0 mb-5">
+        <div class="col mr-5 pix-grid-wrapper">
+          <div class="row pix-grid-row" *ngFor="let row of pixle_image">
+            <div class="col pix-grid-col" *ngFor="let col of row">
+              <app-pix-grid-element [pixle_emoji]="col" [receive_chosen_emoji]="chosen_emoji"></app-pix-grid-element>
+            </div>
+          </div>
+        </div>
+        <div class="col pix-emoji-list-wrapper">
+          <div class="row pix-grid-row" *ngFor="let row of pixle_emoji_list">
+            <app-pix-grid-element [pixle_emoji]="row" [grid_element_type]="1"
+                                  (sendIconCodePoint)="receiveIconCodePoint($event)"></app-pix-grid-element>
+          </div>
         </div>
       </div>
-    </div>
-    <div class="pix-emoji-list-wrapper">
-      <div class="pix-grid-row" *ngFor="let row of pixle_emoji_list">
-        <app-pix-grid-element [pixle_emoji]="row" [grid_element_type]="1"
-                              (sendIconCodePoint)="receiveIconCodePoint($event)"></app-pix-grid-element>
+      <div class="row p-0 validate-button-wrapper ui">
+        <button class="pix-validate-button" (click)="validatePixleOnClick()" type="button">Validate</button>
       </div>
     </div>
-    <button (click)="validatePixleOnClick()" type="button">Validate</button>
   </div>
 </div>

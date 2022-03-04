@@ -10,5 +10,12 @@ $dark-theme: (
 );
 
 // Default variables
-$standard-pixle-size: 550px;
-$tile-size: 110px;
+$standard-pixle-size: 550px !default;
+$tile-size: 110px !default;
+
+// Grid system
+$col-offset: 7px !default;
+$row-offset: $col-offset !default;
+
+// Default margin values
+$margin-5: 32px !default;

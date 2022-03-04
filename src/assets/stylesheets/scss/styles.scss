@@ -1,8 +1,9 @@
 @use "sass:map";
 
 // Import default "libraries"
+@import 'src/assets/stylesheets/mixins/bottleneck';
 @import 'src/assets/stylesheets/mixins/fonts';
-@import 'src/assets/stylesheets/mixins/variables';
+@import 'src/assets/stylesheets/mixins/mixins';
 
 // Default settings
 * {
@@ -46,7 +47,8 @@ a {
 }
 
 input,
-textarea {
+textarea,
+button {
   padding: 4px 12px;
   font-family: $main-font;
   font-size: 18px;
@@ -57,18 +59,7 @@ textarea {
 input:focus,
 input:active,
 textarea:focus,
-textarea:active {
-  outline: none;
-}
-
-button {
-  padding: 4px 12px;
-  font-weight: 400;
-  border: none;
-  outline: none;
-  user-select: none;
-}
-
+textarea:active,
 button:focus {
   outline: none;
 }
@@ -78,17 +69,22 @@ button:hover {
   cursor: pointer;
 }
 
-div.user-popup {
+// Popup
+.user-popup {
   width: $standard-pixle-size;
   opacity: 1;
   transition: top 700ms, opacity 550ms, visibility 300ms;
+  @include box-shadow($shadow_color:map.get($dark-theme, dark-background));
 
   &.close {
     opacity: 0;
     visibility: hidden;
     pointer-events: none;
   }
+}
 
+// UI in general
+.ui {
   input,
   button {
     display: block;
