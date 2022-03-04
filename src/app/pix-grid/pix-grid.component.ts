@@ -4,6 +4,7 @@ import {PIXLEARTS} from '../database/pix-arts-database';
 import {REDCROSS, WHITE_QUESTIONMARK} from '../database/emoji-database';
 import {PixGridElementComponent} from '../pix-grid-element/pix-grid-element.component';
 import {PixGameComponent} from '../pix-game/pix-game.component';
+import {MATCH_PIXLE_NOT_FOUND, MATCH_PIXLE_SOLVED, MATCH_PIXLE_UNSOLVED} from '../database/status-numbers';
 
 @Component({
   selector: 'app-pix-grid',
@@ -31,7 +32,7 @@ export class PixGridComponent implements OnInit, AfterViewInit {
 
   ngOnInit(): void {
     if (!this.searchRandomPixleArt()) {
-      this.sendMatchStatus.emit(500);
+      this.sendMatchStatus.emit(MATCH_PIXLE_NOT_FOUND);
     }
   }
 
@@ -154,26 +155,29 @@ export class PixGridComponent implements OnInit, AfterViewInit {
     let temp_pix_grid_comps: PixGridElementComponent[] = this.pixGridElementComponents.toArray();
     if (temp_pix_grid_comps == undefined || null) return;
 
-    let total_count: number = 0;
+    let total_count: number = 0, failed_count: number = 0;
     let pixle_convert: number[] = this.convertPixleIntoNormalArray();
     if (pixle_convert.length <= 0) return;
     // Check every pixle tile if its valid --> emoji at the exact same position as in the original pixle
     for (let i: number = 0; i < pixle_convert.length; i++) {
-      if (temp_pix_grid_comps[i].pixle_tile_lives <= 0) {
-        this.sendMatchStatus.emit(200);
-        break;
-      }
       if (temp_pix_grid_comps[i].pixle_emoji_codepoint !== pixle_convert[i]) {
         temp_pix_grid_comps[i].updateTileStatus(false);
+        if (temp_pix_grid_comps[i].pixle_tile_lives <= 0) failed_count++;
         continue;
       }
       temp_pix_grid_comps[i].updateTileStatus(true);
       total_count++;
     }
 
+    // If any tile has reached its limits --> went out of lives --> game over
+    if (failed_count > 0) {
+      this.sendMatchStatus.emit(MATCH_PIXLE_UNSOLVED);
+      return;
+    }
+
     if (total_count >= pixle_convert.length) {
       this.pixle_solved = true;
-      this.sendMatchStatus.emit(100);
+      this.sendMatchStatus.emit(MATCH_PIXLE_SOLVED);
     }
   }
 

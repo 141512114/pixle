@@ -2,6 +2,7 @@ import {Component, ViewChild} from '@angular/core';
 import {PIXLE_ICONS} from '../database/emoji-database';
 import {IPopUp} from '../interface/popup-message.interface';
 import {PixPopupMessageComponent} from '../pix-popup-message/pix-popup-message.component';
+import {MATCH_PIXLE_NOT_FOUND, MATCH_PIXLE_SOLVED, MATCH_PIXLE_UNSOLVED} from '../database/status-numbers';
 
 const MISSINGPIXLEMSG: IPopUp = {
   headline: 'Missing pixle data!',
@@ -36,13 +37,13 @@ export class PixGameComponent {
    */
   public receiveMatchStatus(status: number): void {
     switch (status) {
-      case 100:
+      case MATCH_PIXLE_SOLVED:
         this.match_status_msg.openPopUp(SUCCESSMSG);
         break;
-      case 200:
+      case MATCH_PIXLE_UNSOLVED:
         this.match_status_msg.openPopUp(FAILEDMSG);
         break;
-      case 500:
+      case MATCH_PIXLE_NOT_FOUND:
         this.match_status_msg.openPopUp(MISSINGPIXLEMSG);
         break;
       default:
