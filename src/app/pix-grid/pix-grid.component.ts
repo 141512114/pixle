@@ -21,7 +21,7 @@ export class PixGridComponent implements OnInit, AfterViewInit {
   hidden_pixle_tile: number = WHITE_QUESTIONMARK;
 
   pixle_id: number = -1;
-  pixle_image?: number[][];
+  pixle_image: number[][] = [];
   pixle_image_width: number = 0;
   pixle_image_height: number = 0;
   pixle_emoji_list: number[] = [];
@@ -47,8 +47,8 @@ export class PixGridComponent implements OnInit, AfterViewInit {
    *
    * @param emoji_codepoint
    */
-  public receiveIconCodePoint(emoji_codepoint: number): void {
-    if (!this.game_started) return;
+  public receiveIconCodePoint(emoji_codepoint: number = -1): void {
+    if (!this.game_started || this.pixle_solved) return;
     this.chosen_emoji = emoji_codepoint;
   }
 
@@ -66,7 +66,7 @@ export class PixGridComponent implements OnInit, AfterViewInit {
    * @private
    */
   private searchRandomPixleArt(): boolean {
-    if (this.pixle_arts == undefined || null) return false;
+    if (this.pixle_arts.length <= 0) return false;
     let rand: number = PixGameComponent.generateRandomInteger(this.pixle_arts.length - 1);
 
     let selected_pixle_art: IPixle = this.pixle_arts[rand];
@@ -82,7 +82,7 @@ export class PixGridComponent implements OnInit, AfterViewInit {
     this.pixle_id = selected_pixle_art.id;
 
     // Make sure a pixle tile array was assigned
-    if (this.pixle_image == undefined || null) return false;
+    if (this.pixle_image.length <= 0) return false;
     this.pixle_image_height = this.pixle_image.length;
     this.pixle_image_width = this.pixle_image[0].length;
 
@@ -96,8 +96,7 @@ export class PixGridComponent implements OnInit, AfterViewInit {
    */
   private getEmojiList(): boolean {
     // Make sure a pixle tile array was assigned
-    if (this.pixle_image == undefined || null) return false;
-
+    if (this.pixle_image.length <= 0) return false;
     let pixle_convert: number[] = this.convertPixleIntoNormalArray();
     if (pixle_convert.length <= 0) return false;
 
@@ -136,7 +135,7 @@ export class PixGridComponent implements OnInit, AfterViewInit {
    */
   private hidePixle(): void {
     let temp_pix_grid_comps: PixGridElementComponent[] = this.pixGridElementComponents.toArray();
-    if (temp_pix_grid_comps == undefined || null) return;
+    if (temp_pix_grid_comps.length <= 0) return;
     for (let i: number = 0; i < temp_pix_grid_comps.length; i++) {
       if (temp_pix_grid_comps[i].grid_element_type === 1) continue;
       temp_pix_grid_comps[i].changeElementIcon(this.hidden_pixle_tile);
@@ -153,7 +152,7 @@ export class PixGridComponent implements OnInit, AfterViewInit {
   private validatePixle(): void {
     if (!this.game_started || this.pixle_solved) return;
     let temp_pix_grid_comps: PixGridElementComponent[] = this.pixGridElementComponents.toArray();
-    if (temp_pix_grid_comps == undefined || null) return;
+    if (temp_pix_grid_comps.length <= 0) return;
 
     let total_count: number = 0, failed_count: number = 0;
     let pixle_convert: number[] = this.convertPixleIntoNormalArray();
@@ -172,11 +171,13 @@ export class PixGridComponent implements OnInit, AfterViewInit {
     // If any tile has reached its limits --> went out of lives --> game over
     if (failed_count > 0) {
       this.sendMatchStatus.emit(MATCH_PIXLE_UNSOLVED);
+      this.game_started = false;
       return;
     }
 
     if (total_count >= pixle_convert.length) {
       this.pixle_solved = true;
+      this.game_started = false;
       this.sendMatchStatus.emit(MATCH_PIXLE_SOLVED);
     }
   }
@@ -189,15 +190,13 @@ export class PixGridComponent implements OnInit, AfterViewInit {
    */
   private convertPixleIntoNormalArray(): number[] {
     let pixle_convert: number[] = [];
-
     // Make sure a pixle tile array was assigned
-    if (this.pixle_image == undefined || null) return [];
+    if (this.pixle_image.length <= 0) return [];
     for (let i: number = 0; i < this.pixle_image_height; i++) {
       for (let j: number = 0; j < this.pixle_image_width; j++) {
         pixle_convert.push(this.pixle_image[i][j]);
       }
     }
-
     return pixle_convert;
   }
 }

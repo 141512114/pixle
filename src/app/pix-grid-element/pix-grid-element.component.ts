@@ -53,8 +53,8 @@ export class PixGridElementComponent implements OnInit, AfterViewInit {
    *
    * @param emoji_codepoint
    */
-  public revealOnClick(emoji_codepoint: number): void {
-    if (emoji_codepoint === -1 || this.pixle_tile_solved || this.pixle_tile_lives <= 0) return;
+  public revealOnClick(emoji_codepoint: number = -1): void {
+    if (this.pixle_tile_solved || this.pixle_tile_lives <= 0) return;
     this.changeElementIcon(emoji_codepoint);
   }
 
@@ -63,8 +63,8 @@ export class PixGridElementComponent implements OnInit, AfterViewInit {
    *
    * @param emoji_codepoint
    */
-  public changeElementIcon(emoji_codepoint: number): void {
-    if ((emoji_codepoint == undefined || null) || (this.pixle_emoji_codepoint === emoji_codepoint)) return;
+  public changeElementIcon(emoji_codepoint: number = -1): void {
+    if ((emoji_codepoint == -1) || (this.pixle_emoji_codepoint === emoji_codepoint)) return;
     this.pixle_emoji_text = String.fromCodePoint(emoji_codepoint);
     this.pixle_emoji_codepoint = emoji_codepoint;
   }

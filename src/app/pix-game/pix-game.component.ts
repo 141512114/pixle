@@ -68,15 +68,13 @@ export class PixGameComponent {
    *
    * @param emoji_ids
    */
-  public static getIconsFromListById(emoji_ids: number[]): number[] {
-    if (emoji_ids == undefined || null) return [];
-
+  public static getIconsFromListById(emoji_ids: number[] = []): number[] {
+    if (emoji_ids.length <= 0) return [];
     let temp_emoji_codepoints: number[] = [];
     for (let i: number = 0; i < emoji_ids.length; i++) {
       let emoji_codepoint: number = PIXLE_ICONS[emoji_ids[i]];
       temp_emoji_codepoints.push(emoji_codepoint);
     }
-
     return temp_emoji_codepoints;
   }
 }
