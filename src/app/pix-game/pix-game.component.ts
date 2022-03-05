@@ -1,8 +1,10 @@
 import {Component, ViewChild} from '@angular/core';
+import {Location} from '@angular/common';
 import {PIXLE_ICONS} from '../database/emoji-database';
 import {IPopUp} from '../interface/popup-message.interface';
 import {PixPopupMessageComponent} from '../pix-popup-message/pix-popup-message.component';
 import {MATCH_PIXLE_NOT_FOUND, MATCH_PIXLE_SOLVED, MATCH_PIXLE_UNSOLVED} from '../database/status-numbers';
+import {Router} from '@angular/router';
 
 const MISSINGPIXLEMSG: IPopUp = {
   headline: 'Missing pixle data!',
@@ -29,6 +31,22 @@ const FAILEDMSG: IPopUp = {
 })
 export class PixGameComponent {
   @ViewChild('match_status') private match_status_msg!: PixPopupMessageComponent;
+
+  constructor(private router: Router, private location: Location) {
+  }
+
+  /**
+   * Receive reload request
+   */
+  public async receiveReloadRequest() {
+    let absolute_path: string = this.location.path();
+    this.router.routeReuseStrategy.shouldReuseRoute = () => false;
+    this.router.onSameUrlNavigation = 'reload';
+    // Reload component --> redirect to same url but do not reuse old one
+    await this.router.navigateByUrl(absolute_path, {skipLocationChange: true}).then(() => {
+      this.router.navigate([absolute_path]);
+    });
+  }
 
   /**
    * Receive the current status of the ongoing match and evaluate the status number

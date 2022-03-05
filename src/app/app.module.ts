@@ -6,6 +6,7 @@ import {PixGridComponent} from './pix-grid/pix-grid.component';
 import {PixGameComponent} from './pix-game/pix-game.component';
 import {PixGridElementComponent} from './pix-grid-element/pix-grid-element.component';
 import {PixPopupMessageComponent} from './pix-popup-message/pix-popup-message.component';
+import { AppRoutingModule } from './app-routing.module';
 
 @NgModule({
   declarations: [
@@ -16,7 +17,8 @@ import {PixPopupMessageComponent} from './pix-popup-message/pix-popup-message.co
     PixPopupMessageComponent
   ],
   imports: [
-    BrowserModule
+    BrowserModule,
+    AppRoutingModule
   ],
   providers: [],
   bootstrap: [AppComponent]
