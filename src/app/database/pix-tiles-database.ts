@@ -3,9 +3,9 @@
  * Image: REDSQUARE
  */
 export const PIXLE_REDSQUARE: number[][] = [
-  [1, 1, 1],
-  [1, 1, 1],
-  [1, 1, 1]
+  [1, 2, 1],
+  [3, 1, 3],
+  [1, 2, 1]
 ];
 
 /**
@@ -14,7 +14,7 @@ export const PIXLE_REDSQUARE: number[][] = [
  */
 export const PIXLE_BLUESQUARE: number[][] = [
   [2, 2, 2],
-  [2, 2, 2],
+  [1, 1, 1],
   [2, 2, 2]
 ];
 
@@ -23,9 +23,9 @@ export const PIXLE_BLUESQUARE: number[][] = [
  * Image: ORANGESQUARE
  */
 export const PIXLE_ORANGESQUARE: number[][] = [
-  [3, 3, 3],
-  [3, 3, 3],
-  [3, 3, 3]
+  [2, 3, 2],
+  [3, 2, 3],
+  [2, 3, 2]
 ];
 
 /**
@@ -33,9 +33,9 @@ export const PIXLE_ORANGESQUARE: number[][] = [
  * Image: YELLOWSQUARE
  */
 export const PIXLE_YELLOWSQUARE: number[][] = [
-  [4, 4, 4],
-  [4, 4, 4],
-  [4, 4, 4]
+  [5, 2, 5],
+  [5, 5, 5],
+  [4, 2, 4]
 ];
 
 /**
@@ -43,9 +43,9 @@ export const PIXLE_YELLOWSQUARE: number[][] = [
  * Image: GREENSQUARE
  */
 export const PIXLE_GREENSQUARE: number[][] = [
-  [5, 5, 5],
-  [5, 5, 5],
-  [5, 5, 5]
+  [6, 5, 6],
+  [6, 6, 6],
+  [6, 5, 6]
 ];
 
 /**
@@ -53,7 +53,7 @@ export const PIXLE_GREENSQUARE: number[][] = [
  * Image: PURPLESQUARE
  */
 export const PIXLE_PURPLESQUARE: number[][] = [
-  [6, 6, 6],
-  [6, 6, 6],
-  [6, 6, 6]
+  [6, 1, 6],
+  [6, 1, 6],
+  [6, 1, 6]
 ];
