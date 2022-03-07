@@ -170,8 +170,8 @@ export class PixGridComponent implements OnInit, AfterViewInit {
 
     // If any tile has reached its limits --> went out of lives --> game over
     if (failed_count > 0) {
-      this.sendMatchStatus.emit(MATCH_PIXLE_UNSOLVED);
       this.game_started = false;
+      this.sendMatchStatus.emit(MATCH_PIXLE_UNSOLVED);
       return;
     }
 
