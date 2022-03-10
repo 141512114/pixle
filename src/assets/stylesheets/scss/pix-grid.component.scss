@@ -15,7 +15,7 @@ div.component-pix-grid {
     width: auto;
     height: auto;
     padding: 20px;
-    background-color: map.get($sand-palette, mellow-apricot);
+    background-color: map.get($default-color-palette, 2);
     user-select: none;
     vertical-align: top;
     // @include box-shadow($shadow_color:map.get($sand-palette, sandy-brown));

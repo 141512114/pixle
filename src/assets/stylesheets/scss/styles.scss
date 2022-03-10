@@ -13,7 +13,7 @@
 
 html,
 body {
-  background-color: map.get($sand-palette, slate);
+  background-color: map.get($default-color-palette, 1);
 }
 
 section {
@@ -94,9 +94,9 @@ button:hover {
     font-size: 21px;
     letter-spacing: 2px;
     color: white;
-    border: 4px solid map.get($sand-palette, mellow-apricot);
+    border: 4px solid map.get($default-color-palette, 2);
     @extend .rounded-5;
-    background-color: map.get($sand-palette, mellow-apricot);
+    background-color: map.get($default-color-palette, 2);
     transition: background-color 300ms, border-color 300ms, color 300ms;
 
     &:last-child {
@@ -105,16 +105,16 @@ button:hover {
   }
 
   button {
-    color: grey;
+    color: $default-text-color-unfocused;
   }
 
   input:focus,
   button:hover {
     color: $default-text-color;
-    border-color: map.get($sand-palette, apricot);
+    border-color: map.get($default-color-palette, 3);
   }
 
   button:active {
-    background-color: map.get($sand-palette, apricot);
+    background-color: map.get($default-color-palette, 3);
   }
 }

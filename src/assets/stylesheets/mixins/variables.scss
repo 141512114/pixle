@@ -2,17 +2,32 @@
 
 // Default color maps
 $sand-palette: (
-  slate: #3e4e50,
-  apricot: #facfad,
-  mellow-apricot: #f8bd7f,
-  sandy-brown: #f5ac72,
-  tumbleweed: #f2aa7e
+  1: #3e4e50,
+  2: #facfad,
+  3: #f8bd7f,
+  4: #f5ac72,
+  5: #f2aa7e
 );
+$ocean-palette: (
+  1: #161925,
+  2: #23395b,
+  3: #406e8e,
+  4: #8ea8c3,
+  5: #cbf7ed
+);
+
+$default-color-palette: $ocean-palette !default;
+
+// Default colors
+$default-text-color: white !default;
+$default-text-color-unfocused: map.get($ocean-palette, 4) !default;
 
 // Default variables
 $standard-pixle-size: 550px !default;
 $tile-size: 110px !default;
-$default-text-color: white !default;
+
+$background-color-alpha-focused: .75 !default;
+$background-color-alpha-unfocused: .5 !default;
 
 // Grid system
 $col-offset: 7px !default;

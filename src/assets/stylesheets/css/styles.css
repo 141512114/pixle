@@ -61,7 +61,7 @@
 
 html,
 body {
-  background-color: #3e4e50;
+  background-color: #161925;
 }
 
 section {
@@ -139,8 +139,8 @@ button:hover {
   font-size: 21px;
   letter-spacing: 2px;
   color: white;
-  border: 4px solid #f8bd7f;
-  background-color: #f8bd7f;
+  border: 4px solid #23395b;
+  background-color: #23395b;
   -webkit-transition: background-color 300ms, border-color 300ms, color 300ms;
   -o-transition: background-color 300ms, border-color 300ms, color 300ms;
   transition: background-color 300ms, border-color 300ms, color 300ms;
@@ -150,14 +150,14 @@ button:hover {
   margin-bottom: 0;
 }
 .ui button {
-  color: grey;
+  color: #8ea8c3;
 }
 .ui input:focus,
 .ui button:hover {
   color: white;
-  border-color: #facfad;
+  border-color: #406e8e;
 }
 .ui button:active {
-  background-color: #facfad;
+  background-color: #406e8e;
 }
 /*# sourceMappingURL=sourcemaps/styles.css.map */
