@@ -42,6 +42,12 @@ export class PixGridComponent implements OnInit, AfterViewInit {
     }, 2000);
   }
 
+  /**
+   * Helper function
+   * Makes an array of numbers which helps to use *ngFor as a normal for loop
+   *
+   * @param i
+   */
   public counter(i: number): number[] {
     let round: number = Math.ceil(i);
     return new Array(round);
