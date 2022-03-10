@@ -34,19 +34,19 @@ div.component-pix-grid-element {
 
   &.grid-element-status {
     &__solved::before {
-      background-color: rgba(green, $background-color-alpha-unfocused);
+      background-color: rgba(map.get($default-color-palette, 6), $background-color-alpha-unfocused);
     }
 
     &__2::before {
-      background-color: rgba(yellow, $background-color-alpha-unfocused);
+      background-color: rgba(map.get($default-color-palette, 7), $background-color-alpha-unfocused);
     }
 
     &__1::before {
-      background-color: rgba(orange, $background-color-alpha-unfocused);
+      background-color: rgba(map.get($default-color-palette, 8), $background-color-alpha-unfocused);
     }
 
     &__failed::before {
-      background-color: rgba(red, $background-color-alpha-unfocused);
+      background-color: rgba(map.get($default-color-palette, 9), $background-color-alpha-unfocused);
     }
   }
 
@@ -63,11 +63,11 @@ div.component-pix-grid-element {
 
       &.grid-element-status {
         &__2::before {
-          background-color: rgba(yellow, $background-color-alpha-focused);
+          background-color: rgba(map.get($default-color-palette, 7), $background-color-alpha-focused);
         }
 
         &__1::before {
-          background-color: rgba(orange, $background-color-alpha-focused);
+          background-color: rgba(map.get($default-color-palette, 8), $background-color-alpha-focused);
         }
       }
     }
