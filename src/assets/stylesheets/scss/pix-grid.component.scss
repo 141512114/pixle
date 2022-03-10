@@ -15,10 +15,10 @@ div.component-pix-grid {
     width: auto;
     height: auto;
     padding: 20px;
-    background-color: map.get($dark-theme, second-background);
+    background-color: map.get($sand-palette, mellow-apricot);
     user-select: none;
     vertical-align: top;
-    @include box-shadow($shadow_color:map.get($dark-theme, dark-background));
+    // @include box-shadow($shadow_color:map.get($sand-palette, sandy-brown));
   }
 
   div.validate-button-wrapper {
@@ -30,7 +30,7 @@ div.component-pix-grid {
       position: relative;
       width: 100%;
       border: none;
-      @include box-shadow($shadow_color:map.get($dark-theme, dark-background));
+      // @include box-shadow($shadow_color:map.get($sand-palette, sandy-brown));
 
       &:hover {
         color: white;

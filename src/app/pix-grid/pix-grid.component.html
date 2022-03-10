@@ -10,9 +10,11 @@
           </div>
         </div>
         <div class="col rounded-5 pix-emoji-list-wrapper">
-          <div class="row pix-grid-row" *ngFor="let row of pixle_emoji_list">
-            <app-pix-grid-element [pixle_emoji]="row" [grid_element_type]="1"
-                                  (sendIconCodePoint)="receiveIconCodePoint($event)"></app-pix-grid-element>
+          <div class="col pix-grid-col" *ngFor="let col of counter(pixle_emoji_list.length / pixle_image_height); let i = index">
+            <div class="row pix-grid-row" *ngFor="let row of counter(pixle_image_height); let j = index">
+              <app-pix-grid-element [pixle_emoji]="pixle_emoji_list[pixle_image_height * i + j]" [grid_element_type]="1"
+                                    (sendIconCodePoint)="receiveIconCodePoint($event)"></app-pix-grid-element>
+            </div>
           </div>
         </div>
       </div>

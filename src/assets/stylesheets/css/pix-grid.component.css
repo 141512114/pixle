@@ -9,29 +9,12 @@ div.component-pix-grid div.pix-emoji-list-wrapper {
   width: auto;
   height: auto;
   padding: 20px;
-  background-color: #1b1c21;
+  background-color: #f8bd7f;
   -webkit-user-select: none;
      -moz-user-select: none;
       -ms-user-select: none;
           user-select: none;
   vertical-align: top;
-}
-div.component-pix-grid div.pix-grid-wrapper::before,
-div.component-pix-grid div.pix-emoji-list-wrapper::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  width: 100%;
-  height: 100%;
-  z-index: -1;
-  border-radius: inherit;
-  -webkit-box-shadow: 0 7px 30px 0 rgba(8, 9, 10, 0.5);
-          box-shadow: 0 7px 30px 0 rgba(8, 9, 10, 0.5);
-  -webkit-transform: translateZ(0);
-          transform: translateZ(0);
 }
 div.component-pix-grid div.validate-button-wrapper {
   position: relative;
@@ -42,22 +25,6 @@ div.component-pix-grid div.validate-button-wrapper button {
   position: relative;
   width: 100%;
   border: none;
-}
-div.component-pix-grid div.validate-button-wrapper button::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  width: 100%;
-  height: 100%;
-  z-index: -1;
-  border-radius: inherit;
-  -webkit-box-shadow: 0 7px 30px 0 rgba(8, 9, 10, 0.5);
-          box-shadow: 0 7px 30px 0 rgba(8, 9, 10, 0.5);
-  -webkit-transform: translateZ(0);
-          transform: translateZ(0);
 }
 div.component-pix-grid div.validate-button-wrapper button:hover {
   color: white;

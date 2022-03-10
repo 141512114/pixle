@@ -42,6 +42,11 @@ export class PixGridComponent implements OnInit, AfterViewInit {
     }, 2000);
   }
 
+  public counter(i: number): number[] {
+    let round: number = Math.ceil(i);
+    return new Array(round);
+  }
+
   /**
    * Receive the icon codepoint from one of the grid elements
    *
@@ -117,8 +122,9 @@ export class PixGridComponent implements OnInit, AfterViewInit {
     }
 
     // Fill empty slots with placeholders, if there ever are less emojis used than the vertical amount of icons in a pixle
-    if (temp_emoji_list.length < this.pixle_image_height) {
-      let short_count: number = this.pixle_image_height - temp_emoji_list.length;
+    let modulo: number = temp_emoji_list.length % this.pixle_image_height;
+    if (modulo > 0 && modulo < this.pixle_image_height) {
+      let short_count: number = this.pixle_image_height - modulo;
       for (let i: number = 0; i < short_count; i++) {
         temp_emoji_list.push(this.empty_emoji_slot);
       }

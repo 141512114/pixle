@@ -1,17 +1,18 @@
 @use "sass:map";
 
 // Default color maps
-$dark-theme: (
-  main-background: #101114,
-  second-background: #1b1c21,
-  light-background: #32374d,
-  dark-background: #08090a,
-  main-text: white
+$sand-palette: (
+  slate: #3e4e50,
+  apricot: #facfad,
+  mellow-apricot: #f8bd7f,
+  sandy-brown: #f5ac72,
+  tumbleweed: #f2aa7e
 );
 
 // Default variables
 $standard-pixle-size: 550px !default;
 $tile-size: 110px !default;
+$default-text-color: white !default;
 
 // Grid system
 $col-offset: 7px !default;

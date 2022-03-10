@@ -57,7 +57,7 @@ div.component-pix-grid-element::before {
           transform: translate(-50%, -50%);
   width: 90px;
   height: 90px;
-  background-color: rgba(16, 17, 20, 0.45);
+  background-color: #f5ac72;
   -webkit-transition: width 300ms, height 300ms, background-color 200ms, border-radius 200ms;
   -o-transition: width 300ms, height 300ms, background-color 200ms, border-radius 200ms;
   transition: width 300ms, height 300ms, background-color 200ms, border-radius 200ms;
@@ -89,7 +89,7 @@ div.component-pix-grid-element:hover {
 div.component-pix-grid-element:hover:not(.grid-element-status__solved, .grid-element-status__failed)::before {
   width: 100px;
   height: 100px;
-  background-color: rgba(16, 17, 20, 0.65);
+  background-color: #f5ac72;
 }
 div.component-pix-grid-element:hover:not(.grid-element-status__solved, .grid-element-status__failed).grid-element-status__2::before {
   background-color: rgba(255, 255, 0, 0.65);
