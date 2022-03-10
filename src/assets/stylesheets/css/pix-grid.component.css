@@ -9,12 +9,55 @@ div.component-pix-grid div.pix-emoji-list-wrapper {
   width: auto;
   height: auto;
   padding: 20px;
-  background-color: #20314E;
+  background-color: #20314e;
   -webkit-user-select: none;
      -moz-user-select: none;
       -ms-user-select: none;
           user-select: none;
   vertical-align: top;
+}
+div.component-pix-grid div.pix-grid-wrapper {
+  -webkit-perspective: 1000px;
+          perspective: 1000px;
+}
+div.component-pix-grid div.pix-grid-wrapper div.pix-grid-inner {
+  position: relative;
+  -webkit-transform-style: preserve-3d;
+          transform-style: preserve-3d;
+  -webkit-transition: -webkit-transform 400ms;
+  transition: -webkit-transform 400ms;
+  -o-transition: transform 400ms;
+  transition: transform 400ms;
+  transition: transform 400ms, -webkit-transform 400ms;
+}
+div.component-pix-grid div.pix-grid-wrapper div.pix-grid-inner .front-face, div.component-pix-grid div.pix-grid-wrapper div.pix-grid-inner .back-face {
+  -webkit-backface-visibility: hidden;
+          backface-visibility: hidden;
+  z-index: 10;
+}
+div.component-pix-grid div.pix-grid-wrapper div.pix-grid-inner .back-face {
+  position: absolute;
+  top: 0;
+  left: 0;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+  pointer-events: none;
+  -webkit-transform: rotateY(180deg);
+          transform: rotateY(180deg);
+  z-index: 20;
+}
+div.component-pix-grid div.pix-grid-wrapper:hover div.pix-grid-inner {
+  -webkit-transform: rotateY(-180deg);
+          transform: rotateY(-180deg);
+}
+div.component-pix-grid div.pix-grid-wrapper:hover div.pix-grid-inner .front-face {
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+  pointer-events: none;
 }
 div.component-pix-grid div.validate-button-wrapper {
   position: relative;

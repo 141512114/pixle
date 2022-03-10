@@ -13,7 +13,7 @@
 
 html,
 body {
-  background-color: map.get($default-color-palette, 1);
+  @include background-color(1);
 }
 
 section {
@@ -74,7 +74,6 @@ button:hover {
   width: $standard-pixle-size;
   opacity: 1;
   transition: top 700ms, opacity 550ms, visibility 300ms;
-  // @include box-shadow($shadow_color:map.get($sand-palette, sandy-brown));
 
   &.close {
     opacity: 0;
@@ -96,7 +95,7 @@ button:hover {
     color: white;
     border: 4px solid map.get($default-color-palette, 2);
     @extend .rounded-5;
-    background-color: map.get($default-color-palette, 2);
+    @include background-color(2);
     transition: background-color 300ms, border-color 300ms, color 300ms;
 
     &:last-child {
@@ -115,6 +114,6 @@ button:hover {
   }
 
   button:active {
-    background-color: map.get($default-color-palette, 3);
+    @include background-color(3);
   }
 }

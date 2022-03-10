@@ -140,7 +140,7 @@ button:hover {
   letter-spacing: 2px;
   color: white;
   border: 4px solid #20314E;
-  background-color: #20314E;
+  background-color: #20314e;
   -webkit-transition: background-color 300ms, border-color 300ms, color 300ms;
   -o-transition: background-color 300ms, border-color 300ms, color 300ms;
   transition: background-color 300ms, border-color 300ms, color 300ms;

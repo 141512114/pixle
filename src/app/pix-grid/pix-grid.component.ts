@@ -149,7 +149,7 @@ export class PixGridComponent implements OnInit, AfterViewInit {
     let temp_pix_grid_comps: PixGridElementComponent[] = this.pixGridElementComponents.toArray();
     if (temp_pix_grid_comps.length <= 0) return;
     for (let i: number = 0; i < temp_pix_grid_comps.length; i++) {
-      if (temp_pix_grid_comps[i].grid_element_type === 1) continue;
+      if (temp_pix_grid_comps[i].grid_element_type !== 0) continue;
       temp_pix_grid_comps[i].changeElementIcon(this.hidden_pixle_tile);
     }
     this.game_started = true;

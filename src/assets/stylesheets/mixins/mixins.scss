@@ -1,3 +1,5 @@
+@use "sass:map";
+
 // Default mixins
 @mixin clickable($bool: false) {
   @if ($bool == true) {
@@ -5,6 +7,10 @@
   } @else {
     pointer-events: none;
   }
+}
+
+@mixin background-color($color_id, $alpha:1) {
+  background-color: rgba(map.get($default-color-palette, $color_id), $alpha);
 }
 
 @mixin alignment_old($xoff:50%, $yoff:50%, $xoff_counter:-$xoff, $yoff_counter:-$yoff) {

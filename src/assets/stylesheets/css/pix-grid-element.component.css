@@ -72,16 +72,16 @@ div.component-pix-grid-element p.icon-container {
   z-index: 20;
 }
 div.component-pix-grid-element.grid-element-status__solved::before {
-  background-color: rgba(35, 206, 107, 0.65);
+  background-color: rgba(35, 206, 107, 0.8);
 }
 div.component-pix-grid-element.grid-element-status__2::before {
-  background-color: rgba(249, 233, 0, 0.65);
+  background-color: rgba(249, 233, 0, 0.8);
 }
 div.component-pix-grid-element.grid-element-status__1::before {
-  background-color: rgba(243, 146, 55, 0.65);
+  background-color: rgba(243, 146, 55, 0.8);
 }
 div.component-pix-grid-element.grid-element-status__failed::before {
-  background-color: rgba(231, 29, 54, 0.65);
+  background-color: rgba(231, 29, 54, 0.8);
 }
 div.component-pix-grid-element:hover {
   cursor: pointer;

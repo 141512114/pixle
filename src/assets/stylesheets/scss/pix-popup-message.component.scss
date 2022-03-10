@@ -15,7 +15,7 @@ div.component-pix-popup-message {
   div.match-closing-message {
     padding: 35px;
     border-radius: 32px;
-    background-color: map.get($default-color-palette, 2);
+    @include background-color(2);
 
     p {
       margin: 0;
@@ -25,7 +25,7 @@ div.component-pix-popup-message {
     button {
       margin-top: 25px;
       border-color: map.get($default-color-palette, 3);
-      background-color: map.get($default-color-palette, 3);
+      @include background-color(3);
     }
   }
 }
