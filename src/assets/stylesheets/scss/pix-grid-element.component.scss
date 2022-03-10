@@ -18,7 +18,7 @@ div.component-pix-grid-element {
     width: $tile-size - $background-offset;
     height: $tile-size - $background-offset;
     @extend .rounded-3;
-    background-color: rgba(map.get($default-color-palette, 3), $background-color-alpha-unfocused);
+    background-color: map.get($default-color-palette, 3);
     transition: width 300ms, height 300ms, background-color 200ms, border-radius 200ms;
     z-index: 10;
   }
@@ -58,7 +58,7 @@ div.component-pix-grid-element {
         width: $tile-size - $background-offset-hover;
         height: $tile-size - $background-offset-hover;
         @extend .rounded-4;
-        background-color: rgba(map.get($default-color-palette, 3), $background-color-alpha-focused);
+        background-color: map.get($default-color-palette, 3);
       }
 
       &.grid-element-status {

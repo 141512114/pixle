@@ -139,8 +139,8 @@ button:hover {
   font-size: 21px;
   letter-spacing: 2px;
   color: white;
-  border: 4px solid #23395b;
-  background-color: #23395b;
+  border: 4px solid #20314E;
+  background-color: #20314E;
   -webkit-transition: background-color 300ms, border-color 300ms, color 300ms;
   -o-transition: background-color 300ms, border-color 300ms, color 300ms;
   transition: background-color 300ms, border-color 300ms, color 300ms;
@@ -155,9 +155,9 @@ button:hover {
 .ui input:focus,
 .ui button:hover {
   color: white;
-  border-color: #406e8e;
+  border-color: #1d2940;
 }
 .ui button:active {
-  background-color: #406e8e;
+  background-color: #1d2940;
 }
 /*# sourceMappingURL=sourcemaps/styles.css.map */
