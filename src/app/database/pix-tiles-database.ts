@@ -35,7 +35,7 @@ export const PIXLE_ORANGESQUARE: number[][] = [
 export const PIXLE_YELLOWSQUARE: number[][] = [
   [5, 2, 5],
   [5, 5, 5],
-  [4, 2, 3]
+  [4, 2, 4]
 ];
 
 /**
