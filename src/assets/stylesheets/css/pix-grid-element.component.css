@@ -15,6 +15,14 @@
 }
 
 /**** Classes ****/
+.locked {
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+  pointer-events: none;
+}
+
 .p-0 {
   padding-top: 0;
   padding-left: 0;
@@ -34,20 +42,22 @@
   border-radius: 32px;
 }
 
-.rounded-4, div.component-pix-grid-element:hover:not(.grid-element-status__solved, .grid-element-status__failed)::before {
+.rounded-4, div.component-pix-grid-element:hover div.icon-wrapper:not(.locked)::before {
   border-radius: 22px;
 }
 
-.rounded-3, div.component-pix-grid-element::before {
+.rounded-3, div.component-pix-grid-element div.icon-wrapper::before {
   border-radius: 17px;
 }
 
 div.component-pix-grid-element {
-  position: relative;
   width: 110px;
   height: 110px;
 }
-div.component-pix-grid-element::before {
+div.component-pix-grid-element div.icon-wrapper {
+  position: relative;
+}
+div.component-pix-grid-element div.icon-wrapper::before {
   content: "";
   position: absolute;
   top: 50%;
@@ -63,7 +73,7 @@ div.component-pix-grid-element::before {
   transition: width 300ms, height 300ms, background-color 200ms, border-radius 200ms;
   z-index: 10;
 }
-div.component-pix-grid-element p.icon-container {
+div.component-pix-grid-element div.icon-wrapper p.icon-inner {
   position: relative;
   width: 100%;
   font-size: 44px;
@@ -71,30 +81,83 @@ div.component-pix-grid-element p.icon-container {
   line-height: 110px;
   z-index: 20;
 }
-div.component-pix-grid-element.grid-element-status__solved::before {
+div.component-pix-grid-element div.grid-element-inner {
+  -webkit-perspective: 1000px;
+          perspective: 1000px;
+}
+div.component-pix-grid-element div.grid-element-inner div.grid-element-flip {
+  position: relative;
+  -webkit-transform-style: preserve-3d;
+          transform-style: preserve-3d;
+  -webkit-transition: -webkit-transform 400ms;
+  transition: -webkit-transform 400ms;
+  -o-transition: transform 400ms;
+  transition: transform 400ms;
+  transition: transform 400ms, -webkit-transform 400ms;
+}
+div.component-pix-grid-element div.grid-element-inner div.grid-element-flip .front-face,
+div.component-pix-grid-element div.grid-element-inner div.grid-element-flip .back-face {
+  -webkit-backface-visibility: hidden;
+          backface-visibility: hidden;
+  z-index: 10;
+}
+div.component-pix-grid-element div.grid-element-inner div.grid-element-flip .front-face div.icon-wrapper::before,
+div.component-pix-grid-element div.grid-element-inner div.grid-element-flip .front-face div.icon-wrapper p.icon-inner,
+div.component-pix-grid-element div.grid-element-inner div.grid-element-flip .back-face div.icon-wrapper::before,
+div.component-pix-grid-element div.grid-element-inner div.grid-element-flip .back-face div.icon-wrapper p.icon-inner {
+  -webkit-backface-visibility: hidden;
+          backface-visibility: hidden;
+}
+div.component-pix-grid-element div.grid-element-inner div.grid-element-flip .back-face {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+  pointer-events: none;
+  -webkit-transform: rotateX(180deg);
+          transform: rotateX(180deg);
+  z-index: 20;
+}
+div.component-pix-grid-element div.status-element.grid-element-status__solved div.icon-wrapper::before {
   background-color: rgba(35, 206, 107, 0.8);
 }
-div.component-pix-grid-element.grid-element-status__2::before {
+div.component-pix-grid-element div.status-element.grid-element-status__2 div.icon-wrapper::before {
   background-color: rgba(249, 233, 0, 0.8);
 }
-div.component-pix-grid-element.grid-element-status__1::before {
+div.component-pix-grid-element div.status-element.grid-element-status__1 div.icon-wrapper::before {
   background-color: rgba(243, 146, 55, 0.8);
 }
-div.component-pix-grid-element.grid-element-status__failed::before {
+div.component-pix-grid-element div.status-element.grid-element-status__failed div.icon-wrapper::before {
   background-color: rgba(231, 29, 54, 0.8);
 }
 div.component-pix-grid-element:hover {
   cursor: pointer;
 }
-div.component-pix-grid-element:hover:not(.grid-element-status__solved, .grid-element-status__failed)::before {
+div.component-pix-grid-element:hover div.grid-element-flip {
+  -webkit-transform: rotateX(-180deg);
+          transform: rotateX(-180deg);
+}
+div.component-pix-grid-element:hover div.grid-element-flip .front-face {
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+  pointer-events: none;
+}
+div.component-pix-grid-element:hover div.icon-wrapper:not(.locked)::before {
   width: 100px;
   height: 100px;
   background-color: #1d2940;
 }
-div.component-pix-grid-element:hover:not(.grid-element-status__solved, .grid-element-status__failed).grid-element-status__2::before {
+div.component-pix-grid-element:hover div.status-element:not(.grid-element-status__solved, .grid-element-status__failed).grid-element-status__2 div.icon-wrapper::before {
   background-color: rgba(249, 233, 0, 0.8);
 }
-div.component-pix-grid-element:hover:not(.grid-element-status__solved, .grid-element-status__failed).grid-element-status__1::before {
+div.component-pix-grid-element:hover div.status-element:not(.grid-element-status__solved, .grid-element-status__failed).grid-element-status__1 div.icon-wrapper::before {
   background-color: rgba(243, 146, 55, 0.8);
 }
 /*# sourceMappingURL=sourcemaps/pix-grid-element.component.css.map */

@@ -12,7 +12,7 @@ import {MATCH_PIXLE_NOT_FOUND, MATCH_PIXLE_SOLVED, MATCH_PIXLE_UNSOLVED} from '.
   styleUrls: ['../../assets/stylesheets/css/minified/pix-grid.component.min.css']
 })
 export class PixGridComponent implements OnInit, AfterViewInit {
-  @ViewChildren(PixGridElementComponent) private pixGridElementComponents!: QueryList<PixGridElementComponent>;
+  @ViewChildren('user_input_element') private user_input_element!: QueryList<PixGridElementComponent>;
   pixle_arts: IPixle[] = PIXLEARTS; // <-- pulled database
 
   @Output() sendMatchStatus: EventEmitter<number> = new EventEmitter<number>();
@@ -49,8 +49,12 @@ export class PixGridComponent implements OnInit, AfterViewInit {
    * @param i
    */
   public counter(i: number): number[] {
-    let round: number = Math.ceil(i);
-    return new Array(round);
+    let ceil: number = Math.ceil(i);
+    let number_list: number[] = [];
+    for (let i = 0; i < ceil; i++) {
+      number_list.push(i);
+    }
+    return number_list;
   }
 
   /**
@@ -146,7 +150,7 @@ export class PixGridComponent implements OnInit, AfterViewInit {
    * @private
    */
   private hidePixle(): void {
-    let temp_pix_grid_comps: PixGridElementComponent[] = this.pixGridElementComponents.toArray();
+    let temp_pix_grid_comps: PixGridElementComponent[] = this.user_input_element.toArray();
     if (temp_pix_grid_comps.length <= 0) return;
     for (let i: number = 0; i < temp_pix_grid_comps.length; i++) {
       if (temp_pix_grid_comps[i].grid_element_type !== 0) continue;
@@ -163,7 +167,7 @@ export class PixGridComponent implements OnInit, AfterViewInit {
    */
   private validatePixle(): void {
     if (!this.game_started || this.pixle_solved) return;
-    let temp_pix_grid_comps: PixGridElementComponent[] = this.pixGridElementComponents.toArray();
+    let temp_pix_grid_comps: PixGridElementComponent[] = this.user_input_element.toArray();
     if (temp_pix_grid_comps.length <= 0) return;
 
     let total_count: number = 0, failed_count: number = 0;

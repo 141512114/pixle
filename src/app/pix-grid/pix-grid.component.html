@@ -3,29 +3,19 @@
     <div class="container">
       <div class="row p-0 mb-5">
         <div class="col mr-5 rounded-5 pix-grid-wrapper">
-          <div class="pix-grid-inner">
-            <div class="front-face">
-              <div class="row pix-grid-row" *ngFor="let row of pixle_image">
-                <div class="col pix-grid-col" *ngFor="let col of row">
-                  <app-pix-grid-element [pixle_emoji]="col" [receive_chosen_emoji]="chosen_emoji"></app-pix-grid-element>
-                </div>
-              </div>
-            </div>
-            <div class="back-face">
-              <div class="row pix-grid-row" *ngFor="let row of pixle_image">
-                <div class="col pix-grid-col" *ngFor="let col of row">
-                  <app-pix-grid-element [pixle_emoji]="col" [grid_element_type]="2"
-                                        [receive_chosen_emoji]="chosen_emoji"></app-pix-grid-element>
-                </div>
-              </div>
+          <div class="row pix-grid-row" *ngFor="let row of pixle_image">
+            <div class="col pix-grid-col" *ngFor="let col of row">
+              <app-pix-grid-element #user_input_element [pixle_emoji]="col"
+                                    [receive_chosen_emoji]="chosen_emoji"></app-pix-grid-element>
             </div>
           </div>
         </div>
         <div class="col rounded-5 pix-emoji-list-wrapper">
           <div class="col pix-grid-col"
-               *ngFor="let col of counter(pixle_emoji_list.length / pixle_image_height); let i = index">
-            <div class="row pix-grid-row" *ngFor="let row of counter(pixle_image_height); let j = index">
-              <app-pix-grid-element [pixle_emoji]="pixle_emoji_list[pixle_image_height * i + j]" [grid_element_type]="1"
+               *ngFor="let i of counter(pixle_emoji_list.length / pixle_image_height)">
+            <div class="row pix-grid-row" *ngFor="let j of counter(pixle_image_height)">
+              <app-pix-grid-element [pixle_emoji]="pixle_emoji_list[pixle_image_height * i + j]"
+                                    [grid_element_type]="1"
                                     (sendIconCodePoint)="receiveIconCodePoint($event)"></app-pix-grid-element>
             </div>
           </div>

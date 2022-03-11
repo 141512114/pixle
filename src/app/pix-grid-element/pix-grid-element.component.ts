@@ -8,6 +8,7 @@ import {WHITE_QUESTIONMARK} from '../database/emoji-database';
 })
 export class PixGridElementComponent implements OnInit, AfterViewInit {
   @ViewChild('component_grid_element') private component_grid_element!: ElementRef;
+  @ViewChild('user_input_element') private user_input_element!: ElementRef;
   @Input() pixle_emoji: number = -1;
   @Input() receive_chosen_emoji: number = -1;
   /**
@@ -78,7 +79,7 @@ export class PixGridElementComponent implements OnInit, AfterViewInit {
    */
   public updateTileStatus(solved: boolean): void {
     if (this.grid_element_type === 1 || this.pixle_tile_solved || this.pixle_tile_lives <= 0) return;
-    let grid_native_element: HTMLElement = this.component_grid_element.nativeElement;
+    let grid_native_element: HTMLElement = this.user_input_element.nativeElement;
 
     if (!solved) {
       this.changeElementIcon(this.pixle_emoji_default);
@@ -86,12 +87,26 @@ export class PixGridElementComponent implements OnInit, AfterViewInit {
       // Add class which represents the current health status
       if (this.pixle_tile_lives <= 0) {
         grid_native_element.classList.add('grid-element-status__failed');
+        PixGridElementComponent.lockGridElement(grid_native_element);
       } else {
         grid_native_element.classList.add('grid-element-status__' + this.pixle_tile_lives);
       }
     } else {
       grid_native_element.classList.add('grid-element-status__solved');
-      this.pixle_tile_solved = solved;
+      PixGridElementComponent.lockGridElement(grid_native_element);
     }
+
+    this.pixle_tile_solved = solved;
+  }
+
+  /**
+   * Lock grid element
+   *
+   * @param wrapper
+   * @private
+   */
+  private static lockGridElement(wrapper: HTMLElement): void {
+    if (wrapper == undefined || null) return;
+    wrapper.querySelector('div.icon-wrapper')?.classList.add('locked');
   }
 }

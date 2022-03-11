@@ -3,8 +3,6 @@
 @import 'src/assets/stylesheets/mixins/variables';
 @import 'src/assets/stylesheets/mixins/mixins';
 
-$offset: 20px;
-
 // pix-grid component stylesheet
 div.component-pix-grid {
   position: relative;
@@ -16,44 +14,10 @@ div.component-pix-grid {
     position: relative;
     width: auto;
     height: auto;
-    padding: $offset;
+    padding: 20px;
     @include background-color(2);
     user-select: none;
     vertical-align: top;
-  }
-
-  div.pix-grid-wrapper {
-    perspective: 1000px;
-
-    div.pix-grid-inner {
-      position: relative;
-      transform-style: preserve-3d;
-      transition: transform 400ms;
-
-      .front-face, .back-face {
-        backface-visibility: hidden;
-        z-index: 10;
-      }
-
-      .back-face {
-        position: absolute;
-        top: 0;
-        left: 0;
-        user-select: none;
-        pointer-events: none;
-        transform: rotateY(180deg);
-        z-index: 20;
-      }
-    }
-
-    &:hover div.pix-grid-inner {
-      transform: rotateY(-180deg);
-
-      .front-face {
-        user-select: none;
-        pointer-events: none;
-      }
-    }
   }
 
   div.validate-button-wrapper {

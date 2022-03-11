@@ -22,6 +22,11 @@
 
 /**** Classes ****/
 
+.locked {
+  user-select: none;
+  pointer-events: none;
+}
+
 // Padding
 .p-0 {
   padding-top: 0;
