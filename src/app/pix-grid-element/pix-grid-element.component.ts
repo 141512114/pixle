@@ -39,8 +39,6 @@ export class PixGridElementComponent implements OnInit, AfterViewInit {
           this.sendIconCodePoint.emit(this.pixle_emoji_codepoint);
         });
         break;
-      case 2:
-        break;
       case 0:
       default:
         // On click: change emoji
