@@ -10,7 +10,7 @@ const UNDO_FLIP_TIME: number = 2000;
 })
 export class PixGridElementComponent implements OnInit, AfterViewInit {
   @ViewChild('component_grid_element') private component_grid_element!: ElementRef;
-  @ViewChild('user_input_element') private user_input_element!: ElementRef;
+  @ViewChild('user_interactive') private user_interactive!: ElementRef;
   @ViewChild('correct_answer') private correct_answer!: ElementRef;
   @Input() pixle_emoji: number = -1; // <-- stores the correct answer
   @Input() receive_chosen_emoji: number = -1;
@@ -39,7 +39,7 @@ export class PixGridElementComponent implements OnInit, AfterViewInit {
       case 1:
         // Disable placeholder elements --> marked with a red cross
         if (this.pixle_emoji === REDCROSS) {
-          PixGridElementComponent.lockGridElement(this.user_input_element.nativeElement);
+          PixGridElementComponent.lockGridElement(this.user_interactive.nativeElement);
           return;
         }
         // Emit signal to outer component --> send codepoint of emoji
@@ -61,7 +61,7 @@ export class PixGridElementComponent implements OnInit, AfterViewInit {
    * Used in the grid component (parent component --> game controller)
    */
   public initFlip(): void {
-    this.doFlip(this.user_input_element.nativeElement);
+    this.doFlip(this.user_interactive.nativeElement);
   }
 
   /**
@@ -92,7 +92,7 @@ export class PixGridElementComponent implements OnInit, AfterViewInit {
    */
   public updateTileStatus(solved: boolean): void {
     if (this.grid_element_type === 1 || this.pixle_tile_solved || this.pixle_tile_lives <= 0) return;
-    let grid_native_element: HTMLElement = this.user_input_element.nativeElement;
+    let grid_native_element: HTMLElement = this.user_interactive.nativeElement;
 
     if (!solved) {
       this.pixle_tile_lives--;

@@ -5,7 +5,7 @@
         <div class="col mr-5 rounded-5 pix-grid-wrapper">
           <div class="row pix-grid-row" *ngFor="let row of pixle_image">
             <div class="col pix-grid-col" *ngFor="let col of row">
-              <app-pix-grid-element #user_input_element [pixle_emoji]="col"
+              <app-pix-grid-element #pixle_emoji_input [pixle_emoji]="col"
                                     [receive_chosen_emoji]="chosen_emoji"></app-pix-grid-element>
             </div>
           </div>

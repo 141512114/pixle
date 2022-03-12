@@ -12,7 +12,7 @@ import {MATCH_PIXLE_NOT_FOUND, MATCH_PIXLE_SOLVED, MATCH_PIXLE_UNSOLVED} from '.
   styleUrls: ['../../assets/stylesheets/css/minified/pix-grid.component.min.css']
 })
 export class PixGridComponent implements OnInit, AfterViewInit {
-  @ViewChildren('user_input_element') private user_input_element!: QueryList<PixGridElementComponent>;
+  @ViewChildren('pixle_emoji_input') private pixle_emoji_input!: QueryList<PixGridElementComponent>;
   pixle_arts: IPixle[] = PIXLEARTS; // <-- pulled database
 
   @Output() sendMatchStatus: EventEmitter<number> = new EventEmitter<number>();
@@ -148,7 +148,7 @@ export class PixGridComponent implements OnInit, AfterViewInit {
    * @private
    */
   private hidePixle(): void {
-    let temp_pix_grid_comps: PixGridElementComponent[] = this.user_input_element.toArray();
+    let temp_pix_grid_comps: PixGridElementComponent[] = this.pixle_emoji_input.toArray();
     if (temp_pix_grid_comps.length <= 0) return;
     for (let i: number = 0; i < temp_pix_grid_comps.length; i++) {
       if (temp_pix_grid_comps[i].grid_element_type !== 0) continue;
@@ -165,7 +165,7 @@ export class PixGridComponent implements OnInit, AfterViewInit {
    */
   private validatePixle(): void {
     if (!this.game_started || this.pixle_solved) return;
-    let temp_pix_grid_comps: PixGridElementComponent[] = this.user_input_element.toArray();
+    let temp_pix_grid_comps: PixGridElementComponent[] = this.pixle_emoji_input.toArray();
     if (temp_pix_grid_comps.length <= 0) return;
 
     let total_count: number = 0, failed_count: number = 0;

@@ -1,7 +1,7 @@
 <div #component_grid_element class="component-pix-grid-element" [ngSwitch]="grid_element_type">
   <ng-container *ngSwitchCase="0">
     <div class="grid-element-inner">
-      <div #user_input_element class="grid-element-flip icon-wrapper" data-grid-element-status="3">
+      <div #user_interactive class="grid-element-flip icon-wrapper" data-grid-element-status="3">
         <div class="front-face">
           <ng-container *ngTemplateOutlet="icon_element"></ng-container>
         </div>
@@ -12,7 +12,7 @@
     </div>
   </ng-container>
   <ng-container *ngSwitchDefault>
-    <div #user_input_element class="icon-wrapper">
+    <div #user_interactive class="icon-wrapper">
       <ng-container *ngTemplateOutlet="icon_element"></ng-container>
     </div>
   </ng-container>
