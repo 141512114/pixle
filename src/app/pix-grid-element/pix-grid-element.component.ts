@@ -1,6 +1,8 @@
 import {AfterViewInit, Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild} from '@angular/core';
 import {WHITE_QUESTIONMARK} from '../database/emoji-database';
 
+const UNDO_FLIP_TIME: number = 2000;
+
 @Component({
   selector: 'app-pix-grid-element',
   templateUrl: './pix-grid-element.component.html',
@@ -9,8 +11,8 @@ import {WHITE_QUESTIONMARK} from '../database/emoji-database';
 export class PixGridElementComponent implements OnInit, AfterViewInit {
   @ViewChild('component_grid_element') private component_grid_element!: ElementRef;
   @ViewChild('user_input_element') private user_input_element!: ElementRef;
-  @ViewChild('correct') private correct_answer_element!: ElementRef;
-  @Input() pixle_emoji: number = -1;
+  @ViewChild('correct_answer') private correct_answer!: ElementRef;
+  @Input() pixle_emoji: number = -1; // <-- stores the correct answer
   @Input() receive_chosen_emoji: number = -1;
   /**
    * Different grid element types:
@@ -108,14 +110,15 @@ export class PixGridElementComponent implements OnInit, AfterViewInit {
    */
   private doFlip(element: HTMLElement): void {
     if ((element == undefined || null) || (element.classList.contains('do-flip'))) return;
-    let icon_element = this.correct_answer_element.nativeElement.querySelector('p.icon-inner');
+    // Show correct answer after flipping the grid element
+    let icon_element = this.correct_answer.nativeElement.querySelector('p.icon-inner');
     icon_element.textContent = String.fromCodePoint(this.pixle_emoji);
     element.classList.add('do-flip');
     PixGridElementComponent.lockGridElement(element);
 
     window.setTimeout(() => {
       PixGridElementComponent.undoFlip(element);
-    }, 2000);
+    }, UNDO_FLIP_TIME);
   }
 
   /**
