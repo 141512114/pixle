@@ -1,7 +1,7 @@
 import {AfterViewInit, Component, EventEmitter, OnInit, Output, QueryList, ViewChildren} from '@angular/core';
 import {IPixle} from '../interface/pixle.interface';
 import {PIXLEARTS} from '../database/pix-arts-database';
-import {REDCROSS, WHITE_QUESTIONMARK} from '../database/emoji-database';
+import {REDCROSS} from '../database/emoji-database';
 import {PixGridElementComponent} from '../pix-grid-element/pix-grid-element.component';
 import {PixGameComponent} from '../pix-game/pix-game.component';
 import {MATCH_PIXLE_NOT_FOUND, MATCH_PIXLE_SOLVED, MATCH_PIXLE_UNSOLVED} from '../database/status-numbers';
@@ -18,7 +18,6 @@ export class PixGridComponent implements OnInit, AfterViewInit {
   @Output() sendMatchStatus: EventEmitter<number> = new EventEmitter<number>();
 
   empty_emoji_slot: number = REDCROSS;
-  hidden_pixle_tile: number = WHITE_QUESTIONMARK;
 
   pixle_id: number = -1;
   pixle_image: number[][] = [];
@@ -37,9 +36,7 @@ export class PixGridComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit(): void {
-    setTimeout(() => {
-      this.hidePixle();
-    }, 2000);
+    this.hidePixle();
   }
 
   /**
@@ -146,6 +143,7 @@ export class PixGridComponent implements OnInit, AfterViewInit {
 
   /**
    * Hide the pixle --> swap emojis on all tiles
+   * Flip tiles over
    *
    * @private
    */
@@ -154,7 +152,7 @@ export class PixGridComponent implements OnInit, AfterViewInit {
     if (temp_pix_grid_comps.length <= 0) return;
     for (let i: number = 0; i < temp_pix_grid_comps.length; i++) {
       if (temp_pix_grid_comps[i].grid_element_type !== 0) continue;
-      temp_pix_grid_comps[i].changeElementIcon(this.hidden_pixle_tile);
+      temp_pix_grid_comps[i].initFlip();
     }
     this.game_started = true;
   }

@@ -53,6 +53,13 @@ export class PixGridElementComponent implements OnInit, AfterViewInit {
   }
 
   /**
+   * Used in the grid component (parent component --> game controller)
+   */
+  public initFlip(): void {
+    this.doFlip(this.user_input_element.nativeElement);
+  }
+
+  /**
    * After clicking on this component frontend element: reveal / change the icon currently held by the player
    *
    * @param emoji_codepoint
