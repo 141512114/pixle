@@ -81,6 +81,18 @@ div.component-pix-grid-element div.icon-wrapper::before {
   transition: width 300ms, height 300ms, background-color 200ms, border-radius 200ms;
   z-index: 10;
 }
+div.component-pix-grid-element div.icon-wrapper[data-grid-element-status=solved]::before {
+  background-color: rgba(35, 206, 107, 0.8);
+}
+div.component-pix-grid-element div.icon-wrapper[data-grid-element-status="2"]::before {
+  background-color: rgba(249, 233, 0, 0.65);
+}
+div.component-pix-grid-element div.icon-wrapper[data-grid-element-status="1"]::before {
+  background-color: rgba(243, 146, 55, 0.65);
+}
+div.component-pix-grid-element div.icon-wrapper[data-grid-element-status=failed]::before {
+  background-color: rgba(231, 29, 54, 0.8);
+}
 div.component-pix-grid-element div.grid-element-inner {
   -webkit-perspective: 1000px;
           perspective: 1000px;
@@ -130,30 +142,17 @@ div.component-pix-grid-element div.grid-element-inner div.grid-element-flip.do-f
           user-select: none;
   pointer-events: none;
 }
-div.component-pix-grid-element .grid-element-status__solved.icon-wrapper::before {
-  background-color: rgba(35, 206, 107, 0.8);
-}
-div.component-pix-grid-element .grid-element-status__2.icon-wrapper::before {
-  background-color: rgba(249, 233, 0, 0.8);
-}
-div.component-pix-grid-element .grid-element-status__1.icon-wrapper::before {
-  background-color: rgba(243, 146, 55, 0.8);
-}
-div.component-pix-grid-element .grid-element-status__failed.icon-wrapper::before {
-  background-color: rgba(231, 29, 54, 0.8);
-}
 div.component-pix-grid-element:hover {
   cursor: pointer;
 }
 div.component-pix-grid-element:hover div.icon-wrapper:not(.locked)::before {
   width: 100px;
   height: 100px;
-  background-color: #1d2940;
 }
-div.component-pix-grid-element:hover :not(.grid-element-status__solved, .grid-element-status__failed).grid-element-status__2.icon-wrapper::before {
+div.component-pix-grid-element:hover div.icon-wrapper:not(.locked)[data-grid-element-status="2"]::before {
   background-color: rgba(249, 233, 0, 0.8);
 }
-div.component-pix-grid-element:hover :not(.grid-element-status__solved, .grid-element-status__failed).grid-element-status__1.icon-wrapper::before {
+div.component-pix-grid-element:hover div.icon-wrapper:not(.locked)[data-grid-element-status="1"]::before {
   background-color: rgba(243, 146, 55, 0.8);
 }
 /*# sourceMappingURL=sourcemaps/pix-grid-element.component.css.map */

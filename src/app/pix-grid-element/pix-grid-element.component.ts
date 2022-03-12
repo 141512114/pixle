@@ -85,15 +85,15 @@ export class PixGridElementComponent implements OnInit, AfterViewInit {
       this.pixle_tile_lives--;
       // Add class which represents the current health status
       if (this.pixle_tile_lives <= 0) {
-        grid_native_element.classList.add('grid-element-status__failed');
+        grid_native_element.dataset['gridElementStatus'] = 'failed';
         PixGridElementComponent.undoFlip(grid_native_element);
         PixGridElementComponent.lockGridElement(grid_native_element);
         return;
       }
-      grid_native_element.classList.add('grid-element-status__' + this.pixle_tile_lives);
+      grid_native_element.dataset['gridElementStatus'] = this.pixle_tile_lives.toString();
       this.doFlip(grid_native_element);
     } else {
-      grid_native_element.classList.add('grid-element-status__solved');
+      grid_native_element.dataset['gridElementStatus'] = 'solved';
       PixGridElementComponent.lockGridElement(grid_native_element);
     }
 

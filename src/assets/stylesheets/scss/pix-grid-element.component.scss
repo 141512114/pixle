@@ -33,6 +33,22 @@ div.component-pix-grid-element {
       transition: width 300ms, height 300ms, background-color 200ms, border-radius 200ms;
       z-index: 10;
     }
+
+    &[data-grid-element-status="solved"]::before {
+      @include background-color(6, $background-color-alpha-focused);
+    }
+
+    &[data-grid-element-status="2"]::before {
+      @include background-color(7, $background-color-alpha-unfocused);
+    }
+
+    &[data-grid-element-status="1"]::before {
+      @include background-color(8, $background-color-alpha-unfocused);
+    }
+
+    &[data-grid-element-status="failed"]::before {
+      @include background-color(9, $background-color-alpha-focused);
+    }
   }
 
   div.grid-element-inner {
@@ -74,43 +90,22 @@ div.component-pix-grid-element {
     }
   }
 
-  .grid-element-status {
-    &__solved.icon-wrapper::before {
-      @include background-color(6, $background-color-alpha-focused);
-    }
-
-    &__2.icon-wrapper::before {
-      @include background-color(7, $background-color-alpha-focused);
-    }
-
-    &__1.icon-wrapper::before {
-      @include background-color(8, $background-color-alpha-focused);
-    }
-
-    &__failed.icon-wrapper::before {
-      @include background-color(9, $background-color-alpha-focused);
-    }
-  }
-
   &:hover {
     cursor: pointer;
 
-    div.icon-wrapper:not(.locked)::before {
-      width: $tile-size - $background-offset-hover;
-      height: $tile-size - $background-offset-hover;
-      @extend .rounded-4;
-      background-color: map.get($default-color-palette, 3);
-    }
+    div.icon-wrapper:not(.locked) {
+      &::before {
+        width: $tile-size - $background-offset-hover;
+        height: $tile-size - $background-offset-hover;
+        @extend .rounded-4;
+      }
 
-    :not(.grid-element-status__solved, .grid-element-status__failed) {
-      &.grid-element-status {
-        &__2.icon-wrapper::before {
-          @include background-color(7, $background-color-alpha-focused);
-        }
+      &[data-grid-element-status="2"]::before {
+        @include background-color(7, $background-color-alpha-focused);
+      }
 
-        &__1.icon-wrapper::before {
-          @include background-color(8, $background-color-alpha-focused);
-        }
+      &[data-grid-element-status="1"]::before {
+        @include background-color(8, $background-color-alpha-focused);
       }
     }
   }
