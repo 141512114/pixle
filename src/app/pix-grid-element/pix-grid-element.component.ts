@@ -83,13 +83,12 @@ export class PixGridElementComponent implements OnInit, AfterViewInit {
     let grid_native_element: HTMLElement = this.user_input_element.nativeElement;
 
     if (!solved) {
-      this.changeElementIcon(this.pixle_emoji_default);
       this.pixle_tile_lives--;
       // Add class which represents the current health status
       if (this.pixle_tile_lives <= 0) {
         grid_native_element.dataset['gridElementStatus'] = 'failed';
-        PixGridElementComponent.undoFlip(grid_native_element);
         PixGridElementComponent.lockGridElement(grid_native_element);
+        this.undoFlip(grid_native_element);
         return;
       }
       grid_native_element.dataset['gridElementStatus'] = this.pixle_tile_lives.toString();
@@ -98,7 +97,6 @@ export class PixGridElementComponent implements OnInit, AfterViewInit {
       grid_native_element.dataset['gridElementStatus'] = 'solved';
       PixGridElementComponent.lockGridElement(grid_native_element);
     }
-
     this.pixle_tile_solved = solved;
   }
 
@@ -117,7 +115,7 @@ export class PixGridElementComponent implements OnInit, AfterViewInit {
     PixGridElementComponent.lockGridElement(element);
 
     window.setTimeout(() => {
-      PixGridElementComponent.undoFlip(element);
+      this.undoFlip(element);
     }, UNDO_FLIP_TIME);
   }
 
@@ -127,9 +125,10 @@ export class PixGridElementComponent implements OnInit, AfterViewInit {
    * @param element
    * @private
    */
-  private static undoFlip(element: HTMLElement): void {
+  private undoFlip(element: HTMLElement): void {
     if ((element == undefined || null) || (!element.classList.contains('do-flip'))) return;
     element.classList.remove('do-flip');
+    this.changeElementIcon(this.pixle_emoji_default);
     PixGridElementComponent.unlockGridElement(element);
   }
 
