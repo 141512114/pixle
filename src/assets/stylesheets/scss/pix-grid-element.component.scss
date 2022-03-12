@@ -11,6 +11,15 @@ div.component-pix-grid-element {
   width: $tile-size;
   height: $tile-size;
 
+  p.icon-inner {
+    position: relative;
+    width: 100%;
+    font-size: 44px;
+    text-align: center;
+    line-height: $tile-size;
+    z-index: 20;
+  }
+
   div.icon-wrapper {
     position: relative;
 
@@ -24,15 +33,6 @@ div.component-pix-grid-element {
       transition: width 300ms, height 300ms, background-color 200ms, border-radius 200ms;
       z-index: 10;
     }
-
-    p.icon-inner {
-      position: relative;
-      width: 100%;
-      font-size: 44px;
-      text-align: center;
-      line-height: $tile-size;
-      z-index: 20;
-    }
   }
 
   div.grid-element-inner {
@@ -45,15 +45,10 @@ div.component-pix-grid-element {
 
       .front-face,
       .back-face {
+        position: relative;
         backface-visibility: hidden;
-        z-index: 10;
-
-        div.icon-wrapper {
-          &::before,
-          p.icon-inner {
-            backface-visibility: hidden;
-          }
-        }
+        transform-style: preserve-3d;
+        z-index: 20;
       }
 
       .back-face {
@@ -65,42 +60,40 @@ div.component-pix-grid-element {
         user-select: none;
         pointer-events: none;
         transform: rotateX(180deg);
-        z-index: 20;
+        z-index: 30;
+      }
+
+      &.do-flip {
+        transform: rotateX(-180deg);
+
+        .front-face {
+          user-select: none;
+          pointer-events: none;
+        }
       }
     }
   }
 
-  div.status-element {
-    &.grid-element-status {
-      &__solved div.icon-wrapper::before {
-        @include background-color(6, $background-color-alpha-focused);
-      }
+  .grid-element-status {
+    &__solved.icon-wrapper::before {
+      @include background-color(6, $background-color-alpha-focused);
+    }
 
-      &__2 div.icon-wrapper::before {
-        @include background-color(7, $background-color-alpha-focused);
-      }
+    &__2.icon-wrapper::before {
+      @include background-color(7, $background-color-alpha-focused);
+    }
 
-      &__1 div.icon-wrapper::before {
-        @include background-color(8, $background-color-alpha-focused);
-      }
+    &__1.icon-wrapper::before {
+      @include background-color(8, $background-color-alpha-focused);
+    }
 
-      &__failed div.icon-wrapper::before {
-        @include background-color(9, $background-color-alpha-focused);
-      }
+    &__failed.icon-wrapper::before {
+      @include background-color(9, $background-color-alpha-focused);
     }
   }
 
   &:hover {
     cursor: pointer;
-
-    div.grid-element-flip {
-      transform: rotateX(-180deg);
-
-      .front-face {
-        user-select: none;
-        pointer-events: none;
-      }
-    }
 
     div.icon-wrapper:not(.locked)::before {
       width: $tile-size - $background-offset-hover;
@@ -109,13 +102,13 @@ div.component-pix-grid-element {
       background-color: map.get($default-color-palette, 3);
     }
 
-    div.status-element:not(.grid-element-status__solved, .grid-element-status__failed) {
+    :not(.grid-element-status__solved, .grid-element-status__failed) {
       &.grid-element-status {
-        &__2 div.icon-wrapper::before {
+        &__2.icon-wrapper::before {
           @include background-color(7, $background-color-alpha-focused);
         }
 
-        &__1 div.icon-wrapper::before {
+        &__1.icon-wrapper::before {
           @include background-color(8, $background-color-alpha-focused);
         }
       }

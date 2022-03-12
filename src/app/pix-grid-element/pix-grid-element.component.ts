@@ -9,6 +9,7 @@ import {WHITE_QUESTIONMARK} from '../database/emoji-database';
 export class PixGridElementComponent implements OnInit, AfterViewInit {
   @ViewChild('component_grid_element') private component_grid_element!: ElementRef;
   @ViewChild('user_input_element') private user_input_element!: ElementRef;
+  @ViewChild('correct') private correct_answer_element!: ElementRef;
   @Input() pixle_emoji: number = -1;
   @Input() receive_chosen_emoji: number = -1;
   /**
@@ -65,7 +66,7 @@ export class PixGridElementComponent implements OnInit, AfterViewInit {
    * @param emoji_codepoint
    */
   public changeElementIcon(emoji_codepoint: number = -1): void {
-    if ((emoji_codepoint == -1) || (this.pixle_emoji_codepoint === emoji_codepoint)) return;
+    if ((emoji_codepoint === -1) || (this.pixle_emoji_codepoint === emoji_codepoint)) return;
     this.pixle_emoji_text = String.fromCodePoint(emoji_codepoint);
     this.pixle_emoji_codepoint = emoji_codepoint;
   }
@@ -85,10 +86,12 @@ export class PixGridElementComponent implements OnInit, AfterViewInit {
       // Add class which represents the current health status
       if (this.pixle_tile_lives <= 0) {
         grid_native_element.classList.add('grid-element-status__failed');
+        PixGridElementComponent.undoFlip(grid_native_element);
         PixGridElementComponent.lockGridElement(grid_native_element);
-      } else {
-        grid_native_element.classList.add('grid-element-status__' + this.pixle_tile_lives);
+        return;
       }
+      grid_native_element.classList.add('grid-element-status__' + this.pixle_tile_lives);
+      this.doFlip(grid_native_element);
     } else {
       grid_native_element.classList.add('grid-element-status__solved');
       PixGridElementComponent.lockGridElement(grid_native_element);
@@ -98,13 +101,54 @@ export class PixGridElementComponent implements OnInit, AfterViewInit {
   }
 
   /**
-   * Lock grid element
+   * Flip grid element
    *
-   * @param wrapper
+   * @param element
    * @private
    */
-  private static lockGridElement(wrapper: HTMLElement): void {
-    if (wrapper == undefined || null) return;
-    wrapper.querySelector('div.icon-wrapper')?.classList.add('locked');
+  private doFlip(element: HTMLElement): void {
+    if ((element == undefined || null) || (element.classList.contains('do-flip'))) return;
+    let icon_element = this.correct_answer_element.nativeElement.querySelector('p.icon-inner');
+    icon_element.textContent = String.fromCodePoint(this.pixle_emoji);
+    element.classList.add('do-flip');
+    PixGridElementComponent.lockGridElement(element);
+
+    window.setTimeout(() => {
+      PixGridElementComponent.undoFlip(element);
+    }, 2000);
+  }
+
+  /**
+   * Reverse flipped grid element
+   *
+   * @param element
+   * @private
+   */
+  private static undoFlip(element: HTMLElement): void {
+    if ((element == undefined || null) || (!element.classList.contains('do-flip'))) return;
+    element.classList.remove('do-flip');
+    PixGridElementComponent.unlockGridElement(element);
+  }
+
+  /**
+   * Lock grid element
+   *
+   * @param element
+   * @private
+   */
+  private static lockGridElement(element: HTMLElement): void {
+    if ((element == undefined || null) || (element.classList.contains('locked'))) return;
+    element.classList.add('locked');
+  }
+
+  /**
+   * Unlock grid element
+   *
+   * @param element
+   * @private
+   */
+  private static unlockGridElement(element: HTMLElement): void {
+    if ((element == undefined || null) || (!element.classList.contains('locked'))) return;
+    element.classList.remove('locked');
   }
 }
