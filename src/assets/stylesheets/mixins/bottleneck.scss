@@ -23,8 +23,15 @@
 /**** Classes ****/
 
 .locked {
-  user-select: none;
-  pointer-events: none;
+  user-select: none !important;
+  pointer-events: none !important;
+  cursor: default !important;
+
+  &:hover,
+  &:focus,
+  &:active {
+    cursor: default !important;
+  }
 }
 
 // Padding

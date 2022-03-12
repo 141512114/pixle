@@ -90,23 +90,21 @@ div.component-pix-grid-element {
     }
   }
 
-  &:hover {
+  &:hover div.icon-wrapper:not(.locked) {
     cursor: pointer;
 
-    div.icon-wrapper:not(.locked) {
-      &::before {
-        width: $tile-size - $background-offset-hover;
-        height: $tile-size - $background-offset-hover;
-        @extend .rounded-4;
-      }
+    &::before {
+      width: $tile-size - $background-offset-hover;
+      height: $tile-size - $background-offset-hover;
+      @extend .rounded-4;
+    }
 
-      &[data-grid-element-status="2"]::before {
-        @include background-color(7, $background-color-alpha-focused);
-      }
+    &[data-grid-element-status="2"]::before {
+      @include background-color(7, $background-color-alpha-focused);
+    }
 
-      &[data-grid-element-status="1"]::before {
-        @include background-color(8, $background-color-alpha-focused);
-      }
+    &[data-grid-element-status="1"]::before {
+      @include background-color(8, $background-color-alpha-focused);
     }
   }
 }

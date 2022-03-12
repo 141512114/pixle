@@ -1,5 +1,5 @@
 import {AfterViewInit, Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild} from '@angular/core';
-import {WHITE_QUESTIONMARK} from '../database/emoji-database';
+import {REDCROSS, WHITE_QUESTIONMARK} from '../database/emoji-database';
 
 const UNDO_FLIP_TIME: number = 2000;
 
@@ -37,6 +37,11 @@ export class PixGridElementComponent implements OnInit, AfterViewInit {
     // Check which type this grid element has
     switch (this.grid_element_type) {
       case 1:
+        // Disable placeholder elements --> marked with a red cross
+        if (this.pixle_emoji === REDCROSS) {
+          PixGridElementComponent.lockGridElement(this.user_input_element.nativeElement);
+          return;
+        }
         // Emit signal to outer component --> send codepoint of emoji
         this.component_grid_element.nativeElement.addEventListener('click', () => {
           this.sendIconCodePoint.emit(this.pixle_emoji_codepoint);
