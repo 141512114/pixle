@@ -34,6 +34,10 @@ div.component-pix-grid-element {
       z-index: 10;
     }
 
+    &.selected::before {
+      @include background-color(4);
+    }
+
     &[data-grid-element-status="solved"]::before {
       @include background-color(6, $background-color-alpha-focused);
     }

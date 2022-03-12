@@ -58,6 +58,28 @@ export class PixGridElementComponent implements OnInit, AfterViewInit {
   }
 
   /**
+   * Select this emoji and element
+   */
+  public selectThisEmoji(): void {
+    if (this.grid_element_type !== 1) return;
+    let element: HTMLElement = this.user_interactive.nativeElement;
+    if (!element.classList.contains('selected')) {
+      element.classList.add('selected');
+    }
+  }
+
+  /**
+   * Unselect this emoji and element
+   */
+  public unselectThisEmoji(): void {
+    if (this.grid_element_type !== 1) return;
+    let element: HTMLElement = this.user_interactive.nativeElement;
+    if (element.classList.contains('selected')) {
+      element.classList.remove('selected');
+    }
+  }
+
+  /**
    * Used in the grid component (parent component --> game controller)
    */
   public initFlip(): void {

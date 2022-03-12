@@ -13,6 +13,7 @@ import {MATCH_PIXLE_NOT_FOUND, MATCH_PIXLE_SOLVED, MATCH_PIXLE_UNSOLVED} from '.
 })
 export class PixGridComponent implements OnInit, AfterViewInit {
   @ViewChildren('pixle_emoji_input') private pixle_emoji_input!: QueryList<PixGridElementComponent>;
+  @ViewChildren('pixle_emoji_output') private pixle_emoji_output!: QueryList<PixGridElementComponent>;
   pixle_arts: IPixle[] = PIXLEARTS; // <-- pulled database
 
   @Output() sendMatchStatus: EventEmitter<number> = new EventEmitter<number>();
@@ -60,8 +61,17 @@ export class PixGridComponent implements OnInit, AfterViewInit {
    * @param emoji_codepoint
    */
   public receiveIconCodePoint(emoji_codepoint: number = -1): void {
-    if (!this.game_started || this.pixle_solved) return;
+    if (this.pixle_solved || emoji_codepoint === -1) return;
     this.chosen_emoji = emoji_codepoint;
+    let emoji_emitter_list: PixGridElementComponent[] = this.pixle_emoji_output.toArray();
+    for (let i = 0; i < emoji_emitter_list.length; i++) {
+      let current_entry: PixGridElementComponent = emoji_emitter_list[i];
+      if (current_entry.pixle_emoji_codepoint !== this.chosen_emoji) {
+        current_entry.unselectThisEmoji();
+        continue;
+      }
+      current_entry.selectThisEmoji();
+    }
   }
 
   /**

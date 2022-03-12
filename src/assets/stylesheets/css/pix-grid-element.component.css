@@ -85,6 +85,9 @@ div.component-pix-grid-element div.icon-wrapper::before {
   transition: width 300ms, height 300ms, background-color 200ms, border-radius 200ms;
   z-index: 10;
 }
+div.component-pix-grid-element div.icon-wrapper.selected::before {
+  background-color: #8ea8c3;
+}
 div.component-pix-grid-element div.icon-wrapper[data-grid-element-status=solved]::before {
   background-color: rgba(35, 206, 107, 0.8);
 }
