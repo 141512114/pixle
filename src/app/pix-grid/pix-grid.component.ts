@@ -5,6 +5,7 @@ import {REDCROSS} from '../database/emoji-database';
 import {PixGridElementComponent} from '../pix-grid-element/pix-grid-element.component';
 import {PixGameComponent} from '../pix-game/pix-game.component';
 import {MATCH_PIXLE_NOT_FOUND, MATCH_PIXLE_SOLVED, MATCH_PIXLE_UNSOLVED} from '../database/status-numbers';
+import {HelperFunctionsService} from '../services/helper-functions.service';
 
 @Component({
   selector: 'app-pix-grid',
@@ -47,12 +48,7 @@ export class PixGridComponent implements OnInit, AfterViewInit {
    * @param i
    */
   public counter(i: number): number[] {
-    let ceil: number = Math.ceil(i);
-    let number_list: number[] = [];
-    for (let i = 0; i < ceil; i++) {
-      number_list.push(i);
-    }
-    return number_list;
+    return HelperFunctionsService.makeForLoopCount(i);
   }
 
   /**
@@ -63,6 +59,22 @@ export class PixGridComponent implements OnInit, AfterViewInit {
   public receiveIconCodePoint(emoji_codepoint: number = -1): void {
     if (this.pixle_solved || emoji_codepoint === -1) return;
     this.chosen_emoji = emoji_codepoint;
+    this.selectCurrentChosenEmoji();
+  }
+
+  /**
+   * After clicking on a button, validate the pixle created by the player
+   */
+  public validatePixleOnClick(): void {
+    this.validatePixle();
+  }
+
+  /**
+   * Select the currently chosen emoji --> apply styling
+   *
+   * @private
+   */
+  private selectCurrentChosenEmoji(): void {
     let emoji_emitter_list: PixGridElementComponent[] = this.pixle_emoji_output.toArray();
     for (let i = 0; i < emoji_emitter_list.length; i++) {
       let current_entry: PixGridElementComponent = emoji_emitter_list[i];
@@ -75,13 +87,6 @@ export class PixGridComponent implements OnInit, AfterViewInit {
   }
 
   /**
-   * After clicking on a button, validate the pixle created by the player
-   */
-  public validatePixleOnClick(): void {
-    this.validatePixle();
-  }
-
-  /**
    * Search for any pixle art from the database (get a random one)
    * Emit an event, which sends the chosen pixle object out to be received by other components
    *
@@ -89,7 +94,7 @@ export class PixGridComponent implements OnInit, AfterViewInit {
    */
   private searchRandomPixleArt(): boolean {
     if (this.pixle_arts.length <= 0) return false;
-    let rand: number = PixGameComponent.generateRandomInteger(this.pixle_arts.length - 1);
+    let rand: number = HelperFunctionsService.generateRandomInteger(this.pixle_arts.length - 1);
 
     let selected_pixle_art: IPixle = this.pixle_arts[rand];
     if (selected_pixle_art == undefined || null) return false;
@@ -98,7 +103,7 @@ export class PixGridComponent implements OnInit, AfterViewInit {
     // Go through the pixle image --> contains only emoji ids --> convert them to codepoints
     let temp_pixle_image: number[][] = [];
     for (let i: number = 0; i < pixle_art_tiles.length; i++) {
-      temp_pixle_image.push(PixGameComponent.getIconsFromListById(pixle_art_tiles[i]));
+      temp_pixle_image.push(PixGameComponent.getEmojisFromListById(pixle_art_tiles[i]));
     }
     this.pixle_image = temp_pixle_image;
     this.pixle_id = selected_pixle_art.id;
@@ -117,9 +122,7 @@ export class PixGridComponent implements OnInit, AfterViewInit {
    * @private
    */
   private getEmojiList(): boolean {
-    // Make sure a pixle tile array was assigned
-    if (this.pixle_image.length <= 0) return false;
-    let pixle_convert: number[] = this.convertPixleIntoNormalArray();
+    let pixle_convert: number[] = HelperFunctionsService.twoDimensionalArrayToOneDimensional(this.pixle_image);
     if (pixle_convert.length <= 0) return false;
 
     let temp_emoji_list: number[] = [];
@@ -179,7 +182,7 @@ export class PixGridComponent implements OnInit, AfterViewInit {
     if (temp_pix_grid_comps.length <= 0) return;
 
     let total_count: number = 0, failed_count: number = 0;
-    let pixle_convert: number[] = this.convertPixleIntoNormalArray();
+    let pixle_convert: number[] = HelperFunctionsService.twoDimensionalArrayToOneDimensional(this.pixle_image);
     if (pixle_convert.length <= 0) return;
     // Check every pixle tile if its valid --> emoji at the exact same position as in the original pixle
     for (let i: number = 0; i < pixle_convert.length; i++) {
@@ -204,23 +207,5 @@ export class PixGridComponent implements OnInit, AfterViewInit {
       this.game_started = false;
       this.sendMatchStatus.emit(MATCH_PIXLE_SOLVED);
     }
-  }
-
-  /**
-   * Convert the pixle array (two-dimensional) into a "normal" array (one-dimensional)
-   * This makes it easier to compare every entry with each other and find duplicates
-   *
-   * @private
-   */
-  private convertPixleIntoNormalArray(): number[] {
-    let pixle_convert: number[] = [];
-    // Make sure a pixle tile array was assigned
-    if (this.pixle_image.length <= 0) return [];
-    for (let i: number = 0; i < this.pixle_image_height; i++) {
-      for (let j: number = 0; j < this.pixle_image_width; j++) {
-        pixle_convert.push(this.pixle_image[i][j]);
-      }
-    }
-    return pixle_convert;
   }
 }

@@ -70,23 +70,12 @@ export class PixGameComponent {
   }
 
   /**
-   * Generate a random integer between two limiter values --> min and max
-   * The parameter min is by default 0
-   *
-   * @param max
-   * @param min
-   */
-  public static generateRandomInteger(max: number, min: number = 0): number {
-    return Math.floor(Math.random() * (max - min + 1) + min);
-  }
-
-  /**
    * Get the emoji by its id --> search it in the emoji collection
    * Return an array of codepoints
    *
    * @param emoji_ids
    */
-  public static getIconsFromListById(emoji_ids: number[] = []): number[] {
+  public static getEmojisFromListById(emoji_ids: number[] = []): number[] {
     if (emoji_ids.length <= 0) return [];
     let temp_emoji_codepoints: number[] = [];
     for (let i: number = 0; i < emoji_ids.length; i++) {

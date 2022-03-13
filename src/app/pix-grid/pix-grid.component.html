@@ -11,8 +11,7 @@
           </div>
         </div>
         <div class="col rounded-5 pix-emoji-list-wrapper">
-          <div class="col pix-grid-col"
-               *ngFor="let i of counter(pixle_emoji_list.length / pixle_image_height)">
+          <div class="col pix-grid-col" *ngFor="let i of counter(pixle_emoji_list.length / pixle_image_height)">
             <div class="row pix-grid-row" *ngFor="let j of counter(pixle_image_height)">
               <app-pix-grid-element #pixle_emoji_output [pixle_emoji]="pixle_emoji_list[pixle_image_height * i + j]"
                                     [grid_element_type]="1"

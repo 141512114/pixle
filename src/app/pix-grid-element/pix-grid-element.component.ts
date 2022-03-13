@@ -1,5 +1,6 @@
 import {AfterViewInit, Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild} from '@angular/core';
 import {REDCROSS, WHITE_QUESTIONMARK} from '../database/emoji-database';
+import {HelperFunctionsService} from '../services/helper-functions.service';
 
 const UNDO_FLIP_TIME: number = 2000;
 
@@ -39,7 +40,7 @@ export class PixGridElementComponent implements OnInit, AfterViewInit {
       case 1:
         // Disable placeholder elements --> marked with a red cross
         if (this.pixle_emoji === REDCROSS) {
-          PixGridElementComponent.lockGridElement(this.user_interactive.nativeElement);
+          HelperFunctionsService.lockElement(this.user_interactive.nativeElement);
           return;
         }
         // Emit signal to outer component --> send codepoint of emoji
@@ -55,6 +56,13 @@ export class PixGridElementComponent implements OnInit, AfterViewInit {
         });
         break;
     }
+  }
+
+  /**
+   * Used in the grid component (parent component --> game controller)
+   */
+  public initFlip(): void {
+    this.doFlip(this.user_interactive.nativeElement);
   }
 
   /**
@@ -80,13 +88,6 @@ export class PixGridElementComponent implements OnInit, AfterViewInit {
   }
 
   /**
-   * Used in the grid component (parent component --> game controller)
-   */
-  public initFlip(): void {
-    this.doFlip(this.user_interactive.nativeElement);
-  }
-
-  /**
    * After clicking on this component frontend element: reveal / change the icon currently held by the player
    *
    * @param emoji_codepoint
@@ -94,17 +95,6 @@ export class PixGridElementComponent implements OnInit, AfterViewInit {
   public revealOnClick(emoji_codepoint: number = -1): void {
     if (this.pixle_tile_solved || this.pixle_tile_lives <= 0) return;
     this.changeElementIcon(emoji_codepoint);
-  }
-
-  /**
-   * Change the grid elements icon
-   *
-   * @param emoji_codepoint
-   */
-  public changeElementIcon(emoji_codepoint: number = -1): void {
-    if ((emoji_codepoint === -1) || (this.pixle_emoji_codepoint === emoji_codepoint)) return;
-    this.pixle_emoji_text = String.fromCodePoint(emoji_codepoint);
-    this.pixle_emoji_codepoint = emoji_codepoint;
   }
 
   /**
@@ -121,7 +111,7 @@ export class PixGridElementComponent implements OnInit, AfterViewInit {
       // Add class which represents the current health status
       if (this.pixle_tile_lives <= 0) {
         grid_native_element.dataset['gridElementStatus'] = 'failed';
-        PixGridElementComponent.lockGridElement(grid_native_element);
+        HelperFunctionsService.lockElement(grid_native_element);
         this.undoFlip(grid_native_element);
         return;
       }
@@ -129,9 +119,21 @@ export class PixGridElementComponent implements OnInit, AfterViewInit {
       this.doFlip(grid_native_element);
     } else {
       grid_native_element.dataset['gridElementStatus'] = 'solved';
-      PixGridElementComponent.lockGridElement(grid_native_element);
+      HelperFunctionsService.lockElement(grid_native_element);
     }
     this.pixle_tile_solved = solved;
+  }
+
+  /**
+   * Change the grid elements icon
+   *
+   * @param emoji_codepoint
+   * @private
+   */
+  private changeElementIcon(emoji_codepoint: number = -1): void {
+    if ((emoji_codepoint === -1) || (this.pixle_emoji_codepoint === emoji_codepoint)) return;
+    this.pixle_emoji_text = String.fromCodePoint(emoji_codepoint);
+    this.pixle_emoji_codepoint = emoji_codepoint;
   }
 
   /**
@@ -165,7 +167,7 @@ export class PixGridElementComponent implements OnInit, AfterViewInit {
     // Show correct answer before flipping the grid element
     this.showCorrectAnswer();
     element.classList.add('do-flip');
-    PixGridElementComponent.lockGridElement(element);
+    HelperFunctionsService.lockElement(element);
 
     window.setTimeout(() => {
       this.undoFlip(element);
@@ -183,28 +185,6 @@ export class PixGridElementComponent implements OnInit, AfterViewInit {
     element.classList.remove('do-flip');
     this.hideCorrectAnswer();
     this.changeElementIcon(this.pixle_emoji_default);
-    PixGridElementComponent.unlockGridElement(element);
-  }
-
-  /**
-   * Lock grid element
-   *
-   * @param element
-   * @private
-   */
-  private static lockGridElement(element: HTMLElement): void {
-    if ((element == undefined || null) || (element.classList.contains('locked'))) return;
-    element.classList.add('locked');
-  }
-
-  /**
-   * Unlock grid element
-   *
-   * @param element
-   * @private
-   */
-  private static unlockGridElement(element: HTMLElement): void {
-    if ((element == undefined || null) || (!element.classList.contains('locked'))) return;
-    element.classList.remove('locked');
+    HelperFunctionsService.unlockElement(element);
   }
 }
