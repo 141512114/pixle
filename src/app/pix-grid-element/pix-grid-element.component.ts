@@ -41,12 +41,12 @@ export class PixGridElementComponent implements OnInit, AfterViewInit {
         // Disable placeholder elements --> marked with a red cross
         if (this.pixle_emoji === REDCROSS) {
           HelperFunctionsService.lockElement(this.user_interactive.nativeElement);
-          return;
+        } else {
+          // Emit signal to outer component --> send codepoint of emoji
+          this.component_grid_element.nativeElement.addEventListener('click', () => {
+            this.sendIconCodePoint.emit(this.pixle_emoji_codepoint);
+          });
         }
-        // Emit signal to outer component --> send codepoint of emoji
-        this.component_grid_element.nativeElement.addEventListener('click', () => {
-          this.sendIconCodePoint.emit(this.pixle_emoji_codepoint);
-        });
         break;
       case 0:
       default:

@@ -103,7 +103,8 @@ export class PixGridComponent implements OnInit, AfterViewInit {
     // Go through the pixle image --> contains only emoji ids --> convert them to codepoints
     let temp_pixle_image: number[][] = [];
     for (let i: number = 0; i < pixle_art_tiles.length; i++) {
-      temp_pixle_image.push(PixGameComponent.getEmojisFromListById(pixle_art_tiles[i]));
+      let emojis_in_tile: number[] = PixGameComponent.getEmojisFromListById(pixle_art_tiles[i]);
+      temp_pixle_image.push(emojis_in_tile);
     }
     this.pixle_image = temp_pixle_image;
     this.pixle_id = selected_pixle_art.id;
