@@ -31,7 +31,16 @@ export class PixGridElementComponent implements OnInit, AfterViewInit {
   pixle_emoji_codepoint: number = -1;
 
   ngOnInit(): void {
-    this.changeElementIcon(this.pixle_emoji);
+    // Check which type this grid element has
+    switch (this.grid_element_type) {
+      case 1:
+        this.changeElementIcon(this.pixle_emoji);
+        break;
+      case 0:
+      default:
+        this.changeElementIcon(this.pixle_emoji_default);
+        break;
+    }
   }
 
   ngAfterViewInit(): void {
