@@ -7,6 +7,8 @@ import {PixGameComponent} from '../pix-game/pix-game.component';
 import {MATCH_PIXLE_NOT_FOUND, MATCH_PIXLE_SOLVED, MATCH_PIXLE_UNSOLVED} from '../database/status-numbers';
 import {HelperFunctionsService} from '../services/helper-functions.service';
 
+const UNDO_FLIP_TIME: number = 2000;
+
 @Component({
   selector: 'app-pix-grid',
   templateUrl: './pix-grid.component.html',
@@ -38,7 +40,7 @@ export class PixGridComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit(): void {
-    this.hidePixle();
+    this.startGame();
   }
 
   /**
@@ -67,6 +69,21 @@ export class PixGridComponent implements OnInit, AfterViewInit {
    */
   public validatePixleOnClick(): void {
     this.validatePixle();
+  }
+
+  /**
+   * Start the game
+   * Show the pixle at the beginning for a set duration
+   * Hide it, if the timer is over
+   *
+   * @private
+   */
+  private startGame(): void {
+    this.setDisplayStatusOfPixle(false);
+    window.setTimeout(() => {
+      this.setDisplayStatusOfPixle();
+      this.game_started = true;
+    }, UNDO_FLIP_TIME);
   }
 
   /**
@@ -99,7 +116,6 @@ export class PixGridComponent implements OnInit, AfterViewInit {
     let selected_pixle_art: IPixle = this.pixle_arts[rand];
     if (selected_pixle_art == undefined || null) return false;
     let pixle_art_tiles: number[][] = selected_pixle_art.tiles;
-
     // Go through the pixle image --> contains only emoji ids --> convert them to codepoints
     let temp_pixle_image: number[][] = [];
     for (let i: number = 0; i < pixle_art_tiles.length; i++) {
@@ -108,7 +124,6 @@ export class PixGridComponent implements OnInit, AfterViewInit {
     }
     this.pixle_image = temp_pixle_image;
     this.pixle_id = selected_pixle_art.id;
-
     // Make sure a pixle tile array was assigned
     if (this.pixle_image.length <= 0) return false;
     this.pixle_image_height = this.pixle_image.length;
@@ -141,7 +156,6 @@ export class PixGridComponent implements OnInit, AfterViewInit {
         }
       }
     }
-
     // Fill empty slots with placeholders, if there ever are less emojis used than the vertical amount of icons in a pixle
     let modulo: number = temp_emoji_list.length % this.pixle_image_height;
     if (modulo > 0 && modulo < this.pixle_image_height) {
@@ -150,25 +164,32 @@ export class PixGridComponent implements OnInit, AfterViewInit {
         temp_emoji_list.push(this.empty_emoji_slot);
       }
     }
-
     this.pixle_emoji_list = temp_emoji_list;
     return true;
   }
 
   /**
+   * Show the pixle --> swap emojis on all tiles
+   *
+   * OR
+   *
    * Hide the pixle --> swap emojis on all tiles
    * Flip tiles over
    *
+   * @param reverse
    * @private
    */
-  private hidePixle(): void {
+  private setDisplayStatusOfPixle(reverse: boolean = true): void {
     let temp_pix_grid_comps: PixGridElementComponent[] = this.pixle_emoji_input.toArray();
     if (temp_pix_grid_comps.length <= 0) return;
     for (let i: number = 0; i < temp_pix_grid_comps.length; i++) {
       if (temp_pix_grid_comps[i].grid_element_type !== 0) continue;
-      temp_pix_grid_comps[i].initFlip();
+      if (reverse) {
+        temp_pix_grid_comps[i].reverseFlip();
+      } else {
+        temp_pix_grid_comps[i].initFlip();
+      }
     }
-    this.game_started = true;
   }
 
   /**
@@ -195,18 +216,23 @@ export class PixGridComponent implements OnInit, AfterViewInit {
       temp_pix_grid_comps[i].updateTileStatus(true);
       total_count++;
     }
-
     // If any tile has reached its limits --> went out of lives --> game over
     if (failed_count > 0) {
       this.game_started = false;
       this.sendMatchStatus.emit(MATCH_PIXLE_UNSOLVED);
       return;
-    }
-
-    if (total_count >= pixle_convert.length) {
-      this.pixle_solved = true;
-      this.game_started = false;
-      this.sendMatchStatus.emit(MATCH_PIXLE_SOLVED);
+    } else {
+      // Player has won the game
+      if (total_count >= pixle_convert.length) {
+        this.pixle_solved = true;
+        this.game_started = false;
+        this.sendMatchStatus.emit(MATCH_PIXLE_SOLVED);
+      } else {
+        // Player didn't win yet --> reset flip-state of some tiles
+        window.setTimeout(() => {
+          this.setDisplayStatusOfPixle();
+        }, UNDO_FLIP_TIME);
+      }
     }
   }
 }

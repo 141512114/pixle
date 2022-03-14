@@ -2,8 +2,6 @@ import {AfterViewInit, Component, ElementRef, EventEmitter, Input, OnInit, Outpu
 import {REDCROSS, WHITE_QUESTIONMARK} from '../database/emoji-database';
 import {HelperFunctionsService} from '../services/helper-functions.service';
 
-const UNDO_FLIP_TIME: number = 2000;
-
 @Component({
   selector: 'app-pix-grid-element',
   templateUrl: './pix-grid-element.component.html',
@@ -75,6 +73,13 @@ export class PixGridElementComponent implements OnInit, AfterViewInit {
   }
 
   /**
+   * Used to reverse flip an element
+   */
+  public reverseFlip(): void {
+    this.undoFlip(this.user_interactive.nativeElement);
+  }
+
+  /**
    * Select this emoji and element
    */
   public selectThisEmoji(): void {
@@ -120,12 +125,11 @@ export class PixGridElementComponent implements OnInit, AfterViewInit {
       // Add class which represents the current health status
       if (this.pixle_tile_lives <= 0) {
         grid_native_element.dataset['gridElementStatus'] = 'failed';
-        HelperFunctionsService.lockElement(grid_native_element);
-        this.undoFlip(grid_native_element);
-        return;
+        this.undoFlip(grid_native_element, false);
+      } else {
+        grid_native_element.dataset['gridElementStatus'] = this.pixle_tile_lives.toString();
+        this.doFlip(grid_native_element);
       }
-      grid_native_element.dataset['gridElementStatus'] = this.pixle_tile_lives.toString();
-      this.doFlip(grid_native_element);
     } else {
       grid_native_element.dataset['gridElementStatus'] = 'solved';
       HelperFunctionsService.lockElement(grid_native_element);
@@ -179,23 +183,21 @@ export class PixGridElementComponent implements OnInit, AfterViewInit {
     this.showCorrectAnswer();
     element.classList.add('do-flip');
     HelperFunctionsService.lockElement(element);
-
-    window.setTimeout(() => {
-      this.undoFlip(element);
-    }, UNDO_FLIP_TIME);
   }
 
   /**
    * Reverse flipped grid element
    *
    * @param element
+   * @param unlock_element
    * @private
    */
-  private undoFlip(element: HTMLElement): void {
+  private undoFlip(element: HTMLElement, unlock_element: boolean = true): void {
     if ((this.grid_element_type !== 0) || (element == undefined || null) || (!element.classList.contains('do-flip'))) return;
     element.classList.remove('do-flip');
     this.hideCorrectAnswer();
     this.changeElementIcon(this.pixle_emoji_default);
+    if (!unlock_element) return;
     HelperFunctionsService.unlockElement(element);
   }
 }
