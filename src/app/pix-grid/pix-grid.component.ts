@@ -1,4 +1,13 @@
-import {AfterViewInit, Component, EventEmitter, Output, QueryList, ViewChildren} from '@angular/core';
+import {
+  AfterContentInit,
+  AfterViewInit,
+  Component,
+  EventEmitter,
+  OnInit,
+  Output,
+  QueryList,
+  ViewChildren
+} from '@angular/core';
 import {IPixle} from '../interface/pixle.interface';
 import {PIXLEARTS} from '../database/pix-arts-database';
 import {REDCROSS} from '../database/emoji-database';
@@ -14,7 +23,7 @@ const UNDO_FLIP_TIME: number = 2000;
   templateUrl: './pix-grid.component.html',
   styleUrls: ['../../assets/stylesheets/css/minified/pix-grid.component.min.css']
 })
-export class PixGridComponent implements AfterViewInit {
+export class PixGridComponent implements OnInit, AfterViewInit, AfterContentInit {
   @ViewChildren('pixle_emoji_input') private pixle_emoji_input!: QueryList<PixGridElementComponent>;
   @ViewChildren('pixle_emoji_output') private pixle_emoji_output!: QueryList<PixGridElementComponent>;
   pixle_arts: IPixle[] = PIXLEARTS; // <-- pulled database
@@ -33,8 +42,18 @@ export class PixGridComponent implements AfterViewInit {
   game_started: boolean = false;
   chosen_emoji: number = -1;
 
+  ngOnInit(): void {
+    this.searchRandomPixleArt();
+  }
+
   ngAfterViewInit(): void {
     this.startGame();
+  }
+
+  ngAfterContentInit(): void {
+    if (this.pixle_image.length <= 0) {
+      this.sendMatchStatus.emit(MATCH_PIXLE_NOT_FOUND);
+    }
   }
 
   /**
@@ -73,16 +92,12 @@ export class PixGridComponent implements AfterViewInit {
    * @private
    */
   private startGame(): void {
-    if (!this.searchRandomPixleArt()) {
-      this.sendMatchStatus.emit(MATCH_PIXLE_NOT_FOUND);
-      return;
-    } else {
-      this.setDisplayStatusOfPixle(false);
-      window.setTimeout(() => {
-        this.setDisplayStatusOfPixle();
-        this.game_started = true;
-      }, UNDO_FLIP_TIME);
-    }
+    if (this.pixle_image.length <= 0) return;
+    this.setDisplayStatusOfPixle(false);
+    window.setTimeout(() => {
+      this.setDisplayStatusOfPixle();
+      this.game_started = true;
+    }, UNDO_FLIP_TIME);
   }
 
   /**
