@@ -6,12 +6,6 @@ import {PixPopupMessageComponent} from '../pix-popup-message/pix-popup-message.c
 import {MATCH_PIXLE_NOT_FOUND, MATCH_PIXLE_SOLVED, MATCH_PIXLE_UNSOLVED} from '../database/status-numbers';
 import {Router} from '@angular/router';
 
-const MISSINGPIXLEMSG: IPopUp = {
-  headline: 'Missing pixle data!',
-  subline: 'There was a mistake retrieving a pixle from the database.',
-  message_body: 'If this issue occurs more than it should, report this bug to the team.'
-};
-
 const SUCCESSMSG: IPopUp = {
   headline: 'Congratulations!',
   subline: 'You solved today\'s pixle!',
@@ -22,6 +16,12 @@ const FAILEDMSG: IPopUp = {
   headline: 'Something\'s not right!',
   subline: 'You didn\'t solve today\'s pixle!',
   message_body: 'Keep it up! There is still time left to give it another shot.'
+};
+
+const MISSINGPIXLEMSG: IPopUp = {
+  headline: 'Missing pixle data!',
+  subline: 'There was a mistake retrieving a pixle from the database.',
+  message_body: 'If this issue occurs more than it should, report this bug to the team.'
 };
 
 @Component({

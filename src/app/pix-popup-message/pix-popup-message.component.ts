@@ -1,4 +1,4 @@
-import {Component, ElementRef, EventEmitter, Input, Output, ViewChild} from '@angular/core';
+import {Component, ElementRef, EventEmitter, Output, ViewChild} from '@angular/core';
 import {IPopUp} from '../interface/popup-message.interface';
 
 const DEFAULT_POPUP: IPopUp = {
@@ -14,15 +14,18 @@ const DEFAULT_POPUP: IPopUp = {
 })
 export class PixPopupMessageComponent {
   @ViewChild('match_closing_message') match_closing_message!: ElementRef;
-  @Input() message: IPopUp = DEFAULT_POPUP;
   @Output() sendReloadRequest: EventEmitter<any> = new EventEmitter();
+
+  message: IPopUp = DEFAULT_POPUP;
 
   /**
    * Open pop up
    */
-  public openPopUp(msg_object: IPopUp = DEFAULT_POPUP): void {
+  public openPopUp(msg_object: IPopUp): void {
     this.message = msg_object;
-    this.match_closing_message.nativeElement.classList.remove('close');
+    let message_element: HTMLElement = this.match_closing_message.nativeElement;
+    if (!message_element.classList.contains('close')) return;
+    message_element.classList.remove('close');
   }
 
   /**
