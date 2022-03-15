@@ -1,21 +1,10 @@
-import {
-  AfterContentInit,
-  AfterViewInit,
-  Component,
-  EventEmitter,
-  OnInit,
-  Output,
-  QueryList,
-  ViewChildren
-} from '@angular/core';
-import {IPixle} from '../interface/pixle.interface';
-import {PIXLEARTS} from '../database/pix-arts-database';
-import {REDCROSS} from '../database/emoji-database';
+import {AfterViewInit, Component, EventEmitter, Input, OnInit, Output, QueryList, ViewChildren} from '@angular/core';
 import {PixGridElementComponent} from '../pix-grid-element/pix-grid-element.component';
 import {PixGameComponent} from '../pix-game/pix-game.component';
-import {MATCH_PIXLE_NOT_FOUND, MATCH_PIXLE_SOLVED, MATCH_PIXLE_UNSOLVED} from '../database/status-numbers';
+import {MATCH_PIXLE_SOLVED, MATCH_PIXLE_UNSOLVED} from '../database/status-numbers';
 import {HelperFunctionsService} from '../services/helper-functions.service';
 
+// Timer
 const UNDO_FLIP_TIME: number = 2000;
 
 @Component({
@@ -23,37 +12,27 @@ const UNDO_FLIP_TIME: number = 2000;
   templateUrl: './pix-grid.component.html',
   styleUrls: ['../../assets/stylesheets/css/minified/pix-grid.component.min.css']
 })
-export class PixGridComponent implements OnInit, AfterViewInit, AfterContentInit {
+export class PixGridComponent implements OnInit, AfterViewInit {
   @ViewChildren('pixle_emoji_input') private pixle_emoji_input!: QueryList<PixGridElementComponent>;
   @ViewChildren('pixle_emoji_output') private pixle_emoji_output!: QueryList<PixGridElementComponent>;
-  pixle_arts: IPixle[] = PIXLEARTS; // <-- pulled database
 
+  @Input() grid_image: number[][] = [];
+  @Input() emoji_list: number[] = [];
   @Output() sendMatchStatus: EventEmitter<number> = new EventEmitter<number>();
 
-  empty_emoji_slot: number = REDCROSS;
+  grid_image_width: number = 0;
+  grid_image_height: number = 0;
 
-  pixle_id: number = -1;
-  pixle_image: number[][] = [];
-  pixle_image_width: number = 0;
-  pixle_image_height: number = 0;
-  pixle_emoji_list: number[] = [];
-  pixle_solved: boolean = false;
-
-  game_started: boolean = false;
   chosen_emoji: number = -1;
 
   ngOnInit(): void {
-    this.searchRandomPixleArt();
+    if (this.grid_image.length <= 0) return;
+    this.grid_image_width = this.grid_image[0].length;
+    this.grid_image_height = this.grid_image.length;
   }
 
   ngAfterViewInit(): void {
-    this.startGame();
-  }
-
-  ngAfterContentInit(): void {
-    if (this.pixle_image.length <= 0) {
-      this.sendMatchStatus.emit(MATCH_PIXLE_NOT_FOUND);
-    }
+    this.setDisplayStatusOfPixle(false);
   }
 
   /**
@@ -72,7 +51,7 @@ export class PixGridComponent implements OnInit, AfterViewInit, AfterContentInit
    * @param emoji_codepoint
    */
   public receiveIconCodePoint(emoji_codepoint: number = -1): void {
-    if (this.pixle_solved || emoji_codepoint === -1) return;
+    if (PixGameComponent.pixle_solved || emoji_codepoint === -1) return;
     this.chosen_emoji = emoji_codepoint;
     this.selectCurrentChosenEmoji();
   }
@@ -85,19 +64,26 @@ export class PixGridComponent implements OnInit, AfterViewInit, AfterContentInit
   }
 
   /**
-   * Start the game
-   * Show the pixle at the beginning for a set duration
-   * Hide it, if the timer is over
+   * Show the pixle --> swap emojis on all tiles
    *
-   * @private
+   * OR
+   *
+   * Hide the pixle --> swap emojis on all tiles
+   * Flip tiles over
+   *
+   * @param reverse
    */
-  private startGame(): void {
-    if (this.pixle_image.length <= 0) return;
-    this.setDisplayStatusOfPixle(false);
-    window.setTimeout(() => {
-      this.setDisplayStatusOfPixle();
-      this.game_started = true;
-    }, UNDO_FLIP_TIME);
+  public setDisplayStatusOfPixle(reverse: boolean = true): void {
+    let temp_pix_grid_comps: PixGridElementComponent[] = this.pixle_emoji_input.toArray();
+    if (temp_pix_grid_comps.length <= 0) return;
+    for (let i: number = 0; i < temp_pix_grid_comps.length; i++) {
+      if (temp_pix_grid_comps[i].grid_element_type !== 0) continue;
+      if (reverse) {
+        temp_pix_grid_comps[i].reverseFlip();
+      } else {
+        temp_pix_grid_comps[i].initFlip();
+      }
+    }
   }
 
   /**
@@ -118,107 +104,18 @@ export class PixGridComponent implements OnInit, AfterViewInit, AfterContentInit
   }
 
   /**
-   * Search for any pixle art from the database (get a random one)
-   * Emit an event, which sends the chosen pixle object out to be received by other components
-   *
-   * @private
-   */
-  private searchRandomPixleArt(): boolean {
-    if (this.pixle_arts.length <= 0) return false;
-    let rand: number = HelperFunctionsService.generateRandomInteger(this.pixle_arts.length - 1);
-
-    let selected_pixle_art: IPixle = this.pixle_arts[rand];
-    if (selected_pixle_art == undefined || null) return false;
-    let pixle_art_tiles: number[][] = selected_pixle_art.tiles;
-    // Go through the pixle image --> contains only emoji ids --> convert them to codepoints
-    let temp_pixle_image: number[][] = [];
-    for (let i: number = 0; i < pixle_art_tiles.length; i++) {
-      let emojis_in_tile: number[] = PixGameComponent.getEmojisFromListById(pixle_art_tiles[i]);
-      temp_pixle_image.push(emojis_in_tile);
-    }
-    this.pixle_image = temp_pixle_image;
-    this.pixle_id = selected_pixle_art.id;
-    // Make sure a pixle tile array was assigned
-    if (this.pixle_image.length <= 0) return false;
-    this.pixle_image_height = this.pixle_image.length;
-    this.pixle_image_width = this.pixle_image[0].length;
-
-    return this.getEmojiList();
-  }
-
-  /**
-   * Get the list of emojis used in the pixle
-   *
-   * @private
-   */
-  private getEmojiList(): boolean {
-    let pixle_convert: number[] = HelperFunctionsService.twoDimensionalArrayToOneDimensional(this.pixle_image);
-    if (pixle_convert.length <= 0) return false;
-
-    let temp_emoji_list: number[] = [];
-    for (let i: number = 0; i < pixle_convert.length; i++) {
-      for (let j: number = pixle_convert.length - 1; j > 0; j--) {
-        // Make absolutely sure that both picked entries are the exact same (or not)
-        if (pixle_convert[j] === pixle_convert[i]) {
-          let emoji_codepoint: number = pixle_convert[i];
-          // Check if there already exists this exact emoji code point in the temporary array
-          if (temp_emoji_list.includes(emoji_codepoint)) {
-            break;
-          } else {
-            temp_emoji_list.push(emoji_codepoint);
-          }
-        }
-      }
-    }
-    // Fill empty slots with placeholders, if there ever are less emojis used than the vertical amount of icons in a pixle
-    let modulo: number = temp_emoji_list.length % this.pixle_image_height;
-    if (modulo > 0 && modulo < this.pixle_image_height) {
-      let short_count: number = this.pixle_image_height - modulo;
-      for (let i: number = 0; i < short_count; i++) {
-        temp_emoji_list.push(this.empty_emoji_slot);
-      }
-    }
-    this.pixle_emoji_list = temp_emoji_list;
-    return true;
-  }
-
-  /**
-   * Show the pixle --> swap emojis on all tiles
-   *
-   * OR
-   *
-   * Hide the pixle --> swap emojis on all tiles
-   * Flip tiles over
-   *
-   * @param reverse
-   * @private
-   */
-  private setDisplayStatusOfPixle(reverse: boolean = true): void {
-    let temp_pix_grid_comps: PixGridElementComponent[] = this.pixle_emoji_input.toArray();
-    if (temp_pix_grid_comps.length <= 0) return;
-    for (let i: number = 0; i < temp_pix_grid_comps.length; i++) {
-      if (temp_pix_grid_comps[i].grid_element_type !== 0) continue;
-      if (reverse) {
-        temp_pix_grid_comps[i].reverseFlip();
-      } else {
-        temp_pix_grid_comps[i].initFlip();
-      }
-    }
-  }
-
-  /**
    * Validate the pixle
    * Easy version: go through every tile and check its validity separately
    *
    * @private
    */
   private validatePixle(): void {
-    if (!this.game_started || this.pixle_solved) return;
+    if (!PixGameComponent.game_started || PixGameComponent.pixle_solved) return;
     let temp_pix_grid_comps: PixGridElementComponent[] = this.pixle_emoji_input.toArray();
     if (temp_pix_grid_comps.length <= 0) return;
 
     let total_count: number = 0, failed_count: number = 0;
-    let pixle_convert: number[] = HelperFunctionsService.twoDimensionalArrayToOneDimensional(this.pixle_image);
+    let pixle_convert: number[] = HelperFunctionsService.twoDimensionalArrayToOneDimensional(this.grid_image);
     if (pixle_convert.length <= 0) return;
     // Check every pixle tile if its valid --> emoji at the exact same position as in the original pixle
     for (let i: number = 0; i < pixle_convert.length; i++) {
@@ -232,14 +129,14 @@ export class PixGridComponent implements OnInit, AfterViewInit, AfterContentInit
     }
     // If any tile has reached its limits --> went out of lives --> game over
     if (failed_count > 0) {
-      this.game_started = false;
+      PixGameComponent.game_started = false;
       this.sendMatchStatus.emit(MATCH_PIXLE_UNSOLVED);
       return;
     } else {
       // Player has won the game
       if (total_count >= pixle_convert.length) {
-        this.pixle_solved = true;
-        this.game_started = false;
+        PixGameComponent.pixle_solved = true;
+        PixGameComponent.game_started = false;
         this.sendMatchStatus.emit(MATCH_PIXLE_SOLVED);
       } else {
         // Player didn't win yet --> reset flip-state of some tiles
