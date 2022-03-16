@@ -76,6 +76,7 @@ export class PixGameComponent implements OnInit, AfterViewInit {
     // Reload component --> redirect to same url but do not reuse old one
     await this.router.navigateByUrl(absolute_path, {skipLocationChange: true}).then(() => {
       this.router.navigate([absolute_path]);
+      PixGameComponent.resetGame();
     });
   }
 
@@ -128,6 +129,17 @@ export class PixGameComponent implements OnInit, AfterViewInit {
       this.pixGridComponent.setDisplayStatusOfPixle();
       PixGameComponent.game_started = true;
     }, UNDO_FLIP_TIME);
+  }
+
+  /**
+   * Reset important variables
+   * They need to be explicitly reset because of their static nature
+   *
+   * @private
+   */
+  private static resetGame(): void {
+    PixGameComponent.pixle_solved = false;
+    PixGameComponent.game_started = false;
   }
 
   /**
