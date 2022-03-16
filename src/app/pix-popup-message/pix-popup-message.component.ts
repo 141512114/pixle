@@ -1,7 +1,7 @@
-import {Component, ElementRef, EventEmitter, Output, ViewChild} from '@angular/core';
+import {AfterViewInit, Component, ElementRef, EventEmitter, Output, ViewChild} from '@angular/core';
 import {IPopUp} from '../interface/popup-message.interface';
 
-const DEFAULT_POPUP: IPopUp = {
+const DEFAULT_MSG: IPopUp = {
   headline: 'Hmm..., this isn\'t supposed to be shown already...',
   subline: '',
   message_body: 'Did you try something??'
@@ -12,18 +12,26 @@ const DEFAULT_POPUP: IPopUp = {
   templateUrl: './pix-popup-message.component.html',
   styleUrls: ['../../assets/stylesheets/css/minified/pix-popup-message.component.min.css']
 })
-export class PixPopupMessageComponent {
-  @ViewChild('match_closing_message') match_closing_message!: ElementRef;
+export class PixPopupMessageComponent implements AfterViewInit {
+  @ViewChild('msg_container') msg_container!: ElementRef;
+  @ViewChild('msg_headline') msg_headline!: ElementRef;
+  @ViewChild('msg_description') msg_description!: ElementRef;
   @Output() sendReloadRequest: EventEmitter<any> = new EventEmitter();
 
-  message: IPopUp = DEFAULT_POPUP;
+  message: IPopUp = DEFAULT_MSG;
+
+  ngAfterViewInit(): void {
+    this.writeNewMessage(this.message);
+  }
 
   /**
-   * Open pop up
+   * Open the popup message
+   *
+   * @param msg_object
    */
   public openPopUp(msg_object: IPopUp): void {
-    this.message = msg_object;
-    let message_element: HTMLElement = this.match_closing_message.nativeElement;
+    this.writeNewMessage(msg_object);
+    let message_element: HTMLElement = this.msg_container.nativeElement;
     if (!message_element.classList.contains('close')) return;
     message_element.classList.remove('close');
   }
@@ -33,5 +41,16 @@ export class PixPopupMessageComponent {
    */
   public reloadGameComponent(): void {
     this.sendReloadRequest.emit();
+  }
+
+  /**
+   * Writes a new message on the popup panel
+   *
+   * @param msg_object
+   * @private
+   */
+  private writeNewMessage(msg_object: IPopUp): void {
+    this.msg_headline.nativeElement.textContent = msg_object.headline;
+    this.msg_description.nativeElement.textContent = msg_object.message_body;
   }
 }

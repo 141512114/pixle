@@ -11,17 +11,17 @@ import {PIXLEARTS} from '../database/pix-arts-database';
 import {PixGridComponent} from '../pix-grid/pix-grid.component';
 
 // Popup messages
-const SUCCESSMSG: IPopUp = {
+const SUCCESS_MSG: IPopUp = {
   headline: 'Congratulations!',
   subline: 'You solved today\'s pixle!',
   message_body: 'But do not worry, there are many more to come! Look forward for your next pixle!'
 };
-const FAILEDMSG: IPopUp = {
+const FAILED_MSG: IPopUp = {
   headline: 'Something\'s not right!',
   subline: 'You didn\'t solve today\'s pixle!',
   message_body: 'Keep it up! There is still time left to give it another shot.'
 };
-const MISSINGPIXLEMSG: IPopUp = {
+const MISSING_PIXLE_MSG: IPopUp = {
   headline: 'Missing pixle data!',
   subline: 'There was a mistake retrieving a pixle from the database.',
   message_body: 'If this issue occurs more than it should, report this bug to the team.'
@@ -85,13 +85,13 @@ export class PixGameComponent implements OnInit, AfterViewInit {
   public receiveMatchStatus(status: number): void {
     switch (status) {
       case MATCH_PIXLE_SOLVED:
-        this.match_status_msg.openPopUp(SUCCESSMSG);
+        this.match_status_msg.openPopUp(SUCCESS_MSG);
         break;
       case MATCH_PIXLE_UNSOLVED:
-        this.match_status_msg.openPopUp(FAILEDMSG);
+        this.match_status_msg.openPopUp(FAILED_MSG);
         break;
       case MATCH_PIXLE_NOT_FOUND:
-        this.match_status_msg.openPopUp(MISSINGPIXLEMSG);
+        this.match_status_msg.openPopUp(MISSING_PIXLE_MSG);
         break;
       default:
         break;
