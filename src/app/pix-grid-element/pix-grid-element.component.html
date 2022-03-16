@@ -1,24 +1,14 @@
-<div #component_grid_element class="component-pix-grid-element" [ngSwitch]="grid_element_type">
-  <ng-container *ngSwitchCase="0">
+<div #component_grid_element class="component-pix-grid-element">
     <div class="grid-element-inner">
-      <div #user_interactive class="grid-element-flip icon-wrapper" data-grid-element-status="3">
+      <div #user_interactive [ngClass]="{'grid-element-flip': grid_element_type===0}" class="icon-wrapper" data-grid-element-status="3">
         <div class="front-face">
-          <ng-container *ngTemplateOutlet="icon_element"></ng-container>
+          <p class="icon-inner">
+            {{pixle_emoji_text}}
+          </p>
         </div>
-        <div #correct_answer class="back-face">
-          <ng-container *ngTemplateOutlet="icon_element"></ng-container>
+        <div #correct_answer *ngIf="grid_element_type===0" class="back-face">
+          <p class="icon-inner"></p>
         </div>
       </div>
     </div>
-  </ng-container>
-  <ng-container *ngSwitchDefault>
-    <div #user_interactive class="icon-wrapper" data-selected=false>
-      <ng-container *ngTemplateOutlet="icon_element"></ng-container>
-    </div>
-  </ng-container>
 </div>
-<ng-template #icon_element>
-  <p class="icon-inner">
-    {{pixle_emoji_text}}
-  </p>
-</ng-template>
