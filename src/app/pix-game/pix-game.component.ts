@@ -55,13 +55,15 @@ export class PixGameComponent implements OnInit, AfterViewInit {
   }
 
   ngOnInit(): void {
-    this.startGame();
+    this.searchRandomPixleArt();
   }
 
   ngAfterViewInit(): void {
     if (this.pixle_image.length <= 0) {
       this.receiveMatchStatus(MATCH_PIXLE_NOT_FOUND);
+      return;
     }
+    this.startGame();
   }
 
   /**
@@ -122,7 +124,6 @@ export class PixGameComponent implements OnInit, AfterViewInit {
    * @private
    */
   private startGame(): void {
-    if (!this.searchRandomPixleArt()) return;
     window.setTimeout(() => {
       this.pixGridComponent.setDisplayStatusOfPixle();
       PixGameComponent.game_started = true;

@@ -21,6 +21,7 @@ export class PixPopupMessageComponent implements AfterViewInit {
   message: IPopUp = DEFAULT_MSG;
 
   ngAfterViewInit(): void {
+    // Write default message
     this.writeNewMessage(this.message);
   }
 
