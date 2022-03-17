@@ -11,6 +11,7 @@ export class PixGridElementComponent implements OnInit, AfterViewInit {
   @ViewChild('component_grid_element') private component_grid_element!: ElementRef;
   @ViewChild('user_interactive') private user_interactive!: ElementRef;
   @ViewChild('correct_answer') private correct_answer!: ElementRef;
+
   @Input() pixle_emoji: number = -1; // <-- stores the correct answer
   @Input() receive_chosen_emoji: number = -1;
   /**

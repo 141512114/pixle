@@ -24,6 +24,7 @@ export class PixGridComponent implements OnInit, AfterViewInit {
   grid_image_height: number = 0;
 
   chosen_emoji: number = -1;
+  validating: boolean = false;
 
   ngOnInit(): void {
     if (this.grid_image.length <= 0) return;
@@ -60,6 +61,7 @@ export class PixGridComponent implements OnInit, AfterViewInit {
    * After clicking on a button, validate the pixle created by the player
    */
   public validatePixleOnClick(): void {
+    if (this.validating) return;
     this.validatePixle();
   }
 
@@ -134,9 +136,11 @@ export class PixGridComponent implements OnInit, AfterViewInit {
         PixGameComponent.game_started = false;
         this.sendMatchStatus.emit(MATCH_PIXLE_SOLVED);
       } else {
+        this.validating = true;
         // Player didn't win yet --> reset flip-state of some tiles
         window.setTimeout(() => {
           this.setDisplayStatusOfPixle();
+          this.validating = false;
         }, UNDO_FLIP_TIME);
       }
     }
