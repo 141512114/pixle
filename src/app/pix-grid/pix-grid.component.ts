@@ -75,7 +75,6 @@ export class PixGridComponent implements OnInit, AfterViewInit {
    */
   public setDisplayStatusOfPixle(reverse: boolean = true): void {
     let temp_pix_grid_comps: PixGridElementComponent[] = this.pixle_emoji_input.toArray();
-    if (temp_pix_grid_comps.length <= 0) return;
     for (let i: number = 0; i < temp_pix_grid_comps.length; i++) {
       if (temp_pix_grid_comps[i].grid_element_type !== 0) continue;
       if (reverse) {
@@ -110,13 +109,10 @@ export class PixGridComponent implements OnInit, AfterViewInit {
    * @private
    */
   private validatePixle(): void {
-    if (!PixGameComponent.game_started || PixGameComponent.pixle_solved) return;
+    if (!PixGameComponent.game_started || PixGameComponent.pixle_solved || this.grid_image.length <= 0) return;
     let temp_pix_grid_comps: PixGridElementComponent[] = this.pixle_emoji_input.toArray();
-    if (temp_pix_grid_comps.length <= 0) return;
-
     let total_count: number = 0, failed_count: number = 0;
     let pixle_convert: number[] = HelperFunctionsService.twoDimensionalArrayToOneDimensional(this.grid_image);
-    if (pixle_convert.length <= 0) return;
     // Check every pixle tile if its valid --> emoji at the exact same position as in the original pixle
     for (let i: number = 0; i < pixle_convert.length; i++) {
       if (temp_pix_grid_comps[i].pixle_emoji_codepoint !== pixle_convert[i]) {
@@ -131,7 +127,6 @@ export class PixGridComponent implements OnInit, AfterViewInit {
     if (failed_count > 0) {
       PixGameComponent.game_started = false;
       this.sendMatchStatus.emit(MATCH_PIXLE_UNSOLVED);
-      return;
     } else {
       // Player has won the game
       if (total_count >= pixle_convert.length) {

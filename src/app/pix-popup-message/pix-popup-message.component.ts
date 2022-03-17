@@ -51,6 +51,7 @@ export class PixPopupMessageComponent implements AfterViewInit {
    * @private
    */
   private writeNewMessage(msg_object: IPopUp): void {
+    if (msg_object == null || undefined) return;
     this.msg_headline.nativeElement.textContent = msg_object.headline;
     this.msg_description.nativeElement.textContent = msg_object.message_body;
   }

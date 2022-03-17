@@ -108,7 +108,6 @@ export class PixGameComponent implements OnInit, AfterViewInit {
    * @param emoji_ids
    */
   public static getEmojisFromListById(emoji_ids: number[] = []): number[] {
-    if (emoji_ids.length <= 0) return [];
     let temp_emoji_codepoints: number[] = [];
     for (let i: number = 0; i < emoji_ids.length; i++) {
       let emoji_codepoint: number = PIXLE_ICONS[emoji_ids[i]];
@@ -177,9 +176,8 @@ export class PixGameComponent implements OnInit, AfterViewInit {
    * @private
    */
   private getEmojiList(): boolean {
+    if (this.pixle_image.length <= 0) return false;
     let pixle_convert: number[] = HelperFunctionsService.twoDimensionalArrayToOneDimensional(this.pixle_image);
-    if (pixle_convert.length <= 0) return false;
-
     let temp_emoji_list: number[] = [];
     for (let i: number = 0; i < pixle_convert.length; i++) {
       for (let j: number = pixle_convert.length - 1; j > 0; j--) {
