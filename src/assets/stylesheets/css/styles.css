@@ -73,7 +73,7 @@
 
 html,
 body {
-  background-color: #161925;
+  background-color: #141722;
 }
 
 section {
@@ -162,7 +162,7 @@ button:hover {
   margin-bottom: 0;
 }
 .ui button {
-  color: #8ea8c3;
+  color: #6E8894;
 }
 .ui input:focus,
 .ui button:hover {

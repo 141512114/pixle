@@ -9,22 +9,23 @@ $sand-palette: (
   5: #f2aa7e
 );
 $ocean-palette: (
-  1: #161925,
-  2: #20314E,
+  1: #141722,
+  2: #181d2c,
   3: #1d2940,
-  4: #8ea8c3,
-  5: #cbf7ed,
-  6: #23ce6b,
-  7: #f9e900,
-  8: #f39237,
-  9: #e71d36
+  4: #20314E,
+  5: #6E8894,
+  6: #8ea8c3,
+  7: #23ce6b,
+  8: #f9e900,
+  9: #f39237,
+  10: #e71d36
 );
 
 $default-color-palette: $ocean-palette !default;
 
 // Default colors
 $default-text-color: white !default;
-$default-text-color-unfocused: map.get($ocean-palette, 4) !default;
+$default-text-color-unfocused: map.get($ocean-palette, 5) !default;
 
 // Default variables
 $standard-pixle-size: 550px !default;

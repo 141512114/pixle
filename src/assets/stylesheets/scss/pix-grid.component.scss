@@ -15,7 +15,7 @@ div.component-pix-grid {
     width: auto;
     height: auto;
     padding: 20px;
-    @include background-color(2);
+    @include background-color(4);
     user-select: none;
     vertical-align: top;
   }

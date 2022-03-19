@@ -35,23 +35,23 @@ div.component-pix-grid-element {
     }
 
     &.selected::before {
-      @include background-color(4);
+      @include background-color(6);
     }
 
     &[data-grid-element-status="solved"]::before {
-      @include background-color(6, $background-color-alpha-focused);
+      @include background-color(7, $background-color-alpha-focused);
     }
 
     &[data-grid-element-status="2"]::before {
-      @include background-color(7, $background-color-alpha-unfocused);
-    }
-
-    &[data-grid-element-status="1"]::before {
       @include background-color(8, $background-color-alpha-unfocused);
     }
 
+    &[data-grid-element-status="1"]::before {
+      @include background-color(9, $background-color-alpha-unfocused);
+    }
+
     &[data-grid-element-status="failed"]::before {
-      @include background-color(9, $background-color-alpha-focused);
+      @include background-color(10, $background-color-alpha-focused);
     }
   }
 
@@ -104,11 +104,11 @@ div.component-pix-grid-element {
     }
 
     &[data-grid-element-status="2"]::before {
-      @include background-color(7, $background-color-alpha-focused);
+      @include background-color(8, $background-color-alpha-focused);
     }
 
     &[data-grid-element-status="1"]::before {
-      @include background-color(8, $background-color-alpha-focused);
+      @include background-color(9, $background-color-alpha-focused);
     }
   }
 }

@@ -15,7 +15,7 @@ div.component-pix-popup-message {
   div.match-closing-message {
     padding: 35px;
     border-radius: 32px;
-    @include background-color(2);
+    @include background-color(4);
 
     p {
       margin: 0;
