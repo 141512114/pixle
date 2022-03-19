@@ -27,6 +27,10 @@
   cursor: default !important;
 }
 
+.position-relative {
+  position: relative;
+}
+
 .p-0 {
   padding-top: 0;
   padding-left: 0;
@@ -124,6 +128,10 @@ button {
   font-size: 18px;
   font-weight: 400;
   outline: none;
+}
+
+button {
+  text-align: center;
 }
 
 input:focus,

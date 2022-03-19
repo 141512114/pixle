@@ -27,6 +27,10 @@
   cursor: default !important;
 }
 
+.position-relative {
+  position: relative;
+}
+
 .p-0 {
   padding-top: 0;
   padding-left: 0;
