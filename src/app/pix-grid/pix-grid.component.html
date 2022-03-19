@@ -1,28 +1,29 @@
 <div class="component-pix-grid">
-  <div class="playground-wrapper">
-    <div class="container">
-      <div class="row p-0 mb-5">
-        <div class="col mr-5 rounded-5 pix-grid-wrapper">
-          <div class="row pix-grid-row" *ngFor="let row of grid_image">
-            <div class="col pix-grid-col" *ngFor="let col of row">
-              <app-pix-grid-element #pixle_emoji_input [pixle_emoji]="col"
-                                    [receive_chosen_emoji]="chosen_emoji"></app-pix-grid-element>
-            </div>
-          </div>
-        </div>
-        <div class="col rounded-5 pix-emoji-list-wrapper">
-          <div class="col pix-grid-col" *ngFor="let i of counter(emoji_list.length / grid_image_height)">
-            <div class="row pix-grid-row" *ngFor="let j of counter(grid_image_height)">
-              <app-pix-grid-element #pixle_emoji_output [pixle_emoji]="emoji_list[grid_image_height * i + j]"
-                                    [grid_element_type]="1"
-                                    (sendIconCodePoint)="receiveIconCodePoint($event)"></app-pix-grid-element>
-            </div>
+  <div class="container">
+    <div class="row p-0 mb-4 rounded-5 playground-wrapper">
+      <div class="col rounded-5 pix-grid-wrapper">
+        <div class="row pix-grid-row" *ngFor="let row of grid_image">
+          <div class="col pix-grid-col" *ngFor="let col of row">
+            <app-pix-grid-element #pixle_emoji_input [pixle_emoji]="col"
+                                  [receive_chosen_emoji]="chosen_emoji"></app-pix-grid-element>
           </div>
         </div>
       </div>
-      <div class="row p-0 rounded-5 validate-button-wrapper ui">
-        <button class="pix-validate-button" (click)="validatePixleOnClick()" type="button">Validate</button>
+      <div class="col pix-emoji-list-wrapper">
+        <div class="col pix-grid-col" *ngFor="let i of counter(emoji_list.length / grid_image_height)">
+          <div class="row pix-grid-row" *ngFor="let j of counter(grid_image_height)">
+            <app-pix-grid-element #pixle_emoji_output [pixle_emoji]="emoji_list[grid_image_height * i + j]"
+                                  [grid_element_type]="1"
+                                  (sendIconCodePoint)="receiveIconCodePoint($event)"></app-pix-grid-element>
+          </div>
+        </div>
       </div>
+    </div>
+    <div class="row p-0 mb-2 rounded-5 validate-button-wrapper ui">
+      <button class="pix-validate-button" (click)="validatePixleOnClick()" type="button">Validate</button>
+    </div>
+    <div class="row p-0 rounded-5 reload-pix-button-wrapper ui">
+      <button class="pix-reload-button" (click)="reloadGameComponent()" type="button">Reload pixle</button>
     </div>
   </div>
 </div>

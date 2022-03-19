@@ -15,12 +15,24 @@ div.component-pix-grid {
     width: auto;
     height: auto;
     padding: 20px;
-    @include background-color(4);
     user-select: none;
     vertical-align: top;
   }
 
-  div.validate-button-wrapper {
+  div.pix-grid-wrapper {
+    @include background-color(4);
+  }
+
+  div.playground-wrapper {
+    position: relative;
+    width: auto;
+    height: auto;
+    @include background-color(2);
+    overflow: hidden;
+  }
+
+  div.validate-button-wrapper,
+  div.reload-pix-button-wrapper {
     position: relative;
     width: 100%;
     height: auto;

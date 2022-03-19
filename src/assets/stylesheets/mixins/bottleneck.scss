@@ -47,19 +47,39 @@
   margin-right: $margin-5;
 }
 
-.mb-5 {
-  margin-bottom: $margin-5;
+.mb- {
+  &5 {
+    margin-bottom: $margin-5;
+  }
+
+  &4 {
+    margin-bottom: $margin-4;
+  }
+
+  &3 {
+    margin-bottom: $margin-3;
+  }
+
+  &2 {
+    margin-bottom: $margin-2;
+  }
+
+  &1 {
+    margin-bottom: $margin-1;
+  }
 }
 
 // Border radius
-.rounded-5 {
-  border-radius: $rounded-5;
-}
+.rounded- {
+  &5 {
+    border-radius: $rounded-5;
+  }
 
-.rounded-4 {
-  border-radius: $rounded-4;
-}
+  &4 {
+    border-radius: $rounded-4;
+  }
 
-.rounded-3 {
-  border-radius: $rounded-3;
+  &3 {
+    border-radius: $rounded-3;
+  }
 }

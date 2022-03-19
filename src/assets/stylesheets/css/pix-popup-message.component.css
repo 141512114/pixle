@@ -13,7 +13,7 @@ div.component-pix-popup-message.close {
 div.component-pix-popup-message div.match-closing-message {
   padding: 35px;
   border-radius: 32px;
-  background-color: #20314e;
+  background-color: #223758;
 }
 div.component-pix-popup-message div.match-closing-message p {
   margin: 0;
@@ -21,7 +21,7 @@ div.component-pix-popup-message div.match-closing-message p {
 }
 div.component-pix-popup-message div.match-closing-message button {
   margin-top: 25px;
-  border-color: #1d2940;
-  background-color: #1d2940;
+  border-color: #1D2E49;
+  background-color: #1d2e49;
 }
 /*# sourceMappingURL=sourcemaps/pix-popup-message.component.css.map */

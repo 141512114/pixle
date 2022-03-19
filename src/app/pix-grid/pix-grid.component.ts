@@ -19,6 +19,7 @@ export class PixGridComponent implements OnInit, AfterViewInit {
   @Input() grid_image: number[][] = [];
   @Input() emoji_list: number[] = [];
   @Output() sendMatchStatus: EventEmitter<number> = new EventEmitter<number>();
+  @Output() sendReloadRequest: EventEmitter<any> = new EventEmitter<any>();
 
   grid_image_width: number = 0;
   grid_image_height: number = 0;
@@ -44,6 +45,13 @@ export class PixGridComponent implements OnInit, AfterViewInit {
    */
   public counter(i: number): number[] {
     return HelperFunctionsService.makeForLoopCount(i);
+  }
+
+  /**
+   * Reload the whole game component
+   */
+  public reloadGameComponent(): void {
+    this.sendReloadRequest.emit();
   }
 
   /**

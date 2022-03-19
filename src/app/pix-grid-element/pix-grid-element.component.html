@@ -1,7 +1,8 @@
 <div #component_grid_element class="component-pix-grid-element">
   <div class="grid-element-inner">
-    <div #user_interactive [ngClass]="{'grid-element-flip': grid_element_type===0}" class="icon-wrapper"
-         data-grid-element-status="3">
+    <div #user_interactive
+         [ngClass]="{'grid-element-flip': grid_element_type===0, 'invert-before': grid_element_type===1}"
+         class="icon-wrapper" data-grid-element-status="3">
       <div class="front-face">
         <p class="icon-inner">
           {{pixle_emoji_text}}
