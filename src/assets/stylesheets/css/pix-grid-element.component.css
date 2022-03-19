@@ -38,6 +38,22 @@
   padding-bottom: 0;
 }
 
+.mt-5 {
+  margin-top: 32px;
+}
+.mt-4 {
+  margin-top: 27px;
+}
+.mt-3 {
+  margin-top: 22px;
+}
+.mt-2 {
+  margin-top: 17px;
+}
+.mt-1 {
+  margin-top: 12px;
+}
+
 .mr-5 {
   margin-right: 32px;
 }

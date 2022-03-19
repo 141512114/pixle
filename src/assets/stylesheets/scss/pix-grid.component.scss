@@ -5,15 +5,8 @@
 
 // pix-grid component stylesheet
 div.component-pix-grid {
-  position: relative;
-  width: auto;
-  height: auto;
-
   div.pix-grid-wrapper,
   div.pix-emoji-list-wrapper {
-    position: relative;
-    width: auto;
-    height: auto;
     padding: 20px;
     user-select: none;
     vertical-align: top;
@@ -24,21 +17,15 @@ div.component-pix-grid {
   }
 
   div.playground-wrapper {
-    position: relative;
-    width: auto;
-    height: auto;
     @include background-color(2);
     overflow: hidden;
   }
 
   div.validate-button-wrapper,
   div.reload-pix-button-wrapper {
-    position: relative;
     width: 100%;
-    height: auto;
 
     button {
-      position: relative;
       width: 100%;
       border: none;
 

@@ -50,6 +50,28 @@
 }
 
 // Margin
+.mt- {
+  &5 {
+    margin-top: $margin-5;
+  }
+
+  &4 {
+    margin-top: $margin-4;
+  }
+
+  &3 {
+    margin-top: $margin-3;
+  }
+
+  &2 {
+    margin-top: $margin-2;
+  }
+
+  &1 {
+    margin-top: $margin-1;
+  }
+}
+
 .mr-5 {
   margin-right: $margin-5;
 }

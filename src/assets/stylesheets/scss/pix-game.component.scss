@@ -1,10 +1,6 @@
 @import 'src/assets/stylesheets/mixins/mixins';
 
 // pix-game component stylesheet
-section.component-pix-game {
-  position: relative;
-
-  div.pix-game-wrapper {
-    @include alignment_old();
-  }
+section.component-pix-game div.pix-game-wrapper {
+  @include alignment_old();
 }

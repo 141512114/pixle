@@ -1,13 +1,5 @@
-div.component-pix-grid {
-  position: relative;
-  width: auto;
-  height: auto;
-}
 div.component-pix-grid div.pix-grid-wrapper,
 div.component-pix-grid div.pix-emoji-list-wrapper {
-  position: relative;
-  width: auto;
-  height: auto;
   padding: 20px;
   -webkit-user-select: none;
      -moz-user-select: none;
@@ -19,21 +11,15 @@ div.component-pix-grid div.pix-grid-wrapper {
   background-color: #223758;
 }
 div.component-pix-grid div.playground-wrapper {
-  position: relative;
-  width: auto;
-  height: auto;
   background-color: #18243a;
   overflow: hidden;
 }
 div.component-pix-grid div.validate-button-wrapper,
 div.component-pix-grid div.reload-pix-button-wrapper {
-  position: relative;
   width: 100%;
-  height: auto;
 }
 div.component-pix-grid div.validate-button-wrapper button,
 div.component-pix-grid div.reload-pix-button-wrapper button {
-  position: relative;
   width: 100%;
   border: none;
 }
