@@ -1,8 +1,8 @@
 import {AfterViewInit, Component, EventEmitter, Input, OnInit, Output, QueryList, ViewChildren} from '@angular/core';
 import {PixGridElementComponent} from '../pix-grid-element/pix-grid-element.component';
-import {PixGameComponent} from '../pix-game/pix-game.component';
 import {MATCH_PIXLE_SOLVED, MATCH_PIXLE_UNSOLVED} from '../database/status-numbers';
 import {HelperFunctionsService} from '../services/helper-functions.service';
+import {GameManager} from '../pix-game/game.manager';
 
 // Timer
 const UNDO_FLIP_TIME: number = 2000;
@@ -52,7 +52,7 @@ export class PixGridComponent implements OnInit, AfterViewInit {
    * @param emoji_codepoint
    */
   public receiveIconCodePoint(emoji_codepoint: number = -1): void {
-    if (PixGameComponent.pixle_solved || emoji_codepoint === -1) return;
+    if (GameManager.pixle_solved || emoji_codepoint === -1) return;
     this.chosen_emoji = emoji_codepoint;
     this.selectCurrentChosenEmoji();
   }
@@ -111,7 +111,7 @@ export class PixGridComponent implements OnInit, AfterViewInit {
    * @private
    */
   private validatePixle(): void {
-    if (!PixGameComponent.game_started || PixGameComponent.pixle_solved || this.grid_image.length <= 0) return;
+    if (!GameManager.game_started || GameManager.pixle_solved || this.grid_image.length <= 0) return;
     let temp_pix_grid_comps: PixGridElementComponent[] = this.pixle_emoji_input.toArray();
     let total_count: number = 0, failed_count: number = 0;
     let pixle_convert: number[] = HelperFunctionsService.twoDimensionalArrayToOneDimensional(this.grid_image);
@@ -127,13 +127,13 @@ export class PixGridComponent implements OnInit, AfterViewInit {
     }
     // If any tile has reached its limits --> went out of lives --> game over
     if (failed_count > 0) {
-      PixGameComponent.game_started = false;
+      GameManager.game_started = false;
       this.sendMatchStatus.emit(MATCH_PIXLE_UNSOLVED);
     } else {
       // Player has won the game
       if (total_count >= pixle_convert.length) {
-        PixGameComponent.pixle_solved = true;
-        PixGameComponent.game_started = false;
+        GameManager.pixle_solved = true;
+        GameManager.game_started = false;
         this.sendMatchStatus.emit(MATCH_PIXLE_SOLVED);
       } else {
         this.validating = true;

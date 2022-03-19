@@ -9,6 +9,7 @@ import {HelperFunctionsService} from '../services/helper-functions.service';
 import {IPixle} from '../interface/pixle.interface';
 import {PIXLEARTS} from '../database/pix-arts-database';
 import {PixGridComponent} from '../pix-grid/pix-grid.component';
+import {GameManager} from './game.manager';
 
 // Popup messages
 const SUCCESS_MSG: IPopUp = {
@@ -48,9 +49,6 @@ export class PixGameComponent implements OnInit, AfterViewInit {
   pixle_image_height: number = 0;
   pixle_emoji_list: number[] = [];
 
-  public static pixle_solved: boolean = false;
-  public static game_started: boolean = false;
-
   constructor(private router: Router, private location: Location) {
   }
 
@@ -76,7 +74,7 @@ export class PixGameComponent implements OnInit, AfterViewInit {
     // Reload component --> redirect to same url but do not reuse old one
     await this.router.navigateByUrl(absolute_path, {skipLocationChange: true}).then(() => {
       this.router.navigate([absolute_path]);
-      PixGameComponent.resetGame();
+      GameManager.resetGame();
     });
   }
 
@@ -126,19 +124,8 @@ export class PixGameComponent implements OnInit, AfterViewInit {
   private startGame(): void {
     window.setTimeout(() => {
       this.pixGridComponent.setDisplayStatusOfPixle();
-      PixGameComponent.game_started = true;
+      GameManager.initGame();
     }, UNDO_FLIP_TIME);
-  }
-
-  /**
-   * Reset important variables
-   * They need to be explicitly reset because of their static nature
-   *
-   * @private
-   */
-  private static resetGame(): void {
-    PixGameComponent.pixle_solved = false;
-    PixGameComponent.game_started = false;
   }
 
   /**
