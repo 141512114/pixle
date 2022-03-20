@@ -62,39 +62,9 @@ div.component-pix-grid-element {
   div.grid-element-inner {
     perspective: 1000px;
 
-    div.grid-element-flip {
-      position: relative;
-      transform-style: preserve-3d;
-      transition: transform 400ms;
-
-      .front-face,
-      .back-face {
-        position: relative;
-        backface-visibility: hidden;
-        transform-style: preserve-3d;
-        z-index: 20;
-      }
-
-      .back-face {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        user-select: none;
-        pointer-events: none;
-        transform: rotateX(180deg);
-        z-index: 30;
-      }
-
-      &.do-flip {
-        transform: rotateX(-180deg);
-
-        .front-face {
-          user-select: none;
-          pointer-events: none;
-        }
-      }
+    div.flip-element div.back-face {
+      user-select: none;
+      pointer-events: none;
     }
   }
 

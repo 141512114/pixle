@@ -20,11 +20,29 @@
       </div>
     </div>
     <div class="playground-ui-wrapper">
-      <div class="row p-0 mb-2 rounded-5 validate-button-wrapper ui">
-        <button class="pix-validate-button" (click)="validatePixleOnClick()" type="button">Validate</button>
-      </div>
-      <div class="row p-0 rounded-5 reload-pix-button-wrapper ui">
-        <button class="pix-reload-button" (click)="reloadGameComponent()" type="button">Reload pixle</button>
+      <div #flip_ui class="playground-ui-inner flip-element">
+        <div class="front-face">
+          <div class="row p-0 mb-2 rounded-5 validate-button-wrapper ui">
+            <button class="pix-validate-button" (click)="validatePixleOnClick()" type="button">Validate</button>
+          </div>
+          <div class="row p-0 rounded-5 reload-pix-button-wrapper ui">
+            <button class="pix-reload-button" (click)="reloadGameComponent()" type="button">Reload pixle</button>
+          </div>
+        </div>
+        <div class="back-face">
+          <div class="container position-relative share-results-wrapper">
+            <div class="row p-0 mb-2">
+              <h2>Share your results!</h2>
+            </div>
+            <div class="row p-0">
+              <a class="twitter-share-button share-button" href="https://twitter.com/intent/tweet?text=Hello%20world"
+                 target="_blank">Tweet</a>
+              <a class="share-button" href="whatsapp://send?text=This is WhatsApp sharing example using link"
+                 data-action="share/whatsapp/share" target="_blank">WhatsApp</a>
+              <button class="share-button" type="button">Clipboard</button>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>

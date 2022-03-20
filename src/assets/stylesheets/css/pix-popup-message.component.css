@@ -10,15 +10,15 @@ div.component-pix-popup-message {
 div.component-pix-popup-message.close {
   top: 300px;
 }
-div.component-pix-popup-message div.match-closing-message {
+div.component-pix-popup-message div.popup-wrapper {
   padding: 35px;
   background-color: #223758;
 }
-div.component-pix-popup-message div.match-closing-message p {
+div.component-pix-popup-message div.popup-wrapper p {
   margin: 0;
   padding: 0;
 }
-div.component-pix-popup-message div.match-closing-message button {
+div.component-pix-popup-message div.popup-wrapper button {
   border: none;
   background-color: #1d2e49;
 }

@@ -136,6 +136,11 @@ a {
   font-family: "Open-Sans", sans-serif;
 }
 
+a,
+li {
+  text-decoration: none;
+}
+
 input,
 textarea,
 button {
@@ -148,6 +153,7 @@ button {
 
 button {
   text-align: center;
+  border: none;
 }
 
 input:focus,
@@ -205,5 +211,46 @@ button:hover {
 }
 .ui button:active {
   background-color: #1d2e49;
+}
+
+.flip-element {
+  position: relative;
+  -webkit-transform-style: preserve-3d;
+          transform-style: preserve-3d;
+  -webkit-transition: -webkit-transform 400ms;
+  transition: -webkit-transform 400ms;
+  -o-transition: transform 400ms;
+  transition: transform 400ms;
+  transition: transform 400ms, -webkit-transform 400ms;
+}
+.flip-element .front-face,
+.flip-element .back-face {
+  position: relative;
+  -webkit-backface-visibility: hidden;
+          backface-visibility: hidden;
+  -webkit-transform-style: preserve-3d;
+          transform-style: preserve-3d;
+  z-index: 20;
+}
+.flip-element .back-face {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  -webkit-transform: rotateX(180deg);
+          transform: rotateX(180deg);
+  z-index: 30;
+}
+.flip-element.do-flip {
+  -webkit-transform: rotateX(-180deg);
+          transform: rotateX(-180deg);
+}
+.flip-element.do-flip .front-face {
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+  pointer-events: none;
 }
 /*# sourceMappingURL=sourcemaps/styles.css.map */

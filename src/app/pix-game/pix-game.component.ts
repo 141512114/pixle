@@ -3,7 +3,7 @@ import {Location} from '@angular/common';
 import {PIXLE_ICONS, REDCROSS} from '../database/emoji-database';
 import {IPopUp} from '../interface/popup-message.interface';
 import {PixPopupMessageComponent} from '../pix-popup-message/pix-popup-message.component';
-import {MATCH_PIXLE_NOT_FOUND, MATCH_PIXLE_SOLVED, MATCH_PIXLE_UNSOLVED} from '../database/status-numbers';
+import {MATCH_PIXLE_NOT_FOUND} from '../database/status-numbers';
 import {Router} from '@angular/router';
 import {HelperFunctionsService} from '../services/helper-functions.service';
 import {IPixle} from '../interface/pixle.interface';
@@ -12,16 +12,6 @@ import {PixGridComponent} from '../pix-grid/pix-grid.component';
 import {GameManager} from './game.manager';
 
 // Popup messages
-const SUCCESS_MSG: IPopUp = {
-  headline: 'Congratulations!',
-  subline: 'You solved today\'s pixle!',
-  message_body: 'But do not worry, there are many more to come! Look forward for your next pixle!'
-};
-const FAILED_MSG: IPopUp = {
-  headline: 'Something\'s not right!',
-  subline: 'You didn\'t solve today\'s pixle!',
-  message_body: 'Keep it up! There is still time left to give it another shot.'
-};
 const MISSING_PIXLE_MSG: IPopUp = {
   headline: 'Missing pixle data!',
   subline: 'There was a mistake retrieving a pixle from the database.',
@@ -85,12 +75,6 @@ export class PixGameComponent implements OnInit, AfterViewInit {
    */
   public receiveMatchStatus(status: number): void {
     switch (status) {
-      case MATCH_PIXLE_SOLVED:
-        this.match_status_msg.openPopUp(SUCCESS_MSG);
-        break;
-      case MATCH_PIXLE_UNSOLVED:
-        this.match_status_msg.openPopUp(FAILED_MSG);
-        break;
       case MATCH_PIXLE_NOT_FOUND:
         this.match_status_msg.openPopUp(MISSING_PIXLE_MSG);
         break;
