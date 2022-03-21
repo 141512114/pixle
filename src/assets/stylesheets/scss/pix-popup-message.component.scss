@@ -1,8 +1,5 @@
-@use "sass:map";
-
 // pix-popup-message component stylesheet
 @import 'src/assets/stylesheets/mixins/mixins';
-@import 'src/assets/stylesheets/mixins/variables';
 
 div.component-pix-popup-message {
   @include alignment_old();
