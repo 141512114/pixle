@@ -26,7 +26,7 @@ Paths: -------------------------------------------------
 const SRC_PATH = './src/assets/';
 
 // Style paths
-const STYLES_SRC_FILES = SRC_PATH + 'stylesheets/scss/**/*.scss';
+const STYLES_SRC_FILES = SRC_PATH + 'stylesheets/scss/**/!(_*)*.scss';
 const STYLES_DEST_PATH = SRC_PATH + 'stylesheets/css/';
 
 /*

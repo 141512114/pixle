@@ -1,7 +1,5 @@
-@use "sass:map";
-
-@import 'src/assets/stylesheets/mixins/variables';
-@import 'src/assets/stylesheets/mixins/mixins';
+@import '../mixins/variables';
+@import '../mixins/mixins';
 
 // pix-grid component stylesheet
 div.component-pix-grid {
@@ -9,7 +7,6 @@ div.component-pix-grid {
   div.pix-emoji-list-wrapper {
     padding: 20px;
     user-select: none;
-    vertical-align: top;
   }
 
   div.pix-grid-wrapper {

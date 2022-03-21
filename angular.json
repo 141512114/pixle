@@ -27,6 +27,7 @@
               "src/assets"
             ],
             "styles": [
+              "src/assets/stylesheets/css/minified/bootstrap/bootstrap.min.css",
               "src/assets/stylesheets/css/minified/styles.min.css"
             ],
             "scripts": []
@@ -94,6 +95,7 @@
               "src/assets"
             ],
             "styles": [
+              "src/assets/stylesheets/css/minified/bootstrap/bootstrap.min.css",
               "src/assets/stylesheets/css/minified/styles.min.css"
             ],
             "scripts": []

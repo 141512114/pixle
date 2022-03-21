@@ -1,5 +1,6 @@
 // pix-popup-message component stylesheet
-@import 'src/assets/stylesheets/mixins/mixins';
+@import '../mixins/variables';
+@import '../mixins/mixins';
 
 div.component-pix-popup-message {
   @include alignment_old();

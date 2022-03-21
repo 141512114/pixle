@@ -1,7 +1,5 @@
-@use "sass:map";
-
-@import 'src/assets/stylesheets/mixins/bottleneck';
-@import 'src/assets/stylesheets/mixins/mixins';
+@import '../mixins/variables';
+@import '../mixins/mixins';
 
 $background-offset: 20px;
 $background-offset-hover: 10px;
@@ -28,7 +26,6 @@ div.component-pix-grid-element {
       @include alignment_old();
       width: $tile-size - $background-offset;
       height: $tile-size - $background-offset;
-      @extend .rounded-3;
       @include background-color(3);
       transition: width 300ms, height 300ms, background-color 200ms, border-radius 200ms;
       z-index: 10;
@@ -74,7 +71,6 @@ div.component-pix-grid-element {
     &::before {
       width: $tile-size - $background-offset-hover;
       height: $tile-size - $background-offset-hover;
-      @extend .rounded-4;
     }
 
     &[data-grid-element-status="2"]::before {
@@ -83,6 +79,37 @@ div.component-pix-grid-element {
 
     &[data-grid-element-status="1"]::before {
       @include background-color(9, $background-color-alpha-focused);
+    }
+  }
+}
+
+// Responsive design
+@media only screen and (max-width: 400px) {
+  $tile-size: 65px;
+
+  $background-offset: 10px;
+  $background-offset-hover: 5px;
+
+  div.component-pix-grid-element {
+    width: $tile-size;
+    height: $tile-size;
+
+    p.icon-inner {
+      line-height: $tile-size;
+    }
+
+    div.icon-wrapper::before {
+      width: $tile-size - $background-offset;
+      height: $tile-size - $background-offset;
+    }
+
+    &:hover div.icon-wrapper:not(.locked) {
+      cursor: pointer;
+
+      &::before {
+        width: $tile-size - $background-offset-hover;
+        height: $tile-size - $background-offset-hover;
+      }
     }
   }
 }

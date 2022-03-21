@@ -1,9 +1,5 @@
-@use "sass:map";
-
 // Import default "libraries"
-@import 'src/assets/stylesheets/mixins/bottleneck';
-@import 'src/assets/stylesheets/mixins/fonts';
-@import 'src/assets/stylesheets/mixins/mixins';
+@import '../mixins/bottleneck';
 
 // Default settings
 * {
@@ -62,7 +58,6 @@ button {
 }
 
 button {
-  text-align: center;
   border: none;
 }
 
@@ -72,92 +67,4 @@ textarea:focus,
 textarea:active,
 button:focus {
   outline: none;
-}
-
-a:hover,
-button:hover {
-  cursor: pointer;
-}
-
-// Popup
-.user-popup {
-  width: $standard-pixle-size;
-  opacity: 1;
-  transition: top 700ms, opacity 550ms, visibility 300ms;
-
-  &.close {
-    opacity: 0;
-    visibility: hidden;
-    pointer-events: none;
-  }
-}
-
-// UI in general
-.ui {
-  input,
-  button {
-    display: block;
-    width: 100%;
-    margin-bottom: 12px;
-    padding: 21px 32px;
-    font-size: 21px;
-    letter-spacing: 2px;
-    color: white;
-    border: 4px solid map.get($default-color-palette, 4);
-    @extend .rounded-5;
-    @include background-color(4);
-    transition: background-color 300ms, border-color 300ms, color 300ms;
-
-    &:last-child {
-      margin-bottom: 0;
-    }
-  }
-
-  button {
-    color: $default-text-color-unfocused;
-  }
-
-  input:focus,
-  button:hover {
-    color: $default-text-color;
-    border-color: map.get($default-color-palette, 3);
-  }
-
-  button:active {
-    @include background-color(3);
-  }
-}
-
-// Effects
-.flip-element {
-  position: relative;
-  transform-style: preserve-3d;
-  transition: transform 400ms;
-
-  .front-face,
-  .back-face {
-    position: relative;
-    backface-visibility: hidden;
-    transform-style: preserve-3d;
-    z-index: 20;
-  }
-
-  .back-face {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    transform: rotateX(180deg);
-    z-index: 30;
-  }
-
-  &.do-flip {
-    transform: rotateX(-180deg);
-
-    .front-face {
-      user-select: none;
-      pointer-events: none;
-    }
-  }
 }

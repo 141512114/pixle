@@ -1,90 +1,3 @@
-.row {
-  display: block;
-  padding-bottom: 7px;
-}
-.row:last-child {
-  padding-bottom: 0;
-}
-
-.col {
-  display: inline-block;
-  padding-right: 7px;
-}
-.col:last-child {
-  padding-right: 0;
-}
-
-/**** Classes ****/
-.locked {
-  -webkit-user-select: none !important;
-     -moz-user-select: none !important;
-      -ms-user-select: none !important;
-          user-select: none !important;
-  pointer-events: none !important;
-  cursor: default !important;
-}
-.locked:hover, .locked:focus, .locked:active {
-  cursor: default !important;
-}
-
-.position-relative {
-  position: relative;
-}
-
-.p-0 {
-  padding-top: 0;
-  padding-left: 0;
-  padding-right: 0;
-  padding-bottom: 0;
-}
-
-.mt-5 {
-  margin-top: 32px;
-}
-.mt-4 {
-  margin-top: 27px;
-}
-.mt-3 {
-  margin-top: 22px;
-}
-.mt-2 {
-  margin-top: 17px;
-}
-.mt-1 {
-  margin-top: 12px;
-}
-
-.mr-5 {
-  margin-right: 32px;
-}
-
-.mb-5 {
-  margin-bottom: 32px;
-}
-.mb-4 {
-  margin-bottom: 27px;
-}
-.mb-3 {
-  margin-bottom: 22px;
-}
-.mb-2 {
-  margin-bottom: 17px;
-}
-.mb-1 {
-  margin-bottom: 12px;
-}
-
-.rounded-5, .ui input,
-.ui button {
-  border-radius: 32px;
-}
-.rounded-4 {
-  border-radius: 22px;
-}
-.rounded-3 {
-  border-radius: 17px;
-}
-
 /* fonts */
 @font-face {
   font-family: "Open-Sans";
@@ -96,77 +9,16 @@
   src: url("./src/assets/fonts/OpenSans/OpenSans-Bold.ttf") format("truetype");
   font-display: swap;
 }
-* {
-  margin: 0;
-  padding: 0;
+.locked {
+  -webkit-user-select: none !important;
+     -moz-user-select: none !important;
+      -ms-user-select: none !important;
+          user-select: none !important;
+  pointer-events: none !important;
+  cursor: default !important;
 }
-
-html,
-body {
-  background-color: #141722;
-}
-
-section {
-  width: 100%;
-  min-height: 100vh;
-  height: auto;
-}
-
-h1,
-h2,
-h3,
-h4,
-h5,
-p,
-a {
-  font-weight: 400;
-  color: white;
-}
-
-h1,
-h2,
-h3,
-h4,
-h5 {
-  font-family: "Open-Sans-Bold", sans-serif;
-}
-
-p,
-a {
-  font-family: "Open-Sans", sans-serif;
-}
-
-a,
-li {
-  text-decoration: none;
-}
-
-input,
-textarea,
-button {
-  padding: 4px 12px;
-  font-family: "Open-Sans", sans-serif;
-  font-size: 18px;
-  font-weight: 400;
-  outline: none;
-}
-
-button {
-  text-align: center;
-  border: none;
-}
-
-input:focus,
-input:active,
-textarea:focus,
-textarea:active,
-button:focus {
-  outline: none;
-}
-
-a:hover,
-button:hover {
-  cursor: pointer;
+.locked:hover, .locked:focus, .locked:active {
+  cursor: default !important;
 }
 
 .user-popup {
@@ -252,5 +104,72 @@ button:hover {
       -ms-user-select: none;
           user-select: none;
   pointer-events: none;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+}
+
+html,
+body {
+  background-color: #141722;
+}
+
+section {
+  width: 100%;
+  min-height: 100vh;
+  height: auto;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+p,
+a {
+  font-weight: 400;
+  color: white;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5 {
+  font-family: "Open-Sans-Bold", sans-serif;
+}
+
+p,
+a {
+  font-family: "Open-Sans", sans-serif;
+}
+
+a,
+li {
+  text-decoration: none;
+}
+
+input,
+textarea,
+button {
+  padding: 4px 12px;
+  font-family: "Open-Sans", sans-serif;
+  font-size: 18px;
+  font-weight: 400;
+  outline: none;
+}
+
+button {
+  border: none;
+}
+
+input:focus,
+input:active,
+textarea:focus,
+textarea:active,
+button:focus {
+  outline: none;
 }
 /*# sourceMappingURL=sourcemaps/styles.css.map */

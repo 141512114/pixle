@@ -5,5 +5,7 @@ section.component-pix-game div.pix-game-wrapper {
   -webkit-transform: translate(-50%, -50%);
       -ms-transform: translate(-50%, -50%);
           transform: translate(-50%, -50%);
+  width: auto;
+  height: auto;
 }
 /*# sourceMappingURL=sourcemaps/pix-game.component.css.map */
