@@ -32,7 +32,7 @@ const STYLES_SRC_FILES = DEV_SRC_PATH + 'stylesheets/scss/**/!(_*)*.scss';
 const STYLES_MIN_DEST_PATH = SRC_PATH + 'stylesheets/css/';
 
 const BOOTSTRAP_SRC_FILES = DEV_SRC_PATH + 'stylesheets/bootstrap/**/!(_*)*.scss';
-const BOOTSTRAP_MIN_DEST_PATH = SRC_PATH + 'stylesheets/bootstrap-min/';
+const BOOTSTRAP_MIN_DEST_PATH = SRC_PATH + 'stylesheets/bootstrap/';
 
 // Stylesheets deletion pattern
 const STYLES_DEL_PATTERN = [
