@@ -19,7 +19,7 @@ const UNDO_FLIP_TIME: number = 2000;
 @Component({
   selector: 'app-pix-grid',
   templateUrl: './pix-grid.component.html',
-  styleUrls: ['../../assets/stylesheets/css/minified/pix-grid.component.min.css']
+  styleUrls: ['../../assets/stylesheets/css/pix-grid.component.min.css']
 })
 export class PixGridComponent implements OnInit, AfterViewInit {
   @ViewChildren('pixle_emoji_input') private pixle_emoji_input!: QueryList<PixGridElementComponent>;

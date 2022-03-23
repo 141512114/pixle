@@ -27,8 +27,8 @@
               "src/assets"
             ],
             "styles": [
-              "src/assets/stylesheets/bootstrap-min/minified/bootstrap.min.css",
-              "src/assets/stylesheets/css/minified/styles.min.css"
+              "src/assets/stylesheets/bootstrap/bootstrap.min.css",
+              "src/assets/stylesheets/css/styles.min.css"
             ],
             "scripts": []
           },
@@ -95,8 +95,8 @@
               "src/assets"
             ],
             "styles": [
-              "src/assets/stylesheets/bootstrap-min/minified/bootstrap.min.css",
-              "src/assets/stylesheets/css/minified/styles.min.css"
+              "src/assets/stylesheets/bootstrap/bootstrap.min.css",
+              "src/assets/stylesheets/css/styles.min.css"
             ],
             "scripts": []
           }
