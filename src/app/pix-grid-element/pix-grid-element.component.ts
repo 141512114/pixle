@@ -5,7 +5,7 @@ import {HelperFunctionsService} from '../services/helper-functions.service';
 @Component({
   selector: 'app-pix-grid-element',
   templateUrl: './pix-grid-element.component.html',
-  styleUrls: ['../../assets/stylesheets/css/pix-grid-element.component.min.css']
+  styleUrls: ['../../stylesheets/css/pix-grid-element.component.min.css']
 })
 export class PixGridElementComponent implements OnInit, AfterViewInit {
   @ViewChild('component_grid_element') private component_grid_element!: ElementRef;

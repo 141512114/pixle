@@ -24,7 +24,7 @@ const UNDO_FLIP_TIME: number = 2000;
 @Component({
   selector: 'app-pix-game',
   templateUrl: './pix-game.component.html',
-  styleUrls: ['../../assets/stylesheets/css/pix-game.component.min.css']
+  styleUrls: ['../../stylesheets/css/pix-game.component.min.css']
 })
 export class PixGameComponent implements OnInit, AfterViewInit {
   @ViewChild('match_status') private match_status_msg!: PixPopupMessageComponent;

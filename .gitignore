@@ -40,5 +40,5 @@ testem.log
 # System files
 .DS_Store
 Thumbs.db
-/src/assets/stylesheets/bootstrap/
-/src/assets/stylesheets/css/
+/src/stylesheets/bootstrap/
+/src/stylesheets/css/

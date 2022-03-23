@@ -10,7 +10,7 @@ const DEFAULT_MSG: IPopUp = {
 @Component({
   selector: 'app-pix-popup-message',
   templateUrl: './pix-popup-message.component.html',
-  styleUrls: ['../../assets/stylesheets/css/pix-popup-message.component.min.css']
+  styleUrls: ['../../stylesheets/css/pix-popup-message.component.min.css']
 })
 export class PixPopupMessageComponent implements AfterViewInit {
   @ViewChild('msg_container') msg_container!: ElementRef;

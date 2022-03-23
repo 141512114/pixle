@@ -24,8 +24,8 @@ Paths: ----------------------------------------------------------
 
 */
 
-const SRC_PATH = './src/assets/';
-const DEV_SRC_PATH = './src/dev-assets/';
+const SRC_PATH = './src/';
+const DEV_SRC_PATH = './local/';
 
 // Style paths
 const STYLES_SRC_FILES = DEV_SRC_PATH + 'stylesheets/scss/**/!(_*)*.scss';
