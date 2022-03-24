@@ -3,23 +3,41 @@
 
 // pix-grid component stylesheet
 div.component-pix-grid {
-  div.pix-grid-wrapper,
-  div.pix-emoji-list-wrapper {
-    padding: 20px;
-    user-select: none;
-  }
-
-  div.pix-grid-wrapper {
-    @include background-color(4);
-  }
-
   div.playground-wrapper {
     @include background-color(2);
     overflow: hidden;
+
+    div.pix-grid-wrapper,
+    div.playground-ui-wrapper {
+      padding: 20px;
+      user-select: none;
+    }
+
+    div.pix-grid-wrapper {
+      @include background-color(4);
+    }
   }
 
   div.playground-ui-wrapper {
     perspective: 1000px;
+
+    div.pix-control-wrapper {
+      padding: 10px;
+    }
+
+    div.validate-button-wrapper,
+    div.reload-pix-button-wrapper {
+      width: 100%;
+
+      button {
+        width: 100%;
+        border: none;
+
+        &:hover {
+          color: white;
+        }
+      }
+    }
 
     div.share-results-wrapper {
       @include flexbox();
@@ -51,20 +69,6 @@ div.component-pix-grid {
           cursor: pointer;
           color: $default-text-color;
         }
-      }
-    }
-  }
-
-  div.validate-button-wrapper,
-  div.reload-pix-button-wrapper {
-    width: 100%;
-
-    button {
-      width: 100%;
-      border: none;
-
-      &:hover {
-        color: white;
       }
     }
   }

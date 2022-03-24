@@ -1,44 +1,49 @@
 <div class="component-pix-grid position-relative">
-  <div class="p-0 g-0 mb-4 rounded-3 playground-wrapper">
-    <div class="rounded-3 pix-grid-wrapper">
-      <div class="row g-0 pix-grid-row" *ngFor="let row of grid_image">
+  <div class="row flex-row flex-nowrap p-0 g-0 mb-4 rounded-3 playground-wrapper">
+    <div class="col rounded-3 pix-grid-wrapper">
+      <div class="row flex-row flex-nowrap g-0 pix-grid-row" *ngFor="let row of grid_image">
         <div class="col p-0 pix-grid-col" *ngFor="let col of row">
           <app-pix-grid-element #pixle_emoji_input [pixle_emoji]="col"
                                 [receive_chosen_emoji]="chosen_emoji"></app-pix-grid-element>
         </div>
       </div>
     </div>
-    <div class="pix-emoji-list-wrapper">
-      <div class="row g-0 pix-grid-row" *ngFor="let i of counter(emoji_list.length / grid_image_height)">
-        <div class="col pix-grid-col" *ngFor="let j of counter(grid_image_height)">
-          <app-pix-grid-element #pixle_emoji_output [pixle_emoji]="emoji_list[grid_image_height * i + j]"
-                                [grid_element_type]="1"
-                                (sendIconCodePoint)="receiveIconCodePoint($event)"></app-pix-grid-element>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="row p-0 g-0 playground-ui-wrapper">
-    <div #flip_ui class="playground-ui-inner flip-element">
-      <div class="front-face">
-        <div class="p-0 mb-2 validate-button-wrapper ui">
-          <button class="rounded-3 pix-validate-button" (click)="validatePixleOnClick()" type="button">Validate</button>
-        </div>
-        <div class="p-0 reload-pix-button-wrapper ui">
-          <button class="rounded-3 pix-reload-button" (click)="reloadGameComponent()" type="button">Reload pixle</button>
-        </div>
-      </div>
-      <div class="back-face">
-        <div class="container position-relative share-results-wrapper">
-          <div class="row p-0 mb-2">
-            <h2>Share your results!</h2>
+    <div class="col d-inline-flex flex-column playground-ui-wrapper">
+      <div class="pix-emoji-list-wrapper">
+        <div class="row flex-row flex-nowrap g-0 pix-grid-row"
+             *ngFor="let i of counter(emoji_list.length / grid_image_width)">
+          <div class="col pix-grid-col" *ngFor="let j of counter(grid_image_width)">
+            <app-pix-grid-element #pixle_emoji_output [pixle_emoji]="emoji_list[grid_image_width * i + j]"
+                                  [grid_element_type]="1"
+                                  (sendIconCodePoint)="receiveIconCodePoint($event)"></app-pix-grid-element>
           </div>
-          <div class="row p-0">
-            <a class="twitter-share-button share-button" href="https://twitter.com/intent/tweet?text=Hello%20world"
-               target="_blank">Tweet</a>
-            <a class="share-button" href="whatsapp://send?text=This is WhatsApp sharing example using link"
-               data-action="share/whatsapp/share" target="_blank">WhatsApp</a>
-            <button class="share-button" type="button">Clipboard</button>
+        </div>
+      </div>
+      <div class="mt-auto pix-control-wrapper">
+        <div #flip_ui class="playground-ui-inner flip-element">
+          <div class="front-face">
+            <div class="p-0 mb-3 validate-button-wrapper ui">
+              <button class="rounded-3 pix-validate-button" (click)="validatePixleOnClick()" type="button">Validate
+              </button>
+            </div>
+            <div class="p-0 reload-pix-button-wrapper ui">
+              <button class="rounded-3 pix-reload-button" (click)="reloadGameComponent()" type="button">Reload pixle
+              </button>
+            </div>
+          </div>
+          <div class="back-face">
+            <div class="container position-relative share-results-wrapper">
+              <div class="row p-0 mb-2">
+                <h2>Share your results!</h2>
+              </div>
+              <div class="row p-0">
+                <a class="twitter-share-button share-button" href="https://twitter.com/intent/tweet?text=Hello%20world"
+                   target="_blank">Tweet</a>
+                <a class="share-button" href="whatsapp://send?text=This is WhatsApp sharing example using link"
+                   data-action="share/whatsapp/share" target="_blank">WhatsApp</a>
+                <button class="share-button" type="button">Clipboard</button>
+              </div>
+            </div>
           </div>
         </div>
       </div>

@@ -197,14 +197,17 @@ export class PixGridElementComponent implements OnInit, AfterViewInit {
    */
   private undoFlip(element: HTMLElement, unlock_element: boolean = true): void {
     if ((this.grid_element_type !== 0) || (element == undefined || null)) return;
-    if (!this.pixle_tile_solved) {
-      this.hideCorrectAnswer();
-      this.changeElementIcon(this.pixle_emoji_default);
-    }
     if (element.classList.contains('do-flip')) {
       element.classList.remove('do-flip');
     }
-    if (!unlock_element) return;
-    HelperFunctionsService.unlockElement(element);
+    // Delay resetting this tile after reversing the flip --> smooth effect
+    window.setTimeout(() => {
+      if (!this.pixle_tile_solved) {
+        this.hideCorrectAnswer();
+        this.changeElementIcon(this.pixle_emoji_default);
+      }
+      if (!unlock_element) return;
+      HelperFunctionsService.unlockElement(element);
+    }, 500);
   }
 }

@@ -6,7 +6,8 @@ import {
   Input,
   OnInit,
   Output,
-  QueryList, ViewChild,
+  QueryList,
+  ViewChild,
   ViewChildren
 } from '@angular/core';
 import {PixGridElementComponent} from '../pix-grid-element/pix-grid-element.component';
@@ -44,7 +45,7 @@ export class PixGridComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit(): void {
-    this.setDisplayStatusOfPixle(false);
+    this.setFlipStatus(false);
   }
 
   /**
@@ -61,6 +62,7 @@ export class PixGridComponent implements OnInit, AfterViewInit {
    * Reload the whole game component
    */
   public reloadGameComponent(): void {
+    if (this.validating) return;
     this.sendReloadRequest.emit();
   }
 
@@ -93,7 +95,7 @@ export class PixGridComponent implements OnInit, AfterViewInit {
    *
    * @param reverse
    */
-  public setDisplayStatusOfPixle(reverse: boolean = true): void {
+  public setFlipStatus(reverse: boolean = true): void {
     let temp_pix_grid_comps: PixGridElementComponent[] = this.pixle_emoji_input.toArray();
     for (let i: number = 0; i < temp_pix_grid_comps.length; i++) {
       if (temp_pix_grid_comps[i].grid_element_type !== 0) continue;
@@ -103,6 +105,10 @@ export class PixGridComponent implements OnInit, AfterViewInit {
         temp_pix_grid_comps[i].initFlip();
       }
     }
+    if (!reverse) return;
+    window.setTimeout(() => {
+      this.validating = false;
+    }, 1000);
   }
 
   /**
@@ -142,6 +148,8 @@ export class PixGridComponent implements OnInit, AfterViewInit {
    */
   private validatePixle(): void {
     if (!GameManager.game_started || GameManager.pixle_solved || this.grid_image.length <= 0) return;
+    this.validating = true;
+
     let temp_pix_grid_comps: PixGridElementComponent[] = this.pixle_emoji_input.toArray();
     let total_count: number = 0, failed_count: number = 0;
     let pixle_convert: number[] = HelperFunctionsService.twoDimensionalArrayToOneDimensional(this.grid_image);
@@ -158,19 +166,19 @@ export class PixGridComponent implements OnInit, AfterViewInit {
     // If any tile has reached its limits --> went out of lives --> game over
     if (failed_count > 0) {
       GameManager.game_started = false;
+      this.validating = false;
       this.flipPlaygroundUI();
     } else {
       // Player has won the game
       if (total_count >= pixle_convert.length) {
         GameManager.pixle_solved = true;
         GameManager.game_started = false;
+        this.validating = false;
         this.flipPlaygroundUI();
       } else {
-        this.validating = true;
         // Player didn't win yet --> reset flip-state of some tiles
         window.setTimeout(() => {
-          this.setDisplayStatusOfPixle();
-          this.validating = false;
+          this.setFlipStatus();
         }, UNDO_FLIP_TIME);
       }
     }

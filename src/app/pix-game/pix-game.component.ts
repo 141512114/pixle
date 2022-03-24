@@ -107,7 +107,7 @@ export class PixGameComponent implements OnInit, AfterViewInit {
    */
   private startGame(): void {
     window.setTimeout(() => {
-      this.pixGridComponent.setDisplayStatusOfPixle();
+      this.pixGridComponent.setFlipStatus();
       GameManager.initGame();
     }, UNDO_FLIP_TIME);
   }
@@ -164,10 +164,10 @@ export class PixGameComponent implements OnInit, AfterViewInit {
         }
       }
     }
-    // Fill empty slots with placeholders, if there ever are fewer emojis used than the vertical amount of icons in a pixle
-    let modulo: number = temp_emoji_list.length % this.pixle_image_height;
-    if (modulo > 0 && modulo < this.pixle_image_height) {
-      let short_count: number = this.pixle_image_height - modulo;
+    // Fill empty slots with placeholders, if there ever are fewer emojis used than the horizontal amount of icons in a pixle
+    let modulo: number = temp_emoji_list.length % this.pixle_image_width;
+    if (modulo > 0 && modulo < this.pixle_image_width) {
+      let short_count: number = this.pixle_image_width - modulo;
       for (let i: number = 0; i < short_count; i++) {
         temp_emoji_list.push(this.empty_emoji_slot);
       }
