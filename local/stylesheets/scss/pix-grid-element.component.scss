@@ -61,7 +61,14 @@ div.component-pix-grid-element {
 
   div.icon-wrapper:not(.locked):hover {
     cursor: pointer;
-    @include background-color(2);
+
+    &:not(.selected) {
+      @include background-color(2);
+    }
+
+    &.invert-before {
+      @include background-color(6);
+    }
 
     &[data-grid-element-status="2"] {
       @include background-color(8, $background-color-alpha-focused);
