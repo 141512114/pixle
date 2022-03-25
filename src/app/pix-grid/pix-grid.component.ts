@@ -1,15 +1,4 @@
-import {
-  AfterViewInit,
-  Component,
-  ElementRef,
-  EventEmitter,
-  Input,
-  OnInit,
-  Output,
-  QueryList,
-  ViewChild,
-  ViewChildren
-} from '@angular/core';
+import {AfterViewInit, Component, EventEmitter, Input, OnInit, Output, QueryList, ViewChildren} from '@angular/core';
 import {PixGridElementComponent} from '../pix-grid-element/pix-grid-element.component';
 import {HelperFunctionsService} from '../services/helper-functions.service';
 import {GameManager} from '../pix-game/game.manager';
@@ -25,7 +14,6 @@ const UNDO_FLIP_TIME: number = 2000;
 export class PixGridComponent implements OnInit, AfterViewInit {
   @ViewChildren('pixle_emoji_input') private pixle_emoji_input!: QueryList<PixGridElementComponent>;
   @ViewChildren('pixle_emoji_output') private pixle_emoji_output!: QueryList<PixGridElementComponent>;
-  @ViewChild('flip_ui') private flip_ui!: ElementRef;
 
   @Input() grid_image: number[][] = [];
   @Input() emoji_list: number[] = [];
@@ -33,7 +21,6 @@ export class PixGridComponent implements OnInit, AfterViewInit {
   @Output() sendReloadRequest: EventEmitter<any> = new EventEmitter<any>();
 
   grid_image_width: number = 0;
-  grid_image_height: number = 0;
 
   chosen_emoji: number = -1;
   validating: boolean = false;
@@ -41,7 +28,6 @@ export class PixGridComponent implements OnInit, AfterViewInit {
   ngOnInit(): void {
     if (this.grid_image.length <= 0) return;
     this.grid_image_width = this.grid_image[0].length;
-    this.grid_image_height = this.grid_image.length;
   }
 
   ngAfterViewInit(): void {
@@ -105,22 +91,6 @@ export class PixGridComponent implements OnInit, AfterViewInit {
         temp_pix_grid_comps[i].initFlip();
       }
     }
-    if (!reverse) return;
-    window.setTimeout(() => {
-      this.validating = false;
-    }, 1000);
-  }
-
-  /**
-   * Flip the playground ui
-   * (sitting at the bottom of the pixle grid)
-   *
-   * @private
-   */
-  private flipPlaygroundUI(): void {
-    let flip_ui_element: HTMLElement = this.flip_ui.nativeElement;
-    if (flip_ui_element.classList.contains('do-flip')) return;
-    flip_ui_element.classList.add('do-flip');
   }
 
   /**
@@ -147,40 +117,46 @@ export class PixGridComponent implements OnInit, AfterViewInit {
    * @private
    */
   private validatePixle(): void {
-    if (!GameManager.game_started || GameManager.pixle_solved || this.grid_image.length <= 0) return;
+    if (!GameManager.game_started || GameManager.pixle_solved || this.validating) return;
     this.validating = true;
 
     let temp_pix_grid_comps: PixGridElementComponent[] = this.pixle_emoji_input.toArray();
     let total_count: number = 0, failed_count: number = 0;
-    let pixle_convert: number[] = HelperFunctionsService.twoDimensionalArrayToOneDimensional(this.grid_image);
     // Check every pixle tile if its valid --> emoji at the exact same position as in the original pixle
-    for (let i: number = 0; i < pixle_convert.length; i++) {
-      if (temp_pix_grid_comps[i].pixle_emoji_codepoint !== pixle_convert[i]) {
-        temp_pix_grid_comps[i].updateTileStatus(false);
-        if (temp_pix_grid_comps[i].pixle_tile_lives <= 0) failed_count++;
-        continue;
+    for (let i: number = 0; i < this.grid_image.length; i++) {
+      for (let j: number = 0; j < this.grid_image_width; j++) {
+        let current_column: number = (this.grid_image_width * i) + j;
+        if (temp_pix_grid_comps[current_column].pixle_emoji_codepoint !== this.grid_image[i][j]) {
+          temp_pix_grid_comps[current_column].updateTileStatus(false);
+          if (temp_pix_grid_comps[current_column].pixle_tile_lives <= 0) {
+            failed_count++;
+          }
+          continue;
+        }
+        temp_pix_grid_comps[current_column].updateTileStatus(true);
+        total_count++;
       }
-      temp_pix_grid_comps[i].updateTileStatus(true);
-      total_count++;
     }
     // If any tile has reached its limits --> went out of lives --> game over
     if (failed_count > 0) {
-      GameManager.game_started = false;
-      this.validating = false;
-      this.flipPlaygroundUI();
+      GameManager.resetGame();
     } else {
       // Player has won the game
-      if (total_count >= pixle_convert.length) {
+      let tile_amount: number = this.grid_image_width * this.grid_image.length;
+      if (total_count >= tile_amount) {
         GameManager.pixle_solved = true;
         GameManager.game_started = false;
-        this.validating = false;
-        this.flipPlaygroundUI();
       } else {
         // Player didn't win yet --> reset flip-state of some tiles
         window.setTimeout(() => {
           this.setFlipStatus();
+          window.setTimeout(() => {
+            this.validating = false;
+          }, 1000);
         }, UNDO_FLIP_TIME);
+        return;
       }
     }
+    this.validating = false;
   }
 }

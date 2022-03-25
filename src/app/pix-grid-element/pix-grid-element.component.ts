@@ -126,7 +126,8 @@ export class PixGridElementComponent implements OnInit, AfterViewInit {
       // Add class which represents the current health status
       if (this.pixle_tile_lives <= 0) {
         grid_native_element.dataset['gridElementStatus'] = 'failed';
-        this.undoFlip(grid_native_element, false);
+        this.undoFlip(grid_native_element);
+        HelperFunctionsService.lockElement(grid_native_element);
       } else {
         grid_native_element.dataset['gridElementStatus'] = this.pixle_tile_lives.toString();
         this.doFlip(grid_native_element);
@@ -192,10 +193,9 @@ export class PixGridElementComponent implements OnInit, AfterViewInit {
    * Reverse flipped grid element
    *
    * @param element
-   * @param unlock_element
    * @private
    */
-  private undoFlip(element: HTMLElement, unlock_element: boolean = true): void {
+  private undoFlip(element: HTMLElement): void {
     if ((this.grid_element_type !== 0) || (element == undefined || null)) return;
     if (element.classList.contains('do-flip')) {
       element.classList.remove('do-flip');
@@ -205,9 +205,10 @@ export class PixGridElementComponent implements OnInit, AfterViewInit {
       if (!this.pixle_tile_solved) {
         this.hideCorrectAnswer();
         this.changeElementIcon(this.pixle_emoji_default);
+        if (this.pixle_tile_lives > 0) {
+          HelperFunctionsService.unlockElement(element);
+        }
       }
-      if (!unlock_element) return;
-      HelperFunctionsService.unlockElement(element);
     }, 500);
   }
 }
