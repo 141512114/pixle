@@ -1,6 +1,16 @@
 /* fonts */
-@font-face { font-family: 'Open-Sans'; src: url('../../../src/assets/fonts/OpenSans/OpenSans-Regular.ttf') format('truetype'); font-display: swap; }
-@font-face { font-family: 'Open-Sans-Bold'; src: url('../../../src/assets/fonts/OpenSans/OpenSans-Bold.ttf') format('truetype'); font-display: swap; }
+@font-face {
+  font-family: 'Open-Sans';
+  src: url('../../../src/assets/fonts/OpenSans/OpenSans-Medium.ttf') format('truetype');
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Open-Sans-Bold';
+  src: url('../../../src/assets/fonts/OpenSans/OpenSans-Bold.ttf') format('truetype');
+  font-display: swap;
+}
 
 $main-font: 'Open-Sans', sans-serif;
 $main-header: 'Open-Sans-Bold', sans-serif;
+$main-ui: 'Open-Sans-Bold', sans-serif;

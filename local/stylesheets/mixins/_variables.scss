@@ -1,24 +1,36 @@
 @use "sass:map";
 
 // Default color maps
-$ocean-palette: (
-  1: #141722,
-  2: #18243A,
-  3: #1D2E49,
-  4: #223758,
-  5: #6E8894,
-  6: #5473A0,
-  7: #23ce6b,
-  8: #f9e900,
-  9: #f39237,
-  10: #e71d36
+$neo-palette: (
+  1: #0F1020,
+  2: #2F195F,
+  3: #51368D,
+  4: #7353BA,
+  5: #EFC3F5,
+  6: #FAA6FF,
 );
 
-$default-color-palette: $ocean-palette !default;
+$pop-palette: (
+  1: #22162B,
+  2: #451F55,
+  3: #5C3773,
+  4: #724E91,
+  5: #E54F6D,
+  6: #F8C630,
+);
+
+$status-palette: (
+  1: #23ce6b,
+  2: #f9e900,
+  3: #f39237,
+  4: #e71d36
+);
+
+$default-color-palette: $pop-palette !default;
 
 // Default colors
 $default-text-color: white !default;
-$default-text-color-unfocused: map.get($ocean-palette, 5) !default;
+$default-text-color-unfocused: map.get($default-color-palette, 2) !default;
 
 // Default variables
 $standard-pixle-size: 550px !default;

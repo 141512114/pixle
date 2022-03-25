@@ -28,15 +28,6 @@ div.component-pix-grid {
     div.validate-button-wrapper,
     div.reload-pix-button-wrapper {
       width: 100%;
-
-      button {
-        width: 100%;
-        border: none;
-
-        &:hover {
-          color: white;
-        }
-      }
     }
 
     div.share-results-wrapper {
@@ -89,6 +80,7 @@ div.component-pix-grid {
     }
   }
 }
+
 @media only screen and (max-width: 510px) {
   div.component-pix-grid {
     div.playground-wrapper {
@@ -103,6 +95,7 @@ div.component-pix-grid {
     }
   }
 }
+
 @media only screen and (max-width: 410px) {
   div.component-pix-grid {
     div.playground-wrapper {

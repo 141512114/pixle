@@ -34,6 +34,7 @@
     width: 100%;
     margin-bottom: 12px;
     padding: 21px 32px;
+    font-family: $main-ui;
     font-size: 21px;
     letter-spacing: 2px;
     color: white;
@@ -47,17 +48,24 @@
   }
 
   button {
+    border: none;
     color: $default-text-color-unfocused;
+    transition: background-color 300ms, opacity 300ms, color 300ms;
   }
 
-  input:focus,
-  button:hover {
+  input:hover,
+  input:focus {
     color: $default-text-color;
     border-color: map.get($default-color-palette, 3);
   }
 
+  button:hover {
+    color: map.get($default-color-palette, 5);
+    @include background-color(6);
+  }
+
   button:active {
-    @include background-color(3);
+    opacity: .75;
   }
 }
 
