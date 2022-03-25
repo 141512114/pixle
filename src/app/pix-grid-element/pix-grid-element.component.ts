@@ -201,14 +201,14 @@ export class PixGridElementComponent implements OnInit, AfterViewInit {
       element.classList.remove('do-flip');
     }
     // Delay resetting this tile after reversing the flip --> smooth effect
-    window.setTimeout(() => {
-      if (!this.pixle_tile_solved) {
+    if (!this.pixle_tile_solved) {
+      this.changeElementIcon(this.pixle_emoji_default);
+      window.setTimeout(() => {
         this.hideCorrectAnswer();
-        this.changeElementIcon(this.pixle_emoji_default);
         if (this.pixle_tile_lives > 0) {
           HelperFunctionsService.unlockElement(element);
         }
-      }
-    }, 500);
+      }, 500);
+    }
   }
 }
