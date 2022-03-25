@@ -42,3 +42,4 @@ testem.log
 Thumbs.db
 /src/stylesheets/bootstrap/
 /src/stylesheets/css/
+/builds
