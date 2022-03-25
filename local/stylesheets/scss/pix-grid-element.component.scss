@@ -1,95 +1,101 @@
 @import '../mixins/variables';
 @import '../mixins/mixins';
 
-// pix-grid-element component stylesheet
-div.component-pix-grid-element {
-  width: $tile-size;
-  height: $tile-size;
+@mixin grid_element_styling($size: $tile-size, $padding: 10px, $font-size: 44px) {
+  div.component-pix-grid-element {
+    width: $size;
+    height: $size;
 
-  $padding: 10px;
-
-  div.grid-element-inner {
-    width: inherit;
-    height: inherit;
-    padding: $padding;
-
-    div.flip-element div.back-face {
-      user-select: none;
-      pointer-events: none;
-    }
-  }
-
-  p.icon-inner {
-    position: relative;
-    width: 100%;
-    font-size: 44px;
-    text-align: center;
-    line-height: $tile-size - $padding * 2;
-  }
-
-  div.icon-wrapper {
-    position: relative;
-    width: 100%;
-    height: 100%;
-    @include background-color(3);
-    transition: transform 550ms, background-color 500ms, border-radius 350ms;
-
-    &.invert-before {
-      @include background-color(4);
+    div.grid-element-inner {
+      width: inherit;
+      height: inherit;
+      padding: $padding;
     }
 
-    &.selected {
-      @include background-color(6);
-    }
-
-    &[data-grid-element-status="solved"] {
-      @include background-color(7, $background-color-alpha-focused);
-    }
-
-    &[data-grid-element-status="2"] {
-      @include background-color(8, $background-color-alpha-unfocused);
-    }
-
-    &[data-grid-element-status="1"] {
-      @include background-color(9, $background-color-alpha-unfocused);
-    }
-
-    &[data-grid-element-status="failed"] {
-      @include background-color(10, $background-color-alpha-focused);
-    }
-  }
-
-  div.icon-wrapper:not(.locked):hover {
-    cursor: pointer;
-
-    &:not(.selected) {
-      @include background-color(2);
-    }
-
-    &.invert-before {
-      @include background-color(6);
-    }
-
-    &[data-grid-element-status="2"] {
-      @include background-color(8, $background-color-alpha-focused);
-    }
-
-    &[data-grid-element-status="1"] {
-      @include background-color(9, $background-color-alpha-focused);
+    p.icon-inner {
+      position: relative;
+      width: 100%;
+      font-size: $font-size;
+      text-align: center;
+      line-height: $size - $padding * 2;
     }
   }
 }
 
-// Responsive design
-@media only screen and (max-width: 400px) {
-  $tile-size: 65px;
+// pix-grid-element component stylesheet
+@include grid_element_styling();
 
-  div.component-pix-grid-element {
-    width: $tile-size;
-    height: $tile-size;
+div.flip-element div.back-face {
+  user-select: none;
+  pointer-events: none;
+}
 
-    p.icon-inner {
-      line-height: $tile-size;
-    }
+div.icon-wrapper {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  @include background-color(3);
+  transition: transform 550ms, background-color 500ms, border-radius 350ms;
+
+  &.invert-before {
+    @include background-color(4);
   }
+
+  &.selected {
+    @include background-color(6);
+  }
+
+  &[data-grid-element-status="solved"] {
+    @include background-color(7, $background-color-alpha-focused);
+  }
+
+  &[data-grid-element-status="2"] {
+    @include background-color(8, $background-color-alpha-unfocused);
+  }
+
+  &[data-grid-element-status="1"] {
+    @include background-color(9, $background-color-alpha-unfocused);
+  }
+
+  &[data-grid-element-status="failed"] {
+    @include background-color(10, $background-color-alpha-focused);
+  }
+}
+
+div.icon-wrapper:not(.locked):hover {
+  cursor: pointer;
+
+  &:not(.selected) {
+    @include background-color(2);
+  }
+
+  &.invert-before {
+    @include background-color(6);
+  }
+
+  &[data-grid-element-status="2"] {
+    @include background-color(8, $background-color-alpha-focused);
+  }
+
+  &[data-grid-element-status="1"] {
+    @include background-color(9, $background-color-alpha-focused);
+  }
+}
+
+// Responsive design
+@media only screen and (max-width: 1450px) {
+  $tile-size: 100px;
+  @include grid_element_styling($tile-size, 9px, 41px);
+}
+@media only screen and (max-width: 768px) {
+  $tile-size: 95px;
+  @include grid_element_styling($tile-size, 9px, 39px);
+}
+@media only screen and (max-width: 510px) {
+  $tile-size: 90px;
+  @include grid_element_styling($tile-size, 7px, 36px);
+}
+@media only screen and (max-width: 410px) {
+  $tile-size: 80px;
+  @include grid_element_styling($tile-size, 5px, 34px);
 }
