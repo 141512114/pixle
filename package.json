@@ -1,6 +1,17 @@
 {
   "name": "pixle-game",
   "version": "0.0.0",
+  "hintConfig": {
+    "connector": {
+      "name": "webhint"
+    },
+    "extends": [
+      "web-recommended"
+    ],
+    "hints": {
+      "meta-viewport": "error"
+    }
+  },
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
@@ -28,6 +39,7 @@
     "@angular-devkit/build-angular": "~13.2.5",
     "@angular/cli": "~13.2.5",
     "@angular/compiler-cli": "~13.2.0",
+    "@hint/configuration-web-recommended": "^8.2.7",
     "@types/jasmine": "~3.10.0",
     "@types/node": "^12.11.1",
     "del": "^6.0.0",
@@ -38,6 +50,7 @@
     "gulp-rename": "^2.0.0",
     "gulp-sass": "^5.1.0",
     "gulp-sourcemaps": "^3.0.0",
+    "hint": "^6.1.10",
     "jasmine-core": "~4.0.0",
     "karma": "~6.3.0",
     "karma-chrome-launcher": "~3.1.0",
