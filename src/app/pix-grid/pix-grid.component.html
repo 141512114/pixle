@@ -1,5 +1,5 @@
 <div class="component-pix-grid position-relative">
-  <div class="row flex-column flex-lg-row flex-nowrap p-0 g-0 rounded-3 playground-wrapper">
+  <div class="row flex-nowrap p-0 g-0 rounded-3 playground-wrapper">
     <div class="col rounded-3 pix-grid-wrapper">
       <div class="row flex-row flex-nowrap g-0 pix-grid-row" *ngFor="let row of grid_image">
         <div class="col p-0 pix-grid-col" *ngFor="let col of row">
@@ -20,30 +20,14 @@
         </div>
       </div>
       <div class="mt-auto pix-control-wrapper">
-        <div class="playground-ui-inner flip-element">
-          <div class="front-face">
-            <div class="p-0 mb-2 mb-lg-3 validate-button-wrapper ui">
-              <button class="rounded-3 pix-validate-button" (click)="validatePixleOnClick()" type="button">Flip!
-              </button>
-            </div>
-            <div class="p-0 reload-pix-button-wrapper ui">
-              <button class="rounded-3 pix-reload-button" (click)="reloadGameComponent()" type="button">Reload
-              </button>
-            </div>
+        <div class="playground-ui-inner">
+          <div class="p-0 mb-2 mb-lg-3 validate-button-wrapper ui">
+            <button class="rounded-3 pix-validate-button" (click)="validatePixleOnClick()" type="button">Flip!
+            </button>
           </div>
-          <div class="back-face">
-            <div class="container position-relative share-results-wrapper">
-              <div class="row p-0 mb-2">
-                <h2>Share your results!</h2>
-              </div>
-              <div class="row p-0">
-                <a class="twitter-share-button share-button" href="https://twitter.com/intent/tweet?text=Hello%20world"
-                   target="_blank">Tweet</a>
-                <a class="share-button" href="whatsapp://send?text=This is WhatsApp sharing example using link"
-                   data-action="share/whatsapp/share" target="_blank">WhatsApp</a>
-                <button class="share-button" type="button">Clipboard</button>
-              </div>
-            </div>
+          <div class="p-0 reload-pix-button-wrapper ui">
+            <button class="rounded-3 pix-reload-button" (click)="reloadGameComponent()" type="button">Reload
+            </button>
           </div>
         </div>
       </div>

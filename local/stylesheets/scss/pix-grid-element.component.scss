@@ -88,17 +88,27 @@ div.icon-wrapper:not(.locked):hover {
   @include grid_element_styling($tile-size, 9px, 41px);
 }
 
-@media only screen and (max-width: 768px) {
-  $tile-size: 95px;
-  @include grid_element_styling($tile-size, 9px, 39px);
-}
-
-@media only screen and (max-width: 510px) {
+@media only screen and (max-width: 1100px) {
   $tile-size: 90px;
   @include grid_element_styling($tile-size, 7px, 36px);
 }
 
-@media only screen and (max-width: 410px) {
+@media only screen and (max-width: 768px) {
+  $tile-size: 90px;
+  @include grid_element_styling($tile-size, 7px, 36px);
+}
+
+@media only screen and (max-width: 650px) {
   $tile-size: 80px;
   @include grid_element_styling($tile-size, 5px, 34px);
+}
+
+@media only screen and (max-width: 445px) {
+  $tile-size: 75px;
+  @include grid_element_styling($tile-size, 5px, 32px);
+}
+
+@media only screen and (max-width: 375px) {
+  $tile-size: 70px;
+  @include grid_element_styling($tile-size, 4px, 28px);
 }

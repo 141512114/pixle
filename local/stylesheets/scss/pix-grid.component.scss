@@ -4,6 +4,7 @@
 // pix-grid component stylesheet
 div.component-pix-grid {
   div.playground-wrapper {
+    flex-direction: row;
     @include background-color(2);
     overflow: hidden;
 
@@ -75,6 +76,12 @@ div.component-pix-grid {
 
     div.playground-ui-wrapper div.pix-control-wrapper {
       padding: 9px;
+    }
+  }
+
+  @media only screen and (max-width: 910px) {
+    div.playground-wrapper {
+      flex-direction: column;
     }
   }
 
