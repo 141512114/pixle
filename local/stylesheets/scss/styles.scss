@@ -9,6 +9,7 @@
 
 html,
 body {
+  width: 100%;
   @include background-color(1);
 }
 

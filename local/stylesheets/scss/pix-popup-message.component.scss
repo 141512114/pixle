@@ -4,10 +4,16 @@
 
 div.component-pix-popup-message {
   @include alignment_old();
+  width: $default-popup-size;
+  opacity: 1;
+  transition: top 700ms, opacity 550ms, visibility 300ms;
   z-index: 999;
 
   &.close {
     top: 300px;
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
   }
 
   div.popup-wrapper {
@@ -23,5 +29,25 @@ div.component-pix-popup-message {
       border: none;
       @include background-color(3);
     }
+  }
+
+  // Responsive design
+  @media only screen and (max-width: 768px) {
+    $default-popup-size: 400px;
+    width: $default-popup-size;
+  }
+
+  @media only screen and (max-width: 500px) {
+    $default-popup-size: 350px;
+    width: $default-popup-size;
+
+    div.popup-wrapper {
+      padding: 20px;
+    }
+  }
+
+  @media only screen and (max-width: 400px) {
+    $default-popup-size: 85%;
+    width: $default-popup-size;
   }
 }

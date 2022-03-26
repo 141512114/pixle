@@ -13,19 +13,6 @@
   }
 }
 
-// Popup
-.user-popup {
-  width: $standard-pixle-size;
-  opacity: 1;
-  transition: top 700ms, opacity 550ms, visibility 300ms;
-
-  &.close {
-    opacity: 0;
-    visibility: hidden;
-    pointer-events: none;
-  }
-}
-
 // UI in general
 .ui {
   input,

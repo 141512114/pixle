@@ -63,11 +63,9 @@ div.component-pix-grid {
       }
     }
   }
-}
 
-// Responsive design
-@media only screen and (max-width: 1100px) {
-  div.component-pix-grid {
+  // Responsive design
+  @media only screen and (max-width: 1100px) {
     div.playground-wrapper {
       div.pix-grid-wrapper,
       div.playground-ui-wrapper {
@@ -79,10 +77,8 @@ div.component-pix-grid {
       padding: 9px;
     }
   }
-}
 
-@media only screen and (max-width: 510px) {
-  div.component-pix-grid {
+  @media only screen and (max-width: 510px) {
     div.playground-wrapper {
       div.pix-grid-wrapper,
       div.playground-ui-wrapper {
@@ -94,10 +90,8 @@ div.component-pix-grid {
       padding: 7px;
     }
   }
-}
 
-@media only screen and (max-width: 410px) {
-  div.component-pix-grid {
+  @media only screen and (max-width: 410px) {
     div.playground-wrapper {
       div.pix-grid-wrapper,
       div.playground-ui-wrapper {
