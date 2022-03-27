@@ -10,7 +10,7 @@ div.component-pix-grid {
 
     div.pix-grid-wrapper,
     div.playground-ui-wrapper {
-      padding: 20px;
+      padding: 12px;
       user-select: none;
     }
 
@@ -23,7 +23,7 @@ div.component-pix-grid {
     perspective: 1000px;
 
     div.pix-control-wrapper {
-      padding: 10px;
+      padding: 7px;
     }
 
     div.validate-button-wrapper,
@@ -33,35 +33,9 @@ div.component-pix-grid {
   }
 
   // Responsive design
-  @media only screen and (max-width: 1100px) {
-    div.playground-wrapper {
-      div.pix-grid-wrapper,
-      div.playground-ui-wrapper {
-        padding: 15px;
-      }
-    }
-
-    div.playground-ui-wrapper div.pix-control-wrapper {
-      padding: 9px;
-    }
-  }
-
   @media only screen and (max-width: 910px) {
     div.playground-wrapper {
       flex-direction: column;
-    }
-  }
-
-  @media only screen and (max-width: 510px) {
-    div.playground-wrapper {
-      div.pix-grid-wrapper,
-      div.playground-ui-wrapper {
-        padding: 12px;
-      }
-    }
-
-    div.playground-ui-wrapper div.pix-control-wrapper {
-      padding: 7px;
     }
   }
 

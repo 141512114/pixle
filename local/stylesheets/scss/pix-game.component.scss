@@ -1,7 +1,30 @@
+@import '../mixins/variables';
 @import '../mixins/mixins';
 
 // pix-game component stylesheet
+header.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
+  height: auto;
+  padding: 7px 0;
+  user-select: none;
+  @include flexbox();
+  @include background-color(2);
+  z-index: 999;
+
+  .game-title {
+    margin: 0;
+    padding: 4px 0;
+    text-transform: uppercase;
+    text-align: center;
+    letter-spacing: 2px;
+  }
+}
+
 section.component-pix-game {
   @include flexbox();
-  padding: 55px 0;
+  padding: 85px 0;
 }
