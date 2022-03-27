@@ -19,17 +19,8 @@ div.component-pix-grid {
     }
   }
 
-  div.playground-ui-wrapper {
-    perspective: 1000px;
-
-    div.pix-control-wrapper {
-      padding: 7px;
-    }
-
-    div.validate-button-wrapper,
-    div.reload-pix-button-wrapper {
-      width: 100%;
-    }
+  div.playground-ui-wrapper div.pix-control-wrapper {
+    padding: 7px;
   }
 
   // Responsive design
