@@ -8,8 +8,6 @@ import {Component, ElementRef, ViewChild} from '@angular/core';
 export class AppComponent {
   @ViewChild('app_root') private app_root!: ElementRef;
 
-  title = 'pixle-game';
-
   /**
    * Receive and set the theme
    *
