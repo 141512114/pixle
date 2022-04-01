@@ -4,13 +4,15 @@ div.component-theme-switcher {
   bottom: 18px;
   left: 18px;
 
+  $list-item-offset: 10px;
+
   ul {
     margin: 0;
     padding: 0;
 
     li {
       display: block;
-      margin-bottom: 10px;
+      margin-bottom: $list-item-offset;
       list-style: none;
 
       button {
@@ -20,6 +22,18 @@ div.component-theme-switcher {
 
       &:last-child {
         margin-bottom: 0;
+      }
+    }
+  }
+
+  @media only screen and (max-width: 1100px) {
+    ul li {
+      display: inline-block;
+      margin-bottom: 0;
+      margin-right: $list-item-offset;
+
+      &:last-child {
+        margin-right: 0;
       }
     }
   }
