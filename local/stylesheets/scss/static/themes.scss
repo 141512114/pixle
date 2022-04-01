@@ -33,9 +33,9 @@
     @include background-color(6, $theme);
   }
 
-  header.navbar {
+  /* header.navbar {
     @include background-color(2, $theme);
-  }
+  } */
 
   div.component-pix-grid div.playground-wrapper {
     @include background-color(2, $theme);
