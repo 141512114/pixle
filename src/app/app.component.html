@@ -1,1 +1,4 @@
-<router-outlet></router-outlet>
+<main #app_root class="component-app" data-theme="default">
+  <router-outlet></router-outlet>
+  <app-theme-switcher (sendThemeData)="receiveThemeData($event)"></app-theme-switcher>
+</main>

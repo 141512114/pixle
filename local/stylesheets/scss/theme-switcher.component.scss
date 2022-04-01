@@ -1,0 +1,26 @@
+// theme-switcher component stylesheet
+div.component-theme-switcher {
+  position: fixed;
+  bottom: 18px;
+  left: 18px;
+
+  ul {
+    margin: 0;
+    padding: 0;
+
+    li {
+      display: block;
+      margin-bottom: 10px;
+      list-style: none;
+
+      button {
+        width: auto;
+        text-align: left;
+      }
+
+      &:last-child {
+        margin-bottom: 0;
+      }
+    }
+  }
+}

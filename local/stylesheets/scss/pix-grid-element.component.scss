@@ -34,16 +34,7 @@ div.icon-wrapper {
   position: relative;
   width: 100%;
   height: 100%;
-  @include background-color(3);
   transition: transform 550ms, background-color 150ms;
-
-  &.invert-before {
-    @include background-color(4);
-  }
-
-  &.selected {
-    @include background-color(6);
-  }
 
   &[data-grid-element-status="solved"] {
     @include background-color(1, $status-palette, $background-color-alpha-focused);
@@ -64,14 +55,6 @@ div.icon-wrapper {
 
 div.icon-wrapper:not(.locked):hover {
   cursor: pointer;
-
-  &:not(.selected) {
-    @include background-color(2);
-  }
-
-  &.invert-before {
-    @include background-color(6);
-  }
 
   &[data-grid-element-status="2"] {
     @include background-color(2, $status-palette, $background-color-alpha-focused);

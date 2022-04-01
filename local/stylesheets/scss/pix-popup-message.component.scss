@@ -18,7 +18,6 @@ div.component-pix-popup-message {
 
   div.popup-wrapper {
     padding: 35px;
-    @include background-color(4);
 
     p {
       margin: 0;
@@ -27,7 +26,6 @@ div.component-pix-popup-message {
 
     button {
       border: none;
-      @include background-color(3);
     }
   }
 

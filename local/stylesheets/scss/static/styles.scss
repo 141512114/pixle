@@ -1,16 +1,10 @@
 // Import default "libraries"
-@import '../mixins/bottleneck';
+@import '../../mixins/bottleneck';
 
 // Default settings
 * {
   margin: 0;
   padding: 0;
-}
-
-html,
-body {
-  width: 100%;
-  @include background-color(1);
 }
 
 section {

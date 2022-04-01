@@ -1,21 +1,13 @@
-@import '../mixins/variables';
-@import '../mixins/mixins';
-
 // pix-grid component stylesheet
 div.component-pix-grid {
   div.playground-wrapper {
     flex-direction: row;
-    @include background-color(2);
     overflow: hidden;
 
     div.pix-grid-wrapper,
     div.playground-ui-wrapper {
       padding: 12px;
       user-select: none;
-    }
-
-    div.pix-grid-wrapper {
-      @include background-color(4);
     }
   }
 

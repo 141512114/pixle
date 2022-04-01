@@ -1,0 +1,95 @@
+@use "sass:map";
+
+@import '../../mixins/themes';
+@import '../../mixins/mixins';
+
+@mixin theme_setup($theme: $default-color-palette) {
+  $default-text-color-unfocused: map.get($theme, 2);
+  @include background-color(1, $theme);
+
+  .ui {
+    input {
+      border: 4px solid map.get($theme, 4);
+      @include background-color(4, $theme);
+    }
+
+    button {
+      color: $default-text-color-unfocused;
+      @include background-color(4, $theme);
+    }
+
+    input:hover,
+    input:focus {
+      border-color: map.get($theme, 3);
+    }
+
+    button:hover {
+      color: map.get($theme, 5);
+      @include background-color(6, $theme);
+    }
+  }
+
+  .selected {
+    @include background-color(6, $theme);
+  }
+
+  header.navbar {
+    @include background-color(2, $theme);
+  }
+
+  div.component-pix-grid div.playground-wrapper {
+    @include background-color(2, $theme);
+
+    div.pix-grid-wrapper {
+      @include background-color(4, $theme);
+    }
+  }
+
+  div.component-pix-grid-element div.icon-wrapper {
+    @include background-color(3, $theme);
+
+    &.invert-before {
+      @include background-color(4, $theme);
+    }
+
+    &:not(.locked):hover {
+      cursor: pointer;
+
+      &:not(.selected) {
+        @include background-color(2, $theme);
+      }
+
+      &.invert-before {
+        @include background-color(6, $theme);
+      }
+    }
+  }
+
+  div.component-pix-popup-message div.popup-wrapper {
+    @include background-color(4, $theme);
+
+    button {
+      @include background-color(3, $theme);
+    }
+  }
+}
+
+main.component-app {
+  @include theme_setup();
+
+  &[data-theme="neo"] {
+    @include theme_setup($neo-palette);
+  }
+
+  &[data-theme="vibe"] {
+    @include theme_setup($vibe-palette);
+  }
+
+  &[data-theme="pop"] {
+    @include theme_setup($pop-palette);
+  }
+
+  &[data-theme="volcano"] {
+    @include theme_setup($volcano-palette);
+  }
+}

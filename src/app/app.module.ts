@@ -6,7 +6,8 @@ import {PixGridComponent} from './pix-grid/pix-grid.component';
 import {PixGameComponent} from './pix-game/pix-game.component';
 import {PixGridElementComponent} from './pix-grid-element/pix-grid-element.component';
 import {PixPopupMessageComponent} from './pix-popup-message/pix-popup-message.component';
-import { AppRoutingModule } from './app-routing.module';
+import {AppRoutingModule} from './app-routing.module';
+import {ThemeSwitcherComponent} from './theme-switcher/theme-switcher.component';
 
 @NgModule({
   declarations: [
@@ -14,7 +15,8 @@ import { AppRoutingModule } from './app-routing.module';
     PixGridComponent,
     PixGameComponent,
     PixGridElementComponent,
-    PixPopupMessageComponent
+    PixPopupMessageComponent,
+    ThemeSwitcherComponent
   ],
   imports: [
     BrowserModule,

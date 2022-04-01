@@ -121,7 +121,6 @@ export class PixGameComponent implements OnInit, AfterViewInit {
   private searchRandomPixleArt(): boolean {
     if (this.pixle_arts.length <= 0) return false;
     let rand: number = HelperFunctionsService.generateRandomInteger(this.pixle_arts.length - 1);
-
     let selected_pixle_art: IPixle = this.pixle_arts[rand];
     if (selected_pixle_art == undefined || null) return false;
     let pixle_art_tiles: number[][] = selected_pixle_art.tiles;

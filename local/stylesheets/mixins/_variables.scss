@@ -1,50 +1,6 @@
 @use "sass:map";
 
-// Default color maps
-$neo-palette: (
-  1: #0F1020,
-  2: #2F195F,
-  3: #51368D,
-  4: #7353BA,
-  5: #EFC3F5,
-  6: #FAA6FF
-);
-
-$vibe-palette: (
-  1: #22162B,
-  2: #451F55,
-  3: #5C3773,
-  4: #724E91,
-  5: #E54F6D,
-  6: #F8C630
-);
-
-$pop-palette: (
-  1: #0056F5,
-  2: #5C95FF,
-  3: #85BAFF,
-  4: #ADE2FF,
-  5: #EEAABF,
-  6: #D94574
-);
-
-$volcano-palette: (
-  1: #EA591F,
-  2: #151513,
-  3: #2B2927,
-  4: #403D39,
-  5: #FFFAEB,
-  6: #BAB1A0
-);
-
-$cold-palette: (
-  1: #08090D,
-  2: #131B2A,
-  3: #1E2E48,
-  4: #284067,
-  5: #E4EBF1,
-  6: #2BDEB4
-);
+@import 'themes';
 
 $status-palette: (
   1: #23ce6b,
@@ -52,8 +8,6 @@ $status-palette: (
   3: #f39237,
   4: #e71d36
 );
-
-$default-color-palette: $cold-palette !default;
 
 // Default colors
 $default-text-color: white !default;
@@ -65,19 +19,3 @@ $tile-size: 90px !default;
 
 $background-color-alpha-focused: .8 !default;
 $background-color-alpha-unfocused: .65 !default;
-
-// Grid system
-$col-offset: 7px !default;
-$row-offset: $col-offset !default;
-
-// Default margin values
-$margin-5: 32px !default;
-$margin-4: 27px !default;
-$margin-3: 22px !default;
-$margin-2: 17px !default;
-$margin-1: 12px !default;
-
-// Default border radius values
-$rounded-5: 32px !default;
-$rounded-4: 22px !default;
-$rounded-3: 17px !default;
