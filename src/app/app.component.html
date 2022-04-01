@@ -1,4 +1,7 @@
 <main #app_root class="component-app position-relative" data-theme="default">
+  <header class="navbar">
+    <h2 class="game-title">Pixle!</h2>
+  </header>
   <router-outlet></router-outlet>
   <app-theme-switcher (sendThemeData)="receiveThemeData($event)"></app-theme-switcher>
 </main>

@@ -1,4 +1,27 @@
+@import '../mixins/mixins';
+
 // app-component stylesheet
+header.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
+  height: auto;
+  padding: 7px 0;
+  user-select: none;
+  @include flexbox();
+  z-index: 999;
+
+  .game-title {
+    margin: 0;
+    padding: 4px 0;
+    text-transform: uppercase;
+    text-align: center;
+    letter-spacing: 2px;
+  }
+}
+
 main {
   width: 100%;
   min-height: 100vh;
