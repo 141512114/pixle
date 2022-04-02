@@ -36,6 +36,12 @@ div.component-pix-grid {
   }
 
   // Responsive design
+  @media only screen and (max-width: $breakpoint_lg) {
+    div.playground-ui-wrapper div.pix-control-wrapper {
+      padding: 4px;
+    }
+  }
+
   @media only screen and (max-width: $breakpoint_md) {
     div.playground-wrapper {
       flex-direction: column;
