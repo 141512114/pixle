@@ -10,7 +10,7 @@ import {HelperFunctionsService} from '../services/helper-functions.service';
 export class PixGridElementComponent implements OnInit, AfterViewInit {
   @ViewChild('component_grid_element') private component_grid_element!: ElementRef;
   @ViewChild('user_interactive') private user_interactive!: ElementRef;
-  @ViewChild('correct_answer') private correct_answer!: ElementRef;
+  @ViewChild('correct_answer') private correct_answer?: ElementRef;
 
   @Input() pixle_emoji: number = -1; // <-- stores the correct answer
   @Input() receive_chosen_emoji: number = -1;
@@ -157,7 +157,7 @@ export class PixGridElementComponent implements OnInit, AfterViewInit {
    * @private
    */
   private showCorrectAnswer(): void {
-    if (this.grid_element_type !== 0) return;
+    if (this.grid_element_type !== 0 || this.correct_answer == undefined) return;
     let icon_element = this.correct_answer.nativeElement.querySelector('p.icon-inner');
     icon_element.textContent = String.fromCodePoint(this.pixle_emoji);
   }
@@ -168,7 +168,7 @@ export class PixGridElementComponent implements OnInit, AfterViewInit {
    * @private
    */
   private hideCorrectAnswer(): void {
-    if (this.grid_element_type !== 0) return;
+    if (this.grid_element_type !== 0 || this.correct_answer == undefined) return;
     let icon_element = this.correct_answer.nativeElement.querySelector('p.icon-inner');
     icon_element.textContent = String.fromCodePoint(this.pixle_emoji_default);
   }

@@ -1,7 +1,10 @@
-// pix-popup-message component stylesheet
+@use "sass:map";
+
 @import '../mixins/variables';
 @import '../mixins/mixins';
+@import '../mixins/themes';
 
+// pix-popup-message component stylesheet
 div.component-pix-popup-message {
   @include alignment_old();
   width: $default-popup-size;
@@ -18,7 +21,7 @@ div.component-pix-popup-message {
 
   div.popup-wrapper {
     padding: 35px;
-    background-color: var(--default-theme-four);
+    background-color: var(--default-theme-four, map.get($default-color-palette, 4));
 
     p {
       margin: 0;
@@ -27,7 +30,7 @@ div.component-pix-popup-message {
 
     button {
       border: none;
-      background-color: var(--default-theme-three);
+      background-color: var(--default-theme-three, map.get($default-color-palette, 3));
     }
   }
 

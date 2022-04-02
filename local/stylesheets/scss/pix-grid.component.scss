@@ -1,10 +1,13 @@
+@use "sass:map";
+
 @import '../mixins/mixins';
+@import '../mixins/themes';
 
 // pix-grid component stylesheet
 div.component-pix-grid {
   div.playground-wrapper {
     flex-direction: row;
-    background-color: var(--default-theme-two);
+    background-color: var(--default-theme-two, map.get($default-color-palette, 2));
     overflow: hidden;
 
     div.pix-grid-wrapper,
@@ -14,7 +17,7 @@ div.component-pix-grid {
     }
 
     div.pix-grid-wrapper {
-      background-color: var(--default-theme-four);
+      background-color: var(--default-theme-four, map.get($default-color-palette, 4));
     }
   }
 
@@ -44,6 +47,7 @@ div.component-pix-grid {
       right: 0;
       margin: 0;
       padding: 0;
+      box-shadow: 0 0 15px 3px var(--default-theme-one, map.get($default-color-palette, 1));
 
       div.validate-button-wrapper,
       div.reload-pix-button-wrapper {
@@ -58,11 +62,11 @@ div.component-pix-grid {
 
       div.reload-pix-button-wrapper button {
         color: var(--default-theme-four);
-        background-color: var(--default-theme-two);
+        background-color: var(--default-theme-two, map.get($default-color-palette, 2));
 
         &:hover {
           color: var(--default-theme-five);
-          background-color: var(--default-theme-six);
+          background-color: var(--default-theme-six, map.get($default-color-palette, 6));
         }
       }
     }
@@ -73,13 +77,6 @@ div.component-pix-grid {
       div.pix-grid-wrapper,
       div.playground-ui-wrapper {
         padding: 10px;
-      }
-    }
-
-    div.playground-ui-wrapper div.pix-control-wrapper {
-      div.validate-button-wrapper,
-      div.reload-pix-button-wrapper {
-        border-right: 2px solid var(--default-theme-two);
       }
     }
   }

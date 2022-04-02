@@ -46,10 +46,16 @@ div.component-theme-switcher {
       visibility: visible;
     }
 
-    ul li.hide-theme {
-      pointer-events: none;
-      opacity: 0;
-      visibility: hidden;
+    ul li {
+      button {
+        box-shadow: 0 0 12px 0 var(--default-theme-one);
+      }
+
+      &.hide-theme {
+        pointer-events: none;
+        opacity: 0;
+        visibility: hidden;
+      }
     }
   }
 

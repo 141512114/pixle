@@ -1,4 +1,7 @@
+@use "sass:map";
+
 @import '../mixins/mixins';
+@import '../mixins/themes';
 
 // app-component stylesheet
 header.navbar {
@@ -26,5 +29,5 @@ main {
   width: 100%;
   min-height: 100vh;
   height: auto;
-  background-color: var(--default-theme-one);
+  background-color: var(--default-theme-one, map.get($default-color-palette, 1));
 }

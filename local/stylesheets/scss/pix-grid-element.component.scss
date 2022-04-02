@@ -1,5 +1,8 @@
+@use "sass:map";
+
 @import '../mixins/variables';
 @import '../mixins/mixins';
+@import '../mixins/themes';
 
 @mixin grid_element_styling($size: $tile-size, $padding: 7px, $font-size: 39px) {
   div.component-pix-grid-element {
@@ -36,10 +39,10 @@ div.icon-wrapper {
   height: 100%;
   transition: transform 550ms, background-color 150ms;
 
-  background-color: var(--default-theme-three);
+  background-color: var(--default-theme-three, map.get($default-color-palette, 3));
 
   &.invert-before {
-    background-color: var(--default-theme-four);
+    background-color: var(--default-theme-four, map.get($default-color-palette, 4));
   }
 
   &[data-grid-element-status="solved"] {
@@ -63,11 +66,11 @@ div.icon-wrapper:not(.locked):hover {
   cursor: pointer;
 
   &:not(.selected) {
-    background-color: var(--default-theme-two);
+    background-color: var(--default-theme-two, map.get($default-color-palette, 2));
   }
 
   &.invert-before {
-    background-color: var(--default-theme-six);
+    background-color: var(--default-theme-six, map.get($default-color-palette, 6));
   }
 
   &[data-grid-element-status="2"] {
