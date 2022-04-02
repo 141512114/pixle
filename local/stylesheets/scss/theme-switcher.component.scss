@@ -1,10 +1,17 @@
 // theme-switcher component stylesheet
 div.component-theme-switcher {
+  $comp_offset: 18px;
+
   position: fixed;
-  bottom: 18px;
-  left: 18px;
+  bottom: $comp_offset;
+  left: $comp_offset;
 
   $list-item-offset: 10px;
+
+  div.open-theme-sidebar {
+    display: none;
+    visibility: hidden;
+  }
 
   ul {
     margin: 0;
@@ -14,6 +21,7 @@ div.component-theme-switcher {
       display: block;
       margin-bottom: $list-item-offset;
       list-style: none;
+      transition: opacity 250ms, visibility 250ms;
 
       button {
         width: auto;
@@ -26,15 +34,29 @@ div.component-theme-switcher {
     }
   }
 
-  @media only screen and (max-width: 1100px) {
-    ul li {
-      display: inline-block;
-      margin-bottom: 0;
-      margin-right: $list-item-offset;
+  @media only screen and (max-width: 1350px) {
+    $comp_offset: 15px;
 
-      &:last-child {
-        margin-right: 0;
-      }
+    top: $comp_offset;
+    bottom: unset;
+    left: $comp_offset;
+
+    div.open-theme-sidebar {
+      display: block;
+      visibility: visible;
     }
+
+    ul li.hide-theme {
+      pointer-events: none;
+      opacity: 0;
+      visibility: hidden;
+    }
+  }
+
+  @media only screen and (max-width: 550px) {
+    $comp_offset: 12px;
+
+    top: $comp_offset;
+    left: $comp_offset;
   }
 }

@@ -9,7 +9,7 @@
       </div>
     </div>
     <div class="col d-inline-flex flex-column playground-ui-wrapper">
-      <div class="mb-2 mb-lg-0 pix-emoji-list-wrapper">
+      <div class="pix-emoji-list-wrapper">
         <div class="row g-0 pix-grid-row"
              *ngFor="let i of counter(emoji_list.length / grid_image_width)">
           <div class="col pix-grid-col" *ngFor="let j of counter(grid_image_width)">
@@ -20,12 +20,12 @@
         </div>
       </div>
       <div class="mt-auto pix-control-wrapper">
-        <div class="playground-ui-inner">
-          <div class="p-0 mb-2 mb-lg-3 validate-button-wrapper ui">
+        <div class="playground-ui-inner ui">
+          <div class="p-0 validate-button-wrapper">
             <button class="rounded-3 pix-validate-button" (click)="validatePixleOnClick()" type="button">Flip!
             </button>
           </div>
-          <div class="p-0 reload-pix-button-wrapper ui">
+          <div class="p-0 reload-pix-button-wrapper">
             <button class="rounded-3 pix-reload-button" (click)="reloadGameComponent()" type="button">Reload
             </button>
           </div>

@@ -2,7 +2,7 @@
 
 // app-component stylesheet
 header.navbar {
-  position: fixed;
+  position: absolute;
   top: 0;
   left: 0;
   right: 0;
@@ -11,12 +11,12 @@ header.navbar {
   padding: 7px 0;
   user-select: none;
   @include flexbox();
+  pointer-events: none;
   z-index: 999;
 
   .game-title {
     margin: 0;
     padding: 4px 0;
-    text-transform: uppercase;
     text-align: center;
     letter-spacing: 2px;
   }
