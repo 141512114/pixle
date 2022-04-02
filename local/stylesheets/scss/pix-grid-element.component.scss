@@ -98,7 +98,7 @@ div.icon-wrapper:not(.locked):hover {
   @include grid_element_styling($tile-size, 5px, 33px);
 }
 
-@media only screen and (max-width: $breakpoint_sm) {
+@media only screen and (max-width: $breakpoint_xsm) {
   $tile-size: 65px;
   @include grid_element_styling($tile-size, 4px, 29px);
 }
