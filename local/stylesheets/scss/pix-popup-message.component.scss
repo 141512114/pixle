@@ -49,7 +49,7 @@ div.component-pix-popup-message {
     }
   }
 
-  @media only screen and (max-width: 400px) {
+  @media only screen and (max-width: $breakpoint_sm) {
     $default-popup-size: 85%;
     width: $default-popup-size;
   }

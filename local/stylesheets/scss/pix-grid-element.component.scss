@@ -4,7 +4,7 @@
 @import '../mixins/mixins';
 @import '../mixins/themes';
 
-@mixin grid_element_styling($size: $tile-size, $padding: 7px, $font-size: 39px) {
+@mixin grid_element_styling($size: $tile-size, $padding: 6px, $font-size: 37px) {
   div.component-pix-grid-element {
     width: $size;
     height: $size;
@@ -83,17 +83,22 @@ div.icon-wrapper:not(.locked):hover {
 }
 
 // Responsive design
-@media only screen and (max-width: 1100px) {
-  $tile-size: 85px;
-  @include grid_element_styling($tile-size, 5px, 37px);
+@media only screen and (max-width: $breakpoint_lg) {
+  $tile-size: 75px;
+  @include grid_element_styling($tile-size, 4px, 35px);
 }
 
-@media only screen and (max-width: 650px) {
+@media only screen and (max-width: 1100px) {
+  $tile-size: 70px;
+  @include grid_element_styling($tile-size, 4px, 33px);
+}
+
+@media only screen and (max-width: $breakpoint_md) {
   $tile-size: 75px;
   @include grid_element_styling($tile-size, 5px, 33px);
 }
 
-@media only screen and (max-width: 445px) {
+@media only screen and (max-width: $breakpoint_sm) {
   $tile-size: 65px;
   @include grid_element_styling($tile-size, 4px, 29px);
 }

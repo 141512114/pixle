@@ -1,5 +1,7 @@
 @use "sass:map";
 
+@import 'responsive';
+
 $status-palette: (
   1: #23ce6b,
   2: #f9e900,
@@ -12,7 +14,7 @@ $default-text-color: white !default;
 
 // Default variables
 $default-popup-size: 550px !default;
-$tile-size: 90px !default;
+$tile-size: 85px !default;
 
 $background-color-alpha-focused: .8 !default;
 $background-color-alpha-unfocused: .65 !default;

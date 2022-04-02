@@ -1,5 +1,7 @@
 import {Component, ElementRef, ViewChild} from '@angular/core';
 
+export const STYLESHEETS_PATH: string = '../../stylesheets/css/';
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',

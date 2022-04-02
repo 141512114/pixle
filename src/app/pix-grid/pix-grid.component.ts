@@ -2,6 +2,7 @@ import {AfterViewInit, Component, EventEmitter, Input, OnInit, Output, QueryList
 import {PixGridElementComponent} from '../pix-grid-element/pix-grid-element.component';
 import {HelperFunctionsService} from '../services/helper-functions.service';
 import {GameManager} from '../pix-game/game.manager';
+import {STYLESHEETS_PATH} from '../app.component';
 
 // Timer
 const UNDO_FLIP_TIME: number = 2000;
@@ -9,7 +10,7 @@ const UNDO_FLIP_TIME: number = 2000;
 @Component({
   selector: 'app-pix-grid',
   templateUrl: './pix-grid.component.html',
-  styleUrls: ['../../stylesheets/css/pix-grid.component.min.css']
+  styleUrls: [STYLESHEETS_PATH + 'pix-grid.component.min.css']
 })
 export class PixGridComponent implements OnInit, AfterViewInit {
   @ViewChildren('pixle_emoji_input') private pixle_emoji_input!: QueryList<PixGridElementComponent>;

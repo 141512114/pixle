@@ -2,6 +2,7 @@
 
 @import '../mixins/mixins';
 @import '../mixins/themes';
+@import '../mixins/responsive';
 
 // pix-grid component stylesheet
 div.component-pix-grid {
@@ -35,7 +36,7 @@ div.component-pix-grid {
   }
 
   // Responsive design
-  @media only screen and (max-width: 910px) {
+  @media only screen and (max-width: $breakpoint_md) {
     div.playground-wrapper {
       flex-direction: column;
     }
@@ -72,7 +73,7 @@ div.component-pix-grid {
     }
   }
 
-  @media only screen and (max-width: 410px) {
+  @media only screen and (max-width: $breakpoint_sm) {
     div.playground-wrapper {
       div.pix-grid-wrapper,
       div.playground-ui-wrapper {

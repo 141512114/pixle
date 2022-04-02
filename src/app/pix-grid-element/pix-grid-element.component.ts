@@ -1,11 +1,12 @@
 import {AfterViewInit, Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild} from '@angular/core';
 import {REDCROSS, WHITE_QUESTIONMARK} from '../database/emoji-database';
 import {HelperFunctionsService} from '../services/helper-functions.service';
+import {STYLESHEETS_PATH} from '../app.component';
 
 @Component({
   selector: 'app-pix-grid-element',
   templateUrl: './pix-grid-element.component.html',
-  styleUrls: ['../../stylesheets/css/pix-grid-element.component.min.css']
+  styleUrls: [STYLESHEETS_PATH + 'pix-grid-element.component.min.css']
 })
 export class PixGridElementComponent implements OnInit, AfterViewInit {
   @ViewChild('component_grid_element') private component_grid_element!: ElementRef;

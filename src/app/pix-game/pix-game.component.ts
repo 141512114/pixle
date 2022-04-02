@@ -10,6 +10,7 @@ import {IPixle} from '../interface/pixle.interface';
 import {PIXLEARTS} from '../database/pix-arts-database';
 import {PixGridComponent} from '../pix-grid/pix-grid.component';
 import {GameManager} from './game.manager';
+import {STYLESHEETS_PATH} from '../app.component';
 
 // Popup messages
 const MISSING_PIXLE_MSG: IPopUp = {
@@ -24,7 +25,7 @@ const UNDO_FLIP_TIME: number = 2000;
 @Component({
   selector: 'app-pix-game',
   templateUrl: './pix-game.component.html',
-  styleUrls: ['../../stylesheets/css/pix-game.component.min.css']
+  styleUrls: [STYLESHEETS_PATH + 'pix-game.component.min.css']
 })
 export class PixGameComponent implements OnInit, AfterViewInit {
   @ViewChild('match_status') private match_status_msg!: PixPopupMessageComponent;

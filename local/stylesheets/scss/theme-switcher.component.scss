@@ -1,3 +1,5 @@
+@import '../mixins/responsive';
+
 // theme-switcher component stylesheet
 div.component-theme-switcher {
   $comp_offset: 18px;
@@ -34,7 +36,7 @@ div.component-theme-switcher {
     }
   }
 
-  @media only screen and (max-width: 1350px) {
+  @media only screen and (max-width: $breakpoint_lg) {
     $comp_offset: 15px;
 
     top: $comp_offset;
@@ -59,7 +61,7 @@ div.component-theme-switcher {
     }
   }
 
-  @media only screen and (max-width: 550px) {
+  @media only screen and (max-width: $breakpoint_xsm) {
     $comp_offset: 12px;
 
     top: $comp_offset;

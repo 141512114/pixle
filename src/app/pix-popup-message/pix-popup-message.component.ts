@@ -1,5 +1,6 @@
 import {AfterViewInit, Component, ElementRef, EventEmitter, Output, ViewChild} from '@angular/core';
 import {IPopUp} from '../interface/popup-message.interface';
+import {STYLESHEETS_PATH} from '../app.component';
 
 const DEFAULT_MSG: IPopUp = {
   headline: 'Hmm..., this isn\'t supposed to be shown already...',
@@ -10,7 +11,7 @@ const DEFAULT_MSG: IPopUp = {
 @Component({
   selector: 'app-pix-popup-message',
   templateUrl: './pix-popup-message.component.html',
-  styleUrls: ['../../stylesheets/css/pix-popup-message.component.min.css']
+  styleUrls: [STYLESHEETS_PATH + 'pix-popup-message.component.min.css']
 })
 export class PixPopupMessageComponent implements AfterViewInit {
   @ViewChild('msg_container') msg_container!: ElementRef;
