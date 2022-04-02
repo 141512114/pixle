@@ -1,6 +1,6 @@
 @use "sass:map";
 
-@import '../../mixins/themes';
+@import 'themes';
 
 @mixin theme_setup($theme: $default-color-palette) {
   --default-theme-one: #{map.get($theme, 1)};

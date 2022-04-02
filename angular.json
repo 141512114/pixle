@@ -28,7 +28,6 @@
             ],
             "styles": [
               "src/stylesheets/bootstrap/bootstrap.min.css",
-              "src/stylesheets/css/static/themes.min.css",
               "src/stylesheets/css/static/styles.min.css"
             ],
             "scripts": []
@@ -109,7 +108,6 @@
             ],
             "styles": [
               "src/stylesheets/bootstrap/bootstrap.min.css",
-              "src/stylesheets/css/static/themes.min.css",
               "src/stylesheets/css/static/styles.min.css"
             ],
             "scripts": []
