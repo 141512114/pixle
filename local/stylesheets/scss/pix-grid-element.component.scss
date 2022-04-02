@@ -36,6 +36,12 @@ div.icon-wrapper {
   height: 100%;
   transition: transform 550ms, background-color 150ms;
 
+  background-color: var(--default-theme-three);
+
+  &.invert-before {
+    background-color: var(--default-theme-four);
+  }
+
   &[data-grid-element-status="solved"] {
     @include background-color(1, $status-palette, $background-color-alpha-focused);
   }
@@ -55,6 +61,14 @@ div.icon-wrapper {
 
 div.icon-wrapper:not(.locked):hover {
   cursor: pointer;
+
+  &:not(.selected) {
+    background-color: var(--default-theme-two);
+  }
+
+  &.invert-before {
+    background-color: var(--default-theme-six);
+  }
 
   &[data-grid-element-status="2"] {
     @include background-color(2, $status-palette, $background-color-alpha-focused);

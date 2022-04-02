@@ -13,6 +13,10 @@
   }
 }
 
+.selected {
+  background-color: var(--default-theme-six) !important;
+}
+
 // UI in general
 .ui {
   input,
@@ -25,6 +29,8 @@
     font-size: 21px;
     letter-spacing: 2px;
     color: white;
+    border: 4px solid var(--default-theme-four);
+    background-color: var(--default-theme-four);
     transition: background-color 300ms, border-color 300ms, color 300ms;
 
     &:last-child {
@@ -32,9 +38,20 @@
     }
   }
 
+  input:hover,
+  input:focus {
+    border-color: var(--default-theme-three);
+  }
+
   button {
+    color: var(--default-theme-two);
     border: none;
     transition: background-color 300ms, opacity 300ms, color 300ms;
+  }
+
+  button:hover {
+    color: var(--default-theme-five);
+    background-color: var(--default-theme-six);
   }
 
   button:active {

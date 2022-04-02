@@ -2,12 +2,17 @@
 div.component-pix-grid {
   div.playground-wrapper {
     flex-direction: row;
+    background-color: var(--default-theme-two);
     overflow: hidden;
 
     div.pix-grid-wrapper,
     div.playground-ui-wrapper {
       padding: 12px;
       user-select: none;
+    }
+
+    div.pix-grid-wrapper {
+      background-color: var(--default-theme-four);
     }
   }
 

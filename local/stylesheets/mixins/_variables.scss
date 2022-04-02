@@ -11,7 +11,6 @@ $status-palette: (
 
 // Default colors
 $default-text-color: white !default;
-$default-text-color-unfocused: map.get($default-color-palette, 2) !default;
 
 // Default variables
 $default-popup-size: 550px !default;
