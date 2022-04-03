@@ -34,5 +34,18 @@ header.navbar {
 
 main {
   @include flexbox();
+  padding: 205px 0;
   background-color: var(--default-theme-one, map.get($default-color-palette, 1));
+
+  @media only screen and (max-width: $breakpoint_md) {
+    padding: 125px 0;
+  }
+
+  @media only screen and (max-width: $breakpoint_xsm) {
+    padding: 105px 0;
+  }
+
+  @media only screen and (max-width: $breakpoint_sm) {
+    padding: 85px 0;
+  }
 }

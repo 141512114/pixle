@@ -7,14 +7,20 @@
   padding: 0;
 }
 
+html, body {
+  width: 100%;
+  height: auto;
+}
+
 main {
   width: 100%;
-  min-height: calc(var(--vh, 1vh) * 100);
   min-height: -webkit-fill-available;
+  min-height: calc(var(--vh, 1vh) * 100);
   height: auto;
 }
 
 main section {
+  display: block;
   width: 100%;
   height: auto;
 }

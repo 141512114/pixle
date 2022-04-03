@@ -1,20 +1,4 @@
-@import '../mixins/mixins';
-@import '../mixins/responsive';
-
 // pix-game component stylesheet
-section.component-pix-game {
-  @include flexbox();
-  padding: 85px 0;
-
-  @media only screen and (max-width: $breakpoint_md) {
-    padding: 65px 0;
-  }
-
-  @media only screen and (max-width: $breakpoint_xsm) {
-    padding: 60px 0;
-  }
-
-  @media only screen and (max-width: $breakpoint_sm) {
-    padding: 50px 0;
-  }
+section.component-pix-game div.pix-game-wrapper {
+  margin: 0 auto;
 }
