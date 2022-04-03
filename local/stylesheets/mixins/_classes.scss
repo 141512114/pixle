@@ -17,73 +17,6 @@
   background-color: var(--default-theme-six) !important;
 }
 
-// UI in general
-.ui {
-  input,
-  button {
-    display: block;
-    width: 100%;
-    margin-bottom: 12px;
-    padding: 13px 18px;
-    font-family: $main-ui;
-    font-size: 21px;
-    letter-spacing: 2px;
-    color: white;
-    border: 4px solid var(--default-theme-four);
-    background-color: var(--default-theme-four);
-    transition: background-color 300ms, border-color 300ms, color 300ms;
-
-    &:last-child {
-      margin-bottom: 0;
-    }
-  }
-
-  input:hover,
-  input:focus {
-    border-color: var(--default-theme-three);
-  }
-
-  button {
-    color: var(--default-theme-two);
-    border: none;
-    transition: background-color 300ms, opacity 300ms, color 300ms;
-  }
-
-  button:hover {
-    color: var(--default-theme-five);
-    background-color: var(--default-theme-six);
-  }
-
-  button:active {
-    opacity: .75;
-  }
-
-  @media only screen and (max-width: $breakpoint_lg) {
-    input,
-    button {
-      font-size: 18px;
-      letter-spacing: 1px;
-      padding: 12px;
-    }
-  }
-
-  @media only screen and (max-width: $breakpoint_xxsm) {
-    input,
-    button {
-      font-size: 16px;
-      letter-spacing: normal;
-      padding: 10px;
-    }
-  }
-
-  @media only screen and (max-width: $breakpoint_sm) {
-    input,
-    button {
-      font-size: 15px;
-    }
-  }
-}
-
 // Effects
 .flip-element {
   position: relative;
@@ -93,6 +26,10 @@
   .front-face,
   .back-face {
     position: relative;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
     backface-visibility: hidden;
     transform-style: preserve-3d;
     z-index: 20;
@@ -100,10 +37,6 @@
 
   .back-face {
     position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
     transform: rotateX(180deg);
     z-index: 30;
   }

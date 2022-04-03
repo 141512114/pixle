@@ -1,109 +1,36 @@
 @use "sass:map";
 
 @import '../mixins/themes';
-@import '../mixins/variables';
 @import '../mixins/mixins';
 
-@mixin grid_element_styling($size: $tile-size, $padding: 6px, $font-size: 37px) {
-  div.component-pix-grid-element {
-    width: $size;
-    height: $size;
-
-    div.grid-element-inner {
-      width: inherit;
-      height: inherit;
-      padding: $padding;
-    }
-
-    p.icon-inner {
-      position: relative;
-      width: 100%;
-      font-size: $font-size;
-      text-align: center;
-      line-height: $size - $padding * 2;
-    }
-  }
-}
-
 // pix-grid-element component stylesheet
-@include grid_element_styling();
-
-div.flip-element div.back-face {
-  user-select: none;
-  pointer-events: none;
-}
-
-div.icon-wrapper {
-  position: relative;
+div.component-pix-grid-element,
+svg.square-placeholder,
+div.grid-element-inner {
   width: 100%;
   height: 100%;
-  transition: transform 550ms, background-color 150ms;
-
-  background-color: var(--default-theme-three, map.get($default-color-palette, 3));
-
-  &.invert-before {
-    background-color: var(--default-theme-four, map.get($default-color-palette, 4));
-  }
-
-  &[data-grid-element-status="solved"] {
-    @include background-color(1, $status-palette, $background-color-alpha-focused);
-  }
-
-  &[data-grid-element-status="2"] {
-    @include background-color(2, $status-palette, $background-color-alpha-unfocused);
-  }
-
-  &[data-grid-element-status="1"] {
-    @include background-color(3, $status-palette, $background-color-alpha-unfocused);
-  }
-
-  &[data-grid-element-status="failed"] {
-    @include background-color(4, $status-palette, $background-color-alpha-focused);
-  }
 }
 
-div.icon-wrapper:not(.locked):hover {
-  cursor: pointer;
+div.grid-element-inner {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: var(--default-theme-four, map.get($default-color-palette, 4));
 
-  &:not(.selected) {
-    background-color: var(--default-theme-two, map.get($default-color-palette, 2));
+  div {
+    width: 100%;
+    height: 100%;
+    @include vertical-align(middle);
   }
 
-  &.invert-before {
-    background-color: var(--default-theme-six, map.get($default-color-palette, 6));
+  p.emoji {
+    display: inline-block;
+    width: 100%;
+    font-size: calc(1.25em + 4vw);
+    text-align: center;
+    user-select: none;
+    pointer-events: none;
   }
-
-  &[data-grid-element-status="2"] {
-    @include background-color(2, $status-palette, $background-color-alpha-focused);
-  }
-
-  &[data-grid-element-status="1"] {
-    @include background-color(3, $status-palette, $background-color-alpha-focused);
-  }
-}
-
-// Responsive design
-@media only screen and (max-width: $breakpoint_lg) {
-  $tile-size: 73px;
-  @include grid_element_styling($tile-size, 4px, 35px);
-}
-
-@media only screen and (max-width: $breakpoint_xmd) {
-  $tile-size: 70px;
-  @include grid_element_styling($tile-size, 4px, 33px);
-}
-
-@media only screen and (max-width: $breakpoint_md) {
-  $tile-size: 70px;
-  @include grid_element_styling($tile-size, 5px, 33px);
-}
-
-@media only screen and (max-width: $breakpoint_xsm) {
-  $tile-size: 62px;
-  @include grid_element_styling($tile-size, 4px, 30px);
-}
-
-@media only screen and (max-width: 375px) {
-  $tile-size: 56px;
-  @include grid_element_styling($tile-size, 3px, 27px);
 }

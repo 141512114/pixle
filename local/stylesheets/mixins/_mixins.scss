@@ -1,14 +1,6 @@
 @use "sass:map";
 
 // Default mixins
-@mixin clickable($bool: false) {
-  @if ($bool == true) {
-    pointer-events: all;
-  } @else {
-    pointer-events: none;
-  }
-}
-
 @mixin background-color($color_id, $palette: $default-color-palette, $alpha:1) {
   background-color: rgba(map.get($palette, $color_id), $alpha);
 }
@@ -27,11 +19,19 @@
   align-items: $valign;
 }
 
-@mixin grid($tmp_r:unset, $tmp_c:auto auto auto, $gap: 0) {
-  display: grid;
-  grid-template-rows: $tmp_r;
-  grid-template-columns: $tmp_c;
-  grid-gap: $gap;
+@mixin vertical-align($align: middle) {
+  &:before {
+    content: "";
+    display: inline-block;
+    height: 100%;
+    vertical-align: $align;
+    // you can add font-size 0 here and restore in the children to prevent
+    // the inline-block white-space to mess the width of your elements
+    font-size: 0;
+  }
+  & > * {
+    vertical-align: $align;
+  }
 }
 
 @mixin box-shadow($settings:0 7px 30px 0, $shadow_color:black, $alpha:.5) {

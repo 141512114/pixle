@@ -1,14 +1,15 @@
 <div class="component-pix-grid container w-auto position-relative">
   <div class="row p-0 g-0 rounded-3 playground-wrapper">
-    <div class="col rounded-3 pix-grid-wrapper">
+    <div class="col col-md-6 rounded-3 pix-grid-wrapper">
       <div class="row g-0 pix-grid-row" *ngFor="let row of grid_image">
-        <div class="col-{{12/grid_image_width}} p-0 pix-grid-col" *ngFor="let col of row">
+        <div class="col-{{12/grid_image_width}} pix-grid-col" *ngFor="let col of row">
           <app-pix-grid-element #pixle_emoji_input [pixle_emoji]="col"
                                 [receive_chosen_emoji]="chosen_emoji"></app-pix-grid-element>
         </div>
       </div>
     </div>
-    <div class="col d-inline-flex flex-column playground-ui-wrapper">
+    <div class="w-100 d-md-none"></div>
+    <div class="col col-md-6 flex-column playground-ui-wrapper">
       <div class="pix-emoji-list-wrapper">
         <div class="row g-0 pix-grid-row"
              *ngFor="let i of counter(emoji_list.length / grid_image_width)">
@@ -20,7 +21,7 @@
         </div>
       </div>
       <div class="mt-auto pix-control-wrapper">
-        <div class="playground-ui-inner ui">
+        <div class="playground-ui-inner d-flex flex-row flex-sm-column">
           <div class="p-0 validate-button-wrapper">
             <button class="rounded-3 pix-validate-button" (click)="validatePixleOnClick()" type="button">Flip!
             </button>

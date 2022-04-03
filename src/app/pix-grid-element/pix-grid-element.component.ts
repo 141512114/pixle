@@ -159,7 +159,7 @@ export class PixGridElementComponent implements OnInit, AfterViewInit {
    */
   private showCorrectAnswer(): void {
     if (this.grid_element_type !== 0 || this.correct_answer == undefined) return;
-    let icon_element = this.correct_answer.nativeElement.querySelector('p.icon-inner');
+    let icon_element = this.correct_answer.nativeElement.querySelector('p.emoji');
     icon_element.textContent = String.fromCodePoint(this.pixle_emoji);
   }
 
@@ -170,7 +170,7 @@ export class PixGridElementComponent implements OnInit, AfterViewInit {
    */
   private hideCorrectAnswer(): void {
     if (this.grid_element_type !== 0 || this.correct_answer == undefined) return;
-    let icon_element = this.correct_answer.nativeElement.querySelector('p.icon-inner');
+    let icon_element = this.correct_answer.nativeElement.querySelector('p.emoji');
     icon_element.textContent = String.fromCodePoint(this.pixle_emoji_default);
   }
 

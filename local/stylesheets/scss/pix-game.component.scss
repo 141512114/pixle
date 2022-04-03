@@ -1,4 +1,14 @@
+@import '../mixins/mixins';
+
 // pix-game component stylesheet
-section.component-pix-game div.pix-game-wrapper {
-  margin: 0 auto;
+div.component-pix-game,
+div.pix-game-wrapper {
+  @include flexbox();
+  min-height: 100vh;
+  min-height: -webkit-fill-available;
+  min-height: calc(var(--vh, 1vh) * 100);
+}
+
+div.pix-game-wrapper {
+  padding: 65px 0;
 }

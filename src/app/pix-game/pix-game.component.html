@@ -1,9 +1,9 @@
 <section class="component-pix-game container-fluid position-relative">
-  <div class="pix-game-wrapper container w-auto p-0">
+  <div class="pix-game-wrapper container w-auto px-0">
     <ng-container *ngIf="pixle_image.length > 0">
       <app-pix-grid (sendMatchStatus)="receiveMatchStatus($event)" (sendReloadRequest)="receiveReloadRequest()"
                     [grid_image]="pixle_image" [emoji_list]="pixle_emoji_list"></app-pix-grid>
     </ng-container>
-    <app-pix-popup-message #match_status (sendReloadRequest)="receiveReloadRequest()"></app-pix-popup-message>
+    <!-- <app-pix-popup-message #match_status (sendReloadRequest)="receiveReloadRequest()"></app-pix-popup-message> -->
   </div>
 </section>

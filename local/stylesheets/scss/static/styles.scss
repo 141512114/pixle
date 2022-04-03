@@ -1,4 +1,5 @@
-// Import default "libraries"
+@use "sass:map";
+
 @import '../../mixins/bottleneck';
 
 // Default settings
@@ -7,20 +8,18 @@
   padding: 0;
 }
 
-html, body {
+html,
+body {
   width: 100%;
   height: auto;
+  background-color: var(--default-theme-one, map.get($default-color-palette, 1));
 }
 
-main {
-  width: 100%;
-  min-height: -webkit-fill-available;
-  min-height: calc(var(--vh, 1vh) * 100);
-  height: auto;
-}
-
-main section {
-  display: block;
+header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
   width: 100%;
   height: auto;
 }
@@ -33,7 +32,6 @@ h5,
 p,
 a {
   font-weight: 400;
-  color: $default-text-color;
 }
 
 h1,

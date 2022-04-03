@@ -11,7 +11,8 @@
   --default-theme-six: #{map.get($theme, 6)};
 }
 
-main.component-app {
+html,
+body {
   @include theme_setup();
 
   &[data-theme="neo"] {

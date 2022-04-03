@@ -1,16 +1,15 @@
 <div #component_grid_element class="component-pix-grid-element position-relative">
-  <div class="grid-element-inner">
-    <div #user_interactive
-         [ngClass]="{'flip-element': grid_element_type===0, 'invert-before': grid_element_type===1}"
-         class="rounded-3 icon-wrapper" data-grid-element-status="3">
-      <div class="front-face">
-        <p class="icon-inner">
-          {{pixle_emoji_text}}
-        </p>
-      </div>
-      <div #correct_answer *ngIf="grid_element_type===0" class="back-face">
-        <p class="icon-inner"></p>
-      </div>
+  <svg class="square-placeholder" viewBox="0 0 1 1"></svg>
+  <div #user_interactive
+       [ngClass]="{'flip-element': grid_element_type===0, 'invert-before': grid_element_type===1}"
+       class="rounded-3 grid-element-inner emoji-wrapper" data-grid-element-status="3">
+    <div class="front-face">
+      <p class="p-0 m-0 emoji">
+        {{pixle_emoji_text}}
+      </p>
+    </div>
+    <div #correct_answer *ngIf="grid_element_type===0" class="back-face">
+      <p class="p-0 m-0 emoji"></p>
     </div>
   </div>
 </div>
