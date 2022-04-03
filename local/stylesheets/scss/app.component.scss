@@ -33,8 +33,6 @@ header.navbar {
 }
 
 main {
-  width: 100%;
-  min-height: 100vh;
-  height: auto;
+  @include flexbox();
   background-color: var(--default-theme-one, map.get($default-color-palette, 1));
 }

@@ -7,11 +7,15 @@
   padding: 0;
 }
 
-section {
+main {
   width: 100%;
-  min-height: 100vh;
   min-height: calc(var(--vh, 1vh) * 100);
   min-height: -webkit-fill-available;
+  height: auto;
+}
+
+main section {
+  width: 100%;
   height: auto;
 }
 
