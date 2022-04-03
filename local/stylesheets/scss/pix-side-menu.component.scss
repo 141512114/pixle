@@ -28,6 +28,7 @@ div.component-pix-side-menu {
   right: 0;
   width: 100%;
   height: 100vh;
+  padding: 65px 0;
   background-color: var(--default-theme-two, map.get($default-color-palette, 2));
   transition: top 250ms, visibility 250ms, opacity 250ms;
   z-index: 99;
@@ -41,5 +42,28 @@ div.component-pix-side-menu {
 
   div.close-side-menu-wrapper {
     position: absolute;
+  }
+
+  div.publisher-info div.info-image img.logo {
+    width: 250px;
+    height: auto;
+    transform: rotate(-45deg);
+    user-select: none;
+
+    @media only screen and (max-width: $breakpoint_lg) {
+      width: 225px;
+    }
+
+    @media only screen and (max-width: $breakpoint_xmd) {
+      width: 155px;
+    }
+
+    @media only screen and (max-width: $breakpoint_md) {
+      width: 135px;
+    }
+
+    @media only screen and (max-width: 325px) {
+      width: 100%;
+    }
   }
 }
