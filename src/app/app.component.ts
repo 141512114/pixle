@@ -1,4 +1,4 @@
-import {Component, ElementRef, ViewChild} from '@angular/core';
+import {AfterViewInit, Component, ElementRef, ViewChild} from '@angular/core';
 
 export const STYLESHEETS_PATH: string = '../../stylesheets/css/';
 
@@ -7,8 +7,17 @@ export const STYLESHEETS_PATH: string = '../../stylesheets/css/';
   templateUrl: './app.component.html',
   styleUrls: ['../stylesheets/css/app.component.min.css']
 })
-export class AppComponent {
+export class AppComponent implements AfterViewInit{
   @ViewChild('app_root') private app_root!: ElementRef;
+
+  ngAfterViewInit() {
+    let vh = window.innerHeight * 0.01;
+    this.app_root.nativeElement.style.setProperty('--vh', `${vh}px`);
+    window.addEventListener('resize', () => {
+      let vh = window.innerHeight * 0.01;
+      this.app_root.nativeElement.style.setProperty('--vh', `${vh}px`);
+    });
+  }
 
   /**
    * Receive and set the theme

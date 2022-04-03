@@ -79,11 +79,11 @@ div.component-pix-grid {
     }
   }
 
-  @media only screen and (max-width: $breakpoint_sm) {
+  @media only screen and (max-width: $breakpoint_xsm) {
     div.playground-wrapper {
       div.pix-grid-wrapper,
       div.playground-ui-wrapper {
-        padding: 7px;
+        padding: 5px;
       }
     }
   }
