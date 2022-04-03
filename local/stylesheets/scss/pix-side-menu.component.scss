@@ -23,17 +23,17 @@ div.close-side-menu-wrapper {
 
 div.component-pix-side-menu {
   @include flexbox();
+  top: 0;
   left: 0;
   right: 0;
-  bottom: 0;
   width: 100%;
   height: 100vh;
   background-color: var(--default-theme-two, map.get($default-color-palette, 2));
-  transition: bottom 250ms, visibility 250ms, opacity 250ms;
+  transition: top 250ms, visibility 250ms, opacity 250ms;
   z-index: 99;
 
   &.close {
-    bottom: -80px;
+    top: 80px;
     pointer-events: none;
     visibility: hidden;
     opacity: 0;

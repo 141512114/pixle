@@ -3,7 +3,7 @@
     <button #toggle_themes class="rounded-3" (click)="toggleThemesSidebar()" type="button">Themes</button>
   </div>
   <ul class="theme-switcher-wrapper">
-    <ng-container *ngFor="let theme of ['Neo', 'Vibe', 'Pop', 'Volcano', 'Default']">
+    <ng-container *ngFor="let theme of ['Neo', 'Vibe', 'Pop', 'Volcano', 'Cold']">
       <li #theme_item class="theme-list-item hide-theme">
         <button class="rounded-3" (click)="changeTheme(theme.toLowerCase())" type="button">{{theme}}</button>
       </li>
