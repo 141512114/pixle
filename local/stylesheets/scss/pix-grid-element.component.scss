@@ -84,7 +84,7 @@ div.icon-wrapper:not(.locked):hover {
 
 // Responsive design
 @media only screen and (max-width: $breakpoint_lg) {
-  $tile-size: 75px;
+  $tile-size: 73px;
   @include grid_element_styling($tile-size, 4px, 35px);
 }
 
@@ -94,16 +94,16 @@ div.icon-wrapper:not(.locked):hover {
 }
 
 @media only screen and (max-width: $breakpoint_md) {
-  $tile-size: 75px;
+  $tile-size: 70px;
   @include grid_element_styling($tile-size, 5px, 33px);
 }
 
 @media only screen and (max-width: $breakpoint_xsm) {
-  $tile-size: 65px;
-  @include grid_element_styling($tile-size, 4px, 29px);
+  $tile-size: 62px;
+  @include grid_element_styling($tile-size, 4px, 30px);
 }
 
 @media only screen and (max-width: 375px) {
-  $tile-size: 60px;
-  @include grid_element_styling($tile-size, 3px, 28px);
+  $tile-size: 56px;
+  @include grid_element_styling($tile-size, 3px, 27px);
 }
