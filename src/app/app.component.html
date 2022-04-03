@@ -3,6 +3,5 @@
 </header>
 <main #app_root class="component-app position-relative" data-theme="default" role="main">
   <router-outlet></router-outlet>
-  <app-theme-switcher (sendThemeData)="receiveThemeData($event)"></app-theme-switcher>
-  <app-pix-side-menu></app-pix-side-menu>
+  <app-pix-side-menu (sendThemeData)="receiveThemeData($event)"></app-pix-side-menu>
 </main>

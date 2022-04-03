@@ -2,11 +2,6 @@
 
 // theme-switcher component stylesheet
 div.component-theme-switcher {
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  padding: 18px;
-
   $list-item-offset: 10px;
 
   div.open-theme-sidebar {
@@ -33,33 +28,5 @@ div.component-theme-switcher {
         margin-bottom: 0;
       }
     }
-  }
-
-  @media only screen and (max-width: $breakpoint_lg) {
-    top: 0;
-    bottom: unset;
-    left: 0;
-    padding: 15px;
-
-    div.open-theme-sidebar {
-      display: block;
-      visibility: visible;
-    }
-
-    ul li {
-      button {
-        box-shadow: 0 0 12px 0 var(--default-theme-one);
-      }
-
-      &.hide-theme {
-        pointer-events: none;
-        opacity: 0;
-        visibility: hidden;
-      }
-    }
-  }
-
-  @media only screen and (max-width: $breakpoint_xsm) {
-    padding: 12px;
   }
 }

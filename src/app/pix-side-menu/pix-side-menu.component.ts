@@ -1,4 +1,4 @@
-import {Component, ElementRef, ViewChild} from '@angular/core';
+import {Component, ElementRef, EventEmitter, Output, ViewChild} from '@angular/core';
 import {STYLESHEETS_PATH} from '../app.component';
 
 @Component({
@@ -8,6 +8,16 @@ import {STYLESHEETS_PATH} from '../app.component';
 })
 export class PixSideMenuComponent {
   @ViewChild('side_menu') private side_menu!: ElementRef;
+  @Output() public sendThemeData: EventEmitter<string> = new EventEmitter<string>();
+
+  /**
+   * Receive and set the theme
+   *
+   * @param theme_name
+   */
+  public receiveThemeData(theme_name: string): void {
+    this.sendThemeData.emit(theme_name);
+  }
 
   /**
    * Open the side menu
