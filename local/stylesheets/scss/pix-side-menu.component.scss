@@ -1,0 +1,45 @@
+@use "sass:map";
+
+@import '../mixins/themes';
+@import '../mixins/mixins';
+@import '../mixins/responsive';
+
+// pix-side-menu component stylesheet
+div.open-side-menu-wrapper,
+div.close-side-menu-wrapper {
+  position: fixed;
+  top: 0;
+  right: 0;
+  padding: 18px;
+
+  @media only screen and (max-width: $breakpoint_lg) {
+    padding: 15px;
+  }
+
+  @media only screen and (max-width: $breakpoint_xsm) {
+    padding: 12px;
+  }
+}
+
+div.component-pix-side-menu {
+  @include flexbox();
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 100%;
+  height: 100vh;
+  background-color: var(--default-theme-two, map.get($default-color-palette, 2));
+  transition: bottom 250ms, visibility 250ms, opacity 250ms;
+  z-index: 99;
+
+  &.close {
+    bottom: -80px;
+    pointer-events: none;
+    visibility: hidden;
+    opacity: 0;
+  }
+
+  div.close-side-menu-wrapper {
+    position: absolute;
+  }
+}

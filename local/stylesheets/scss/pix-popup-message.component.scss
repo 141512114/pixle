@@ -1,8 +1,8 @@
 @use "sass:map";
 
+@import '../mixins/themes';
 @import '../mixins/variables';
 @import '../mixins/mixins';
-@import '../mixins/themes';
 
 // pix-popup-message component stylesheet
 div.component-pix-popup-message {

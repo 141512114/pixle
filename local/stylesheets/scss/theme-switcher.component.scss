@@ -2,11 +2,10 @@
 
 // theme-switcher component stylesheet
 div.component-theme-switcher {
-  $comp_offset: 18px;
-
   position: fixed;
-  bottom: $comp_offset;
-  left: $comp_offset;
+  bottom: 0;
+  left: 0;
+  padding: 18px;
 
   $list-item-offset: 10px;
 
@@ -37,11 +36,10 @@ div.component-theme-switcher {
   }
 
   @media only screen and (max-width: $breakpoint_lg) {
-    $comp_offset: 15px;
-
-    top: $comp_offset;
+    top: 0;
     bottom: unset;
-    left: $comp_offset;
+    left: 0;
+    padding: 15px;
 
     div.open-theme-sidebar {
       display: block;
@@ -62,9 +60,6 @@ div.component-theme-switcher {
   }
 
   @media only screen and (max-width: $breakpoint_xsm) {
-    $comp_offset: 12px;
-
-    top: $comp_offset;
-    left: $comp_offset;
+    padding: 12px;
   }
 }

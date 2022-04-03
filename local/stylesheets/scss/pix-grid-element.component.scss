@@ -1,8 +1,8 @@
 @use "sass:map";
 
+@import '../mixins/themes';
 @import '../mixins/variables';
 @import '../mixins/mixins';
-@import '../mixins/themes';
 
 @mixin grid_element_styling($size: $tile-size, $padding: 6px, $font-size: 37px) {
   div.component-pix-grid-element {

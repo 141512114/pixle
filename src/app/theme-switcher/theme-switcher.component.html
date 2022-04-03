@@ -1,22 +1,12 @@
 <div class="component-theme-switcher ui">
   <div class="open-theme-sidebar mb-3 mb-md-4">
-    <button #open_themes class="rounded-3" (click)="toggleThemesSidebar()" type="button">Themes</button>
+    <button #toggle_themes class="rounded-3" (click)="toggleThemesSidebar()" type="button">Themes</button>
   </div>
   <ul class="theme-switcher-wrapper">
-    <li #theme_item class="theme-list-item hide-theme">
-      <button class="rounded-3" (click)="changeTheme('neo')" type="button">Neo</button>
-    </li>
-    <li #theme_item class="theme-list-item hide-theme">
-      <button class="rounded-3" (click)="changeTheme('vibe')" type="button">Vibe</button>
-    </li>
-    <li #theme_item class="theme-list-item hide-theme">
-      <button class="rounded-3" (click)="changeTheme('pop')" type="button">Pop</button>
-    </li>
-    <li #theme_item class="theme-list-item hide-theme">
-      <button class="rounded-3" (click)="changeTheme('volcano')" type="button">Volcano</button>
-    </li>
-    <li #theme_item class="theme-list-item hide-theme">
-      <button class="rounded-3" (click)="changeTheme('default')" type="button">Cold</button>
-    </li>
+    <ng-container *ngFor="let theme of ['Neo', 'Vibe', 'Pop', 'Volcano', 'Default']">
+      <li #theme_item class="theme-list-item hide-theme">
+        <button class="rounded-3" (click)="changeTheme(theme.toLowerCase())" type="button">{{theme}}</button>
+      </li>
+    </ng-container>
   </ul>
 </div>

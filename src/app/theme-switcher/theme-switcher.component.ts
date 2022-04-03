@@ -6,7 +6,7 @@ import {Component, ElementRef, EventEmitter, Output, QueryList, ViewChild, ViewC
   styleUrls: ['../../stylesheets/css/theme-switcher.component.min.css']
 })
 export class ThemeSwitcherComponent {
-  @ViewChild('open_themes') private open_themes_button!: ElementRef;
+  @ViewChild('toggle_themes') private toggle_themes_button!: ElementRef;
   @ViewChildren('theme_item') private theme_items!: QueryList<ElementRef>;
   @Output() public sendThemeData: EventEmitter<string> = new EventEmitter<string>();
 
@@ -29,7 +29,7 @@ export class ThemeSwitcherComponent {
     this.show_themes = !this.show_themes;
 
     let select_class: string = 'selected';
-    let toggle_button: HTMLElement = this.open_themes_button.nativeElement;
+    let toggle_button: HTMLElement = this.toggle_themes_button.nativeElement;
     if (!this.show_themes) {
       if (toggle_button.classList.contains(select_class)) {
         toggle_button.classList.remove(select_class);

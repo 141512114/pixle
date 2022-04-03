@@ -1,0 +1,23 @@
+<div class="open-side-menu-wrapper ui">
+  <button class="rounded-3 open-side-menu" type="button" (click)="openSideMenu()">Open</button>
+</div>
+<div #side_menu class="component-pix-side-menu container-fluid position-fixed close">
+  <div class="close-side-menu-wrapper ui">
+    <button class="rounded-3 close-side-menu" type="button" (click)="closeSideMenu()">Close</button>
+  </div>
+  <div class="container">
+    <div class="row">
+      <div class="col col-sm-4">
+        <p>Nani logo and stuff</p>
+      </div>
+      <div class="w-100 d-sm-none"></div>
+      <div class="col col-sm-4">
+        <p>Settings</p>
+      </div>
+      <div class="w-100 d-sm-none"></div>
+      <div class="col col-sm-4">
+        <p>Important links</p>
+      </div>
+    </div>
+  </div>
+</div>
