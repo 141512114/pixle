@@ -13,14 +13,14 @@ export class AppComponent implements AfterViewInit {
 
   constructor(@Inject(DOCUMENT) private document: Document) {
     let vh = window.innerHeight * 0.01;
-    this.document.body.style.setProperty('--vh', `${vh}px`);
+    this.document.documentElement.style.setProperty('--vh', `${vh}px`);
   }
 
   ngAfterViewInit() {
     // Calculate viewport height --> alternative to css vh unit
     window.addEventListener('resize', () => {
       let vh = window.innerHeight * 0.01;
-      this.document.body.style.setProperty('--vh', `${vh}px`);
+      this.document.documentElement.style.setProperty('--vh', `${vh}px`);
     });
   }
 

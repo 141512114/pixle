@@ -1,7 +1,7 @@
 <div class="component-pix-grid container w-auto h-100 position-relative">
   <div class="row p-0 g-0 h-100 playground-wrapper">
     <div #grid_wrapper class="col col-md-6 pix-grid-wrapper">
-      <div class="pix-grid-inner">
+      <div #grid_inner class="pix-grid-inner">
         <div class="row g-0 pix-grid-row" *ngFor="let row of grid_image">
           <div class="col-{{12/grid_image_width}} pix-grid-col" *ngFor="let col of row">
             <app-pix-grid-element #pixle_emoji_input [pixle_emoji]="col"
