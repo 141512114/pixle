@@ -1,6 +1,6 @@
-<div class="component-pix-grid container w-auto position-relative">
-  <div class="row p-0 g-0 rounded-3 playground-wrapper">
-    <div class="col col-md-6 rounded-3 pix-grid-wrapper">
+<div class="component-pix-grid container w-auto h-100 position-relative">
+  <div class="row p-0 g-0 h-100 playground-wrapper">
+    <div #grid_wrapper class="col col-md-6 pix-grid-wrapper">
       <div class="row g-0 pix-grid-row" *ngFor="let row of grid_image">
         <div class="col-{{12/grid_image_width}} pix-grid-col" *ngFor="let col of row">
           <app-pix-grid-element #pixle_emoji_input [pixle_emoji]="col"
@@ -9,7 +9,7 @@
       </div>
     </div>
     <div class="w-100 d-md-none"></div>
-    <div class="col col-md-6 flex-column playground-ui-wrapper">
+    <div #ui_wrapper class="col col-md-6 mt-auto flex-column playground-ui-wrapper">
       <div class="pix-emoji-list-wrapper">
         <div class="row g-0 pix-grid-row"
              *ngFor="let i of counter(emoji_list.length / grid_image_width)">

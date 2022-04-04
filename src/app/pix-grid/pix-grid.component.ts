@@ -1,4 +1,14 @@
-import {AfterViewInit, Component, EventEmitter, Input, OnInit, Output, QueryList, ViewChildren} from '@angular/core';
+import {
+  AfterViewInit,
+  Component, ElementRef,
+  EventEmitter,
+  Input,
+  OnInit,
+  Output,
+  QueryList,
+  ViewChild,
+  ViewChildren
+} from '@angular/core';
 import {PixGridElementComponent} from '../pix-grid-element/pix-grid-element.component';
 import {HelperFunctionsService} from '../services/helper-functions.service';
 import {GameManager} from '../pix-game/game.manager';
@@ -13,6 +23,8 @@ const UNDO_FLIP_TIME: number = 2000;
   styleUrls: [STYLESHEETS_PATH + 'pix-grid.component.min.css']
 })
 export class PixGridComponent implements OnInit, AfterViewInit {
+  @ViewChild('grid_wrapper') private grid_wrapper!: ElementRef;
+  @ViewChild('ui_wrapper') private ui_wrapper!: ElementRef;
   @ViewChildren('pixle_emoji_input') private pixle_emoji_input!: QueryList<PixGridElementComponent>;
   @ViewChildren('pixle_emoji_output') private pixle_emoji_output!: QueryList<PixGridElementComponent>;
 
@@ -22,6 +34,7 @@ export class PixGridComponent implements OnInit, AfterViewInit {
   @Output() sendReloadRequest: EventEmitter<any> = new EventEmitter<any>();
 
   grid_image_width: number = 0;
+  grid_image_height: number = 0;
 
   chosen_emoji: number = -1;
   validating: boolean = false;
@@ -29,9 +42,14 @@ export class PixGridComponent implements OnInit, AfterViewInit {
   ngOnInit(): void {
     if (this.grid_image.length <= 0) return;
     this.grid_image_width = this.grid_image[0].length;
+    this.grid_image_height = this.grid_image.length;
   }
 
   ngAfterViewInit(): void {
+    this.scaleDownGridElements();
+    window.addEventListener('resize', () => {
+      this.scaleDownGridElements();
+    });
     this.setFlipStatus(false);
   }
 
@@ -90,6 +108,33 @@ export class PixGridComponent implements OnInit, AfterViewInit {
         temp_pix_grid_comps[i].reverseFlip();
       } else {
         temp_pix_grid_comps[i].initFlip();
+      }
+    }
+  }
+
+  /**
+   * Used inside an EventListener attached to the window
+   *
+   * @private
+   */
+  private scaleDownGridElements(): void {
+    let grid_wrapper_element: HTMLElement = this.grid_wrapper.nativeElement;
+    let ui_wrapper_element: HTMLElement = this.ui_wrapper.nativeElement;
+
+    let bottom_grid_wrapper: number = grid_wrapper_element.offsetTop + grid_wrapper_element.offsetHeight;
+    let dist: number = ui_wrapper_element.offsetTop - bottom_grid_wrapper;
+    console.log('Distance between Grid and UI: ' + dist);
+    if (dist <= 0) {
+      console.log('Hit!');
+      let relative_ui_wrapper_height_per: number = ui_wrapper_element.offsetHeight / window.innerHeight;
+      let relative_grid_wrapper_height: number = grid_wrapper_element.offsetHeight * (1 - relative_ui_wrapper_height_per);
+
+      let relative_grid_element_size: number = relative_grid_wrapper_height / this.grid_image_height;
+      let grid_element_list: PixGridElementComponent[] = this.pixle_emoji_input.toArray();
+      for (let i = 0; i < grid_element_list.length; i++) {
+        let grid_element_html: HTMLElement = grid_element_list[i].component_grid_element.nativeElement;
+        grid_element_html.style.width = relative_grid_element_size + 'px';
+        grid_element_html.style.height = relative_grid_element_size + 'px';
       }
     }
   }

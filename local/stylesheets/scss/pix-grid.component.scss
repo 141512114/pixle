@@ -1,4 +1,10 @@
+@import '../mixins/mixins';
+
 // pix-grid component stylesheet
 div.component-pix-grid div.pix-grid-col {
   padding: 5px;
+}
+
+div.pix-grid-wrapper {
+  @include flexbox();
 }

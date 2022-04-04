@@ -9,7 +9,7 @@ import {STYLESHEETS_PATH} from '../app.component';
   styleUrls: [STYLESHEETS_PATH + 'pix-grid-element.component.min.css']
 })
 export class PixGridElementComponent implements OnInit, AfterViewInit {
-  @ViewChild('component_grid_element') private component_grid_element!: ElementRef;
+  @ViewChild('component_grid_element') public component_grid_element!: ElementRef;
   @ViewChild('user_interactive') private user_interactive!: ElementRef;
   @ViewChild('correct_answer') private correct_answer?: ElementRef;
 

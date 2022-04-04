@@ -3,12 +3,10 @@
 // pix-game component stylesheet
 div.component-pix-game,
 div.pix-game-wrapper {
-  @include flexbox();
-  min-height: 100vh;
-  min-height: -webkit-fill-available;
-  min-height: calc(var(--vh, 1vh) * 100);
-}
-
-div.pix-game-wrapper {
-  padding: 65px 0;
+  height: 100vh;
+  height: -webkit-fill-available;
+  height: calc(var(--vh, 1vh) * 100);
+  max-height: 100vh;
+  max-height: -webkit-fill-available;
+  max-height: calc(var(--vh, 1vh) * 100);
 }
