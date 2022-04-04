@@ -1,4 +1,5 @@
-import {AfterViewInit, Component, ElementRef, ViewChild} from '@angular/core';
+import {AfterViewInit, Component, ElementRef, Inject, ViewChild} from '@angular/core';
+import {DOCUMENT} from '@angular/common';
 
 export const STYLESHEETS_PATH: string = '../../stylesheets/css/';
 
@@ -10,13 +11,16 @@ export const STYLESHEETS_PATH: string = '../../stylesheets/css/';
 export class AppComponent implements AfterViewInit {
   @ViewChild('app_root') private app_root!: ElementRef;
 
-  ngAfterViewInit() {
+  constructor(@Inject(DOCUMENT) private document: Document) {
     let vh = window.innerHeight * 0.01;
-    this.app_root.nativeElement.style.setProperty('--vh', `${vh}px`);
+    this.document.body.style.setProperty('--vh', `${vh}px`);
+  }
+
+  ngAfterViewInit() {
     // Calculate viewport height --> alternative to css vh unit
     window.addEventListener('resize', () => {
       let vh = window.innerHeight * 0.01;
-      this.app_root.nativeElement.style.setProperty('--vh', `${vh}px`);
+      this.document.body.style.setProperty('--vh', `${vh}px`);
     });
   }
 

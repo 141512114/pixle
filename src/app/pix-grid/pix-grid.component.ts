@@ -1,7 +1,7 @@
 import {
   AfterViewInit,
   Component, ElementRef,
-  EventEmitter,
+  EventEmitter, Inject,
   Input,
   OnInit,
   Output,
@@ -13,6 +13,7 @@ import {PixGridElementComponent} from '../pix-grid-element/pix-grid-element.comp
 import {HelperFunctionsService} from '../services/helper-functions.service';
 import {GameManager} from '../pix-game/game.manager';
 import {STYLESHEETS_PATH} from '../app.component';
+import {DOCUMENT} from '@angular/common';
 
 // Timer
 const UNDO_FLIP_TIME: number = 2000;
@@ -39,6 +40,9 @@ export class PixGridComponent implements OnInit, AfterViewInit {
   chosen_emoji: number = -1;
   validating: boolean = false;
 
+  constructor(@Inject(DOCUMENT) private document: Document) {
+  }
+
   ngOnInit(): void {
     if (this.grid_image.length <= 0) return;
     this.grid_image_width = this.grid_image[0].length;
@@ -46,11 +50,11 @@ export class PixGridComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit(): void {
-    this.scaleDownGridElements();
     window.addEventListener('resize', () => {
       this.scaleDownGridElements();
     });
     this.setFlipStatus(false);
+    this.scaleDownGridElements();
   }
 
   /**
@@ -119,22 +123,33 @@ export class PixGridComponent implements OnInit, AfterViewInit {
    */
   private scaleDownGridElements(): void {
     let grid_wrapper_element: HTMLElement = this.grid_wrapper.nativeElement;
+    let grid_inner_element: HTMLElement | null = grid_wrapper_element.querySelector('div.pix-grid-inner');
     let ui_wrapper_element: HTMLElement = this.ui_wrapper.nativeElement;
+    let header_element: HTMLElement | null = this.document.body.querySelector('header.navbar');
 
+    if ((grid_inner_element == null || undefined) || (header_element == null || undefined)) return;
+
+    let grid_element_list: NodeListOf<HTMLElement> = grid_inner_element.querySelectorAll('div.pix-grid-col');
+
+    // Set an initial maximum width and height on each grid element
+    let grid_element_initial_scale: number = grid_wrapper_element.offsetWidth / this.grid_image_width;
+    for (let i = 0; i < grid_element_list.length; i++) {
+      grid_element_list[i].style.maxWidth = grid_element_initial_scale + 'px';
+      grid_element_list[i].style.maxHeight = grid_element_initial_scale + 'px';
+    }
+
+    // If the ui wrapper and the grid wrapper collide with each other --> scale down grid elements accordingly
     let bottom_grid_wrapper: number = grid_wrapper_element.offsetTop + grid_wrapper_element.offsetHeight;
     let dist: number = ui_wrapper_element.offsetTop - bottom_grid_wrapper;
-    console.log('Distance between Grid and UI: ' + dist);
-    if (dist <= 0) {
-      console.log('Hit!');
-      let relative_ui_wrapper_height_per: number = ui_wrapper_element.offsetHeight / window.innerHeight;
-      let relative_grid_wrapper_height: number = grid_wrapper_element.offsetHeight * (1 - relative_ui_wrapper_height_per);
+    if (dist <= 0 || grid_inner_element.offsetWidth < grid_wrapper_element.offsetWidth) {
+      let window_inner_height: number = window.innerHeight - header_element.offsetHeight;
+      let relative_ui_wrapper_height_per: number = ui_wrapper_element.offsetHeight / window_inner_height;
+      let relative_grid_wrapper_height: number = window_inner_height * (1 - relative_ui_wrapper_height_per);
 
       let relative_grid_element_size: number = relative_grid_wrapper_height / this.grid_image_height;
-      let grid_element_list: PixGridElementComponent[] = this.pixle_emoji_input.toArray();
       for (let i = 0; i < grid_element_list.length; i++) {
-        let grid_element_html: HTMLElement = grid_element_list[i].component_grid_element.nativeElement;
-        grid_element_html.style.width = relative_grid_element_size + 'px';
-        grid_element_html.style.height = relative_grid_element_size + 'px';
+        grid_element_list[i].style.width = relative_grid_element_size + 'px';
+        grid_element_list[i].style.height = relative_grid_element_size + 'px';
       }
     }
   }

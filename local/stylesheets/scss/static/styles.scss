@@ -15,6 +15,15 @@ body {
   background-color: var(--default-theme-one, map.get($default-color-palette, 1));
 }
 
+body {
+  height: 100vh;
+  height: -webkit-fill-available;
+  height: calc(var(--vh, 1vh) * 100);
+  max-height: 100vh;
+  max-height: -webkit-fill-available;
+  max-height: calc(var(--vh, 1vh) * 100);
+}
+
 header {
   position: fixed;
   top: 0;
