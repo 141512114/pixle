@@ -1,11 +1,13 @@
-<div class="component-pix-grid container w-auto h-100 position-relative">
+<div class="component-pix-grid container w-auto h-100 p-0 position-relative">
   <div class="row p-0 g-0 h-100 playground-wrapper">
-    <div #grid_wrapper class="col col-md-6 pix-grid-wrapper">
-      <div #grid_inner class="pix-grid-inner">
-        <div class="row g-0 pix-grid-row" *ngFor="let row of grid_image">
-          <div class="col-{{12/grid_image_width}} pix-grid-col" *ngFor="let col of row">
-            <app-pix-grid-element #pixle_emoji_input [pixle_emoji]="col"
-                                  [receive_chosen_emoji]="chosen_emoji"></app-pix-grid-element>
+    <div #grid_wrapper class="col col-md-6 px-4">
+      <div class="pix-grid-wrapper w-100 h-100">
+        <div #grid_inner class="pix-grid-inner">
+          <div class="row g-0 pix-grid-row" *ngFor="let row of grid_image">
+            <div class="col-{{12/grid_image_width}} pix-grid-col" *ngFor="let col of row">
+              <app-pix-grid-element #pixle_emoji_input [pixle_emoji]="col"
+                                    [receive_chosen_emoji]="chosen_emoji"></app-pix-grid-element>
+            </div>
           </div>
         </div>
       </div>
@@ -23,15 +25,13 @@
         </div>
       </div>
       <div class="mt-auto pix-control-wrapper">
-        <div class="playground-ui-inner d-flex flex-row flex-sm-column">
-          <div class="p-0 validate-button-wrapper">
-            <button class="rounded-3 pix-validate-button" (click)="validatePixleOnClick()" type="button">Flip!
-            </button>
-          </div>
-          <div class="p-0 reload-pix-button-wrapper">
-            <button class="rounded-3 pix-reload-button" (click)="reloadGameComponent()" type="button">Reload
-            </button>
-          </div>
+        <div class="p-0 validate-button-wrapper">
+          <button class="pix-validate-button" (click)="validatePixleOnClick()" type="button">Flip!
+          </button>
+        </div>
+        <div class="p-0 reload-pix-button-wrapper">
+          <button class="pix-reload-button" (click)="reloadGameComponent()" type="button">Reload
+          </button>
         </div>
       </div>
     </div>

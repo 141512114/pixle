@@ -1,7 +1,9 @@
 import {
   AfterViewInit,
-  Component, ElementRef,
-  EventEmitter, Inject,
+  Component,
+  ElementRef,
+  EventEmitter,
+  Inject,
   Input,
   OnInit,
   Output,
@@ -123,7 +125,8 @@ export class PixGridComponent implements OnInit, AfterViewInit {
    * @private
    */
   private scaleDownGridElements(): void {
-    let grid_wrapper_element: HTMLElement = this.grid_wrapper.nativeElement;
+    let grid_container_element: HTMLElement = this.grid_wrapper.nativeElement;
+    let grid_wrapper_element: HTMLElement = this.grid_wrapper.nativeElement.querySelector('div.pix-grid-wrapper');
     let grid_inner_element: HTMLElement | null = this.grid_inner.nativeElement;
     let ui_wrapper_element: HTMLElement = this.ui_wrapper.nativeElement;
     let header_element: HTMLElement | null = this.document.body.querySelector('header.navbar');
@@ -134,7 +137,7 @@ export class PixGridComponent implements OnInit, AfterViewInit {
     grid_inner_element.style.maxWidth = grid_wrapper_element.offsetWidth + 'px';
 
     // If the ui wrapper and the grid wrapper collide with each other --> scale down grid elements accordingly
-    let bottom_grid_wrapper: number = grid_wrapper_element.offsetTop + grid_wrapper_element.offsetHeight;
+    let bottom_grid_wrapper: number = grid_container_element.offsetTop + grid_container_element.offsetHeight;
     let dist: number = ui_wrapper_element.offsetTop - bottom_grid_wrapper;
     if (dist <= 0 || grid_inner_element.offsetWidth < grid_wrapper_element.offsetWidth) {
       let window_inner_height: number = window.innerHeight - header_element.offsetHeight;
