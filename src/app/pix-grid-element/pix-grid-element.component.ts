@@ -1,7 +1,18 @@
-import {AfterViewInit, Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild} from '@angular/core';
+import {
+  AfterViewInit,
+  Component,
+  ElementRef,
+  EventEmitter,
+  Inject,
+  Input,
+  OnInit,
+  Output,
+  ViewChild
+} from '@angular/core';
 import {REDCROSS, WHITE_QUESTIONMARK} from '../database/emoji-database';
 import {HelperFunctionsService} from '../services/helper-functions.service';
 import {STYLESHEETS_PATH} from '../app.component';
+import {WINDOW} from '../window-injection.token';
 
 @Component({
   selector: 'app-pix-grid-element',
@@ -29,6 +40,9 @@ export class PixGridElementComponent implements OnInit, AfterViewInit {
   pixle_tile_solved: boolean = false;
   pixle_emoji_text: string = '';
   pixle_emoji_codepoint: number = -1;
+
+  constructor(@Inject(WINDOW) private readonly window: Window) {
+  }
 
   ngOnInit(): void {
     // Check which type this grid element has
@@ -204,7 +218,7 @@ export class PixGridElementComponent implements OnInit, AfterViewInit {
     // Delay resetting this tile after reversing the flip --> smooth effect
     if (!this.pixle_tile_solved) {
       this.changeElementIcon(this.pixle_emoji_default);
-      window.setTimeout(() => {
+      this.window.setTimeout(() => {
         this.hideCorrectAnswer();
         if (this.pixle_tile_lives > 0) {
           HelperFunctionsService.unlockElement(element);

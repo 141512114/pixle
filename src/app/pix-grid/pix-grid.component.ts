@@ -16,6 +16,7 @@ import {HelperFunctionsService} from '../services/helper-functions.service';
 import {GameManager} from '../pix-game/game.manager';
 import {STYLESHEETS_PATH} from '../app.component';
 import {DOCUMENT} from '@angular/common';
+import {WINDOW} from '../window-injection.token';
 
 // Timer
 const UNDO_FLIP_TIME: number = 2000;
@@ -43,8 +44,7 @@ export class PixGridComponent implements OnInit, AfterViewInit {
   chosen_emoji: number = -1;
   validating: boolean = false;
 
-  constructor(@Inject(DOCUMENT) private document: Document, private readonly window: Window | null) {
-    this.window = this.document.defaultView;
+  constructor(@Inject(DOCUMENT) private document: Document, @Inject(WINDOW) private readonly window: Window) {
   }
 
   ngOnInit(): void {
@@ -54,7 +54,7 @@ export class PixGridComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit() {
-    this.window?.addEventListener('resize', () => {
+    this.window.addEventListener('resize', () => {
       this.scaleDownGridElements();
     });
 
@@ -154,7 +154,7 @@ export class PixGridComponent implements OnInit, AfterViewInit {
     let ui_wrapper_element: HTMLElement = this.ui_wrapper.nativeElement;
     let header_element: HTMLElement | null = this.document.body.querySelector('header.navbar');
 
-    if ((this.window == null) || (header_element == null || undefined)) return;
+    if (header_element == null || undefined) return;
 
     let window_inner_height: number = this.window.innerHeight - header_element.offsetHeight;
     let relative_ui_wrapper_height_per: number = ui_wrapper_element.offsetHeight / window_inner_height;
@@ -221,9 +221,9 @@ export class PixGridComponent implements OnInit, AfterViewInit {
         GameManager.game_started = false;
       } else {
         // Player didn't win yet --> reset flip-state of some tiles
-        this.window?.setTimeout(() => {
+        this.window.setTimeout(() => {
           this.setFlipStatus();
-          this.window?.setTimeout(() => {
+          this.window.setTimeout(() => {
             this.validating = false;
           }, 1000);
         }, UNDO_FLIP_TIME);

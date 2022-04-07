@@ -1,4 +1,4 @@
-import {AfterViewInit, Component, OnInit, ViewChild} from '@angular/core';
+import {AfterViewInit, Component, Inject, OnInit, ViewChild} from '@angular/core';
 import {Location} from '@angular/common';
 import {PIXLE_ICONS, REDCROSS} from '../database/emoji-database';
 import {IPopUp} from '../interface/popup-message.interface';
@@ -11,6 +11,7 @@ import {PIXLEARTS} from '../database/pix-arts-database';
 import {PixGridComponent} from '../pix-grid/pix-grid.component';
 import {GameManager} from './game.manager';
 import {STYLESHEETS_PATH} from '../app.component';
+import {WINDOW} from '../window-injection.token';
 
 // Popup messages
 const MISSING_PIXLE_MSG: IPopUp = {
@@ -40,7 +41,7 @@ export class PixGameComponent implements OnInit, AfterViewInit {
   pixle_image_height: number = 0;
   pixle_emoji_list: number[] = [];
 
-  constructor(private router: Router, private location: Location) {
+  constructor(private router: Router, private location: Location, @Inject(WINDOW) private readonly window: Window) {
   }
 
   ngOnInit(): void {
@@ -107,7 +108,7 @@ export class PixGameComponent implements OnInit, AfterViewInit {
    * @private
    */
   private startGame(): void {
-    window.setTimeout(() => {
+    this.window.setTimeout(() => {
       this.pixGridComponent.setFlipStatus();
       GameManager.initGame();
     }, UNDO_FLIP_TIME);
