@@ -43,7 +43,8 @@ export class PixGridComponent implements OnInit, AfterViewInit {
   chosen_emoji: number = -1;
   validating: boolean = false;
 
-  constructor(@Inject(DOCUMENT) private document: Document) {
+  constructor(@Inject(DOCUMENT) private document: Document, private readonly window: Window | null) {
+    this.window = this.document.defaultView;
   }
 
   ngOnInit(): void {
@@ -52,12 +53,13 @@ export class PixGridComponent implements OnInit, AfterViewInit {
     this.grid_image_height = this.grid_image.length;
   }
 
-  ngAfterViewInit(): void {
-    window.addEventListener('resize', () => {
+  ngAfterViewInit() {
+    this.window?.addEventListener('resize', () => {
       this.scaleDownGridElements();
     });
+
+    this.setInitialSizes();
     this.setFlipStatus(false);
-    this.scaleDownGridElements();
   }
 
   /**
@@ -125,27 +127,43 @@ export class PixGridComponent implements OnInit, AfterViewInit {
    * @private
    */
   private scaleDownGridElements(): void {
-    let grid_container_element: HTMLElement = this.grid_wrapper.nativeElement;
-    let grid_wrapper_element: HTMLElement = this.grid_wrapper.nativeElement.querySelector('div.pix-grid-wrapper');
-    let grid_inner_element: HTMLElement | null = this.grid_inner.nativeElement;
+    let grid_wrapper_element: HTMLElement = this.grid_wrapper.nativeElement;
+    let grid_buffer_element: HTMLElement = this.grid_wrapper.nativeElement.querySelector('div.pix-grid-buffer');
+    let grid_inner_element: HTMLElement = this.grid_inner.nativeElement;
+    let ui_wrapper_element: HTMLElement = this.ui_wrapper.nativeElement;
+
+    // Set an initial maximum width and height on each grid element
+    grid_inner_element.style.maxWidth = grid_buffer_element.offsetWidth + 'px';
+
+    // If the ui wrapper and the grid wrapper collide with each other --> scale down grid elements accordingly
+    let bottom_grid_wrapper: number = grid_wrapper_element.offsetTop + grid_wrapper_element.offsetHeight;
+    let dist: number = ui_wrapper_element.offsetTop - bottom_grid_wrapper;
+    if (dist <= 0 || grid_inner_element.offsetWidth < grid_buffer_element.offsetWidth) {
+      this.setInitialSizes();
+    }
+  }
+
+  /**
+   * Set the (initial) sizes of every grid participant
+   *
+   * @private
+   */
+  private setInitialSizes(): void {
+    let grid_buffer_element = this.grid_wrapper.nativeElement.querySelector('div.pix-grid-buffer');
+    let grid_inner_element: HTMLElement = this.grid_inner.nativeElement;
     let ui_wrapper_element: HTMLElement = this.ui_wrapper.nativeElement;
     let header_element: HTMLElement | null = this.document.body.querySelector('header.navbar');
 
-    if ((grid_inner_element == null || undefined) || (header_element == null || undefined)) return;
+    if ((this.window == null) || (header_element == null || undefined)) return;
 
-    // Set an initial maximum width and height on each grid element
-    grid_inner_element.style.maxWidth = grid_wrapper_element.offsetWidth + 'px';
-
-    // If the ui wrapper and the grid wrapper collide with each other --> scale down grid elements accordingly
-    let bottom_grid_wrapper: number = grid_container_element.offsetTop + grid_container_element.offsetHeight;
-    let dist: number = ui_wrapper_element.offsetTop - bottom_grid_wrapper;
-    if (dist <= 0 || grid_inner_element.offsetWidth < grid_wrapper_element.offsetWidth) {
-      let window_inner_height: number = window.innerHeight - header_element.offsetHeight;
-      let relative_ui_wrapper_height_per: number = ui_wrapper_element.offsetHeight / window_inner_height;
-      let relative_grid_wrapper_height: number = window_inner_height * (1 - relative_ui_wrapper_height_per);
-      // Manipulate width of grid inner element
-      grid_inner_element.style.width = (relative_grid_wrapper_height / this.grid_image_height) * this.grid_image_width + 'px';
-    }
+    let window_inner_height: number = this.window.innerHeight - header_element.offsetHeight;
+    let relative_ui_wrapper_height_per: number = ui_wrapper_element.offsetHeight / window_inner_height;
+    let relative_grid_wrapper_height: number = window_inner_height * (1 - relative_ui_wrapper_height_per);
+    // Manipulate width of grid inner element
+    let calc_grid_inner_width: number = (relative_grid_wrapper_height / this.grid_image_height) * this.grid_image_width;
+    let padding_offset: number = parseInt(getComputedStyle(grid_buffer_element, null).paddingTop) + parseInt(getComputedStyle(grid_buffer_element, null).paddingBottom);
+    console.log(padding_offset);
+    grid_inner_element.style.width = calc_grid_inner_width - padding_offset + 'px';
   }
 
   /**
@@ -203,9 +221,9 @@ export class PixGridComponent implements OnInit, AfterViewInit {
         GameManager.game_started = false;
       } else {
         // Player didn't win yet --> reset flip-state of some tiles
-        window.setTimeout(() => {
+        this.window?.setTimeout(() => {
           this.setFlipStatus();
-          window.setTimeout(() => {
+          this.window?.setTimeout(() => {
             this.validating = false;
           }, 1000);
         }, UNDO_FLIP_TIME);

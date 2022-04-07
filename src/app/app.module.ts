@@ -8,7 +8,7 @@ import {PixGridElementComponent} from './pix-grid-element/pix-grid-element.compo
 import {PixPopupMessageComponent} from './pix-popup-message/pix-popup-message.component';
 import {AppRoutingModule} from './app-routing.module';
 import {ThemeSwitcherComponent} from './theme-switcher/theme-switcher.component';
-import { PixSideMenuComponent } from './pix-side-menu/pix-side-menu.component';
+import {PixSideMenuComponent} from './pix-side-menu/pix-side-menu.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +24,9 @@ import { PixSideMenuComponent } from './pix-side-menu/pix-side-menu.component';
     BrowserModule,
     AppRoutingModule
   ],
-  providers: [],
+  providers: [
+    {provide: Window, useValue: window}
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule {

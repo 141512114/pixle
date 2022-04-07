@@ -9,9 +9,13 @@ div.component-pix-grid div.pix-grid-col {
   padding: 5px;
 }
 
-div.pix-grid-wrapper {
+div.pix-grid-buffer {
   @include flexbox();
   padding: 15px 0;
+}
+
+div.playground-ui-wrapper {
+  flex-grow: unset;
 }
 
 div.pix-emoji-list-wrapper {
