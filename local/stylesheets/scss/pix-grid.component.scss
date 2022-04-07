@@ -12,6 +12,7 @@ div.component-pix-grid div.pix-grid-col {
 div.pix-grid-buffer {
   @include flexbox();
   padding: 15px 0;
+  overflow: hidden;
 }
 
 div.playground-ui-wrapper {
