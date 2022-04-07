@@ -24,9 +24,7 @@ import {PixSideMenuComponent} from './pix-side-menu/pix-side-menu.component';
     BrowserModule,
     AppRoutingModule
   ],
-  providers: [
-    {provide: Window, useValue: window}
-  ],
+  providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule {
