@@ -44,6 +44,9 @@ export class PixGridComponent implements OnInit, AfterViewInit {
   chosen_emoji: number = -1;
   validating: boolean = false;
 
+  private prev_window_width: number = 0;
+  private prev_window_height: number = 0;
+
   constructor(@Inject(DOCUMENT) private document: Document, @Inject(WINDOW) private readonly window: Window) {
   }
 
@@ -139,14 +142,7 @@ export class PixGridComponent implements OnInit, AfterViewInit {
     // Set an initial maximum width and height on each grid element
     grid_inner_element.style.maxWidth = grid_buffer_element.offsetWidth + 'px';
 
-    let padding_top: number = parseInt(this.window.getComputedStyle(grid_buffer_element, null).paddingTop);
-    let padding_bottom: number = parseInt(this.window.getComputedStyle(grid_buffer_element, null).paddingBottom);
-    let padding_offset: number = padding_top + padding_bottom;
-    let real_height_of_buffer: number = grid_buffer_element.offsetHeight - padding_offset;
-
-    if (real_height_of_buffer <= grid_inner_element.offsetHeight || grid_inner_element.offsetWidth < grid_buffer_element.offsetWidth) {
-      this.setInitialSizes();
-    }
+    this.setInitialSizes();
   }
 
   /**
@@ -155,12 +151,61 @@ export class PixGridComponent implements OnInit, AfterViewInit {
    * @private
    */
   private setInitialSizes(): void {
+    let grid_wrapper_element: HTMLElement = this.grid_wrapper.nativeElement;
+    let grid_buffer_element: HTMLElement = this.grid_wrapper.nativeElement.querySelector('div.pix-grid-buffer');
+    let grid_inner_element: HTMLElement = this.grid_inner.nativeElement;
+
+    let grid_inner_new_width: number = grid_inner_element.offsetWidth;
+    // If window is getting resized on x-axis
+    if (this.prev_window_width === 0 || this.prev_window_width != this.window.innerWidth) {
+      if (this.window.innerWidth <= grid_wrapper_element.offsetWidth) {
+        grid_inner_new_width = this.calculateWidthOfGridInnerElementViaWindowWidth();
+        this.prev_window_width = this.window.innerWidth;
+      }
+    }
+    // If window is getting resized on y-axis
+    if (this.prev_window_height === 0 || this.prev_window_height != this.window.innerHeight) {
+      let padding_top: number = parseInt(this.window.getComputedStyle(grid_buffer_element, null).paddingTop);
+      let padding_bottom: number = parseInt(this.window.getComputedStyle(grid_buffer_element, null).paddingBottom);
+      let padding_offset: number = padding_top + padding_bottom;
+      let real_height_of_buffer: number = grid_buffer_element.offsetHeight - padding_offset;
+
+      if (real_height_of_buffer <= grid_inner_element.offsetHeight || grid_inner_element.offsetWidth < grid_buffer_element.offsetWidth) {
+        grid_inner_new_width = this.calculateWidthOfGridInnerElementViaWindowHeight();
+        this.prev_window_height = this.window.innerHeight;
+      }
+    }
+
+    let min: number = 200;
+    let max: number = grid_buffer_element.offsetWidth;
+    let clamp_grid_inner_width: number = Math.min(Math.max(grid_inner_new_width, min), max);
+    grid_inner_element.style.width = clamp_grid_inner_width + 'px';
+  }
+
+  /**
+   * Calculate the grid-inner width by looking at the window inner width
+   *
+   * @private
+   */
+  private calculateWidthOfGridInnerElementViaWindowWidth(): number {
+    let grid_wrapper_element: HTMLElement = this.grid_wrapper.nativeElement;
+    let padding_left: number = parseInt(this.window.getComputedStyle(grid_wrapper_element, null).paddingLeft);
+    let padding_right: number = parseInt(this.window.getComputedStyle(grid_wrapper_element, null).paddingRight);
+    return this.window.innerWidth - (padding_left + padding_right);
+  }
+
+  /**
+   * Calculate the grid-inner width by looking at the window inner height
+   *
+   * @private
+   */
+  private calculateWidthOfGridInnerElementViaWindowHeight(): number {
     let grid_buffer_element: HTMLElement = this.grid_wrapper.nativeElement.querySelector('div.pix-grid-buffer');
     let grid_inner_element: HTMLElement = this.grid_inner.nativeElement;
     let ui_wrapper_element: HTMLElement = this.ui_wrapper.nativeElement;
     let header_element: HTMLElement | null = this.document.body.querySelector('header.navbar');
 
-    if (header_element == null || undefined) return;
+    if (header_element == null || undefined) return 0;
 
     let window_inner_height: number = this.window.innerHeight - header_element.offsetHeight;
     let relative_ui_wrapper_height_per: number = ui_wrapper_element.offsetHeight / window_inner_height;
@@ -170,10 +215,7 @@ export class PixGridComponent implements OnInit, AfterViewInit {
 
     let padding_top: number = parseInt(this.window.getComputedStyle(grid_buffer_element, null).paddingTop);
     let padding_bottom: number = parseInt(this.window.getComputedStyle(grid_buffer_element, null).paddingBottom);
-    let width_padding_diff: number = calc_grid_inner_width - (padding_top + padding_bottom);
-
-    let clamp_grid_inner_width: number = Math.min(Math.max(width_padding_diff, 0), grid_buffer_element.offsetWidth);
-    grid_inner_element.style.width = clamp_grid_inner_width + 'px';
+    return calc_grid_inner_width - (padding_top + padding_bottom);
   }
 
   /**

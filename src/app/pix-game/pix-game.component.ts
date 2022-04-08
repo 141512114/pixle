@@ -166,13 +166,13 @@ export class PixGameComponent implements OnInit, AfterViewInit {
       }
     }
     // Fill empty slots with placeholders, if there ever are fewer emojis used than the horizontal amount of icons in a pixle
-    let modulo: number = temp_emoji_list.length % this.pixle_image_width;
+    /* let modulo: number = temp_emoji_list.length % this.pixle_image_width;
     if (modulo > 0 && modulo < this.pixle_image_width) {
       let short_count: number = this.pixle_image_width - modulo;
       for (let i: number = 0; i < short_count; i++) {
         temp_emoji_list.push(this.empty_emoji_slot);
       }
-    }
+    } */
     this.pixle_emoji_list = temp_emoji_list;
     return true;
   }

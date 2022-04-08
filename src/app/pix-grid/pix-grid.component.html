@@ -1,5 +1,5 @@
-<div class="component-pix-grid container position-relative w-auto h-100 p-0">
-  <table class="table p-0 h-100 playground-wrapper">
+<div class="component-pix-grid container position-relative h-100 p-0">
+  <table class="table p-0 w-100 h-100 playground-wrapper">
     <tr class="h-100">
       <td #grid_wrapper class="px-4 pix-grid-wrapper">
         <div class="m-0 w-100 h-100 pix-grid-buffer">
@@ -17,10 +17,9 @@
     <tr class="h-auto">
       <td #ui_wrapper class="playground-ui-wrapper">
         <div class="pix-emoji-list-wrapper">
-          <div class="row g-0 pix-grid-row"
-               *ngFor="let i of counter(emoji_list.length / grid_image_width)">
-            <div class="col-{{12/grid_image_width}} pix-grid-col" *ngFor="let j of counter(grid_image_width)">
-              <app-pix-grid-element #pixle_emoji_output [pixle_emoji]="emoji_list[grid_image_width * i + j]"
+          <div class="pix-emoji-list-buffer">
+            <div class="pix-grid-col" *ngFor="let j of counter(emoji_list.length)">
+              <app-pix-grid-element #pixle_emoji_output [pixle_emoji]="emoji_list[j]"
                                     [grid_element_type]="1"
                                     (sendIconCodePoint)="receiveIconCodePoint($event)"></app-pix-grid-element>
             </div>

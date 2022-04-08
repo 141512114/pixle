@@ -1,24 +1,82 @@
 @use "sass:map";
+@use "sass:math";
 
 @import '../mixins/fonts';
 @import '../mixins/themes';
 @import '../mixins/mixins';
 
 // pix-grid component stylesheet
-div.component-pix-grid div.pix-grid-col {
-  padding: 5px;
+div.component-pix-grid {
+  max-width: 375px;
+  width: auto;
+
+  div.pix-grid-col {
+    padding: 5px;
+  }
 }
 
 div.pix-grid-buffer {
   @include flexbox();
   padding: 15px 0;
   overflow: hidden;
+
+  div.pix-grid-inner {
+    @include flexbox();
+    min-width: 200px;
+
+    div.pix-grid-col {
+      max-width: 85px;
+
+      @media only screen and (min-width: 375px) {
+        max-width: 100px;
+      }
+
+      @media only screen and (min-width: 500px) {
+        max-width: unset;
+      }
+    }
+  }
 }
 
 div.pix-emoji-list-wrapper {
-  padding: 13px 32px;
+  $padding_vertical: 12px;
+
+  width: 100vw;
+  padding: $padding_vertical 0 math.div($padding_vertical, 2);
   background-color: var(--default-theme-three, map.get($default-color-palette, 3));
-  overflow: scroll;
+
+  div.pix-emoji-list-buffer {
+    display: flex;
+    flex-wrap: nowrap;
+    padding: 0 22px math.div($padding_vertical, 2);
+    overflow-x: scroll;
+    overflow-y: hidden;
+    -webkit-overflow-scrolling: touch;
+
+    &::-webkit-scrollbar {
+      display: none;
+    }
+  }
+
+  div.pix-grid-col {
+    display: inline-block;
+    width: 75px;
+    height: 75px;
+    margin-right: 6px;
+    flex: 0 0 auto;
+
+    &:first-child {
+      margin-left: auto;
+    }
+
+    &:last-child {
+      margin-right: auto;
+    }
+  }
+
+  @media only screen and (min-width: 375px) {
+    width: 375px;
+  }
 }
 
 div.pix-control-wrapper {
@@ -30,8 +88,9 @@ div.pix-control-wrapper {
 
     button {
       width: 100%;
-      padding: 7px 0;
+      padding: 12px 0;
       font-family: $main-ui;
+      font-size: 18px;
     }
   }
 
