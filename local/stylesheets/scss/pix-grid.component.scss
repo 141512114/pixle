@@ -15,10 +15,6 @@ div.pix-grid-buffer {
   overflow: hidden;
 }
 
-div.playground-ui-wrapper {
-  flex-grow: unset;
-}
-
 div.pix-emoji-list-wrapper {
   padding: 13px 32px;
   background-color: var(--default-theme-three, map.get($default-color-palette, 3));

@@ -51,18 +51,20 @@ export class PixGridComponent implements OnInit, AfterViewInit {
     if (this.grid_image.length <= 0) return;
     this.grid_image_width = this.grid_image[0].length;
     this.grid_image_height = this.grid_image.length;
-  }
 
-  ngAfterViewInit() {
     this.window.addEventListener('resize', () => {
       this.scaleDownGridElements();
     });
+  }
 
-    // Set an initial maximum width and height on each grid element
-    let grid_buffer_element: HTMLElement = this.grid_wrapper.nativeElement.querySelector('div.pix-grid-buffer');
-    this.grid_inner.nativeElement.style.maxWidth = grid_buffer_element.offsetWidth + 'px';
+  ngAfterViewInit() {
+    this.window.setTimeout(() => {
+      // Set an initial maximum width and height on each grid element
+      let grid_buffer_element: HTMLElement = this.grid_wrapper.nativeElement.querySelector('div.pix-grid-buffer');
+      this.grid_inner.nativeElement.style.maxWidth = grid_buffer_element.offsetWidth + 'px';
 
-    this.setInitialSizes();
+      this.setInitialSizes();
+    }, 10);
     this.setFlipStatus(false);
   }
 
@@ -164,11 +166,12 @@ export class PixGridComponent implements OnInit, AfterViewInit {
     let relative_ui_wrapper_height_per: number = ui_wrapper_element.offsetHeight / window_inner_height;
     let relative_grid_wrapper_height: number = window_inner_height * (1 - relative_ui_wrapper_height_per);
     // Manipulate width of grid inner element
-    let calc_grid_inner_width: number = (relative_grid_wrapper_height / this.grid_image_height) * this.grid_image_width;
+    let calc_grid_inner_width: number = (relative_grid_wrapper_height / grid_inner_element.offsetHeight) * grid_inner_element.offsetWidth;
 
     let padding_top: number = parseInt(this.window.getComputedStyle(grid_buffer_element, null).paddingTop);
     let padding_bottom: number = parseInt(this.window.getComputedStyle(grid_buffer_element, null).paddingBottom);
     let width_padding_diff: number = calc_grid_inner_width - (padding_top + padding_bottom);
+
     let clamp_grid_inner_width: number = Math.min(Math.max(width_padding_diff, 0), grid_buffer_element.offsetWidth);
     grid_inner_element.style.width = clamp_grid_inner_width + 'px';
   }

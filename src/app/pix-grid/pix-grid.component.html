@@ -1,38 +1,42 @@
 <div class="component-pix-grid container position-relative w-auto h-100 p-0">
-  <div class="row p-0 g-0 h-100 flex-column playground-wrapper">
-    <div #grid_wrapper class="col px-4 pix-grid-wrapper">
-      <div class="m-0 w-100 h-100 pix-grid-buffer">
-        <div #grid_inner class="pix-grid-inner">
-          <div class="row g-0 pix-grid-row" *ngFor="let row of grid_image">
-            <div class="col-{{12/grid_image_width}} pix-grid-col" *ngFor="let col of row">
-              <app-pix-grid-element #pixle_emoji_input [pixle_emoji]="col"
-                                    [receive_chosen_emoji]="chosen_emoji"></app-pix-grid-element>
+  <table class="table p-0 h-100 playground-wrapper">
+    <tr class="h-100">
+      <td #grid_wrapper class="col px-4 pix-grid-wrapper">
+        <div class="m-0 w-100 h-100 pix-grid-buffer">
+          <div #grid_inner class="pix-grid-inner">
+            <div class="row g-0 pix-grid-row" *ngFor="let row of grid_image">
+              <div class="col-{{12/grid_image_width}} pix-grid-col" *ngFor="let col of row">
+                <app-pix-grid-element #pixle_emoji_input [pixle_emoji]="col"
+                                      [receive_chosen_emoji]="chosen_emoji"></app-pix-grid-element>
+              </div>
             </div>
           </div>
         </div>
-      </div>
-    </div>
-    <div #ui_wrapper class="col mt-auto playground-ui-wrapper">
-      <div class="pix-emoji-list-wrapper">
-        <div class="row g-0 pix-grid-row"
-             *ngFor="let i of counter(emoji_list.length / grid_image_width)">
-          <div class="col-{{12/grid_image_width}} pix-grid-col" *ngFor="let j of counter(grid_image_width)">
-            <app-pix-grid-element #pixle_emoji_output [pixle_emoji]="emoji_list[grid_image_width * i + j]"
-                                  [grid_element_type]="1"
-                                  (sendIconCodePoint)="receiveIconCodePoint($event)"></app-pix-grid-element>
+      </td>
+    </tr>
+    <tr class="h-auto">
+      <td #ui_wrapper class="playground-ui-wrapper">
+        <div class="pix-emoji-list-wrapper">
+          <div class="row g-0 pix-grid-row"
+               *ngFor="let i of counter(emoji_list.length / grid_image_width)">
+            <div class="col-{{12/grid_image_width}} pix-grid-col" *ngFor="let j of counter(grid_image_width)">
+              <app-pix-grid-element #pixle_emoji_output [pixle_emoji]="emoji_list[grid_image_width * i + j]"
+                                    [grid_element_type]="1"
+                                    (sendIconCodePoint)="receiveIconCodePoint($event)"></app-pix-grid-element>
+            </div>
           </div>
         </div>
-      </div>
-      <div class="mt-auto pix-control-wrapper">
-        <div class="p-0 validate-button-wrapper">
-          <button class="pix-validate-button" (click)="validatePixleOnClick()" type="button">Flip!
-          </button>
+        <div class="mt-auto pix-control-wrapper">
+          <div class="p-0 validate-button-wrapper">
+            <button class="pix-validate-button" (click)="validatePixleOnClick()" type="button">Flip!
+            </button>
+          </div>
+          <div class="p-0 reload-pix-button-wrapper">
+            <button class="pix-reload-button" (click)="reloadGameComponent()" type="button">Reload
+            </button>
+          </div>
         </div>
-        <div class="p-0 reload-pix-button-wrapper">
-          <button class="pix-reload-button" (click)="reloadGameComponent()" type="button">Reload
-          </button>
-        </div>
-      </div>
-    </div>
-  </div>
+      </td>
+    </tr>
+  </table>
 </div>
