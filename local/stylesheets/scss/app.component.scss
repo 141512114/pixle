@@ -8,7 +8,7 @@ header.navbar {
   padding: 7px 0;
   user-select: none;
   @include flexbox();
-  border-bottom: 2px solid var(--default-theme-three, map.get($default-color-palette, 3));
+  background-color: var(--default-theme-three, map.get($default-color-palette, 3));
   pointer-events: none;
   z-index: 999;
 

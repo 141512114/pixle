@@ -26,16 +26,13 @@ div.pix-grid-buffer {
 
     div.pix-grid-col {
       max-width: 85px;
-
-      @media only screen and (min-width: 375px) {
-        max-width: 100px;
-      }
-
-      @media only screen and (min-width: 500px) {
-        max-width: unset;
-      }
     }
   }
+}
+
+.playground-ui-wrapper {
+  border-radius: 8px 8px 0 0;
+  overflow: hidden;
 }
 
 div.pix-emoji-list-wrapper {
@@ -48,7 +45,7 @@ div.pix-emoji-list-wrapper {
   div.pix-emoji-list-buffer {
     display: flex;
     flex-wrap: nowrap;
-    padding: 0 22px math.div($padding_vertical, 2);
+    padding: 0 13px math.div($padding_vertical, 2);
     overflow-x: scroll;
     overflow-y: hidden;
     -webkit-overflow-scrolling: touch;
