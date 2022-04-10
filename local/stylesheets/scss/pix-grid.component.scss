@@ -12,16 +12,28 @@ div.component-pix-grid {
 
   div.pix-grid-col {
     padding: 5px;
+    font-size: calc(1.25em + 3.5vmin);
+
+    @media only screen and (min-width: 515px) {
+      font-size: calc(1.35em + 2.5vmin);
+    }
+
+    @media only screen and (min-width: 625px) {
+      font-size: calc(1.1em + 2.5vmin);
+    }
   }
+}
+
+.pix-grid-wrapper {
+  @include flexbox();
+  overflow: hidden;
 }
 
 div.pix-grid-buffer {
   @include flexbox();
   padding: 15px 0;
-  overflow: hidden;
 
   div.pix-grid-inner {
-    @include flexbox();
     min-width: 200px;
 
     div.pix-grid-col {
@@ -68,6 +80,14 @@ div.pix-emoji-list-wrapper {
 
     &:last-child {
       margin-right: auto;
+    }
+
+    @media only screen and (min-width: 450px) {
+      font-size: calc(1.1em + 2.5vmin);
+    }
+
+    @media only screen and (min-width: 700px) {
+      font-size: calc(1em + 2.2vmin);
     }
   }
 
