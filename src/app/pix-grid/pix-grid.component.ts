@@ -206,7 +206,10 @@ export class PixGridComponent implements OnInit, AfterViewInit {
     let window_inner_height: number = this.window.innerHeight - header_element.offsetHeight;
     let relative_ui_wrapper_height_per: number = ui_wrapper_element.offsetHeight / window_inner_height;
     let relative_grid_wrapper_height: number = window_inner_height * (1 - relative_ui_wrapper_height_per);
-    return ( (relative_grid_wrapper_height / this.grid_image_height) * this.grid_image_width) - padding_offset;
+    let new_grid_buffer_width: number = ( (relative_grid_wrapper_height / this.grid_image_height) * this.grid_image_width) - padding_offset;
+
+    grid_buffer_element.style.maxWidth = new_grid_buffer_width + 'px';
+    return new_grid_buffer_width;
   }
 
   /**
