@@ -154,14 +154,14 @@ export class PixGridComponent implements OnInit, AfterViewInit {
     if (this.prev_window_height === 0 || this.prev_window_height != this.window.innerHeight) {
       // If window is getting resized on y-axis
       if (grid_buffer_element.offsetWidth < grid_wrapper_element.offsetWidth || real_height_of_buffer <= grid_inner_element.offsetHeight) {
-        grid_inner_new_width = this.calculateWidthOfGridInnerElementViaWindowHeight();
+        grid_inner_new_width = this.calculateWidthOfGridBufferElementViaWindowHeight();
       }
       this.prev_window_height = this.window.innerHeight;
     } else if (this.prev_window_width === 0 || this.prev_window_width != this.window.innerWidth) {
       // If window is getting resized on x-axis
       if ((grid_buffer_element.offsetWidth < grid_wrapper_element.offsetWidth
         || this.window.innerWidth <= grid_wrapper_element.offsetWidth) && real_height_of_buffer > grid_inner_element.offsetHeight) {
-        grid_inner_new_width = this.calculateWidthOfGridInnerElementViaWindowWidth();
+        grid_inner_new_width = this.calculateWidthOfGridBufferElementViaWindowWidth();
       }
       this.prev_window_width = this.window.innerWidth;
     }
@@ -180,7 +180,7 @@ export class PixGridComponent implements OnInit, AfterViewInit {
    *
    * @private
    */
-  private calculateWidthOfGridInnerElementViaWindowWidth(): number {
+  private calculateWidthOfGridBufferElementViaWindowWidth(): number {
     let grid_wrapper_element: HTMLElement = this.grid_wrapper.nativeElement;
     let padding_left: number = parseInt(this.window.getComputedStyle(grid_wrapper_element, null).paddingLeft);
     let padding_right: number = parseInt(this.window.getComputedStyle(grid_wrapper_element, null).paddingRight);
@@ -192,17 +192,21 @@ export class PixGridComponent implements OnInit, AfterViewInit {
    *
    * @private
    */
-  private calculateWidthOfGridInnerElementViaWindowHeight(): number {
+  private calculateWidthOfGridBufferElementViaWindowHeight(): number {
     let grid_buffer_element: HTMLElement = this.grid_wrapper.nativeElement.querySelector('div.pix-grid-buffer');
     let ui_wrapper_element: HTMLElement = this.ui_wrapper.nativeElement;
     let header_element: HTMLElement | null = this.document.body.querySelector('header.navbar');
 
     if (header_element == null || undefined) return grid_buffer_element.offsetWidth;
 
+    let padding_top: number = parseInt(this.window.getComputedStyle(grid_buffer_element, null).paddingTop);
+    let padding_bottom: number = parseInt(this.window.getComputedStyle(grid_buffer_element, null).paddingBottom);
+    let padding_offset: number = padding_top + padding_bottom;
+
     let window_inner_height: number = this.window.innerHeight - header_element.offsetHeight;
     let relative_ui_wrapper_height_per: number = ui_wrapper_element.offsetHeight / window_inner_height;
     let relative_grid_wrapper_height: number = window_inner_height * (1 - relative_ui_wrapper_height_per);
-    return (relative_grid_wrapper_height / grid_buffer_element.offsetWidth) * grid_buffer_element.offsetHeight;
+    return ( (relative_grid_wrapper_height / this.grid_image_height) * this.grid_image_width) - padding_offset;
   }
 
   /**
