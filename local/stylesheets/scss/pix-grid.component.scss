@@ -113,24 +113,18 @@ div.pix-control-wrapper {
 
 @media only screen and (min-width: $breakpoint_sm) {
   div.pix-emoji-list-wrapper div.pix-grid-col {
-    font-size: calc(1.1em + 2.5vmin);
+    font-size: calc(1.35em + 2.5vmin);
   }
 }
 
 @media only screen and (min-width: $breakpoint_xsm) {
   div.component-pix-grid div.pix-grid-col {
-    font-size: calc(1.2em + 2.3vmin);
-  }
-}
-
-@media only screen and (min-width: 700px) {
-  div.pix-emoji-list-wrapper div.pix-grid-col {
-    font-size: calc(1em + 2.1vmin);
+    font-size: calc(1.1em + 2.2vmin);
   }
 }
 
 @media only screen and (min-width: $breakpoint_xxxsm) {
-  div.component-pix-grid div.pix-grid-col {
-    font-size: calc(1em + 2.3vmin);
+  div.pix-emoji-list-wrapper div.pix-grid-col {
+    font-size: calc(1em + 2.1vmin);
   }
 }

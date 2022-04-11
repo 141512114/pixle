@@ -1,6 +1,7 @@
 @use "sass:map";
 
 @import '../mixins/themes';
+@import '../mixins/variables';
 @import '../mixins/mixins';
 
 // pix-grid-element component stylesheet
@@ -22,6 +23,23 @@ div.grid-element-inner {
   right: 0;
   bottom: 0;
   background-color: var(--default-theme-four, map.get($default-color-palette, 4));
+  transition: transform 550ms, background-color 150ms;
+
+  &[data-grid-element-status="solved"] {
+    @include background-color(1, $status-palette, $background-color-alpha-focused);
+  }
+
+  &[data-grid-element-status="2"] {
+    @include background-color(2, $status-palette, $background-color-alpha-unfocused);
+  }
+
+  &[data-grid-element-status="1"] {
+    @include background-color(3, $status-palette, $background-color-alpha-unfocused);
+  }
+
+  &[data-grid-element-status="failed"] {
+    @include background-color(4, $status-palette, $background-color-alpha-focused);
+  }
 
   div {
     width: 100%;
@@ -35,5 +53,25 @@ div.grid-element-inner {
     text-align: center;
     user-select: none;
     pointer-events: none;
+  }
+
+  &:not(.locked):hover {
+    cursor: pointer;
+
+    &:not(.selected) {
+      background-color: var(--default-theme-three, map.get($default-color-palette, 3));
+    }
+
+    &.invert-before {
+      background-color: var(--default-theme-six, map.get($default-color-palette, 6));
+    }
+
+    &[data-grid-element-status="2"] {
+      @include background-color(2, $status-palette, $background-color-alpha-focused);
+    }
+
+    &[data-grid-element-status="1"] {
+      @include background-color(3, $status-palette, $background-color-alpha-focused);
+    }
   }
 }
