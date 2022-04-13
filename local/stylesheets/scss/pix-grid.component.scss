@@ -9,12 +9,33 @@
 // pix-grid component stylesheet
 $grid_limit_width: 375px;
 
+div.mobile-landscape-popup {
+  display: none;
+  visibility: hidden;
+
+  div.mobile-landscape-popup-wrapper {
+    padding: 11px 21px;
+    background-color: var(--default-theme-four, map.get($default-color-palette, 4));
+
+    p {
+      margin: 0;
+      padding: 0;
+      font-size: calc(1em + 1.65vmin);
+      color: var(--default-theme-one, map.get($default-color-palette, 1))
+    }
+  }
+}
+
 div.component-pix-grid {
   width: auto;
 
   div.pix-grid-col {
     padding: 5px;
-    font-size: calc(1.25em + 3.5vmin);
+    font-size: calc(1.2em + 3vmin);
+
+    @media only screen and (max-width: 250px) {
+      font-size: calc(1em + 2.85vmin);
+    }
   }
 }
 
@@ -34,7 +55,7 @@ div.pix-grid-buffer {
     min-width: 135px;
 
     div.pix-grid-col {
-      max-width: 85px;
+      max-width: 75px;
     }
   }
 }
@@ -68,10 +89,11 @@ div.pix-emoji-list-wrapper {
 
   div.pix-grid-col {
     display: inline-block;
-    width: 75px;
-    height: 75px;
+    width: 65px;
+    height: 65px;
     margin-right: 6px;
     flex: 0 0 auto;
+    font-size: calc(1em + 2.85vmin);
 
     &:first-child {
       margin-left: auto;
@@ -115,8 +137,23 @@ div.pix-control-wrapper {
   }
 }
 
+@media only screen and (max-width: $breakpoint_sm),
+only screen and (max-height: 600px) {
+  div.pix-grid-inner div.pix-grid-col {
+    &.gridw-5, &.gridh-5 {
+      font-size: calc(1.3em + 2.35vmin);
+    }
+  }
+}
+
 @media only screen and (min-width: $breakpoint_sm) {
+  div.pix-grid-buffer div.pix-grid-inner div.pix-grid-col {
+    max-width: 85px;
+  }
+
   div.pix-emoji-list-wrapper div.pix-grid-col {
+    width: 75px;
+    height: 75px;
     font-size: calc(1.35em + 2.5vmin);
   }
 }
@@ -144,5 +181,18 @@ div.pix-control-wrapper {
     div.pix-emoji-list-wrapper div.pix-emoji-list-buffer {
       overflow-x: hidden;
     }
+  }
+}
+
+// ########### Disable if orientation is landscape (only for mobile)
+@media only screen and (max-height: 615px) and (orientation: landscape) {
+  div.component-pix-grid {
+    display: none;
+    visibility: hidden;
+  }
+
+  div.mobile-landscape-popup {
+    @include flexbox();
+    visibility: visible;
   }
 }

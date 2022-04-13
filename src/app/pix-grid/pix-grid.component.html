@@ -5,7 +5,9 @@
         <div class="m-0 h-100 pix-grid-buffer">
           <div #grid_inner class="w-100 h-auto pix-grid-inner">
             <div class="row w-100 justify-content-center g-0 pix-grid-row" *ngFor="let row of grid_image">
-              <div class="col-{{12/grid_image_width}} pix-grid-col" *ngFor="let col of row">
+              <div
+                class="col-{{12/grid_image_width}} pix-grid-col gridw-{{grid_image_width}} gridh-{{grid_image_height}}"
+                *ngFor="let col of row">
                 <app-pix-grid-element #pixle_emoji_input [pixle_emoji]="col"
                                       [receive_chosen_emoji]="chosen_emoji"></app-pix-grid-element>
               </div>
@@ -38,4 +40,9 @@
       </td>
     </tr>
   </table>
+</div>
+<div class="container-fluid h-100 w-100 mobile-landscape-popup">
+  <div class="rounded-3 mobile-landscape-popup-wrapper">
+    <p>Landscape-Mode isn't available.</p>
+  </div>
 </div>
