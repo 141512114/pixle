@@ -169,7 +169,7 @@ export class PixGridComponent implements OnInit, AfterViewInit {
     let padding_left: number = parseInt(this.window.getComputedStyle(grid_wrapper_element, null).paddingLeft);
     let padding_right: number = parseInt(this.window.getComputedStyle(grid_wrapper_element, null).paddingRight);
 
-    let min: number = 200;
+    let min: number = 135;
     let max: number = grid_wrapper_element.offsetWidth - (padding_left + padding_right);
     let clamp_grid_inner_width: number = Math.min(Math.max(grid_inner_new_width, min), max);
     grid_buffer_element.style.width = clamp_grid_inner_width + 'px';
