@@ -10,7 +10,6 @@
 $grid_limit_width: 375px;
 
 div.component-pix-grid {
-  max-width: $grid_limit_width;
   width: auto;
 
   div.pix-grid-col {
@@ -20,7 +19,10 @@ div.component-pix-grid {
 }
 
 .pix-grid-wrapper {
+  display: block;
   @include flexbox();
+  max-width: $grid_limit_width;
+  margin: 0 auto;
   overflow: hidden;
 }
 
@@ -38,6 +40,9 @@ div.pix-grid-buffer {
 }
 
 .playground-ui-wrapper {
+  display: block;
+  width: 100vw;
+  margin: 0 auto;
   border-radius: 8px 8px 0 0;
   overflow: hidden;
 }
@@ -45,7 +50,6 @@ div.pix-grid-buffer {
 div.pix-emoji-list-wrapper {
   $padding_vertical: 12px;
 
-  width: 100vw;
   padding: $padding_vertical 0 math.div($padding_vertical, 2);
   background-color: var(--default-theme-three, map.get($default-color-palette, 3));
 
@@ -106,7 +110,7 @@ div.pix-control-wrapper {
 }
 
 @media only screen and (min-width: $breakpoint_mm) {
-  div.pix-emoji-list-wrapper {
+  .playground-ui-wrapper {
     width: $grid_limit_width;
   }
 }
@@ -124,7 +128,21 @@ div.pix-control-wrapper {
 }
 
 @media only screen and (min-width: $breakpoint_xxxsm) {
+  .playground-ui-wrapper {
+    width: 450px;
+  }
+
   div.pix-emoji-list-wrapper div.pix-grid-col {
     font-size: calc(1em + 2.1vmin);
+  }
+}
+
+@media only screen and (min-width: $breakpoint_xmd) {
+  .playground-ui-wrapper {
+    width: 500px;
+
+    div.pix-emoji-list-wrapper div.pix-emoji-list-buffer {
+      overflow-x: hidden;
+    }
   }
 }
