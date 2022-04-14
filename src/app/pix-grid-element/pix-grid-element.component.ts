@@ -128,7 +128,7 @@ export class PixGridElementComponent implements OnInit, AfterViewInit {
    * @param emoji_codepoint
    */
   public revealOnClick(emoji_codepoint: number = -1): void {
-    if ((this.grid_element_type !== 0) || (this.pixle_tile_solved || this.pixle_tile_lives <= 0)) return;
+    if (this.grid_element_type !== 0 || (this.pixle_tile_solved || this.pixle_tile_lives <= 0)) return;
     this.setElementIcon(emoji_codepoint, true);
   }
 
@@ -138,7 +138,7 @@ export class PixGridElementComponent implements OnInit, AfterViewInit {
    * @param solved
    */
   public updateTileStatus(solved: boolean): void {
-    if (this.grid_element_type !== 0 || this.pixle_tile_solved || this.pixle_tile_lives <= 0) return;
+    if (this.grid_element_type !== 0 || (this.pixle_tile_solved || this.pixle_tile_lives <= 0)) return;
     let grid_native_element: HTMLElement = this.user_interactive.nativeElement;
 
     if (!solved) {
@@ -214,7 +214,7 @@ export class PixGridElementComponent implements OnInit, AfterViewInit {
    * @private
    */
   private doFlip(element: HTMLElement): void {
-    if ((this.grid_element_type !== 0) || (element == undefined || null)) return;
+    if (this.grid_element_type !== 0 || element == undefined || null) return;
     // Show correct answer before flipping the grid element
     this.showCorrectAnswer();
     if (!element.classList.contains('do-flip')) {
@@ -231,7 +231,7 @@ export class PixGridElementComponent implements OnInit, AfterViewInit {
    * @private
    */
   private undoFlip(element: HTMLElement, reset: boolean = false): void {
-    if ((this.grid_element_type !== 0) || (element == undefined || null)) return;
+    if (this.grid_element_type !== 0 || element == undefined || null) return;
     if (element.classList.contains('do-flip')) {
       element.classList.remove('do-flip');
     }
