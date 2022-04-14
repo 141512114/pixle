@@ -3,10 +3,8 @@
   <div #user_interactive
        [ngClass]="{'flip-element': grid_element_type===0, 'invert-before': grid_element_type===1}"
        class="rounded-3 grid-element-inner emoji-wrapper" data-grid-element-status="3">
-    <div class="front-face">
-      <p class="p-0 m-0 emoji">
-        {{pixle_emoji_text}}
-      </p>
+    <div #emoji_input class="front-face">
+      <p class="p-0 m-0 emoji"></p>
     </div>
     <div #correct_answer *ngIf="grid_element_type===0" class="back-face">
       <p class="p-0 m-0 emoji"></p>

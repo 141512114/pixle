@@ -22,6 +22,7 @@ import {WINDOW} from '../window-injection.token';
 export class PixGridElementComponent implements OnInit, AfterViewInit {
   @ViewChild('component_grid_element') public component_grid_element!: ElementRef;
   @ViewChild('user_interactive') private user_interactive!: ElementRef;
+  @ViewChild('emoji_input') private emoji_input!: ElementRef;
   @ViewChild('correct_answer') private correct_answer?: ElementRef;
 
   @Input() pixle_emoji: number = -1; // <-- stores the correct answer
@@ -48,16 +49,18 @@ export class PixGridElementComponent implements OnInit, AfterViewInit {
     // Check which type this grid element has
     switch (this.grid_element_type) {
       case 1:
-        this.changeElementIcon(this.pixle_emoji);
+        this.setElementIcon(this.pixle_emoji);
         break;
       case 0:
       default:
-        this.changeElementIcon(this.pixle_emoji_default);
+        this.setElementIcon(this.pixle_emoji_default);
         break;
     }
   }
 
   ngAfterViewInit(): void {
+    this.updateElementViewIcon();
+
     // Check which type this grid element has
     switch (this.grid_element_type) {
       case 1:
@@ -124,7 +127,8 @@ export class PixGridElementComponent implements OnInit, AfterViewInit {
    */
   public revealOnClick(emoji_codepoint: number = -1): void {
     if ((this.grid_element_type !== 0) || (this.pixle_tile_solved || this.pixle_tile_lives <= 0)) return;
-    this.changeElementIcon(emoji_codepoint);
+    this.setElementIcon(emoji_codepoint);
+    this.updateElementViewIcon();
   }
 
   /**
@@ -160,10 +164,20 @@ export class PixGridElementComponent implements OnInit, AfterViewInit {
    * @param emoji_codepoint
    * @private
    */
-  private changeElementIcon(emoji_codepoint: number = -1): void {
-    if ((emoji_codepoint === -1) || (this.pixle_emoji_codepoint === emoji_codepoint)) return;
+  private setElementIcon(emoji_codepoint: number = -1): void {
+    if (emoji_codepoint === -1 || (emoji_codepoint !== -1 && this.pixle_emoji_codepoint === emoji_codepoint)) return;
     this.pixle_emoji_text = String.fromCodePoint(emoji_codepoint);
     this.pixle_emoji_codepoint = emoji_codepoint;
+  }
+
+  /**
+   * Update the icon shown to the player
+   *
+   * @private
+   */
+  private updateElementViewIcon(): void {
+    let icon_element = this.emoji_input.nativeElement.querySelector('p.emoji');
+    icon_element.textContent = this.pixle_emoji_text;
   }
 
   /**
@@ -217,7 +231,8 @@ export class PixGridElementComponent implements OnInit, AfterViewInit {
     }
     // Delay resetting this tile after reversing the flip --> smooth effect
     if (!this.pixle_tile_solved) {
-      this.changeElementIcon(this.pixle_emoji_default);
+      this.setElementIcon(this.pixle_emoji_default);
+      this.updateElementViewIcon();
       this.window.setTimeout(() => {
         this.hideCorrectAnswer();
         if (this.pixle_tile_lives > 0) {
