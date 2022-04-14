@@ -1,6 +1,6 @@
 import {AfterViewInit, Component, Inject, OnInit, ViewChild} from '@angular/core';
 import {Location} from '@angular/common';
-import {PIXLE_ICONS, REDCROSS} from '../database/emoji-database';
+import {PIXLE_ICONS} from '../database/emoji-database';
 import {IPopUp} from '../interface/popup-message.interface';
 import {PixPopupMessageComponent} from '../pix-popup-message/pix-popup-message.component';
 import {MATCH_PIXLE_NOT_FOUND} from '../database/status-numbers';
@@ -32,8 +32,6 @@ export class PixGameComponent implements OnInit, AfterViewInit {
   @ViewChild('match_status') private match_status_msg!: PixPopupMessageComponent;
   @ViewChild(PixGridComponent) private pixGridComponent!: PixGridComponent;
   pixle_arts: IPixle[] = PIXLEARTS; // <-- pulled database
-
-  empty_emoji_slot: number = REDCROSS;
 
   pixle_id: number = -1;
   pixle_image: number[][] = [];
@@ -165,14 +163,6 @@ export class PixGameComponent implements OnInit, AfterViewInit {
         }
       }
     }
-    // Fill empty slots with placeholders, if there ever are fewer emojis used than the horizontal amount of icons in a pixle
-    /* let modulo: number = temp_emoji_list.length % this.pixle_image_width;
-    if (modulo > 0 && modulo < this.pixle_image_width) {
-      let short_count: number = this.pixle_image_width - modulo;
-      for (let i: number = 0; i < short_count; i++) {
-        temp_emoji_list.push(this.empty_emoji_slot);
-      }
-    } */
     this.pixle_emoji_list = temp_emoji_list;
     return true;
   }

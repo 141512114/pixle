@@ -11,15 +11,6 @@ export class PixSideMenuComponent {
   @Output() public sendThemeData: EventEmitter<string> = new EventEmitter<string>();
 
   /**
-   * Receive and set the theme
-   *
-   * @param theme_name
-   */
-  public receiveThemeData(theme_name: string): void {
-    this.sendThemeData.emit(theme_name);
-  }
-
-  /**
    * Open the side menu
    */
   public openSideMenu(): void {

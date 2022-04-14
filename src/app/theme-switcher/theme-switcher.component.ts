@@ -1,4 +1,5 @@
-import {Component, EventEmitter, Output} from '@angular/core';
+import {Component, EventEmitter, Inject, Output} from '@angular/core';
+import {DOCUMENT} from '@angular/common';
 
 @Component({
   selector: 'app-theme-switcher',
@@ -8,12 +9,15 @@ import {Component, EventEmitter, Output} from '@angular/core';
 export class ThemeSwitcherComponent {
   @Output() public sendThemeData: EventEmitter<string> = new EventEmitter<string>();
 
+  constructor(@Inject(DOCUMENT) private document: Document) {
+  }
+
   /**
    * Change theme of the game
    *
    * @param theme_name
    */
   public changeTheme(theme_name: string): void {
-    this.sendThemeData.emit(theme_name);
+    this.document.body.dataset['theme'] = theme_name;
   }
 }

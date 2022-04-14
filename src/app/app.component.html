@@ -2,7 +2,7 @@
   <header class="navbar position-relative">
     <div class="header-ui-wrapper">
       <div class="company-logo">
-        <img src="../assets/nani_logo_duotone.svg" width="50" type="image/svg+xml"/>
+        <img src="../assets/nani_logo_duotone.svg" alt="Nani Games Logo" type="image/svg+xml"/>
       </div>
       <div class="open-side-menu-wrapper">
         <button class="rounded-3 open-side-menu" type="button" (click)="openSideMenu()">Open</button>
@@ -13,5 +13,5 @@
   <main class="component-app position-relative" role="main">
     <router-outlet></router-outlet>
   </main>
-  <app-pix-side-menu (sendThemeData)="receiveThemeData($event)"></app-pix-side-menu>
+  <app-pix-side-menu></app-pix-side-menu>
 </div>

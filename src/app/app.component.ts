@@ -32,15 +32,6 @@ export class AppComponent implements AfterViewInit {
   }
 
   /**
-   * Receive and set the theme
-   *
-   * @param theme_name
-   */
-  public receiveThemeData(theme_name: string): void {
-    this.document.body.dataset['theme'] = theme_name;
-  }
-
-  /**
    * Add a css property / variable which will "replace" the css unit vh
    * Using this variable is much more reliable and mobile-friendly
    *
