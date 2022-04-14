@@ -14,6 +14,8 @@ import {HelperFunctionsService} from '../services/helper-functions.service';
 import {STYLESHEETS_PATH} from '../app.component';
 import {WINDOW} from '../window-injection.token';
 
+const SHORT_OFFSET: number = 500;
+
 @Component({
   selector: 'app-pix-grid-element',
   templateUrl: './pix-grid-element.component.html',
@@ -127,8 +129,7 @@ export class PixGridElementComponent implements OnInit, AfterViewInit {
    */
   public revealOnClick(emoji_codepoint: number = -1): void {
     if ((this.grid_element_type !== 0) || (this.pixle_tile_solved || this.pixle_tile_lives <= 0)) return;
-    this.setElementIcon(emoji_codepoint);
-    this.updateElementViewIcon();
+    this.setElementIcon(emoji_codepoint, true);
   }
 
   /**
@@ -162,12 +163,16 @@ export class PixGridElementComponent implements OnInit, AfterViewInit {
    * Change the grid elements icon
    *
    * @param emoji_codepoint
+   * @param update
    * @private
    */
-  private setElementIcon(emoji_codepoint: number = -1): void {
+  private setElementIcon(emoji_codepoint: number = -1, update: boolean = false): void {
     if (emoji_codepoint === -1 || (emoji_codepoint !== -1 && this.pixle_emoji_codepoint === emoji_codepoint)) return;
     this.pixle_emoji_text = String.fromCodePoint(emoji_codepoint);
     this.pixle_emoji_codepoint = emoji_codepoint;
+
+    if (!update) return;
+    this.updateElementViewIcon();
   }
 
   /**
@@ -231,14 +236,13 @@ export class PixGridElementComponent implements OnInit, AfterViewInit {
     }
     // Delay resetting this tile after reversing the flip --> smooth effect
     if (!this.pixle_tile_solved) {
-      this.setElementIcon(this.pixle_emoji_default);
-      this.updateElementViewIcon();
+      this.setElementIcon(this.pixle_emoji_default, true);
       this.window.setTimeout(() => {
         this.hideCorrectAnswer();
         if (this.pixle_tile_lives > 0) {
           HelperFunctionsService.unlockElement(element);
         }
-      }, 500);
+      }, SHORT_OFFSET);
     }
   }
 }
