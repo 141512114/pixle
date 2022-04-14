@@ -146,7 +146,7 @@ export class PixGridElementComponent implements OnInit, AfterViewInit {
       // Add class which represents the current health status
       if (this.pixle_tile_lives <= 0) {
         grid_native_element.dataset['gridElementStatus'] = 'failed';
-        this.undoFlip(grid_native_element);
+        this.undoFlip(grid_native_element, true);
         HelperFunctionsService.lockElement(grid_native_element);
       } else {
         grid_native_element.dataset['gridElementStatus'] = this.pixle_tile_lives.toString();
@@ -227,9 +227,10 @@ export class PixGridElementComponent implements OnInit, AfterViewInit {
    * Reverse flipped grid element
    *
    * @param element
+   * @param reset
    * @private
    */
-  private undoFlip(element: HTMLElement): void {
+  private undoFlip(element: HTMLElement, reset: boolean = false): void {
     if ((this.grid_element_type !== 0) || (element == undefined || null)) return;
     if (element.classList.contains('do-flip')) {
       element.classList.remove('do-flip');
@@ -237,12 +238,14 @@ export class PixGridElementComponent implements OnInit, AfterViewInit {
     // Delay resetting this tile after reversing the flip --> smooth effect
     if (!this.pixle_tile_solved) {
       this.setElementIcon(this.pixle_emoji_default, true);
-      this.window.setTimeout(() => {
-        this.hideCorrectAnswer();
-        if (this.pixle_tile_lives > 0) {
-          HelperFunctionsService.unlockElement(element);
-        }
-      }, SHORT_OFFSET);
+      if (!reset) {
+        this.window.setTimeout(() => {
+          this.hideCorrectAnswer();
+          if (this.pixle_tile_lives > 0) {
+            HelperFunctionsService.unlockElement(element);
+          }
+        }, SHORT_OFFSET);
+      }
     }
   }
 }
