@@ -91,7 +91,7 @@ div.pix-emoji-list-wrapper {
     display: inline-block;
     width: 65px;
     height: 65px;
-    margin-right: 6px;
+    margin-right: 3px;
     flex: 0 0 auto;
     font-size: calc(1em + 2.85vmin);
 
@@ -170,6 +170,7 @@ only screen and (max-height: 600px) {
   }
 
   div.pix-emoji-list-wrapper div.pix-grid-col {
+    margin-right: 6px;
     font-size: calc(1em + 2.1vmin);
   }
 }
