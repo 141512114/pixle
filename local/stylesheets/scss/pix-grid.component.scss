@@ -21,7 +21,7 @@ div.mobile-landscape-popup {
       margin: 0;
       padding: 0;
       font-size: calc(1em + 1.65vmin);
-      color: var(--default-theme-one, map.get($default-color-palette, 1))
+      color: var(--default-theme-one, map.get($default-color-palette, 1));
     }
   }
 }
