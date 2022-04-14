@@ -18,33 +18,25 @@ div.mobile-landscape-popup {
     background-color: var(--default-theme-four, map.get($default-color-palette, 4));
 
     p {
-      margin: 0;
-      padding: 0;
       font-size: calc(1em + 1.65vmin);
       color: var(--default-theme-one, map.get($default-color-palette, 1));
     }
   }
 }
 
-div.component-pix-grid {
-  width: auto;
+div.component-pix-grid div.pix-grid-col {
+  padding: 5px;
+  font-size: calc(1.2em + 3vmin);
 
-  div.pix-grid-col {
-    padding: 5px;
-    font-size: calc(1.2em + 3vmin);
-
-    @media only screen and (max-width: 250px) {
-      font-size: calc(1em + 2.85vmin);
-    }
+  @media only screen and (max-width: 250px) {
+    font-size: calc(1em + 2.85vmin);
   }
 }
 
 .pix-grid-wrapper {
-  display: block;
   @include flexbox();
   max-width: $grid_limit_width;
   margin: 0 auto;
-  overflow: hidden;
 }
 
 div.pix-grid-buffer {
@@ -65,7 +57,6 @@ div.pix-grid-buffer {
   width: 100vw;
   margin: 0 auto;
   border-radius: 8px 8px 0 0;
-  overflow: hidden;
 }
 
 div.pix-emoji-list-wrapper {
@@ -75,8 +66,6 @@ div.pix-emoji-list-wrapper {
   background-color: var(--default-theme-three, map.get($default-color-palette, 3));
 
   div.pix-emoji-list-buffer {
-    display: flex;
-    flex-wrap: nowrap;
     padding: 0 13px math.div($padding_vertical, 2);
     overflow-x: scroll;
     overflow-y: hidden;

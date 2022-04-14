@@ -1,7 +1,7 @@
-<div class="component-pix-grid container position-relative h-100 p-0">
+<div class="component-pix-grid container position-relative w-auto h-100 p-0">
   <table class="table p-0 w-100 h-100 playground-wrapper">
     <tr class="h-100" align="center">
-      <td #grid_wrapper class="h-100 px-4 pix-grid-wrapper">
+      <td #grid_wrapper class="h-100 px-4 overflow-hidden pix-grid-wrapper">
         <div class="m-0 h-100 pix-grid-buffer">
           <div #grid_inner class="w-100 h-auto pix-grid-inner">
             <div class="row w-100 justify-content-center g-0 pix-grid-row" *ngFor="let row of grid_image">
@@ -17,9 +17,9 @@
       </td>
     </tr>
     <tr class="h-auto" align="center">
-      <td #ui_wrapper class="playground-ui-wrapper">
+      <td #ui_wrapper class="overflow-hidden playground-ui-wrapper">
         <div class="pix-emoji-list-wrapper">
-          <div class="pix-emoji-list-buffer">
+          <div class="d-flex flex-nowrap pix-emoji-list-buffer">
             <div class="pix-grid-col" *ngFor="let j of counter(emoji_list.length)">
               <app-pix-grid-element #pixle_emoji_output [pixle_emoji]="emoji_list[j]"
                                     [grid_element_type]="1"
@@ -43,6 +43,6 @@
 </div>
 <div class="container-fluid h-100 w-100 mobile-landscape-popup">
   <div class="rounded-3 mobile-landscape-popup-wrapper">
-    <p>Landscape-Mode isn't available.</p>
+    <p class="m-0 p-0">Landscape-Mode isn't available.</p>
   </div>
 </div>
