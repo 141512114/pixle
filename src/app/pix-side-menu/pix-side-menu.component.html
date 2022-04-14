@@ -1,30 +1,17 @@
-<div class="open-side-menu-wrapper ui">
-  <button class="rounded-3 open-side-menu" type="button" (click)="openSideMenu()">Open</button>
-</div>
 <div #side_menu class="component-pix-side-menu container-fluid position-fixed close">
-  <div class="close-side-menu-wrapper ui">
+  <div class="close-side-menu-wrapper">
     <button class="rounded-3 close-side-menu" type="button" (click)="closeSideMenu()">Close</button>
   </div>
-  <div class="container overflow-auto ui">
+  <div class="container overflow-auto">
     <div class="row g-0">
-      <!-- <div class="col col-sm-4 mb-3 mb-sm-0 publisher-info">
-        <div class="info-image mb-3 mb-md-4">
-          <img class="logo" src="assets/nani_logo_duotone.svg" type="image/svg">
-        </div>
-        <div class="info-text">
-          <h1>A game made by Nani Games</h1>
-          <p>Pixle was developed and published by Nani.</p>
-        </div>
-      </div>
-      <div class="w-100 d-sm-none"></div> -->
       <div class="col-6 mb-3 mb-sm-0 settings">
         <app-theme-switcher (sendThemeData)="receiveThemeData($event)"></app-theme-switcher>
       </div>
       <div class="col-6 important-links">
         <button class="rounded-3 w-auto imprint" type="button">Imprint</button>
         <button class="rounded-3 w-auto contact" type="button">Contact</button>
-        <button class="rounded-3 w-auto Cookies" type="button">Cookies</button>
-        <button class="rounded-3 w-auto Other" type="button">Other</button>
+        <button class="rounded-3 w-auto cookies" type="button">Cookies</button>
+        <button class="rounded-3 w-auto other" type="button">Other</button>
       </div>
     </div>
   </div>

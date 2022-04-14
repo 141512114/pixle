@@ -2,14 +2,14 @@
 
 @import '../mixins/themes';
 @import '../mixins/mixins';
+@import '../mixins/responsive';
 
 // app component stylesheet
 header.navbar {
+  @include flexbox();
   padding: 7px 0;
   user-select: none;
-  @include flexbox();
   background-color: var(--default-theme-three, map.get($default-color-palette, 3));
-  pointer-events: none;
   z-index: 999;
 
   .game-title {
@@ -17,6 +17,42 @@ header.navbar {
     padding: 4px 0;
     text-align: center;
     letter-spacing: 2px;
+    pointer-events: none;
+  }
+
+  div.header-ui-wrapper {
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    @include flexbox(space-between, unset, row);
+    width: 100%;
+    height: 100%;
+    padding: 0 6px;
+
+    div.company-logo {
+      display: block;
+      width: auto;
+      padding: 7px 0;
+
+      img {
+        height: 100%;
+      }
+    }
+
+    div.open-side-menu-wrapper {
+      @include flexbox();
+      padding: 5px;
+    }
+
+    @media only screen and (min-width: $breakpoint_md) {
+      padding: 0 10px;
+    }
+
+    @media only screen and (min-width: $breakpoint_xmd) {
+      padding: 0 13px;
+    }
   }
 }
 

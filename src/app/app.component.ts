@@ -1,6 +1,7 @@
-import {AfterViewInit, Component, ElementRef, Inject, ViewChild} from '@angular/core';
+import {AfterViewInit, Component, Inject, ViewChild} from '@angular/core';
 import {DOCUMENT} from '@angular/common';
 import {WINDOW} from './window-injection.token';
+import {PixSideMenuComponent} from './pix-side-menu/pix-side-menu.component';
 
 export const STYLESHEETS_PATH: string = '../../stylesheets/css/';
 
@@ -10,7 +11,7 @@ export const STYLESHEETS_PATH: string = '../../stylesheets/css/';
   styleUrls: ['../stylesheets/css/app.component.min.css']
 })
 export class AppComponent implements AfterViewInit {
-  @ViewChild('app_root') private app_root!: ElementRef;
+  @ViewChild(PixSideMenuComponent) private pixSideMenuComponent!: PixSideMenuComponent;
 
   constructor(@Inject(DOCUMENT) private document: Document, @Inject(WINDOW) private readonly window: Window) {
     this.addViewportHeightProperty();
@@ -24,12 +25,19 @@ export class AppComponent implements AfterViewInit {
   }
 
   /**
+   * Open the side menu
+   */
+  public openSideMenu(): void {
+    this.pixSideMenuComponent.openSideMenu();
+  }
+
+  /**
    * Receive and set the theme
    *
    * @param theme_name
    */
   public receiveThemeData(theme_name: string): void {
-    this.app_root.nativeElement.dataset['theme'] = theme_name;
+    this.document.body.dataset['theme'] = theme_name;
   }
 
   /**

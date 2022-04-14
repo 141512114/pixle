@@ -55,17 +55,28 @@ a {
 
 a,
 li {
+  list-style: none;
   text-decoration: none;
 }
 
 input,
 textarea,
 button {
-  padding: 4px 12px;
+  padding: 4px 10px;
   font-family: $main-font;
-  font-size: 18px;
+  font-size: 14px;
   font-weight: 400;
   outline: none;
+
+  @media only screen and (min-width: $breakpoint_xxsm) {
+    padding: 4px 11px;
+    font-size: 16px;
+  }
+
+  @media only screen and (min-width: $breakpoint_xmd) {
+    padding: 4px 12px;
+    font-size: 18px;
+  }
 }
 
 button {

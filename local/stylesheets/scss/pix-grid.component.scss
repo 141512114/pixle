@@ -175,6 +175,12 @@ only screen and (max-height: 600px) {
   }
 }
 
+@media only screen and (min-width: $breakpoint_md) {
+  div.pix-emoji-list-wrapper div.pix-grid-col {
+    font-size: calc(.9em + 2vmin);
+  }
+}
+
 @media only screen and (min-width: $breakpoint_xmd) {
   .playground-ui-wrapper {
     width: 500px;
