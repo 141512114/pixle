@@ -130,7 +130,7 @@ div.pix-control-wrapper {
 only screen and (max-height: 600px) {
   div.pix-grid-inner div.pix-grid-col {
     &.gridw-5, &.gridh-5 {
-      font-size: calc(1.3em + 2.35vmin);
+      font-size: calc(1em + 2.2vmin);
     }
   }
 }
