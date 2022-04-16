@@ -76,11 +76,11 @@ div.grid-element-inner {
     }
 
     &[data-grid-element-status="2"] {
-      @include background-color(2, $status-palette, $background-color-alpha-focused);
+      background-color: rgba(map.get($status-palette, 2), $background-color-alpha-focused);
     }
 
     &[data-grid-element-status="1"] {
-      @include background-color(3, $status-palette, $background-color-alpha-focused);
+      background-color: rgba(map.get($status-palette, 3), $background-color-alpha-focused);
     }
   }
 }

@@ -1,10 +1,6 @@
 @use "sass:map";
 
 // Default mixins
-@mixin background-color($color_id, $palette: $default-color-palette, $alpha:1) {
-  background-color: rgba(map.get($palette, $color_id), $alpha);
-}
-
 @mixin alignment_old($xoff:50%, $yoff:50%, $xoff_counter:-$xoff, $yoff_counter:-$yoff) {
   position: absolute;
   top: $xoff;
