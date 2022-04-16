@@ -9,21 +9,6 @@
 // pix-grid component stylesheet
 $grid_limit_width: 375px;
 
-div.mobile-landscape-popup {
-  display: none;
-  visibility: hidden;
-
-  div.mobile-landscape-popup-wrapper {
-    padding: 11px 21px;
-    background-color: var(--default-theme-four, map.get($default-color-palette, 4));
-
-    p {
-      font-size: calc(1em + 1.65vmin);
-      color: var(--default-theme-one, map.get($default-color-palette, 1));
-    }
-  }
-}
-
 div.component-pix-grid div.pix-grid-col {
   padding: 5px;
   font-size: calc(1.2em + 3vmin);
@@ -177,18 +162,5 @@ only screen and (max-height: 600px) {
     div.pix-emoji-list-wrapper div.pix-emoji-list-buffer {
       overflow-x: hidden;
     }
-  }
-}
-
-// ########### Disable if orientation is landscape (only for mobile)
-@media only screen and (max-height: 615px) and (orientation: landscape) {
-  div.component-pix-grid {
-    display: none;
-    visibility: hidden;
-  }
-
-  div.mobile-landscape-popup {
-    @include flexbox();
-    visibility: visible;
   }
 }
