@@ -111,6 +111,12 @@ div.pix-control-wrapper {
   div.reload-pix-button-wrapper button {
     color: var(--default-theme-four, map.get($default-color-palette, 4));
     background-color: var(--default-theme-two, map.get($default-color-palette, 2));
+
+    &:hover {
+      cursor: pointer;
+      color: var(--default-theme-two, map.get($default-color-palette, 2));
+      background-color: var(--default-theme-six, map.get($default-color-palette, 6));
+    }
   }
 }
 

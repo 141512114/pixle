@@ -29,6 +29,16 @@ header {
   height: auto;
 }
 
+.nani-logo-colors {
+  .nani-stripes {
+    fill: var(--default-theme-six, map.get($default-color-palette, 6));
+  }
+
+  .nani-snake {
+    fill: var(--default-theme-five, map.get($default-color-palette, 5));
+  }
+}
+
 h1,
 h2,
 h3,
@@ -84,7 +94,7 @@ button {
   font-family: $main-ui;
   color: var(--default-theme-two, map.get($default-color-palette, 2));
   background-color: var(--default-theme-four, map.get($default-color-palette, 4));
-  transition: background-color 200ms;
+  transition: color 200ms, background-color 200ms;
 
   &:hover {
     cursor: pointer;
