@@ -1,7 +1,8 @@
-import {Component, ElementRef, EventEmitter, Output, ViewChild} from '@angular/core';
+import {Component, ElementRef, EventEmitter, Output, ViewChild, ViewEncapsulation} from '@angular/core';
 import {STYLESHEETS_PATH} from '../app.component';
 
 @Component({
+  encapsulation: ViewEncapsulation.None,
   selector: 'app-pix-side-menu',
   templateUrl: './pix-side-menu.component.html',
   styleUrls: [STYLESHEETS_PATH + 'pix-side-menu.component.css']

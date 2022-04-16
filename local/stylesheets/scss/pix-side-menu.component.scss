@@ -2,6 +2,7 @@
 
 @import '../mixins/themes';
 @import '../mixins/mixins';
+@import '../mixins/fonts';
 @import '../mixins/responsive';
 
 // pix-side-menu component stylesheet
@@ -29,5 +30,71 @@ div.component-pix-side-menu {
     top: 0;
     right: 0;
     padding: 18px;
+  }
+}
+
+div.theme-settings,
+div.important-links {
+  position: relative;
+
+  div.background-text-label {
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    width: auto;
+    height: 100%;
+    overflow: hidden;
+    z-index: 1;
+
+    p {
+      margin: 0;
+      padding: 0;
+      font-family: $main-ui;
+      font-size: 48px;
+      color: var(--default-theme-one, map.get($default-color-palette, 1));
+      transform-origin: top;
+      transform: rotate(90deg) translateX(calc(50% - 10px));
+    }
+  }
+
+  ul li {
+    margin-bottom: 10px;
+
+    button {
+      padding: 6px 12px;
+      font-size: 16px;
+    }
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+
+    @media only screen and (min-width: $breakpoint_xsm) {
+      margin-bottom: 12px;
+
+      button {
+        padding: 7px 15px;
+        font-size: 18px;
+      }
+    }
+
+    @media only screen and (min-width: $breakpoint_xxxsm) {
+      margin-bottom: 13px;
+
+      button {
+        padding: 8px 15px;
+        font-size: 20px;
+      }
+    }
+
+    @media only screen and (min-width: $breakpoint_xmd) {
+      margin-bottom: 13px;
+
+      button {
+        padding: 9px 18px;
+        font-size: 22px;
+      }
+    }
   }
 }

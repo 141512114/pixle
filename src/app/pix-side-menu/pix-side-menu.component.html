@@ -2,12 +2,18 @@
   <div class="close-side-menu-wrapper">
     <button class="rounded-3 close-side-menu" type="button" (click)="closeSideMenu()">Close</button>
   </div>
-  <div class="container overflow-auto">
+  <div class="container">
     <div class="row g-0 settings-wrapper">
-      <div class="col-6 mb-3 mb-sm-0 theme-settings">
+      <div class="col-6 theme-settings">
+        <!-- <div class="background-text-label">
+          <p>Theme</p>
+        </div> -->
         <app-theme-switcher></app-theme-switcher>
       </div>
       <div class="col-6 important-links">
+        <!-- <div class="background-text-label">
+          <p>Links</p>
+        </div> -->
         <ul class="important-links-list">
           <li>
             <button class="rounded-3 w-auto imprint" type="button">Imprint</button>
