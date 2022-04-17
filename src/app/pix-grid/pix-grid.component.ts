@@ -145,10 +145,10 @@ export class PixGridComponent implements OnInit, AfterViewInit {
    */
   private calculateWidthOfGridBufferElementViaWindowHeight(): number {
     let grid_buffer_element: HTMLElement = this.grid_wrapper.nativeElement.querySelector('div.pix-grid-buffer');
-    /* let ui_wrapper_element: HTMLElement = this.ui_wrapper.nativeElement;
+    let ui_wrapper_element: HTMLElement | null = this.document.getElementById('pix-grid-ui');
     let header_element: HTMLElement | null = this.document.body.querySelector('header.navbar');
 
-    if (header_element == null || undefined) return grid_buffer_element.offsetWidth;
+    if ((header_element == null || undefined) || (ui_wrapper_element == null || undefined)) return grid_buffer_element.offsetWidth;
 
     let padding_top: number = parseInt(this.window.getComputedStyle(grid_buffer_element, null).paddingTop);
     let padding_bottom: number = parseInt(this.window.getComputedStyle(grid_buffer_element, null).paddingBottom);
@@ -160,7 +160,6 @@ export class PixGridComponent implements OnInit, AfterViewInit {
     let new_grid_buffer_width: number = ((relative_grid_wrapper_height / this.grid_image_height) * this.grid_image_width) - padding_offset;
 
     grid_buffer_element.style.maxWidth = new_grid_buffer_width + 'px';
-    return new_grid_buffer_width; */
-    return grid_buffer_element.offsetWidth;
+    return new_grid_buffer_width;
   }
 }
