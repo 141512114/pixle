@@ -11,6 +11,10 @@
   width: 100vw;
   margin: 0 auto;
   border-radius: 8px 8px 0 0;
+
+  div.pix-grid-col {
+    padding: 5px;
+  }
 }
 
 div.pix-emoji-list-wrapper {
@@ -85,6 +89,12 @@ div.pix-control-wrapper {
     width: 75px;
     height: 75px;
     font-size: calc(1.35em + 2.5vmin);
+  }
+}
+
+@media only screen and (min-width: $breakpoint_xsm) {
+  div.pix-emoji-list-wrapper div.pix-grid-col {
+    font-size: calc(1.1em + 2.2vmin);
   }
 }
 
