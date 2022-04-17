@@ -12,6 +12,8 @@ import {PixGridComponent} from '../pix-grid/pix-grid.component';
 import {GameManager} from './game.manager';
 import {STYLESHEETS_PATH} from '../app.component';
 import {WINDOW} from '../window-injection.token';
+import {PixGridElementComponent} from '../pix-grid-element/pix-grid-element.component';
+import {PixGridUiComponent} from '../pix-grid-ui/pix-grid-ui.component';
 
 // Popup messages
 const MISSING_PIXLE_MSG: IPopUp = {
@@ -31,6 +33,7 @@ const UNDO_FLIP_TIME: number = 2000;
 export class PixGameComponent implements OnInit, AfterViewInit {
   @ViewChild('match_status') private match_status_msg!: PixPopupMessageComponent;
   @ViewChild(PixGridComponent) private pixGridComponent!: PixGridComponent;
+  @ViewChild(PixGridUiComponent) private pixGridUiComponent!: PixGridUiComponent;
   pixle_arts: IPixle[] = PIXLEARTS; // <-- pulled database
 
   pixle_id: number = -1;
@@ -38,6 +41,8 @@ export class PixGameComponent implements OnInit, AfterViewInit {
   pixle_image_width: number = 0;
   pixle_image_height: number = 0;
   pixle_emoji_list: number[] = [];
+
+  validating: boolean = false;
 
   constructor(private router: Router, private location: Location, @Inject(WINDOW) private readonly window: Window) {
   }
@@ -58,6 +63,7 @@ export class PixGameComponent implements OnInit, AfterViewInit {
    * Receive reload request
    */
   public async receiveReloadRequest() {
+    if (this.validating) return;
     let absolute_path: string = this.location.path();
     this.router.routeReuseStrategy.shouldReuseRoute = () => false;
     this.router.onSameUrlNavigation = 'reload';
@@ -81,6 +87,14 @@ export class PixGameComponent implements OnInit, AfterViewInit {
       default:
         break;
     }
+  }
+
+  /**
+   * Receive validation request from the ui
+   */
+  public receiveValidationRequest(): void {
+    if (this.validating) return;
+    this.validatePixle();
   }
 
   /**
@@ -165,5 +179,55 @@ export class PixGameComponent implements OnInit, AfterViewInit {
     }
     this.pixle_emoji_list = temp_emoji_list;
     return true;
+  }
+
+  /**
+   * Validate the pixle
+   * Easy version: go through every tile and check its validity separately
+   *
+   * @private
+   */
+  private validatePixle(): void {
+    if (!GameManager.game_started || GameManager.pixle_solved || this.validating) return;
+    this.validating = true;
+
+    let temp_pix_grid_comps: PixGridElementComponent[] = this.pixGridComponent.pixle_emoji_input.toArray();
+    let total_count: number = 0, failed_count: number = 0;
+    // Check every pixle tile if its valid --> emoji at the exact same position as in the original pixle
+    for (let i: number = 0; i < this.pixle_image_height; i++) {
+      for (let j: number = 0; j < this.pixle_image_width; j++) {
+        let current_column: number = (this.pixle_image_width * i) + j;
+        if (temp_pix_grid_comps[current_column].pixle_emoji_codepoint !== this.pixle_image[i][j]) {
+          temp_pix_grid_comps[current_column].updateTileStatus(false);
+          if (temp_pix_grid_comps[current_column].pixle_tile_lives <= 0) {
+            failed_count++;
+          }
+          continue;
+        }
+        temp_pix_grid_comps[current_column].updateTileStatus(true);
+        total_count++;
+      }
+    }
+    // If any tile has reached its limits --> went out of lives --> game over
+    if (failed_count > 0) {
+      GameManager.resetGame();
+    } else {
+      // Player has won the game
+      let tile_amount: number = this.pixle_image_width * this.pixle_image_height;
+      if (total_count >= tile_amount) {
+        GameManager.pixle_solved = true;
+        GameManager.game_started = false;
+      } else {
+        // Player didn't win yet --> reset flip-state of some tiles
+        this.window.setTimeout(() => {
+          this.pixGridComponent.setFlipStatus();
+          this.window.setTimeout(() => {
+            this.validating = false;
+          }, 1000);
+        }, UNDO_FLIP_TIME);
+        return;
+      }
+    }
+    this.validating = false;
   }
 }

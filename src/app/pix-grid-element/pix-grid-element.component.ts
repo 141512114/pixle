@@ -13,6 +13,7 @@ import {REDCROSS, WHITE_QUESTIONMARK} from '../database/emoji-database';
 import {HelperFunctionsService} from '../services/helper-functions.service';
 import {STYLESHEETS_PATH} from '../app.component';
 import {WINDOW} from '../window-injection.token';
+import {GameManager} from '../pix-game/game.manager';
 
 const SHORT_OFFSET: number = 500;
 
@@ -28,7 +29,6 @@ export class PixGridElementComponent implements OnInit, AfterViewInit {
   @ViewChild('correct_answer') private correct_answer?: ElementRef;
 
   @Input() pixle_emoji: number = -1; // <-- stores the correct answer
-  @Input() receive_chosen_emoji: number = -1;
   /**
    * Different grid element types:
    * 0 => Receiver
@@ -80,7 +80,7 @@ export class PixGridElementComponent implements OnInit, AfterViewInit {
       default:
         // On click: change emoji
         this.component_grid_element.nativeElement.addEventListener('click', () => {
-          this.revealOnClick(this.receive_chosen_emoji);
+          this.revealOnClick(GameManager.chosen_emoji);
         });
         break;
     }

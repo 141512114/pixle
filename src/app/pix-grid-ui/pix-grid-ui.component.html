@@ -1,0 +1,20 @@
+<div class="overflow-hidden component-pix-grid-ui playground-ui-wrapper">
+  <div class="pix-emoji-list-wrapper">
+    <div class="d-flex flex-nowrap pix-emoji-list-buffer">
+      <div class="pix-grid-col" *ngFor="let j of counter(emoji_list.length)">
+        <app-pix-grid-element #pixle_emoji_output [pixle_emoji]="emoji_list[j]" [grid_element_type]="1"
+                              (sendIconCodePoint)="receiveIconCodePoint($event)"></app-pix-grid-element>
+      </div>
+    </div>
+  </div>
+  <div class="mt-auto pix-control-wrapper">
+    <div class="p-0 validate-button-wrapper">
+      <button class="pix-validate-button" (click)="validatePixleOnClick()" type="button">Flip!
+      </button>
+    </div>
+    <div class="p-0 reload-pix-button-wrapper">
+      <button class="pix-reload-button" (click)="reloadGameComponent()" type="button">Reload
+      </button>
+    </div>
+  </div>
+</div>

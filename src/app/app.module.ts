@@ -9,6 +9,7 @@ import {PixPopupMessageComponent} from './pix-popup-message/pix-popup-message.co
 import {AppRoutingModule} from './app-routing.module';
 import {ThemeSwitcherComponent} from './theme-switcher/theme-switcher.component';
 import {PixSideMenuComponent} from './pix-side-menu/pix-side-menu.component';
+import { PixGridUiComponent } from './pix-grid-ui/pix-grid-ui.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import {PixSideMenuComponent} from './pix-side-menu/pix-side-menu.component';
     PixGridElementComponent,
     PixPopupMessageComponent,
     ThemeSwitcherComponent,
-    PixSideMenuComponent
+    PixSideMenuComponent,
+    PixGridUiComponent
   ],
   imports: [
     BrowserModule,

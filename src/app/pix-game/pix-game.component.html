@@ -1,9 +1,21 @@
 <section class="component-pix-game container-fluid position-relative h-100 p-0">
-  <div class="pix-game-wrapper container h-100 p-0">
-    <ng-container *ngIf="pixle_image.length > 0">
-      <app-pix-grid (sendMatchStatus)="receiveMatchStatus($event)" (sendReloadRequest)="receiveReloadRequest()"
-                    [grid_image]="pixle_image" [emoji_list]="pixle_emoji_list"></app-pix-grid>
-    </ng-container>
+  <div class="container position-relative h-100 p-0 pix-game-wrapper">
+    <table class="table p-0 w-100 h-100 playground-wrapper">
+      <tr class="h-100" align="center">
+        <td class="h-100 px-4 overflow-hidden pix-grid-wrapper">
+          <ng-container *ngIf="pixle_image.length > 0">
+            <app-pix-grid (sendMatchStatus)="receiveMatchStatus($event)" [grid_image]="pixle_image"></app-pix-grid>
+          </ng-container>
+        </td>
+      </tr>
+      <tr class="h-auto" align="center">
+        <td class="overflow-hidden playground-ui-wrapper">
+          <app-pix-grid-ui (sendValidationRequest)="receiveValidationRequest()"
+                           (sendReloadRequest)="receiveReloadRequest()"
+                           [emoji_list]="pixle_emoji_list"></app-pix-grid-ui>
+        </td>
+      </tr>
+    </table>
     <!-- <app-pix-popup-message #match_status (sendReloadRequest)="receiveReloadRequest()"></app-pix-popup-message> -->
   </div>
   <div class="container-fluid h-100 w-100 mobile-landscape-popup">

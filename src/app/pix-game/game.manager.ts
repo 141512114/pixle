@@ -5,6 +5,8 @@ export class GameManager {
   public static pixle_solved: boolean = false;
   public static game_started: boolean = false;
 
+  public static chosen_emoji: number = -1;
+
   /**
    * Initialize the game
    */
