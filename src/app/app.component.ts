@@ -2,6 +2,7 @@ import {AfterViewInit, Component, Inject, ViewChild} from '@angular/core';
 import {DOCUMENT} from '@angular/common';
 import {WINDOW} from './window-injection.token';
 import {PixSideMenuComponent} from './pix-side-menu/pix-side-menu.component';
+import {faEllipsis} from '@fortawesome/free-solid-svg-icons';
 
 export const STYLESHEETS_PATH: string = '../../stylesheets/css/';
 
@@ -12,6 +13,8 @@ export const STYLESHEETS_PATH: string = '../../stylesheets/css/';
 })
 export class AppComponent implements AfterViewInit {
   @ViewChild(PixSideMenuComponent) private pixSideMenuComponent!: PixSideMenuComponent;
+
+  ellipsis = faEllipsis;
 
   constructor(@Inject(DOCUMENT) private document: Document, @Inject(WINDOW) private readonly window: Window) {
     this.addViewportHeightProperty();

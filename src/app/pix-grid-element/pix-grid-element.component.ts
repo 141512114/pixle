@@ -62,7 +62,6 @@ export class PixGridElementComponent implements OnInit, AfterViewInit {
 
   ngAfterViewInit(): void {
     this.updateElementViewIcon();
-
     // Check which type this grid element has
     switch (this.grid_element_type) {
       case 1:

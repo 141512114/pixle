@@ -9,7 +9,8 @@ import {PixPopupMessageComponent} from './pix-popup-message/pix-popup-message.co
 import {AppRoutingModule} from './app-routing.module';
 import {ThemeSwitcherComponent} from './theme-switcher/theme-switcher.component';
 import {PixSideMenuComponent} from './pix-side-menu/pix-side-menu.component';
-import { PixGridUiComponent } from './pix-grid-ui/pix-grid-ui.component';
+import {PixGridUiComponent} from './pix-grid-ui/pix-grid-ui.component';
+import {FontAwesomeModule} from '@fortawesome/angular-fontawesome';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { PixGridUiComponent } from './pix-grid-ui/pix-grid-ui.component';
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    FontAwesomeModule
   ],
   providers: [],
   bootstrap: [AppComponent]
