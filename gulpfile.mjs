@@ -13,6 +13,7 @@ import gulpSass from 'gulp-sass';
 import cleanCSS from 'gulp-clean-css';
 import sourcemaps from 'gulp-sourcemaps';
 import autoprefixer from 'gulp-autoprefixer';
+import svgmin from 'gulp-svgmin';
 import plumber from 'gulp-plumber';
 import del from 'del';
 
@@ -26,6 +27,10 @@ Paths: ----------------------------------------------------------
 
 const SRC_PATH = './src/';
 const DEV_SRC_PATH = './local/';
+const ASSETS_PATH = SRC_PATH + 'assets/';
+
+// SVG paths
+const SVG_FOLDER = ASSETS_PATH + 'svg/';
 
 // Style paths
 const STYLES_SRC_FILES = DEV_SRC_PATH + 'stylesheets/scss/**/!(_*)*.scss';
@@ -132,6 +137,19 @@ gulp.task('bootstrap-stylesheets', async function () {
   await to_css(BOOTSTRAP_SRC_FILES, BOOTSTRAP_MIN_DEST_PATH).then(() =>
     uglify(BOOTSTRAP_MIN_DEST_PATH)
   );
+});
+
+/*
+
+Compress svg files: ----------------------------------------------
+
+*/
+
+gulp.task('svg-compress', async function() {
+  gulp.src(SVG_FOLDER + '**/*.svg')
+    .pipe(plumber())
+    .pipe(svgmin())
+    .pipe(gulp.dest(SVG_FOLDER));
 });
 
 /*
