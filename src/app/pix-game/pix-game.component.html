@@ -2,7 +2,7 @@
   <div class="container position-relative h-100 p-0 pix-game-wrapper">
     <table class="table p-0 w-100 h-100 playground-wrapper">
       <tr class="h-100" align="center">
-        <td class="h-100 px-4 overflow-hidden pix-grid-wrapper">
+        <td class="h-100 overflow-hidden pix-grid-wrapper">
           <ng-container *ngIf="pixle_image.length > 0">
             <app-pix-grid (sendMatchStatus)="receiveMatchStatus($event)" [grid_image]="pixle_image"></app-pix-grid>
           </ng-container>

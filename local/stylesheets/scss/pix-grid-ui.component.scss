@@ -13,7 +13,7 @@
   border-radius: 8px 8px 0 0;
 
   div.pix-grid-col {
-    padding: 5px;
+    padding: 4px;
   }
 }
 
@@ -65,17 +65,6 @@ div.pix-control-wrapper {
       font-size: 18px;
     }
   }
-
-  div.reload-pix-button-wrapper button {
-    color: var(--default-theme-four, map.get($default-color-palette, 4));
-    background-color: var(--default-theme-two, map.get($default-color-palette, 2));
-
-    &:hover {
-      cursor: pointer;
-      color: var(--default-theme-two, map.get($default-color-palette, 2));
-      background-color: var(--default-theme-six, map.get($default-color-palette, 6));
-    }
-  }
 }
 
 @media only screen and (min-width: $breakpoint_mm) {
@@ -85,6 +74,10 @@ div.pix-control-wrapper {
 }
 
 @media only screen and (min-width: $breakpoint_sm) {
+  .playground-ui-wrapper div.pix-grid-col {
+    padding: 5px;
+  }
+
   div.pix-emoji-list-wrapper div.pix-grid-col {
     width: 75px;
     height: 75px;

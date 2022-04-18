@@ -20,6 +20,7 @@ export class GameManager {
    * They need to be explicitly reset because of their static nature
    */
   public static resetGame(): void {
+    GameManager.chosen_emoji = -1;
     GameManager.pixle_solved = false;
     GameManager.game_started = false;
   }

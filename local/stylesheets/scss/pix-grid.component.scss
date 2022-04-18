@@ -1,15 +1,10 @@
-@use "sass:map";
-@use "sass:math";
-
-@import '../mixins/fonts';
 @import '../mixins/variables';
-@import '../mixins/themes';
 @import '../mixins/mixins';
 @import '../mixins/responsive';
 
 // pix-grid component stylesheet
 div.component-pix-grid div.pix-grid-col {
-  padding: 5px;
+  padding: 4px;
   font-size: calc(1.2em + 3vmin);
 
   @media only screen and (max-width: 250px) {
@@ -46,6 +41,10 @@ only screen and (max-height: 600px) {
 }
 
 @media only screen and (min-width: $breakpoint_sm) {
+  div.component-pix-grid div.pix-grid-col {
+    padding: 5px;
+  }
+
   div.pix-grid-buffer div.pix-grid-inner div.pix-grid-col {
     max-width: 85px;
   }
