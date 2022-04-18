@@ -1,6 +1,6 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { PixGridUiComponent } from './pix-grid-ui.component';
+import {PixGridUiComponent} from './pix-grid-ui.component';
 
 describe('PixGridUiComponent', () => {
   let component: PixGridUiComponent;
@@ -8,9 +8,9 @@ describe('PixGridUiComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ PixGridUiComponent ]
+      declarations: [PixGridUiComponent]
     })
-    .compileComponents();
+      .compileComponents();
   });
 
   beforeEach(() => {

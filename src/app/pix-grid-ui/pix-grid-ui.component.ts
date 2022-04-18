@@ -10,7 +10,7 @@ import {GameManager} from '../pix-game/game.manager';
   styleUrls: [STYLESHEETS_PATH + 'pix-grid-ui.component.min.css']
 })
 export class PixGridUiComponent {
-  @ViewChildren('pixle_emoji_output') public pixle_emoji_output!: QueryList<PixGridElementComponent>;
+  @ViewChildren(PixGridElementComponent) public pixle_emoji_output!: QueryList<PixGridElementComponent>;
 
   @Input() emoji_list: number[] = [];
   @Output() sendValidationRequest: EventEmitter<any> = new EventEmitter<any>();

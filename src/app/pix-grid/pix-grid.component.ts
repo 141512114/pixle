@@ -24,7 +24,7 @@ import {WINDOW} from '../window-injection.token';
 export class PixGridComponent implements OnInit, AfterViewInit {
   @ViewChild('grid_wrapper') private grid_wrapper!: ElementRef;
   @ViewChild('grid_inner') private grid_inner!: ElementRef;
-  @ViewChildren('pixle_emoji_input') public pixle_emoji_input!: QueryList<PixGridElementComponent>;
+  @ViewChildren(PixGridElementComponent) public pixle_emoji_input!: QueryList<PixGridElementComponent>;
 
   @Input() grid_image: number[][] = [];
   @Output() sendMatchStatus: EventEmitter<number> = new EventEmitter<number>();

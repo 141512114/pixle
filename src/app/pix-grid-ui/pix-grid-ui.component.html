@@ -2,7 +2,7 @@
   <div class="pix-emoji-list-wrapper">
     <div class="d-flex flex-nowrap pix-emoji-list-buffer">
       <div class="pix-grid-col" *ngFor="let j of counter(emoji_list.length)">
-        <app-pix-grid-element #pixle_emoji_output [pixle_emoji]="emoji_list[j]" [grid_element_type]="1"
+        <app-pix-grid-element [pixle_emoji]="emoji_list[j]" [grid_element_type]="1"
                               (sendIconCodePoint)="receiveIconCodePoint($event)"></app-pix-grid-element>
       </div>
     </div>
