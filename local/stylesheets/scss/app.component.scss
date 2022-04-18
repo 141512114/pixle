@@ -44,6 +44,26 @@ header.navbar {
     div.open-side-menu-wrapper {
       @include flexbox();
       padding: 5px;
+
+      button {
+        font-size: 18px;
+        padding: 0 10px;
+
+        @media only screen and (min-width: $breakpoint_mm) {
+          font-size: 20px;
+          padding: 0 12px;
+        }
+
+        @media only screen and (min-width: $breakpoint_xxsm) {
+          font-size: 22px;
+          padding: 0 15px;
+        }
+
+        @media only screen and (min-width: $breakpoint_xmd) {
+          font-size: 24px;
+          padding: 0 17px;
+        }
+      }
     }
 
     @media only screen and (min-width: $breakpoint_md) {

@@ -30,6 +30,21 @@ div.component-pix-side-menu {
     top: 0;
     right: 0;
     padding: 18px;
+
+    button {
+      font-size: 20px;
+      padding: 0 14px;
+
+      @media only screen and (min-width: $breakpoint_xxsm) {
+        font-size: 22px;
+        padding: 0 15px;
+      }
+
+      @media only screen and (min-width: $breakpoint_xmd) {
+        font-size: 24px;
+        padding: 0 17px;
+      }
+    }
   }
 }
 

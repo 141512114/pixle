@@ -1,5 +1,7 @@
 import {Component, ElementRef, EventEmitter, Output, ViewChild, ViewEncapsulation} from '@angular/core';
 import {STYLESHEETS_PATH} from '../app.component';
+import {IconDefinition} from '@fortawesome/free-brands-svg-icons';
+import {faXmark} from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   encapsulation: ViewEncapsulation.None,
@@ -10,6 +12,8 @@ import {STYLESHEETS_PATH} from '../app.component';
 export class PixSideMenuComponent {
   @ViewChild('side_menu') private side_menu!: ElementRef;
   @Output() public sendThemeData: EventEmitter<string> = new EventEmitter<string>();
+
+  xmark: IconDefinition = faXmark;
 
   /**
    * Open the side menu
