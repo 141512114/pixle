@@ -31,8 +31,7 @@ div.pix-grid-buffer {
   }
 }
 
-@media only screen and (max-width: $breakpoint_sm),
-only screen and (max-height: 600px) {
+@media only screen and (max-width: $breakpoint_mm), only screen and (max-height: 600px) {
   div.pix-grid-inner div.pix-grid-col {
     &.gridw-5, &.gridh-5 {
       font-size: calc(1em + 2.2vmin);
@@ -52,6 +51,12 @@ only screen and (max-height: 600px) {
 
 @media only screen and (min-width: $breakpoint_xsm) {
   div.component-pix-grid div.pix-grid-col {
-    font-size: calc(1.1em + 2.2vmin);
+    font-size: calc(1.35em + 2.2vmin);
+  }
+}
+
+@media only screen and (min-width: $breakpoint_xxxsm) {
+  div.component-pix-grid div.pix-grid-col {
+    font-size: calc(1em + 2.2vmin);
   }
 }

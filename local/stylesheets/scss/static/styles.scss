@@ -20,6 +20,35 @@ body {
   background-color: var(--default-theme-one, map.get($default-color-palette, 1));
 }
 
+body.startTouch {
+  .btn:hover, .btn:active {
+    background-color: var(--default-theme-six, map.get($default-color-palette, 6));
+
+    &.invert-colors {
+      color: var(--default-theme-two, map.get($default-color-palette, 2));
+      background-color: var(--default-theme-six, map.get($default-color-palette, 6));
+    }
+
+    &.grid-element-inner {
+      &:not(.selected) {
+        background-color: var(--default-theme-three, map.get($default-color-palette, 3));
+      }
+
+      &.invert-before {
+        background-color: var(--default-theme-six, map.get($default-color-palette, 6));
+      }
+
+      &[data-grid-element-status="2"] {
+        background-color: rgba(map.get($status-palette, 2), $background-color-alpha-focused);
+      }
+
+      &[data-grid-element-status="1"] {
+        background-color: rgba(map.get($status-palette, 3), $background-color-alpha-focused);
+      }
+    }
+  }
+}
+
 header {
   position: fixed;
   top: 0;
@@ -96,16 +125,18 @@ button {
   background-color: var(--default-theme-four, map.get($default-color-palette, 4));
   transition: color 200ms, background-color 200ms;
 
-  &:hover {
-    cursor: pointer;
-    background-color: var(--default-theme-six, map.get($default-color-palette, 6));
-  }
-
   &.invert-colors {
     color: var(--default-theme-four, map.get($default-color-palette, 4));
     background-color: var(--default-theme-two, map.get($default-color-palette, 2));
+  }
 
+  @media (hover: hover) and (pointer: fine) {
     &:hover {
+      cursor: pointer;
+      background-color: var(--default-theme-six, map.get($default-color-palette, 6));
+    }
+
+    &.invert-colors:hover {
       cursor: pointer;
       color: var(--default-theme-two, map.get($default-color-palette, 2));
       background-color: var(--default-theme-six, map.get($default-color-palette, 6));

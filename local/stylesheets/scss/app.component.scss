@@ -34,7 +34,7 @@ header.navbar {
     div.company-logo {
       display: block;
       width: auto;
-      padding: 8px 0 8px 5px;
+      padding: 10px 0 10px 5px;
 
       svg {
         height: 100%;
@@ -46,22 +46,17 @@ header.navbar {
       padding: 5px;
 
       button {
-        font-size: 18px;
-        padding: 0 10px;
-
-        @media only screen and (min-width: $breakpoint_mm) {
-          font-size: 20px;
-          padding: 0 12px;
-        }
+        font-size: 20px;
+        padding: 2px 12px;
 
         @media only screen and (min-width: $breakpoint_xxsm) {
           font-size: 22px;
-          padding: 0 15px;
+          padding: 2px 15px;
         }
 
         @media only screen and (min-width: $breakpoint_xmd) {
           font-size: 24px;
-          padding: 0 17px;
+          padding: 2px 17px;
         }
       }
     }
