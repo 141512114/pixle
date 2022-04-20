@@ -79,7 +79,7 @@ export class AppComponent implements OnInit, AfterViewInit {
   private addTouchClass(): void {
     clearTimeout(this.isTouchTimer);
     let body_element: HTMLElement = this.document.body;
-    if (hasTouch() && body_element.classList.contains('startTouch')) return;
+    if (!hasTouch() || body_element.classList.contains('startTouch')) return;
     body_element.classList.add('startTouch');
   }
 
@@ -91,7 +91,7 @@ export class AppComponent implements OnInit, AfterViewInit {
   private removeTouchClass(): void {
     this.isTouchTimer = setTimeout(() => {
       let body_element: HTMLElement = this.document.body;
-      if (hasTouch() && !body_element.classList.contains('startTouch')) return;
+      if (!body_element.classList.contains('startTouch')) return;
       body_element.classList.remove('startTouch');
     }, 75);
   }
