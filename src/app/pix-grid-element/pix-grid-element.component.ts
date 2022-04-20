@@ -23,7 +23,7 @@ const SHORT_OFFSET: number = 500;
   styleUrls: [STYLESHEETS_PATH + 'pix-grid-element.component.min.css']
 })
 export class PixGridElementComponent implements OnInit, AfterViewInit {
-  @ViewChild('component_grid_element') public component_grid_element!: ElementRef;
+  @ViewChild('component_grid_element') private component_grid_element!: ElementRef;
   @ViewChild('user_interactive') private user_interactive!: ElementRef;
   @ViewChild('emoji_input') private emoji_input!: ElementRef;
   @ViewChild('correct_answer') private correct_answer?: ElementRef;
@@ -105,9 +105,8 @@ export class PixGridElementComponent implements OnInit, AfterViewInit {
   public selectThisEmoji(): void {
     if (this.grid_element_type !== 1) return;
     let element: HTMLElement = this.user_interactive.nativeElement;
-    if (!element.classList.contains('selected')) {
-      element.classList.add('selected');
-    }
+    if (element.classList.contains('selected')) return;
+    element.classList.add('selected');
   }
 
   /**
@@ -116,9 +115,8 @@ export class PixGridElementComponent implements OnInit, AfterViewInit {
   public unselectThisEmoji(): void {
     if (this.grid_element_type !== 1) return;
     let element: HTMLElement = this.user_interactive.nativeElement;
-    if (element.classList.contains('selected')) {
-      element.classList.remove('selected');
-    }
+    if (!element.classList.contains('selected')) return;
+    element.classList.remove('selected');
   }
 
   /**

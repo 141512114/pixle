@@ -13,6 +13,39 @@
   }
 }
 
+@mixin highlight_btn_mixin() {
+  .highlight-btn {
+    &:not(.locked) {
+      &:hover,
+      &:active {
+        cursor: pointer;
+        color: var(--default-theme-two, map.get($default-color-palette, 2));
+        background-color: var(--default-theme-six, map.get($default-color-palette, 6));
+      }
+    }
+
+    &--grid-element:not(.locked) {
+      &:hover,
+      &:active {
+        cursor: pointer;
+        background-color: var(--default-theme-three, map.get($default-color-palette, 3));
+
+        &[data-grid-element-status="2"] {
+          background-color: rgba(map.get($status-palette, 2), $background-color-alpha-focused);
+        }
+
+        &[data-grid-element-status="1"] {
+          background-color: rgba(map.get($status-palette, 3), $background-color-alpha-focused);
+        }
+      }
+    }
+  }
+}
+
+@media (hover: hover) and (pointer: fine) {
+  @include highlight_btn_mixin;
+}
+
 .selected {
   background-color: var(--default-theme-six) !important;
 }

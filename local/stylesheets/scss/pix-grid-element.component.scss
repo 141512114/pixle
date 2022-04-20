@@ -63,26 +63,4 @@ div.grid-element-inner {
     user-select: none;
     pointer-events: none;
   }
-
-  @media (hover: hover) and (pointer: fine) {
-    &:not(.locked):hover {
-      cursor: pointer;
-
-      &:not(.selected) {
-        background-color: var(--default-theme-three, map.get($default-color-palette, 3));
-      }
-
-      &.invert-before {
-        background-color: var(--default-theme-six, map.get($default-color-palette, 6));
-      }
-
-      &[data-grid-element-status="2"] {
-        background-color: rgba(map.get($status-palette, 2), $background-color-alpha-focused);
-      }
-
-      &[data-grid-element-status="1"] {
-        background-color: rgba(map.get($status-palette, 3), $background-color-alpha-focused);
-      }
-    }
-  }
 }
