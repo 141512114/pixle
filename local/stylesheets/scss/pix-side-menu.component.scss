@@ -2,7 +2,6 @@
 
 @import '../mixins/themes';
 @import '../mixins/mixins';
-@import '../mixins/fonts';
 @import '../mixins/responsive';
 
 // pix-side-menu component stylesheet
@@ -50,29 +49,6 @@ div.component-pix-side-menu {
 
 div.theme-settings,
 div.important-links {
-  position: relative;
-
-  div.background-text-label {
-    position: absolute;
-    top: 0;
-    left: 0;
-    bottom: 0;
-    width: auto;
-    height: 100%;
-    overflow: hidden;
-    z-index: 1;
-
-    p {
-      margin: 0;
-      padding: 0;
-      font-family: $main-ui;
-      font-size: 48px;
-      color: var(--default-theme-one, map.get($default-color-palette, 1));
-      transform-origin: top;
-      transform: rotate(90deg) translateX(calc(50% - 10px));
-    }
-  }
-
   ul li {
     margin-bottom: 10px;
 
