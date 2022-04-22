@@ -30,4 +30,8 @@ body {
   &[data-theme="volcano"] {
     @include theme_setup($volcano-palette);
   }
+
+  &[data-theme="troll"] {
+    @include theme_setup($we-do-trolling-palette);
+  }
 }
