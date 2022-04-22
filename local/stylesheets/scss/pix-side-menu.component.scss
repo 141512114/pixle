@@ -15,35 +15,13 @@ div.component-pix-side-menu {
   padding: 65px 0;
   background-color: var(--default-theme-two, map.get($default-color-palette, 2));
   transition: top 250ms, visibility 250ms, opacity 250ms;
-  z-index: 9999;
+  z-index: 99;
 
   &.close {
-    top: 80px;
+    top: -80px;
     pointer-events: none;
     visibility: hidden;
     opacity: 0;
-  }
-
-  div.close-side-menu-wrapper {
-    position: absolute;
-    top: 0;
-    right: 0;
-    padding: 18px;
-
-    button {
-      font-size: 20px;
-      padding: 0 14px;
-
-      @media only screen and (min-width: $breakpoint_xxsm) {
-        font-size: 22px;
-        padding: 0 15px;
-      }
-
-      @media only screen and (min-width: $breakpoint_xmd) {
-        font-size: 24px;
-        padding: 0 17px;
-      }
-    }
   }
 }
 

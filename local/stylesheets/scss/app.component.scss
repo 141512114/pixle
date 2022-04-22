@@ -10,7 +10,7 @@ header.navbar {
   padding: 7px 0;
   user-select: none;
   background-color: var(--default-theme-three, map.get($default-color-palette, 3));
-  z-index: 999;
+  z-index: 9999;
 
   .game-title {
     margin: 0;
@@ -48,6 +48,17 @@ header.navbar {
       button {
         font-size: 20px;
         padding: 2px 12px;
+
+        span {
+          display: none;
+          width: 24px;
+          visibility: hidden;
+
+          &.show {
+            display: block;
+            visibility: visible;
+          }
+        }
 
         @media only screen and (min-width: $breakpoint_xxsm) {
           font-size: 22px;

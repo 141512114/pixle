@@ -1,8 +1,8 @@
-import {AfterViewInit, Component, Inject, OnInit, ViewChild} from '@angular/core';
+import {AfterViewInit, Component, ElementRef, Inject, OnInit, ViewChild} from '@angular/core';
 import {DOCUMENT} from '@angular/common';
 import {WINDOW} from './window-injection.token';
 import {PixSideMenuComponent} from './pix-side-menu/pix-side-menu.component';
-import {faGear} from '@fortawesome/free-solid-svg-icons';
+import {faGear, faXmark} from '@fortawesome/free-solid-svg-icons';
 import {IconDefinition} from '@fortawesome/free-brands-svg-icons';
 
 export const STYLESHEETS_PATH: string = '../../stylesheets/css/';
@@ -30,8 +30,10 @@ const hasTouch = () => {
 })
 export class AppComponent implements OnInit, AfterViewInit {
   @ViewChild(PixSideMenuComponent) private pixSideMenuComponent!: PixSideMenuComponent;
+  @ViewChild('toggle_side_menu_btn') private toggle_side_menu_btn!: ElementRef;
 
-  iconSideMenu: IconDefinition = faGear;
+  iconOpenSideMenu: IconDefinition = faGear;
+  iconCloseSideMenu: IconDefinition = faXmark;
   isTouchTimer: any;
 
   constructor(@Inject(DOCUMENT) private document: Document, @Inject(WINDOW) private readonly window: Window) {
@@ -54,10 +56,30 @@ export class AppComponent implements OnInit, AfterViewInit {
   }
 
   /**
-   * Open the side menu
+   * Toggle (open or close) the side menu
    */
-  public openSideMenu(): void {
-    this.pixSideMenuComponent.openSideMenu();
+  public toggleSideMenu(): void {
+    let openIconButton: HTMLElement = this.toggle_side_menu_btn.nativeElement.querySelector('span.open-icon');
+    let closeIconButton: HTMLElement = this.toggle_side_menu_btn.nativeElement.querySelector('span.close-icon');
+    let show_class: string = 'show';
+
+    if (this.pixSideMenuComponent.active) {
+      this.pixSideMenuComponent.closeSideMenu();
+      if (!openIconButton.classList.contains(show_class)) {
+        openIconButton.classList.add(show_class);
+      }
+      if (closeIconButton.classList.contains(show_class)) {
+        closeIconButton.classList.remove(show_class);
+      }
+    } else {
+      this.pixSideMenuComponent.openSideMenu();
+      if (openIconButton.classList.contains(show_class)) {
+        openIconButton.classList.remove(show_class);
+      }
+      if (!closeIconButton.classList.contains(show_class)) {
+        closeIconButton.classList.add(show_class);
+      }
+    }
   }
 
   /**

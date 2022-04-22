@@ -9,8 +9,13 @@
         </a>
       </div>
       <div class="open-side-menu-wrapper">
-        <button class="btn rounded-3 open-side-menu" type="button" (click)="openSideMenu()">
-          <fa-icon [icon]="iconSideMenu"></fa-icon>
+        <button #toggle_side_menu_btn class="rounded-3 open-side-menu" type="button" (click)="toggleSideMenu()">
+          <span class="show open-icon">
+            <fa-icon [icon]="iconOpenSideMenu"></fa-icon>
+          </span>
+          <span class="close-icon">
+            <fa-icon [icon]="iconCloseSideMenu"></fa-icon>
+          </span>
         </button>
       </div>
     </div>

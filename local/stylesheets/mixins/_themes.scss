@@ -1,10 +1,10 @@
 // Color maps
 $neo-palette: (
   1: #0F1020,
-  2: #2F195F,
-  3: #51368D,
+  2: #381E71,
+  3: #553894,
   4: #7353BA,
-  5: #F6DCF9,
+  5: #ECB9F3,
   6: #F870FF
 );
 
@@ -18,16 +18,16 @@ $vibe-palette: (
 );
 
 $pop-palette: (
-  1: #0056F5,
-  2: #5C95FF,
-  3: #85BAFF,
-  4: #ADE2FF,
-  5: #F2BBCC,
-  6: #D94574
+  1: #004FE0,
+  2: #1F6DFF,
+  3: #4797FF,
+  4: #85D4FF,
+  5: #EA99B3,
+  6: #D53467
 );
 
 $volcano-palette: (
-  1: #EA591F,
+  1: #E04E15,
   2: #151513,
   3: #2B2927,
   4: #403D39,
@@ -38,10 +38,10 @@ $volcano-palette: (
 $cold-palette: (
   1: #08080C,
   2: #131B2A,
-  3: #18253A,
-  4: #294066,
+  3: #1E2E48,
+  4: #2E4976,
   5: #E4EBF1,
-  6: #21D4AA
+  6: #1EC29C
 );
 
 $default-color-palette: $cold-palette !default;

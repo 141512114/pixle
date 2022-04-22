@@ -1,7 +1,5 @@
 import {Component, ElementRef, EventEmitter, Output, ViewChild, ViewEncapsulation} from '@angular/core';
 import {STYLESHEETS_PATH} from '../app.component';
-import {IconDefinition} from '@fortawesome/free-brands-svg-icons';
-import {faXmark} from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   encapsulation: ViewEncapsulation.None,
@@ -13,7 +11,7 @@ export class PixSideMenuComponent {
   @ViewChild('side_menu') private side_menu!: ElementRef;
   @Output() public sendThemeData: EventEmitter<string> = new EventEmitter<string>();
 
-  xmark: IconDefinition = faXmark;
+  active: boolean = false;
 
   /**
    * Open the side menu
@@ -22,6 +20,7 @@ export class PixSideMenuComponent {
     let side_menu_element: HTMLElement = this.side_menu.nativeElement;
     if (side_menu_element.classList.contains('close')) {
       side_menu_element.classList.remove('close');
+      this.active = true;
     }
   }
 
@@ -32,6 +31,7 @@ export class PixSideMenuComponent {
     let side_menu_element: HTMLElement = this.side_menu.nativeElement;
     if (!side_menu_element.classList.contains('close')) {
       side_menu_element.classList.add('close');
+      this.active = false;
     }
   }
 }
