@@ -144,7 +144,7 @@ export class PixGameComponent implements OnInit, AfterViewInit {
       let emojis_in_tile: number[] = PixGameComponent.getEmojisFromListById(pixle_art_tiles[i]);
       temp_pixle_image.push(emojis_in_tile);
     }
-    this.pixle_image = temp_pixle_image;
+    // this.pixle_image = temp_pixle_image;
     this.pixle_id = selected_pixle_art.id;
     // Make sure a pixle tile array was assigned
     if (this.pixle_image.length <= 0) return false;

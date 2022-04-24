@@ -3,8 +3,8 @@
 // Default mixins
 @mixin alignment_old($xoff:50%, $yoff:50%, $xoff_counter:-$xoff, $yoff_counter:-$yoff) {
   position: absolute;
-  top: $xoff;
-  left: $yoff;
+  top: $yoff;
+  left: $xoff;
   transform: translate($xoff_counter, $yoff_counter);
 }
 

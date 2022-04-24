@@ -4,6 +4,11 @@
 @import '../mixins/mixins';
 
 // pix-game component stylesheet
+.pix-popup-wrapper {
+  @include alignment_old($yoff: 0%);
+  @include flexbox();
+}
+
 div.mobile-landscape-popup {
   display: none;
   visibility: hidden;
