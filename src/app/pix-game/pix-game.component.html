@@ -7,9 +7,11 @@
             <app-pix-grid (sendMatchStatus)="receiveMatchStatus($event)" [grid_image]="pixle_image"></app-pix-grid>
           </td>
         </ng-container>
-        <td class="w-100 h-100 overflow-hidden pix-popup-wrapper">
-          <app-pix-popup-message #match_status (sendReloadRequest)="receiveReloadRequest()"></app-pix-popup-message>
-        </td>
+        <ng-container *ngIf="pixle_image.length <= 0">
+          <td class="h-100 overflow-hidden pix-popup-wrapper">
+            <app-pix-popup-message #match_status (sendReloadRequest)="receiveReloadRequest()"></app-pix-popup-message>
+          </td>
+        </ng-container>
       </tr>
       <tr class="h-auto" align="center">
         <td class="overflow-hidden playground-ui-wrapper">
