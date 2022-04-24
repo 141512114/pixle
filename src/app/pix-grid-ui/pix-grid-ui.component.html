@@ -9,11 +9,13 @@
   </div>
   <div class="mt-auto pix-control-wrapper">
     <div class="p-0 validate-button-wrapper">
-      <button class="pix-validate-button" (click)="validatePixleOnClick()" type="button">Flip!
+      <button class="pix-validate-button" (click)="validatePixleOnClick()" type="button" aria-label="Flip all tiles">
+        Flip!
       </button>
     </div>
     <div class="p-0 reload-pix-button-wrapper">
-      <button class="pix-reload-button invert-colors" (click)="reloadGameComponent()" type="button">Reload
+      <button class="pix-reload-button invert-colors" (click)="reloadGameComponent()" type="button"
+              aria-label="Reload game">Reload
       </button>
     </div>
   </div>
