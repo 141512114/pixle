@@ -10,10 +10,11 @@ $status-palette: (
 );
 
 // Default colors
-$default-text-color: white !default;
+$default-headline-color: white !default;
+$default-text-color: #DEDEDE !default;
 
 // Default variables
-$default-popup-size: 550px !default;
+$default-popup-size: 450px !default;
 $tile-size: 80px !default;
 
 $background-color-alpha-focused: .45 !default;

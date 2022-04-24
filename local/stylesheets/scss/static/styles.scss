@@ -51,6 +51,7 @@ h5,
 p,
 a {
   font-weight: 400;
+  text-align: left;
 }
 
 h1,
@@ -59,12 +60,13 @@ h3,
 h4,
 h5 {
   font-family: $main-header;
-  color: $default-text-color;
+  color: $default-headline-color;
 }
 
 p,
 a {
   font-family: $main-font;
+  color: $default-text-color;
 }
 
 a,
