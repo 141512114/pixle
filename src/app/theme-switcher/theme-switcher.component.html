@@ -3,7 +3,7 @@
     <ng-container *ngFor="let theme of ['Neo', 'Vibe', 'Pop', 'Volcano', 'Cold', 'Troll']">
       <li class="theme-list-item">
         <button class="btn rounded-3" (click)="changeTheme(theme.toLowerCase())" type="button"
-                aria-label="{{theme}} theme">{{theme}}</button>
+                [attr.aria-label]="theme + 'theme'">{{theme}}</button>
       </li>
     </ng-container>
   </ul>
