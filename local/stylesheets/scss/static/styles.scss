@@ -8,6 +8,11 @@
   padding: 0;
 }
 
+*::selection {
+  color: white;
+  background-color: var(--default-theme-six, map.get($default-color-palette, 6));
+}
+
 html,
 body {
   width: 100%;
