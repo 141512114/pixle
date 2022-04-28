@@ -1,16 +1,35 @@
 <div id="pix-grid-ui" class="overflow-hidden component-pix-grid-ui playground-ui-wrapper">
-  <div class="pix-emoji-list-wrapper">
-    <div class="d-flex flex-nowrap pix-emoji-list-buffer">
+  <div class="position-relative pix-grid-ui-wrapper" *ngIf="emoji_list.length > 0">
+    <div class="d-flex flex-nowrap pix-emoji-list">
       <div class="pix-grid-col" *ngFor="let j of counter(emoji_list.length)">
         <app-pix-grid-element [pixle_emoji]="emoji_list[j]" [grid_element_type]="1"
                               (sendIconCodePoint)="receiveIconCodePoint($event)"></app-pix-grid-element>
       </div>
     </div>
+    <div class="d-flex flex-nowrap pix-social-share-wrapper close">
+      <ul class="m-0 p-0 pix-social-share-list">
+        <li class="share-item pix-grid-col">
+          <a href="#" class="share-on-twitter">
+            <fa-icon [icon]="iconShareTwitter"></fa-icon>
+          </a>
+        </li>
+        <li class="share-item pix-grid-col">
+          <a href="#" class="share-on-whatsapp">
+            <fa-icon [icon]="iconShareWhatsApp"></fa-icon>
+          </a>
+        </li>
+        <li class="share-item pix-grid-col">
+          <a href="#" class="share-copy-to-clipboard">
+            <fa-icon [icon]="iconShareCopy"></fa-icon>
+          </a>
+        </li>
+      </ul>
+    </div>
   </div>
   <div class="mt-auto pix-control-wrapper">
     <div class="p-0 validate-button-wrapper">
-      <button class="pix-validate-button" (click)="validatePixleOnClick()" type="button" aria-label="Flip all tiles">
-        Flip!
+      <button class="pix-validate-button" (click)="validatePixleOnClick()" type="button"
+              aria-label="Flip all tiles">Flip!
       </button>
     </div>
     <div class="p-0 reload-pix-button-wrapper">

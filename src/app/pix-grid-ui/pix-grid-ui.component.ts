@@ -3,6 +3,8 @@ import {STYLESHEETS_PATH} from '../app.component';
 import {HelperFunctionsService} from '../services/helper-functions.service';
 import {PixGridElementComponent} from '../pix-grid-element/pix-grid-element.component';
 import {GameManager} from '../pix-game/game.manager';
+import {faTwitter, faWhatsapp, IconDefinition} from '@fortawesome/free-brands-svg-icons';
+import {faCopy} from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-pix-grid-ui',
@@ -15,6 +17,10 @@ export class PixGridUiComponent {
   @Input() emoji_list: number[] = [];
   @Output() sendValidationRequest: EventEmitter<any> = new EventEmitter<any>();
   @Output() sendReloadRequest: EventEmitter<any> = new EventEmitter<any>();
+
+  iconShareTwitter: IconDefinition = faTwitter;
+  iconShareWhatsApp: IconDefinition = faWhatsapp;
+  iconShareCopy: IconDefinition = faCopy;
 
   /**
    * Helper function
