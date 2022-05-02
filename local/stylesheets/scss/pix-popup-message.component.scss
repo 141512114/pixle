@@ -25,17 +25,26 @@ div.component-pix-popup-message {
     background-color: var(--default-theme-three, map.get($default-color-palette, 3));
   }
 
+  p {
+    font-size: 15px;
+  }
+
   button {
     width: 100%;
     padding: 7px 0;
-    font-size: 18px;
+    font-size: 16px;
   }
 
   @media only screen and (min-width: $breakpoint_xxxsm) {
     width: $default-popup-size;
 
+    p {
+      font-size: 16px;
+    }
+
     button {
       padding: 9px 0;
+      font-size: 18px;
     }
   }
 
