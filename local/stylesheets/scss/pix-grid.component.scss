@@ -18,14 +18,14 @@ div.component-pix-grid div.pix-grid-col {
   margin: 0 auto;
 }
 
-div.pix-grid-buffer {
+.pix-grid-buffer {
   @include flexbox();
   padding: 15px 0;
 
-  div.pix-grid-inner {
+  .pix-grid-inner {
     min-width: 135px;
 
-    div.pix-grid-col {
+    .pix-grid-col {
       max-width: 75px;
     }
   }

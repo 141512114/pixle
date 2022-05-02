@@ -36,6 +36,10 @@ header.navbar {
       width: auto;
       padding: 10px 0 10px 5px;
 
+      a {
+        background: none;
+      }
+
       svg {
         height: 100%;
       }

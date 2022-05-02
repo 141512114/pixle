@@ -19,6 +19,12 @@ div.mobile-landscape-popup {
   }
 }
 
+div.pix-popup-wrapper {
+  @include alignment_old();
+  width: 100%;
+  pointer-events: none;
+}
+
 // ########### Disable if orientation is landscape (only for mobile)
 @media only screen and (max-height: 615px) and (orientation: landscape) {
   div.pix-game-wrapper {

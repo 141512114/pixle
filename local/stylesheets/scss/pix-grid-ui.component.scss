@@ -13,8 +13,22 @@
   margin: 0 auto;
   border-radius: 8px 8px 0 0;
 
-  div.pix-grid-col {
+  .pix-grid-col {
+    display: inline-block;
+    width: 65px;
+    height: 65px;
+    margin-right: 3px;
     padding: 4px;
+    flex: 0 0 auto;
+    font-size: calc(1em + 2.85vmin);
+
+    &:first-child {
+      margin-left: auto;
+    }
+
+    &:last-child {
+      margin-right: auto;
+    }
   }
 }
 
@@ -23,6 +37,18 @@ div.pix-social-share-wrapper {
   $padding_vertical: 12px;
   padding: $padding_vertical 0 math.div($padding_vertical, 2);
   overflow: hidden;
+
+  div.pix-emoji-list,
+  div.pix-social-share-wrapper {
+    transition: top 250ms, opacity 250ms, visibility 250ms;
+    user-select: none;
+
+    &.close {
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+    }
+  }
 
   div.pix-emoji-list,
   ul.pix-social-share-list {
@@ -40,27 +66,20 @@ div.pix-social-share-wrapper {
     width: 100%;
     height: 100%;
 
-    li a {
-      @include flexbox();
+    div.share-item-wrapper {
       width: 100%;
       height: 100%;
-    }
-  }
+      margin: 0;
+      padding: 0;
+      border: 2px solid transparent;
+      background-color: var(--default-theme-four, map.get($default-color-palette, 4));
+      overflow: hidden;
 
-  .pix-grid-col {
-    display: inline-block;
-    width: 65px;
-    height: 65px;
-    margin-right: 3px;
-    flex: 0 0 auto;
-    font-size: calc(1em + 2.85vmin);
-
-    &:first-child {
-      margin-left: auto;
-    }
-
-    &:last-child {
-      margin-right: auto;
+      a {
+        @include flexbox();
+        width: 100%;
+        height: 100%;
+      }
     }
   }
 }
@@ -77,14 +96,9 @@ div.pix-social-share-wrapper {
   bottom: 0;
   width: 100%;
   height: 100%;
-  transition: top 250ms, opacity 250ms, visibility 250ms;
-  user-select: none;
 
   &.close {
     top: 80px;
-    opacity: 0;
-    visibility: hidden;
-    pointer-events: none;
   }
 }
 

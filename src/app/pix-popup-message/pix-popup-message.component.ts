@@ -1,4 +1,4 @@
-import {AfterViewInit, Component, ElementRef, EventEmitter, Output, ViewChild} from '@angular/core';
+import {AfterViewInit, Component, ElementRef, ViewChild} from '@angular/core';
 import {IPopUp} from '../interface/popup-message.interface';
 import {STYLESHEETS_PATH} from '../app.component';
 
@@ -17,7 +17,6 @@ export class PixPopupMessageComponent implements AfterViewInit {
   @ViewChild('msg_container') msg_container!: ElementRef;
   @ViewChild('msg_headline') msg_headline!: ElementRef;
   @ViewChild('msg_description') msg_description!: ElementRef;
-  @Output() sendReloadRequest: EventEmitter<any> = new EventEmitter();
 
   message: IPopUp = DEFAULT_MSG;
 
@@ -39,10 +38,12 @@ export class PixPopupMessageComponent implements AfterViewInit {
   }
 
   /**
-   * Reload the whole game component
+   * Close the popup message
    */
-  public reloadGameComponent(): void {
-    this.sendReloadRequest.emit();
+  public closePopUp(): void {
+    let message_element: HTMLElement = this.msg_container.nativeElement;
+    if (message_element.classList.contains('close')) return;
+    message_element.classList.add('close');
   }
 
   /**
@@ -53,7 +54,7 @@ export class PixPopupMessageComponent implements AfterViewInit {
    */
   private writeNewMessage(msg_object: IPopUp): void {
     if (msg_object == null || undefined) return;
-    this.msg_headline.nativeElement.textContent = msg_object.headline;
-    this.msg_description.nativeElement.textContent = msg_object.message_body;
+    this.msg_headline.nativeElement.innerHTML = msg_object.headline;
+    this.msg_description.nativeElement.innerHTML = msg_object.message_body;
   }
 }

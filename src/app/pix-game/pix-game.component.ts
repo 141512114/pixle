@@ -21,6 +21,16 @@ const MISSING_PIXLE_MSG: IPopUp = {
   subline: 'There was a mistake retrieving a pixle from the database.',
   message_body: 'If this issue occurs more than it should, report this bug to the team.'
 };
+const SUCCESS_PIXLE_MSG: IPopUp = {
+  headline: 'Congratulations!',
+  subline: '',
+  message_body: 'You\'ve made it, keep going!</br>Challenge your friends and family by sharing your score and see who is better.'
+};
+const FAILED_PIXLE_MSG: IPopUp = {
+  headline: 'No way!',
+  subline: '',
+  message_body: 'This is it... . You\'ve lost.</br>But i\'m believing in you, just keep going!'
+};
 
 // Timer
 const UNDO_FLIP_TIME: number = 2000;
@@ -210,6 +220,7 @@ export class PixGameComponent implements OnInit, AfterViewInit {
     }
     // If any tile has reached its limits --> went out of lives --> game over
     if (failed_count > 0) {
+      this.match_status_msg.openPopUp(FAILED_PIXLE_MSG);
       GameManager.resetGame();
     } else {
       // Player has won the game
@@ -217,6 +228,7 @@ export class PixGameComponent implements OnInit, AfterViewInit {
       if (total_count >= tile_amount) {
         GameManager.pixle_solved = true;
         GameManager.game_started = false;
+        this.match_status_msg.openPopUp(SUCCESS_PIXLE_MSG);
       } else {
         // Player didn't win yet --> reset flip-state of some tiles
         this.window.setTimeout(() => {
@@ -228,6 +240,7 @@ export class PixGameComponent implements OnInit, AfterViewInit {
         return;
       }
     }
+    this.pixGridUiComponent.switchUiElements();
     this.validating = false;
   }
 }

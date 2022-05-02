@@ -5,13 +5,16 @@
 
 // pix-popup-message component stylesheet
 div.component-pix-popup-message {
+  position: relative;
+  top: 0;
   width: 85%;
   opacity: 1;
   transition: top 700ms, opacity 550ms, visibility 300ms;
+  pointer-events: all;
   z-index: 99;
 
   &.close {
-    top: 300px;
+    top: 125px;
     opacity: 0;
     visibility: hidden;
     pointer-events: none;
