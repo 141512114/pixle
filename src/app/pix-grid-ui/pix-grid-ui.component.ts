@@ -1,10 +1,11 @@
 import {Component, ElementRef, EventEmitter, Input, Output, QueryList, ViewChild, ViewChildren} from '@angular/core';
+import {Clipboard} from '@angular/cdk/clipboard';
 import {STYLESHEETS_PATH} from '../app.component';
 import {HelperFunctionsService} from '../services/helper-functions.service';
 import {PixGridElementComponent} from '../pix-grid-element/pix-grid-element.component';
 import {GameManager} from '../pix-game/game.manager';
-import {faTwitter, faWhatsapp, IconDefinition} from '@fortawesome/free-brands-svg-icons';
-import {faClipboard} from '@fortawesome/free-solid-svg-icons';
+import {faClipboard, faLink} from '@fortawesome/free-solid-svg-icons';
+import {NgNavigatorShareService} from 'ng-navigator-share';
 
 @Component({
   selector: 'app-pix-grid-ui',
@@ -20,9 +21,11 @@ export class PixGridUiComponent {
   @Output() sendValidationRequest: EventEmitter<any> = new EventEmitter<any>();
   @Output() sendReloadRequest: EventEmitter<any> = new EventEmitter<any>();
 
-  iconShareTwitter: IconDefinition = faTwitter;
-  iconShareWhatsApp: IconDefinition = faWhatsapp;
-  iconShareCopy: IconDefinition = faClipboard;
+  iconShareAny = faLink;
+  iconShareCopy = faClipboard;
+
+  constructor(private ngNavigatorShareService: NgNavigatorShareService, private clipboard: Clipboard) {
+  }
 
   /**
    * Helper function
@@ -46,6 +49,34 @@ export class PixGridUiComponent {
    */
   public reloadGameComponent(): void {
     this.sendReloadRequest.emit();
+  }
+
+  /**
+   * Open up a new ui, which allows the user to share on any platform
+   * Works for example on mobile
+   * The user then can share via social media, email, directly to contacts or just copy the contents
+   */
+  public shareOnSocialMedia(): void {
+    // Check if device can share / has the api
+    if (this.ngNavigatorShareService.canShare()) {
+      this.ngNavigatorShareService.share({
+        text: 'Hello World',
+        title: 'Can you solve this pixle?',
+        url: 'https://pixle.gg'
+      }).then((response) => {
+        console.log(response);
+      });
+    } else {
+      // If not, just copy the content
+      this.copyToClipboard();
+    }
+  }
+
+  /**
+   * Copy pixle content to the clipboard
+   */
+  public copyToClipboard(): void {
+    this.clipboard.copy('Hello World');
   }
 
   /**

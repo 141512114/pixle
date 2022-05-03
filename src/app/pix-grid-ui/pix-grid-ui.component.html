@@ -8,25 +8,16 @@
     </div>
     <div #social_share class="w-100 h-100 d-flex flex-nowrap pix-social-share-wrapper close">
       <ul class="w-100 h-100 m-0 p-0 pix-social-share-list">
-        <li class="share-item pix-grid-col">
+        <li class="share-item pix-grid-col ignore-ratio">
           <div class="rounded-3 overflow-hidden share-item-wrapper highlight-btn">
-            <a href="https://twitter.com/intent/tweet?text=Hello%20World&hashtags=pixle,nani&url=https://pixle.gg"
-               target="_blank" class="share-on-twitter">
-              <fa-icon [icon]="iconShareTwitter"></fa-icon>
-            </a>
+            <button (click)="shareOnSocialMedia()" class="share-on-any" type="button">
+              <span>Share</span><span><fa-icon [icon]="iconShareAny"></fa-icon></span>
+            </button>
           </div>
         </li>
         <li class="share-item pix-grid-col">
           <div class="rounded-3 overflow-hidden share-item-wrapper highlight-btn">
-            <a href="whatsapp://send?text=Hello%20World%20https%3A%2F%2Fpixle.gg" target="_blank"
-               class="share-on-whatsapp">
-              <fa-icon [icon]="iconShareWhatsApp"></fa-icon>
-            </a>
-          </div>
-        </li>
-        <li class="share-item pix-grid-col">
-          <div class="rounded-3 overflow-hidden share-item-wrapper highlight-btn">
-            <a class="share-copy-to-clipboard">
+            <a (click)="copyToClipboard()" class="share-copy-to-clipboard">
               <fa-icon [icon]="iconShareCopy"></fa-icon>
             </a>
           </div>

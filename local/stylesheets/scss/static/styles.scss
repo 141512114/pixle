@@ -118,7 +118,8 @@ button {
     background-color: #1DA1F2;
   }
 
-  &.share-on-whatsapp {
+  &.share-on-whatsapp,
+  &.share-on-any {
     color: white;
     background-color: #25D366;
   }

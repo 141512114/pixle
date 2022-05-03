@@ -38,6 +38,7 @@
     "@fortawesome/free-solid-svg-icons": "^6.1.0",
     "ajv": "^8.8.2",
     "ajv-errors": "^1.0.1",
+    "ng-navigator-share": "^1.0.4",
     "rxjs": "~7.5.0",
     "tslib": "^2.3.0",
     "zone.js": "~0.11.4"
