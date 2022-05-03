@@ -40,13 +40,35 @@ div.pix-social-share-wrapper {
 
   div.pix-emoji-list,
   div.pix-social-share-wrapper {
-    transition: top 250ms, opacity 250ms, visibility 250ms;
+    transition: top 750ms, opacity 650ms, visibility 300ms;
     user-select: none;
 
     &.close {
       opacity: 0;
       visibility: hidden;
       pointer-events: none;
+    }
+  }
+
+  div.pix-emoji-list {
+    top: 0;
+
+    &.close {
+      top: -80px;
+    }
+  }
+
+  div.pix-social-share-wrapper {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: 100%;
+    height: 100%;
+
+    &.close {
+      top: 80px;
     }
   }
 
@@ -71,7 +93,6 @@ div.pix-social-share-wrapper {
       height: 100%;
       margin: 0;
       padding: 0;
-      border: 2px solid transparent;
       background-color: var(--default-theme-four, map.get($default-color-palette, 4));
       overflow: hidden;
 
@@ -86,20 +107,6 @@ div.pix-social-share-wrapper {
 
 div.pix-grid-ui-wrapper {
   background-color: var(--default-theme-three, map.get($default-color-palette, 3));
-}
-
-div.pix-social-share-wrapper {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  width: 100%;
-  height: 100%;
-
-  &.close {
-    top: 80px;
-  }
 }
 
 div.pix-control-wrapper {

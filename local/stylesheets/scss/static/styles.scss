@@ -113,6 +113,16 @@ button {
     background-color: var(--default-theme-two, map.get($default-color-palette, 2));
   }
 
+  &.share-on-twitter {
+    color: white;
+    background-color: #1DA1F2;
+  }
+
+  &.share-on-whatsapp {
+    color: white;
+    background-color: #25D366;
+  }
+
   @extend .highlight-btn;
 }
 
