@@ -9,14 +9,13 @@ div.component-pix-popup-message {
   top: 0;
   width: 85%;
   opacity: 1;
-  transition: top 800ms, opacity 750ms, visibility 300ms;
+  transition: top 800ms, opacity 750ms;
   pointer-events: all;
   z-index: 99;
 
   &.close {
     top: 125px;
     opacity: 0;
-    visibility: hidden;
     pointer-events: none;
   }
 

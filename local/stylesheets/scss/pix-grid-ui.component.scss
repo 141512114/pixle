@@ -40,12 +40,11 @@ div.pix-social-share-wrapper {
 
   div.pix-emoji-list,
   div.pix-social-share-wrapper {
-    transition: top 750ms, opacity 650ms, visibility 300ms;
+    transition: top 750ms, opacity 650ms;
     user-select: none;
 
     &.close {
       opacity: 0;
-      visibility: hidden;
       pointer-events: none;
     }
   }
@@ -64,8 +63,6 @@ div.pix-social-share-wrapper {
     left: 0;
     right: 0;
     bottom: 0;
-    width: 100%;
-    height: 100%;
 
     &.close {
       top: 80px;
@@ -84,23 +81,18 @@ div.pix-social-share-wrapper {
     }
   }
 
-  ul.pix-social-share-list {
+  ul.pix-social-share-list div.share-item-wrapper {
     width: 100%;
     height: 100%;
+    margin: 0;
+    padding: 0;
+    background-color: var(--default-theme-four, map.get($default-color-palette, 4));
+    overflow: hidden;
 
-    div.share-item-wrapper {
+    a {
+      @include flexbox();
       width: 100%;
       height: 100%;
-      margin: 0;
-      padding: 0;
-      background-color: var(--default-theme-four, map.get($default-color-palette, 4));
-      overflow: hidden;
-
-      a {
-        @include flexbox();
-        width: 100%;
-        height: 100%;
-      }
     }
   }
 }
