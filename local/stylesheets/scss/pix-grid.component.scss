@@ -5,9 +5,9 @@
 // pix-grid component stylesheet
 div.component-pix-grid div.pix-grid-col {
   padding: 4px;
-  font-size: calc(1.2em + 3vmin);
+  font-size: calc(1.15em + 2.85vmin);
 
-  @media only screen and (max-width: 250px) {
+  @media only screen and (max-width: 300px) {
     font-size: calc(1em + 2.85vmin);
   }
 }

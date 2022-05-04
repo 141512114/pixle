@@ -46,6 +46,52 @@
   @include highlight_btn_mixin;
 }
 
+.pix-social-share-list .share-item-wrapper {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  background-color: var(--default-theme-four, map.get($default-color-palette, 4));
+  overflow: hidden;
+
+  a,
+  button {
+    @include flexbox($dir:row);
+    width: 100%;
+    height: 100%;
+  }
+
+  button {
+    font-size: 16px;
+    padding: 0 24px;
+
+    span {
+      display: inline-block;
+      margin-right: 8px;
+
+      &:last-child {
+        margin-right: 0;
+      }
+    }
+  }
+
+  @media only screen and (min-width: $breakpoint_sm) {
+    button {
+      font-size: 18px;
+    }
+  }
+}
+
+.horizontal-scroll-wrapper {
+  overflow-x: scroll;
+  overflow-y: hidden;
+  -webkit-overflow-scrolling: touch;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
 .selected {
   background-color: var(--default-theme-six) !important;
 }

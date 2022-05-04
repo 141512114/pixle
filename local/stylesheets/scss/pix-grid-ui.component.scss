@@ -74,45 +74,8 @@ div.pix-social-share-wrapper {
   }
 
   div.pix-emoji-list,
-  ul.pix-social-share-list {
+  .pix-social-share-list {
     padding: 0 13px math.div($padding_vertical, 2);
-    overflow-x: scroll;
-    overflow-y: hidden;
-    -webkit-overflow-scrolling: touch;
-
-    &::-webkit-scrollbar {
-      display: none;
-    }
-  }
-
-  ul.pix-social-share-list div.share-item-wrapper {
-    width: 100%;
-    height: 100%;
-    margin: 0;
-    padding: 0;
-    background-color: var(--default-theme-four, map.get($default-color-palette, 4));
-    overflow: hidden;
-
-    a,
-    button {
-      @include flexbox($dir:row);
-      width: 100%;
-      height: 100%;
-    }
-
-    button {
-      font-size: 16px;
-      padding: 0 24px;
-
-      span {
-        display: inline-block;
-        margin-right: 8px;
-
-        &:last-child {
-          margin-right: 0;
-        }
-      }
-    }
   }
 }
 
@@ -150,10 +113,6 @@ div.pix-control-wrapper {
     width: 75px;
     height: 75px;
     font-size: calc(1.35em + 2.5vmin);
-  }
-
-  ul.pix-social-share-list div.share-item-wrapper button {
-    font-size: 18px;
   }
 }
 
