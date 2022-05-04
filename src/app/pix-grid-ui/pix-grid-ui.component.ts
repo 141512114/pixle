@@ -76,7 +76,7 @@ export class PixGridUiComponent {
       this.windowNavigator.share({
         text: this.pixle_share_result,
         title: 'Can you solve this pixle?',
-        url: 'https://pixle.gg'
+        url: 'https://pixle.gg/'
       }).then(() => {
         console.log('Successful share');
       }).catch((error) => {
@@ -92,7 +92,8 @@ export class PixGridUiComponent {
    * Copy pixle content to the clipboard
    */
   public copyToClipboard(): void {
-    this.clipboard.copy(this.pixle_share_result);
+    let pixle_url: string = 'https://pixle.gg/';
+    this.clipboard.copy(this.pixle_share_result + '\n' + pixle_url);
   }
 
   /**

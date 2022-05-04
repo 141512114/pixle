@@ -253,10 +253,9 @@ export class PixGameComponent implements OnInit, AfterViewInit {
    */
   private generateShareMessage(): void {
     let pixle_details: string = 'Z' + this.pixle_id + ' / X' + this.pixle_image_width + ' / Y' + this.pixle_image_height;
-    let results_info_link: string = 'https://pixle.gg';
-    let results_info_text: string = 'Well, ... winning isn\'t everything.\n' + results_info_link;
+    let results_info_text: string = 'Well, ... winning isn\'t everything.';
     if (GameManager.pixle_solved) {
-      results_info_text = 'First try! I bet you won\'t even get one row right!\n' + results_info_link;
+      results_info_text = 'First try! I bet you won\'t even get one row right!';
     }
     let share_result: string[] = this.generatePixleStatusMap();
     let pixle_status_map: string = '';
@@ -267,7 +266,7 @@ export class PixGameComponent implements OnInit, AfterViewInit {
         pixle_status_map = pixle_status_map + share_result[i];
       }
     }
-    this.pixle_share_result = pixle_status_map + '\n' + pixle_details + '\n\n' + results_info_text;
+    this.pixle_share_result = '\n\n' + pixle_status_map + '\n' + pixle_details + '\n\n' + results_info_text;
   }
 
   /**
