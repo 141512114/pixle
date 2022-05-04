@@ -1,21 +1,21 @@
 <div id="pix-grid-ui" class="overflow-hidden component-pix-grid-ui playground-ui-wrapper">
   <div class="position-relative pix-grid-ui-wrapper" *ngIf="emoji_list.length > 0">
     <div #emoji_list_wrapper class="position-relative d-flex flex-nowrap pix-emoji-list horizontal-scroll-wrapper">
-      <div class="pix-grid-col" *ngFor="let j of counter(emoji_list.length)">
+      <div class="pix-col-item" *ngFor="let j of counter(emoji_list.length)">
         <app-pix-grid-element [pixle_emoji]="emoji_list[j]" [grid_element_type]="1"
                               (sendIconCodePoint)="receiveIconCodePoint($event)"></app-pix-grid-element>
       </div>
     </div>
     <div #social_share class="w-100 h-100 d-flex flex-nowrap pix-social-share-wrapper close">
       <div class="w-100 h-100 m-0 p-0 overflow-hidden pix-social-share-list">
-        <div class="share-item pix-grid-col ignore-ratio">
+        <div class="share-item pix-col-item w-auto">
           <div class="rounded-3 overflow-hidden share-item-wrapper highlight-btn">
             <button (click)="shareOnSocialMedia()" class="share-on-any" type="button">
               <span>Share</span><span><fa-icon [icon]="iconShareAny"></fa-icon></span>
             </button>
           </div>
         </div>
-        <div class="share-item pix-grid-col">
+        <div class="share-item pix-col-item">
           <div class="rounded-3 overflow-hidden share-item-wrapper highlight-btn">
             <a (click)="copyToClipboard()" class="share-copy-to-clipboard">
               <fa-icon [icon]="iconShareCopy"></fa-icon>

@@ -3,64 +3,60 @@
 @import '../mixins/responsive';
 
 // pix-grid component stylesheet
-div.component-pix-grid div.pix-grid-col {
-  padding: 4px;
-  font-size: calc(1.15em + 2.85vmin);
-
-  @media only screen and (max-width: 300px) {
-    font-size: calc(1em + 2.85vmin);
+div.component-pix-grid {
+  .pix-grid-wrapper {
+    @include flexbox();
+    max-width: $grid_limit_width;
+    margin: 0 auto;
   }
-}
 
-.pix-grid-wrapper {
-  @include flexbox();
-  max-width: $grid_limit_width;
-  margin: 0 auto;
-}
+  .pix-grid-buffer {
+    @include flexbox();
+    padding: 15px 0;
 
-.pix-grid-buffer {
-  @include flexbox();
-  padding: 15px 0;
-
-  .pix-grid-inner {
-    min-width: 135px;
-
-    .pix-grid-col {
-      max-width: 75px;
+    .pix-grid-inner {
+      min-width: 135px;
     }
   }
-}
 
-@media only screen and (max-width: $breakpoint_mm) {
-  div.pix-grid-inner div.pix-grid-col.gridw-5 {
-    font-size: calc(1em + 2.2vmin);
-  }
-}
+  .pix-col-item {
+    max-width: 75px;
+    margin: 0;
+    padding: 4px;
+    font-size: calc(1.15em + 2.85vmin);
 
-@media only screen and (max-height: 600px) {
-  div.pix-grid-inner div.pix-grid-col.gridh-5 {
-    font-size: calc(1em + 2.2vmin);
-  }
-}
-
-@media only screen and (min-width: $breakpoint_sm) {
-  div.component-pix-grid div.pix-grid-col {
-    padding: 5px;
+    @media only screen and (max-width: 300px) {
+      font-size: calc(1em + 2.85vmin);
+    }
   }
 
-  div.pix-grid-buffer div.pix-grid-inner div.pix-grid-col {
-    max-width: 85px;
+  @media only screen and (max-width: $breakpoint_mm) {
+    .pix-col-item.gridw-5 {
+      font-size: calc(1em + 2.2vmin);
+    }
   }
-}
 
-@media only screen and (min-width: $breakpoint_xsm) {
-  div.component-pix-grid div.pix-grid-col {
-    font-size: calc(1.25em + 2.2vmin);
+  @media only screen and (max-height: 600px) {
+    .pix-col-item.gridh-5 {
+      font-size: calc(1em + 2.2vmin);
+    }
   }
-}
 
-@media only screen and (min-width: $breakpoint_xxxsm) {
-  div.component-pix-grid div.pix-grid-col {
-    font-size: calc(1em + 2.2vmin);
+  @media only screen and (min-width: $breakpoint_sm) {
+    .pix-col-item {
+      max-width: 85px;
+    }
+  }
+
+  @media only screen and (min-width: $breakpoint_xsm) {
+    .pix-col-item {
+      font-size: calc(1.25em + 2.2vmin);
+    }
+  }
+
+  @media only screen and (min-width: $breakpoint_xxxsm) {
+    .pix-col-item {
+      font-size: calc(1em + 2.1vmin);
+    }
   }
 }

@@ -14,13 +14,12 @@ div.component-pix-side-menu {
   height: 100vh;
   padding: 65px 0;
   background-color: var(--default-theme-two, map.get($default-color-palette, 2));
-  transition: top 250ms, visibility 250ms, opacity 250ms;
+  transition: top 500ms, opacity 450ms;
   z-index: 99;
 
   &.close {
     top: -80px;
     pointer-events: none;
-    visibility: hidden;
     opacity: 0;
   }
 }

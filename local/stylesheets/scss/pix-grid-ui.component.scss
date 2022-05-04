@@ -6,25 +6,16 @@
 @import '../mixins/responsive';
 
 // pix-grid-ui component stylesheet
-.playground-ui-wrapper {
+div.component-pix-grid-ui {
   display: block;
   width: 100vw;
   margin: 0 auto;
   border-radius: 8px 8px 0 0;
+  background-color: var(--default-theme-three, map.get($default-color-palette, 3));
 
-  .pix-grid-col {
-    display: inline-block;
+  .pix-col-item {
     width: 65px;
     height: 65px;
-    margin-right: 3px;
-    padding: 4px;
-    flex: 0 0 auto;
-    font-size: calc(1em + 2.85vmin);
-    vertical-align: top;
-
-    &.ignore-ratio {
-      width: auto;
-    }
 
     &:first-child {
       margin-left: auto;
@@ -34,13 +25,18 @@
       margin-right: auto;
     }
   }
-}
 
-div.pix-grid-ui-wrapper,
-div.pix-social-share-wrapper {
-  $padding_vertical: 12px;
-  padding: $padding_vertical 0 math.div($padding_vertical, 2);
-  overflow: hidden;
+  div.pix-grid-ui-wrapper,
+  div.pix-social-share-wrapper {
+    $padding_vertical: 12px;
+    padding: $padding_vertical 0 math.div($padding_vertical, 2);
+    overflow: hidden;
+
+    div.pix-emoji-list,
+    .pix-social-share-list {
+      padding: 0 13px math.div($padding_vertical, 2);
+    }
+  }
 
   div.pix-emoji-list,
   div.pix-social-share-wrapper {
@@ -73,79 +69,44 @@ div.pix-social-share-wrapper {
     }
   }
 
-  div.pix-emoji-list,
-  .pix-social-share-list {
-    padding: 0 13px math.div($padding_vertical, 2);
-  }
-}
+  div.pix-control-wrapper {
+    div.validate-button-wrapper,
+    div.reload-pix-button-wrapper {
+      display: inline-block;
+      vertical-align: bottom;
+      width: 50%;
 
-div.pix-grid-ui-wrapper {
-  background-color: var(--default-theme-three, map.get($default-color-palette, 3));
-}
-
-div.pix-control-wrapper {
-  div.validate-button-wrapper,
-  div.reload-pix-button-wrapper {
-    display: inline-block;
-    vertical-align: bottom;
-    width: 50%;
-
-    button {
-      width: 100%;
-      padding: 12px 0;
-      font-size: 18px;
+      button {
+        width: 100%;
+        padding: 12px 0;
+        font-size: 18px;
+      }
     }
   }
-}
 
-@media only screen and (min-width: $breakpoint_mm) {
-  .playground-ui-wrapper {
+  @media only screen and (min-width: $breakpoint_mm) {
     width: $grid_limit_width;
   }
-}
 
-@media only screen and (min-width: $breakpoint_sm) {
-  .playground-ui-wrapper .pix-grid-col {
-    padding: 5px;
+  @media only screen and (min-width: $breakpoint_sm) {
+    .pix-col-item {
+      width: 75px;
+      height: 75px;
+      padding: 5px;
+    }
   }
 
-  div.pix-grid-ui-wrapper .pix-grid-col {
-    width: 75px;
-    height: 75px;
-    font-size: calc(1.35em + 2.5vmin);
-  }
-}
-
-@media only screen and (min-width: $breakpoint_xsm) {
-  div.pix-grid-ui-wrapper .pix-grid-col {
-    font-size: calc(1.1em + 2.2vmin);
-  }
-}
-
-@media only screen and (min-width: $breakpoint_xxxsm) {
-  .playground-ui-wrapper {
+  @media only screen and (min-width: $breakpoint_xxxsm) {
     width: 450px;
   }
 
-  div.pix-grid-ui-wrapper .pix-grid-col {
-    margin-right: 6px;
-    font-size: calc(1em + 2.1vmin);
-  }
-}
-
-@media only screen and (min-width: $breakpoint_md) {
-  div.pix-grid-ui-wrapper .pix-grid-col {
-    font-size: calc(.9em + 2vmin);
-  }
-}
-
-@media only screen and (min-width: $breakpoint_xmd) {
-  .playground-ui-wrapper {
+  @media only screen and (min-width: $breakpoint_xmd) {
     width: 500px;
 
-    div.pix-grid-ui-wrapper {
+    div.pix-grid-ui-wrapper,
+    div.pix-social-share-wrapper {
       div.pix-emoji-list,
-      ul.pix-social-share-list {
+      .pix-social-share-list {
         overflow-x: hidden;
       }
     }

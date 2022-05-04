@@ -13,6 +13,20 @@
   }
 }
 
+.horizontal-scroll-wrapper {
+  overflow-x: scroll;
+  overflow-y: hidden;
+  -webkit-overflow-scrolling: touch;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+.selected {
+  background-color: var(--default-theme-six) !important;
+}
+
 @mixin highlight_btn_mixin() {
   .highlight-btn {
     &:not(.locked) {
@@ -44,6 +58,37 @@
 
 @media (hover: hover) and (pointer: fine) {
   @include highlight_btn_mixin;
+}
+
+.pix-col-item {
+  display: inline-block;
+  margin-right: 3px;
+  padding: 4px;
+  flex: 0 0 auto;
+  font-size: calc(1em + 2.85vmin);
+  vertical-align: top;
+
+  &:last-child {
+    margin-right: 0;
+  }
+
+  @media only screen and (min-width: $breakpoint_sm) {
+    padding: 5px;
+    font-size: calc(1.35em + 2.5vmin);
+  }
+
+  @media only screen and (min-width: $breakpoint_xsm) {
+    font-size: calc(1.1em + 2.2vmin);
+  }
+
+  @media only screen and (min-width: $breakpoint_xxxsm) {
+    margin-right: 6px;
+    font-size: calc(1em + 2.1vmin);
+  }
+
+  @media only screen and (min-width: $breakpoint_md) {
+    font-size: calc(.9em + 2vmin);
+  }
 }
 
 .pix-social-share-list .share-item-wrapper {
@@ -80,20 +125,6 @@
       font-size: 18px;
     }
   }
-}
-
-.horizontal-scroll-wrapper {
-  overflow-x: scroll;
-  overflow-y: hidden;
-  -webkit-overflow-scrolling: touch;
-
-  &::-webkit-scrollbar {
-    display: none;
-  }
-}
-
-.selected {
-  background-color: var(--default-theme-six) !important;
 }
 
 // Effects
