@@ -100,6 +100,13 @@ export class PixGridElementComponent implements OnInit, AfterViewInit {
   }
 
   /**
+   * Get the status of this grid element
+   */
+  public getStatus(): number {
+    return this.user_interactive.nativeElement.dataset.gridElementStatus;
+  }
+
+  /**
    * Select this emoji and element
    */
   public selectThisEmoji(): void {

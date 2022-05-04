@@ -1,6 +1,6 @@
 import {AfterViewInit, Component, Inject, OnInit, ViewChild} from '@angular/core';
 import {Location} from '@angular/common';
-import {PIXLE_ICONS} from '../database/emoji-database';
+import {GREENSQUARE, ORANGESQUARE, PIXLE_ICONS, REDSQUARE, YELLOWSQUARE} from '../database/emoji-database';
 import {IPopUp} from '../interface/popup-message.interface';
 import {PixPopupMessageComponent} from '../pix-popup-message/pix-popup-message.component';
 import {MATCH_PIXLE_NOT_FOUND} from '../database/status-numbers';
@@ -52,6 +52,7 @@ export class PixGameComponent implements OnInit, AfterViewInit {
   pixle_image_height: number = 0;
   pixle_emoji_list: number[] = [];
 
+  pixle_share_result: string = '';
   validating: boolean = false;
 
   constructor(private router: Router, private location: Location, @Inject(WINDOW) private readonly window: Window) {
@@ -240,7 +241,61 @@ export class PixGameComponent implements OnInit, AfterViewInit {
         return;
       }
     }
+    this.generateShareMessage();
     this.pixGridUiComponent.switchUiElements();
     this.validating = false;
+  }
+
+  /**
+   * Generate the share message
+   *
+   * @private
+   */
+  private generateShareMessage(): void {
+    let pixle_details: string = 'Z' + this.pixle_id + ' / X' + this.pixle_image_width + ' / Y' + this.pixle_image_height;
+    let results_info_link: string = 'https://pixle.gg';
+    let results_info_text: string = 'Well, ... winning isn\'t everything.\n' + results_info_link;
+    if (GameManager.pixle_solved) {
+      results_info_text = 'First try! I bet you won\'t even get one row right!\n' + results_info_link;
+    }
+    let share_result: string[] = this.generatePixleStatusMap();
+    let pixle_status_map: string = '';
+    for (let i = 0; i < share_result.length; i++) {
+      if ((i + 1) % this.pixle_image_width === 0) {
+        pixle_status_map = pixle_status_map + share_result[i] + '\n';
+      } else {
+        pixle_status_map = pixle_status_map + share_result[i];
+      }
+    }
+    this.pixle_share_result = pixle_status_map + '\n' + pixle_details + '\n\n' + results_info_text;
+  }
+
+  /**
+   * Generate a status map after solving a pixle or just finishing a match
+   * The status map displays the lives left on each tile of a pixle
+   *
+   * @private
+   */
+  private generatePixleStatusMap(): string[] {
+    let grid_elements_array: PixGridElementComponent[] = this.pixGridComponent.pixle_emoji_input.toArray();
+    let pixle_status_map: string[] = [];
+    for (let i: number = 0; i < grid_elements_array.length; i++) {
+      switch (grid_elements_array[i].getStatus()) {
+        case 0:
+          pixle_status_map.push(String.fromCodePoint(REDSQUARE));
+          break;
+        case 1:
+          pixle_status_map.push(String.fromCodePoint(ORANGESQUARE));
+          break;
+        case 2:
+          pixle_status_map.push(String.fromCodePoint(YELLOWSQUARE));
+          break;
+        case 3:
+        default:
+          pixle_status_map.push(String.fromCodePoint(GREENSQUARE));
+          break;
+      }
+    }
+    return pixle_status_map;
   }
 }

@@ -28,6 +28,7 @@ export class PixGridUiComponent {
   @ViewChildren(PixGridElementComponent) public pixle_emoji_output!: QueryList<PixGridElementComponent>;
 
   @Input() emoji_list: number[] = [];
+  @Input() pixle_share_result: string = 'Not quite there yet!';
   @Output() sendValidationRequest: EventEmitter<any> = new EventEmitter<any>();
   @Output() sendReloadRequest: EventEmitter<any> = new EventEmitter<any>();
 
@@ -73,7 +74,7 @@ export class PixGridUiComponent {
     // Check if device can share / has the api
     if (this.windowNavigator.share) {
       this.windowNavigator.share({
-        text: 'Hello World',
+        text: this.pixle_share_result,
         title: 'Can you solve this pixle?',
         url: 'https://pixle.gg'
       }).then(() => {
@@ -91,7 +92,7 @@ export class PixGridUiComponent {
    * Copy pixle content to the clipboard
    */
   public copyToClipboard(): void {
-    this.clipboard.copy('Hello World');
+    this.clipboard.copy(this.pixle_share_result);
   }
 
   /**
