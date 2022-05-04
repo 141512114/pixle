@@ -222,6 +222,7 @@ export class PixGameComponent implements OnInit, AfterViewInit {
     // If any tile has reached its limits --> went out of lives --> game over
     if (failed_count > 0) {
       this.match_status_msg.openPopUp(FAILED_PIXLE_MSG);
+      this.generateShareMessage();
       GameManager.resetGame();
     } else {
       // Player has won the game
@@ -230,6 +231,7 @@ export class PixGameComponent implements OnInit, AfterViewInit {
         GameManager.pixle_solved = true;
         GameManager.game_started = false;
         this.match_status_msg.openPopUp(SUCCESS_PIXLE_MSG);
+        this.generateShareMessage();
       } else {
         // Player didn't win yet --> reset flip-state of some tiles
         this.window.setTimeout(() => {
@@ -241,7 +243,6 @@ export class PixGameComponent implements OnInit, AfterViewInit {
         return;
       }
     }
-    this.generateShareMessage();
     this.pixGridUiComponent.switchUiElements();
     this.validating = false;
   }

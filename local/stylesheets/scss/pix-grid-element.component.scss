@@ -44,7 +44,7 @@ div.grid-element-inner {
     background-color: rgba($status-color, $background-color-alpha-unfocused);
   }
 
-  &[data-grid-element-status="failed"] {
+  &[data-grid-element-status="0"] {
     $status-color: map.get($status-palette, 4);
     border-color: $status-color;
     background-color: rgba($status-color, $background-color-alpha-unfocused);

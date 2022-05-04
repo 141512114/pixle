@@ -103,7 +103,7 @@ export class PixGridElementComponent implements OnInit, AfterViewInit {
    * Get the status of this grid element
    */
   public getStatus(): number {
-    return this.user_interactive.nativeElement.dataset.gridElementStatus;
+    return this.pixle_tile_lives;
   }
 
   /**
@@ -148,12 +148,11 @@ export class PixGridElementComponent implements OnInit, AfterViewInit {
     if (!solved) {
       this.pixle_tile_lives--;
       // Add class which represents the current health status
+      grid_native_element.dataset['gridElementStatus'] = this.pixle_tile_lives.toString();
       if (this.pixle_tile_lives <= 0) {
-        grid_native_element.dataset['gridElementStatus'] = 'failed';
         this.undoFlip(grid_native_element, true);
         HelperFunctionsService.lockElement(grid_native_element);
       } else {
-        grid_native_element.dataset['gridElementStatus'] = this.pixle_tile_lives.toString();
         this.doFlip(grid_native_element);
       }
     } else {
