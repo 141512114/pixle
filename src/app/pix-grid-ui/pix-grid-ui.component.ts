@@ -1,11 +1,21 @@
-import {Component, ElementRef, EventEmitter, Input, Output, QueryList, ViewChild, ViewChildren} from '@angular/core';
+import {
+  Component,
+  ElementRef,
+  EventEmitter,
+  Inject,
+  Input,
+  Output,
+  QueryList,
+  ViewChild,
+  ViewChildren
+} from '@angular/core';
 import {Clipboard} from '@angular/cdk/clipboard';
 import {STYLESHEETS_PATH} from '../app.component';
 import {HelperFunctionsService} from '../services/helper-functions.service';
 import {PixGridElementComponent} from '../pix-grid-element/pix-grid-element.component';
 import {GameManager} from '../pix-game/game.manager';
 import {faClipboard, faLink} from '@fortawesome/free-solid-svg-icons';
-import {NgNavigatorShareService} from 'ng-navigator-share';
+import {WINDOW} from '../window-injection.token';
 
 @Component({
   selector: 'app-pix-grid-ui',
@@ -24,7 +34,10 @@ export class PixGridUiComponent {
   iconShareAny = faLink;
   iconShareCopy = faClipboard;
 
-  constructor(private ngNavigatorShareService: NgNavigatorShareService, private clipboard: Clipboard) {
+  private windowNavigator;
+
+  constructor(@Inject(WINDOW) private readonly window: Window, private clipboard: Clipboard) {
+    this.windowNavigator = this.window.navigator;
   }
 
   /**
@@ -58,13 +71,15 @@ export class PixGridUiComponent {
    */
   public shareOnSocialMedia(): void {
     // Check if device can share / has the api
-    if (this.ngNavigatorShareService.canShare()) {
-      this.ngNavigatorShareService.share({
+    if (this.windowNavigator.share) {
+      this.windowNavigator.share({
         text: 'Hello World',
         title: 'Can you solve this pixle?',
         url: 'https://pixle.gg'
-      }).then((response) => {
-        console.log(response);
+      }).then(() => {
+        console.log('Successful share');
+      }).catch((error) => {
+        console.log('Error sharing', error);
       });
     } else {
       // If not, just copy the content
