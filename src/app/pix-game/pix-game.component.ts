@@ -200,7 +200,7 @@ export class PixGameComponent implements OnInit, AfterViewInit {
    */
   private validatePixle(): void {
     if (!GameManager.game_started || GameManager.pixle_solved || this.validating) return;
-    this.checkGridRowTimers();
+    this.pixGridComponent.checkGridRowTimers();
     this.validating = true;
 
     let temp_pix_grid_comps: PixGridElementComponent[] = this.pixGridComponent.pixle_emoji_input.toArray();
@@ -244,21 +244,6 @@ export class PixGameComponent implements OnInit, AfterViewInit {
     }
     this.pixGridUiComponent.switchUiElements();
     this.validating = false;
-  }
-
-  /**
-   * Check if the grid row timers have finished
-   * But they must all have finished their task
-   *
-   * @private
-   */
-  private checkGridRowTimers(): void {
-    let grid_image_row_timer: number[] = this.pixGridComponent.grid_image_row_timer;
-    for (let i = 0; i < grid_image_row_timer.length; i++) {
-      if (grid_image_row_timer[i] != null) {
-        this.window.clearTimeout(grid_image_row_timer[i]);
-      }
-    }
   }
 
   /**

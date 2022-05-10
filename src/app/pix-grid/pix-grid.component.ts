@@ -74,6 +74,7 @@ export class PixGridComponent implements OnInit, AfterViewInit {
   public flipWholePixle(delay_on: boolean = false, reverse: boolean = true): void {
     let temp_pix_grid_comps: PixGridElementComponent[] = this.pixle_emoji_input.toArray();
     let current_grid_row: number = 0;
+    this.checkGridRowTimers();
 
     // Instant / regular flip
     const flipWholeRow = (row_num: number = 0): boolean => {
@@ -113,6 +114,19 @@ export class PixGridComponent implements OnInit, AfterViewInit {
     } else {
       for (let i = 0; i < this.grid_image_height; i++) {
         flipWholeRow(i);
+      }
+    }
+  }
+
+  /**
+   * Check if the grid row timers have finished
+   * But they must all have finished their task
+   */
+  public checkGridRowTimers(): void {
+    let grid_image_row_timer: number[] = this.grid_image_row_timer;
+    for (let i = 0; i < grid_image_row_timer.length; i++) {
+      if (grid_image_row_timer[i] != null) {
+        this.window.clearTimeout(grid_image_row_timer[i]);
       }
     }
   }
