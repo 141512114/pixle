@@ -24,7 +24,7 @@ div.grid-element-inner {
   bottom: 0;
   border: 2px solid transparent;
   background-color: var(--default-theme-four, map.get($default-color-palette, 4));
-  transition: transform 550ms, background-color 150ms;
+  transition: transform 635ms, background-color 300ms;
 
   &[data-grid-element-status="solved"] {
     $status-color: map.get($status-palette, 1);

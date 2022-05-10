@@ -73,7 +73,7 @@ export class PixGridElementComponent implements OnInit, AfterViewInit {
           // Emit signal to outer component --> send codepoint of emoji
           this.component_grid_element.nativeElement.addEventListener('click', () => {
             this.sendIconCodePoint.emit(this.pixle_emoji_codepoint);
-          });
+          }, false);
         }
         break;
       case 0:
@@ -81,7 +81,7 @@ export class PixGridElementComponent implements OnInit, AfterViewInit {
         // On click: change emoji
         this.component_grid_element.nativeElement.addEventListener('click', () => {
           this.revealOnClick(GameManager.chosen_emoji);
-        });
+        }, false);
         // If any transition on this element ends --> call this event
         let transitionEnd = GameManager.transitionEndEventName();
         this.component_grid_element.nativeElement.addEventListener(transitionEnd, () => {
@@ -93,7 +93,7 @@ export class PixGridElementComponent implements OnInit, AfterViewInit {
           if (this.pixle_tile_lives > 0) {
             HelperFunctionsService.unlockElement(element);
           }
-        });
+        }, false);
         break;
     }
   }

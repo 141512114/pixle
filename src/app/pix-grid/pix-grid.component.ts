@@ -16,6 +16,9 @@ import {STYLESHEETS_PATH} from '../app.component';
 import {DOCUMENT} from '@angular/common';
 import {WINDOW} from '../window-injection.token';
 
+// Timer / Offset
+const ROW_OFFSET: number = 715;
+
 @Component({
   selector: 'app-pix-grid',
   templateUrl: './pix-grid.component.html',
@@ -91,7 +94,7 @@ export class PixGridComponent implements OnInit, AfterViewInit {
         current_grid_row++;
         flipWholeRow(current_grid_row);
         delayFlip();
-      }, 600));
+      }, ROW_OFFSET));
     }
 
     if (delay_on) {

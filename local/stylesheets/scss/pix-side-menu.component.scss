@@ -14,7 +14,7 @@ div.component-pix-side-menu {
   height: 100vh;
   padding: 65px 0;
   background-color: var(--default-theme-two, map.get($default-color-palette, 2));
-  transition: top 500ms, opacity 450ms;
+  transition: top 475ms, opacity 400ms;
   z-index: 99;
 
   &.close {
