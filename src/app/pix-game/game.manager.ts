@@ -24,4 +24,25 @@ export class GameManager {
     GameManager.pixle_solved = false;
     GameManager.game_started = false;
   }
+
+  /**
+   * Browser support tool
+   * The event listener 'transitionend' as many variations across all browsers
+   * This tool checks them all and chooses which one works / fits best
+   */
+  public static transitionEndEventName() {
+    let el: HTMLElement = document.createElement('div');
+    let transitions: any = {
+      'transition': 'transitionend',
+      'OTransition': 'otransitionend',  // oTransitionEnd in very old Opera
+      'MozTransition': 'transitionend',
+      'WebkitTransition': 'webkitTransitionEnd'
+    };
+    let i: any;
+    for (i in transitions) {
+      if (transitions.hasOwnProperty(i) && el.style[i] !== undefined) {
+        return transitions[i];
+      }
+    }
+  }
 }

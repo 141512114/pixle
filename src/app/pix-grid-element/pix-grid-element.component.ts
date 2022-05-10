@@ -15,8 +15,6 @@ import {STYLESHEETS_PATH} from '../app.component';
 import {WINDOW} from '../window-injection.token';
 import {GameManager} from '../pix-game/game.manager';
 
-const SHORT_OFFSET: number = 500;
-
 @Component({
   selector: 'app-pix-grid-element',
   templateUrl: './pix-grid-element.component.html',
@@ -43,6 +41,9 @@ export class PixGridElementComponent implements OnInit, AfterViewInit {
   pixle_tile_solved: boolean = false;
   pixle_emoji_text: string = '';
   pixle_emoji_codepoint: number = -1;
+
+  private do_flip_class: any = 'do-flip';
+  private selected_class: any = 'selected';
 
   constructor(@Inject(WINDOW) private readonly window: Window) {
   }
@@ -81,22 +82,20 @@ export class PixGridElementComponent implements OnInit, AfterViewInit {
         this.component_grid_element.nativeElement.addEventListener('click', () => {
           this.revealOnClick(GameManager.chosen_emoji);
         });
+        // If any transition on this element ends --> call this event
+        let transitionEnd = GameManager.transitionEndEventName();
+        this.component_grid_element.nativeElement.addEventListener(transitionEnd, () => {
+          if (GameManager.pixle_solved || !GameManager.game_started) return;
+          let element: HTMLElement = this.user_interactive.nativeElement;
+          if (element.classList.contains(this.do_flip_class)) return;
+          // Reset backface of grid element
+          this.hideCorrectAnswer();
+          if (this.pixle_tile_lives > 0) {
+            HelperFunctionsService.unlockElement(element);
+          }
+        });
         break;
     }
-  }
-
-  /**
-   * Used in the grid component (parent component --> game controller)
-   */
-  public initFlip(): void {
-    this.doFlip(this.user_interactive.nativeElement);
-  }
-
-  /**
-   * Used to reverse flip an element
-   */
-  public reverseFlip(): void {
-    this.undoFlip(this.user_interactive.nativeElement);
   }
 
   /**
@@ -112,8 +111,8 @@ export class PixGridElementComponent implements OnInit, AfterViewInit {
   public selectThisEmoji(): void {
     if (this.grid_element_type !== 1) return;
     let element: HTMLElement = this.user_interactive.nativeElement;
-    if (element.classList.contains('selected')) return;
-    element.classList.add('selected');
+    if (element.classList.contains(this.selected_class)) return;
+    element.classList.add(this.selected_class);
   }
 
   /**
@@ -122,8 +121,8 @@ export class PixGridElementComponent implements OnInit, AfterViewInit {
   public unselectThisEmoji(): void {
     if (this.grid_element_type !== 1) return;
     let element: HTMLElement = this.user_interactive.nativeElement;
-    if (!element.classList.contains('selected')) return;
-    element.classList.remove('selected');
+    if (!element.classList.contains(this.selected_class)) return;
+    element.classList.remove(this.selected_class);
   }
 
   /**
@@ -134,6 +133,35 @@ export class PixGridElementComponent implements OnInit, AfterViewInit {
   public revealOnClick(emoji_codepoint: number = -1): void {
     if (this.grid_element_type !== 0 || (this.pixle_tile_solved || this.pixle_tile_lives <= 0)) return;
     this.setElementIcon(emoji_codepoint, true);
+  }
+
+  /**
+   * Flip grid element
+   */
+  public doFlip(): void {
+    if (this.grid_element_type !== 0) return;
+    let element: HTMLElement = this.user_interactive.nativeElement;
+    // Show correct answer before flipping the grid element
+    this.showCorrectAnswer();
+    if (!element.classList.contains(this.do_flip_class)) {
+      element.classList.add(this.do_flip_class);
+    }
+    HelperFunctionsService.lockElement(element);
+  }
+
+  /**
+   * Reverse flipped grid element
+   */
+  public undoFlip(): void {
+    if (this.grid_element_type !== 0) return;
+    let element: HTMLElement = this.user_interactive.nativeElement;
+    if (element.classList.contains(this.do_flip_class)) {
+      element.classList.remove(this.do_flip_class);
+    }
+    // Delay resetting this tile after reversing the flip --> smooth effect
+    if (!this.pixle_tile_solved) {
+      this.setElementIcon(this.pixle_emoji_default, true);
+    }
   }
 
   /**
@@ -150,10 +178,10 @@ export class PixGridElementComponent implements OnInit, AfterViewInit {
       // Add class which represents the current health status
       grid_native_element.dataset['gridElementStatus'] = this.pixle_tile_lives.toString();
       if (this.pixle_tile_lives <= 0) {
-        this.undoFlip(grid_native_element, true);
+        this.undoFlip();
         HelperFunctionsService.lockElement(grid_native_element);
       } else {
-        this.doFlip(grid_native_element);
+        this.doFlip();
       }
     } else {
       grid_native_element.dataset['gridElementStatus'] = 'solved';
@@ -208,47 +236,5 @@ export class PixGridElementComponent implements OnInit, AfterViewInit {
     if (this.grid_element_type !== 0 || this.correct_answer == undefined) return;
     let icon_element = this.correct_answer.nativeElement.querySelector('p.emoji');
     icon_element.textContent = String.fromCodePoint(this.pixle_emoji_default);
-  }
-
-  /**
-   * Flip grid element
-   *
-   * @param element
-   * @private
-   */
-  private doFlip(element: HTMLElement): void {
-    if (this.grid_element_type !== 0 || element == undefined || null) return;
-    // Show correct answer before flipping the grid element
-    this.showCorrectAnswer();
-    if (!element.classList.contains('do-flip')) {
-      element.classList.add('do-flip');
-    }
-    HelperFunctionsService.lockElement(element);
-  }
-
-  /**
-   * Reverse flipped grid element
-   *
-   * @param element
-   * @param reset
-   * @private
-   */
-  private undoFlip(element: HTMLElement, reset: boolean = false): void {
-    if (this.grid_element_type !== 0 || element == undefined || null) return;
-    if (element.classList.contains('do-flip')) {
-      element.classList.remove('do-flip');
-    }
-    // Delay resetting this tile after reversing the flip --> smooth effect
-    if (!this.pixle_tile_solved) {
-      this.setElementIcon(this.pixle_emoji_default, true);
-      if (!reset) {
-        this.window.setTimeout(() => {
-          this.hideCorrectAnswer();
-          if (this.pixle_tile_lives > 0) {
-            HelperFunctionsService.unlockElement(element);
-          }
-        }, SHORT_OFFSET);
-      }
-    }
   }
 }

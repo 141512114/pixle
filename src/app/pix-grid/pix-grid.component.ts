@@ -32,6 +32,8 @@ export class PixGridComponent implements OnInit, AfterViewInit {
   grid_image_width: number = 0;
   grid_image_height: number = 0;
 
+  grid_image_row_timer: number[] = [];
+
   private prev_window_width: number = 0;
   private prev_window_height: number = 0;
 
@@ -52,7 +54,7 @@ export class PixGridComponent implements OnInit, AfterViewInit {
     this.window.setTimeout(() => {
       this.setInitialSizes();
     }, 10);
-    this.setFlipStatus(false);
+    this.flipWholePixle(false, false);
   }
 
   /**
@@ -63,16 +65,41 @@ export class PixGridComponent implements OnInit, AfterViewInit {
    * Hide the pixle --> swap emojis on all tiles
    * Flip tiles over
    *
+   * @param delay_on
    * @param reverse
    */
-  public setFlipStatus(reverse: boolean = true): void {
+  public flipWholePixle(delay_on: boolean = false, reverse: boolean = true): void {
     let temp_pix_grid_comps: PixGridElementComponent[] = this.pixle_emoji_input.toArray();
-    for (let i: number = 0; i < temp_pix_grid_comps.length; i++) {
-      if (temp_pix_grid_comps[i].grid_element_type !== 0) continue;
-      if (reverse) {
-        temp_pix_grid_comps[i].reverseFlip();
-      } else {
-        temp_pix_grid_comps[i].initFlip();
+    let current_grid_row: number = 0;
+
+    // Instant / regular flip
+    const flipWholeRow = (row_num: number = 0): void => {
+      if (row_num >= this.grid_image_height) return;
+      for (let i: number = 0; i < this.grid_image_width; i++) {
+        let current_grid_column: number = this.grid_image_width * row_num + i;
+        if (reverse) {
+          temp_pix_grid_comps[current_grid_column].undoFlip();
+        } else {
+          temp_pix_grid_comps[current_grid_column].doFlip();
+        }
+      }
+    }
+
+    // Delayed flip
+    const delayFlip = (): void => {
+      this.grid_image_row_timer.push(setTimeout(() => {
+        current_grid_row++;
+        flipWholeRow(current_grid_row);
+        delayFlip();
+      }, 600));
+    }
+
+    if (delay_on) {
+      flipWholeRow(current_grid_row);
+      delayFlip();
+    } else {
+      for (let i = 0; i < this.grid_image_height; i++) {
+        flipWholeRow(i);
       }
     }
   }
