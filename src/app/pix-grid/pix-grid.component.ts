@@ -129,6 +129,7 @@ export class PixGridComponent implements OnInit, AfterViewInit {
         this.window.clearTimeout(grid_image_row_timer[i]);
       }
     }
+    this.grid_image_row_timer.length = 0;
   }
 
   /**
