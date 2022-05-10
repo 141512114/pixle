@@ -76,30 +76,39 @@ export class PixGridComponent implements OnInit, AfterViewInit {
     let current_grid_row: number = 0;
 
     // Instant / regular flip
-    const flipWholeRow = (row_num: number = 0): void => {
-      if (row_num >= this.grid_image_height) return;
+    const flipWholeRow = (row_num: number = 0): boolean => {
+      if (row_num >= this.grid_image_height) return false;
+      let solved_tiles_count: number = 0;
       for (let i: number = 0; i < this.grid_image_width; i++) {
         let current_grid_column: number = this.grid_image_width * row_num + i;
+        if (temp_pix_grid_comps[current_grid_column].pixle_tile_solved) {
+          solved_tiles_count++;
+          continue;
+        }
         if (reverse) {
           temp_pix_grid_comps[current_grid_column].undoFlip();
         } else {
           temp_pix_grid_comps[current_grid_column].doFlip();
         }
       }
+      return solved_tiles_count < this.grid_image_width;
     }
 
     // Delayed flip
-    const delayFlip = (): void => {
-      this.grid_image_row_timer.push(setTimeout(() => {
+    const delayFlip = (do_delay: boolean = false): void => {
+      if (do_delay) {
+        this.grid_image_row_timer.push(setTimeout(() => {
+          current_grid_row++;
+          delayFlip(flipWholeRow(current_grid_row));
+        }, ROW_OFFSET));
+      } else {
         current_grid_row++;
-        flipWholeRow(current_grid_row);
-        delayFlip();
-      }, ROW_OFFSET));
+        delayFlip(flipWholeRow(current_grid_row));
+      }
     }
 
     if (delay_on) {
-      flipWholeRow(current_grid_row);
-      delayFlip();
+      delayFlip(flipWholeRow(current_grid_row));
     } else {
       for (let i = 0; i < this.grid_image_height; i++) {
         flipWholeRow(i);
