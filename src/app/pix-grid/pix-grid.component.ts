@@ -96,6 +96,7 @@ export class PixGridComponent implements OnInit, AfterViewInit {
 
     // Delayed flip
     const delayFlip = (do_delay: boolean = false): void => {
+      if (current_grid_row >= this.grid_image_height) return;
       if (do_delay) {
         this.grid_image_row_timer.push(setTimeout(() => {
           current_grid_row++;
