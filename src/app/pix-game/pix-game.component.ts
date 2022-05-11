@@ -33,7 +33,7 @@ const FAILED_PIXLE_MSG: IPopUp = {
 };
 
 // Timer
-const UNDO_FLIP_TIME: number = 2250;
+const UNDO_FLIP_TIME: number = 1035;
 
 @Component({
   selector: 'app-pix-game',
@@ -132,8 +132,8 @@ export class PixGameComponent implements OnInit, AfterViewInit {
    */
   private startGame(): void {
     this.window.setTimeout(() => {
-      this.pixGridComponent.flipWholePixle(true);
       GameManager.initGame();
+      this.pixGridComponent.flipWholePixle(true);
     }, UNDO_FLIP_TIME);
   }
 
@@ -207,6 +207,7 @@ export class PixGameComponent implements OnInit, AfterViewInit {
     let total_count: number = 0, failed_count: number = 0;
     // Check every pixle tile if its valid --> emoji at the exact same position as in the original pixle
     for (let i: number = 0; i < this.pixle_image_height; i++) {
+      let solved_tiles_count: number = 0;
       for (let j: number = 0; j < this.pixle_image_width; j++) {
         let current_column: number = (this.pixle_image_width * i) + j;
         if (temp_pix_grid_comps[current_column].pixle_emoji_codepoint !== this.pixle_image[i][j]) {
@@ -217,8 +218,9 @@ export class PixGameComponent implements OnInit, AfterViewInit {
           continue;
         }
         temp_pix_grid_comps[current_column].updateTileStatus(true);
-        total_count++;
+        solved_tiles_count++;
       }
+      total_count += solved_tiles_count;
     }
     // If any tile has reached its limits --> went out of lives --> game over
     if (failed_count > 0) {

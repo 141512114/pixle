@@ -15,9 +15,10 @@ import {PixGridElementComponent} from '../pix-grid-element/pix-grid-element.comp
 import {STYLESHEETS_PATH} from '../app.component';
 import {DOCUMENT} from '@angular/common';
 import {WINDOW} from '../window-injection.token';
+import {GameManager} from '../pix-game/game.manager';
 
 // Timer / Offset
-const ROW_OFFSET: number = 715;
+const ROW_OFFSET: number = 345;
 
 @Component({
   selector: 'app-pix-grid',
@@ -72,6 +73,7 @@ export class PixGridComponent implements OnInit, AfterViewInit {
    * @param reverse
    */
   public flipWholePixle(delay_on: boolean = false, reverse: boolean = true): void {
+    if (GameManager.pixle_solved) return;
     let temp_pix_grid_comps: PixGridElementComponent[] = this.pixle_emoji_input.toArray();
     let current_grid_row: number = 0;
     this.checkGridRowTimers();
@@ -124,6 +126,7 @@ export class PixGridComponent implements OnInit, AfterViewInit {
    */
   public checkGridRowTimers(): void {
     let grid_image_row_timer: number[] = this.grid_image_row_timer;
+    if (grid_image_row_timer.length <= 0) return;
     for (let i = 0; i < grid_image_row_timer.length; i++) {
       if (grid_image_row_timer[i] != null) {
         this.window.clearTimeout(grid_image_row_timer[i]);
