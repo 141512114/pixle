@@ -36,7 +36,7 @@ div.component-pix-grid-ui {
     background-color: var(--default-theme-six, map.get($default-color-palette, 6));
     user-select: none;
     pointer-events: none;
-    transition: opacity 550ms, visibility 550ms;
+    transition: opacity 450ms, visibility 450ms;
 
     span {
       font-family: $main-ui;

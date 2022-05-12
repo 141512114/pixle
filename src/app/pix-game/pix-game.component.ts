@@ -33,7 +33,7 @@ const FAILED_PIXLE_MSG: IPopUp = {
 };
 
 // Timer
-const UNDO_FLIP_TIME: number = 1035;
+const UNDO_FLIP_TIME: number = 1400;
 
 @Component({
   selector: 'app-pix-game',
