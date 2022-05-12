@@ -6,7 +6,6 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 
 This is the official repository of the web-based game _Pixle_. The game is developed and published by Nani Games.
 Lead Developer and Designer is Nolan Bjarne Schiemann, Co-Founder of Nani Games.
-The web-application _Pixle_ is build upon the framework _Angular_, owned by Google.
 
 Wordle, Picross and typical nonograms inspired the creation and development of this web-application _Pixle_.
 The player solves puzzles on a daily basis. Each day reveals a new, randomly generated puzzle to solve.
