@@ -93,7 +93,8 @@ export class PixGridUiComponent {
    */
   public copyToClipboard(): void {
     let pixle_url: string = 'https://pixle.gg/';
-    this.clipboard.copy(this.pixle_share_result + '\n' + pixle_url);
+    let msg_to_copy: string = this.pixle_share_result + '\n' + pixle_url;
+    this.clipboard.copy(msg_to_copy);
   }
 
   /**

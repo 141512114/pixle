@@ -172,7 +172,6 @@ export class PixGridElementComponent implements OnInit, AfterViewInit {
   public updateTileStatus(solved: boolean): void {
     if (this.grid_element_type !== 0 || (this.pixle_tile_solved || this.pixle_tile_lives <= 0)) return;
     let grid_native_element: HTMLElement = this.user_interactive.nativeElement;
-
     if (!solved) {
       this.pixle_tile_lives--;
       // Add class which represents the current health status
@@ -201,7 +200,6 @@ export class PixGridElementComponent implements OnInit, AfterViewInit {
     if (emoji_codepoint === -1 || (emoji_codepoint !== -1 && this.pixle_emoji_codepoint === emoji_codepoint)) return;
     this.pixle_emoji_text = String.fromCodePoint(emoji_codepoint);
     this.pixle_emoji_codepoint = emoji_codepoint;
-
     if (!update) return;
     this.updateElementViewIcon();
   }

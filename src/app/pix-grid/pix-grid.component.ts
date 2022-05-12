@@ -48,7 +48,6 @@ export class PixGridComponent implements OnInit, AfterViewInit {
     if (this.grid_image.length <= 0) return;
     this.grid_image_width = this.grid_image[0].length;
     this.grid_image_height = this.grid_image.length;
-
     this.window.addEventListener('resize', () => {
       this.scaleDownGridElements();
     });
@@ -77,7 +76,6 @@ export class PixGridComponent implements OnInit, AfterViewInit {
     let temp_pix_grid_comps: PixGridElementComponent[] = this.pixle_emoji_input.toArray();
     let current_grid_row: number = 0;
     this.checkGridRowTimers();
-
     // Instant / regular flip
     const flipWholeRow = (row_num: number = 0): boolean => {
       if (row_num >= this.grid_image_height) return false;
@@ -96,7 +94,6 @@ export class PixGridComponent implements OnInit, AfterViewInit {
       }
       return solved_tiles_count < this.grid_image_width;
     }
-
     // Delayed flip
     const delayFlip = (do_delay: boolean = false): void => {
       if (current_grid_row >= this.grid_image_height) return;
@@ -110,7 +107,6 @@ export class PixGridComponent implements OnInit, AfterViewInit {
         delayFlip(flipWholeRow(current_grid_row));
       }
     }
-
     if (delay_on) {
       delayFlip(flipWholeRow(current_grid_row));
     } else {

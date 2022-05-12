@@ -182,9 +182,8 @@ export class PixGameComponent implements OnInit, AfterViewInit {
           // Check if there already exists this exact emoji code point in the temporary array
           if (temp_emoji_list.includes(emoji_codepoint)) {
             break;
-          } else {
-            temp_emoji_list.push(emoji_codepoint);
           }
+          temp_emoji_list.push(emoji_codepoint);
         }
       }
     }
@@ -210,14 +209,15 @@ export class PixGameComponent implements OnInit, AfterViewInit {
       let solved_tiles_count: number = 0;
       for (let j: number = 0; j < this.pixle_image_width; j++) {
         let current_column: number = (this.pixle_image_width * i) + j;
-        if (temp_pix_grid_comps[current_column].pixle_emoji_codepoint !== this.pixle_image[i][j]) {
-          temp_pix_grid_comps[current_column].updateTileStatus(false);
-          if (temp_pix_grid_comps[current_column].pixle_tile_lives <= 0) {
+        let one_pixle_tile: PixGridElementComponent = temp_pix_grid_comps[current_column];
+        if (one_pixle_tile.pixle_emoji_codepoint !== this.pixle_image[i][j]) {
+          one_pixle_tile.updateTileStatus(false);
+          if (one_pixle_tile.pixle_tile_lives <= 0) {
             failed_count++;
           }
           continue;
         }
-        temp_pix_grid_comps[current_column].updateTileStatus(true);
+        one_pixle_tile.updateTileStatus(true);
         solved_tiles_count++;
       }
       total_count += solved_tiles_count;
@@ -262,10 +262,11 @@ export class PixGameComponent implements OnInit, AfterViewInit {
     let share_result: string[] = this.generatePixleStatusMap();
     let pixle_status_map: string = '';
     for (let i = 0; i < share_result.length; i++) {
+      let one_pixle_tile: string = pixle_status_map + share_result[i];
       if ((i + 1) % this.pixle_image_width === 0) {
-        pixle_status_map = pixle_status_map + share_result[i] + '\n';
+        pixle_status_map = one_pixle_tile + '\n';
       } else {
-        pixle_status_map = pixle_status_map + share_result[i];
+        pixle_status_map = one_pixle_tile;
       }
     }
     this.pixle_share_result = '\n\n' + pixle_status_map + '\n' + pixle_details + '\n\n' + results_info_text;
