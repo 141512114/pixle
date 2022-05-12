@@ -38,6 +38,7 @@
     "@fortawesome/free-solid-svg-icons": "^6.1.0",
     "ajv": "^8.8.2",
     "ajv-errors": "^1.0.1",
+    "glob-parent": "^6.0.2",
     "rxjs": "~7.5.0",
     "tslib": "^2.3.0",
     "zone.js": "~0.11.4"
@@ -51,7 +52,7 @@
     "@types/node": "^12.11.1",
     "del": "^6.0.0",
     "gulp": "^4.0.2",
-    "gulp-autoprefixer": "^8.0.0",
+    "gulp-autoprefixer": "^6.1.0",
     "gulp-clean-css": "^4.3.0",
     "gulp-plumber": "^1.2.1",
     "gulp-rename": "^2.0.0",
