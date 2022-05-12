@@ -180,9 +180,7 @@ export class PixGameComponent implements OnInit, AfterViewInit {
         if (pixle_convert[j] === pixle_convert[i]) {
           let emoji_codepoint: number = pixle_convert[i];
           // Check if there already exists this exact emoji code point in the temporary array
-          if (temp_emoji_list.includes(emoji_codepoint)) {
-            break;
-          }
+          if (temp_emoji_list.includes(emoji_codepoint)) break;
           temp_emoji_list.push(emoji_codepoint);
         }
       }

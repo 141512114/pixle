@@ -25,6 +25,7 @@ import {WINDOW} from '../window-injection.token';
 export class PixGridUiComponent {
   @ViewChild('emoji_list_wrapper') private emoji_list_wrapper!: ElementRef;
   @ViewChild('social_share') private social_share!: ElementRef;
+  @ViewChild('copied_badge') private copied_badge!: ElementRef;
   @ViewChildren(PixGridElementComponent) public pixle_emoji_output!: QueryList<PixGridElementComponent>;
 
   @Input() emoji_list: number[] = [];
@@ -36,6 +37,7 @@ export class PixGridUiComponent {
   iconShareCopy = faClipboard;
 
   private windowNavigator;
+  private copied_badge_timer: number = -1;
 
   constructor(@Inject(WINDOW) private readonly window: Window, private clipboard: Clipboard) {
     this.windowNavigator = this.window.navigator;
@@ -94,7 +96,18 @@ export class PixGridUiComponent {
   public copyToClipboard(): void {
     let pixle_url: string = 'https://pixle.gg/';
     let msg_to_copy: string = this.pixle_share_result + '\n' + pixle_url;
-    this.clipboard.copy(msg_to_copy);
+    if (this.clipboard.copy(msg_to_copy)) {
+      this.window.clearTimeout(this.copied_badge_timer);
+      let copied_badge_element: HTMLElement = this.copied_badge.nativeElement;
+      if (copied_badge_element.classList.contains('close')) {
+        copied_badge_element.classList.remove('close');
+      }
+      this.copied_badge_timer = setTimeout(() => {
+        if (!copied_badge_element.classList.contains('close')) {
+          copied_badge_element.classList.add('close');
+        }
+      }, 2000);
+    }
   }
 
   /**
