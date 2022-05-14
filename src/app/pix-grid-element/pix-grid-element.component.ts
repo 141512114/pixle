@@ -9,7 +9,7 @@ import {
   Output,
   ViewChild
 } from '@angular/core';
-import {REDCROSS, WHITE_QUESTIONMARK} from '../database/emoji-database';
+import {WHITE_QUESTIONMARK} from '../database/emoji-database';
 import {HelperFunctionsService} from '../services/helper-functions.service';
 import {STYLESHEETS_PATH} from '../app.component';
 import {WINDOW} from '../window-injection.token';
@@ -66,15 +66,10 @@ export class PixGridElementComponent implements OnInit, AfterViewInit {
     // Check which type this grid element has
     switch (this.grid_element_type) {
       case 1:
-        // Disable placeholder elements --> marked with a red cross
-        if (this.pixle_emoji === REDCROSS) {
-          HelperFunctionsService.lockElement(this.user_interactive.nativeElement);
-        } else {
-          // Emit signal to outer component --> send codepoint of emoji
-          this.component_grid_element.nativeElement.addEventListener('click', () => {
-            this.sendIconCodePoint.emit(this.pixle_emoji_codepoint);
-          }, false);
-        }
+        // Emit signal to outer component --> send codepoint of emoji
+        this.component_grid_element.nativeElement.addEventListener('click', () => {
+          this.sendIconCodePoint.emit(this.pixle_emoji_codepoint);
+        }, false);
         break;
       case 0:
       default:
@@ -96,13 +91,6 @@ export class PixGridElementComponent implements OnInit, AfterViewInit {
         }, false);
         break;
     }
-  }
-
-  /**
-   * Get the status of this grid element
-   */
-  public getStatus(): number {
-    return this.pixle_tile_lives;
   }
 
   /**

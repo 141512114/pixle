@@ -280,7 +280,7 @@ export class PixGameComponent implements OnInit, AfterViewInit {
     let grid_elements_array: PixGridElementComponent[] = this.pixGridComponent.pixle_emoji_input.toArray();
     let pixle_status_map: string[] = [];
     for (let i: number = 0; i < grid_elements_array.length; i++) {
-      switch (grid_elements_array[i].getStatus()) {
+      switch (grid_elements_array[i].pixle_tile_lives) {
         case 0:
           pixle_status_map.push(String.fromCodePoint(REDSQUARE));
           break;

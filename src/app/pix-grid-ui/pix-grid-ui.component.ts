@@ -23,8 +23,7 @@ import {WINDOW} from '../window-injection.token';
   styleUrls: [STYLESHEETS_PATH + 'pix-grid-ui.component.min.css']
 })
 export class PixGridUiComponent {
-  @ViewChild('emoji_list_wrapper') private emoji_list_wrapper!: ElementRef;
-  @ViewChild('social_share') private social_share!: ElementRef;
+  @ViewChild('ui_wrapper') private ui_wrapper!: ElementRef;
   @ViewChild('copied_badge') private copied_badge!: ElementRef;
   @ViewChildren(PixGridElementComponent) public pixle_emoji_output!: QueryList<PixGridElementComponent>;
 
@@ -126,19 +125,12 @@ export class PixGridUiComponent {
    * Toggle one or the other
    */
   public switchUiElements(): void {
-    let emoji_list_element: HTMLElement = this.emoji_list_wrapper.nativeElement;
-    let social_share_element: HTMLElement = this.social_share.nativeElement;
-    let close_class: string = 'close';
-    if (emoji_list_element.classList.contains(close_class)) {
-      emoji_list_element.classList.remove(close_class);
-      if (!social_share_element.classList.contains(close_class)) {
-        social_share_element.classList.add(close_class);
-      }
+    let ui_wrapper_element: HTMLElement = this.ui_wrapper.nativeElement;
+    let close_class: string = 'switch-ui';
+    if (!ui_wrapper_element.classList.contains(close_class)) {
+      ui_wrapper_element.classList.add(close_class);
     } else {
-      emoji_list_element.classList.add(close_class);
-      if (social_share_element.classList.contains(close_class)) {
-        social_share_element.classList.remove(close_class);
-      }
+      ui_wrapper_element.classList.remove(close_class);
     }
   }
 

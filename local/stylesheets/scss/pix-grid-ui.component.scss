@@ -64,33 +64,35 @@ div.component-pix-grid-ui {
 
   div.pix-emoji-list,
   div.pix-social-share-wrapper {
+    top: 0;
     transition: top 750ms, opacity 550ms, visibility 550ms;
     user-select: none;
-
-    &.close {
-      opacity: 0;
-      pointer-events: none;
-      visibility: hidden;
-    }
-  }
-
-  div.pix-emoji-list {
-    top: 0;
-
-    &.close {
-      top: -80px;
-    }
   }
 
   div.pix-social-share-wrapper {
     position: absolute;
-    top: 0;
+    top: 80px;
     left: 0;
     right: 0;
     bottom: 0;
+    opacity: 0;
+    pointer-events: none;
+    visibility: hidden;
+  }
 
-    &.close {
-      top: 80px;
+  div.pix-grid-ui-wrapper.switch-ui {
+    div.pix-emoji-list {
+      top: -80px;
+      opacity: 0;
+      pointer-events: none;
+      visibility: hidden;
+    }
+
+    div.pix-social-share-wrapper {
+      top: 0;
+      opacity: 1;
+      pointer-events: all;
+      visibility: visible;
     }
   }
 

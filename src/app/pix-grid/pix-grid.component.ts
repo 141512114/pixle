@@ -48,16 +48,16 @@ export class PixGridComponent implements OnInit, AfterViewInit {
     if (this.grid_image.length <= 0) return;
     this.grid_image_width = this.grid_image[0].length;
     this.grid_image_height = this.grid_image.length;
-    this.window.addEventListener('resize', () => {
-      this.scaleDownGridElements();
-    });
   }
 
   ngAfterViewInit() {
+    this.window.addEventListener('resize', () => {
+      this.setInitialSizes();
+    });
     this.window.setTimeout(() => {
       this.setInitialSizes();
+      this.flipWholePixle(false, false);
     }, 10);
-    this.flipWholePixle(false, false);
   }
 
   /**
@@ -129,15 +129,6 @@ export class PixGridComponent implements OnInit, AfterViewInit {
       }
     }
     this.grid_image_row_timer.length = 0;
-  }
-
-  /**
-   * Used inside an EventListener attached to the window
-   *
-   * @private
-   */
-  private scaleDownGridElements(): void {
-    this.setInitialSizes();
   }
 
   /**

@@ -23,6 +23,8 @@ const hasTouch = () => {
   return null;
 };
 
+const COOLDOWN_TOUCH: number = 75;
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -59,25 +61,18 @@ export class AppComponent implements OnInit, AfterViewInit {
    * Toggle (open or close) the side menu
    */
   public toggleSideMenu(): void {
-    let openIconButton: HTMLElement = this.toggle_side_menu_btn.nativeElement.querySelector('span.open-icon');
-    let closeIconButton: HTMLElement = this.toggle_side_menu_btn.nativeElement.querySelector('span.close-icon');
-    let show_class: string = 'show';
+    let toggle_side_menu_element: HTMLElement = this.toggle_side_menu_btn.nativeElement;
+    let show_class: string = 'toggle';
 
     if (this.pixSideMenuComponent.active) {
       this.pixSideMenuComponent.closeSideMenu();
-      if (!openIconButton.classList.contains(show_class)) {
-        openIconButton.classList.add(show_class);
-      }
-      if (closeIconButton.classList.contains(show_class)) {
-        closeIconButton.classList.remove(show_class);
+      if (toggle_side_menu_element.classList.contains(show_class)) {
+        toggle_side_menu_element.classList.remove(show_class);
       }
     } else {
       this.pixSideMenuComponent.openSideMenu();
-      if (openIconButton.classList.contains(show_class)) {
-        openIconButton.classList.remove(show_class);
-      }
-      if (!closeIconButton.classList.contains(show_class)) {
-        closeIconButton.classList.add(show_class);
+      if (!toggle_side_menu_element.classList.contains(show_class)) {
+        toggle_side_menu_element.classList.add(show_class);
       }
     }
   }
@@ -115,6 +110,6 @@ export class AppComponent implements OnInit, AfterViewInit {
       let body_element: HTMLElement = this.document.body;
       if (!body_element.classList.contains('startTouch')) return;
       body_element.classList.remove('startTouch');
-    }, 75);
+    }, COOLDOWN_TOUCH);
   }
 }

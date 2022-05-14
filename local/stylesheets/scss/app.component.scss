@@ -27,21 +27,13 @@ header.navbar {
     bottom: 0;
     right: 0;
     @include flexbox(space-between, unset, row);
-    width: 100%;
-    height: 100%;
     padding: 0 6px;
 
     div.company-logo {
-      display: block;
-      width: auto;
       padding: 10px 0 10px 5px;
 
       a {
         background: none;
-      }
-
-      svg {
-        height: 100%;
       }
     }
 
@@ -58,7 +50,18 @@ header.navbar {
           width: 24px;
           visibility: hidden;
 
-          &.show {
+          &.open-icon {
+            display: block;
+            visibility: visible;
+          }
+        }
+
+        &.toggle {
+          span.open-icon {
+            display: none;
+            visibility: hidden;
+          }
+          span.close-icon {
             display: block;
             visibility: visible;
           }
