@@ -127,6 +127,30 @@
   }
 }
 
+.pix-copied-badge {
+  position: absolute;
+  top: -65px;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 9px 21px;
+  background-color: var(--default-theme-six, map.get($default-color-palette, 6));
+  user-select: none;
+  pointer-events: none;
+  transition: opacity 450ms, visibility 450ms;
+
+  span {
+    font-family: $main-ui;
+    font-size: 18px;
+    color: var(--default-theme-one, map.get($default-color-palette, 1));
+  }
+
+  &.close {
+    opacity: 0;
+    pointer-events: none;
+    visibility: hidden;
+  }
+}
+
 // Effects
 .flip-element {
   position: relative;
