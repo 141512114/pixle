@@ -145,7 +145,7 @@ Compress svg files: ----------------------------------------------
 
 */
 
-gulp.task('svg-compress', async function() {
+gulp.task('svg-compress', async function () {
   gulp.src(SVG_FOLDER + '**/*.svg')
     .pipe(plumber())
     .pipe(svgmin())
