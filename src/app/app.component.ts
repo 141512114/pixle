@@ -31,12 +31,11 @@ const COOLDOWN_TOUCH: number = 75;
   styleUrls: ['../stylesheets/css/app.component.min.css']
 })
 export class AppComponent implements OnInit, AfterViewInit {
-  @ViewChild(PixSideMenuComponent) private pixSideMenuComponent!: PixSideMenuComponent;
-  @ViewChild('toggle_side_menu_btn') private toggle_side_menu_btn!: ElementRef;
-
   iconOpenSideMenu: IconDefinition = faGear;
   iconCloseSideMenu: IconDefinition = faXmark;
   isTouchTimer: any;
+  @ViewChild(PixSideMenuComponent) private pixSideMenuComponent!: PixSideMenuComponent;
+  @ViewChild('toggle_side_menu_btn') private toggle_side_menu_btn!: ElementRef;
 
   constructor(@Inject(DOCUMENT) private document: Document, @Inject(WINDOW) private readonly window: Window) {
     this.addViewportHeightProperty();

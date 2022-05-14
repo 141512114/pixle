@@ -26,18 +26,14 @@ const ROW_OFFSET: number = 345;
   styleUrls: [STYLESHEETS_PATH + 'pix-grid.component.min.css']
 })
 export class PixGridComponent implements OnInit, AfterViewInit {
-  @ViewChild('grid_wrapper') private grid_wrapper!: ElementRef;
-  @ViewChild('grid_inner') private grid_inner!: ElementRef;
   @ViewChildren(PixGridElementComponent) public pixle_emoji_input!: QueryList<PixGridElementComponent>;
-
   @Input() grid_image: number[][] = [];
   @Output() sendMatchStatus: EventEmitter<number> = new EventEmitter<number>();
-
   grid_image_width: number = 0;
   grid_image_height: number = 0;
-
   grid_image_row_timer: number[] = [];
-
+  @ViewChild('grid_wrapper') private grid_wrapper!: ElementRef;
+  @ViewChild('grid_inner') private grid_inner!: ElementRef;
   private prev_window_width: number = 0;
   private prev_window_height: number = 0;
 

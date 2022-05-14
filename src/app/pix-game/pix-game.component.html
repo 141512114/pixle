@@ -1,9 +1,9 @@
 <section class="component-pix-game container-fluid position-relative h-100 p-0">
   <div class="container position-relative h-100 p-0 pix-game-wrapper">
     <table class="table position-relative p-0 w-100 h-100 playground-wrapper">
-      <tr class="position-relative h-100" align="center">
+      <tr align="center" class="position-relative h-100">
         <td class="position-relative h-100 overflow-hidden">
-          <div class="w-100 h-100 pix-grid-wrapper" *ngIf="pixle_image.length > 0">
+          <div *ngIf="pixle_image.length > 0" class="w-100 h-100 pix-grid-wrapper">
             <app-pix-grid (sendMatchStatus)="receiveMatchStatus($event)" [grid_image]="pixle_image"></app-pix-grid>
           </div>
           <div class="pix-popup-wrapper">
@@ -11,10 +11,10 @@
           </div>
         </td>
       </tr>
-      <tr class="h-auto" align="center">
+      <tr align="center" class="h-auto">
         <td class="position-relative playground-ui-wrapper">
-          <app-pix-grid-ui (sendValidationRequest)="receiveValidationRequest()"
-                           (sendReloadRequest)="receiveReloadRequest()"
+          <app-pix-grid-ui (sendReloadRequest)="receiveReloadRequest()"
+                           (sendValidationRequest)="receiveValidationRequest()"
                            [emoji_list]="pixle_emoji_list" [pixle_share_result]="pixle_share_result"></app-pix-grid-ui>
         </td>
       </tr>

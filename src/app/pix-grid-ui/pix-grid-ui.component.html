@@ -1,12 +1,12 @@
-<div id="pix-grid-ui" class="position-relative component-pix-grid-ui playground-ui-wrapper">
+<div class="position-relative component-pix-grid-ui playground-ui-wrapper" id="pix-grid-ui">
   <div #copied_badge class="rounded-3 overflow-hidden pix-copied-badge close">
     <span>Copied!</span>
   </div>
-  <div #ui_wrapper class="position-relative overflow-hidden pix-grid-ui-wrapper" *ngIf="emoji_list.length > 0">
+  <div #ui_wrapper *ngIf="emoji_list.length > 0" class="position-relative overflow-hidden pix-grid-ui-wrapper">
     <div class="position-relative d-flex flex-nowrap pix-emoji-list horizontal-scroll-wrapper">
-      <div class="pix-col-item" *ngFor="let j of counter(emoji_list.length)">
-        <app-pix-grid-element [pixle_emoji]="emoji_list[j]" [grid_element_type]="1"
-                              (sendIconCodePoint)="receiveIconCodePoint($event)"></app-pix-grid-element>
+      <div *ngFor="let j of counter(emoji_list.length)" class="pix-col-item">
+        <app-pix-grid-element (sendIconCodePoint)="receiveIconCodePoint($event)" [grid_element_type]="1"
+                              [pixle_emoji]="emoji_list[j]"></app-pix-grid-element>
       </div>
     </div>
     <div class="w-100 h-100 d-flex flex-nowrap overflow-hidden pix-social-share-wrapper">
@@ -30,13 +30,13 @@
   </div>
   <div class="mt-auto pix-control-wrapper">
     <div class="p-0 validate-button-wrapper">
-      <button class="pix-validate-button" (click)="validatePixleOnClick()" type="button"
-              aria-label="Flip all tiles">Flip!
+      <button (click)="validatePixleOnClick()" aria-label="Flip all tiles" class="pix-validate-button"
+              type="button">Flip!
       </button>
     </div>
     <div class="p-0 reload-pix-button-wrapper">
-      <button class="pix-reload-button invert-colors" (click)="reloadGameComponent()" type="button"
-              aria-label="Reload game">Reload
+      <button (click)="reloadGameComponent()" aria-label="Reload game" class="pix-reload-button invert-colors"
+              type="button">Reload
       </button>
     </div>
   </div>

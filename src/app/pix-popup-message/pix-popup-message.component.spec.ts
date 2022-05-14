@@ -1,6 +1,6 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { PixPopupMessageComponent } from './pix-popup-message.component';
+import {PixPopupMessageComponent} from './pix-popup-message.component';
 
 describe('PixPopupMessageComponent', () => {
   let component: PixPopupMessageComponent;
@@ -8,9 +8,9 @@ describe('PixPopupMessageComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ PixPopupMessageComponent ]
+      declarations: [PixPopupMessageComponent]
     })
-    .compileComponents();
+      .compileComponents();
   });
 
   beforeEach(() => {

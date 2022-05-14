@@ -23,18 +23,15 @@ import {WINDOW} from '../window-injection.token';
   styleUrls: [STYLESHEETS_PATH + 'pix-grid-ui.component.min.css']
 })
 export class PixGridUiComponent {
-  @ViewChild('ui_wrapper') private ui_wrapper!: ElementRef;
-  @ViewChild('copied_badge') private copied_badge!: ElementRef;
   @ViewChildren(PixGridElementComponent) public pixle_emoji_output!: QueryList<PixGridElementComponent>;
-
   @Input() emoji_list: number[] = [];
   @Input() pixle_share_result: string = 'Not quite there yet!';
   @Output() sendValidationRequest: EventEmitter<any> = new EventEmitter<any>();
   @Output() sendReloadRequest: EventEmitter<any> = new EventEmitter<any>();
-
   iconShareAny = faLink;
   iconShareCopy = faClipboard;
-
+  @ViewChild('ui_wrapper') private ui_wrapper!: ElementRef;
+  @ViewChild('copied_badge') private copied_badge!: ElementRef;
   private windowNavigator;
   private copied_badge_timer: number = -1;
 

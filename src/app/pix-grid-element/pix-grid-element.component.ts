@@ -21,11 +21,6 @@ import {GameManager} from '../pix-game/game.manager';
   styleUrls: [STYLESHEETS_PATH + 'pix-grid-element.component.min.css']
 })
 export class PixGridElementComponent implements OnInit, AfterViewInit {
-  @ViewChild('component_grid_element') private component_grid_element!: ElementRef;
-  @ViewChild('user_interactive') private user_interactive!: ElementRef;
-  @ViewChild('emoji_input') private emoji_input!: ElementRef;
-  @ViewChild('correct_answer') private correct_answer?: ElementRef;
-
   @Input() pixle_emoji: number = -1; // <-- stores the correct answer
   /**
    * Different grid element types:
@@ -34,14 +29,15 @@ export class PixGridElementComponent implements OnInit, AfterViewInit {
    */
   @Input() grid_element_type: number = 0;
   @Output() sendIconCodePoint: EventEmitter<number> = new EventEmitter<number>();
-
   pixle_emoji_default: number = WHITE_QUESTIONMARK;
-
   pixle_tile_lives: number = 3;
   pixle_tile_solved: boolean = false;
   pixle_emoji_text: string = '';
   pixle_emoji_codepoint: number = -1;
-
+  @ViewChild('component_grid_element') private component_grid_element!: ElementRef;
+  @ViewChild('user_interactive') private user_interactive!: ElementRef;
+  @ViewChild('emoji_input') private emoji_input!: ElementRef;
+  @ViewChild('correct_answer') private correct_answer?: ElementRef;
   private do_flip_class: any = 'do-flip';
   private selected_class: any = 'selected';
 

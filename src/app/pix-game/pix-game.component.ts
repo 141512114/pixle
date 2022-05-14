@@ -41,21 +41,34 @@ const UNDO_FLIP_TIME: number = 1400;
   styleUrls: [STYLESHEETS_PATH + 'pix-game.component.min.css']
 })
 export class PixGameComponent implements OnInit, AfterViewInit {
-  @ViewChild('match_status') private match_status_msg!: PixPopupMessageComponent;
-  @ViewChild(PixGridComponent) private pixGridComponent!: PixGridComponent;
-  @ViewChild(PixGridUiComponent) private pixGridUiComponent!: PixGridUiComponent;
   pixle_arts: IPixle[] = PIXLEARTS; // <-- pulled database
-
   pixle_id: number = -1;
   pixle_image: number[][] = [];
   pixle_image_width: number = 0;
   pixle_image_height: number = 0;
   pixle_emoji_list: number[] = [];
-
   pixle_share_result: string = '';
   validating: boolean = false;
+  @ViewChild('match_status') private match_status_msg!: PixPopupMessageComponent;
+  @ViewChild(PixGridComponent) private pixGridComponent!: PixGridComponent;
+  @ViewChild(PixGridUiComponent) private pixGridUiComponent!: PixGridUiComponent;
 
   constructor(private router: Router, private location: Location, @Inject(WINDOW) private readonly window: Window) {
+  }
+
+  /**
+   * Get the emoji by its id --> search it in the emoji collection
+   * Return an array of codepoints
+   *
+   * @param emoji_ids
+   */
+  public static getEmojisFromListById(emoji_ids: number[] = []): number[] {
+    let temp_emoji_codepoints: number[] = [];
+    for (let i: number = 0; i < emoji_ids.length; i++) {
+      let emoji_codepoint: number = PIXLE_ICONS[emoji_ids[i]];
+      temp_emoji_codepoints.push(emoji_codepoint);
+    }
+    return temp_emoji_codepoints;
   }
 
   ngOnInit(): void {
@@ -106,21 +119,6 @@ export class PixGameComponent implements OnInit, AfterViewInit {
   public receiveValidationRequest(): void {
     if (this.validating) return;
     this.validatePixle();
-  }
-
-  /**
-   * Get the emoji by its id --> search it in the emoji collection
-   * Return an array of codepoints
-   *
-   * @param emoji_ids
-   */
-  public static getEmojisFromListById(emoji_ids: number[] = []): number[] {
-    let temp_emoji_codepoints: number[] = [];
-    for (let i: number = 0; i < emoji_ids.length; i++) {
-      let emoji_codepoint: number = PIXLE_ICONS[emoji_ids[i]];
-      temp_emoji_codepoints.push(emoji_codepoint);
-    }
-    return temp_emoji_codepoints;
   }
 
   /**

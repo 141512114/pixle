@@ -8,10 +8,9 @@ import {STYLESHEETS_PATH} from '../app.component';
   styleUrls: [STYLESHEETS_PATH + 'pix-side-menu.component.css']
 })
 export class PixSideMenuComponent {
-  @ViewChild('side_menu') private side_menu!: ElementRef;
   @Output() public sendThemeData: EventEmitter<string> = new EventEmitter<string>();
-
   active: boolean = false;
+  @ViewChild('side_menu') private side_menu!: ElementRef;
 
   /**
    * Open the side menu
