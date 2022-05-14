@@ -32,6 +32,7 @@
       padding-top: $form-floating-input-padding-t;
       padding-bottom: $form-floating-input-padding-b;
     }
+
     // Duplicated because `:-webkit-autofill` invalidates other selectors when grouped
     &:-webkit-autofill {
       padding-top: $form-floating-input-padding-t;
@@ -52,6 +53,7 @@
       transform: $form-floating-label-transform;
     }
   }
+
   // Duplicated because `:-webkit-autofill` invalidates other selectors when grouped
   > .form-control:-webkit-autofill {
     ~ label {
@@ -59,5 +61,6 @@
       transform: $form-floating-label-transform;
     }
   }
+
   // stylelint-enable no-duplicate-selectors
 }

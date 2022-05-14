@@ -36,6 +36,7 @@
     @include transition($modal-transition);
     transform: $modal-fade-transform;
   }
+
   .modal.show & {
     transform: $modal-show-transform;
   }
@@ -160,7 +161,9 @@
     @include box-shadow($modal-content-box-shadow-sm-up);
   }
 
-  .modal-sm { max-width: $modal-sm; }
+  .modal-sm {
+    max-width: $modal-sm;
+  }
 }
 
 @include media-breakpoint-up(lg) {
@@ -171,7 +174,9 @@
 }
 
 @include media-breakpoint-up(xl) {
-  .modal-xl { max-width: $modal-xl; }
+  .modal-xl {
+    max-width: $modal-xl;
+  }
 }
 
 // scss-docs-start modal-fullscreen-loop
@@ -206,4 +211,5 @@
     }
   }
 }
+
 // scss-docs-end modal-fullscreen-loop
