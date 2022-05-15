@@ -29,7 +29,7 @@ const SUCCESS_PIXLE_MSG: IPopUp = {
 const FAILED_PIXLE_MSG: IPopUp = {
   headline: 'No way!',
   subline: '',
-  message_body: 'This is it... . You\'ve lost.</br>But i\'m believing in you, just keep going!'
+  message_body: 'This is it... . You\'ve lost.</br>But i\'m believing in you, hang in there!'
 };
 
 // Timer
