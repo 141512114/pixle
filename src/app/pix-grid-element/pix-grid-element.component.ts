@@ -78,11 +78,12 @@ export class PixGridElementComponent implements OnInit, AfterViewInit {
         this.component_grid_element.nativeElement.addEventListener(transitionEnd, () => {
           if (GameManager.pixle_solved || !GameManager.game_started) return;
           let element: HTMLElement = this.user_interactive.nativeElement;
-          if (element.classList.contains(this.do_flip_class)) return;
-          // Reset backface of grid element
-          this.hideCorrectAnswer();
-          if (this.pixle_tile_lives > 0) {
-            HelperFunctionsService.unlockElement(element);
+          if (!element.classList.contains(this.do_flip_class)) {
+            // Reset backface of grid element
+            this.hideCorrectAnswer();
+            if (this.pixle_tile_lives > 0) {
+              HelperFunctionsService.unlockElement(element);
+            }
           }
         }, false);
         break;
@@ -142,10 +143,11 @@ export class PixGridElementComponent implements OnInit, AfterViewInit {
     if (element.classList.contains(this.do_flip_class)) {
       element.classList.remove(this.do_flip_class);
     }
-    // Delay resetting this tile after reversing the flip --> smooth effect
     if (!this.pixle_tile_solved) {
       this.setElementIcon(this.pixle_emoji_default, true);
     }
+    // Second part is executed in an event listener
+    // The listener is set right at the beginning of this components lifespan
   }
 
   /**
@@ -194,6 +196,7 @@ export class PixGridElementComponent implements OnInit, AfterViewInit {
    * @private
    */
   private updateElementViewIcon(): void {
+    if (this.emoji_input == undefined) return;
     let icon_element = this.emoji_input.nativeElement.querySelector('p.emoji');
     icon_element.textContent = this.pixle_emoji_text;
   }
