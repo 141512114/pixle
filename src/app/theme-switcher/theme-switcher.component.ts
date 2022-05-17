@@ -19,5 +19,7 @@ export class ThemeSwitcherComponent {
    */
   public changeTheme(theme_name: string): void {
     this.document.body.dataset['theme'] = theme_name;
+    // Save the selected theme also to the local storage (cache?)
+    localStorage.setItem('last_theme', theme_name);
   }
 }

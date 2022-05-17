@@ -47,6 +47,11 @@ export class AppComponent implements OnInit, AfterViewInit {
     ['mouseover', 'touchend', 'touchcancel'].forEach(event => {
       this.window.addEventListener(event, this.removeTouchClass, false);
     });
+    // Get the stored theme data, if available, and "restore" the previous settings
+    const PREVIOUS_THEME: string | null = localStorage.getItem('last_theme');
+    if (PREVIOUS_THEME != null) {
+      this.document.body.dataset['theme'] = PREVIOUS_THEME;
+    }
   }
 
   ngAfterViewInit() {
