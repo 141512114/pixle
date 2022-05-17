@@ -4,7 +4,7 @@ import {DOCUMENT} from '@angular/common';
 @Component({
   selector: 'app-theme-switcher',
   templateUrl: './theme-switcher.component.html',
-  styleUrls: ['../../stylesheets/css/theme-switcher.component.min.css']
+  styleUrls: []
 })
 export class ThemeSwitcherComponent {
   @Output() public sendThemeData: EventEmitter<string> = new EventEmitter<string>();
