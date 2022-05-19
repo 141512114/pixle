@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Inject, Output} from '@angular/core';
+import {Component, Inject} from '@angular/core';
 import {DOCUMENT} from '@angular/common';
 
 @Component({
@@ -7,8 +7,6 @@ import {DOCUMENT} from '@angular/common';
   styleUrls: []
 })
 export class ThemeSwitcherComponent {
-  @Output() public sendThemeData: EventEmitter<string> = new EventEmitter<string>();
-
   constructor(@Inject(DOCUMENT) private document: Document) {
   }
 

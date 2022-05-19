@@ -3,9 +3,8 @@ import {Location} from '@angular/common';
 import {GREENSQUARE, ORANGESQUARE, PIXLE_ICONS, REDSQUARE, YELLOWSQUARE} from '../database/emoji-database';
 import {IPopUp} from '../interface/popup-message.interface';
 import {PixPopupMessageComponent} from '../pix-popup-message/pix-popup-message.component';
-import {MATCH_PIXLE_NOT_FOUND} from '../database/status-numbers';
 import {Router} from '@angular/router';
-import {HelperFunctionsService} from '../services/helper-functions.service';
+import {HelperFunctionsService} from '../abstract/services/helper-functions.service';
 import {IPixle} from '../interface/pixle.interface';
 import {PIXLEARTS} from '../database/pix-arts-database';
 import {PixGridComponent} from '../pix-grid/pix-grid.component';
@@ -77,7 +76,7 @@ export class PixGameComponent implements OnInit, AfterViewInit {
 
   ngAfterViewInit(): void {
     if (this.pixle_image.length <= 0) {
-      this.receiveMatchStatus(MATCH_PIXLE_NOT_FOUND);
+      this.sendMatchMessage(MISSING_PIXLE_MSG);
       return;
     }
     this.startGame();
@@ -101,16 +100,12 @@ export class PixGameComponent implements OnInit, AfterViewInit {
   /**
    * Receive the current status of the ongoing match and evaluate the status number
    *
-   * @param status
+   * @param msg_object
    */
-  public receiveMatchStatus(status: number): void {
-    switch (status) {
-      case MATCH_PIXLE_NOT_FOUND:
-        this.match_status_msg.openPopUp(MISSING_PIXLE_MSG);
-        break;
-      default:
-        break;
-    }
+  public sendMatchMessage(msg_object: IPopUp): void {
+    let popup_msg: PixPopupMessageComponent = this.match_status_msg;
+    popup_msg.writeNewMessage(msg_object);
+    popup_msg.openHTMLElement(popup_msg.msg_container.nativeElement);
   }
 
   /**
@@ -220,7 +215,7 @@ export class PixGameComponent implements OnInit, AfterViewInit {
     }
     // If any tile has reached its limits --> went out of lives --> game over
     if (failed_count > 0) {
-      this.match_status_msg.openPopUp(FAILED_PIXLE_MSG);
+      this.sendMatchMessage(FAILED_PIXLE_MSG);
       this.generateShareMessage();
       GameManager.resetGame();
     } else {
@@ -229,7 +224,7 @@ export class PixGameComponent implements OnInit, AfterViewInit {
       if (total_count >= tile_amount) {
         GameManager.pixle_solved = true;
         GameManager.game_started = false;
-        this.match_status_msg.openPopUp(SUCCESS_PIXLE_MSG);
+        this.sendMatchMessage(SUCCESS_PIXLE_MSG);
         this.generateShareMessage();
       } else {
         // Player didn't win yet --> reset flip-state of some tiles

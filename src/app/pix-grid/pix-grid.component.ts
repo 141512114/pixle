@@ -2,11 +2,9 @@ import {
   AfterViewInit,
   Component,
   ElementRef,
-  EventEmitter,
   Inject,
   Input,
   OnInit,
-  Output,
   QueryList,
   ViewChild,
   ViewChildren
@@ -28,7 +26,6 @@ const ROW_OFFSET: number = 345;
 export class PixGridComponent implements OnInit, AfterViewInit {
   @ViewChildren(PixGridElementComponent) public pixle_emoji_input!: QueryList<PixGridElementComponent>;
   @Input() grid_image: number[][] = [];
-  @Output() sendMatchStatus: EventEmitter<number> = new EventEmitter<number>();
   grid_image_width: number = 0;
   grid_image_height: number = 0;
   grid_image_row_timer: number[] = [];

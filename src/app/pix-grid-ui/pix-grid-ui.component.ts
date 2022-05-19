@@ -11,18 +11,19 @@ import {
 } from '@angular/core';
 import {Clipboard} from '@angular/cdk/clipboard';
 import {STYLESHEETS_PATH} from '../app.component';
-import {HelperFunctionsService} from '../services/helper-functions.service';
+import {HelperFunctionsService} from '../abstract/services/helper-functions.service';
 import {PixGridElementComponent} from '../pix-grid-element/pix-grid-element.component';
 import {GameManager} from '../pix-game/game.manager';
 import {faClipboard, faLink} from '@fortawesome/free-solid-svg-icons';
 import {WINDOW} from '../window-injection.token';
+import {AbstractHtmlElement} from '../abstract/abstract.html-element';
 
 @Component({
   selector: 'app-pix-grid-ui',
   templateUrl: './pix-grid-ui.component.html',
   styleUrls: [STYLESHEETS_PATH + 'pix-grid-ui.component.min.css']
 })
-export class PixGridUiComponent {
+export class PixGridUiComponent extends AbstractHtmlElement {
   @ViewChildren(PixGridElementComponent) public pixle_emoji_output!: QueryList<PixGridElementComponent>;
   @Input() emoji_list: number[] = [];
   @Input() pixle_share_result: string = 'Not quite there yet!';
@@ -36,6 +37,7 @@ export class PixGridUiComponent {
   private copied_badge_timer: number = -1;
 
   constructor(@Inject(WINDOW) private readonly window: Window, private clipboard: Clipboard) {
+    super();
     this.windowNavigator = this.window.navigator;
   }
 
@@ -95,13 +97,9 @@ export class PixGridUiComponent {
     if (this.clipboard.copy(msg_to_copy)) {
       this.window.clearTimeout(this.copied_badge_timer);
       let copied_badge_element: HTMLElement = this.copied_badge.nativeElement;
-      if (copied_badge_element.classList.contains('close')) {
-        copied_badge_element.classList.remove('close');
-      }
+      this.openHTMLElement(copied_badge_element);
       this.copied_badge_timer = setTimeout(() => {
-        if (!copied_badge_element.classList.contains('close')) {
-          copied_badge_element.classList.add('close');
-        }
+        this.closeHTMLElement(copied_badge_element);
       }, 2000);
     }
   }

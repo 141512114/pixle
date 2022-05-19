@@ -10,7 +10,7 @@ import {
   ViewChild
 } from '@angular/core';
 import {WHITE_QUESTIONMARK} from '../database/emoji-database';
-import {HelperFunctionsService} from '../services/helper-functions.service';
+import {HelperFunctionsService} from '../abstract/services/helper-functions.service';
 import {STYLESHEETS_PATH} from '../app.component';
 import {WINDOW} from '../window-injection.token';
 import {GameManager} from '../pix-game/game.manager';

@@ -65,20 +65,22 @@ export class AppComponent implements OnInit, AfterViewInit {
    * Toggle (open or close) the side menu
    */
   public toggleSideMenu(): void {
+    let side_menu_element: HTMLElement = this.pixSideMenuComponent.side_menu.nativeElement;
     let toggle_side_menu_element: HTMLElement = this.toggle_side_menu_btn.nativeElement;
     let show_class: string = 'toggle';
 
     if (this.pixSideMenuComponent.active) {
-      this.pixSideMenuComponent.closeSideMenu();
+      this.pixSideMenuComponent.closeHTMLElement(side_menu_element);
       if (toggle_side_menu_element.classList.contains(show_class)) {
         toggle_side_menu_element.classList.remove(show_class);
       }
     } else {
-      this.pixSideMenuComponent.openSideMenu();
+      this.pixSideMenuComponent.openHTMLElement(side_menu_element);
       if (!toggle_side_menu_element.classList.contains(show_class)) {
         toggle_side_menu_element.classList.add(show_class);
       }
     }
+    this.pixSideMenuComponent.active = !this.pixSideMenuComponent.active;
   }
 
   /**
