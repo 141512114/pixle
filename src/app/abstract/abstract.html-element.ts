@@ -7,19 +7,21 @@ export class AbstractHtmlElement {
    * Open the popup message
    *
    * @param html_element
+   * @param class_name
    */
-  public openHTMLElement(html_element: HTMLElement): void {
-    if (!html_element.classList.contains('close')) return;
-    html_element.classList.remove('close');
+  public addClassToHTMLElement(html_element: HTMLElement, class_name: any = 'close'): void {
+    if (!html_element.classList.contains(class_name)) return;
+    html_element.classList.remove(class_name);
   }
 
   /**
    * Close the popup message
    *
    * @param html_element
+   * @param class_name
    */
-  public closeHTMLElement(html_element: HTMLElement): void {
-    if (html_element.classList.contains('close')) return;
-    html_element.classList.add('close');
+  public removeClassFromHTMLElement(html_element: HTMLElement, class_name: any = 'close'): void {
+    if (html_element.classList.contains(class_name)) return;
+    html_element.classList.add(class_name);
   }
 }

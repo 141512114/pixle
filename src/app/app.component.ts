@@ -70,12 +70,12 @@ export class AppComponent implements OnInit, AfterViewInit {
     let show_class: string = 'toggle';
 
     if (this.pixSideMenuComponent.active) {
-      this.pixSideMenuComponent.closeHTMLElement(side_menu_element);
+      this.pixSideMenuComponent.removeClassFromHTMLElement(side_menu_element);
       if (toggle_side_menu_element.classList.contains(show_class)) {
         toggle_side_menu_element.classList.remove(show_class);
       }
     } else {
-      this.pixSideMenuComponent.openHTMLElement(side_menu_element);
+      this.pixSideMenuComponent.addClassToHTMLElement(side_menu_element);
       if (!toggle_side_menu_element.classList.contains(show_class)) {
         toggle_side_menu_element.classList.add(show_class);
       }

@@ -45,9 +45,7 @@ export class PixGridComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit() {
-    this.window.setTimeout(() => {
-      this.setInitialSizes();
-    }, 10);
+    this.window.setTimeout(this.setInitialSizes, 10);
     this.flipWholePixle(false, false);
   }
 

@@ -105,7 +105,7 @@ export class PixGameComponent implements OnInit, AfterViewInit {
   public sendMatchMessage(msg_object: IPopUp): void {
     let popup_msg: PixPopupMessageComponent = this.match_status_msg;
     popup_msg.writeNewMessage(msg_object);
-    popup_msg.openHTMLElement(popup_msg.msg_container.nativeElement);
+    popup_msg.addClassToHTMLElement(popup_msg.msg_container.nativeElement);
   }
 
   /**

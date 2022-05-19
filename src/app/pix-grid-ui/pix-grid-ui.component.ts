@@ -97,9 +97,9 @@ export class PixGridUiComponent extends AbstractHtmlElement {
     if (this.clipboard.copy(msg_to_copy)) {
       this.window.clearTimeout(this.copied_badge_timer);
       let copied_badge_element: HTMLElement = this.copied_badge.nativeElement;
-      this.openHTMLElement(copied_badge_element);
+      this.addClassToHTMLElement(copied_badge_element);
       this.copied_badge_timer = setTimeout(() => {
-        this.closeHTMLElement(copied_badge_element);
+        this.removeClassFromHTMLElement(copied_badge_element);
       }, 2000);
     }
   }

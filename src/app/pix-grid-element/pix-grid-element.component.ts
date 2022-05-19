@@ -14,13 +14,14 @@ import {HelperFunctionsService} from '../abstract/services/helper-functions.serv
 import {STYLESHEETS_PATH} from '../app.component';
 import {WINDOW} from '../window-injection.token';
 import {GameManager} from '../pix-game/game.manager';
+import {AbstractHtmlElement} from '../abstract/abstract.html-element';
 
 @Component({
   selector: 'app-pix-grid-element',
   templateUrl: './pix-grid-element.component.html',
   styleUrls: [STYLESHEETS_PATH + 'pix-grid-element.component.min.css']
 })
-export class PixGridElementComponent implements OnInit, AfterViewInit {
+export class PixGridElementComponent extends AbstractHtmlElement implements OnInit, AfterViewInit {
   @Input() pixle_emoji: number = -1; // <-- stores the correct answer
   /**
    * Different grid element types:
@@ -42,6 +43,7 @@ export class PixGridElementComponent implements OnInit, AfterViewInit {
   private selected_class: any = 'selected';
 
   constructor(@Inject(WINDOW) private readonly window: Window) {
+    super()
   }
 
   ngOnInit(): void {
@@ -96,8 +98,7 @@ export class PixGridElementComponent implements OnInit, AfterViewInit {
   public selectThisEmoji(): void {
     if (this.grid_element_type !== 1) return;
     let element: HTMLElement = this.user_interactive.nativeElement;
-    if (element.classList.contains(this.selected_class)) return;
-    element.classList.add(this.selected_class);
+    this.removeClassFromHTMLElement(element, this.selected_class);
   }
 
   /**
@@ -106,8 +107,7 @@ export class PixGridElementComponent implements OnInit, AfterViewInit {
   public unselectThisEmoji(): void {
     if (this.grid_element_type !== 1) return;
     let element: HTMLElement = this.user_interactive.nativeElement;
-    if (!element.classList.contains(this.selected_class)) return;
-    element.classList.remove(this.selected_class);
+    this.addClassToHTMLElement(element, this.selected_class);
   }
 
   /**
@@ -128,9 +128,7 @@ export class PixGridElementComponent implements OnInit, AfterViewInit {
     let element: HTMLElement = this.user_interactive.nativeElement;
     // Show correct answer before flipping the grid element
     this.showCorrectAnswer();
-    if (!element.classList.contains(this.do_flip_class)) {
-      element.classList.add(this.do_flip_class);
-    }
+    this.removeClassFromHTMLElement(element, this.do_flip_class);
     HelperFunctionsService.lockElement(element);
   }
 
@@ -140,9 +138,7 @@ export class PixGridElementComponent implements OnInit, AfterViewInit {
   public undoFlip(): void {
     if (this.grid_element_type !== 0) return;
     let element: HTMLElement = this.user_interactive.nativeElement;
-    if (element.classList.contains(this.do_flip_class)) {
-      element.classList.remove(this.do_flip_class);
-    }
+    this.addClassToHTMLElement(element, this.do_flip_class);
     if (!this.pixle_tile_solved) {
       this.setElementIcon(this.pixle_emoji_default, true);
     }
