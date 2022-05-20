@@ -1,10 +1,14 @@
 import {PIXLE_ICONS} from '../../src/app/database/emoji-database';
+import {IPixle} from '../../src/app/interface/pixle.interface';
+import * as fs from 'fs';
 
 const HPATTERN: number[][] = [
   [0, 1, 0],
   [0, 0, 0],
   [0, 1, 0]
 ];
+
+let pixle_master_list: IPixle[] = [];
 
 /**
  * Generate a random integer between two limiter values --> min and max
@@ -65,9 +69,9 @@ function chooseRandomIcons(): number[] {
   let max_icon_count: number = getMaximumIconCount(HPATTERN);
   let chosen_icons: number[] = [];
   for (let i = 0; i < max_icon_count; i++) {
-    let current_chosen_icon: number = generateRandomInteger(PIXLE_ICONS.length);
+    let current_chosen_icon: number = generateRandomInteger(PIXLE_ICONS.length - 1);
     while (chosen_icons.includes(current_chosen_icon)) {
-      current_chosen_icon = generateRandomInteger(PIXLE_ICONS.length);
+      current_chosen_icon = generateRandomInteger(PIXLE_ICONS.length - 1);
     }
     chosen_icons.push(current_chosen_icon);
   }
@@ -75,11 +79,37 @@ function chooseRandomIcons(): number[] {
 }
 
 /**
+ * Generate a new pixle
+ *
+ * @param pixle_id
+ */
+function generateNewPixle(pixle_id: number = 0): void {
+  let chosen_icons: number[] = chooseRandomIcons();
+  let new_pixle: IPixle = {id: pixle_id, tiles: generateNewPattern(HPATTERN, chosen_icons)};
+  pixle_master_list.push(new_pixle);
+}
+
+/**
+ * Create the file which stores all pixles
+ */
+function createPixleDatabaseFile(): void {
+  const path_name: string = './local/pixle-generator/database/';
+  const file_name: string = 'pixle-arts.database.json';
+  const json_content: string = JSON.stringify(pixle_master_list);
+  fs.writeFile(path_name + file_name, json_content, 'utf8', function (err) {
+    if (err) return console.log(err);
+    console.log("The file was saved!");
+  });
+}
+
+/**
  * Initialize the pixle generator
  */
 function initPixleGenerator(): void {
-  let chosen_icons: number[] = chooseRandomIcons();
-  generateNewPattern(HPATTERN, chosen_icons);
+  for (let i = 0; i < 10; i++) {
+    generateNewPixle(i);
+  }
+  createPixleDatabaseFile();
 }
 
 initPixleGenerator();

@@ -6,13 +6,13 @@ import {PixPopupMessageComponent} from '../pix-popup-message/pix-popup-message.c
 import {Router} from '@angular/router';
 import {HelperFunctionsService} from '../abstract/services/helper-functions.service';
 import {IPixle} from '../interface/pixle.interface';
-import {PIXLEARTS} from '../database/pix-arts-database';
 import {PixGridComponent} from '../pix-grid/pix-grid.component';
 import {GameManager} from './game.manager';
 import {STYLESHEETS_PATH} from '../app.component';
 import {WINDOW} from '../window-injection.token';
 import {PixGridElementComponent} from '../pix-grid-element/pix-grid-element.component';
 import {PixGridUiComponent} from '../pix-grid-ui/pix-grid-ui.component';
+import * as PixleList from '../database/pixle-arts.database.json';
 
 // Popup messages
 const MISSING_PIXLE_MSG: IPopUp = {
@@ -40,7 +40,7 @@ const UNDO_FLIP_TIME: number = 1400;
   styleUrls: [STYLESHEETS_PATH + 'pix-game.component.min.css']
 })
 export class PixGameComponent implements OnInit, AfterViewInit {
-  pixle_arts: IPixle[] = PIXLEARTS; // <-- pulled database
+  pixle_arts: IPixle[] = PixleList; // <-- pulled database
   pixle_id: number = -1;
   pixle_image: number[][] = [];
   pixle_image_width: number = 0;
