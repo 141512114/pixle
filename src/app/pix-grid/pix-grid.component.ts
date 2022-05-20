@@ -167,6 +167,7 @@ export class PixGridComponent implements OnInit, AfterViewInit {
   /**
    * Calculate the grid-buffer width by looking at the window inner width
    *
+   * @return Calculated width of the grid buffer
    * @private
    */
   private calculateWidthOfGridBufferElementViaWindowWidth(): number {
@@ -179,6 +180,7 @@ export class PixGridComponent implements OnInit, AfterViewInit {
   /**
    * Calculate the grid-buffer width by looking at the window inner height
    *
+   * @return Calculated height of the grid buffer
    * @private
    */
   private calculateWidthOfGridBufferElementViaWindowHeight(): number {

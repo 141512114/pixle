@@ -46,6 +46,7 @@ export class PixGridUiComponent extends AbstractHtmlElement {
    * Makes an array of numbers which helps to use *ngFor as a normal for loop
    *
    * @param i
+   * @return Array of numbers
    */
   public counter(i: number): number[] {
     return HelperFunctionsService.makeForLoopCount(i);

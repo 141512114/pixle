@@ -6,6 +6,24 @@ const HPATTERN: number[][] = [
   [0, 1, 0]
 ];
 
+/**
+ * Generate a random integer between two limiter values --> min and max
+ * The parameter min is by default 0
+ *
+ * @param max
+ * @param min
+ * @return Random integer
+ */
+function generateRandomInteger(max: number, min: number = 0): number {
+  return Math.floor(Math.random() * (max - min + 1) + min);
+}
+
+/**
+ * Get the maximum icon count which is possible inside a given pattern
+ *
+ * @param pattern
+ * @return Maximum icon count possible
+ */
 function getMaximumIconCount(pattern: number[][]): number {
   if (pattern === undefined) return 0;
   let total_count: number[] = [];
@@ -19,11 +37,13 @@ function getMaximumIconCount(pattern: number[][]): number {
   return total_count.length;
 }
 
-function getRandomIcon(): number {
-  let max = PIXLE_ICONS.length, min = 0;
-  return Math.floor(Math.random() * (max - min + 1) + min);
-}
-
+/**
+ * Generate a new pattern. Use a template as a starting point and fill in the missing pieces
+ *
+ * @param pattern
+ * @param new_icons
+ * @return Generated pattern
+ */
 function generateNewPattern(pattern: number[][], new_icons: number[]): number[][] {
   let new_pattern: number[][] = [];
   for (let i = 0; i < pattern.length; i++) {
@@ -40,9 +60,9 @@ function chooseRandomIcons(): void {
   let maxIconCount: number = getMaximumIconCount(HPATTERN);
   let chosenIcons: number[] = [];
   for (let i = 0; i < maxIconCount; i++) {
-    let current_chosen_icon: number = getRandomIcon();
+    let current_chosen_icon: number = generateRandomInteger(PIXLE_ICONS.length);
     while (chosenIcons.includes(current_chosen_icon)) {
-      current_chosen_icon = getRandomIcon();
+      current_chosen_icon = generateRandomInteger(PIXLE_ICONS.length);
     }
     chosenIcons.push(current_chosen_icon);
   }

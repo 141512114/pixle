@@ -8,6 +8,7 @@ export class HelperFunctionsService {
    * Convert any two-dimensional array into a one-dimensional array
    *
    * @param array
+   * @return Converted two-dimensional array
    */
   public static twoDimensionalArrayToOneDimensional(array: number[][]): number[] {
     // Make sure a pixle tile array was assigned
@@ -27,6 +28,7 @@ export class HelperFunctionsService {
    *
    * @param max
    * @param min
+   * @return Random integer
    */
   public static generateRandomInteger(max: number, min: number = 0): number {
     return Math.floor(Math.random() * (max - min + 1) + min);
@@ -36,6 +38,7 @@ export class HelperFunctionsService {
    * Makes an array of numbers which helps to use *ngFor as a normal for loop
    *
    * @param i
+   * @return Array of numbers
    */
   public static makeForLoopCount(i: number): number[] {
     let ceil: number = Math.ceil(i);
