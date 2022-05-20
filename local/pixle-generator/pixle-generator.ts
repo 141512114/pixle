@@ -56,17 +56,30 @@ function generateNewPattern(pattern: number[][], new_icons: number[]): number[][
   return new_pattern;
 }
 
-function chooseRandomIcons(): void {
-  let maxIconCount: number = getMaximumIconCount(HPATTERN);
-  let chosenIcons: number[] = [];
-  for (let i = 0; i < maxIconCount; i++) {
+/**
+ * Choose random icons / emojis, which will be inserted into the randomly chosen pattern
+ *
+ * @return Array of icons / emojis
+ */
+function chooseRandomIcons(): number[] {
+  let max_icon_count: number = getMaximumIconCount(HPATTERN);
+  let chosen_icons: number[] = [];
+  for (let i = 0; i < max_icon_count; i++) {
     let current_chosen_icon: number = generateRandomInteger(PIXLE_ICONS.length);
-    while (chosenIcons.includes(current_chosen_icon)) {
+    while (chosen_icons.includes(current_chosen_icon)) {
       current_chosen_icon = generateRandomInteger(PIXLE_ICONS.length);
     }
-    chosenIcons.push(current_chosen_icon);
+    chosen_icons.push(current_chosen_icon);
   }
-  console.log(generateNewPattern(HPATTERN, chosenIcons));
+  return chosen_icons;
 }
 
-chooseRandomIcons();
+/**
+ * Initialize the pixle generator
+ */
+function initPixleGenerator(): void {
+  let chosen_icons: number[] = chooseRandomIcons();
+  generateNewPattern(HPATTERN, chosen_icons);
+}
+
+initPixleGenerator();
