@@ -1,12 +1,7 @@
-import {PIXLE_ICONS} from '../../src/app/database/emoji-database';
+import {PIXLE_ICONS} from '../../src/app/database/emoji.database';
 import {IPixle} from '../../src/app/interface/pixle.interface';
 import * as fs from 'fs';
-
-const HPATTERN: number[][] = [
-  [0, 1, 0],
-  [0, 0, 0],
-  [0, 1, 0]
-];
+import {MASTER_PATTERNS} from './pixle-pattern-list';
 
 let pixle_master_list: IPixle[] = [];
 
@@ -61,12 +56,23 @@ function generateNewPattern(pattern: number[][], new_icons: number[]): number[][
 }
 
 /**
+ * Choose a random pattern from the master list
+ *
+ * @return Chosen pattern
+ */
+function chooseRandomPattern(): number[][] {
+  let rand: number = generateRandomInteger(MASTER_PATTERNS.length - 1);
+  return MASTER_PATTERNS[rand];
+}
+
+/**
  * Choose random icons / emojis, which will be inserted into the randomly chosen pattern
  *
+ * @param pattern
  * @return Array of icons / emojis
  */
-function chooseRandomIcons(): number[] {
-  let max_icon_count: number = getMaximumIconCount(HPATTERN);
+function chooseRandomIcons(pattern: number[][]): number[] {
+  let max_icon_count: number = getMaximumIconCount(pattern);
   let chosen_icons: number[] = [];
   for (let i = 0; i < max_icon_count; i++) {
     let current_chosen_icon: number = generateRandomInteger(PIXLE_ICONS.length - 1);
@@ -84,8 +90,9 @@ function chooseRandomIcons(): number[] {
  * @param pixle_id
  */
 function generateNewPixle(pixle_id: number = 0): void {
-  let chosen_icons: number[] = chooseRandomIcons();
-  let new_pixle: IPixle = {id: pixle_id, tiles: generateNewPattern(HPATTERN, chosen_icons)};
+  let pattern: number[][] = chooseRandomPattern();
+  let chosen_icons: number[] = chooseRandomIcons(pattern);
+  let new_pixle: IPixle = {id: pixle_id, tiles: generateNewPattern(pattern, chosen_icons)};
   pixle_master_list.push(new_pixle);
 }
 

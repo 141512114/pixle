@@ -9,7 +9,7 @@ import {
   Output,
   ViewChild
 } from '@angular/core';
-import {WHITE_QUESTIONMARK} from '../database/emoji-database';
+import {WHITE_QUESTIONMARK} from '../database/emoji.database';
 import {HelperFunctionsService} from '../abstract/services/helper-functions.service';
 import {STYLESHEETS_PATH} from '../app.component';
 import {WINDOW} from '../window-injection.token';
