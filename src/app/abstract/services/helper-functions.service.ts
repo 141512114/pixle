@@ -89,12 +89,12 @@ export class HelperFunctionsService {
    *
    * @return Availability of the local storage (boolean)
    */
-  public static isLocalStorageAvailable(){
+  public static isLocalStorageAvailable() {
     try {
       localStorage.setItem('check', 'availability');
       localStorage.removeItem('check');
       return true;
-    } catch(e) {
+    } catch (e) {
       return false;
     }
   }
