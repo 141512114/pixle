@@ -61,18 +61,18 @@
 </IfModule>
 
 <IfModule mod_expires.c>
- # Others
- AddType text/css
- AddType text/javascript
- AddType text/html
- AddType application/javascript
- AddType image/gif
- AddType image/jpeg
- AddType image/png
- AddType image/x-icon
+ ExpiresActive on
 
- # Fonts
- # Add correct content-type for fonts
+ # Others
+ AddType text/css .css
+ AddType text/javascript .js
+ AddType text/html .html
+ AddType application/javascript .js
+ AddType image/gif .gif
+ AddType image/jpeg .jpeg
+ AddType image/png .png
+
+ # Declare fonts content-type
  AddType application/vnd.ms-fontobject .eot
  AddType application/x-font-ttf .ttf
  AddType application/x-font-opentype .otf
@@ -82,8 +82,6 @@
  # Compress compressible fonts
  # only uncomment if you dont have compression turned on already. Otherwise it will cause all other filetypes not to get compressed
  # AddOutputFilterByType DEFLATE application/x-font-ttf application/x-font-opentype image/svg+xml
-
- ExpiresActive on
 
  # Others
  ExpiresByType text/css "access plus 1 month"
@@ -96,24 +94,22 @@
  ExpiresByType image/x-icon "access plus 1 month"
 
  # Fonts
- ExpiresByType application/vnd.ms-fontobject "access plus 1 year"
- ExpiresByType application/x-font-ttf "access plus 1 year"
- ExpiresByType application/x-font-opentype "access plus 1 year"
- ExpiresByType application/x-font-woff "access plus 1 year"
- ExpiresByType application/font-woff2  "access plus 1 month"
- ExpiresByType image/svg+xml "access plus 1 year"
-</IfModule>
+ ExpiresByType application/x-font-woff "access plus 1 years"
+ ExpiresByType application/x-font-ttf "access plus 1 years"
+ ExpiresByType application/vnd.ms-fontobject "access plus 1 years"
+ ExpiresByType application/svg+xml "access plus 1 years"
 
-<IfModule mod_headers.c>
- <FilesMatch "\\.(ico|jpe?g|png|gif|swf)$">
-  Header set Cache-Control "max-age=2592000, public"
- </FilesMatch>
- <FilesMatch "\\.(css)$">
-  Header set Cache-Control "max-age=604800, public"
- </FilesMatch>
- <FilesMatch "\\.(js)$">
-  Header set Cache-Control "max-age=216000, private"
- </FilesMatch>
+ <IfModule mod_headers.c>
+  <FilesMatch "\\.(ico|jpe?g|png|gif|swf)$">
+   Header set Cache-Control "max-age=2592000, public"
+  </FilesMatch>
+  <FilesMatch "\\.(css)$">
+   Header set Cache-Control "max-age=604800, public"
+  </FilesMatch>
+  <FilesMatch "\\.(js)$">
+   Header set Cache-Control "max-age=216000, private"
+  </FilesMatch>
+ </IfModule>
 </IfModule>
 
 RewriteEngine On
