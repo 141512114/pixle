@@ -14,11 +14,13 @@ import {PixGridElementComponent} from '../pix-grid-element/pix-grid-element.comp
 import {PixGridUiComponent} from '../pix-grid-ui/pix-grid-ui.component';
 import * as PixleList from '../database/pixle-arts.database.json';
 
+export const SUPPORT_EMAIL: string = 'support@nani-games.net';
+
 // Popup messages
 const MISSING_PIXLE_MSG: IPopUp = {
   headline: 'Missing pixle data!',
   subline: 'There was a mistake retrieving a pixle from the database.',
-  message_body: 'If this issue occurs more than it should, report this bug to the team.'
+  message_body: 'If this issue occurs more often than it should, report it to the team.</br><a class="share-via-mail" href="mailto:' + SUPPORT_EMAIL + '">' + SUPPORT_EMAIL + '</a>'
 };
 const SUCCESS_PIXLE_MSG: IPopUp = {
   headline: 'Congratulations!',

@@ -124,6 +124,11 @@ button {
     background-color: #25D366;
   }
 
+  &.share-via-mail {
+    color: var(--default-theme-six, map.get($default-color-palette, 6));
+    background-color: transparent;
+  }
+
   @extend .highlight-btn;
 }
 

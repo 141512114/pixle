@@ -29,7 +29,9 @@ div.important-links {
   ul li {
     margin-bottom: 10px;
 
+    a,
     button {
+      display: inline-block;
       padding: 6px 12px;
       font-size: 16px;
     }
@@ -41,6 +43,7 @@ div.important-links {
     @media only screen and (min-width: $breakpoint_xsm) {
       margin-bottom: 12px;
 
+      a,
       button {
         padding: 7px 15px;
         font-size: 18px;
@@ -50,6 +53,7 @@ div.important-links {
     @media only screen and (min-width: $breakpoint_xxxsm) {
       margin-bottom: 13px;
 
+      a,
       button {
         padding: 8px 15px;
         font-size: 20px;
@@ -57,6 +61,7 @@ div.important-links {
     }
 
     @media only screen and (min-width: $breakpoint_xmd) {
+      a,
       button {
         padding: 9px 18px;
         font-size: 22px;
