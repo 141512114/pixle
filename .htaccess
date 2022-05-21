@@ -62,7 +62,34 @@
 
 <IfModule mod_expires.c>
  ExpiresActive on
+ ExpiresDefault "access plus 1 month"
 
+ # Web fonts
+ AddType application/x-font-ttf ttc ttf
+ AddType application/x-font-woff .woff
+ AddType application/font-woff2 .woff2
+ AddType image/svg+xml .svg
+ AddType application/vnd.ms-fontobject eot
+
+ # Embedded OpenType (EOT)
+ ExpiresByType application/vnd.ms-fontobject "access plus 1 month"
+ ExpiresByType font/eot "access plus 1 month"
+
+ # OpenType
+ ExpiresByType font/opentype "access plus 1 month"
+
+ # TrueType
+ ExpiresByType application/x-font-ttf "access plus 1 month"
+
+ # Web Open Font Format (WOFF) 1.0
+ ExpiresByType application/font-woff "access plus 1 month"
+ ExpiresByType application/x-font-woff "access plus 1 month"
+ ExpiresByType font/woff "access plus 1 month"
+
+ # Web Open Font Format (WOFF) 2.0
+ ExpiresByType application/font-woff2 "access plus 1 month"
+
+ # Other
  ExpiresByType text/css "access plus 1 month"
  ExpiresByType text/javascript "access plus 1 month"
  ExpiresByType text/html "access plus 1 month"
@@ -71,18 +98,19 @@
  ExpiresByType image/jpeg "access plus 1 month"
  ExpiresByType image/png "access plus 1 month"
  ExpiresByType image/x-icon "access plus 1 month"
-</IfModule>
-# Append "public" to header "Cache-Control"
-<IfModule mod_headers.c>
- <FilesMatch "\\.(ico|jpe?g|png|gif|swf)$">
-  Header set Cache-Control "max-age=2592000, public"
- </FilesMatch>
- <FilesMatch "\\.(css)$">
-  Header set Cache-Control "max-age=604800, public"
- </FilesMatch>
- <FilesMatch "\\.(js)$">
-  Header set Cache-Control "max-age=216000, private"
- </FilesMatch>
+
+ # Append "public" to header "Cache-Control"
+ <IfModule mod_headers.c>
+  <FilesMatch "\\.(jpg|jpeg|png|gif|swf|ico|svg|ttf|eot|woff|woff2)$">
+   Header set Cache-Control "max-age=31536000, public"
+  </FilesMatch>
+  <FilesMatch "\\.(css)$">
+   Header set Cache-Control "max-age=604800, public"
+  </FilesMatch>
+  <FilesMatch "\\.(js)$">
+   Header set Cache-Control "max-age=216000, private"
+  </FilesMatch>
+ </IfModule>
 </IfModule>
 
 RewriteEngine On
