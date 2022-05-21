@@ -87,12 +87,13 @@ function chooseRandomIcons(pattern: number[][]): number[] {
 /**
  * Generate a new pixle
  *
+ * @param pixle_date
  * @param pixle_id
  */
-function generateNewPixle(pixle_id: number = 0): void {
+function generateNewPixle(pixle_date: any, pixle_id: number = 0): void {
   let pattern: number[][] = chooseRandomPattern();
   let chosen_icons: number[] = chooseRandomIcons(pattern);
-  let new_pixle: IPixle = {id: pixle_id, tiles: generateNewPattern(pattern, chosen_icons)};
+  let new_pixle: IPixle = {id: pixle_id, date: pixle_date, tiles: generateNewPattern(pattern, chosen_icons)};
   pixle_master_list.push(new_pixle);
 }
 
@@ -113,8 +114,16 @@ function createPixleDatabaseFile(): void {
  * Initialize the pixle generator
  */
 function initPixleGenerator(): void {
-  for (let i = 0; i < 10; i++) {
-    generateNewPixle(i);
+  let start_date: Date = new Date();
+  let end_date: Date = new Date();
+  start_date.setUTCHours(0, 0, 0, 0);
+  end_date.setUTCHours(0, 0, 0, 0);
+  end_date.setUTCFullYear(end_date.getUTCFullYear()+1);
+  let i = 0;
+  while(start_date < end_date) {
+    start_date.setUTCDate(start_date.getUTCDate()+1);
+    generateNewPixle(start_date.toJSON(), i);
+    i++;
   }
   createPixleDatabaseFile();
 }

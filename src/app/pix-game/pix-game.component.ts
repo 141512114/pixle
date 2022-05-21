@@ -23,7 +23,7 @@ const MISSING_PIXLE_MSG: IPopUp = {
 const SUCCESS_PIXLE_MSG: IPopUp = {
   headline: 'Congratulations!',
   subline: '',
-  message_body: 'You\'ve made it, keep going!</br>Challenge your friends and family by sharing your score and see who is better.'
+  message_body: 'You\'ve made it, keep going!</br>Challenge your friends and family by sharing your score.'
 };
 const FAILED_PIXLE_MSG: IPopUp = {
   headline: 'No way!',
@@ -32,7 +32,7 @@ const FAILED_PIXLE_MSG: IPopUp = {
 };
 
 // Timer
-const UNDO_FLIP_TIME: number = 1400;
+const UNDO_FLIP_TIME: number = 1435;
 
 @Component({
   selector: 'app-pix-game',
@@ -48,6 +48,7 @@ export class PixGameComponent implements OnInit, AfterViewInit {
   pixle_emoji_list: number[] = [];
   pixle_share_result: string = '';
   validating: boolean = false;
+  private current_date: Date = new Date();
   @ViewChild('match_status') private match_status_msg!: PixPopupMessageComponent;
   @ViewChild(PixGridComponent) private pixGridComponent!: PixGridComponent;
   @ViewChild(PixGridUiComponent) private pixGridUiComponent!: PixGridUiComponent;
@@ -139,9 +140,17 @@ export class PixGameComponent implements OnInit, AfterViewInit {
    * @private
    */
   private searchRandomPixleArt(): boolean {
-    if (this.pixle_arts.length <= 0) return false;
-    let rand: number = HelperFunctionsService.generateRandomInteger(this.pixle_arts.length - 1);
-    let selected_pixle_art: IPixle = this.pixle_arts[rand];
+    let selected_pixle_art: IPixle | null = null;
+    let current_date_formatted: string = HelperFunctionsService.formatDate(new Date(this.current_date));
+    // Go through every entry and check the dates
+    for (let i = 0; i < this.pixle_arts.length; i++) {
+      let current_pixle: IPixle = this.pixle_arts[i];
+      let current_pixle_date: string = HelperFunctionsService.formatDate(new Date(current_pixle.date));
+      if (current_pixle_date === current_date_formatted) {
+        selected_pixle_art = current_pixle;
+        break;
+      }
+    }
     if (selected_pixle_art == undefined || null) return false;
     let pixle_art_tiles: number[][] = selected_pixle_art.tiles;
     // Go through the pixle image --> contains only emoji ids --> convert them to codepoints

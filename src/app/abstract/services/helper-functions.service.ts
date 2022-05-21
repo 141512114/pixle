@@ -68,4 +68,30 @@ export class HelperFunctionsService {
     if ((element == undefined || null) || (!element.classList.contains('locked'))) return;
     element.classList.remove('locked');
   }
+
+  /**
+   * Format a given date and remove the hours, minutes and seconds
+   * Only keep the day, month and year
+   *
+   * @param date
+   * @return Formatted date
+   */
+  public static formatDate(date: Date) {
+    return [
+      date.getFullYear(),
+      HelperFunctionsService.padTo2Digits(date.getMonth() + 1),
+      HelperFunctionsService.padTo2Digits(date.getDate()),
+    ].join('-');
+  }
+
+  /**
+   * Add a zero to any number below 10
+   *
+   * @param num
+   * @return Modified number as a string
+   * @private
+   */
+  private static padTo2Digits(num: number) {
+    return num.toString().padStart(2, '0');
+  }
 }
