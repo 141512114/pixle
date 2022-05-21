@@ -65,11 +65,11 @@
  ExpiresDefault "access plus 1 month"
 
  # Web fonts
- AddType application/x-font-ttf ttc ttf
+ AddType application/x-font-ttf .ttc .ttf
  AddType application/x-font-woff .woff
  AddType application/font-woff2 .woff2
  AddType image/svg+xml .svg
- AddType application/vnd.ms-fontobject eot
+ AddType application/vnd.ms-fontobject .eot
 
  # Embedded OpenType (EOT)
  ExpiresByType application/vnd.ms-fontobject "access plus 1 month"
