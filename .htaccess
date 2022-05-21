@@ -60,9 +60,32 @@
   Header append Vary User-Agent
 </IfModule>
 
-# turns cache on for 1 month
 <IfModule mod_expires.c>
- ExpiresActive On
+ # Others
+ AddType text/css
+ AddType text/javascript
+ AddType text/html
+ AddType application/javascript
+ AddType image/gif
+ AddType image/jpeg
+ AddType image/png
+ AddType image/x-icon
+
+ # Fonts
+ # Add correct content-type for fonts
+ AddType application/vnd.ms-fontobject .eot
+ AddType application/x-font-ttf .ttf
+ AddType application/x-font-opentype .otf
+ AddType application/x-font-woff .woff
+ AddType image/svg+xml .svg
+
+ # Compress compressible fonts
+ # only uncomment if you dont have compression turned on already. Otherwise it will cause all other filetypes not to get compressed
+ # AddOutputFilterByType DEFLATE application/x-font-ttf application/x-font-opentype image/svg+xml
+
+ ExpiresActive on
+
+ # Others
  ExpiresByType text/css "access plus 1 month"
  ExpiresByType text/javascript "access plus 1 month"
  ExpiresByType text/html "access plus 1 month"
@@ -71,7 +94,16 @@
  ExpiresByType image/jpeg "access plus 1 month"
  ExpiresByType image/png "access plus 1 month"
  ExpiresByType image/x-icon "access plus 1 month"
+
+ # Fonts
+ ExpiresByType application/vnd.ms-fontobject "access plus 1 year"
+ ExpiresByType application/x-font-ttf "access plus 1 year"
+ ExpiresByType application/x-font-opentype "access plus 1 year"
+ ExpiresByType application/x-font-woff "access plus 1 year"
+ ExpiresByType application/font-woff2  "access plus 1 month"
+ ExpiresByType image/svg+xml "access plus 1 year"
 </IfModule>
+
 <IfModule mod_headers.c>
  <FilesMatch "\\.(ico|jpe?g|png|gif|swf)$">
   Header set Cache-Control "max-age=2592000, public"
