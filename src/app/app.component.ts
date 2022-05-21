@@ -4,6 +4,7 @@ import {WINDOW} from './window-injection.token';
 import {PixSideMenuComponent} from './pix-side-menu/pix-side-menu.component';
 import {faGear, faXmark} from '@fortawesome/free-solid-svg-icons';
 import {IconDefinition} from '@fortawesome/free-brands-svg-icons';
+import {HelperFunctionsService} from './abstract/services/helper-functions.service';
 
 export const STYLESHEETS_PATH: string = '../../stylesheets/css/';
 
@@ -48,9 +49,14 @@ export class AppComponent implements OnInit, AfterViewInit {
       this.window.addEventListener(event, this.removeTouchClass, false);
     });
     // Get the stored theme data, if available, and "restore" the previous settings
-    const PREVIOUS_THEME: string | null = localStorage.getItem('last_theme');
-    if (PREVIOUS_THEME != null) {
-      this.document.body.dataset['theme'] = PREVIOUS_THEME;
+    let previous_theme: string | null;
+    if (HelperFunctionsService.isLocalStorageAvailable()) {
+      previous_theme = localStorage.getItem('last_theme');
+    } else {
+      previous_theme = sessionStorage.getItem('last_theme');
+    }
+    if (previous_theme != null) {
+      this.document.body.dataset['theme'] = previous_theme;
     }
   }
 

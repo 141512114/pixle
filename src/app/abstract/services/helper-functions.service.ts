@@ -85,6 +85,21 @@ export class HelperFunctionsService {
   }
 
   /**
+   * Check if the local storage of the browser is available
+   *
+   * @return Availability of the local storage (boolean)
+   */
+  public static isLocalStorageAvailable(){
+    try {
+      localStorage.setItem('check', 'availability');
+      localStorage.removeItem('check');
+      return true;
+    } catch(e) {
+      return false;
+    }
+  }
+
+  /**
    * Add a zero to any number below 10
    *
    * @param num
