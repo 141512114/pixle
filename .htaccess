@@ -79,10 +79,6 @@
  AddType application/x-font-woff .woff
  AddType image/svg+xml .svg
 
- # Compress compressible fonts
- # only uncomment if you dont have compression turned on already. Otherwise it will cause all other filetypes not to get compressed
- # AddOutputFilterByType DEFLATE application/x-font-ttf application/x-font-opentype image/svg+xml
-
  # Others
  ExpiresByType text/css "access plus 1 month"
  ExpiresByType text/javascript "access plus 1 month"
@@ -99,6 +95,7 @@
  ExpiresByType application/vnd.ms-fontobject "access plus 1 years"
  ExpiresByType application/svg+xml "access plus 1 years"
 
+ # Append "public" to header "Cache-Control"
  <IfModule mod_headers.c>
   <FilesMatch "\\.(ico|jpe?g|png|gif|swf)$">
    Header set Cache-Control "max-age=2592000, public"
