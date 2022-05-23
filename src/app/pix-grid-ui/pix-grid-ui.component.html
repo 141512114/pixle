@@ -13,16 +13,18 @@
       <div class="w-100 h-100 m-0 p-0 overflow-hidden pix-social-share-list">
         <div class="share-item pix-col-item w-auto">
           <div class="rounded-3 overflow-hidden share-item-wrapper highlight-btn">
-            <button (click)="shareOnSocialMedia()" class="share-on-any" type="button">
+            <button (click)="shareOnSocialMedia()" class="share-on-any"
+                    title="Share your results on social media" type="button">
               <span>Share</span><span><fa-icon [icon]="iconShareAny"></fa-icon></span>
             </button>
           </div>
         </div>
         <div class="share-item pix-col-item">
           <div class="rounded-3 overflow-hidden share-item-wrapper highlight-btn">
-            <a (click)="copyToClipboard()" class="share-copy-to-clipboard">
+            <button (click)="copyToClipboard()" class="share-copy-to-clipboard bigger-icon"
+                    title="Share your results on social media" type="button">
               <fa-icon [icon]="iconShareCopy"></fa-icon>
-            </a>
+            </button>
           </div>
         </div>
       </div>
@@ -31,12 +33,12 @@
   <div class="mt-auto pix-control-wrapper">
     <div class="p-0 validate-button-wrapper">
       <button (click)="validatePixleOnClick()" aria-label="Flip all tiles" class="pix-validate-button"
-              type="button">Flip!
+              type="button" title="Turn all tiles over">Flip!
       </button>
     </div>
     <div class="p-0 reload-pix-button-wrapper">
       <button (click)="reloadGameComponent()" aria-label="Reload game" class="pix-reload-button invert-colors"
-              type="button">Reload
+              type="button" title="Reload the game session">Reload
       </button>
     </div>
   </div>
