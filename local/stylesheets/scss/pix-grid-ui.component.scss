@@ -103,7 +103,7 @@ div.component-pix-grid-ui {
     }
   }
 
-  @media only screen and (max-height: $breakpoint_xxxsm) {
+  @media only screen and (max-height: $breakpoint_xxxsm) and (orientation: landscape) {
     .pix-col-item {
       width: 68px;
       height: 68px;
