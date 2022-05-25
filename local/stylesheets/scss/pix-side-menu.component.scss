@@ -26,46 +26,64 @@ div.component-pix-side-menu {
 
 div.theme-settings,
 div.important-links {
-  ul li {
-    margin-bottom: 10px;
+  padding: 1rem;
+  background-size: 100% auto;
+  background-repeat: repeat-y;
+  background-position: left;
 
-    a,
-    button {
-      display: inline-block;
-      padding: 6px 12px;
-      font-size: 16px;
-    }
+  ul {
+    margin: 0;
+    padding: 0;
 
-    &:last-child {
-      margin-bottom: 0;
-    }
-
-    @media only screen and (min-width: $breakpoint_xsm) {
-      margin-bottom: 12px;
+    li {
+      margin-bottom: 10px;
 
       a,
       button {
-        padding: 7px 15px;
-        font-size: 18px;
+        display: inline-block;
+        padding: 6px 12px;
+        font-size: 16px;
       }
-    }
 
-    @media only screen and (min-width: $breakpoint_xxxsm) {
-      margin-bottom: 13px;
-
-      a,
-      button {
-        padding: 8px 15px;
-        font-size: 20px;
+      &:last-child {
+        margin-bottom: 0;
       }
-    }
 
-    @media only screen and (min-width: $breakpoint_xmd) {
-      a,
-      button {
-        padding: 9px 18px;
-        font-size: 22px;
+      @media only screen and (min-width: $breakpoint_xsm) {
+        margin-bottom: 12px;
+
+        a,
+        button {
+          padding: 7px 15px;
+          font-size: 18px;
+        }
+      }
+
+      @media only screen and (min-width: $breakpoint_xxxsm) {
+        margin-bottom: 13px;
+
+        a,
+        button {
+          padding: 8px 15px;
+          font-size: 20px;
+        }
+      }
+
+      @media only screen and (min-width: $breakpoint_xmd) {
+        a,
+        button {
+          padding: 9px 18px;
+          font-size: 22px;
+        }
       }
     }
   }
+}
+
+div.theme-settings {
+  background-image: url('src/assets/svg/pixle_sidemenu_theme.svg');
+}
+
+div.important-links {
+  background-image: url('src/assets/svg/pixle_sidemenu_other.svg');
 }
