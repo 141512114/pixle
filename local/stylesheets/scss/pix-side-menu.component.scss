@@ -31,51 +31,46 @@ div.important-links {
   background-repeat: repeat-y;
   background-position: top;
 
-  ul {
-    margin: 0;
-    padding: 0;
+  ul li {
+    margin-bottom: 10px;
+    user-select: none;
 
-    li {
-      margin-bottom: 10px;
-      user-select: none;
+    a,
+    button {
+      display: inline-block;
+      padding: 6px 12px;
+      font-size: 16px;
+    }
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+
+    @media only screen and (min-width: $breakpoint_xsm) {
+      margin-bottom: 12px;
 
       a,
       button {
-        display: inline-block;
-        padding: 6px 12px;
-        font-size: 16px;
+        padding: 7px 15px;
+        font-size: 18px;
       }
+    }
 
-      &:last-child {
-        margin-bottom: 0;
+    @media only screen and (min-width: $breakpoint_xxxsm) {
+      margin-bottom: 13px;
+
+      a,
+      button {
+        padding: 8px 15px;
+        font-size: 20px;
       }
+    }
 
-      @media only screen and (min-width: $breakpoint_xsm) {
-        margin-bottom: 12px;
-
-        a,
-        button {
-          padding: 7px 15px;
-          font-size: 18px;
-        }
-      }
-
-      @media only screen and (min-width: $breakpoint_xxxsm) {
-        margin-bottom: 13px;
-
-        a,
-        button {
-          padding: 8px 15px;
-          font-size: 20px;
-        }
-      }
-
-      @media only screen and (min-width: $breakpoint_xmd) {
-        a,
-        button {
-          padding: 9px 18px;
-          font-size: 22px;
-        }
+    @media only screen and (min-width: $breakpoint_xmd) {
+      a,
+      button {
+        padding: 9px 18px;
+        font-size: 22px;
       }
     }
   }
