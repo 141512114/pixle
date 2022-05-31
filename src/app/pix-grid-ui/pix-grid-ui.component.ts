@@ -75,7 +75,7 @@ export class PixGridUiComponent extends AbstractHtmlElement {
     // Check if device can share / has the api
     if (this.windowNavigator.share) {
       this.windowNavigator.share({
-        text: this.pixle_share_result,
+        text: this.pixle_share_result + '\n',
         title: 'Can you solve this pixle?',
         url: 'https://pixle.gg/'
       }).then(() => {
