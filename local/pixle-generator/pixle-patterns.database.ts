@@ -36,9 +36,9 @@ export const SMALLCIRCLEPATTERN: number[][] = [
 ];
 
 export const TWIRLPATTERN: number[][] = [
-  [1, 2, 1],
-  [2, 3, 2],
-  [1, 2, 1]
+  [0, 2, 0],
+  [2, 1, 2],
+  [0, 2, 0]
 ];
 
 export const CROSSPATTERN: number[][] = [
