@@ -12,7 +12,7 @@ import {STYLESHEETS_PATH} from '../app.component';
 import {WINDOW} from '../window-injection.token';
 import {PixGridElementComponent} from '../pix-grid-element/pix-grid-element.component';
 import {PixGridUiComponent} from '../pix-grid-ui/pix-grid-ui.component';
-import * as PixleList from '../database/pixle-arts.database.json';
+import {default as PixleList} from '../database/pixle-arts.database.json';
 
 export const SUPPORT_EMAIL: string = 'support@nani-games.net';
 
