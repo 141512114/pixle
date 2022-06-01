@@ -18,7 +18,11 @@
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
+    "preinstall": "npx npm-force-resolutions",
     "pixles": "ts-node local/pixle-generator/pixle-generator.ts"
+  },
+  "resolutions": {
+    "glob-parent": "^6.0.2"
   },
   "private": true,
   "dependencies": {

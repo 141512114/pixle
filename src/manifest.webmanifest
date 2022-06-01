@@ -1,7 +1,7 @@
 {
   "name": "Pixle - Memory puzzles",
   "short_name": "Pixle",
-  "theme_color": "#1EC29C",
+  "theme_color": "#1E2E48",
   "background_color": "#08080C",
   "display": "standalone",
   "scope": "./",
