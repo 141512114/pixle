@@ -50,7 +50,9 @@ export class PixGridComponent implements OnInit, AfterViewInit {
     this.window.setTimeout(() => {
       this.setInitialSizes();
     }, 10);
+    if (sessionStorage.getItem('lock_grid')) return;
     this.flipWholePixle(false, false);
+    sessionStorage.setItem('lock_grid', '1');
   }
 
   /**
