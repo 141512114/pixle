@@ -56,7 +56,7 @@ div.component-pix-grid-ui {
     visibility: hidden;
 
     .bigger-icon {
-      font-size: 30px;
+      font-size: 28px;
     }
   }
 
@@ -100,6 +100,10 @@ div.component-pix-grid-ui {
       width: 75px;
       height: 75px;
       padding: 5px;
+    }
+
+    div.pix-social-share-wrapper .bigger-icon {
+      font-size: 30px;
     }
   }
 
