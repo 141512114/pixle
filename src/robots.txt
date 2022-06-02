@@ -4,4 +4,4 @@ Allow: /
 User-agent: spies
 Disallow: /
 
-Sitemap: https://pixle.gg/sitemap.xml
+Sitemap: https://play.pixle.gg/sitemap.xml
