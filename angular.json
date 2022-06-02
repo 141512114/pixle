@@ -28,7 +28,8 @@
               "src/manifest.webmanifest",
               "src/sitemap.xml",
               "src/robots.txt",
-              "src/analytics"
+              "src/analytics",
+              "src/.htaccess"
             ],
             "styles": [
               "node_modules/@fortawesome/fontawesome-free/css/solid.min.css",
@@ -119,7 +120,8 @@
               "src/manifest.webmanifest",
               "src/sitemap.xml",
               "src/robots.txt",
-              "src/analytics"
+              "src/analytics",
+              "src/.htaccess"
             ],
             "styles": [
               "node_modules/@fortawesome/fontawesome-free/css/solid.min.css",
