@@ -48,3 +48,4 @@ Thumbs.db
 /local/stylesheets/backup/
 /src/app/database/pixle-arts.database.json
 /local/pixle-generator/database/
+/analytics/index.php
