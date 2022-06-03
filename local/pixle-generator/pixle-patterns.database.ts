@@ -15,6 +15,86 @@ export const CRISSCROSSPATTERN: number[][] = [
   [1, 1, 4, 1, 1]
 ];
 
+export const MCPATTERN: number[][] = [
+  [0, 0, 0, 2, 2],
+  [0, 0, 2, 2, 2],
+  [1, 2, 2, 2, 0],
+  [0, 1, 2, 0, 0],
+  [1, 0, 1, 0, 0]
+];
+
+export const FERENGIPATTERN: number[][] = [
+  [2, 2, 0, 2, 2],
+  [0, 0, 2, 0, 0],
+  [0, 3, 0, 3, 0],
+  [1, 0, 0, 0, 1],
+  [0, 1, 1, 1, 0]
+];
+
+export const STAIRCASEPATTERN: number[][] = [
+  [1, 1, 0, 2, 3],
+  [0, 1, 1, 0, 2],
+  [2, 0, 1, 1, 0],
+  [2, 2, 0, 1, 1],
+  [3, 2, 2, 0, 1]
+];
+
+export const TRIANGLEPATTERN: number[][] = [
+  [1, 4, 3, 4, 3],
+  [1, 1, 4, 3, 4],
+  [1, 2, 1, 4, 3],
+  [1, 2, 2, 1, 4],
+  [1, 1, 1, 1, 1]
+];
+
+export const TETRISPATTERN: number[][] = [
+  [0, 0, 0, 0, 3],
+  [0, 0, 4, 4, 3],
+  [0, 0, 4, 4, 3],
+  [0, 1, 2, 2, 3],
+  [1, 1, 1, 2, 2]
+];
+
+export const BIGCROSSPATTERN: number[][] = [
+  [1, 2, 1, 2, 1],
+  [3, 1, 3, 1, 3],
+  [4, 4, 1, 4, 4],
+  [3, 1, 3, 1, 3],
+  [1, 2, 1, 2, 1]
+];
+
+export const MOSAICPATTERN: number[][] = [
+  [1, 4, 3, 4, 2],
+  [4, 1, 1, 2, 4],
+  [3, 1, 2, 1, 3],
+  [4, 2, 1, 1, 4],
+  [2, 4, 3, 4, 1]
+];
+
+export const MOSAIC2PATTERN: number[][] = [
+  [4, 0, 4, 0, 4],
+  [0, 0, 3, 2, 2],
+  [0, 1, 2, 1, 0],
+  [2, 2, 3, 0, 0],
+  [4, 0, 4, 0, 4]
+];
+
+export const RUBIKSPATTERN: number[][] = [
+  [4, 4, 2, 1, 1],
+  [4, 1, 2, 2, 2],
+  [3, 1, 1, 3, 4],
+  [2, 1, 0, 4, 0],
+  [4, 3, 2, 3, 0]
+];
+
+export const RUBIKS2PATTERN: number[][] = [
+  [4, 0, 0, 2, 3],
+  [1, 2, 3, 2, 0],
+  [1, 2, 2, 3, 1],
+  [1, 3, 4, 1, 3],
+  [2, 2, 4, 2, 3]
+];
+
 export const THREESTRIPESH: number[][] = [
   [1, 1, 1],
   [0, 0, 0],
