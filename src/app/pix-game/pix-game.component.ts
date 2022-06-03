@@ -130,6 +130,8 @@ export class PixGameComponent implements OnInit, AfterViewInit {
   private startGame(): void {
     this.window.setTimeout(() => {
       GameManager.initGame();
+      if (sessionStorage.getItem('lock_grid')) return;
+      // Undo flip --> Grid will be flipped over
       this.pixGridComponent.flipWholePixle(true);
     }, UNDO_FLIP_TIME);
   }
