@@ -95,6 +95,36 @@ export const RUBIKS2PATTERN: number[][] = [
   [2, 2, 4, 2, 3]
 ];
 
+export const RUBIKS3PATTERN: number[][] = [
+  [4, 0, 0, 2],
+  [1, 2, 3, 2],
+  [1, 2, 2, 3],
+  [1, 3, 4, 1],
+  [2, 2, 4, 2]
+];
+
+export const MOSAIC3PATTERN: number[][] = [
+  [1, 0, 3, 0],
+  [0, 1, 1, 2],
+  [3, 1, 2, 1],
+  [0, 2, 1, 1],
+  [2, 0, 3, 0]
+];
+
+export const RUBIKS4PATTERN: number[][] = [
+  [4, 0, 0, 2, 3],
+  [1, 2, 3, 2, 0],
+  [1, 2, 0, 3, 1],
+  [1, 3, 4, 1, 3],
+];
+
+export const MOSAIC4PATTERN: number[][] = [
+  [1, 0, 3, 0, 2],
+  [0, 4, 2, 2, 0],
+  [3, 1, 2, 1, 3],
+  [0, 2, 3, 1, 0],
+];
+
 export const THREESTRIPESH: number[][] = [
   [1, 1, 1],
   [0, 0, 0],

@@ -24,7 +24,8 @@ const ROW_OFFSET: number = 345;
   styleUrls: [STYLESHEETS_PATH + 'pix-grid.component.min.css']
 })
 export class PixGridComponent implements OnInit, AfterViewInit {
-  @ViewChildren(PixGridElementComponent) public pixle_emoji_input!: QueryList<PixGridElementComponent>;
+  @ViewChildren(PixGridElementComponent) public pixle_emoji_input!: QueryList<PixGridElementComponent>
+  @Input() grid_image_id: number = -1;
   @Input() grid_image: number[][] = [];
   grid_image_width: number = 0;
   grid_image_height: number = 0;
@@ -50,9 +51,8 @@ export class PixGridComponent implements OnInit, AfterViewInit {
     this.window.setTimeout(() => {
       this.setInitialSizes();
     }, 10);
-    if (sessionStorage.getItem('lock_grid')) return;
+    if (sessionStorage.getItem('lock_grid') === '1' && sessionStorage.getItem('pixle_id') === this.grid_image_id.toString()) return;
     this.flipWholePixle(false, false);
-    sessionStorage.setItem('lock_grid', '1');
   }
 
   /**
