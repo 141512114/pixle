@@ -18,5 +18,6 @@ export const MASTER_PATTERNS: any[] = [
   patterns.CONFUSEDPATTERN,
   patterns.LIGHTINGPATTERN,
   patterns.HOUSEPATTERN,
-  patterns.CAROUSELPATTERN
+  patterns.CAROUSELPATTERN,
+  patterns.CRISSCROSSPATTERN
 ];

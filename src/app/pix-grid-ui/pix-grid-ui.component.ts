@@ -77,7 +77,7 @@ export class PixGridUiComponent extends AbstractHtmlElement {
       this.windowNavigator.share({
         text: this.pixle_share_result + '\n',
         title: 'Can you solve this pixle?',
-        url: 'https://pixle.gg/'
+        url: 'https://www.pixle.gg/'
       }).then(() => {
         console.log('Successful share');
       }).catch((error) => {
@@ -93,7 +93,7 @@ export class PixGridUiComponent extends AbstractHtmlElement {
    * Copy pixle content to the clipboard
    */
   public copyToClipboard(): void {
-    let pixle_url: string = 'https://pixle.gg/';
+    let pixle_url: string = 'https://www.pixle.gg/';
     let msg_to_copy: string = this.pixle_share_result + '\n' + pixle_url;
     if (this.clipboard.copy(msg_to_copy)) {
       this.window.clearTimeout(this.copied_badge_timer);
