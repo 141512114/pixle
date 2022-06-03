@@ -113,6 +113,12 @@ div.component-pix-grid-ui {
 
   @media only screen and (min-width: $breakpoint_xxxsm) {
     width: 450px;
+
+    .pix-col-item {
+      width: 70px;
+      height: 70px;
+      padding: 4px;
+    }
   }
 
   @media only screen and (min-width: $breakpoint_xmd) {
