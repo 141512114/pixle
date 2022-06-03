@@ -96,22 +96,18 @@ div.component-pix-grid-ui {
   }
 
   @media only screen and (min-width: $breakpoint_sm) {
-    .pix-col-item {
-      width: 75px;
-      height: 75px;
-      padding: 5px;
-    }
-
     div.pix-social-share-wrapper .bigger-icon {
       font-size: 30px;
     }
+
+    .pix-col-item {
+      font-size: calc(1em + 2.2vmin);
+    }
   }
 
-  @media only screen and (max-height: $breakpoint_xxxsm) and (orientation: landscape) {
+  @media only screen and (min-width: $breakpoint_xsm) {
     .pix-col-item {
-      width: 68px;
-      height: 68px;
-      padding: 4px;
+      font-size: calc(.9em + 2vmin);
     }
   }
 

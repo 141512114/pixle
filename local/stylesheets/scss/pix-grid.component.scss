@@ -42,6 +42,14 @@ div.component-pix-grid {
     }
   }
 
+  @media only screen and (max-height: $breakpoint_xxxsm) and (min-width: $breakpoint_xxxsm) {
+    .pix-col-item.gridw-5.gridh-5 {
+      max-width: 70px;
+      padding: 4px;
+      font-size: calc(.8em + 2vmin);
+    }
+  }
+
   @media only screen and (min-width: $breakpoint_mm) {
     .pix-col-item.gridw-5 {
       max-width: 62px;
@@ -80,14 +88,6 @@ div.component-pix-grid {
       &.gridw-5 {
         max-width: 85px;
       }
-    }
-  }
-
-  @media only screen and (max-height: $breakpoint_xxxsm) {
-    .pix-col-item.gridw-5 {
-      max-width: 70px;
-      padding: 4px;
-      font-size: calc(.8em + 2vmin);
     }
   }
 }
