@@ -4,9 +4,7 @@
       <tr align="center" class="position-relative h-100">
         <td class="position-relative h-100 overflow-hidden">
           <div *ngIf="pixle_image.length > 0" class="w-100 h-100 pix-grid-wrapper">
-            <ng-container *ngIf="show_grid">
-              <app-pix-grid [grid_image]="pixle_image" [grid_image_id]="pixle_id"></app-pix-grid>
-            </ng-container>
+            <app-pix-grid [grid_image]="pixle_image" [grid_image_id]="pixle_id"></app-pix-grid>
           </div>
           <div class="pix-popup-wrapper">
             <app-pix-popup-message #match_status></app-pix-popup-message>

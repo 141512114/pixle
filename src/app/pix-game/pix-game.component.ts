@@ -50,7 +50,6 @@ export class PixGameComponent implements OnInit, AfterViewInit {
   pixle_emoji_list: number[] = [];
   pixle_share_result: string = '';
   validating: boolean = false;
-  show_grid: boolean = false;
   private current_date: Date = new Date();
   @ViewChild('match_status') private match_status_msg!: PixPopupMessageComponent;
   @ViewChild(PixGridComponent) private pixGridComponent!: PixGridComponent;
@@ -77,16 +76,6 @@ export class PixGameComponent implements OnInit, AfterViewInit {
 
   ngOnInit(): void {
     this.searchRandomPixleArt();
-    // If the window isn't focused anymore --> hide the grid
-    this.window.addEventListener('focus', () => {
-      this.show_grid = true;
-    });
-    this.window.addEventListener('blur', () => {
-      this.show_grid = false;
-    });
-    if (this.document.hasFocus()) {
-      this.show_grid = true;
-    }
   }
 
   ngAfterViewInit(): void {
