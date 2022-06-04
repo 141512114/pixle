@@ -79,12 +79,9 @@ div.component-pix-grid-ui {
   div.pix-control-wrapper {
     div.validate-button-wrapper,
     div.reload-pix-button-wrapper {
-      display: inline-block;
       vertical-align: bottom;
-      width: 50%;
 
       button {
-        width: 100%;
         padding: 12px 0;
         font-size: 18px;
       }
@@ -123,6 +120,11 @@ div.component-pix-grid-ui {
 
   @media only screen and (min-width: $breakpoint_xmd) {
     width: 500px;
+
+    .pix-col-item {
+      width: 75px;
+      height: 75px;
+    }
 
     div.pix-grid-ui-wrapper,
     div.pix-social-share-wrapper {

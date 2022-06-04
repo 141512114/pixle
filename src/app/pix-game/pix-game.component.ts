@@ -1,5 +1,5 @@
 import {AfterViewInit, Component, Inject, OnInit, ViewChild} from '@angular/core';
-import {Location} from '@angular/common';
+import {DOCUMENT, Location} from '@angular/common';
 import {GREENSQUARE, ORANGESQUARE, PIXLE_ICONS, REDSQUARE, YELLOWSQUARE} from '../database/emoji.database';
 import {IPopUp} from '../interface/popup-message.interface';
 import {PixPopupMessageComponent} from '../pix-popup-message/pix-popup-message.component';
@@ -50,12 +50,13 @@ export class PixGameComponent implements OnInit, AfterViewInit {
   pixle_emoji_list: number[] = [];
   pixle_share_result: string = '';
   validating: boolean = false;
+  show_grid: boolean = false;
   private current_date: Date = new Date();
   @ViewChild('match_status') private match_status_msg!: PixPopupMessageComponent;
   @ViewChild(PixGridComponent) private pixGridComponent!: PixGridComponent;
   @ViewChild(PixGridUiComponent) private pixGridUiComponent!: PixGridUiComponent;
 
-  constructor(private router: Router, private location: Location, @Inject(WINDOW) private readonly window: Window) {
+  constructor(private router: Router, private location: Location, @Inject(DOCUMENT) private document: Document, @Inject(WINDOW) private readonly window: Window) {
   }
 
   /**
@@ -76,6 +77,16 @@ export class PixGameComponent implements OnInit, AfterViewInit {
 
   ngOnInit(): void {
     this.searchRandomPixleArt();
+    // If the window isn't focused anymore --> hide the grid
+    this.window.addEventListener('focus', () => {
+      this.show_grid = true;
+    });
+    this.window.addEventListener('blur', () => {
+      this.show_grid = false;
+    });
+    if (this.document.hasFocus()) {
+      this.show_grid = true;
+    }
   }
 
   ngAfterViewInit(): void {
