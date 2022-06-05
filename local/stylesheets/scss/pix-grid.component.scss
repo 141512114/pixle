@@ -20,19 +20,12 @@ div.component-pix-grid {
   }
 
   .pix-col-item {
-    max-width: 75px;
     margin: 0;
-    padding: 4px;
-    font-size: calc(1.15em + 2.85vmin);
 
     &.gridw-5 {
       max-width: 52px;
       padding: 3px;
       font-size: calc(.75em + 2vmin);
-    }
-
-    @media only screen and (max-width: 300px) {
-      font-size: calc(1em + 2.85vmin);
     }
   }
 
@@ -59,35 +52,23 @@ div.component-pix-grid {
   }
 
   @media only screen and (min-width: $breakpoint_sm) {
-    .pix-col-item {
-      max-width: 85px;
-
-      &.gridw-5 {
-        max-width: 68px;
-        padding: 4px;
-        font-size: calc(1em + 2.2vmin);
-      }
+    .pix-col-item.gridw-5 {
+      max-width: 68px;
+      padding: 4px;
+      font-size: calc(1em + 2.2vmin);
     }
   }
 
   @media only screen and (min-width: $breakpoint_xsm) {
-    .pix-col-item {
-      font-size: calc(1.25em + 2.2vmin);
-
-      &.gridw-5 {
-        max-width: 72px;
-        font-size: calc(1.1em + 1.75vmin);
-      }
+    .pix-col-item.gridw-5 {
+      max-width: 72px;
+      font-size: calc(1.1em + 1.75vmin);
     }
   }
 
   @media only screen and (min-width: $breakpoint_xxxsm) {
-    .pix-col-item {
-      font-size: calc(1em + 2.1vmin);
-
-      &.gridw-5 {
-        max-width: 85px;
-      }
+    .pix-col-item.gridw-5 {
+      max-width: 85px;
     }
   }
 }

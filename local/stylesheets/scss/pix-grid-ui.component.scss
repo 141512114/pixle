@@ -17,6 +17,7 @@ div.component-pix-grid-ui {
   .pix-col-item {
     width: 65px;
     height: 65px;
+    font-size: calc(1em + 2.85vmin);
 
     &:first-child {
       margin-left: auto;

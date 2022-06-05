@@ -16,7 +16,7 @@ import {WINDOW} from '../window-injection.token';
 import {GameManager} from '../pix-game/game.manager';
 
 // Timer / Offset
-const ROW_OFFSET: number = 345;
+const ROW_OFFSET: number = 355;
 
 @Component({
   selector: 'app-pix-grid',
