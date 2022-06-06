@@ -47,6 +47,7 @@
     "glob-parent": "^6.0.2",
     "rxjs": "~7.5.0",
     "tslib": "^2.3.0",
+    "twemoji": "^14.0.2",
     "zone.js": "~0.11.4"
   },
   "devDependencies": {
