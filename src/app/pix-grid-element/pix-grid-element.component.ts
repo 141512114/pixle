@@ -193,7 +193,7 @@ export class PixGridElementComponent extends AbstractHtmlElement implements OnIn
    */
   private updateElementViewIcon(): void {
     if (this.emoji_input == undefined) return;
-    let icon_element = this.emoji_input.nativeElement.querySelector('p.emoji');
+    let icon_element = this.emoji_input.nativeElement.querySelector('.emoji');
     icon_element.textContent = this.pixle_emoji_text;
   }
 
@@ -204,7 +204,7 @@ export class PixGridElementComponent extends AbstractHtmlElement implements OnIn
    */
   private showCorrectAnswer(): void {
     if (this.grid_element_type !== 0 || this.correct_answer == undefined) return;
-    let icon_element = this.correct_answer.nativeElement.querySelector('p.emoji');
+    let icon_element = this.correct_answer.nativeElement.querySelector('.emoji');
     icon_element.textContent = String.fromCodePoint(this.pixle_emoji);
   }
 
@@ -215,7 +215,7 @@ export class PixGridElementComponent extends AbstractHtmlElement implements OnIn
    */
   private hideCorrectAnswer(): void {
     if (this.grid_element_type !== 0 || this.correct_answer == undefined) return;
-    let icon_element = this.correct_answer.nativeElement.querySelector('p.emoji');
+    let icon_element = this.correct_answer.nativeElement.querySelector('.emoji');
     icon_element.textContent = String.fromCodePoint(this.pixle_emoji_default);
   }
 }
