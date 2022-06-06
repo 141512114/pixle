@@ -16,7 +16,7 @@
 }
 
 @mixin vertical-align($align: middle) {
-  &:before {
+  &::before {
     content: "";
     display: inline-block;
     height: 100%;
