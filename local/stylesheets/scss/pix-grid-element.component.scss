@@ -5,18 +5,7 @@
 @import '../mixins/mixins';
 
 // pix-grid-element component stylesheet
-div.component-pix-grid-element,
-div.grid-element-inner {
-  width: 100%;
-  height: 100%;
-}
-
-svg.square-placeholder {
-  width: 100%;
-  height: auto;
-}
-
-div.grid-element-inner {
+.grid-element-inner {
   position: absolute;
   top: 0;
   left: 0;
@@ -56,7 +45,7 @@ div.grid-element-inner {
     @include vertical-align(middle);
   }
 
-  p.emoji {
+  .emoji {
     display: inline-block;
     width: 100%;
     text-align: center;

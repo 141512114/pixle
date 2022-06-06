@@ -1,13 +1,21 @@
-<div #component_grid_element class="component-pix-grid-element position-relative">
-  <svg class="square-placeholder" viewBox="0 0 1 1"></svg>
+<div #component_grid_element class="position-relative w-100 h-100 component-pix-grid-element">
+  <svg class="w-100 h-auto square-placeholder" viewBox="0 0 1 1"></svg>
   <div #user_interactive
        [ngClass]="{'highlight-btn--grid-element flip-element': grid_element_type===0, 'highlight-btn': grid_element_type===1}"
-       class="rounded-3 grid-element-inner emoji-wrapper" data-grid-element-status="3">
+       class="w-100 h-100 rounded-3 grid-element-inner emoji-wrapper" data-grid-element-status="3">
     <div #emoji_input class="front-face">
-      <p class="p-0 m-0 emoji"></p>
+      <svg height="100%" version="1.1" width="100%" x="0" xmlns="http://www.w3.org/2000/svg" y="0">
+        <text alignment-baseline="central" dominant-baseline="central" text-anchor="middle" x="50%" y="50%">
+          <tspan class="emoji" dy="0" rotate="0" x="50%"></tspan>
+        </text>
+      </svg>
     </div>
     <div #correct_answer *ngIf="grid_element_type===0" class="back-face">
-      <p class="p-0 m-0 emoji"></p>
+      <svg height="100%" version="1.1" width="100%" x="0" xmlns="http://www.w3.org/2000/svg" y="0">
+        <text alignment-baseline="central" dominant-baseline="middle" text-anchor="middle" x="50%" y="50%">
+          <tspan class="emoji" dy="0" rotate="0" x="50%"></tspan>
+        </text>
+      </svg>
     </div>
   </div>
 </div>
