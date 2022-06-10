@@ -1,7 +1,9 @@
 User-agent: *
 Allow: /
+Disallow: /assets/important/imprint.html
 
 User-agent: spies
 Disallow: /
+Disallow: /assets/important/imprint.html
 
 Sitemap: https://play.pixle.gg/sitemap.xml
