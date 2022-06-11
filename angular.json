@@ -156,7 +156,8 @@
               "projects/pixle-landing/src/favicon.ico",
               "projects/pixle-landing/src/.htaccess",
               "projects/pixle-landing/src/analytics",
-              "projects/pixle-landing/src/assets"
+              "projects/pixle-landing/src/assets",
+              "projects/pixle-landing/src/local"
             ],
             "styles": [
               "local/static/stylesheets/bootstrap/bootstrap.min.css",
@@ -166,10 +167,6 @@
           },
           "configurations": {
             "production": {
-              "index": {
-                "input": "src/index.prod.html",
-                "output": "index.html"
-              },
               "budgets": [
                 {
                   "type": "initial",
@@ -242,7 +239,8 @@
               "projects/pixle-landing/src/favicon.ico",
               "projects/pixle-landing/src/.htaccess",
               "projects/pixle-landing/src/analytics",
-              "projects/pixle-landing/src/assets"
+              "projects/pixle-landing/src/assets",
+              "projects/pixle-landing/src/local"
             ],
             "styles": [
               "local/static/stylesheets/bootstrap/bootstrap.min.css",

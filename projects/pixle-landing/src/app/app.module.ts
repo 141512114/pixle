@@ -17,4 +17,5 @@ import {PixLandingComponent} from './pix-landing/pix-landing.component';
   providers: [],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+}
