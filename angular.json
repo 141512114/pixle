@@ -147,7 +147,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/pixle-landing",
+            "outputPath": "dist/pixle-landing/browser",
             "index": "projects/pixle-landing/src/index.html",
             "main": "projects/pixle-landing/src/main.ts",
             "polyfills": "projects/pixle-landing/src/polyfills.ts",
@@ -250,6 +250,66 @@
             ],
             "scripts": []
           }
+        },
+        "server": {
+          "builder": "@angular-devkit/build-angular:server",
+          "options": {
+            "outputPath": "dist/pixle-landing/server",
+            "main": "projects/pixle-landing/server.ts",
+            "tsConfig": "projects/pixle-landing/tsconfig.server.json"
+          },
+          "configurations": {
+            "production": {
+              "outputHashing": "media",
+              "fileReplacements": [
+                {
+                  "replace": "projects/pixle-landing/src/environments/environment.ts",
+                  "with": "projects/pixle-landing/src/environments/environment.prod.ts"
+                }
+              ],
+              "optimization": true,
+              "sourceMap": false
+            },
+            "development": {
+              "optimization": true,
+              "sourceMap": true,
+              "extractLicenses": false
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "serve-ssr": {
+          "builder": "@nguniversal/builders:ssr-dev-server",
+          "configurations": {
+            "development": {
+              "browserTarget": "pixle-landing:build:development",
+              "serverTarget": "pixle-landing:server:development"
+            },
+            "production": {
+              "browserTarget": "pixle-landing:build:production",
+              "serverTarget": "pixle-landing:server:production"
+            }
+          },
+          "defaultConfiguration": "development"
+        },
+        "prerender": {
+          "builder": "@nguniversal/builders:prerender",
+          "options": {
+            "routes": [
+              "/"
+            ]
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "pixle-landing:build:production",
+              "serverTarget": "pixle-landing:server:production"
+            },
+            "development": {
+              "browserTarget": "pixle-landing:build:development",
+              "serverTarget": "pixle-landing:server:development"
+            }
+          },
+          "defaultConfiguration": "production"
         }
       }
     }

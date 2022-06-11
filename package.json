@@ -19,7 +19,11 @@
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
     "preinstall": "npx npm-force-resolutions",
-    "pixles": "ts-node local/pixle-generator/pixle-generator.ts"
+    "pixles": "ts-node local/pixle-generator/pixle-generator.ts",
+    "dev:ssr": "ng run pixle-landing:serve-ssr",
+    "serve:ssr": "node dist/pixle-landing/server/main.js",
+    "build:ssr": "ng build --prod --project='pixle-landing' && ng run pixle-landing:server",
+    "prerender": "ng run pixle-landing:prerender"
   },
   "resolutions": {
     "glob-parent": "^6.0.2"
@@ -34,6 +38,7 @@
     "@angular/forms": "~13.2.0",
     "@angular/platform-browser": "~13.2.0",
     "@angular/platform-browser-dynamic": "~13.2.0",
+    "@angular/platform-server": "~13.2.0",
     "@angular/router": "~13.2.0",
     "@angular/service-worker": "~13.2.0",
     "@fortawesome/angular-fontawesome": "^0.10.2",
@@ -42,8 +47,10 @@
     "@fortawesome/free-brands-svg-icons": "^6.1.0",
     "@fortawesome/free-regular-svg-icons": "^6.1.0",
     "@fortawesome/free-solid-svg-icons": "^6.1.0",
+    "@nguniversal/express-engine": "^13.0.2",
     "ajv": "^8.8.2",
     "ajv-errors": "^1.0.1",
+    "express": "^4.15.2",
     "glob-parent": "^6.0.2",
     "rxjs": "~7.5.0",
     "tslib": "^2.3.0",
@@ -55,6 +62,8 @@
     "@angular/cli": "~13.2.5",
     "@angular/compiler-cli": "~13.2.0",
     "@hint/configuration-web-recommended": "^8.2.7",
+    "@nguniversal/builders": "^13.0.2",
+    "@types/express": "^4.17.0",
     "@types/jasmine": "~3.10.0",
     "@types/node": "^12.20.52",
     "del": "^6.1.0",
