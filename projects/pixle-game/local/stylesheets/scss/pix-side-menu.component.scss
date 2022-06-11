@@ -1,0 +1,85 @@
+@use "sass:map";
+
+@import '../../../../../local/stylesheets/mixins/themes';
+@import '../../../../../local/stylesheets/mixins/mixins';
+@import '../../../../../local/stylesheets/mixins/responsive';
+
+// pix-side-menu component stylesheet
+div.component-pix-side-menu {
+  @include flexbox();
+  top: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
+  height: 100vh;
+  padding: 65px 0;
+  background-color: var(--default-theme-two, map.get($default-color-palette, 2));
+  transition: top 475ms, opacity 400ms;
+  z-index: 99;
+
+  &.close {
+    top: -80px;
+    pointer-events: none;
+    opacity: 0;
+  }
+}
+
+div.theme-settings,
+div.important-links {
+  padding: 1rem;
+  background-size: 100% auto;
+  background-repeat: repeat-y;
+  background-position: top;
+
+  ul li {
+    margin-bottom: 10px;
+    user-select: none;
+
+    a,
+    button {
+      display: inline-block;
+      padding: 6px 12px;
+      font-size: 16px;
+    }
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+
+    @media only screen and (min-width: $breakpoint_xsm) {
+      margin-bottom: 12px;
+
+      a,
+      button {
+        padding: 7px 15px;
+        font-size: 18px;
+      }
+    }
+
+    @media only screen and (min-width: $breakpoint_xxxsm) {
+      margin-bottom: 13px;
+
+      a,
+      button {
+        padding: 8px 15px;
+        font-size: 20px;
+      }
+    }
+
+    @media only screen and (min-width: $breakpoint_xmd) {
+      a,
+      button {
+        padding: 9px 18px;
+        font-size: 22px;
+      }
+    }
+  }
+}
+
+div.theme-settings {
+  background-image: url('../../../src/assets/svg/pixle_sidemenu_theme.svg');
+}
+
+div.important-links {
+  background-image: url('../../../src/assets/svg/pixle_sidemenu_other.svg');
+}

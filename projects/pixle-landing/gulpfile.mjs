@@ -24,22 +24,18 @@ Paths: ----------------------------------------------------------
 
 */
 
+const PIXLE_LANDING_SRC_PATH = './src/';
 const DEV_SRC_PATH = './local/';
-const STATIC_SRC_PATH = DEV_SRC_PATH + 'static/';
 
-// Stylesheet paths
+// Style paths
 const STYLES_SRC_FILES = DEV_SRC_PATH + 'stylesheets/scss/**/!(_*)*.scss';
-const STYLES_MIN_DEST_PATH = STATIC_SRC_PATH + 'stylesheets/css/';
-
-const BOOTSTRAP_SRC_FILES = DEV_SRC_PATH + 'stylesheets/bootstrap/**/!(_*)*.scss';
-const BOOTSTRAP_MIN_DEST_PATH = STATIC_SRC_PATH + 'stylesheets/bootstrap/';
+const PIXLE_LANDING_STYLES_MIN_DEST_PATH = PIXLE_LANDING_SRC_PATH + 'stylesheets/css/';
 
 // Stylesheets deletion pattern
 const STYLES_DEL_PATTERN = [
-  STYLES_MIN_DEST_PATH + '*/'
-];
-const STYLES_BOOTSTRAP_DEL_PATTERN = [
-  BOOTSTRAP_MIN_DEST_PATH + '*/'
+  PIXLE_LANDING_SRC_PATH + 'stylesheets/*/',
+  '!' + PIXLE_LANDING_SRC_PATH + 'stylesheets/.gitkeep',
+  '!' + PIXLE_LANDING_SRC_PATH + 'stylesheets/README.md'
 ];
 
 /*
@@ -54,8 +50,7 @@ async function clear_styles(pattern) {
   console.log('\n');
 }
 
-gulp.task('clear-css', () => clear_styles(STYLES_DEL_PATTERN));
-gulp.task('clear-bootstrap', () => clear_styles(STYLES_BOOTSTRAP_DEL_PATTERN));
+gulp.task('clear', () => clear_styles(STYLES_DEL_PATTERN));
 
 /*
 
@@ -109,20 +104,8 @@ Compress normal stylesheets: -------------------------------------
 */
 
 gulp.task('default-stylesheets', async function () {
-  await to_css(STYLES_SRC_FILES, STYLES_MIN_DEST_PATH).then(() =>
-    uglify(STYLES_MIN_DEST_PATH)
-  );
-});
-
-/*
-
-Compress normal bootstrap: ---------------------------------------
-
-*/
-
-gulp.task('bootstrap-stylesheets', async function () {
-  await to_css(BOOTSTRAP_SRC_FILES, BOOTSTRAP_MIN_DEST_PATH).then(() =>
-    uglify(BOOTSTRAP_MIN_DEST_PATH)
+  await to_css(STYLES_SRC_FILES, PIXLE_LANDING_STYLES_MIN_DEST_PATH).then(() =>
+    uglify(PIXLE_LANDING_STYLES_MIN_DEST_PATH)
   );
 });
 
@@ -132,9 +115,7 @@ Compress Task: ---------------------------------------------------
 
 */
 
-gulp.task('compress', gulp.series('clear-css', 'default-stylesheets'));
-gulp.task('bootstrap', gulp.series('clear-bootstrap', 'bootstrap-stylesheets'));
-gulp.task('combined', gulp.series('bootstrap', 'compress'));
+gulp.task('compress', gulp.series('clear', 'default-stylesheets'));
 
 /*
 

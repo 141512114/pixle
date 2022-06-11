@@ -42,11 +42,14 @@ testem.log
 Thumbs.db
 
 # Other
-/src/stylesheets/bootstrap/
-/src/stylesheets/css/
+/local/static/stylesheets/bootstrap/
+/local/static/stylesheets/css/
+/projects/pixle-game/src/stylesheets/css/
+/projects/pixle-landing/src/stylesheets/css/
 /builds/
 /local/stylesheets/backup/
-/src/app/database/pixle-arts.database.json
+/projects/pixle-game/src/app/database/pixle-arts.database.json
 /local/pixle-generator/database/
-/src/analytics/index.php
-/src/assets/important/imprint.html
+/projects/pixle-game/src/analytics/index.php
+/projects/pixle-landing/src/analytics/index.php
+/projects/pixle-game/src/assets/important/imprint.html
