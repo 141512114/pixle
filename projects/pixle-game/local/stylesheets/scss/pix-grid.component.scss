@@ -1,0 +1,74 @@
+@import '../../../../../local/stylesheets/mixins/variables';
+@import '../../../../../local/stylesheets/mixins/mixins';
+@import '../../../../../local/stylesheets/mixins/responsive';
+
+// pix-grid component stylesheet
+div.component-pix-grid {
+  .pix-grid-wrapper {
+    @include flexbox();
+    max-width: $grid_limit_width;
+    margin: 0 auto;
+  }
+
+  .pix-grid-buffer {
+    @include flexbox();
+    padding: 15px 0;
+
+    .pix-grid-inner {
+      min-width: 135px;
+    }
+  }
+
+  .pix-col-item {
+    margin: 0;
+
+    &.gridw-5 {
+      max-width: 52px;
+      padding: 3px;
+      font-size: calc(.75em + 2vmin);
+    }
+  }
+
+  @media only screen and (max-height: 600px) {
+    .pix-col-item.gridh-5:not(.gridw-5) {
+      font-size: calc(1em + 2.2vmin);
+    }
+  }
+
+  @media only screen and (max-height: $breakpoint_xxxsm) and (min-width: $breakpoint_xxxsm) {
+    .pix-col-item.gridw-5.gridh-5 {
+      max-width: 70px;
+      padding: 4px;
+      font-size: calc(.8em + 2vmin);
+    }
+  }
+
+  @media only screen and (min-width: $breakpoint_mm) {
+    .pix-col-item.gridw-5 {
+      max-width: 62px;
+      padding: 4px;
+      font-size: calc(.9em + 2.2vmin);
+    }
+  }
+
+  @media only screen and (min-width: $breakpoint_sm) {
+    .pix-col-item.gridw-5 {
+      max-width: 68px;
+      padding: 4px;
+      font-size: calc(1em + 2.2vmin);
+    }
+  }
+
+  @media only screen and (min-width: $breakpoint_xsm) {
+    .pix-col-item.gridw-5 {
+      max-width: 72px;
+      font-size: calc(1.1em + 1.75vmin);
+    }
+  }
+
+  @media only screen and (min-width: $breakpoint_xxxsm) {
+    .pix-col-item.gridw-5 {
+      max-width: 85px;
+    }
+  }
+}
