@@ -33,8 +33,8 @@
             ],
             "styles": [
               "node_modules/@fortawesome/fontawesome-free/css/solid.min.css",
-              "local/static/stylesheets/bootstrap/bootstrap.min.css",
-              "local/static/stylesheets/css/styles.min.css"
+              "local/stylesheets/css/bootstrap/bootstrap.min.css",
+              "local/stylesheets/css/styles.min.css"
             ],
             "scripts": [],
             "serviceWorker": true,
@@ -125,8 +125,8 @@
             ],
             "styles": [
               "node_modules/@fortawesome/fontawesome-free/css/solid.min.css",
-              "local/static/stylesheets/bootstrap/bootstrap.min.css",
-              "local/static/stylesheets/css/styles.min.css"
+              "local/stylesheets/css/bootstrap/bootstrap.min.css",
+              "local/stylesheets/css/styles.min.css"
             ],
             "scripts": []
           }
@@ -162,8 +162,8 @@
               "projects/pixle-landing/src/robots.txt"
             ],
             "styles": [
-              "local/static/stylesheets/bootstrap/bootstrap.min.css",
-              "local/static/stylesheets/css/styles.min.css"
+              "local/stylesheets/css/bootstrap/bootstrap.min.css",
+              "local/stylesheets/css/styles.min.css"
             ],
             "scripts": []
           },
@@ -251,8 +251,8 @@
               "projects/pixle-landing/src/robots.txt"
             ],
             "styles": [
-              "local/static/stylesheets/bootstrap/bootstrap.min.css",
-              "local/static/stylesheets/css/styles.min.css"
+              "local/stylesheets/css/bootstrap/bootstrap.min.css",
+              "local/stylesheets/css/styles.min.css"
             ],
             "scripts": []
           }

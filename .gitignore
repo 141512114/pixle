@@ -42,8 +42,8 @@ testem.log
 Thumbs.db
 
 # Other
-/local/static/stylesheets/bootstrap/
-/local/static/stylesheets/css/
+/local/stylesheets/css/bootstrap/
+/local/stylesheets/css/
 /projects/pixle-game/src/stylesheets/css/
 /projects/pixle-landing/src/stylesheets/css/
 /builds/
