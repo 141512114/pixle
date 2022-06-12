@@ -1,5 +1,5 @@
 <div class="component-app-wrapper position-relative h-100 d-flex flex-column">
-  <header id="main-navbar" class="navbar do-not-show">
+  <header class="navbar do-not-show">
     <div class="w-100 h-100 header-ui-wrapper">
       <div class="w-auto d-block company-logo">
         <a aria-label="Nani-Games homepage" class="company-website-link" href="https://www.nani-games.net/"
@@ -11,10 +11,22 @@
           </svg>
         </a>
       </div>
+      <div class="open-side-menu-wrapper">
+        <button #toggle_side_menu_btn (click)="toggleSideMenu()" aria-label="Settings menu"
+                class="rounded-3 open-side-menu" title="Open the settings menu" type="button">
+          <span class="open-icon">
+            <fa-icon [icon]="iconOpenSideMenu"></fa-icon>
+          </span>
+          <span class="close-icon">
+            <fa-icon [icon]="iconCloseSideMenu"></fa-icon>
+          </span>
+        </button>
+      </div>
     </div>
     <h2 class="game-title">Pixle</h2>
   </header>
   <main class="component-app position-relative" role="main">
     <router-outlet></router-outlet>
   </main>
+  <app-side-menu></app-side-menu>
 </div>

@@ -1,15 +1,15 @@
 import {AfterViewInit, Component, Inject, OnInit, ViewChild} from '@angular/core';
 import {DOCUMENT, Location} from '@angular/common';
 import {GREENSQUARE, ORANGESQUARE, PIXLE_ICONS, REDSQUARE, YELLOWSQUARE} from '../database/emoji.database';
-import {IPopUp} from '../interface/popup-message.interface';
-import {PixPopupMessageComponent} from '../pix-popup-message/pix-popup-message.component';
+import {IPopUp} from '../../../../../local/typescript/interface/popup-message.interface';
+import {PopupMessageComponent} from '../../../../../local/typescript/popup-message/popup-message.component';
 import {Router} from '@angular/router';
-import {HelperFunctionsService} from '../abstract/services/helper-functions.service';
-import {IPixle} from '../interface/pixle.interface';
+import {HelperFunctionsService} from '../../../../../local/typescript/abstract/services/helper-functions.service';
+import {IPixle} from '../../../../../local/typescript/interface/pixle.interface';
 import {PixGridComponent} from '../pix-grid/pix-grid.component';
 import {GameManager} from './game.manager';
 import {STYLESHEETS_PATH} from '../app.component';
-import {WINDOW} from '../window-injection.token';
+import {WINDOW} from '../../../../../local/typescript/window-injection.token';
 import {PixGridElementComponent} from '../pix-grid-element/pix-grid-element.component';
 import {PixGridUiComponent} from '../pix-grid-ui/pix-grid-ui.component';
 import {default as PixleList} from '../database/pixle-arts.database.json';
@@ -51,7 +51,7 @@ export class PixGameComponent implements OnInit, AfterViewInit {
   pixle_share_result: string = '';
   validating: boolean = false;
   private current_date: Date = new Date();
-  @ViewChild('match_status') private match_status_msg!: PixPopupMessageComponent;
+  @ViewChild('match_status') private match_status_msg!: PopupMessageComponent;
   @ViewChild(PixGridComponent) private pixGridComponent!: PixGridComponent;
   @ViewChild(PixGridUiComponent) private pixGridUiComponent!: PixGridUiComponent;
 
@@ -107,7 +107,7 @@ export class PixGameComponent implements OnInit, AfterViewInit {
    * @param msg_object
    */
   public sendMatchMessage(msg_object: IPopUp): void {
-    let popup_msg: PixPopupMessageComponent = this.match_status_msg;
+    let popup_msg: PopupMessageComponent = this.match_status_msg;
     popup_msg.writeNewMessage(msg_object);
     popup_msg.addClassToHTMLElement(popup_msg.msg_container.nativeElement);
   }

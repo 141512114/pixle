@@ -1,6 +1,6 @@
 {
-  "name": "pixle-game",
-  "version": "0.0.0",
+  "name": "pixle",
+  "version": "1.0.0",
   "hintConfig": {
     "connector": {
       "name": "webhint"

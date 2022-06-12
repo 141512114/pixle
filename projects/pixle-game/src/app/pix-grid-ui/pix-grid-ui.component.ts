@@ -11,12 +11,12 @@ import {
 } from '@angular/core';
 import {Clipboard} from '@angular/cdk/clipboard';
 import {STYLESHEETS_PATH} from '../app.component';
-import {HelperFunctionsService} from '../abstract/services/helper-functions.service';
+import {HelperFunctionsService} from '../../../../../local/typescript/abstract/services/helper-functions.service';
 import {PixGridElementComponent} from '../pix-grid-element/pix-grid-element.component';
 import {GameManager} from '../pix-game/game.manager';
 import {faClipboard, faLink} from '@fortawesome/free-solid-svg-icons';
-import {WINDOW} from '../window-injection.token';
-import {AbstractHtmlElement} from '../abstract/abstract.html-element';
+import {WINDOW} from '../../../../../local/typescript/window-injection.token';
+import {AbstractHtmlElement} from '../../../../../local/typescript/abstract/abstract.html-element';
 
 @Component({
   selector: 'app-pix-grid-ui',

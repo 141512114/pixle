@@ -1,6 +1,5 @@
 import {AfterViewInit, Component, ElementRef, ViewChild} from '@angular/core';
 import {IPopUp} from '../interface/popup-message.interface';
-import {STYLESHEETS_PATH} from '../app.component';
 import {AbstractHtmlElement} from '../abstract/abstract.html-element';
 
 const DEFAULT_MSG: IPopUp = {
@@ -10,11 +9,11 @@ const DEFAULT_MSG: IPopUp = {
 };
 
 @Component({
-  selector: 'app-pix-popup-message',
-  templateUrl: './pix-popup-message.component.html',
-  styleUrls: [STYLESHEETS_PATH + 'pix-popup-message.component.min.css']
+  selector: 'app-popup-message',
+  templateUrl: './popup-message.component.html',
+  styleUrls: ['../../stylesheets/css/popup-message.component.min.css']
 })
-export class PixPopupMessageComponent extends AbstractHtmlElement implements AfterViewInit {
+export class PopupMessageComponent extends AbstractHtmlElement implements AfterViewInit {
   @ViewChild('msg_container') public msg_container!: ElementRef;
   @ViewChild('msg_headline') private msg_headline!: ElementRef;
   @ViewChild('msg_description') private msg_description!: ElementRef;

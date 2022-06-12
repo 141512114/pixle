@@ -1,20 +1,20 @@
 import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import {PixSideMenuComponent} from './pix-side-menu.component';
+import {PopupMessageComponent} from './popup-message.component';
 
-describe('PixSideMenuComponent', () => {
-  let component: PixSideMenuComponent;
-  let fixture: ComponentFixture<PixSideMenuComponent>;
+describe('PixPopupMessageComponent', () => {
+  let component: PopupMessageComponent;
+  let fixture: ComponentFixture<PopupMessageComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [PixSideMenuComponent]
+      declarations: [PopupMessageComponent]
     })
       .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(PixSideMenuComponent);
+    fixture = TestBed.createComponent(PopupMessageComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
