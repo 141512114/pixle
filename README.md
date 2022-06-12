@@ -9,13 +9,14 @@ Lead Developer and Designer is Nolan Bjarne Schiemann, Co-Founder of Nani Games.
 
 Wordle, Picross and typical nonograms inspired the creation and development of this web-application _Pixle_.
 The player solves puzzles on a daily basis. Each day reveals a new, randomly generated puzzle to solve.
-Their difficulty does vary from day to day, but won't exceed a four by four- or five by four grid.
+Their difficulty does vary from day to day, and can be quite nerve-braking at times.
 To solve a puzzle, the player has to place the emojis on their correct tiles / positions, shown to the player
 at the beginning of the game and after each failed try.
 
 ### Generation of puzzles in _Pixle_
 Puzzles in the game _Pixle_ are generated ahead of time and stored inside a small database or array.
-The stored data packs only contain the necessary ids of the used emojis.
+This stored array only contains the necessary ids of the used emojis and a date on which the specific
+Pixle goes public.\
 Puzzles aren't completely, randomly generated. They always use one of the many, already given patterns.
 This way it is ensured that the player won't feel discouraged or uncomfortable while solving a puzzle.
 It creates a certain familiarity and other positive emotions, which help to bond the player to the game.
@@ -24,7 +25,12 @@ encourages him to keep playing and train his memory.
 
 ## First steps
 
-Before serving, you need to run `gulp compress` or `gulp` in order to generate the stylesheets needed. Bootstrap is already in this project, there is no need to install it as a package.
+Before serving, you need to run `gulp compress` or `gulp` in order to generate the stylesheets needed.\
+This has to be done in both projects (_pixle-game_ and _pixle-landing_) and outside in the root folder.
+Each of the projects have their own stylesheets and additionally share static files which are located
+outside, in the root folder.\
+Bootstrap is already in this project, there is no need to install it as a package.
+Bootstrap is located in the root folder, so the command as to be done "globally".\
 This app uses a customized version of bootstrap which is compromised separately via the command `gulp bootstrap`.
 
 **It is also possible to combine these two steps by using `gulp combined`.**
