@@ -106,7 +106,7 @@ function createPixleDatabaseFile(): void {
   const json_content: string = JSON.stringify(pixle_master_list);
   fs.writeFile(path_name + file_name, json_content, 'utf8', function (err) {
     if (err) return console.log(err);
-    console.log("The file was saved!");
+    console.log('The file was saved!');
   });
 }
 
@@ -118,10 +118,10 @@ function initPixleGenerator(): void {
   let end_date: Date = new Date();
   start_date.setUTCHours(0, 0, 0, 0);
   end_date.setUTCHours(0, 0, 0, 0);
-  end_date.setUTCFullYear(end_date.getUTCFullYear()+1);
+  end_date.setUTCFullYear(end_date.getUTCFullYear() + 1);
   let i = 0;
-  while(start_date < end_date) {
-    start_date.setUTCDate(start_date.getUTCDate()+1);
+  while (start_date < end_date) {
+    start_date.setUTCDate(start_date.getUTCDate() + 1);
     generateNewPixle(start_date.toJSON(), i);
     i++;
   }

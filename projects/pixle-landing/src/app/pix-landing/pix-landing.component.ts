@@ -8,7 +8,8 @@ import {STYLESHEETS_PATH} from '../app.component';
 })
 export class PixLandingComponent implements OnInit {
 
-  constructor() { }
+  constructor() {
+  }
 
   ngOnInit(): void {
   }

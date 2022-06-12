@@ -1,6 +1,6 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { PixLandingComponent } from './pix-landing.component';
+import {PixLandingComponent} from './pix-landing.component';
 
 describe('PixLandingComponent', () => {
   let component: PixLandingComponent;
@@ -8,9 +8,9 @@ describe('PixLandingComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ PixLandingComponent ]
+      declarations: [PixLandingComponent]
     })
-    .compileComponents();
+      .compileComponents();
   });
 
   beforeEach(() => {
