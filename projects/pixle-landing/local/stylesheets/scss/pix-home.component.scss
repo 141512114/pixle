@@ -55,7 +55,7 @@ section#about {
       }
     }
 
-    $max: 3;
+    $max: 4;
     @for $i from 1 through $max {
       .numbered-steps:nth-child(#{$i}) {
         z-index: ($max - $i) * 10;
