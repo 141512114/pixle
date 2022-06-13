@@ -34,6 +34,7 @@ body {
   max-height: -webkit-fill-available;
   max-height: calc(var(--vh, 1vh) * 100);
   background-color: var(--default-theme-one, map.get($default-color-palette, 1));
+  overflow-y: auto;
 }
 
 body.startTouch {
@@ -137,6 +138,33 @@ header.navbar {
 
     @media only screen and (min-width: $breakpoint_xmd) {
       padding: 0 13px;
+    }
+  }
+}
+
+footer {
+  position: relative;
+  width: 100%;
+  height: auto;
+  margin: 100px 0 0;
+  padding: 45px 0;
+
+  nav ul {
+    margin: 0;
+    padding: 0;
+
+    li {
+      display: block;
+      margin-bottom: 12px;
+
+      a {
+        display: inline-block;
+        padding: 7px 21px;
+      }
+
+      &:last-child {
+        margin-bottom: 0;
+      }
     }
   }
 }

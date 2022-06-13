@@ -1,5 +1,9 @@
+@import '../../../../../local/stylesheets/mixins/mixins';
+
 // app component stylesheet
 section {
+  @include flexbox();
   min-height: 100vh;
   height: auto;
+  padding: 215px 0;
 }

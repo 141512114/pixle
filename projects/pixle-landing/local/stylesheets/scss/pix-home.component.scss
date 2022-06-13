@@ -1,10 +1,10 @@
+@use "sass:map";
+
+@import '../../../../../local/stylesheets/mixins/fonts';
+@import '../../../../../local/stylesheets/mixins/themes';
 @import '../../../../../local/stylesheets/mixins/mixins';
 
 // pix-home component stylesheet
-section {
-  @include flexbox();
-}
-
 section#welcome {
   div.hero-background {
     position: absolute;
@@ -34,6 +34,57 @@ section#welcome {
           opacity: .65;
         }
       }
+    }
+  }
+}
+
+section#about {
+  .how-to-steps-wrapper {
+    .numbered-steps {
+      position: relative;
+      padding-right: 55px;
+
+      .how-to-description,
+      .how-to-description p {
+        position: relative;
+        z-index: 10;
+      }
+
+      .how-to-description p {
+        padding-left: 7px;
+      }
+    }
+
+    $max: 3;
+    @for $i from 1 through $max {
+      .numbered-steps:nth-child(#{$i}) {
+        z-index: ($max - $i) * 10;
+
+        .how-to-description::before {
+          content: '#{$i}';
+          position: absolute;
+          top: -62px;
+          left: -50px;
+          width: auto;
+          font-family: $main-ui;
+          font-size: 148px;
+          color: var(--default-theme-two, map.get($default-color-palette, 2));
+          user-select: none;
+          pointer-events: none;
+          opacity: .5;
+          z-index: 1;
+        }
+      }
+    }
+  }
+
+  .how-to-picture {
+    user-select: none;
+    pointer-events: none;
+
+    img {
+      width: 100%;
+      height: auto;
     }
   }
 }
