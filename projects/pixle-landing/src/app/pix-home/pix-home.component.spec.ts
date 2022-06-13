@@ -1,20 +1,20 @@
 import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import {PixLandingComponent} from './pix-landing.component';
+import {PixHomeComponent} from './pix-home.component';
 
 describe('PixLandingComponent', () => {
-  let component: PixLandingComponent;
-  let fixture: ComponentFixture<PixLandingComponent>;
+  let component: PixHomeComponent;
+  let fixture: ComponentFixture<PixHomeComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [PixLandingComponent]
+      declarations: [PixHomeComponent]
     })
       .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(PixLandingComponent);
+    fixture = TestBed.createComponent(PixHomeComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

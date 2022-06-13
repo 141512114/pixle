@@ -1,0 +1,39 @@
+@import '../../../../../local/stylesheets/mixins/mixins';
+
+// pix-home component stylesheet
+section {
+  @include flexbox();
+}
+
+section#welcome {
+  div.hero-background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    user-select: none;
+    pointer-events: none;
+    z-index: 1;
+  }
+
+  div.greeting {
+    z-index: 99;
+
+    h1.title {
+      font-family: "Open-Sans-ExtraBold", sans-serif;
+      font-size: 86px;
+      font-weight: 400;
+      letter-spacing: 3px;
+      line-height: 96px;
+
+      span {
+        display: block;
+
+        &.add {
+          opacity: .65;
+        }
+      }
+    }
+  }
+}

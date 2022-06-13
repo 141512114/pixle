@@ -54,7 +54,14 @@ header.navbar {
   padding: 7px 0;
   user-select: none;
   background-color: var(--default-theme-three, map.get($default-color-palette, 3));
+  transition: opacity 300ms, visibility 300ms;
   z-index: 9999;
+
+  &.do-not-show {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+  }
 
   .game-title {
     margin: 0;

@@ -1,4 +1,4 @@
-import {Component, ElementRef, Inject, OnInit, ViewChild} from '@angular/core';
+import {Component, ElementRef, Inject, OnInit, ViewChild, ViewEncapsulation} from '@angular/core';
 import {HelperFunctionsService} from '../../../../local/typescript/abstract/services/helper-functions.service';
 import {DOCUMENT} from '@angular/common';
 import {IconDefinition} from '@fortawesome/free-brands-svg-icons';
@@ -8,6 +8,7 @@ import {SideMenuComponent} from '../../../../local/typescript/side-menu/side-men
 export const STYLESHEETS_PATH: string = '../../stylesheets/css/';
 
 @Component({
+  encapsulation: ViewEncapsulation.None,
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['../stylesheets/css/app.component.min.css']
