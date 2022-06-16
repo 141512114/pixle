@@ -9,7 +9,7 @@
             <span class="add">to</span>
             <span>Pixle!</span>
           </h1>
-          <a class="play-pixle-button" href="https://play.pixle.gg/" rel="noopener">
+          <a class="link-is-button" href="https://play.pixle.gg/" rel="noopener">
             Challenge yourself today!
           </a>
         </div>
@@ -25,7 +25,7 @@
           <h1 class="h1 title">
             What is happening?
           </h1>
-          <p class="short-description">
+          <p class="description">
             View a couple of statistics surrounding the daily pixle and its success rate,<br/>
             or the amount of players who tried solving todays pixle.<br/>
             <span class="opensans-italic">Do you have what it takes solving todays pixle?</span>
@@ -38,28 +38,33 @@
 </section>
 <section id="about">
   <div class="container">
-    <div class="row mb-5 greeting-wrapper">
+    <div class="row greeting-wrapper">
       <div class="col">
         <div class="greeting">
           <h1 class="h1 title">
             Pixle? What is that?
           </h1>
-          <p class="short-description">
-            Wordle, Picross and typical nonograms inspired the creation and development of the web-game Pixle.
-            It combines these different ideas and improves certain aspects of its spiritual predecessors.
-            The main goal of Pixle is to solve puzzles, or pixles as we like to call them. Pixles are nothing
-            more than puzzles and follow a certain pattern. Its pieces consist of up to five different emojis.<br/>
-            Each day a new pixle reveals itself to the world, sometimes bringing players to its limits.
-            To solve a pixle, the player has to place the emojis on their correct tiles or positions,
-            shown to the player at the beginning of the game and after each failed try.
+          <p class="description">
+            Pixle is a very short and casual game which challenges its players with different puzzles each day.<br/>
+            Puzzles are created out of a predefined pattern and randomly chosen emojis.
+            Our pixle generator mixes things up and spits out interesting and challenging puzzles, which are just
+            wanting to be solved. Their difficulty varies from being a three-by-three grid with just two emojis to being
+            an up to five-by-five grid with five different emojis.<br/>
+            Games like Wordle and Picross inspired the development of Pixle. It combines different aspects
+            and improves these and the overall gameplay. Besides solving puzzles on your own, you can challenge
+            your friends and family to these nerve-braking puzzles!<br/>
+            Pixle is now available on the web and we challenge you to solve todays puzzle!
           </p>
+          <a class="mt-2 link-is-button__sm" href="https://play.pixle.gg/" rel="noopener">
+            Play Pixle today!
+          </a>
         </div>
       </div>
     </div>
-    <div class="row mb-5 position-relative how-to-steps-wrapper">
+    <div class="row position-relative how-to-steps-wrapper">
       <div class="col col-sm-3 d-flex flex-column numbered-steps">
         <div class="col how-to-description mb-3">
-          <p>
+          <p class="description">
             Wondering how Pixle works? No worries, we will explain thoroughly.<br/>
             Below you can see a grid of symbols, or as we call them: "emojis".
             This is the area where the fun happens.
@@ -75,7 +80,7 @@
       </div>
       <div class="col col-sm-3 d-flex flex-column numbered-steps">
         <div class="col how-to-description mb-3">
-          <p>
+          <p class="description">
             The grid represents a pixle which consists of up to five different emojis.
             You are shown the pixle once and as soon as its hidden, you have to
             use your memory to rebuild the pattern.<br/>
@@ -92,7 +97,7 @@
       </div>
       <div class="col col-sm-3 d-flex flex-column numbered-steps">
         <div class="col how-to-description mb-3">
-          <p>
+          <p class="description">
             Everytime you place an emoji incorrectly, you lose a try on the mismatched tile.<br/>
             Don't worry, after each failed try, the pixle will flip and show the correct answers briefly.<br/>
             But as soon as you run out of available tries, it's game over!
@@ -108,9 +113,9 @@
       </div>
       <div class="col col-sm-3 d-flex flex-column numbered-steps">
         <div class="col how-to-description mb-3">
-          <p>
+          <p class="description">
             And that's it! Now you know everything about Pixle and its pixles!<br/>
-            Challenging pixles are waiting for you, don't let them bother you for too long.
+            Challenging pixles are waiting, don't let them bother you for too long.
             Challenge yourself and friends today by playing Pixle!
           </p>
         </div>
@@ -129,22 +134,28 @@
           <h2 class="h2 title">
             About puzzles and pixles
           </h2>
-          <p>
+          <p class="description">
             Puzzles, or pixles as we like to call them, are a fundamental part of the game Pixle.
-            After all, the name "Pixle" derives from these different patterns.<br/>
-            But we don't want to talk all day long about this boring stuff.
+            After all, the name "Pixle" derives from them.<br/>
+            But we don't want to talk all day about this boring theoretical stuff.
             How are these pixles created? What is the process?<br/>
-            We built a small generator, which gets fed a few different predefined patterns and emojis.
-            It chooses one random pattern out of the bunch and checks the amount of emojis needed to build this pattern.
+            We built a small generator, which gets fed a few different, predefined patterns and a list of emojis.
+            It chooses one random pattern out of the bunch and checks its requirements, which in this case would be
+            the amount of emojis needed to satisfy its needs.
             Once it knows the correct amount, it randomly picks various emojis out of the list and makes sure double usage
             won't happen. An emoji can only be used once in each pattern.<br/>
-            After choosing a pattern and picking some emojis, both get thrown together and stored in an array.
+            A pattern and its emojis have been chosen, now it is time to throw them together and save in an array.
             A new pixle is born! Along with the pixle, other important information is stored in the array,
-            such as the pixles id and publication date.<br/>
+            such as the pixle id and publication date.<br/>
             And that should cover everything. Now you really now everything about the puzzles, pixles and the game Pixle.<br/>
-            Don't forget to check out the public <a href="#" rel="noopener" target="_blank">GitHub repository</a>
+            Don't forget to check out the public
+            <a href="https://github.com/KoolerNolan/pixle" rel="noopener" target="_blank">GitHub repository</a>
             of Pixle, if you want to dig even deeper.
           </p>
+          <a class="mt-2 link-is-button__sm" href="https://github.com/KoolerNolan/pixle" rel="noopener"
+             target="_blank">
+            Visit the GitHub repository
+          </a>
         </div>
       </div>
     </div>

@@ -36,16 +36,18 @@ section#welcome {
         }
       }
     }
-
-    a.play-pixle-button {
-      display: inline-block;
-      padding: 7px 21px;
-      font-size: 21px;
-    }
   }
 }
 
 section#about {
+  .row {
+    margin-bottom: 5rem;
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+
   .how-to-steps-wrapper {
     .numbered-steps {
       position: relative;
