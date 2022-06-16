@@ -7,8 +7,8 @@ This has to be done in both projects (_pixle-game_ and _pixle-landing_) and outs
 Each of the projects have their own stylesheets and additionally share static files which are located
 outside, in the root folder.\
 Bootstrap is already in this project, there is no need to install it as a package.
-Bootstrap is located in the root folder, so the command as to be done "globally".\
-This app uses a customized version of bootstrap which is compromised separately via the command `gulp bootstrap`.
+This app uses a customized version of bootstrap which is compromised separately via the command `gulp bootstrap`.\
+Bootstrap is located in the root folder, so the command as to be done "globally".
 
 **It is also possible to combine these two steps by using `gulp combined`.**
 
