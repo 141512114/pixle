@@ -13,6 +13,19 @@
   }
 }
 
+.company-logo {
+  padding: 10px 0 10px 5px;
+
+  a {
+    background: none;
+
+    &:hover {
+      cursor: pointer;
+      background: none;
+    }
+  }
+}
+
 // Default settings
 * {
   margin: 0;
@@ -81,14 +94,6 @@ header.navbar {
     @include flexbox(space-between, unset, row);
     padding: 0 6px;
 
-    div.company-logo {
-      padding: 10px 0 10px 5px;
-
-      a {
-        background: none;
-      }
-    }
-
     div.open-side-menu-wrapper {
       @include flexbox();
       padding: 5px;
@@ -149,6 +154,10 @@ footer {
   margin: 32px 0 0;
   padding: 45px 0;
 
+  nav {
+    @include flexbox(space-between, center, row);
+  }
+
   nav ul {
     margin: 0;
     padding: 0;
@@ -161,6 +170,10 @@ footer {
         margin-bottom: 0;
       }
     }
+  }
+
+  .company-logo {
+    height: 100px;
   }
 }
 
