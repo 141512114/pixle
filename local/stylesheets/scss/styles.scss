@@ -3,16 +3,6 @@
 @import '../mixins/bottleneck';
 
 // Default classes
-.nani-logo-colors {
-  .nani-stripes {
-    fill: var(--default-theme-six, map.get($default-color-palette, 6));
-  }
-
-  .nani-snake {
-    fill: var(--default-theme-five, map.get($default-color-palette, 5));
-  }
-}
-
 .company-logo {
   padding: 10px 0 10px 5px;
 

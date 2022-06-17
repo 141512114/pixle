@@ -1,3 +1,5 @@
+@use "sass:map";
+
 // Color maps
 $neo-palette: (
   1: #0F1020,
@@ -54,3 +56,29 @@ $cold-palette: (
 );
 
 $default-color-palette: $cold-palette !default;
+
+.theme-colors {
+  &__1 {
+    fill: var(--default-theme-one, map.get($default-color-palette, 1));
+  }
+
+  &__2 {
+    fill: var(--default-theme-two, map.get($default-color-palette, 2));
+  }
+
+  &__3 {
+    fill: var(--default-theme-three, map.get($default-color-palette, 3));
+  }
+
+  &__4 {
+    fill: var(--default-theme-four, map.get($default-color-palette, 4));
+  }
+
+  &__5 {
+    fill: var(--default-theme-five, map.get($default-color-palette, 5));
+  }
+
+  &__6 {
+    fill: var(--default-theme-six, map.get($default-color-palette, 6));
+  }
+}
