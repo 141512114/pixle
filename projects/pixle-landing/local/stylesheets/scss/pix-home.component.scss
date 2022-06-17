@@ -51,7 +51,6 @@ section#about {
 
   .how-to-steps-wrapper {
     .numbered-steps {
-      position: relative;
       padding: 0 23px;
 
       .how-to-description,
@@ -63,26 +62,27 @@ section#about {
       .how-to-description p {
         padding: 0 7px;
       }
-    }
 
-    $max: 4;
-    @for $i from 1 through $max {
-      .numbered-steps:nth-child(#{$i}) {
-        z-index: ($max - $i) * 10;
+      $max: 4;
+      @for $i from 1 through $max {
+        &__#{$i} {
+          @extend .numbered-steps;
+          z-index: ($max - $i) * 10;
 
-        .how-to-description::before {
-          content: '#{$i}';
-          position: absolute;
-          top: -68px;
-          left: -43px;
-          width: auto;
-          font-family: $main-ui;
-          font-size: 148px;
-          color: var(--default-theme-two, map.get($default-color-palette, 2));
-          user-select: none;
-          pointer-events: none;
-          opacity: .5;
-          z-index: 1;
+          .how-to-description::before {
+            content: '#{$i}';
+            position: absolute;
+            top: -68px;
+            left: -43px;
+            width: auto;
+            font-family: $main-ui;
+            font-size: 148px;
+            color: var(--default-theme-two, map.get($default-color-palette, 2));
+            user-select: none;
+            pointer-events: none;
+            opacity: .5;
+            z-index: 1;
+          }
         }
       }
     }
@@ -92,7 +92,8 @@ section#about {
     user-select: none;
     pointer-events: none;
 
-    img {
+    img,
+    svg {
       width: 100%;
       height: auto;
     }
