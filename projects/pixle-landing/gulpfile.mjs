@@ -56,7 +56,7 @@ Compress javascript files: --------------------------------------
 
 */
 
-gulp.task('default-js', async function() {
+gulp.task('default-js', async function () {
   gulp.src(JAVASCRIPT_SRC_FILES)
     .pipe(plumber())
     .pipe(jsMinify([{

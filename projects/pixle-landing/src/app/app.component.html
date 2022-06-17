@@ -1,10 +1,11 @@
 <div class="component-app-wrapper position-relative">
-  <header id="main-navbar" class="navbar do-not-show">
+  <!-- Header -->
+  <header class="navbar do-not-show" id="main-navbar">
     <div class="w-100 h-100 header-ui-wrapper">
-      <div class="w-auto d-inline-block company-logo">
-        <a aria-label="Nani-Games homepage" href="https://www.nani-games.net/"
-           target="_blank" title="Visit Nani-Games homepage">
-          <svg class="h-100 d-block" height="100%" version="1.1" viewBox="0 0 250 250" x="0px"
+      <div class="w-auto d-block company-logo">
+        <a aria-label="Nani Games homepage" href="https://www.nani-games.net/"
+           target="_blank" title="Visit Nani Games homepage">
+          <svg class="h-100" height="100%" version="1.1" viewBox="0 0 250 250" x="0px"
                xmlns="http://www.w3.org/2000/svg"
                y="0px">
             <use xlink:href="#nani-logo-duotone"></use>
@@ -25,10 +26,13 @@
     </div>
     <h2 class="game-title">Pixle</h2>
   </header>
+  <!-- Main section of the page -->
   <main class="component-app position-relative" role="main">
     <router-outlet></router-outlet>
   </main>
+  <!-- Side menu component -->
   <app-side-menu></app-side-menu>
+  <!-- Footer -->
   <footer id="main-footer">
     <nav class="container">
       <div class="position-relative d-inline-block list-cols">
@@ -56,7 +60,7 @@
             </a>
           </li>
           <li>
-            <a class="link-is-button__sm" href="#" target="_blank">Imprint</a>
+            <a class="link-is-button__sm" href="#">Imprint</a>
           </li>
         </ul>
       </div>
