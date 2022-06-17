@@ -1,6 +1,13 @@
 @import '../../../../../local/stylesheets/mixins/mixins';
 
 // app component stylesheet
+html,
+body {
+  height: auto;
+  max-height: unset;
+  overflow: visible;
+}
+
 section {
   @include flexbox();
   min-height: 100vh;

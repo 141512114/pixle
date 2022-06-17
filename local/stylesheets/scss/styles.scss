@@ -156,6 +156,16 @@ footer {
 
   nav {
     @include flexbox(space-between, center, row);
+
+    .list-cols ul {
+      display: inline-block;
+      margin-right: 36px;
+      vertical-align: top;
+
+      &:last-child {
+        margin-right: 0;
+      }
+    }
   }
 
   nav ul {

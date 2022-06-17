@@ -1,7 +1,7 @@
 <div class="component-app-wrapper position-relative">
   <header id="main-navbar" class="navbar do-not-show">
     <div class="w-100 h-100 header-ui-wrapper">
-      <div class="w-auto d-block company-logo">
+      <div class="w-auto d-inline-block company-logo">
         <a aria-label="Nani-Games homepage" href="https://www.nani-games.net/"
            target="_blank" title="Visit Nani-Games homepage">
           <svg class="h-100 d-block" height="100%" version="1.1" viewBox="0 0 250 250" x="0px"
@@ -31,21 +31,35 @@
   <app-side-menu></app-side-menu>
   <footer id="main-footer">
     <nav class="container">
-      <ul class="position-relative d-inline-block">
-        <li>
-          <a class="link-is-button__sm" href="https://play.pixle.gg/" rel="noopener" target="_blank">
-            Play Pixle today
-          </a>
-        </li>
-        <li>
-          <a class="link-is-button__sm" href="https://www.nani-games.net/" rel="noopener" target="_blank">
-            Nani-Games
-          </a>
-        </li>
-        <li>
-          <a class="link-is-button__sm" href="#" target="_blank">Imprint</a>
-        </li>
-      </ul>
+      <div class="position-relative d-inline-block list-cols">
+        <ul class="position-relative">
+          <li>
+            <a class="link-is-button__sm" href="https://play.pixle.gg/" rel="noopener" target="_blank">
+              Play Pixle today!
+            </a>
+          </li>
+          <li>
+            <a class="link-is-button__sm" href="https://github.com/KoolerNolan/pixle" rel="noopener" target="_blank">
+              GitHub repository
+            </a>
+          </li>
+          <li>
+            <a class="link-is-button__sm" href="https://twitter.com/KoolerNolan" rel="noopener" target="_blank">
+              Twitter
+            </a>
+          </li>
+        </ul>
+        <ul class="position-relative">
+          <li>
+            <a class="link-is-button__sm" href="https://www.nani-games.net/" rel="noopener" target="_blank">
+              Nani Games
+            </a>
+          </li>
+          <li>
+            <a class="link-is-button__sm" href="#" target="_blank">Imprint</a>
+          </li>
+        </ul>
+      </div>
       <div class="w-auto d-inline-block p-0 company-logo">
         <a aria-label="Nani-Games homepage" href="https://www.nani-games.net/"
            target="_blank" title="Visit Nani-Games homepage">
