@@ -59,12 +59,12 @@ header {
   top: 0;
   left: 0;
   right: 0;
+  display: block;
   width: 100%;
   height: auto;
 }
 
 header.navbar {
-  @include flexbox();
   padding: 7px 0;
   user-select: none;
   background-color: var(--default-theme-three, map.get($default-color-palette, 3));
