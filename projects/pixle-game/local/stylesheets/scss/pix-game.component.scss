@@ -1,1 +1,8 @@
+@import '../../../../../local/stylesheets/mixins/mixins';
+
 // pix-game component stylesheet
+.pix-popup-wrapper {
+  @include alignment_old();
+  width: 100%;
+  pointer-events: none;
+}
