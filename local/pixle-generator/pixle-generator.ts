@@ -1,4 +1,4 @@
-import {PIXLE_ICONS} from '../../projects/pixle-game/src/app/database/emoji.database';
+import {PIXLE_ICONS} from '../typescript/emoji.database';
 import {IPixle} from '../typescript/interface/pixle.interface';
 import * as fs from 'fs';
 import {MASTER_PATTERNS} from './pixle-pattern-list';

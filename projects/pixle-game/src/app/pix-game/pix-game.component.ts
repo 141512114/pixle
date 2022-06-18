@@ -1,6 +1,12 @@
 import {AfterViewInit, Component, Inject, OnInit, ViewChild} from '@angular/core';
 import {DOCUMENT, Location} from '@angular/common';
-import {GREENSQUARE, ORANGESQUARE, PIXLE_ICONS, REDSQUARE, YELLOWSQUARE} from '../database/emoji.database';
+import {
+  GREENSQUARE,
+  ORANGESQUARE,
+  PIXLE_ICONS,
+  REDSQUARE,
+  YELLOWSQUARE
+} from '../../../../../local/typescript/emoji.database';
 import {IPopUp} from '../../../../../local/typescript/interface/popup-message.interface';
 import {PopupMessageComponent} from '../../../../../local/typescript/popup-message/popup-message.component';
 import {Router} from '@angular/router';

@@ -18,7 +18,8 @@ section#welcome {
     z-index: 1;
   }
 
-  div.greeting {
+  .greeting {
+    position: relative;
     z-index: 99;
 
     h1.title {

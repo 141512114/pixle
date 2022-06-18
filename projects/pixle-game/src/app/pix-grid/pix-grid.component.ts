@@ -24,7 +24,7 @@ const ROW_OFFSET: number = 355;
   styleUrls: [STYLESHEETS_PATH + 'pix-grid.component.min.css']
 })
 export class PixGridComponent implements OnInit, AfterViewInit {
-  @ViewChildren(PixGridElementComponent) public pixle_emoji_input!: QueryList<PixGridElementComponent>
+  @ViewChildren(PixGridElementComponent) public pixle_emoji_input!: QueryList<PixGridElementComponent>;
   @Input() grid_image_id: number = -1;
   @Input() grid_image: number[][] = [];
   grid_image_width: number = 0;
