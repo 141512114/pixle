@@ -34,7 +34,7 @@ export class PixGridUiComponent extends AbstractHtmlElement {
   @ViewChild('ui_wrapper') private ui_wrapper!: ElementRef;
   @ViewChild('copied_badge') private copied_badge!: ElementRef;
   private windowNavigator;
-  private copied_badge_timer: number = -1;
+  private copied_badge_timer: any = -1;
 
   constructor(@Inject(WINDOW) private readonly window: Window, private clipboard: Clipboard) {
     super();

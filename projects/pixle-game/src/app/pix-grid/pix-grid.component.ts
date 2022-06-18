@@ -29,7 +29,7 @@ export class PixGridComponent implements OnInit, AfterViewInit {
   @Input() grid_image: number[][] = [];
   grid_image_width: number = 0;
   grid_image_height: number = 0;
-  grid_image_row_timer: number[] = [];
+  grid_image_row_timer: any[] = [];
   @ViewChild('grid_wrapper') private grid_wrapper!: ElementRef;
   @ViewChild('grid_inner') private grid_inner!: ElementRef;
   private prev_window_width: number = 0;
