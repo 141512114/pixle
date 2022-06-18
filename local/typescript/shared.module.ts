@@ -3,6 +3,7 @@ import {SideMenuComponent} from './side-menu/side-menu.component';
 import {ThemeSwitcherComponent} from './theme-switcher/theme-switcher.component';
 import {PopupMessageComponent} from './popup-message/popup-message.component';
 import {CommonModule} from '@angular/common';
+import {RouterModule} from '@angular/router';
 
 @NgModule({
   exports: [
@@ -10,7 +11,8 @@ import {CommonModule} from '@angular/common';
     PopupMessageComponent
   ],
   imports: [
-    CommonModule
+    CommonModule,
+    RouterModule
   ],
   declarations: [
     SideMenuComponent,

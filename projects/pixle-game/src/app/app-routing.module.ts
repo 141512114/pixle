@@ -4,7 +4,9 @@ import {PixGameComponent} from './pix-game/pix-game.component';
 
 const routes: Routes = [
   {path: '', redirectTo: '/game', pathMatch: 'full'},
-  {path: 'game', component: PixGameComponent}
+  {path: '**', redirectTo: '/game'},
+  {path: 'game', component: PixGameComponent},
+  {path: 'imprint', redirectTo: 'projects/pixle-game/src/assets/important/imprint.html'}
 ];
 
 @NgModule({
