@@ -18,23 +18,74 @@
   </div>
 </section>
 <section id="statistics">
-  <div class="container">
+  <div class="container greeting">
     <div class="row">
       <div class="col">
-        <div class="greeting">
-          <h1 class="h1 title">
-            What is happening?
-          </h1>
-          <p class="description">
-            View a couple of statistics surrounding the daily pixle and its success rate,<br/>
-            or the amount of players who tried solving todays pixle.<br/>
-            <span class="opensans-italic">Do you have what it takes solving todays pixle?</span>
-          </p>
+        <h1 class="h1 title">
+          What is happening?
+        </h1>
+        <p class="description">
+          View a couple of statistics surrounding the daily pixle and its success rate,<br/>
+          or the amount of players who tried solving today's pixle.<br/>
+          <span class="opensans-italic">Do you have what it takes solving today's pixle?</span>
+        </p>
+        <div class="mt-2 link-collection">
+          <a class="d-inline-block link-is-button__sm" href="https://play.pixle.gg/" rel="noopener">
+            Challenge yourself today!
+          </a>
+          <a class="d-inline-block link-is-button__sm" href="https://twitter.com/KoolerNolan" rel="noopener"
+             target="_blank">
+            Twitter
+          </a>
         </div>
       </div>
     </div>
   </div>
-  <div id="visitor-count"></div>
+  <div class="container statistics-counter-container">
+    <div class="row g-0">
+      <div class="col col-lg-6 position-relative d-flex flex-column statistics-counter-wrapper">
+        <div class="col py-4 mb-3">
+          <h1 class="h1 title">
+            <span class="d-block">99.999.999</span>
+            <span class="d-block mt-2 sub">currently playing Pixle</span>
+            <span class="d-block mt-4 px-4 sub-description">
+              This counter represents the amount players currently playing Pixle.
+            </span>
+          </h1>
+        </div>
+        <div class="w-100 d-block"></div>
+        <div class="col d-inline-flex statistics-counter-icon">
+          <svg class="w-100 h-auto mt-auto" width="100%" version="1.1" viewBox="0 0 250 250" x="0px"
+               xmlns="http://www.w3.org/2000/svg"
+               y="0px">
+            <use xlink:href="#pixle-grid-with-content-graphic"></use>
+          </svg>
+        </div>
+      </div>
+      <div class="w-100 mt-5 d-block d-lg-none"></div>
+      <div class="col col-lg-6 position-relative d-flex flex-column statistics-counter-wrapper">
+        <div class="col py-4 mb-3">
+          <h1 class="h1 title">
+            <span class="d-block">99.999.999</span>
+            <span class="d-block mt-2 sub">solved pixles today</span>
+            <span class="d-block mt-4 px-4 sub-description">
+              This counter represents the amount of solved pixles today.
+              It does not include other pixles from other dates, it is
+              focused on only the most recent pixle.
+            </span>
+          </h1>
+        </div>
+        <div class="w-100 d-block"></div>
+        <div class="col d-inline-flex statistics-counter-icon">
+          <svg class="w-100 h-auto mt-auto" width="100%" version="1.1" viewBox="0 0 250 250" x="0px"
+               xmlns="http://www.w3.org/2000/svg"
+               y="0px">
+            <use xlink:href="#pixle-grid-solved-graphic"></use>
+          </svg>
+        </div>
+      </div>
+    </div>
+  </div>
 </section>
 <section id="about">
   <div class="container">

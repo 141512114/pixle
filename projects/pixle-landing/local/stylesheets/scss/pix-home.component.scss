@@ -41,6 +41,45 @@ section#welcome {
   }
 }
 
+section#statistics {
+  .link-collection a {
+    margin-right: 21px;
+
+    &:last-child {
+      margin-right: 0;
+    }
+  }
+
+  .statistics-counter-container {
+    margin-top: 90px;
+  }
+
+  .statistics-counter-wrapper {
+    @include flexbox();
+
+    h1 {
+      font-family: "Open-Sans-ExtraBold", sans-serif;
+      font-size: 92px;
+      text-align: center;
+
+      span.sub {
+        font-family: $main-header;
+        font-size: 21px;
+      }
+
+      span.sub-description {
+        font-family: $main-font;
+        font-size: 16px;
+        color: $default-text-color;
+      }
+    }
+
+    .statistics-counter-icon {
+      max-width: 225px;
+    }
+  }
+}
+
 section#about {
   .row {
     margin-bottom: 5rem;
