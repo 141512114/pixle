@@ -1,6 +1,6 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { PixHeroGridComponent } from './pix-hero-grid.component';
+import {PixHeroGridComponent} from './pix-hero-grid.component';
 
 describe('PixHeroGridComponent', () => {
   let component: PixHeroGridComponent;
@@ -8,9 +8,9 @@ describe('PixHeroGridComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ PixHeroGridComponent ]
+      declarations: [PixHeroGridComponent]
     })
-    .compileComponents();
+      .compileComponents();
   });
 
   beforeEach(() => {

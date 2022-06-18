@@ -1,6 +1,6 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { PixHeroTileComponent } from './pix-hero-tile.component';
+import {PixHeroTileComponent} from './pix-hero-tile.component';
 
 describe('PixHeroTileComponent', () => {
   let component: PixHeroTileComponent;
@@ -8,9 +8,9 @@ describe('PixHeroTileComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ PixHeroTileComponent ]
+      declarations: [PixHeroTileComponent]
     })
-    .compileComponents();
+      .compileComponents();
   });
 
   beforeEach(() => {

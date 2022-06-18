@@ -3,7 +3,7 @@
 // pix-hero-grid component stylesheet
 .component-pix-hero-grid {
   .pix-grid-wrapper {
-    @include flexbox($valign:flex-end);
+    @include flexbox($valign: flex-end);
     margin: 0 auto;
   }
 

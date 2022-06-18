@@ -32,7 +32,7 @@ export class PixHeroGridComponent implements OnInit {
     for (let i: number = 0; i < row_count; i++) {
       let temp_row_of_image: number[] = [];
       for (let j: number = 0; j < row_count; j++) {
-        let rnd: number = HelperFunctionsService.generateRandomInteger(PIXLE_ICONS.length-1);
+        let rnd: number = HelperFunctionsService.generateRandomInteger(PIXLE_ICONS.length - 1);
         temp_row_of_image.push(PIXLE_ICONS[rnd]);
       }
       temp_pixle_image.push(temp_row_of_image);
