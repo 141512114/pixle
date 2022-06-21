@@ -1,4 +1,5 @@
 @import '../../../../../local/stylesheets/mixins/mixins';
+@import '../../../../../local/stylesheets/mixins/responsive';
 
 // app component stylesheet
 html,
@@ -12,5 +13,23 @@ section {
   @include flexbox();
   min-height: 100vh;
   height: auto;
-  padding: 185px 0;
+  padding: 75px 0;
+}
+
+@media only screen and (min-width: $breakpoint_sm) {
+  section {
+    padding: 105px 0;
+  }
+}
+
+@media only screen and (min-width: $breakpoint_xxsm) {
+  section {
+    padding: 125px 0;
+  }
+}
+
+@media only screen and (min-width: $breakpoint_xmd) {
+  section {
+    padding: 185px 0;
+  }
 }

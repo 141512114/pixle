@@ -147,8 +147,6 @@ footer {
   padding: 45px 0;
 
   nav {
-    @include flexbox(space-between, center, row);
-
     .list-cols ul {
       display: inline-block;
       margin-right: 36px;
@@ -157,6 +155,10 @@ footer {
       &:last-child {
         margin-right: 0;
       }
+    }
+
+    @media only screen and (min-width: $breakpoint_xxxsm) {
+      @include flexbox(space-between, center, row);
     }
   }
 

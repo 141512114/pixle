@@ -1,15 +1,17 @@
-<section class="position-relative m-0 p-0 overflow-hidden" id="welcome">
+<section class="position-relative m-0 px-2 p-sm-0 overflow-hidden" id="welcome">
   <div class="container greeting">
     <div class="row">
-      <div class="col col-md-6">
+      <div class="col col-md-6 d-flex justify-content-center flex-column">
         <h1 class="h1 mb-4 title">
           <span class="add">Welcome</span>
           <span class="add">to</span>
           <span>Pixle!</span>
         </h1>
-        <a class="link-is-button" href="https://play.pixle.gg/" rel="noopener">
-          Challenge yourself today!
-        </a>
+        <div class="link-buffer">
+          <a class="link-is-button" href="https://play.pixle.gg/" rel="noopener">
+            Challenge yourself today!
+          </a>
+        </div>
       </div>
       <div class="col-6 d-none d-md-inline-block">
         <app-pix-hero-grid></app-pix-hero-grid>
@@ -17,7 +19,7 @@
     </div>
   </div>
 </section>
-<section id="statistics">
+<section id="statistics" class="px-2 px-sm-0">
   <div class="container greeting">
     <div class="row">
       <div class="col">
@@ -30,9 +32,10 @@
           <span class="opensans-italic">Do you have what it takes solving today's pixle?</span>
         </p>
         <div class="mt-2 link-collection">
-          <a class="d-inline-block link-is-button__sm" href="https://play.pixle.gg/" rel="noopener">
+          <a class="d-inline-block mb-2 mb-sm-0 link-is-button__sm" href="https://play.pixle.gg/" rel="noopener">
             Challenge yourself today!
           </a>
+          <div class="w-100 d-block d-sm-none"></div>
           <a class="d-inline-block link-is-button__sm" href="https://twitter.com/KoolerNolan" rel="noopener"
              target="_blank">
             Twitter
@@ -42,52 +45,36 @@
     </div>
   </div>
   <div class="container statistics-counter-container">
-    <div class="row g-0">
+    <div class="row gy-0">
       <div class="col col-lg-6 position-relative d-flex flex-column statistics-counter-wrapper">
-        <div class="col py-4 mb-3">
+        <div class="w-100 py-4 rounded-3 overflow-hidden statistics-panel">
           <h1 class="h1 title">
             <span class="d-block">99.999.999</span>
-            <span class="d-block mt-2 sub">currently playing Pixle</span>
-            <span class="d-block mt-4 px-4 sub-description">
-              This counter represents the amount players currently playing Pixle.
+            <span class="d-block mt-2 sub">played Pixle today</span>
+            <span class="d-block mt-2 mt-sm-4 px-4 sub-description">
+              This counter represents how many matches of Pixle have been played today.
             </span>
           </h1>
         </div>
-        <div class="w-100 d-block"></div>
-        <div class="col d-inline-flex statistics-counter-icon">
-          <svg class="w-100 h-auto mt-auto" version="1.1" viewBox="0 0 250 250" width="100%" x="0px"
-               xmlns="http://www.w3.org/2000/svg"
-               y="0px">
-            <use xlink:href="#pixle-grid-with-content-graphic"></use>
-          </svg>
-        </div>
       </div>
-      <div class="w-100 mt-5 d-block d-lg-none"></div>
+      <div class="w-100 mt-4 d-block d-lg-none"></div>
       <div class="col col-lg-6 position-relative d-flex flex-column statistics-counter-wrapper">
-        <div class="col py-4 mb-3">
+        <div class="w-100 py-4 rounded-3 overflow-hidden statistics-panel">
           <h1 class="h1 title">
             <span class="d-block">99.999.999</span>
             <span class="d-block mt-2 sub">solved pixles today</span>
-            <span class="d-block mt-4 px-4 sub-description">
+            <span class="d-block mt-2 mt-sm-4 px-4 sub-description">
               This counter represents the amount of solved pixles today.
               It does not include other pixles from other dates, it is
               focused on only the most recent pixle.
             </span>
           </h1>
         </div>
-        <div class="w-100 d-block"></div>
-        <div class="col d-inline-flex statistics-counter-icon">
-          <svg class="w-100 h-auto mt-auto" version="1.1" viewBox="0 0 250 250" width="100%" x="0px"
-               xmlns="http://www.w3.org/2000/svg"
-               y="0px">
-            <use xlink:href="#pixle-grid-solved-graphic"></use>
-          </svg>
-        </div>
       </div>
     </div>
   </div>
 </section>
-<section id="about">
+<section id="about" class="px-2 px-sm-0">
   <div class="container">
     <div class="row greeting-wrapper">
       <div class="col">
@@ -122,7 +109,7 @@
           </p>
         </div>
         <div class="w-100 d-block"></div>
-        <div class="col d-inline-flex how-to-picture">
+        <div class="col d-inline-flex justify-content-center p-2 how-to-picture">
           <svg class="w-100 h-auto mt-auto" version="1.1" viewBox="0 0 250 250" width="100%" x="0px"
                xmlns="http://www.w3.org/2000/svg"
                y="0px">
@@ -140,7 +127,7 @@
           </p>
         </div>
         <div class="w-100 d-block"></div>
-        <div class="col d-inline-flex how-to-picture">
+        <div class="col d-inline-flex justify-content-center p-2 how-to-picture">
           <svg class="w-100 h-auto mt-auto" version="1.1" viewBox="0 0 250 250" width="100%" x="0px"
                xmlns="http://www.w3.org/2000/svg"
                y="0px">
@@ -158,7 +145,7 @@
           </p>
         </div>
         <div class="w-100 d-block"></div>
-        <div class="col d-inline-flex how-to-picture">
+        <div class="col d-inline-flex justify-content-center p-2 how-to-picture">
           <svg class="w-100 h-auto mt-auto" version="1.1" viewBox="0 0 250 250" width="100%" x="0px"
                xmlns="http://www.w3.org/2000/svg"
                y="0px">
@@ -177,7 +164,7 @@
           </p>
         </div>
         <div class="w-100 d-block"></div>
-        <div class="col d-inline-flex how-to-picture">
+        <div class="col d-inline-flex justify-content-center p-2 how-to-picture">
           <svg class="w-100 h-auto mt-auto" version="1.1" viewBox="0 0 250 250" width="100%" x="0px"
                xmlns="http://www.w3.org/2000/svg"
                y="0px">
