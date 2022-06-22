@@ -58,27 +58,77 @@ $cold-palette: (
 $default-color-palette: $cold-palette !default;
 
 .theme-colors {
+  $stroke_width: 3px;
+
   &__1 {
-    fill: var(--default-theme-one, map.get($default-color-palette, 1));
+    $color: var(--default-theme-one, map.get($default-color-palette, 1));
+
+    fill: $color;
+
+    &__stroke {
+      fill: none;
+      stroke: $color;
+      stroke-width: $stroke_width;
+    }
   }
 
   &__2 {
-    fill: var(--default-theme-two, map.get($default-color-palette, 2));
+    $color: var(--default-theme-two, map.get($default-color-palette, 2));
+
+    fill: $color;
+
+    &__stroke {
+      fill: none;
+      stroke: $color;
+      stroke-width: $stroke_width;
+    }
   }
 
   &__3 {
-    fill: var(--default-theme-three, map.get($default-color-palette, 3));
+    $color: var(--default-theme-three, map.get($default-color-palette, 3));
+
+    fill: $color;
+
+    &__stroke {
+      fill: none;
+      stroke: $color;
+      stroke-width: $stroke_width;
+    }
   }
 
   &__4 {
-    fill: var(--default-theme-four, map.get($default-color-palette, 4));
+    $color: var(--default-theme-four, map.get($default-color-palette, 4));
+
+    fill: $color;
+
+    &__stroke {
+      fill: none;
+      stroke: $color;
+      stroke-width: $stroke_width;
+    }
   }
 
   &__5 {
-    fill: var(--default-theme-five, map.get($default-color-palette, 5));
+    $color: var(--default-theme-five, map.get($default-color-palette, 5));
+
+    fill: $color;
+
+    &__stroke {
+      fill: none;
+      stroke: $color;
+      stroke-width: $stroke_width;
+    }
   }
 
   &__6 {
-    fill: var(--default-theme-six, map.get($default-color-palette, 6));
+    $color: var(--default-theme-six, map.get($default-color-palette, 6));
+
+    fill: $color;
+
+    &__stroke {
+      fill: none;
+      stroke: $color;
+      stroke-width: $stroke_width;
+    }
   }
 }
