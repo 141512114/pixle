@@ -4,6 +4,7 @@ import {PixHomeComponent} from './pix-home/pix-home.component';
 
 const routes: Routes = [
   {path: '', redirectTo: '/home', pathMatch: 'full'},
+  {path: '**', redirectTo: '/home'},
   {path: 'home', component: PixHomeComponent}
 ];
 

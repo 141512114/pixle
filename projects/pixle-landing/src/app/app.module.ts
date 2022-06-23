@@ -20,8 +20,8 @@ import {PixHeroGridComponent} from './pix-hero-grid/pix-hero-grid.component';
   imports: [
     BrowserModule.withServerTransition({appId: 'serverApp'}),
     CommonModule,
-    AppRoutingModule,
     SharedModule,
+    AppRoutingModule,
     FontAwesomeModule
   ],
   providers: [],
