@@ -100,6 +100,21 @@ export class HelperFunctionsService {
   }
 
   /**
+   * Check if the session storage of the browser is available
+   *
+   * @return Availability of the session storage (boolean)
+   */
+  public static isSessionStorageAvailable() {
+    try {
+      sessionStorage.setItem('check', 'availability');
+      sessionStorage.removeItem('check');
+      return true;
+    } catch (e) {
+      return false;
+    }
+  }
+
+  /**
    * Add a zero to any number below 10
    *
    * @param num

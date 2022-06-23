@@ -1,28 +1,12 @@
 import {AfterViewInit, Component, ElementRef, Inject, OnInit, ViewChild} from '@angular/core';
 import {DOCUMENT} from '@angular/common';
-import {WINDOW} from './window-injection.token';
-import {PixSideMenuComponent} from './pix-side-menu/pix-side-menu.component';
+import {WINDOW} from '../../../../local/typescript/window-injection.token';
+import {SideMenuComponent} from '../../../../local/typescript/side-menu/side-menu.component';
 import {faGear, faXmark} from '@fortawesome/free-solid-svg-icons';
 import {IconDefinition} from '@fortawesome/free-brands-svg-icons';
-import {HelperFunctionsService} from './abstract/services/helper-functions.service';
+import {HelperFunctionsService} from '../../../../local/typescript/abstract/services/helper-functions.service';
 
 export const STYLESHEETS_PATH: string = '../../stylesheets/css/';
-
-const hasMatchMedia = typeof window.matchMedia !== 'undefined';
-/**
- * Determine if device is touch-capable
- * true - device is touch-capable
- * false - device is not touch-capable
- * null - unable to determine touch capability
- *
- * @return {null|boolean}
- */
-const hasTouch = () => {
-  if (hasMatchMedia) {
-    return window.matchMedia('(hover: none)').matches;
-  }
-  return null;
-};
 
 const COOLDOWN_TOUCH: number = 75;
 
@@ -35,7 +19,7 @@ export class AppComponent implements OnInit, AfterViewInit {
   iconOpenSideMenu: IconDefinition = faGear;
   iconCloseSideMenu: IconDefinition = faXmark;
   isTouchTimer: any;
-  @ViewChild(PixSideMenuComponent) private pixSideMenuComponent!: PixSideMenuComponent;
+  @ViewChild(SideMenuComponent) private sideMenuComponent!: SideMenuComponent;
   @ViewChild('toggle_side_menu_btn') private toggle_side_menu_btn!: ElementRef;
 
   constructor(@Inject(DOCUMENT) private document: Document, @Inject(WINDOW) private readonly window: Window) {
@@ -49,11 +33,13 @@ export class AppComponent implements OnInit, AfterViewInit {
       this.window.addEventListener(event, this.removeTouchClass, false);
     });
     // Get the stored theme data, if available, and "restore" the previous settings
-    let previous_theme: string | null;
+    let previous_theme: string | null = null;
     if (HelperFunctionsService.isLocalStorageAvailable()) {
       previous_theme = localStorage.getItem('last_theme');
     } else {
-      previous_theme = sessionStorage.getItem('last_theme');
+      if (HelperFunctionsService.isSessionStorageAvailable()) {
+        previous_theme = sessionStorage.getItem('last_theme');
+      }
     }
     if (previous_theme != null) {
       this.document.body.dataset['theme'] = previous_theme;
@@ -71,22 +57,22 @@ export class AppComponent implements OnInit, AfterViewInit {
    * Toggle (open or close) the side menu
    */
   public toggleSideMenu(): void {
-    let side_menu_element: HTMLElement = this.pixSideMenuComponent.side_menu.nativeElement;
+    let side_menu_element: HTMLElement = this.sideMenuComponent.side_menu.nativeElement;
     let toggle_side_menu_element: HTMLElement = this.toggle_side_menu_btn.nativeElement;
     let show_class: string = 'toggle';
 
-    if (this.pixSideMenuComponent.active) {
-      this.pixSideMenuComponent.removeClassFromHTMLElement(side_menu_element);
+    if (this.sideMenuComponent.active) {
+      this.sideMenuComponent.removeClassFromHTMLElement(side_menu_element);
       if (toggle_side_menu_element.classList.contains(show_class)) {
         toggle_side_menu_element.classList.remove(show_class);
       }
     } else {
-      this.pixSideMenuComponent.addClassToHTMLElement(side_menu_element);
+      this.sideMenuComponent.addClassToHTMLElement(side_menu_element);
       if (!toggle_side_menu_element.classList.contains(show_class)) {
         toggle_side_menu_element.classList.add(show_class);
       }
     }
-    this.pixSideMenuComponent.active = !this.pixSideMenuComponent.active;
+    this.sideMenuComponent.active = !this.sideMenuComponent.active;
   }
 
   /**
@@ -101,6 +87,21 @@ export class AppComponent implements OnInit, AfterViewInit {
   }
 
   /**
+   * Determine if device is touch-capable
+   * true - device is touch-capable
+   * false - device is not touch-capable
+   * null - unable to determine touch capability
+   *
+   * @return {null|boolean}
+   */
+  private hasTouch(): boolean | null {
+    if (typeof this.window.matchMedia !== 'undefined') {
+      return this.window.matchMedia('(hover: none)').matches;
+    }
+    return null;
+  }
+
+  /**
    * Add a touch indicator class to the body element
    *
    * @private
@@ -108,7 +109,7 @@ export class AppComponent implements OnInit, AfterViewInit {
   private addTouchClass(): void {
     clearTimeout(this.isTouchTimer);
     let body_element: HTMLElement = this.document.body;
-    if (!hasTouch() || body_element.classList.contains('startTouch')) return;
+    if (!this.hasTouch() || body_element.classList.contains('startTouch')) return;
     body_element.classList.add('startTouch');
   }
 

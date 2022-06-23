@@ -25,18 +25,19 @@ Paths: ----------------------------------------------------------
 */
 
 const DEV_SRC_PATH = './local/';
-const STATIC_SRC_PATH = DEV_SRC_PATH + 'static/';
 
 // Stylesheet paths
 const STYLES_SRC_FILES = DEV_SRC_PATH + 'stylesheets/scss/**/!(_*)*.scss';
-const STYLES_MIN_DEST_PATH = STATIC_SRC_PATH + 'stylesheets/css/';
+const STYLES_MIN_DEST_PATH = DEV_SRC_PATH + 'stylesheets/css/';
 
 const BOOTSTRAP_SRC_FILES = DEV_SRC_PATH + 'stylesheets/bootstrap/**/!(_*)*.scss';
-const BOOTSTRAP_MIN_DEST_PATH = STATIC_SRC_PATH + 'stylesheets/bootstrap/';
+const BOOTSTRAP_MIN_DEST_PATH = STYLES_MIN_DEST_PATH + 'bootstrap/';
 
 // Stylesheets deletion pattern
 const STYLES_DEL_PATTERN = [
-  STYLES_MIN_DEST_PATH + '*/'
+  STYLES_MIN_DEST_PATH + '*/',
+  '!' + BOOTSTRAP_MIN_DEST_PATH,
+  '!' + BOOTSTRAP_MIN_DEST_PATH + '*/'
 ];
 const STYLES_BOOTSTRAP_DEL_PATTERN = [
   BOOTSTRAP_MIN_DEST_PATH + '*/'
@@ -83,10 +84,10 @@ Uglify / Clean CSS: ----------------------------------------------
 
 */
 
-async function uglify(dest) {
+async function uglify(source, dest) {
   'use strict';
   return await new Promise((resolve) => {
-    gulp.src(dest + '**/!(*.min).css')
+    gulp.src(source)
       .pipe(plumber())
       .pipe(cleanCSS({debug: true, compatibility: 'ie8'}, function (details) {
         console.log('Original Size : ' + details.name + ': ' + details.stats.originalSize + ' bytes');
@@ -110,7 +111,7 @@ Compress normal stylesheets: -------------------------------------
 
 gulp.task('default-stylesheets', async function () {
   await to_css(STYLES_SRC_FILES, STYLES_MIN_DEST_PATH).then(() =>
-    uglify(STYLES_MIN_DEST_PATH)
+    uglify([STYLES_MIN_DEST_PATH + '**/!(*.min).css', '!' + BOOTSTRAP_MIN_DEST_PATH + '**/*'], STYLES_MIN_DEST_PATH)
   );
 });
 
@@ -122,7 +123,7 @@ Compress normal bootstrap: ---------------------------------------
 
 gulp.task('bootstrap-stylesheets', async function () {
   await to_css(BOOTSTRAP_SRC_FILES, BOOTSTRAP_MIN_DEST_PATH).then(() =>
-    uglify(BOOTSTRAP_MIN_DEST_PATH)
+    uglify(BOOTSTRAP_MIN_DEST_PATH + '**/!(*.min).css', BOOTSTRAP_MIN_DEST_PATH)
   );
 });
 

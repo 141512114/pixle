@@ -60,6 +60,41 @@
   @include highlight_btn_mixin;
 }
 
+.description a {
+  padding: 2px 3px;
+  color: var(--default-theme-four, map.get($default-color-palette, 4));
+  background-color: transparent;
+}
+
+.link-is-button {
+  display: inline-block;
+  padding: 6px 14px;
+  font-size: 18px;
+  user-select: none;
+
+  &__sm {
+    @extend .link-is-button;
+    padding: 5px 12px;
+    font-size: 16px;
+  }
+
+  @media only screen and (min-width: $breakpoint_sm) {
+    font-size: 21px;
+
+    &__sm {
+      font-size: 18px;
+    }
+  }
+
+  @media only screen and (min-width: $breakpoint_xxxsm) {
+    padding: 7px 21px;
+
+    &__sm {
+      padding: 6px 18px;
+    }
+  }
+}
+
 .pix-col-item {
   display: inline-block;
   max-width: 75px;

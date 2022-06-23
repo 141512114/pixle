@@ -2,10 +2,26 @@
 
 @import '../mixins/bottleneck';
 
+// Default classes
+.company-logo {
+  padding: 10px 0 10px 5px;
+
+  a {
+    background: none;
+
+    &:hover {
+      cursor: pointer;
+      background: none;
+    }
+  }
+}
+
 // Default settings
 * {
   margin: 0;
   padding: 0;
+
+  scrollbar-width: thin !important;
 }
 
 *::selection {
@@ -23,6 +39,7 @@ body {
   max-height: -webkit-fill-available;
   max-height: calc(var(--vh, 1vh) * 100);
   background-color: var(--default-theme-one, map.get($default-color-palette, 1));
+  overflow-y: auto;
 }
 
 body.startTouch {
@@ -34,17 +51,133 @@ header {
   top: 0;
   left: 0;
   right: 0;
+  display: block;
   width: 100%;
   height: auto;
 }
 
-.nani-logo-colors {
-  .nani-stripes {
-    fill: var(--default-theme-six, map.get($default-color-palette, 6));
+header.navbar {
+  padding: 7px 0;
+  user-select: none;
+  background-color: var(--default-theme-three, map.get($default-color-palette, 3));
+  transition: opacity 300ms, visibility 300ms;
+  z-index: 9999;
+
+  &.do-not-show {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
   }
 
-  .nani-snake {
-    fill: var(--default-theme-five, map.get($default-color-palette, 5));
+  .game-title {
+    margin: 0;
+    padding: 4px 0;
+    text-align: center;
+    letter-spacing: 2px;
+    pointer-events: none;
+  }
+
+  div.header-ui-wrapper {
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    @include flexbox(space-between, unset, row);
+    padding: 0 6px;
+
+    div.open-side-menu-wrapper {
+      @include flexbox();
+      padding: 5px;
+
+      button {
+        font-size: 20px;
+        padding: 2px 12px;
+
+        span {
+          display: none;
+          width: 24px;
+          visibility: hidden;
+
+          &.open-icon {
+            display: block;
+            visibility: visible;
+          }
+        }
+
+        &.toggle {
+          span.open-icon {
+            display: none;
+            visibility: hidden;
+          }
+
+          span.close-icon {
+            display: block;
+            visibility: visible;
+          }
+        }
+
+        @media only screen and (min-width: $breakpoint_xxsm) {
+          font-size: 22px;
+          padding: 2px 15px;
+        }
+
+        @media only screen and (min-width: $breakpoint_xmd) {
+          font-size: 24px;
+          padding: 2px 17px;
+        }
+      }
+    }
+
+    @media only screen and (min-width: $breakpoint_md) {
+      padding: 0 10px;
+    }
+
+    @media only screen and (min-width: $breakpoint_xmd) {
+      padding: 0 13px;
+    }
+  }
+}
+
+footer {
+  position: relative;
+  width: 100%;
+  height: auto;
+  margin: 32px 0 0;
+  padding: 45px 0;
+
+  nav {
+    .list-cols ul {
+      display: inline-block;
+      margin-right: 36px;
+      vertical-align: top;
+
+      &:last-child {
+        margin-right: 0;
+      }
+    }
+
+    @media only screen and (min-width: $breakpoint_xxxsm) {
+      @include flexbox(space-between, center, row);
+    }
+  }
+
+  nav ul {
+    margin: 0;
+    padding: 0;
+
+    li {
+      display: block;
+      margin-bottom: 12px;
+
+      &:last-child {
+        margin-bottom: 0;
+      }
+    }
+  }
+
+  .company-logo {
+    height: 100px;
   }
 }
 

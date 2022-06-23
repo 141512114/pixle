@@ -1,0 +1,30 @@
+@use "sass:map";
+
+@import '../../../../../local/stylesheets/mixins/themes';
+@import '../../../../../local/stylesheets/mixins/mixins';
+
+// pix-hero-tile component stylesheet
+.grid-element-inner {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border: 2px solid transparent;
+  background-color: var(--default-theme-four, map.get($default-color-palette, 4));
+  transition: transform 635ms, background-color 300ms;
+
+  div {
+    width: 100%;
+    height: 100%;
+    @include vertical-align(middle);
+  }
+
+  .emoji {
+    display: inline-block;
+    width: 100%;
+    text-align: center;
+    user-select: none;
+    pointer-events: none;
+  }
+}

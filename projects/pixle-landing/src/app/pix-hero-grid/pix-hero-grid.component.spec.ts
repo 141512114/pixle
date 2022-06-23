@@ -1,20 +1,20 @@
 import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import {PixPopupMessageComponent} from './pix-popup-message.component';
+import {PixHeroGridComponent} from './pix-hero-grid.component';
 
-describe('PixPopupMessageComponent', () => {
-  let component: PixPopupMessageComponent;
-  let fixture: ComponentFixture<PixPopupMessageComponent>;
+describe('PixHeroGridComponent', () => {
+  let component: PixHeroGridComponent;
+  let fixture: ComponentFixture<PixHeroGridComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [PixPopupMessageComponent]
+      declarations: [PixHeroGridComponent]
     })
       .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(PixPopupMessageComponent);
+    fixture = TestBed.createComponent(PixHeroGridComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

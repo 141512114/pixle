@@ -1,0 +1,53 @@
+@use "sass:map";
+
+@import '../../../../../local/stylesheets/mixins/themes';
+@import '../../../../../local/stylesheets/mixins/mixins';
+@import '../../../../../local/stylesheets/mixins/responsive';
+
+// app component stylesheet
+html,
+body {
+  height: auto;
+  max-height: unset;
+  overflow: visible;
+}
+
+section {
+  @include flexbox();
+  min-height: 100vh;
+  height: auto;
+  padding: 75px 0;
+}
+
+main .main-background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 100vh;
+  opacity: .175;
+
+  svg {
+    transform-origin: center;
+    transform: rotate(30deg);
+  }
+}
+
+@media only screen and (min-width: $breakpoint_sm) {
+  section {
+    padding: 105px 0;
+  }
+}
+
+@media only screen and (min-width: $breakpoint_xxsm) {
+  section {
+    padding: 125px 0;
+  }
+}
+
+@media only screen and (min-width: $breakpoint_xmd) {
+  section {
+    padding: 185px 0;
+  }
+}

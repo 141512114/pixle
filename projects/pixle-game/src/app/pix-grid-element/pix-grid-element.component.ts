@@ -9,12 +9,12 @@ import {
   Output,
   ViewChild
 } from '@angular/core';
-import {WHITE_QUESTIONMARK} from '../database/emoji.database';
-import {HelperFunctionsService} from '../abstract/services/helper-functions.service';
+import {WHITE_QUESTIONMARK} from '../../../../../local/typescript/emoji.database';
+import {HelperFunctionsService} from '../../../../../local/typescript/abstract/services/helper-functions.service';
 import {STYLESHEETS_PATH} from '../app.component';
-import {WINDOW} from '../window-injection.token';
+import {WINDOW} from '../../../../../local/typescript/window-injection.token';
 import {GameManager} from '../pix-game/game.manager';
-import {AbstractHtmlElement} from '../abstract/abstract.html-element';
+import {AbstractHtmlElement} from '../../../../../local/typescript/abstract/abstract.html-element';
 
 @Component({
   selector: 'app-pix-grid-element',

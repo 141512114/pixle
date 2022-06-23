@@ -8,6 +8,7 @@ Variables: ------------------------------------------------------
 
 import gulp from 'gulp';
 import rename from 'gulp-rename';
+import jsMinify from 'gulp-minify';
 import dartSass from 'sass';
 import gulpSass from 'gulp-sass';
 import cleanCSS from 'gulp-clean-css';
@@ -27,6 +28,17 @@ Paths: ----------------------------------------------------------
 const PIXLE_LANDING_SRC_PATH = './src/';
 const DEV_SRC_PATH = './local/';
 
+// JavaScript paths
+const JAVASCRIPT_SRC_FILES = DEV_SRC_PATH + 'js/**/*';
+const JAVASCRIPT_MIN_DEST_PATH = PIXLE_LANDING_SRC_PATH + 'assets/js/';
+
+// JavaScript deletion pattern
+const JAVASCRIPT_DEL_PATTERN = [
+  JAVASCRIPT_MIN_DEST_PATH + '*/',
+  '!' + JAVASCRIPT_MIN_DEST_PATH + '.gitkeep',
+  '!' + JAVASCRIPT_MIN_DEST_PATH + 'README.md'
+];
+
 // Style paths
 const STYLES_SRC_FILES = DEV_SRC_PATH + 'stylesheets/scss/**/!(_*)*.scss';
 const PIXLE_LANDING_STYLES_MIN_DEST_PATH = PIXLE_LANDING_SRC_PATH + 'stylesheets/css/';
@@ -40,17 +52,38 @@ const STYLES_DEL_PATTERN = [
 
 /*
 
+Compress javascript files: --------------------------------------
+
+*/
+
+gulp.task('default-js', async function () {
+  gulp.src(JAVASCRIPT_SRC_FILES)
+    .pipe(plumber())
+    .pipe(jsMinify([{
+      ext: {
+        src: '.js',
+        min: '.min.js'
+      },
+      noSource: true,
+      ignoreFiles: ['.min.js', '-min.js']
+    }]))
+    .pipe(gulp.dest(JAVASCRIPT_MIN_DEST_PATH));
+});
+
+/*
+
 Clear assets/stylesheets folder: --------------------------------
 
 */
 
-async function clear_styles(pattern) {
+async function clear_files(pattern) {
   const deletedFilePaths = await del(pattern);
   console.log('Deleted files:\n', deletedFilePaths.join('\n'));
   console.log('\n');
 }
 
-gulp.task('clear', () => clear_styles(STYLES_DEL_PATTERN));
+gulp.task('clear-css', () => clear_files(STYLES_DEL_PATTERN));
+gulp.task('clear-js', () => clear_files(JAVASCRIPT_DEL_PATTERN));
 
 /*
 
@@ -115,7 +148,8 @@ Compress Task: ---------------------------------------------------
 
 */
 
-gulp.task('compress', gulp.series('clear', 'default-stylesheets'));
+gulp.task('compress', gulp.series('clear-css', 'default-stylesheets'));
+gulp.task('compress-js', gulp.series('clear-js', 'default-js'));
 
 /*
 

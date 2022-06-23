@@ -12,7 +12,7 @@ import {
 import {PixGridElementComponent} from '../pix-grid-element/pix-grid-element.component';
 import {STYLESHEETS_PATH} from '../app.component';
 import {DOCUMENT} from '@angular/common';
-import {WINDOW} from '../window-injection.token';
+import {WINDOW} from '../../../../../local/typescript/window-injection.token';
 import {GameManager} from '../pix-game/game.manager';
 
 // Timer / Offset
@@ -24,12 +24,12 @@ const ROW_OFFSET: number = 355;
   styleUrls: [STYLESHEETS_PATH + 'pix-grid.component.min.css']
 })
 export class PixGridComponent implements OnInit, AfterViewInit {
-  @ViewChildren(PixGridElementComponent) public pixle_emoji_input!: QueryList<PixGridElementComponent>
+  @ViewChildren(PixGridElementComponent) public pixle_emoji_input!: QueryList<PixGridElementComponent>;
   @Input() grid_image_id: number = -1;
   @Input() grid_image: number[][] = [];
   grid_image_width: number = 0;
   grid_image_height: number = 0;
-  grid_image_row_timer: number[] = [];
+  grid_image_row_timer: any[] = [];
   @ViewChild('grid_wrapper') private grid_wrapper!: ElementRef;
   @ViewChild('grid_inner') private grid_inner!: ElementRef;
   private prev_window_width: number = 0;
