@@ -34,6 +34,18 @@ main .main-background {
   }
 }
 
+.main-cookie-alert {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  @include flexbox();
+  height: 100%;
+  background-color: rgba(black, .45);
+  z-index: 9999;
+}
+
 @media only screen and (min-width: $breakpoint_sm) {
   section {
     padding: 105px 0;
