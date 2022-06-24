@@ -1,11 +1,11 @@
 import {AfterViewInit, Component, Inject, OnInit, ViewChild} from '@angular/core';
 import {DOCUMENT, Location} from '@angular/common';
 import {
-  GREENSQUARE,
-  ORANGESQUARE,
-  PIXLE_ICONS,
-  REDSQUARE,
-  YELLOWSQUARE
+  CODEPOINT_GREENSQUARE,
+  CODEPOINT_ORANGESQUARE,
+  CODEPOINT_REDSQUARE,
+  CODEPOINT_YELLOWSQUARE,
+  PIXLE_ICONS
 } from '../../../../../local/typescript/emoji.database';
 import {IPopUp} from '../../../../../local/typescript/interface/popup-message.interface';
 import {PopupMessageComponent} from '../../../../../local/typescript/popup-message/popup-message.component';
@@ -50,10 +50,10 @@ const UNDO_FLIP_TIME: number = 1575;
 export class PixGameComponent implements OnInit, AfterViewInit {
   pixle_arts: IPixle[] = PixleList; // <-- pulled database
   pixle_id: number = -1;
-  pixle_image: number[][] = [];
+  pixle_image: string[][] = [];
   pixle_image_width: number = 0;
   pixle_image_height: number = 0;
-  pixle_emoji_list: number[] = [];
+  pixle_emoji_list: string[] = [];
   pixle_share_result: string = '';
   validating: boolean = false;
   private current_date: Date = new Date();
@@ -71,10 +71,10 @@ export class PixGameComponent implements OnInit, AfterViewInit {
    * @param emoji_ids
    * @return Emoji codepoints
    */
-  public static getEmojisFromListById(emoji_ids: number[] = []): number[] {
-    let temp_emoji_codepoints: number[] = [];
+  public static getEmojisFromListById(emoji_ids: number[] = []): string[] {
+    let temp_emoji_codepoints: string[] = [];
     for (let i: number = 0; i < emoji_ids.length; i++) {
-      let emoji_codepoint: number = PIXLE_ICONS[emoji_ids[i]];
+      let emoji_codepoint: string = PIXLE_ICONS[emoji_ids[i]];
       temp_emoji_codepoints.push(emoji_codepoint);
     }
     return temp_emoji_codepoints;
@@ -166,9 +166,9 @@ export class PixGameComponent implements OnInit, AfterViewInit {
     if (selected_pixle_art == undefined || null) return false;
     let pixle_art_tiles: number[][] = selected_pixle_art.tiles;
     // Go through the pixle image --> contains only emoji ids --> convert them to codepoints
-    let temp_pixle_image: number[][] = [];
+    let temp_pixle_image: string[][] = [];
     for (let i: number = 0; i < pixle_art_tiles.length; i++) {
-      let emojis_in_tile: number[] = PixGameComponent.getEmojisFromListById(pixle_art_tiles[i]);
+      let emojis_in_tile: string[] = PixGameComponent.getEmojisFromListById(pixle_art_tiles[i]);
       temp_pixle_image.push(emojis_in_tile);
     }
     this.pixle_image = temp_pixle_image;
@@ -189,13 +189,13 @@ export class PixGameComponent implements OnInit, AfterViewInit {
    */
   private getEmojiList(): boolean {
     if (this.pixle_image.length <= 0) return false;
-    let pixle_convert: number[] = HelperFunctionsService.twoDimensionalArrayToOneDimensional(this.pixle_image);
-    let temp_emoji_list: number[] = [];
+    let pixle_convert: string[] = HelperFunctionsService.twoDimensionalArrayToOneDimensional(this.pixle_image);
+    let temp_emoji_list: string[] = [];
     for (let i: number = 0; i < pixle_convert.length; i++) {
       for (let j: number = pixle_convert.length - 1; j > 0; j--) {
         // Make absolutely sure that both picked entries are the exact same (or not)
         if (pixle_convert[j] === pixle_convert[i]) {
-          let emoji_codepoint: number = pixle_convert[i];
+          let emoji_codepoint: string = pixle_convert[i];
           // Check if there already exists this exact emoji code point in the temporary array
           if (temp_emoji_list.includes(emoji_codepoint)) break;
           temp_emoji_list.push(emoji_codepoint);
@@ -225,7 +225,7 @@ export class PixGameComponent implements OnInit, AfterViewInit {
       for (let j: number = 0; j < this.pixle_image_width; j++) {
         let current_column: number = (this.pixle_image_width * i) + j;
         let one_pixle_tile: PixGridElementComponent = temp_pix_grid_comps[current_column];
-        if (one_pixle_tile.pixle_emoji_codepoint !== this.pixle_image[i][j]) {
+        if (one_pixle_tile.twa_emoji_class_front_face !== this.pixle_image[i][j]) {
           one_pixle_tile.updateTileStatus(false);
           if (one_pixle_tile.pixle_tile_lives <= 0) {
             failed_count++;
@@ -297,17 +297,17 @@ export class PixGameComponent implements OnInit, AfterViewInit {
     for (let i: number = 0; i < grid_elements_array.length; i++) {
       switch (grid_elements_array[i].pixle_tile_lives) {
         case 0:
-          pixle_status_map.push(String.fromCodePoint(REDSQUARE));
+          pixle_status_map.push(String.fromCodePoint(CODEPOINT_REDSQUARE));
           break;
         case 1:
-          pixle_status_map.push(String.fromCodePoint(ORANGESQUARE));
+          pixle_status_map.push(String.fromCodePoint(CODEPOINT_ORANGESQUARE));
           break;
         case 2:
-          pixle_status_map.push(String.fromCodePoint(YELLOWSQUARE));
+          pixle_status_map.push(String.fromCodePoint(CODEPOINT_YELLOWSQUARE));
           break;
         case 3:
         default:
-          pixle_status_map.push(String.fromCodePoint(GREENSQUARE));
+          pixle_status_map.push(String.fromCodePoint(CODEPOINT_GREENSQUARE));
           break;
       }
     }

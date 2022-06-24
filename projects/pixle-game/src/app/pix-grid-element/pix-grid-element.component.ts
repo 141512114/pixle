@@ -22,19 +22,19 @@ import {AbstractHtmlElement} from '../../../../../local/typescript/abstract/abst
   styleUrls: [STYLESHEETS_PATH + 'pix-grid-element.component.min.css']
 })
 export class PixGridElementComponent extends AbstractHtmlElement implements OnInit, AfterViewInit {
-  @Input() pixle_emoji: number = -1; // <-- stores the correct answer
+  @Input() pixle_emoji: string = ''; // <-- stores the correct answer
   /**
    * Different grid element types:
    * 0 => Receiver
    * 1 => Emitter
    */
   @Input() grid_element_type: number = 0;
-  @Output() sendIconCodePoint: EventEmitter<number> = new EventEmitter<number>();
-  pixle_emoji_default: number = WHITE_QUESTIONMARK;
+  @Output() sendIconCodePoint: EventEmitter<string> = new EventEmitter<string>();
+  pixle_emoji_default: string = WHITE_QUESTIONMARK;
   pixle_tile_lives: number = 3;
   pixle_tile_solved: boolean = false;
-  pixle_emoji_text: string = '';
-  pixle_emoji_codepoint: number = -1;
+  twa_emoji_class_front_face: string = this.pixle_emoji_default;
+  twa_emoji_class_back_face: string = this.pixle_emoji_default;
   @ViewChild('component_grid_element') private component_grid_element!: ElementRef;
   @ViewChild('user_interactive') private user_interactive!: ElementRef;
   @ViewChild('emoji_input') private emoji_input!: ElementRef;
@@ -60,13 +60,13 @@ export class PixGridElementComponent extends AbstractHtmlElement implements OnIn
   }
 
   ngAfterViewInit(): void {
-    this.updateElementViewIcon();
+    this.setElementIcon();
     // Check which type this grid element has
     switch (this.grid_element_type) {
       case 1:
         // Emit signal to outer component --> send codepoint of emoji
         this.component_grid_element.nativeElement.addEventListener('click', () => {
-          this.sendIconCodePoint.emit(this.pixle_emoji_codepoint);
+          this.sendIconCodePoint.emit(this.twa_emoji_class_front_face);
         }, false);
         break;
       case 0:
@@ -115,9 +115,9 @@ export class PixGridElementComponent extends AbstractHtmlElement implements OnIn
    *
    * @param emoji_codepoint
    */
-  public revealOnClick(emoji_codepoint: number = -1): void {
+  public revealOnClick(emoji_codepoint: string = ''): void {
     if (this.grid_element_type !== 0 || (this.pixle_tile_solved || this.pixle_tile_lives <= 0)) return;
-    this.setElementIcon(emoji_codepoint, true);
+    this.setElementIcon(emoji_codepoint);
   }
 
   /**
@@ -140,7 +140,7 @@ export class PixGridElementComponent extends AbstractHtmlElement implements OnIn
     let element: HTMLElement = this.user_interactive.nativeElement;
     this.addClassToHTMLElement(element, this.do_flip_class);
     if (!this.pixle_tile_solved) {
-      this.setElementIcon(this.pixle_emoji_default, true);
+      this.setElementIcon(this.pixle_emoji_default);
     }
     // Second part is executed in an event listener
     // The listener is set right at the beginning of this components lifespan
@@ -175,26 +175,11 @@ export class PixGridElementComponent extends AbstractHtmlElement implements OnIn
    * Change the grid elements icon
    *
    * @param emoji_codepoint
-   * @param update
    * @private
    */
-  private setElementIcon(emoji_codepoint: number = -1, update: boolean = false): void {
-    if (emoji_codepoint === -1 || (emoji_codepoint !== -1 && this.pixle_emoji_codepoint === emoji_codepoint)) return;
-    this.pixle_emoji_text = String.fromCodePoint(emoji_codepoint);
-    this.pixle_emoji_codepoint = emoji_codepoint;
-    if (!update) return;
-    this.updateElementViewIcon();
-  }
-
-  /**
-   * Update the icon shown to the player
-   *
-   * @private
-   */
-  private updateElementViewIcon(): void {
-    if (this.emoji_input == undefined) return;
-    let icon_element = this.emoji_input.nativeElement.querySelector('.emoji');
-    icon_element.textContent = this.pixle_emoji_text;
+  private setElementIcon(emoji_codepoint: string = ''): void {
+    if (emoji_codepoint === '' || (emoji_codepoint !== '' && this.twa_emoji_class_front_face === emoji_codepoint)) return;
+    this.twa_emoji_class_front_face = emoji_codepoint;
   }
 
   /**
@@ -203,9 +188,8 @@ export class PixGridElementComponent extends AbstractHtmlElement implements OnIn
    * @private
    */
   private showCorrectAnswer(): void {
-    if (this.grid_element_type !== 0 || this.correct_answer == undefined) return;
-    let icon_element = this.correct_answer.nativeElement.querySelector('.emoji');
-    icon_element.textContent = String.fromCodePoint(this.pixle_emoji);
+    if (this.grid_element_type !== 0) return;
+    this.twa_emoji_class_back_face = this.pixle_emoji;
   }
 
   /**
@@ -214,8 +198,7 @@ export class PixGridElementComponent extends AbstractHtmlElement implements OnIn
    * @private
    */
   private hideCorrectAnswer(): void {
-    if (this.grid_element_type !== 0 || this.correct_answer == undefined) return;
-    let icon_element = this.correct_answer.nativeElement.querySelector('.emoji');
-    icon_element.textContent = String.fromCodePoint(this.pixle_emoji_default);
+    if (this.grid_element_type !== 0) return;
+    this.twa_emoji_class_back_face = this.pixle_emoji_default;
   }
 }

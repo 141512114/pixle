@@ -25,7 +25,7 @@ import {AbstractHtmlElement} from '../../../../../local/typescript/abstract/abst
 })
 export class PixGridUiComponent extends AbstractHtmlElement {
   @ViewChildren(PixGridElementComponent) public pixle_emoji_output!: QueryList<PixGridElementComponent>;
-  @Input() emoji_list: number[] = [];
+  @Input() emoji_list: string[] = [];
   @Input() pixle_share_result: string = 'Not quite there yet!';
   @Output() sendValidationRequest: EventEmitter<any> = new EventEmitter<any>();
   @Output() sendReloadRequest: EventEmitter<any> = new EventEmitter<any>();
@@ -110,8 +110,8 @@ export class PixGridUiComponent extends AbstractHtmlElement {
    *
    * @param emoji_codepoint
    */
-  public receiveIconCodePoint(emoji_codepoint: number = -1): void {
-    if (GameManager.pixle_solved || emoji_codepoint === -1) return;
+  public receiveIconCodePoint(emoji_codepoint: string = ''): void {
+    if (GameManager.pixle_solved || emoji_codepoint === '') return;
     GameManager.chosen_emoji = emoji_codepoint;
     this.selectCurrentChosenEmoji();
   }
@@ -139,7 +139,7 @@ export class PixGridUiComponent extends AbstractHtmlElement {
     let emoji_emitter_list: PixGridElementComponent[] = this.pixle_emoji_output.toArray();
     for (let i = 0; i < emoji_emitter_list.length; i++) {
       let current_entry: PixGridElementComponent = emoji_emitter_list[i];
-      if (current_entry.pixle_emoji_codepoint !== GameManager.chosen_emoji) {
+      if (current_entry.twa_emoji_class_front_face !== GameManager.chosen_emoji) {
         current_entry.unselectThisEmoji();
         continue;
       }

@@ -55,7 +55,6 @@
     "got": "^12.1.0",
     "rxjs": "~7.5.0",
     "tslib": "^2.3.0",
-    "twemoji": "^14.0.2",
     "zone.js": "^0.11.6"
   },
   "devDependencies": {

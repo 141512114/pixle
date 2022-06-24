@@ -10,7 +10,7 @@ export class HelperFunctionsService {
    * @param array
    * @return Converted two-dimensional array
    */
-  public static twoDimensionalArrayToOneDimensional(array: number[][]): number[] {
+  public static twoDimensionalArrayToOneDimensional(array: any[][]): any[] {
     // Make sure a pixle tile array was assigned
     if (array.length <= 0) return [];
     let pixle_convert: number[] = [];

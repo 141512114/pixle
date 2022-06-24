@@ -33,6 +33,7 @@
             ],
             "styles": [
               "node_modules/@fortawesome/fontawesome-free/css/solid.min.css",
+              "local/stylesheets/css/twemoji-amazing.min.css",
               "local/stylesheets/css/bootstrap/bootstrap.min.css",
               "local/stylesheets/css/styles.min.css"
             ],
@@ -125,6 +126,7 @@
             ],
             "styles": [
               "node_modules/@fortawesome/fontawesome-free/css/solid.min.css",
+              "local/stylesheets/css/twemoji-amazing.min.css",
               "local/stylesheets/css/bootstrap/bootstrap.min.css",
               "local/stylesheets/css/styles.min.css"
             ],
@@ -162,6 +164,8 @@
               "projects/pixle-landing/src/robots.txt"
             ],
             "styles": [
+              "node_modules/@fortawesome/fontawesome-free/css/solid.min.css",
+              "local/stylesheets/css/twemoji-amazing.min.css",
               "local/stylesheets/css/bootstrap/bootstrap.min.css",
               "local/stylesheets/css/styles.min.css"
             ],
@@ -251,6 +255,8 @@
               "projects/pixle-landing/src/robots.txt"
             ],
             "styles": [
+              "node_modules/@fortawesome/fontawesome-free/css/solid.min.css",
+              "local/stylesheets/css/twemoji-amazing.min.css",
               "local/stylesheets/css/bootstrap/bootstrap.min.css",
               "local/stylesheets/css/styles.min.css"
             ],
