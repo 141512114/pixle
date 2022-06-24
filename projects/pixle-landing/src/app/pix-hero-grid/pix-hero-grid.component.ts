@@ -9,7 +9,7 @@ import {PIXLE_ICONS} from '../../../../../local/typescript/emoji.database';
   styleUrls: [STYLESHEETS_PATH + 'pix-hero-grid.component.min.css']
 })
 export class PixHeroGridComponent implements OnInit {
-  grid_image: number[][] = [];
+  grid_image: string[][] = [];
   grid_image_width: number = 0;
   grid_image_height: number = 0;
 
@@ -27,10 +27,10 @@ export class PixHeroGridComponent implements OnInit {
    * @private
    */
   private searchRandomPixleArt(): void {
-    let temp_pixle_image: number[][] = [];
+    let temp_pixle_image: string[][] = [];
     let row_count: number = 4;
     for (let i: number = 0; i < row_count; i++) {
-      let temp_row_of_image: number[] = [];
+      let temp_row_of_image: string[] = [];
       for (let j: number = 0; j < row_count; j++) {
         let rnd: number = HelperFunctionsService.generateRandomInteger(PIXLE_ICONS.length - 1);
         temp_row_of_image.push(PIXLE_ICONS[rnd]);

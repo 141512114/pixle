@@ -9,11 +9,10 @@ import {AbstractHtmlElement} from '../../../../../local/typescript/abstract/abst
   styleUrls: [STYLESHEETS_PATH + 'pix-hero-tile.component.min.css']
 })
 export class PixHeroTileComponent extends AbstractHtmlElement implements OnInit, AfterViewInit {
-  @Input() pixle_emoji: number = -1;
-  pixle_emoji_text: string = '';
-  pixle_emoji_codepoint: number = -1;
-  pixle_emoji_default: number = WHITE_QUESTIONMARK;
-  pixle_front_face_emoji: string = '';
+  @Input() pixle_emoji: string = '';
+  pixle_twa_emoji_class: string = '';
+  pixle_emoji_default: string = WHITE_QUESTIONMARK;
+  twa_emoji_class_back_face: string = this.pixle_emoji_default;
   pixle_tile_timer: any = -1;
   @ViewChild('tile_content_wrapper') private tile_content_wrapper!: ElementRef;
   @ViewChild('display_emoji') private display_emoji!: ElementRef;
@@ -24,7 +23,6 @@ export class PixHeroTileComponent extends AbstractHtmlElement implements OnInit,
   }
 
   ngOnInit(): void {
-    this.pixle_front_face_emoji = String.fromCodePoint(this.pixle_emoji_default);
   }
 
   ngAfterViewInit(): void {
@@ -63,26 +61,14 @@ export class PixHeroTileComponent extends AbstractHtmlElement implements OnInit,
   /**
    * Change the grid elements icon
    *
-   * @param emoji_codepoint
+   * @param twa_emoji_class
    * @param update
    * @private
    */
-  private setElementIcon(emoji_codepoint: number = -1, update: boolean = false): void {
-    if (emoji_codepoint === -1 || (emoji_codepoint !== -1 && this.pixle_emoji_codepoint === emoji_codepoint)) return;
-    this.pixle_emoji_text = String.fromCodePoint(emoji_codepoint);
-    this.pixle_emoji_codepoint = emoji_codepoint;
+  private setElementIcon(twa_emoji_class: string = '', update: boolean = false): void {
+    if (twa_emoji_class === '' || (twa_emoji_class !== '' && this.pixle_twa_emoji_class === twa_emoji_class)) return;
+    this.pixle_twa_emoji_class = twa_emoji_class;
     if (!update) return;
-    this.updateElementViewIcon();
-  }
-
-  /**
-   * Update the icon shown to the player
-   *
-   * @private
-   */
-  private updateElementViewIcon(): void {
-    if (this.display_emoji == undefined) return;
-    let icon_element = this.display_emoji.nativeElement.querySelector('.emoji');
-    icon_element.textContent = this.pixle_emoji_text;
+    this.twa_emoji_class_back_face = this.pixle_twa_emoji_class;
   }
 }
