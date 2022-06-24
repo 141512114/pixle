@@ -9,28 +9,6 @@ $status-palette: (
   4: #e71d36
 );
 
-.status-colors {
-  &__1 {
-    fill: map.get($status-palette, 1);
-
-    &__dark {
-      fill: #329e7d;
-    }
-  }
-
-  &__2 {
-    fill: map.get($status-palette, 2);
-  }
-
-  &__3 {
-    fill: map.get($status-palette, 3);
-  }
-
-  &__4 {
-    fill: map.get($status-palette, 4);
-  }
-}
-
 // Default colors
 $default-headline-color: white !default;
 $default-text-color: #DEDEDE !default;
