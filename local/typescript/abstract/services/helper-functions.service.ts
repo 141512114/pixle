@@ -124,4 +124,37 @@ export class HelperFunctionsService {
       return false;
     }
   }
+
+  /**
+   * Create a cookie item
+   *
+   * @param item
+   * @param value
+   */
+  public static createCookie(item: string, value: string): void {
+    if (HelperFunctionsService.isLocalStorageAvailable()) {
+      localStorage.setItem(item, value);
+    } else {
+      if (HelperFunctionsService.isSessionStorageAvailable()) {
+        sessionStorage.setItem(item, value);
+      }
+    }
+  }
+
+  /**
+   * Get a cookie item
+   *
+   * @param item
+   */
+  public static getCookie(item: string): string | null {
+    let temp_item_value: string | null = null;
+    if (HelperFunctionsService.isLocalStorageAvailable()) {
+      temp_item_value = localStorage.getItem(item);
+    } else {
+      if (HelperFunctionsService.isSessionStorageAvailable()) {
+        temp_item_value = sessionStorage.getItem(item);
+      }
+    }
+    return temp_item_value;
+  }
 }

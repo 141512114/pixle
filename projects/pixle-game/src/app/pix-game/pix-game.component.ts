@@ -40,6 +40,14 @@ const FAILED_PIXLE_MSG: IPopUp = {
   message_body: 'This is it... . You\'ve lost.</br>But i\'m believing in you, hang in there!'
 };
 
+// Cookie notification
+const COOKIE_NOTIF_MSG: IPopUp = {
+  headline: 'Cookie alert!',
+  subline: '',
+  message_body: 'We are required to inform you about the usage of cookies on our web application. These are required' +
+    ' and used to store information about the current match and applied game settings. Closing this notification means you agree with the usage of cookies.'
+};
+
 // Timer
 const UNDO_FLIP_TIME: number = 1575;
 
@@ -57,8 +65,10 @@ export class PixGameComponent implements OnInit, AfterViewInit {
   pixle_emoji_list: string[] = [];
   pixle_share_result: string = '';
   validating: boolean = false;
+  cookie_consent: boolean = false;
   private current_date: Date = new Date();
   @ViewChild('match_status') private match_status_msg!: PopupMessageComponent;
+  @ViewChild('cookie_alert') private cookie_alert!: PopupMessageComponent;
   @ViewChild(PixGridComponent) private pixGridComponent!: PixGridComponent;
   @ViewChild(PixGridUiComponent) private pixGridUiComponent!: PixGridUiComponent;
 
@@ -82,10 +92,21 @@ export class PixGameComponent implements OnInit, AfterViewInit {
   }
 
   ngOnInit(): void {
+    // Check if a cookie has been created to skip the cookie notification
+    if (HelperFunctionsService.getCookie('cookie_consent') === '1') {
+      this.cookie_consent = true;
+    }
+    // Search for the pixle which is due today
     this.searchRandomPixleArt();
   }
 
   ngAfterViewInit(): void {
+    // If the consent has not been given to the usage of cookies --> show alert
+    if (!this.cookie_consent) {
+      this.sendMatchMessage(COOKIE_NOTIF_MSG, this.cookie_alert);
+      return;
+    }
+    // Otherwise, continue with the actual game
     if (this.pixle_image.length <= 0) {
       this.sendMatchMessage(MISSING_PIXLE_MSG);
       return;
@@ -109,12 +130,31 @@ export class PixGameComponent implements OnInit, AfterViewInit {
   }
 
   /**
+   * Receive the emitted event which tells the game component if a popup has been closed
+   *
+   * @param paket
+   */
+  public receivePopupHasBeenClosed(paket: boolean = false): void {
+    this.cookie_consent = paket;
+    if (this.cookie_consent) {
+      HelperFunctionsService.createCookie('cookie_consent', '1');
+      // Start the game
+      if (this.pixle_image.length <= 0) {
+        this.sendMatchMessage(MISSING_PIXLE_MSG);
+        return;
+      }
+      this.startGame();
+    }
+  }
+
+  /**
    * Receive the current status of the ongoing match and evaluate the status number
    *
    * @param msg_object
+   * @param popup_element
    */
-  public sendMatchMessage(msg_object: IPopUp): void {
-    let popup_msg: PopupMessageComponent = this.match_status_msg;
+  public sendMatchMessage(msg_object: IPopUp, popup_element: PopupMessageComponent = this.match_status_msg): void {
+    let popup_msg: PopupMessageComponent = popup_element;
     popup_msg.writeNewMessage(msg_object);
     popup_msg.addClassToHTMLElement(popup_msg.msg_container.nativeElement);
   }

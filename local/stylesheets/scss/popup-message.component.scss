@@ -26,7 +26,11 @@ div.component-pix-popup-message {
   }
 
   p {
+    max-height: 135px;
+    height: auto;
     font-size: 15px;
+    overflow: auto;
+    overflow-x: hidden;
   }
 
   button {

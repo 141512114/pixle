@@ -37,14 +37,7 @@ export class AppComponent implements OnInit, AfterViewInit {
       }, false);
     });
     // Get the stored theme data, if available, and "restore" the previous settings
-    let previous_theme: string | null = null;
-    if (HelperFunctionsService.isLocalStorageAvailable()) {
-      previous_theme = localStorage.getItem('last_theme');
-    } else {
-      if (HelperFunctionsService.isSessionStorageAvailable()) {
-        previous_theme = sessionStorage.getItem('last_theme');
-      }
-    }
+    let previous_theme: string | null = HelperFunctionsService.getCookie('last_theme');
     if (previous_theme != null) {
       this.document.body.dataset['theme'] = previous_theme;
     }

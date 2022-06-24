@@ -1,4 +1,4 @@
-import {AfterViewInit, Component, ElementRef, ViewChild} from '@angular/core';
+import {AfterViewInit, Component, ElementRef, EventEmitter, Output, ViewChild} from '@angular/core';
 import {IPopUp} from '../interface/popup-message.interface';
 import {AbstractHtmlElement} from '../abstract/abstract.html-element';
 
@@ -17,6 +17,7 @@ export class PopupMessageComponent extends AbstractHtmlElement implements AfterV
   @ViewChild('msg_container') public msg_container!: ElementRef;
   @ViewChild('msg_headline') private msg_headline!: ElementRef;
   @ViewChild('msg_description') private msg_description!: ElementRef;
+  @Output() sendPopupHasBeenClosed: EventEmitter<boolean> = new EventEmitter<boolean>();
 
   ngAfterViewInit(): void {
     // Write default message
@@ -32,5 +33,13 @@ export class PopupMessageComponent extends AbstractHtmlElement implements AfterV
     if (msg_object == null || undefined) return;
     this.msg_headline.nativeElement.innerHTML = msg_object.headline;
     this.msg_description.nativeElement.innerHTML = msg_object.message_body;
+  }
+
+  /**
+   * Close the popup
+   */
+  public closePopup(): void {
+    this.removeClassFromHTMLElement(this.msg_container.nativeElement);
+    this.sendPopupHasBeenClosed.emit(true);
   }
 }
