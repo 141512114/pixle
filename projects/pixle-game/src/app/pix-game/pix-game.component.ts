@@ -26,7 +26,8 @@ export const SUPPORT_EMAIL: string = 'support@nani-games.net';
 const MISSING_PIXLE_MSG: IPopUp = {
   headline: 'Missing pixle data!',
   subline: 'There was a mistake retrieving a pixle from the database.',
-  message_body: 'If this issue occurs more often than it should, report it to the team.</br><a class="share-via-mail" href="mailto:' + SUPPORT_EMAIL + '">' + SUPPORT_EMAIL + '</a>'
+  message_body: 'If this issue occurs more often than it should, report it to the team.</br>' +
+    '<a class="share-via-mail" href="mailto:' + SUPPORT_EMAIL + '">' + SUPPORT_EMAIL + '</a>'
 };
 const SUCCESS_PIXLE_MSG: IPopUp = {
   headline: 'Congratulations!',
@@ -69,15 +70,15 @@ export class PixGameComponent implements OnInit, AfterViewInit {
    * Return an array of codepoints
    *
    * @param emoji_ids
-   * @return Emoji codepoints
+   * @return Array of strings --> twa emoji classes
    */
   public static getEmojisFromListById(emoji_ids: number[] = []): string[] {
-    let temp_emoji_codepoints: string[] = [];
+    let temp_twa_emoji_classes: string[] = [];
     for (let i: number = 0; i < emoji_ids.length; i++) {
-      let emoji_codepoint: string = PIXLE_ICONS[emoji_ids[i]];
-      temp_emoji_codepoints.push(emoji_codepoint);
+      let twa_emoji_class: string = PIXLE_ICONS[emoji_ids[i]];
+      temp_twa_emoji_classes.push(twa_emoji_class);
     }
-    return temp_emoji_codepoints;
+    return temp_twa_emoji_classes;
   }
 
   ngOnInit(): void {
@@ -190,19 +191,19 @@ export class PixGameComponent implements OnInit, AfterViewInit {
   private getEmojiList(): boolean {
     if (this.pixle_image.length <= 0) return false;
     let pixle_convert: string[] = HelperFunctionsService.twoDimensionalArrayToOneDimensional(this.pixle_image);
-    let temp_emoji_list: string[] = [];
+    let temp_twa_emoji_classes: string[] = [];
     for (let i: number = 0; i < pixle_convert.length; i++) {
       for (let j: number = pixle_convert.length - 1; j > 0; j--) {
         // Make absolutely sure that both picked entries are the exact same (or not)
         if (pixle_convert[j] === pixle_convert[i]) {
-          let emoji_codepoint: string = pixle_convert[i];
+          let twa_emoji_class: string = pixle_convert[i];
           // Check if there already exists this exact emoji code point in the temporary array
-          if (temp_emoji_list.includes(emoji_codepoint)) break;
-          temp_emoji_list.push(emoji_codepoint);
+          if (temp_twa_emoji_classes.includes(twa_emoji_class)) break;
+          temp_twa_emoji_classes.push(twa_emoji_class);
         }
       }
     }
-    this.pixle_emoji_list = temp_emoji_list;
+    this.pixle_emoji_list = temp_twa_emoji_classes;
     return true;
   }
 

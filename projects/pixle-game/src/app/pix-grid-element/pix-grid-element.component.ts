@@ -29,7 +29,7 @@ export class PixGridElementComponent extends AbstractHtmlElement implements OnIn
    * 1 => Emitter
    */
   @Input() grid_element_type: number = 0;
-  @Output() sendIconCodePoint: EventEmitter<string> = new EventEmitter<string>();
+  @Output() sendTWAEmojiClass: EventEmitter<string> = new EventEmitter<string>();
   pixle_emoji_default: string = WHITE_QUESTIONMARK;
   pixle_tile_lives: number = 3;
   pixle_tile_solved: boolean = false;
@@ -37,8 +37,6 @@ export class PixGridElementComponent extends AbstractHtmlElement implements OnIn
   twa_emoji_class_back_face: string = this.pixle_emoji_default;
   @ViewChild('component_grid_element') private component_grid_element!: ElementRef;
   @ViewChild('user_interactive') private user_interactive!: ElementRef;
-  @ViewChild('emoji_input') private emoji_input!: ElementRef;
-  @ViewChild('correct_answer') private correct_answer?: ElementRef;
   private do_flip_class: any = 'do-flip';
   private selected_class: any = 'selected';
 
@@ -60,13 +58,12 @@ export class PixGridElementComponent extends AbstractHtmlElement implements OnIn
   }
 
   ngAfterViewInit(): void {
-    this.setElementIcon();
     // Check which type this grid element has
     switch (this.grid_element_type) {
       case 1:
-        // Emit signal to outer component --> send codepoint of emoji
+        // Emit signal to outer component --> send twa class of the emoji
         this.component_grid_element.nativeElement.addEventListener('click', () => {
-          this.sendIconCodePoint.emit(this.twa_emoji_class_front_face);
+          this.sendTWAEmojiClass.emit(this.twa_emoji_class_front_face);
         }, false);
         break;
       case 0:
@@ -82,7 +79,7 @@ export class PixGridElementComponent extends AbstractHtmlElement implements OnIn
           let element: HTMLElement = this.user_interactive.nativeElement;
           if (!element.classList.contains(this.do_flip_class)) {
             // Reset backface of grid element
-            this.hideCorrectAnswer();
+            this.showCorrectAnswer(true);
             if (this.pixle_tile_lives > 0) {
               HelperFunctionsService.unlockElement(element);
             }
@@ -113,11 +110,11 @@ export class PixGridElementComponent extends AbstractHtmlElement implements OnIn
   /**
    * After clicking on this component frontend element: reveal / change the icon currently held by the player
    *
-   * @param emoji_codepoint
+   * @param twa_emoji_class
    */
-  public revealOnClick(emoji_codepoint: string = ''): void {
+  public revealOnClick(twa_emoji_class: string = ''): void {
     if (this.grid_element_type !== 0 || (this.pixle_tile_solved || this.pixle_tile_lives <= 0)) return;
-    this.setElementIcon(emoji_codepoint);
+    this.setElementIcon(twa_emoji_class);
   }
 
   /**
@@ -174,31 +171,22 @@ export class PixGridElementComponent extends AbstractHtmlElement implements OnIn
   /**
    * Change the grid elements icon
    *
-   * @param emoji_codepoint
+   * @param twa_emoji_class
    * @private
    */
-  private setElementIcon(emoji_codepoint: string = ''): void {
-    if (emoji_codepoint === '' || (emoji_codepoint !== '' && this.twa_emoji_class_front_face === emoji_codepoint)) return;
-    this.twa_emoji_class_front_face = emoji_codepoint;
+  private setElementIcon(twa_emoji_class: string = ''): void {
+    if (twa_emoji_class === '' || (twa_emoji_class !== '' && this.twa_emoji_class_front_face === twa_emoji_class)) return;
+    this.twa_emoji_class_front_face = twa_emoji_class;
   }
 
   /**
    * Show the correct answer
    *
+   * @param hide
    * @private
    */
-  private showCorrectAnswer(): void {
+  private showCorrectAnswer(hide: boolean = false): void {
     if (this.grid_element_type !== 0) return;
-    this.twa_emoji_class_back_face = this.pixle_emoji;
-  }
-
-  /**
-   * Hide the correct answer
-   *
-   * @private
-   */
-  private hideCorrectAnswer(): void {
-    if (this.grid_element_type !== 0) return;
-    this.twa_emoji_class_back_face = this.pixle_emoji_default;
+    this.twa_emoji_class_back_face = hide ? this.pixle_emoji_default : this.pixle_emoji;
   }
 }

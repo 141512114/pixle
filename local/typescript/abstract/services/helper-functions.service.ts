@@ -13,7 +13,7 @@ export class HelperFunctionsService {
   public static twoDimensionalArrayToOneDimensional(array: any[][]): any[] {
     // Make sure a pixle tile array was assigned
     if (array.length <= 0) return [];
-    let pixle_convert: number[] = [];
+    let pixle_convert: any[] = [];
     for (let i: number = 0; i < array.length; i++) {
       for (let j: number = 0; j < array[0].length; j++) {
         pixle_convert.push(array[i][j]);
@@ -85,6 +85,17 @@ export class HelperFunctionsService {
   }
 
   /**
+   * Add a zero to any number below 10
+   *
+   * @param num
+   * @return Modified number as a string
+   * @private
+   */
+  private static padTo2Digits(num: number) {
+    return num.toString().padStart(2, '0');
+  }
+
+  /**
    * Check if the local storage of the browser is available
    *
    * @return Availability of the local storage (boolean)
@@ -112,16 +123,5 @@ export class HelperFunctionsService {
     } catch (e) {
       return false;
     }
-  }
-
-  /**
-   * Add a zero to any number below 10
-   *
-   * @param num
-   * @return Modified number as a string
-   * @private
-   */
-  private static padTo2Digits(num: number) {
-    return num.toString().padStart(2, '0');
   }
 }

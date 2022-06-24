@@ -108,11 +108,11 @@ export class PixGridUiComponent extends AbstractHtmlElement {
   /**
    * Receive the icon codepoint from one of the grid elements
    *
-   * @param emoji_codepoint
+   * @param twa_emoji_class
    */
-  public receiveIconCodePoint(emoji_codepoint: string = ''): void {
-    if (GameManager.pixle_solved || emoji_codepoint === '') return;
-    GameManager.chosen_emoji = emoji_codepoint;
+  public receiveIconCodePoint(twa_emoji_class: string = ''): void {
+    if (GameManager.pixle_solved || twa_emoji_class === '') return;
+    GameManager.chosen_emoji = twa_emoji_class;
     this.selectCurrentChosenEmoji();
   }
 
