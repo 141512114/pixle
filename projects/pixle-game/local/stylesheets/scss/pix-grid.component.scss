@@ -23,7 +23,7 @@ div.component-pix-grid {
     margin: 0;
 
     &.gridw-5 {
-      max-width: 52px;
+      max-width: 50px;
       padding: 3px;
       font-size: calc(.75em + 2vmin);
     }
@@ -32,6 +32,12 @@ div.component-pix-grid {
   @media only screen and (max-height: 600px) {
     .pix-col-item.gridh-5:not(.gridw-5) {
       font-size: calc(1em + 2.2vmin);
+    }
+  }
+
+  @media only screen and (min-height: 500px) {
+    .pix-col-item.gridw-5 {
+      max-width: 54px;
     }
   }
 
