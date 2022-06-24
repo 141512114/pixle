@@ -70,7 +70,7 @@ export class PixGameComponent implements OnInit, AfterViewInit {
    * Return an array of codepoints
    *
    * @param emoji_ids
-   * @return Array of strings --> twa emoji classes
+   * @return {string[]} Array of strings --> twa emoji classes
    */
   public static getEmojisFromListById(emoji_ids: number[] = []): string[] {
     let temp_twa_emoji_classes: string[] = [];
@@ -149,7 +149,7 @@ export class PixGameComponent implements OnInit, AfterViewInit {
    * Search for any pixle art from the database (get a random one)
    * Emit an event, which sends the chosen pixle object out to be received by other components
    *
-   * @return Operation successful
+   * @return {boolean} Operation successful
    * @private
    */
   private searchRandomPixleArt(): boolean {
@@ -185,7 +185,7 @@ export class PixGameComponent implements OnInit, AfterViewInit {
   /**
    * Get the list of emojis used in the pixle
    *
-   * @return Operation successful
+   * @return {boolean} Operation successful
    * @private
    */
   private getEmojiList(): boolean {
@@ -289,7 +289,7 @@ export class PixGameComponent implements OnInit, AfterViewInit {
    * Generate a status map after solving a pixle or just finishing a match
    * The status map displays the lives left on each tile of a pixle
    *
-   * @return Generated message
+   * @return {string[]} Generated message
    * @private
    */
   private generatePixleStatusMap(): string[] {

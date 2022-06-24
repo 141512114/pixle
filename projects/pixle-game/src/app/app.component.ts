@@ -28,9 +28,13 @@ export class AppComponent implements OnInit, AfterViewInit {
 
   ngOnInit() {
     // Add several event listeners, which help detect touch input
-    this.window.addEventListener('touchstart', this.addTouchClass, false);
+    this.window.addEventListener('touchstart', () => {
+      this.addTouchClass();
+    }, false);
     ['mouseover', 'touchend', 'touchcancel'].forEach(event => {
-      this.window.addEventListener(event, this.removeTouchClass, false);
+      this.window.addEventListener(event, () => {
+        this.removeTouchClass();
+      }, false);
     });
     // Get the stored theme data, if available, and "restore" the previous settings
     let previous_theme: string | null = null;
@@ -107,9 +111,9 @@ export class AppComponent implements OnInit, AfterViewInit {
    * @private
    */
   private addTouchClass(): void {
-    clearTimeout(this.isTouchTimer);
+    this.window.clearTimeout(this.isTouchTimer);
     let body_element: HTMLElement = this.document.body;
-    if (!this.hasTouch() || body_element.classList.contains('startTouch')) return;
+    if ((this.hasTouch() === false || null) || body_element.classList.contains('startTouch')) return;
     body_element.classList.add('startTouch');
   }
 

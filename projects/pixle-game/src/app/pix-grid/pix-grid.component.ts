@@ -63,10 +63,10 @@ export class PixGridComponent implements OnInit, AfterViewInit {
    * Hide the pixle --> swap emojis on all tiles
    * Flip tiles over
    *
-   * @param delay_on
+   * @param delay_active
    * @param reverse
    */
-  public flipWholePixle(delay_on: boolean = false, reverse: boolean = true): void {
+  public flipWholePixle(delay_active: boolean = false, reverse: boolean = true): void {
     if (GameManager.pixle_solved) return;
     let temp_pix_grid_comps: PixGridElementComponent[] = this.pixle_emoji_input.toArray();
     let current_grid_row: number = 0;
@@ -102,7 +102,7 @@ export class PixGridComponent implements OnInit, AfterViewInit {
         delayFlip(flipWholeRow(current_grid_row));
       }
     }
-    if (delay_on) {
+    if (delay_active) {
       delayFlip(flipWholeRow(current_grid_row));
     } else {
       for (let i = 0; i < this.grid_image_height; i++) {
@@ -169,7 +169,7 @@ export class PixGridComponent implements OnInit, AfterViewInit {
   /**
    * Calculate the grid-buffer width by looking at the window inner width
    *
-   * @return Calculated width of the grid buffer
+   * @return {number} Calculated width of the grid buffer
    * @private
    */
   private calculateWidthOfGridBufferElementViaWindowWidth(): number {
@@ -182,7 +182,7 @@ export class PixGridComponent implements OnInit, AfterViewInit {
   /**
    * Calculate the grid-buffer width by looking at the window inner height
    *
-   * @return Calculated height of the grid buffer
+   * @return {number} Calculated height of the grid buffer
    * @private
    */
   private calculateWidthOfGridBufferElementViaWindowHeight(): number {
