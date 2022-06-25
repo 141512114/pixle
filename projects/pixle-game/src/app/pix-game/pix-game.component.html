@@ -7,11 +7,11 @@
             <div *ngIf="pixle_image.length > 0" class="w-100 h-100 pix-grid-wrapper">
               <app-pix-grid [grid_image]="pixle_image" [grid_image_id]="pixle_id"></app-pix-grid>
             </div>
-            <div class="pix-popup-wrapper">
+            <div class="container-fluid pix-popup-wrapper">
               <app-popup-message #match_status></app-popup-message>
             </div>
           </ng-container>
-          <div class="pix-popup-wrapper" *ngIf="cookie_consent === false">
+          <div class="container-fluid pix-popup-wrapper" *ngIf="cookie_consent === false">
             <app-popup-message (sendPopupHasBeenClosed)="receivePopupHasBeenClosed($event)" #cookie_alert></app-popup-message>
           </div>
         </td>
