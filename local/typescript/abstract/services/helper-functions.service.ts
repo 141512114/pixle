@@ -4,6 +4,8 @@ import {Injectable} from '@angular/core';
   providedIn: 'root'
 })
 export class HelperFunctionsService {
+  public static cookie_consent: boolean = false;
+
   /**
    * Convert any two-dimensional array into a one-dimensional array
    *
@@ -127,12 +129,14 @@ export class HelperFunctionsService {
 
   /**
    * Create a cookie item
+   * Make sure the user has given his consent to the usage of cookies
    *
    * @param item
    * @param value
    */
   public static createCookie(item: string, value: string): void {
-    if (HelperFunctionsService.isLocalStorageAvailable()) {
+    if (item === '' || value === '') return;
+    if (HelperFunctionsService.cookie_consent && HelperFunctionsService.isLocalStorageAvailable()) {
       localStorage.setItem(item, value);
     } else {
       if (HelperFunctionsService.isSessionStorageAvailable()) {
@@ -147,6 +151,7 @@ export class HelperFunctionsService {
    * @param item
    */
   public static getCookie(item: string): string | null {
+    if (item === '') return null;
     let temp_item_value: string | null = null;
     if (HelperFunctionsService.isLocalStorageAvailable()) {
       temp_item_value = localStorage.getItem(item);

@@ -3,7 +3,7 @@
     <table class="table position-relative p-0 w-100 h-100 playground-wrapper">
       <tr align="center" class="position-relative h-100">
         <td class="position-relative h-100 overflow-hidden">
-          <ng-container *ngIf="cookie_consent">
+          <ng-container *ngIf="cookie_popup_is_closed || cookie_consent">
             <div *ngIf="pixle_image.length > 0" class="w-100 h-100 pix-grid-wrapper">
               <app-pix-grid [grid_image]="pixle_image" [grid_image_id]="pixle_id"></app-pix-grid>
             </div>
@@ -11,9 +11,12 @@
               <app-popup-message #match_status></app-popup-message>
             </div>
           </ng-container>
-          <div class="container-fluid pix-popup-wrapper" *ngIf="cookie_consent === false">
-            <app-popup-message (sendPopupHasBeenClosed)="receivePopupHasBeenClosed($event)" #cookie_alert></app-popup-message>
-          </div>
+          <ng-container *ngIf="cookie_popup_is_closed === false">
+            <div class="container-fluid pix-popup-wrapper" *ngIf="cookie_consent === false">
+              <app-popup-message (sendPopupHasBeenClosed)="receivePopupHasBeenClosed($event)" [popup_type]="1"
+                                 #cookie_alert></app-popup-message>
+            </div>
+          </ng-container>
         </td>
       </tr>
       <tr align="center" class="h-auto">

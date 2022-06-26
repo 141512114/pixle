@@ -25,6 +25,7 @@ const COOKIE_NOTIF_MSG: IPopUp = {
 })
 export class AppComponent implements OnInit, AfterViewInit {
   cookie_consent: boolean = false;
+  cookie_popup_is_closed: boolean = false;
   iconOpenSideMenu: IconDefinition = faGear;
   iconCloseSideMenu: IconDefinition = faXmark;
   @ViewChild(SideMenuComponent) private sideMenuComponent!: SideMenuComponent;
@@ -43,6 +44,7 @@ export class AppComponent implements OnInit, AfterViewInit {
     // Check if the consent to the cookie usage has already been given
     if (HelperFunctionsService.getCookie('cookie_consent') === '1') {
       this.cookie_consent = true;
+      HelperFunctionsService.cookie_consent = this.cookie_consent;
     }
   }
 
@@ -59,9 +61,9 @@ export class AppComponent implements OnInit, AfterViewInit {
    */
   public receivePopupHasBeenClosed(paket: boolean = false): void {
     this.cookie_consent = paket;
-    if (this.cookie_consent) {
-      HelperFunctionsService.createCookie('cookie_consent', '1');
-    }
+    HelperFunctionsService.cookie_consent = paket;
+    this.cookie_popup_is_closed = this.cookie_alert.popup_is_closed;
+    HelperFunctionsService.createCookie('cookie_consent', '1');
   }
 
   /**
@@ -72,7 +74,7 @@ export class AppComponent implements OnInit, AfterViewInit {
   public sendMatchMessage(msg_object: IPopUp): void {
     let popup_msg: PopupMessageComponent = this.cookie_alert;
     popup_msg.writeNewMessage(msg_object);
-    popup_msg.addClassToHTMLElement(popup_msg.msg_container.nativeElement);
+    popup_msg.openPopup();
   }
 
   /**

@@ -66,6 +66,7 @@ export class PixGameComponent implements OnInit, AfterViewInit {
   pixle_share_result: string = '';
   validating: boolean = false;
   cookie_consent: boolean = false;
+  cookie_popup_is_closed: boolean = false;
   private current_date: Date = new Date();
   @ViewChild('match_status') private match_status_msg!: PopupMessageComponent;
   @ViewChild('cookie_alert') private cookie_alert!: PopupMessageComponent;
@@ -95,6 +96,7 @@ export class PixGameComponent implements OnInit, AfterViewInit {
     // Check if a cookie has been created to skip the cookie notification
     if (HelperFunctionsService.getCookie('cookie_consent') === '1') {
       this.cookie_consent = true;
+      HelperFunctionsService.cookie_consent = this.cookie_consent;
     }
     // Search for the pixle which is due today
     this.searchRandomPixleArt();
@@ -136,15 +138,15 @@ export class PixGameComponent implements OnInit, AfterViewInit {
    */
   public receivePopupHasBeenClosed(paket: boolean = false): void {
     this.cookie_consent = paket;
-    if (this.cookie_consent) {
-      HelperFunctionsService.createCookie('cookie_consent', '1');
-      // Start the game
-      if (this.pixle_image.length <= 0) {
-        this.sendMatchMessage(MISSING_PIXLE_MSG);
-        return;
-      }
-      this.startGame();
+    HelperFunctionsService.cookie_consent = paket;
+    this.cookie_popup_is_closed = this.cookie_alert.popup_is_closed;
+    HelperFunctionsService.createCookie('cookie_consent', '1');
+    // Start the game
+    if (this.pixle_image.length <= 0) {
+      this.sendMatchMessage(MISSING_PIXLE_MSG);
+      return;
     }
+    this.startGame();
   }
 
   /**
@@ -156,7 +158,7 @@ export class PixGameComponent implements OnInit, AfterViewInit {
   public sendMatchMessage(msg_object: IPopUp, popup_element: PopupMessageComponent = this.match_status_msg): void {
     let popup_msg: PopupMessageComponent = popup_element;
     popup_msg.writeNewMessage(msg_object);
-    popup_msg.addClassToHTMLElement(popup_msg.msg_container.nativeElement);
+    popup_msg.openPopup();
   }
 
   /**

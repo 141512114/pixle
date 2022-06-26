@@ -35,9 +35,12 @@
         <use xlink:href="#nani-logo-duotone-only-strokes"></use>
       </svg>
     </div>
-    <div class="container-fluid w-100 h-100 overflow-hidden main-cookie-alert" *ngIf="cookie_consent === false">
-      <app-popup-message (sendPopupHasBeenClosed)="receivePopupHasBeenClosed($event)" #cookie_alert></app-popup-message>
-    </div>
+    <ng-container *ngIf="cookie_popup_is_closed === false">
+      <div class="container-fluid w-100 h-100 overflow-hidden main-cookie-alert" *ngIf="cookie_consent === false">
+        <app-popup-message (sendPopupHasBeenClosed)="receivePopupHasBeenClosed($event)" [popup_type]="1"
+                           #cookie_alert></app-popup-message>
+      </div>
+    </ng-container>
     <router-outlet></router-outlet>
   </main>
   <!-- Side menu component -->
