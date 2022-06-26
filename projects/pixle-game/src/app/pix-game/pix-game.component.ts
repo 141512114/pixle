@@ -97,8 +97,11 @@ export class PixGameComponent implements OnInit, AfterViewInit {
 
   ngOnInit(): void {
     // Check if a cookie has been created to skip the cookie notification
-    if (HelperFunctionsService.getCookie('cookie_consent') === '1') {
+    if (HelperFunctionsService.getCookie('cookie_consent') === 'true') {
       HelperFunctionsService.cookie_consent.next(true);
+    } else if (HelperFunctionsService.getCookie('cookie_consent') === 'false') {
+      this.cookie_popup_is_closed = true;
+      HelperFunctionsService.cookie_consent.next(false);
     }
     // Search for the pixle which is due today
     this.searchRandomPixleArt();
@@ -106,7 +109,7 @@ export class PixGameComponent implements OnInit, AfterViewInit {
 
   ngAfterViewInit(): void {
     // If the consent has not been given to the usage of cookies --> show alert
-    if (!this.cookie_consent) {
+    if (!this.cookie_consent && !this.cookie_popup_is_closed) {
       this.sendMatchMessage(COOKIE_NOTIF_MSG, this.cookie_alert);
       return;
     }

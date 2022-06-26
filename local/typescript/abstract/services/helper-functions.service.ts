@@ -152,15 +152,12 @@ export class HelperFunctionsService {
    * @param item
    */
   public static getCookie(item: string): string | null {
-    if (item === '') return null;
-    let temp_item_value: string | null = null;
-    if (HelperFunctionsService.cookie_consent && HelperFunctionsService.isLocalStorageAvailable()) {
-      temp_item_value = localStorage.getItem(item);
-    } else {
-      if (HelperFunctionsService.isSessionStorageAvailable()) {
-        temp_item_value = sessionStorage.getItem(item);
-      }
+    if (HelperFunctionsService.isSessionStorageAvailable() && sessionStorage.getItem(item) != null) {
+      return sessionStorage.getItem(item);
     }
-    return temp_item_value;
+    if (HelperFunctionsService.cookie_consent && HelperFunctionsService.isLocalStorageAvailable() && localStorage.getItem(item) != null) {
+      return localStorage.getItem(item);
+    }
+    return null;
   }
 }

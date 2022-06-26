@@ -45,13 +45,16 @@ export class AppComponent implements OnInit, AfterViewInit {
       this.document.body.dataset['theme'] = previous_theme;
     }
     // Check if the consent to the cookie usage has already been given
-    if (HelperFunctionsService.getCookie('cookie_consent') === '1') {
+    if (HelperFunctionsService.getCookie('cookie_consent') === 'true') {
       HelperFunctionsService.cookie_consent.next(true);
+    } else if (HelperFunctionsService.getCookie('cookie_consent') === 'false') {
+      this.cookie_popup_is_closed = true;
+      HelperFunctionsService.cookie_consent.next(false);
     }
   }
 
   ngAfterViewInit() {
-    if (!this.cookie_consent) {
+    if (!this.cookie_consent && !this.cookie_popup_is_closed) {
       this.sendMatchMessage(COOKIE_NOTIF_MSG);
     }
   }
@@ -64,7 +67,7 @@ export class AppComponent implements OnInit, AfterViewInit {
   public receivePopupHasBeenClosed(paket: boolean = false): void {
     HelperFunctionsService.cookie_consent.next(paket);
     this.cookie_popup_is_closed = this.cookie_alert.popup_is_closed;
-    HelperFunctionsService.createCookie('cookie_consent', '1');
+    HelperFunctionsService.createCookie('cookie_consent', String(paket));
   }
 
   /**
