@@ -74,6 +74,9 @@ export class PixGameComponent implements OnInit, AfterViewInit {
   @ViewChild(PixGridUiComponent) private pixGridUiComponent!: PixGridUiComponent;
 
   constructor(private router: Router, private location: Location, @Inject(DOCUMENT) private document: Document, @Inject(WINDOW) private readonly window: Window) {
+    HelperFunctionsService.cookie_consent.subscribe( value => {
+      this.cookie_consent = value;
+    });
   }
 
   /**
@@ -95,8 +98,7 @@ export class PixGameComponent implements OnInit, AfterViewInit {
   ngOnInit(): void {
     // Check if a cookie has been created to skip the cookie notification
     if (HelperFunctionsService.getCookie('cookie_consent') === '1') {
-      this.cookie_consent = true;
-      HelperFunctionsService.cookie_consent = this.cookie_consent;
+      HelperFunctionsService.cookie_consent.next(true);
     }
     // Search for the pixle which is due today
     this.searchRandomPixleArt();
@@ -121,13 +123,14 @@ export class PixGameComponent implements OnInit, AfterViewInit {
    */
   public async receiveReloadRequest(): Promise<void> {
     if (this.validating) return;
-    let absolute_path: string = this.location.path();
+    let absolute_path: string = decodeURI(this.location.path());
     this.router.routeReuseStrategy.shouldReuseRoute = () => false;
     this.router.onSameUrlNavigation = 'reload';
     // Reload component --> redirect to same url but do not reuse old one
-    await this.router.navigateByUrl(absolute_path, {skipLocationChange: true}).then(() => {
+    await this.router.navigateByUrl('/', {skipLocationChange: true}).then(() => {
       this.router.navigate([absolute_path]);
       GameManager.resetGame();
+      HelperFunctionsService.cookie_consent.next(false);
     });
   }
 
@@ -137,8 +140,7 @@ export class PixGameComponent implements OnInit, AfterViewInit {
    * @param paket
    */
   public receivePopupHasBeenClosed(paket: boolean = false): void {
-    this.cookie_consent = paket;
-    HelperFunctionsService.cookie_consent = paket;
+    HelperFunctionsService.cookie_consent.next(paket);
     this.cookie_popup_is_closed = this.cookie_alert.popup_is_closed;
     HelperFunctionsService.createCookie('cookie_consent', '1');
     // Start the game

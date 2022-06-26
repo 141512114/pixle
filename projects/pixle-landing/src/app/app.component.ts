@@ -33,6 +33,9 @@ export class AppComponent implements OnInit, AfterViewInit {
   @ViewChild('toggle_side_menu_btn') private toggle_side_menu_btn!: ElementRef;
 
   constructor(@Inject(DOCUMENT) private document: Document) {
+    HelperFunctionsService.cookie_consent.subscribe( value => {
+      this.cookie_consent = value;
+    });
   }
 
   ngOnInit() {
@@ -43,8 +46,7 @@ export class AppComponent implements OnInit, AfterViewInit {
     }
     // Check if the consent to the cookie usage has already been given
     if (HelperFunctionsService.getCookie('cookie_consent') === '1') {
-      this.cookie_consent = true;
-      HelperFunctionsService.cookie_consent = this.cookie_consent;
+      HelperFunctionsService.cookie_consent.next(true);
     }
   }
 
@@ -60,8 +62,7 @@ export class AppComponent implements OnInit, AfterViewInit {
    * @param paket
    */
   public receivePopupHasBeenClosed(paket: boolean = false): void {
-    this.cookie_consent = paket;
-    HelperFunctionsService.cookie_consent = paket;
+    HelperFunctionsService.cookie_consent.next(paket);
     this.cookie_popup_is_closed = this.cookie_alert.popup_is_closed;
     HelperFunctionsService.createCookie('cookie_consent', '1');
   }

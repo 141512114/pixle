@@ -1,10 +1,11 @@
 import {Injectable} from '@angular/core';
+import {BehaviorSubject} from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class HelperFunctionsService {
-  public static cookie_consent: boolean = false;
+  public static cookie_consent: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
   /**
    * Convert any two-dimensional array into a one-dimensional array
@@ -136,7 +137,7 @@ export class HelperFunctionsService {
    */
   public static createCookie(item: string, value: string): void {
     if (item === '' || value === '') return;
-    if (HelperFunctionsService.cookie_consent && HelperFunctionsService.isLocalStorageAvailable()) {
+    if (HelperFunctionsService.cookie_consent.value && HelperFunctionsService.isLocalStorageAvailable()) {
       localStorage.setItem(item, value);
     } else {
       if (HelperFunctionsService.isSessionStorageAvailable()) {
@@ -153,7 +154,7 @@ export class HelperFunctionsService {
   public static getCookie(item: string): string | null {
     if (item === '') return null;
     let temp_item_value: string | null = null;
-    if (HelperFunctionsService.isLocalStorageAvailable()) {
+    if (HelperFunctionsService.cookie_consent && HelperFunctionsService.isLocalStorageAvailable()) {
       temp_item_value = localStorage.getItem(item);
     } else {
       if (HelperFunctionsService.isSessionStorageAvailable()) {
