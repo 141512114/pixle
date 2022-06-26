@@ -145,7 +145,7 @@ export class PixGameComponent implements OnInit, AfterViewInit {
   public receivePopupHasBeenClosed(paket: boolean = false): void {
     HelperFunctionsService.cookie_consent.next(paket);
     this.cookie_popup_is_closed = this.cookie_alert.popup_is_closed;
-    HelperFunctionsService.createCookie('cookie_consent', '1');
+    HelperFunctionsService.createCookie('cookie_consent', String(paket));
     // Start the game
     if (this.pixle_image.length <= 0) {
       this.sendMatchMessage(MISSING_PIXLE_MSG);
