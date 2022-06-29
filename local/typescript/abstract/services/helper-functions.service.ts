@@ -147,6 +147,18 @@ export class HelperFunctionsService {
   }
 
   /**
+   * Delete a cookie item from the local storage
+   *
+   * @param item
+   */
+  public static deleteCookie(item: string): void {
+    if (item === '') return;
+    if (HelperFunctionsService.isLocalStorageAvailable() && localStorage.getItem(item) != null) {
+      localStorage.removeItem(item);
+    }
+  }
+
+  /**
    * Get a cookie item
    *
    * @param item
