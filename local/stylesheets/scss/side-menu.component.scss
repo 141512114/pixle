@@ -5,13 +5,13 @@
 @import '../mixins/responsive';
 
 // side-menu component stylesheet
-div.component-side-menu {
+.component-side-menu {
   @include flexbox();
   top: 0;
   left: 0;
   right: 0;
   width: 100%;
-  height: 100vh;
+  height: 100%;
   padding: 65px 0;
   background-color: var(--default-theme-two, map.get($default-color-palette, 2));
   transition: top 475ms, opacity 400ms;
@@ -24,8 +24,26 @@ div.component-side-menu {
   }
 }
 
-div.theme-settings,
-div.important-links {
+.settings-wrapper {
+  height: auto;
+  overflow: auto;
+  overflow-x: hidden;
+
+  @media only screen and (max-height: 700px) {
+    max-height: 400px;
+  }
+
+  @media only screen and (max-height: $breakpoint_xsm) {
+    max-height: 300px;
+  }
+
+  @media only screen and (max-height: $breakpoint_sm) {
+    max-height: 200px;
+  }
+}
+
+.theme-settings,
+.important-links {
   padding: 1rem;
   background-size: 100% auto;
   background-repeat: repeat-y;
@@ -75,10 +93,10 @@ div.important-links {
   }
 }
 
-div.theme-settings {
+.theme-settings {
   background-image: url('../../svg/pixle_sidemenu_theme.svg');
 }
 
-div.important-links {
+.important-links {
   background-image: url('../../svg/pixle_sidemenu_other.svg');
 }

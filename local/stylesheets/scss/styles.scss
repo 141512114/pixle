@@ -54,20 +54,14 @@ header {
   display: block;
   width: 100%;
   height: auto;
+  transition: opacity 300ms, visibility 300ms;
 }
 
-header.navbar {
+.navbar {
   padding: 7px 0;
   user-select: none;
   background-color: var(--default-theme-three, map.get($default-color-palette, 3));
-  transition: opacity 300ms, visibility 300ms;
   z-index: 9999;
-
-  &.do-not-show {
-    opacity: 0;
-    visibility: hidden;
-    pointer-events: none;
-  }
 
   .game-title {
     margin: 0;
@@ -77,7 +71,7 @@ header.navbar {
     pointer-events: none;
   }
 
-  div.header-ui-wrapper {
+  .header-ui-wrapper {
     position: absolute;
     top: 0;
     left: 0;
@@ -86,7 +80,7 @@ header.navbar {
     @include flexbox(space-between, unset, row);
     padding: 0 6px;
 
-    div.open-side-menu-wrapper {
+    .open-side-menu-wrapper {
       @include flexbox();
       padding: 5px;
 

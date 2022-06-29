@@ -113,6 +113,12 @@
   }
 }
 
+.do-not-show {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
 .horizontal-scroll-wrapper {
   overflow-x: scroll;
   overflow-y: hidden;

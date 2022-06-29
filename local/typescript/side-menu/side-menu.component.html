@@ -1,10 +1,11 @@
-<div #side_menu class="component-side-menu container-fluid position-fixed close">
+<div #side_menu class="component-side-menu container-fluid position-absolute close">
   <div class="container">
     <div class="row g-0 settings-wrapper">
-      <div class="position-relative col-6 theme-settings">
+      <div class="position-relative col col-sm-6 theme-settings">
         <app-theme-switcher></app-theme-switcher>
       </div>
-      <div class="position-relative col-6 important-links">
+      <div class="w-100 mt-3 mb-3 d-block d-sm-none"></div>
+      <div class="position-relative col col-sm-6 important-links">
         <ul class="m-0 p-0 important-links-list">
           <li class="github">
             <a aria-label="Official GitHub repository link" class="rounded-3 w-auto"
@@ -28,6 +29,11 @@
             <a aria-label="Official Pixle website" class="rounded-3 w-auto"
                href="https://www.pixle.gg/" rel="noopener"
                title="Visit the official website of Pixle">About Pixle
+            </a>
+          </li>
+          <li class="clear-cookie-data">
+            <a aria-label="Clear cookie data" class="rounded-3 w-auto"
+               (click)="clearAllCookies()" title="Click to clear cookie data">Clear cookies
             </a>
           </li>
           <li class="privacy-policy">
