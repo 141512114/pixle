@@ -124,7 +124,7 @@ section#about {
             color: var(--default-theme-two, map.get($default-color-palette, 2));
             user-select: none;
             pointer-events: none;
-            opacity: .5;
+            opacity: .85;
             z-index: 1;
           }
         }
