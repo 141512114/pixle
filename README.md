@@ -7,8 +7,8 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 This is the official repository of the web-based game _Pixle_. The game is developed and published by Nani Games.
 Lead Developer and Designer is Nolan Bjarne Schiemann, Co-Founder of Nani Games.
 
-Wordle, Picross and typical nonograms inspired the creation and development of the web-game Pixle.
-The player solves puzzles on a daily-basis and each day challenges himself to solving a new, randomly generated puzzle. 
+Wordle, Picross and typical nonograms inspired the creation and development of the web-game _Pixle_.
+The player solves puzzles on a daily-basis and each day challenges himself to solve a new and randomly generated puzzle. 
 Their difficulty does vary from day to day, and can be quite nerve-braking at times.
 To solve a puzzle, the player has to place the emojis on their correct tiles or positions, 
 shown to him at the beginning of the game and after each failed try.
@@ -16,7 +16,7 @@ shown to him at the beginning of the game and after each failed try.
 ### Generation of puzzles in _Pixle_
 Puzzles in the game _Pixle_ are generated ahead of time and stored inside a small database or array.
 This array only contains the necessary ids of the used emojis and a date on which the specific
-pixle goes public.\
+puzzle goes public.\
 Puzzles or _pixles_, as we like to call them, aren't fully, randomly generated.
 They always use one of the many, already given patterns.
 This way it is ensured that the player won't feel discouraged or uncomfortable while solving a pixle.
