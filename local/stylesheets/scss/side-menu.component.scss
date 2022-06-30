@@ -15,6 +15,7 @@
   padding: 65px 0;
   background-color: var(--default-theme-two, map.get($default-color-palette, 2));
   transition: top 475ms, opacity 400ms;
+  pointer-events: all;
   z-index: 99;
 
   &.close {
