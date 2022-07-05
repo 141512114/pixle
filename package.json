@@ -31,7 +31,10 @@
   "overrides": {
     "@angular/common": "~14.0.4",
     "@angular/core": "~14.0.4",
-    "@angular/platform-server": "~14.0.4"
+    "@angular/platform-server": "~14.0.4",
+    "gulp": "^4.0.2",
+    "@hint/configuration-web-recommended": "^8.2.12",
+    "hint": "^7.0.1"
   },
   "private": true,
   "dependencies": {
