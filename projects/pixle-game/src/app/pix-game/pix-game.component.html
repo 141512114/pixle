@@ -11,9 +11,9 @@
               <app-popup-message #match_status></app-popup-message>
             </div>
           </ng-container>
-          <div class="container-fluid pix-popup-wrapper" *ngIf="cookie_consent === false">
-            <app-popup-message (sendPopupHasBeenClosed)="receivePopupHasBeenClosed($event)" [popup_type]="1"
-                               #cookie_alert></app-popup-message>
+          <div *ngIf="cookie_consent === false" class="container-fluid pix-popup-wrapper">
+            <app-popup-message #cookie_alert (sendPopupHasBeenClosed)="receivePopupHasBeenClosed($event)"
+                               [popup_type]="1"></app-popup-message>
           </div>
         </td>
       </tr>

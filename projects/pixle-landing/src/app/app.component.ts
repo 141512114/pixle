@@ -33,7 +33,7 @@ export class AppComponent implements OnInit, AfterViewInit {
   @ViewChild('toggle_side_menu_btn') private toggle_side_menu_btn!: ElementRef;
 
   constructor(@Inject(DOCUMENT) private document: Document) {
-    HelperFunctionsService.cookie_consent.subscribe( value => {
+    HelperFunctionsService.cookie_consent.subscribe(value => {
       this.cookie_consent = value;
     });
   }

@@ -42,9 +42,9 @@
       </svg>
     </div>
     <ng-container *ngIf="cookie_popup_is_closed === false">
-      <div class="container-fluid w-100 h-100 overflow-hidden main-cookie-alert" *ngIf="cookie_consent === false">
-        <app-popup-message (sendPopupHasBeenClosed)="receivePopupHasBeenClosed($event)" [popup_type]="1"
-                           #cookie_alert></app-popup-message>
+      <div *ngIf="cookie_consent === false" class="container-fluid w-100 h-100 overflow-hidden main-cookie-alert">
+        <app-popup-message #cookie_alert (sendPopupHasBeenClosed)="receivePopupHasBeenClosed($event)"
+                           [popup_type]="1"></app-popup-message>
       </div>
     </ng-container>
     <router-outlet></router-outlet>
@@ -72,19 +72,19 @@
         </ul>
         <ul class="position-relative">
           <li>
-            <a class="link-is-button__sm" aria-label="Official Nani Games website" title="Visit the Nani Games website"
-               href="https://www.nani-games.net/" rel="noopener" target="_blank">
+            <a aria-label="Official Nani Games website" class="link-is-button__sm" href="https://www.nani-games.net/"
+               rel="noopener" target="_blank" title="Visit the Nani Games website">
               Nani Games
             </a>
           </li>
           <li>
-            <a class="link-is-button__sm" aria-label="Privacy policy" title="Our privacy policy"
-               href="../assets/important/privacy-policy.html">Privacy policy
+            <a aria-label="Privacy policy" class="link-is-button__sm" href="../assets/important/privacy-policy.html"
+               title="Our privacy policy">Privacy policy
             </a>
           </li>
           <li>
-            <a class="link-is-button__sm" aria-label="Imprint" title="Imprint"
-               href="../assets/important/imprint.html">Imprint
+            <a aria-label="Imprint" class="link-is-button__sm" href="../assets/important/imprint.html"
+               title="Imprint">Imprint
             </a>
           </li>
         </ul>

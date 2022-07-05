@@ -74,7 +74,7 @@ export class PixGameComponent implements OnInit, AfterViewInit {
   @ViewChild(PixGridUiComponent) private pixGridUiComponent!: PixGridUiComponent;
 
   constructor(private router: Router, private location: Location, @Inject(DOCUMENT) private document: Document, @Inject(WINDOW) private readonly window: Window) {
-    HelperFunctionsService.cookie_consent.subscribe( value => {
+    HelperFunctionsService.cookie_consent.subscribe(value => {
       this.cookie_consent = value;
     });
   }
