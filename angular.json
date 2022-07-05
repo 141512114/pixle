@@ -326,5 +326,8 @@
       }
     }
   },
-  "defaultProject": "pixle-game"
+  "defaultProject": "pixle-game",
+  "cli": {
+    "analytics": "b7293f7a-73a0-4c89-922b-64a10c2cc3a5"
+  }
 }
