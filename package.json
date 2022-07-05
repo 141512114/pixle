@@ -35,7 +35,8 @@
     "gulp": "^4.0.2",
     "@hint/configuration-web-recommended": "^8.2.12",
     "hint": "^7.0.1",
-    "glob-parent": "6.0.2"
+    "glob-parent": "6.0.2",
+    "got": "^12.1.0"
   },
   "private": true,
   "dependencies": {
