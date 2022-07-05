@@ -20,10 +20,10 @@
     "test": "ng test",
     "preinstall": "npx npm-force-resolutions",
     "pixles": "ts-node local/pixle-generator/pixle-generator.ts",
-    "dev:ssr": "ng run pixle-game:serve-ssr",
+    "dev:ssr": "ng run pixle-landing:serve-ssr",
     "serve:ssr": "node dist/pixle-game/server/main.js",
-    "build:ssr": "ng build && ng run pixle-game:server",
-    "prerender": "ng run pixle-game:prerender"
+    "build:ssr": "ng build && ng run pixle-landing:server",
+    "prerender": "ng run pixle-landing:prerender"
   },
   "resolutions": {
     "glob-parent": "6.0.2"
