@@ -28,14 +28,19 @@ div.component-pix-grid-ui {
     }
   }
 
-  div.pix-grid-ui-wrapper,
-  div.pix-social-share-wrapper {
+  .pix-grid-ui-wrapper,
+  .pix-social-share-wrapper {
     $padding_vertical: 12px;
     padding: $padding_vertical 0 math.div($padding_vertical, 2);
 
-    div.pix-emoji-list,
+    .pix-emoji-list,
     .pix-social-share-list {
-      padding: 0 13px math.div($padding_vertical, 2);
+      padding: 0 0 math.div($padding_vertical, 2);
+    }
+
+    .pix-emoji-list-content-wrapper {
+      padding: 0 13px;
+      white-space: nowrap;
     }
   }
 

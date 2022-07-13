@@ -35,6 +35,12 @@ div.component-pix-grid {
     }
   }
 
+  @media only screen and (min-height: 435px) {
+    .pix-col-item.gridw-5 {
+      max-width: 52px;
+    }
+  }
+
   @media only screen and (min-height: 500px) {
     .pix-col-item.gridw-5 {
       max-width: 54px;

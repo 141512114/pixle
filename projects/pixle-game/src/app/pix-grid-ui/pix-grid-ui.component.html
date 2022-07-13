@@ -4,9 +4,11 @@
   </div>
   <div #ui_wrapper *ngIf="emoji_list.length > 0" class="position-relative overflow-hidden pix-grid-ui-wrapper">
     <div class="position-relative d-flex flex-nowrap pix-emoji-list horizontal-scroll-wrapper">
-      <div *ngFor="let j of counter(emoji_list.length)" class="pix-col-item">
-        <app-pix-grid-element (sendTWAEmojiClass)="receiveIconCodePoint($event)" [grid_element_type]="1"
-                              [pixle_emoji]="emoji_list[j]"></app-pix-grid-element>
+      <div class="w-auto h-auto pix-emoji-list-content-wrapper">
+        <div *ngFor="let j of counter(emoji_list.length)" class="pix-col-item">
+          <app-pix-grid-element (sendTWAEmojiClass)="receiveIconCodePoint($event)" [grid_element_type]="1"
+                                [pixle_emoji]="emoji_list[j]"></app-pix-grid-element>
+        </div>
       </div>
     </div>
     <div class="w-100 h-100 d-flex flex-nowrap overflow-hidden pix-social-share-wrapper">
