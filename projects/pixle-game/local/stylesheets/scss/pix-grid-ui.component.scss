@@ -35,12 +35,7 @@ div.component-pix-grid-ui {
 
     .pix-emoji-list,
     .pix-social-share-list {
-      padding: 0 0 math.div($padding_vertical, 2);
-    }
-
-    .pix-emoji-list-content-wrapper {
-      padding: 0 13px;
-      white-space: nowrap;
+      padding: 0 13px math.div($padding_vertical, 2);
     }
   }
 
