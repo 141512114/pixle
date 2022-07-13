@@ -35,7 +35,12 @@ div.component-pix-grid-ui {
 
     .pix-emoji-list,
     .pix-social-share-list {
-      padding: 0 13px math.div($padding_vertical, 2);
+      padding-bottom: math.div($padding_vertical, 2);
+    }
+
+    .pix-emoji-list-content-wrapper {
+      width: fit-content;
+      padding: 0 13px;
     }
   }
 
