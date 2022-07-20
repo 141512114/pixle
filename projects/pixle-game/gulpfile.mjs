@@ -15,7 +15,7 @@ import sourcemaps from 'gulp-sourcemaps';
 import autoprefixer from 'gulp-autoprefixer';
 import svgmin from 'gulp-svgmin';
 import plumber from 'gulp-plumber';
-import del from 'del';
+import {deleteAsync} from 'del';
 
 const sass = gulpSass(dartSass);
 
@@ -39,7 +39,7 @@ const PIXLE_GAME_STYLES_MIN_DEST_PATH = PIXLE_GAME_SRC_PATH + 'stylesheets/css/'
 
 // Stylesheets deletion pattern
 const STYLES_DEL_PATTERN = [
-  PIXLE_GAME_SRC_PATH + 'stylesheets/*/',
+  PIXLE_GAME_STYLES_MIN_DEST_PATH + '**/*',
   '!' + PIXLE_GAME_SRC_PATH + 'stylesheets/.gitkeep',
   '!' + PIXLE_GAME_SRC_PATH + 'stylesheets/README.md'
 ];
@@ -51,7 +51,7 @@ Clear assets/stylesheets folder: --------------------------------
 */
 
 async function clear_styles(pattern) {
-  const deletedFilePaths = await del(pattern);
+  const deletedFilePaths = await deleteAsync(pattern);
   console.log('Deleted files:\n', deletedFilePaths.join('\n'));
   console.log('\n');
 }

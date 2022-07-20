@@ -14,7 +14,7 @@ import cleanCSS from 'gulp-clean-css';
 import sourcemaps from 'gulp-sourcemaps';
 import autoprefixer from 'gulp-autoprefixer';
 import plumber from 'gulp-plumber';
-import del from 'del';
+import {deleteAsync} from 'del';
 
 const sass = gulpSass(dartSass);
 
@@ -50,7 +50,7 @@ Clear assets/stylesheets folder: --------------------------------
 */
 
 async function clear_styles(pattern) {
-  const deletedFilePaths = await del(pattern);
+  const deletedFilePaths = await deleteAsync(pattern);
   console.log('Deleted files:\n', deletedFilePaths.join('\n'));
   console.log('\n');
 }

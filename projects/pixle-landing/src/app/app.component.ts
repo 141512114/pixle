@@ -1,8 +1,7 @@
 import {AfterViewInit, Component, ElementRef, Inject, OnInit, ViewChild, ViewEncapsulation} from '@angular/core';
 import {HelperFunctionsService} from '../../../../local/typescript/abstract/services/helper-functions.service';
 import {DOCUMENT} from '@angular/common';
-import {IconDefinition} from '@fortawesome/free-brands-svg-icons';
-import {faGear, faXmark} from '@fortawesome/free-solid-svg-icons';
+import {faGear, faXmark, IconDefinition} from '@fortawesome/free-solid-svg-icons';
 import {SideMenuComponent} from '../../../../local/typescript/side-menu/side-menu.component';
 import {IPopUp} from '../../../../local/typescript/interface/popup-message.interface';
 import {PopupMessageComponent} from '../../../../local/typescript/popup-message/popup-message.component';

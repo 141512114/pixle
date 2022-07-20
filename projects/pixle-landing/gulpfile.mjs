@@ -15,7 +15,7 @@ import cleanCSS from 'gulp-clean-css';
 import sourcemaps from 'gulp-sourcemaps';
 import autoprefixer from 'gulp-autoprefixer';
 import plumber from 'gulp-plumber';
-import del from 'del';
+import {deleteAsync} from 'del';
 
 const sass = gulpSass(dartSass);
 
@@ -34,7 +34,7 @@ const JAVASCRIPT_MIN_DEST_PATH = PIXLE_LANDING_SRC_PATH + 'assets/js/';
 
 // JavaScript deletion pattern
 const JAVASCRIPT_DEL_PATTERN = [
-  JAVASCRIPT_MIN_DEST_PATH + '*/',
+  JAVASCRIPT_MIN_DEST_PATH + '**/*',
   '!' + JAVASCRIPT_MIN_DEST_PATH + '.gitkeep',
   '!' + JAVASCRIPT_MIN_DEST_PATH + 'README.md'
 ];
@@ -45,7 +45,7 @@ const PIXLE_LANDING_STYLES_MIN_DEST_PATH = PIXLE_LANDING_SRC_PATH + 'stylesheets
 
 // Stylesheets deletion pattern
 const STYLES_DEL_PATTERN = [
-  PIXLE_LANDING_SRC_PATH + 'stylesheets/*/',
+  PIXLE_LANDING_STYLES_MIN_DEST_PATH + '**/*',
   '!' + PIXLE_LANDING_SRC_PATH + 'stylesheets/.gitkeep',
   '!' + PIXLE_LANDING_SRC_PATH + 'stylesheets/README.md'
 ];
@@ -77,7 +77,7 @@ Clear assets/stylesheets folder: --------------------------------
 */
 
 async function clear_files(pattern) {
-  const deletedFilePaths = await del(pattern);
+  const deletedFilePaths = await deleteAsync(pattern);
   console.log('Deleted files:\n', deletedFilePaths.join('\n'));
   console.log('\n');
 }
