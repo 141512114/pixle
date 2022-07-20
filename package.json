@@ -7,15 +7,11 @@
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
-    "preinstall": "npx npm-force-resolutions",
     "pixles": "ts-node local/pixle-generator/pixle-generator.ts",
     "dev:ssr": "ng run pixle-landing:serve-ssr",
     "serve:ssr": "node dist/pixle-landing/server/main.js",
     "build:ssr": "ng build && ng run pixle-landing:server",
     "prerender": "ng run pixle-landing:prerender"
-  },
-  "resolutions": {
-    "glob-parent": "6.0.2"
   },
   "overrides": {
     "glob-parent": "6.0.2"
@@ -38,11 +34,7 @@
     "@fortawesome/fontawesome-svg-core": "^6.1.1",
     "@fortawesome/free-solid-svg-icons": "^6.1.1",
     "@nguniversal/express-engine": "^14.0.3",
-    "ajv": "^8.11.0",
-    "ajv-errors": "^3.0.0",
     "express": "^4.18.1",
-    "glob-parent": "6.0.2",
-    "got": "^12.1.0",
     "rxjs": "~7.5.0",
     "tslib": "^2.3.0",
     "zone.js": "~0.11.4"
