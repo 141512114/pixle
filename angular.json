@@ -157,7 +157,6 @@
             "assets": [
               "projects/pixle-landing/src/favicon.ico",
               "projects/pixle-landing/src/.htaccess",
-              "projects/pixle-landing/src/analytics",
               "projects/pixle-landing/src/assets",
               "projects/pixle-landing/src/local",
               "projects/pixle-landing/src/sitemap.xml",
@@ -248,7 +247,6 @@
             "assets": [
               "projects/pixle-landing/src/favicon.ico",
               "projects/pixle-landing/src/.htaccess",
-              "projects/pixle-landing/src/analytics",
               "projects/pixle-landing/src/assets",
               "projects/pixle-landing/src/local",
               "projects/pixle-landing/src/sitemap.xml",
