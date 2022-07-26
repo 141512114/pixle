@@ -6,16 +6,16 @@ import {
   CODEPOINT_REDSQUARE,
   CODEPOINT_YELLOWSQUARE,
   PIXLE_ICONS
-} from '../../../../../local/typescript/emoji.database';
-import {IPopUp} from '../../../../../local/typescript/interface/popup-message.interface';
-import {PopupMessageComponent} from '../../../../../local/typescript/popup-message/popup-message.component';
+} from '@typescript/emoji.database';
+import {IPopUp} from '@interface/popup-message.interface';
+import {PopupMessageComponent} from '@typescript/popup-message/popup-message.component';
 import {Router} from '@angular/router';
-import {HelperFunctionsService} from '../../../../../local/typescript/abstract/services/helper-functions.service';
-import {IPixle} from '../../../../../local/typescript/interface/pixle.interface';
+import {HelperFunctionsService} from '@abstract/services/helper-functions.service';
+import {IPixle} from '@interface/pixle.interface';
 import {PixGridComponent} from '../pix-grid/pix-grid.component';
 import {GameManager} from './game.manager';
 import {STYLESHEETS_PATH} from '../app.component';
-import {WINDOW} from '../../../../../local/typescript/window-injection.token';
+import {WINDOW} from '@typescript/window-injection.token';
 import {PixGridElementComponent} from '../pix-grid-element/pix-grid-element.component';
 import {PixGridUiComponent} from '../pix-grid-ui/pix-grid-ui.component';
 import {default as PixleList} from '../database/pixle-arts.database.json';

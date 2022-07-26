@@ -1,7 +1,7 @@
 import {AfterViewInit, Component, ElementRef, Input, OnInit, ViewChild} from '@angular/core';
 import {STYLESHEETS_PATH} from '../app.component';
-import {WHITE_QUESTIONMARK} from '../../../../../local/typescript/emoji.database';
-import {AbstractHtmlElement} from '../../../../../local/typescript/abstract/abstract.html-element';
+import {WHITE_QUESTIONMARK} from '@typescript/emoji.database';
+import {AbstractHtmlElement} from '@abstract/abstract.html-element';
 
 @Component({
   selector: 'app-pix-hero-tile',

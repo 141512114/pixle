@@ -2,7 +2,7 @@ import {ComponentFixture, TestBed} from '@angular/core/testing';
 
 import {PopupMessageComponent} from './popup-message.component';
 
-describe('PixPopupMessageComponent', () => {
+describe('PopupMessageComponent', () => {
   let component: PopupMessageComponent;
   let fixture: ComponentFixture<PopupMessageComponent>;
 

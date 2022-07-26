@@ -11,7 +11,7 @@ import {PixGridUiComponent} from './pix-grid-ui/pix-grid-ui.component';
 import {FontAwesomeModule} from '@fortawesome/angular-fontawesome';
 import {ServiceWorkerModule} from '@angular/service-worker';
 import {environment} from '../environments/environment';
-import {SharedModule} from '../../../../local/typescript/shared.module';
+import {SharedModule} from '@typescript/shared.module';
 
 @NgModule({
   declarations: [

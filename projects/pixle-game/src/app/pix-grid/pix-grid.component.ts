@@ -12,7 +12,7 @@ import {
 import {PixGridElementComponent} from '../pix-grid-element/pix-grid-element.component';
 import {STYLESHEETS_PATH} from '../app.component';
 import {DOCUMENT} from '@angular/common';
-import {WINDOW} from '../../../../../local/typescript/window-injection.token';
+import {WINDOW} from '@typescript/window-injection.token';
 import {GameManager} from '../pix-game/game.manager';
 
 // Timer / Offset

@@ -1,7 +1,7 @@
 import {NgModule} from '@angular/core';
 import {BrowserModule} from '@angular/platform-browser';
 import {CommonModule} from '@angular/common';
-import {SharedModule} from '../../../../local/typescript/shared.module';
+import {SharedModule} from '@typescript/shared.module';
 import {FontAwesomeModule} from '@fortawesome/angular-fontawesome';
 
 import {AppRoutingModule} from './app-routing.module';

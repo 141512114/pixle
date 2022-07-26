@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
-import {HelperFunctionsService} from '../../../../../local/typescript/abstract/services/helper-functions.service';
+import {HelperFunctionsService} from '@abstract/services/helper-functions.service';
 import {STYLESHEETS_PATH} from '../app.component';
-import {PIXLE_ICONS} from '../../../../../local/typescript/emoji.database';
+import {PIXLE_ICONS} from '@typescript/emoji.database';
 
 @Component({
   selector: 'app-pix-hero-grid',

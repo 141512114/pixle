@@ -1,9 +1,9 @@
 import {AfterViewInit, Component, ElementRef, Inject, OnInit, ViewChild} from '@angular/core';
 import {DOCUMENT} from '@angular/common';
-import {WINDOW} from '../../../../local/typescript/window-injection.token';
-import {SideMenuComponent} from '../../../../local/typescript/side-menu/side-menu.component';
+import {WINDOW} from '@typescript/window-injection.token';
+import {SideMenuComponent} from '@typescript/side-menu/side-menu.component';
 import {faGear, faXmark, IconDefinition} from '@fortawesome/free-solid-svg-icons';
-import {HelperFunctionsService} from '../../../../local/typescript/abstract/services/helper-functions.service';
+import {HelperFunctionsService} from '@abstract/services/helper-functions.service';
 
 export const STYLESHEETS_PATH: string = '../../stylesheets/css/';
 
