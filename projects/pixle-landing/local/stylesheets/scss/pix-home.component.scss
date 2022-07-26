@@ -7,7 +7,7 @@
 
 // pix-home component stylesheet
 section#welcome {
-  div.hero-background {
+  .hero-background {
     position: absolute;
     top: 0;
     left: 0;
@@ -22,7 +22,7 @@ section#welcome {
     position: relative;
     z-index: 99;
 
-    h1.title {
+    .title {
       display: block;
       font-family: "Open-Sans-ExtraBold", sans-serif;
       font-size: 76px;
