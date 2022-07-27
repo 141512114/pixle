@@ -3,7 +3,7 @@
  * An easy way to store and use these emojis repeatedly throughout different files etc.
  */
 // Status emoji code points
-export const CODEPOINT_REDSQUARE: number =  0x1f7e5;
+export const CODEPOINT_REDSQUARE: number = 0x1f7e5;
 export const CODEPOINT_ORANGESQUARE: number = 0x1f7e7;
 export const CODEPOINT_YELLOWSQUARE: number = 0x1f7e8;
 export const CODEPOINT_GREENSQUARE: number = 0x1f7e9;

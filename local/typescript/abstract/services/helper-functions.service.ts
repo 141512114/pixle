@@ -88,17 +88,6 @@ export class HelperFunctionsService {
   }
 
   /**
-   * Add a zero to any number below 10
-   *
-   * @param num
-   * @return Modified number as a string
-   * @private
-   */
-  private static padTo2Digits(num: number) {
-    return num.toString().padStart(2, '0');
-  }
-
-  /**
    * Check if the local storage of the browser is available
    *
    * @return Availability of the local storage (boolean)
@@ -171,5 +160,16 @@ export class HelperFunctionsService {
       return localStorage.getItem(item);
     }
     return null;
+  }
+
+  /**
+   * Add a zero to any number below 10
+   *
+   * @param num
+   * @return Modified number as a string
+   * @private
+   */
+  private static padTo2Digits(num: number) {
+    return num.toString().padStart(2, '0');
   }
 }

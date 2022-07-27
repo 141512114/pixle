@@ -16,8 +16,6 @@ const DEFAULT_MSG: IPopUp = {
 export class PopupMessageComponent extends AbstractHtmlElement implements AfterViewInit {
   popup_is_closed: boolean = false;
   @ViewChild('msg_container') public msg_container!: ElementRef;
-  @ViewChild('msg_headline') private msg_headline!: ElementRef;
-  @ViewChild('msg_description') private msg_description!: ElementRef;
   /*
     Popup types:
     0 => normal notification
@@ -25,6 +23,8 @@ export class PopupMessageComponent extends AbstractHtmlElement implements AfterV
    */
   @Input() popup_type: number = 0;
   @Output() sendPopupHasBeenClosed: EventEmitter<boolean> = new EventEmitter<boolean>();
+  @ViewChild('msg_headline') private msg_headline!: ElementRef;
+  @ViewChild('msg_description') private msg_description!: ElementRef;
 
   ngAfterViewInit(): void {
     // Write default message
