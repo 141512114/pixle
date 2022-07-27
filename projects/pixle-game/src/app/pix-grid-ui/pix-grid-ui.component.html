@@ -1,18 +1,20 @@
-<div class="position-relative component-pix-grid-ui playground-ui-wrapper" id="pix-grid-ui">
+<div class="position-relative d-block w-100 component-pix-grid-ui" id="pix-grid-ui">
   <div #copied_badge class="rounded-3 overflow-hidden pix-copied-badge close">
     <span>Copied!</span>
   </div>
   <div #ui_wrapper *ngIf="emoji_list.length > 0" class="position-relative overflow-hidden pix-grid-ui-wrapper">
-    <div class="position-relative pix-emoji-list horizontal-scroll-wrapper">
-      <div class="pix-emoji-list-content-wrapper">
-        <div *ngFor="let j of counter(emoji_list.length)" class="pix-col-item">
-          <app-pix-grid-element (sendTWAEmojiClass)="receiveIconCodePoint($event)" [grid_element_type]="1"
-                                [pixle_emoji]="emoji_list[j]"></app-pix-grid-element>
+    <div class="position-relative d-flex justify-content-center pix-emoji-list">
+      <div class="pix-emoji-list-scroll-wrapper horizontal-scroll-wrapper">
+        <div class="pix-emoji-list-content-wrapper">
+          <div *ngFor="let j of counter(emoji_list.length)" class="pix-col-item">
+            <app-pix-grid-element (sendTWAEmojiClass)="receiveIconCodePoint($event)" [grid_element_type]="1"
+                                  [pixle_emoji]="emoji_list[j]"></app-pix-grid-element>
+          </div>
         </div>
       </div>
     </div>
     <div class="w-100 h-100 d-flex flex-nowrap overflow-hidden pix-social-share-wrapper">
-      <div class="w-100 h-100 m-0 p-0 overflow-hidden pix-social-share-list">
+      <div class="d-flex justify-content-center w-100 h-100 m-0 p-0 overflow-hidden pix-social-share-list">
         <div class="share-item pix-col-item w-auto share-item-wrapper-any">
           <div class="rounded-3 overflow-hidden share-item-wrapper highlight-btn">
             <button (click)="shareOnSocialMedia()" class="share-on-any"

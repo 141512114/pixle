@@ -1,6 +1,27 @@
 @import '../../../../../local/stylesheets/mixins/mixins';
+@import '../../../../../local/stylesheets/mixins/responsive';
 
 // pix-game component stylesheet
+.playground-wrapper {
+  width: 100vw;
+
+  @media only screen and (min-width: $breakpoint_mm) {
+    width: 375px;
+  }
+
+  @media only screen and (min-width: $breakpoint_xxxsm) {
+    width: 450px;
+  }
+
+  @media only screen and (min-width: $breakpoint_xmd) {
+    width: 500px;
+  }
+}
+
+.playground-grid-wrapper {
+  flex: 1 0 0%;
+}
+
 .pix-popup-wrapper {
   @include alignment_old();
   pointer-events: none;

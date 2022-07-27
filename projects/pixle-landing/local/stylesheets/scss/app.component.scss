@@ -30,6 +30,18 @@ section {
   min-height: 100vh;
   height: auto;
   padding: 75px 0;
+
+  @media only screen and (min-width: $breakpoint_sm) {
+    padding: 105px 0;
+  }
+
+  @media only screen and (min-width: $breakpoint_xxsm) {
+    padding: 125px 0;
+  }
+
+  @media only screen and (min-width: $breakpoint_xmd) {
+    padding: 185px 0;
+  }
 }
 
 main .main-background {
@@ -64,23 +76,5 @@ main .main-background {
     opacity: 0;
     display: none !important;
     visibility: hidden;
-  }
-}
-
-@media only screen and (min-width: $breakpoint_sm) {
-  section {
-    padding: 105px 0;
-  }
-}
-
-@media only screen and (min-width: $breakpoint_xxsm) {
-  section {
-    padding: 125px 0;
-  }
-}
-
-@media only screen and (min-width: $breakpoint_xmd) {
-  section {
-    padding: 185px 0;
   }
 }

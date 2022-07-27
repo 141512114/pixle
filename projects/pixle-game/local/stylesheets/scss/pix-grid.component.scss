@@ -3,21 +3,9 @@
 @import '../../../../../local/stylesheets/mixins/responsive';
 
 // pix-grid component stylesheet
-div.component-pix-grid {
-  .pix-grid-wrapper {
-    @include flexbox();
-    max-width: $grid_limit_width;
-    margin: 0 auto;
-  }
-
-  .pix-grid-buffer {
-    @include flexbox();
-    padding: 15px 0;
-
-    .pix-grid-inner {
-      min-width: 135px;
-    }
-  }
+.component-pix-grid {
+  @include flexbox();
+  margin: 0 auto;
 
   .pix-col-item {
     margin: 0;
@@ -82,5 +70,14 @@ div.component-pix-grid {
     .pix-col-item.gridw-5 {
       max-width: 85px;
     }
+  }
+}
+
+.pix-grid-buffer {
+  @include flexbox();
+  padding: 15px 0;
+
+  .pix-grid-inner {
+    min-width: 135px;
   }
 }
