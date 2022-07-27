@@ -66,7 +66,7 @@ export class PixGameComponent implements OnInit, AfterViewInit {
   pixle_share_result: string = '';
   validating: boolean = false;
   cookie_consent: boolean = false;
-  cookie_popup_is_closed: boolean = false;
+  cookie_popup_is_closed: boolean = true;
   private current_date: Date = new Date();
   @ViewChild('match_status') private match_status_msg!: PopupMessageComponent;
   @ViewChild('cookie_alert') private cookie_alert!: PopupMessageComponent;
@@ -97,11 +97,13 @@ export class PixGameComponent implements OnInit, AfterViewInit {
 
   ngOnInit(): void {
     // Check if a cookie has been created to skip the cookie notification
-    if (HelperFunctionsService.getCookie('cookie_consent') === 'true') {
-      HelperFunctionsService.cookie_consent.next(true);
-    } else if (HelperFunctionsService.getCookie('cookie_consent') === 'false') {
-      this.cookie_popup_is_closed = true;
+    let cookie_consent_given: string | null = HelperFunctionsService.getCookie('cookie_consent');
+    if (cookie_consent_given === 'false' || cookie_consent_given == null) {
+      this.cookie_popup_is_closed = false;
       HelperFunctionsService.cookie_consent.next(false);
+    } else if (cookie_consent_given === 'true') {
+      this.cookie_popup_is_closed = true;
+      HelperFunctionsService.cookie_consent.next(true);
     }
     // Search for the pixle which is due today
     this.searchRandomPixleArt();

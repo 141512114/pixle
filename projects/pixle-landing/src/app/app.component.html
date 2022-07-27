@@ -42,7 +42,7 @@
       </svg>
     </div>
     <ng-container *ngIf="cookie_popup_is_closed === false">
-      <div *ngIf="cookie_consent === false" class="container-fluid w-100 h-100 overflow-hidden main-cookie-alert">
+      <div class="container-fluid w-100 h-100 overflow-hidden main-cookie-alert">
         <app-popup-message #cookie_alert (sendPopupHasBeenClosed)="receivePopupHasBeenClosed($event)"
                            [popup_type]="1"></app-popup-message>
       </div>
@@ -68,7 +68,8 @@
           </li>
           <li>
             <a class="link-is-button__sm" href="https://twitter.com/KoolerNolan" rel="noopener" target="_blank"
-               aria-label="Click to visit the official Twitter channel of the creator" title="The official Twitter channel">
+               aria-label="Click to visit the official Twitter channel of the creator"
+               title="The official Twitter channel">
               Twitter
             </a>
           </li>

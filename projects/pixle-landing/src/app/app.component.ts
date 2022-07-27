@@ -24,7 +24,7 @@ const COOKIE_NOTIF_MSG: IPopUp = {
 })
 export class AppComponent implements OnInit, AfterViewInit {
   cookie_consent: boolean = false;
-  cookie_popup_is_closed: boolean = false;
+  cookie_popup_is_closed: boolean = true;
   iconOpenSideMenu: IconDefinition = faGear;
   iconCloseSideMenu: IconDefinition = faXmark;
   @ViewChild(SideMenuComponent) private sideMenuComponent!: SideMenuComponent;
@@ -44,11 +44,13 @@ export class AppComponent implements OnInit, AfterViewInit {
       this.document.body.dataset['theme'] = previous_theme;
     }
     // Check if the consent to the cookie usage has already been given
-    if (HelperFunctionsService.getCookie('cookie_consent') === 'true') {
-      HelperFunctionsService.cookie_consent.next(true);
-    } else if (HelperFunctionsService.getCookie('cookie_consent') === 'false') {
-      this.cookie_popup_is_closed = true;
+    let cookie_consent_given: string | null = HelperFunctionsService.getCookie('cookie_consent');
+    if (cookie_consent_given === 'false' || cookie_consent_given == null) {
+      this.cookie_popup_is_closed = false;
       HelperFunctionsService.cookie_consent.next(false);
+    } else if (cookie_consent_given === 'true') {
+      this.cookie_popup_is_closed = true;
+      HelperFunctionsService.cookie_consent.next(true);
     }
   }
 
