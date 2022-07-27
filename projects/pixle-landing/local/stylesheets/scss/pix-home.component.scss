@@ -41,49 +41,6 @@ section#welcome {
   }
 }
 
-section#statistics {
-  .link-collection a {
-    margin-right: 21px;
-
-    &:last-child {
-      margin-right: 0;
-    }
-  }
-
-  .statistics-counter-container {
-    margin-top: 90px;
-  }
-
-  .statistics-counter-wrapper {
-    @include flexbox(flex-start);
-
-    .statistics-panel {
-      background-color: var(--default-theme-two, map.get($default-color-palette, 2));
-    }
-
-    h1 {
-      font-family: "Open-Sans-ExtraBold", sans-serif;
-      font-size: 42px;
-      text-align: center;
-
-      span.sub {
-        font-family: $main-header;
-        font-size: 16px;
-      }
-
-      span.sub-description {
-        font-family: $main-font;
-        font-size: 13px;
-        color: $default-text-color;
-      }
-    }
-
-    .statistics-counter-icon {
-      max-width: 225px;
-    }
-  }
-}
-
 section#about {
   .row {
     margin-bottom: 5rem;
@@ -91,6 +48,11 @@ section#about {
     &:last-child {
       margin-bottom: 0;
     }
+  }
+
+  .description {
+    hyphens: auto;
+    text-align: justify;
   }
 
   .how-to-steps-wrapper {
@@ -146,49 +108,23 @@ section#about {
 }
 
 @media only screen and (min-width: $breakpoint_sm) {
-  section#welcome .greeting h1.title {
+  section#welcome .greeting .title {
     font-size: 86px;
     letter-spacing: 3px;
     line-height: 96px;
   }
 }
 
-@media only screen and (min-width: $breakpoint_sm) {
-  section#statistics .statistics-counter-wrapper h1 {
-    font-size: 52px;
-
-    span.sub {
-      font-size: 18px;
-    }
-
-    span.sub-description {
-      font-size: 14px;
-    }
-  }
-}
-
 @media only screen and (min-width: $breakpoint_xxxsm) {
-  section#welcome .greeting h1.title {
+  section#welcome .greeting .title {
     font-size: 62px;
     letter-spacing: normal;
     line-height: 66px;
   }
-
-  section#statistics .statistics-counter-wrapper h1 {
-    font-size: 72px;
-
-    span.sub {
-      font-size: 21px;
-    }
-
-    span.sub-description {
-      font-size: 16px;
-    }
-  }
 }
 
 @media screen and (min-width: $breakpoint_lg) {
-  section#welcome .greeting h1.title {
+  section#welcome .greeting .title {
     font-size: 86px;
     letter-spacing: 3px;
     line-height: 96px;
