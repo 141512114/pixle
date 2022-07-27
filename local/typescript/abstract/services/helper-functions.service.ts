@@ -137,7 +137,7 @@ export class HelperFunctionsService {
    */
   public static createCookie(item: string, value: string): void {
     if (item === '' || value === '') return;
-    if (HelperFunctionsService.cookie_consent.value && HelperFunctionsService.isLocalStorageAvailable()) {
+    if (HelperFunctionsService.isLocalStorageAvailable()) {
       localStorage.setItem(item, value);
     } else {
       if (HelperFunctionsService.isSessionStorageAvailable()) {

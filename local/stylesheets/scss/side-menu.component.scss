@@ -20,6 +20,7 @@
 
   &.close {
     top: -80px;
+    user-select: none;
     pointer-events: none;
     opacity: 0;
   }

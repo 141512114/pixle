@@ -24,11 +24,11 @@ const COOKIE_NOTIF_MSG: IPopUp = {
 })
 export class AppComponent implements OnInit, AfterViewInit {
   cookie_consent: boolean = false;
-  cookie_popup_is_closed: boolean = true;
   iconOpenSideMenu: IconDefinition = faGear;
   iconCloseSideMenu: IconDefinition = faXmark;
   @ViewChild(SideMenuComponent) private sideMenuComponent!: SideMenuComponent;
   @ViewChild('cookie_alert') private cookie_alert!: PopupMessageComponent;
+  @ViewChild('cookie_alert_html') private cookie_alert_html!: ElementRef;
   @ViewChild('toggle_side_menu_btn') private toggle_side_menu_btn!: ElementRef;
 
   constructor(@Inject(DOCUMENT) private document: Document) {
@@ -46,18 +46,14 @@ export class AppComponent implements OnInit, AfterViewInit {
     // Check if the consent to the cookie usage has already been given
     let cookie_consent_given: string | null = HelperFunctionsService.getCookie('cookie_consent');
     if (cookie_consent_given === 'false' || cookie_consent_given == null) {
-      this.cookie_popup_is_closed = false;
       HelperFunctionsService.cookie_consent.next(false);
     } else if (cookie_consent_given === 'true') {
-      this.cookie_popup_is_closed = true;
       HelperFunctionsService.cookie_consent.next(true);
     }
   }
 
   ngAfterViewInit() {
-    if (!this.cookie_consent && !this.cookie_popup_is_closed) {
-      this.sendMatchMessage(COOKIE_NOTIF_MSG);
-    }
+    if (!this.cookie_consent) this.sendCookieAlert(COOKIE_NOTIF_MSG);
   }
 
   /**
@@ -66,20 +62,21 @@ export class AppComponent implements OnInit, AfterViewInit {
    * @param paket
    */
   public receivePopupHasBeenClosed(paket: boolean = false): void {
+    this.closeCookieAlert();
     HelperFunctionsService.cookie_consent.next(paket);
-    this.cookie_popup_is_closed = this.cookie_alert.popup_is_closed;
     HelperFunctionsService.createCookie('cookie_consent', String(paket));
   }
 
   /**
-   * Receive the current status of the ongoing match and evaluate the status number
+   * Open and show the user the cookie alert
    *
    * @param msg_object
    */
-  public sendMatchMessage(msg_object: IPopUp): void {
+  public sendCookieAlert(msg_object: IPopUp): void {
     let popup_msg: PopupMessageComponent = this.cookie_alert;
     popup_msg.writeNewMessage(msg_object);
     popup_msg.openPopup();
+    this.openCookieAlert();
   }
 
   /**
@@ -102,5 +99,27 @@ export class AppComponent implements OnInit, AfterViewInit {
       }
     }
     this.sideMenuComponent.active = !this.sideMenuComponent.active;
+  }
+
+  /**
+   * Open the cookie alert on the landing page
+   *
+   * @private
+   */
+  private openCookieAlert(): void {
+    let element: HTMLElement = this.cookie_alert_html.nativeElement;
+    if (!element.classList.contains('close')) return;
+    element.classList.remove('close');
+  }
+
+  /**
+   * Close the cookie alert on the landing page
+   *
+   * @private
+   */
+  private closeCookieAlert(): void {
+    let element: HTMLElement = this.cookie_alert_html.nativeElement;
+    if (element.classList.contains('close')) return;
+    element.classList.add('close');
   }
 }

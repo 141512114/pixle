@@ -57,6 +57,14 @@ main .main-background {
   height: 100%;
   background-color: rgba(black, .45);
   z-index: 9999;
+
+  &.close {
+    user-select: none;
+    pointer-events: none;
+    opacity: 0;
+    display: none !important;
+    visibility: hidden;
+  }
 }
 
 @media only screen and (min-width: $breakpoint_sm) {
