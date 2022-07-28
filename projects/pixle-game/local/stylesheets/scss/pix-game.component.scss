@@ -4,6 +4,7 @@
 // pix-game component stylesheet
 .playground-wrapper {
   width: 100vw;
+  margin: 0 auto;
 
   @media only screen and (min-width: $breakpoint_mm) {
     width: 375px;
@@ -16,10 +17,6 @@
   @media only screen and (min-width: $breakpoint_xmd) {
     width: 500px;
   }
-}
-
-.playground-grid-wrapper {
-  flex: 1 0 0%;
 }
 
 .pix-popup-wrapper {
