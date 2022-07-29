@@ -2,7 +2,7 @@ import {AfterViewInit, Component, ElementRef, Inject, OnInit, ViewChild} from '@
 import {DOCUMENT} from '@angular/common';
 import {WINDOW} from '@typescript/window-injection.token';
 import {SideMenuComponent} from '@typescript/side-menu/side-menu.component';
-import {faGear, faXmark, faQuestionCircle, IconDefinition} from '@fortawesome/free-solid-svg-icons';
+import {faGear, faQuestionCircle, faXmark, IconDefinition} from '@fortawesome/free-solid-svg-icons';
 import {HelperFunctionsService} from '@abstract/services/helper-functions.service';
 
 export const STYLESHEETS_PATH: string = '../../stylesheets/css/';

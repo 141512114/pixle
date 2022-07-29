@@ -19,6 +19,6 @@ document.onreadystatechange = () => {
 }
 
 function scrollToHowToGuide() {
-  let scrollDiv = document.getElementById("how-to-play").offsetTop;
-  window.scrollTo({ top: scrollDiv-70, behavior: 'smooth'});
+  let scrollDiv = document.getElementById('how-to-play').offsetTop;
+  window.scrollTo({top: scrollDiv - 70, behavior: 'smooth'});
 }
