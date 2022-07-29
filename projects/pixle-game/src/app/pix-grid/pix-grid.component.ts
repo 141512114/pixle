@@ -31,6 +31,7 @@ export class PixGridComponent implements OnInit, AfterViewInit {
   grid_image_height: number = 0;
   grid_image_row_timer: any[] = [];
   @ViewChild('grid_wrapper') private grid_wrapper!: ElementRef;
+  @ViewChild('grid_buffer') private grid_buffer!: ElementRef;
   @ViewChild('grid_inner') private grid_inner!: ElementRef;
   private prev_window_width: number = 0;
   private prev_window_height: number = 0;
@@ -133,7 +134,7 @@ export class PixGridComponent implements OnInit, AfterViewInit {
    */
   private setInitialSizes(): void {
     let grid_wrapper_element: HTMLElement = this.grid_wrapper.nativeElement;
-    let grid_buffer_element: HTMLElement = this.grid_wrapper.nativeElement.querySelector('div.pix-grid-buffer');
+    let grid_buffer_element: HTMLElement = this.grid_buffer.nativeElement;
     let grid_inner_element: HTMLElement = this.grid_inner.nativeElement;
 
     let padding_top: number = parseInt(this.window.getComputedStyle(grid_buffer_element, null).paddingTop);
@@ -146,6 +147,7 @@ export class PixGridComponent implements OnInit, AfterViewInit {
       // If window is getting resized on y-axis
       if (grid_buffer_element.offsetWidth < grid_wrapper_element.offsetWidth || real_height_of_buffer <= grid_inner_element.offsetHeight) {
         grid_inner_new_width = this.calculateWidthOfGridBufferElementViaWindowHeight();
+        console.log(grid_inner_new_width);
       }
       this.prev_window_height = this.window.innerHeight;
     } else if (this.prev_window_width === 0 || this.prev_window_width != this.window.innerWidth) {
@@ -186,9 +188,9 @@ export class PixGridComponent implements OnInit, AfterViewInit {
    * @private
    */
   private calculateWidthOfGridBufferElementViaWindowHeight(): number {
-    let grid_buffer_element: HTMLElement = this.grid_wrapper.nativeElement.querySelector('div.pix-grid-buffer');
+    let grid_buffer_element: HTMLElement = this.grid_buffer.nativeElement;
     let ui_wrapper_element: HTMLElement | null = this.document.getElementById('pix-grid-ui');
-    let header_element: HTMLElement | null = this.document.body.querySelector('header.navbar');
+    let header_element: HTMLElement | null = this.document.getElementById('main-navbar');
 
     if ((header_element == null || undefined) || (ui_wrapper_element == null || undefined)) return grid_buffer_element.offsetWidth;
 
