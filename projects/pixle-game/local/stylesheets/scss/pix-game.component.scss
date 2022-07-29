@@ -20,6 +20,9 @@
 }
 
 .pix-popup-wrapper {
-  @include alignment_old();
   pointer-events: none;
+}
+
+.match-status-popup {
+  @include alignment_old();
 }
