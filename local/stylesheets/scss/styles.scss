@@ -80,10 +80,11 @@ header {
     @include flexbox(space-between, unset, row);
     padding: 0 6px;
 
-    .open-side-menu-wrapper {
+    .navbar-link-wrapper {
       @include flexbox();
       padding: 5px;
 
+      a,
       button {
         font-size: 20px;
         padding: 2px 12px;

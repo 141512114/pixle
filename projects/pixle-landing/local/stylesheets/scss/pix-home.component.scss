@@ -33,6 +33,7 @@ section#welcome {
 
     span {
       display: block;
+      color: white;
 
       &.add {
         color: rgba($default-headline-color, .65);
@@ -73,30 +74,28 @@ section#about {
     text-align: justify;
   }
 
-  .how-to-steps-wrapper {
-    .numbered-steps {
-      padding: 0 23px;
+  .how-to-steps-wrapper .numbered-steps {
+    padding: 0 23px;
 
-      $max: 4;
-      @for $i from 1 through $max {
-        &__#{$i} {
-          @extend .numbered-steps;
-          z-index: ($max - $i) * 10;
+    $max: 4;
+    @for $i from 1 through $max {
+      &__#{$i} {
+        @extend .numbered-steps;
+        z-index: ($max - $i) * 10;
 
-          .how-to-description::before {
-            content: '#{$i}';
-            position: absolute;
-            top: -68px;
-            left: -43px;
-            width: auto;
-            font-family: $main-ui;
-            font-size: 148px;
-            color: var(--default-theme-two, map.get($default-color-palette, 2));
-            user-select: none;
-            pointer-events: none;
-            opacity: .85;
-            z-index: 1;
-          }
+        .how-to-description::before {
+          content: '#{$i}';
+          position: absolute;
+          top: -68px;
+          left: -43px;
+          width: auto;
+          font-family: $main-ui;
+          font-size: 148px;
+          color: var(--default-theme-two, map.get($default-color-palette, 2));
+          user-select: none;
+          pointer-events: none;
+          opacity: .85;
+          z-index: 1;
         }
       }
     }

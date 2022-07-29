@@ -12,16 +12,23 @@
           </svg>
         </a>
       </div>
-      <div class="open-side-menu-wrapper">
-        <button #toggle_side_menu_btn (click)="toggleSideMenu()" aria-label="Settings menu"
-                class="rounded-3 open-side-menu" title="Open the settings menu" type="button">
+      <div class="d-flex flex-row navbar-link-wrapper">
+        <div class="how-to-guide-wrapper px-1">
+          <a href="https://www.pixle.gg/#how-to-play" class="d-block rounded-3">
+            <fa-icon [icon]="iconHelpGuide"></fa-icon>
+          </a>
+        </div>
+        <div class="open-side-menu-wrapper px-1">
+          <button #toggle_side_menu_btn (click)="toggleSideMenu()" aria-label="Settings menu"
+                  class="rounded-3 open-side-menu" title="Open the settings menu" type="button">
           <span class="open-icon">
             <fa-icon [icon]="iconOpenSideMenu"></fa-icon>
           </span>
-          <span class="close-icon">
+            <span class="close-icon">
             <fa-icon [icon]="iconCloseSideMenu"></fa-icon>
           </span>
-        </button>
+          </button>
+        </div>
       </div>
     </div>
     <h2 class="h2 game-title">Pixle</h2>
