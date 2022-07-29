@@ -2,17 +2,8 @@
 
 // pix-hero-grid component stylesheet
 .pix-grid-wrapper {
-  @include flexbox($valign: flex-end);
   margin: 0 auto;
-}
-
-.pix-grid-buffer {
-  @include flexbox();
-  padding: 15px 0;
-
-  .pix-grid-inner {
-    min-width: 135px;
-  }
+  min-width: 135px;
 }
 
 .pix-col-item {

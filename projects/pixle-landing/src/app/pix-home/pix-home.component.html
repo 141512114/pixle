@@ -1,12 +1,14 @@
 <section class="position-relative m-0 px-2 p-sm-0 overflow-hidden" id="welcome">
   <div class="container greeting">
     <div class="row">
-      <div class="col col-md-6 d-flex justify-content-center flex-column">
-        <p class="h1 mb-4 title">
-          <span class="add">Welcome</span>
-          <span class="add">to</span>
-          <span>Pixle!</span>
-        </p>
+      <div class="col col-md-6 d-inline-block">
+        <div class="d-block hero-text">
+          <p class="h1 mb-4 title">
+            <span class="add">Welcome</span>
+            <span class="add">to</span>
+            <span>Pixle!</span>
+          </p>
+        </div>
         <div class="row g-0 m-0 p-0 link-buffer">
           <div class="col">
             <a aria-label="Click to accept your daily challenge!" class="link-is-button mb-2"
@@ -30,38 +32,36 @@
     </div>
   </div>
 </section>
-<section class="px-2 px-sm-0" id="about">
+<section class="position-relative px-2 px-sm-0" id="about">
   <div class="container">
-    <div class="row greeting-wrapper">
-      <div class="col">
-        <div class="greeting">
-          <h1 class="h1 title">
-            Pixle? What is that?
-          </h1>
-          <p class="description">
-            Pixle is a very short and casual game which challenges its players with different puzzles each day.<br/>
-            Puzzles are created out of a predefined pattern and a handful of randomly chosen emojis.
-            Our puzzle generator mixes things up and spits out interesting and challenging puzzles, which are just
-            seeking to be solved.<br/>
-            Games like <strong>Wordle</strong> and <strong>Picross</strong> inspired the development of Pixle.
-            It combines different aspects of its spiritual predecessors and improves the overall gameplay,
-            effectively making it a compact and exciting mixture.
-            Besides playing on your own, you can challenge your friends and family to these <strong>nerve-braking
-            puzzles!</strong><br/>
-            Pixle is now available on the web and we challenge you to solve the puzzle of today!
-          </p>
-          <a aria-label="Click to play Pixle now!" class="mt-2 link-is-button__sm" href="https://play.pixle.gg/"
-             rel="noopener" title="Click to play Pixle now!">
-            Play Pixle today!
-          </a>
-        </div>
+    <div class="row about-sections">
+      <div class="col position-relative">
+        <h1 class="h1">
+          Pixle? What is that?
+        </h1>
+        <p class="description">
+          Pixle is a very short and casual game which challenges its players with different puzzles each day.<br/>
+          Puzzles are created out of a predefined pattern and a handful of randomly chosen emojis.
+          Our puzzle generator mixes things up and spits out interesting and challenging puzzles, which are just
+          seeking to be solved.<br/>
+          Games like <strong>Wordle</strong> and <strong>Picross</strong> inspired the development of Pixle.
+          It combines different aspects of its spiritual predecessors and improves the overall gameplay,
+          effectively making it a compact and exciting mixture.
+          Besides playing on your own, you can challenge your friends and family to these <strong>nerve-braking
+          puzzles!</strong><br/>
+          Pixle is now available on the web and we challenge you to solve the puzzle of today!
+        </p>
+        <a aria-label="Click to play Pixle now!" class="mt-2 link-is-button__sm" href="https://play.pixle.gg/"
+           rel="noopener" title="Click to play Pixle now!">
+          Play Pixle today!
+        </a>
       </div>
     </div>
-    <div class="row position-relative how-to-steps-wrapper" id="how-to-play">
-      <h2 class="h2 title mb-3 py-3">
+    <div class="row position-relative about-sections" id="how-to-play">
+      <h2 class="h2 mb-3 py-3">
         A short guide on how to play
       </h2>
-      <div class="row g-0 m-0 p-0">
+      <div class="row g-0 m-0 p-0 how-to-steps-wrapper">
         <div class="col col-sm-6 col-xl-3 position-relative d-flex flex-column numbered-steps__1">
           <div class="col how-to-description mb-3">
             <p class="description">
@@ -137,10 +137,10 @@
         </div>
       </div>
     </div>
-    <div class="row">
+    <div class="row about-sections">
       <div class="col">
-        <div class="pixle-puzzle-description">
-          <h2 class="h2 title">
+        <div class="d-block m-0 p-0">
+          <h2 class="h2">
             About the puzzle creation process
           </h2>
           <p class="description">
@@ -161,6 +161,8 @@
             <a href="https://github.com/KoolerNolan/pixle" rel="noopener" target="_blank">GitHub repository</a>
             of Pixle, if you want to dig even deeper.
           </p>
+        </div>
+        <div class="d-block m-0 p-0">
           <a aria-label="Click to visit the official GitHub repository" class="mt-2 link-is-button__sm"
              href="https://github.com/KoolerNolan/pixle"
              rel="noopener" target="_blank"

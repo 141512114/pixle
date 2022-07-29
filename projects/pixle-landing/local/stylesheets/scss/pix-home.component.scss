@@ -19,7 +19,6 @@ section#welcome {
   }
 
   .greeting {
-    position: relative;
     z-index: 99;
   }
 
@@ -61,7 +60,7 @@ section#welcome {
 }
 
 section#about {
-  .row {
+  .about-sections {
     margin-bottom: 5rem;
 
     &:last-child {
