@@ -184,14 +184,16 @@ export class PixGameComponent implements OnInit, AfterViewInit {
    * @private
    */
   private startGame(): void {
-    this.window.setTimeout(() => {
-      GameManager.initGame();
-      if (sessionStorage.getItem('lock_grid') === '1' && sessionStorage.getItem('pixle_id') === this.pixle_id.toString()) return;
-      // Undo flip --> Grid will be flipped over
-      this.pixGridComponent.flipWholePixle(true);
-      sessionStorage.setItem('lock_grid', '1');
-      sessionStorage.setItem('pixle_id', this.pixle_id.toString());
-    }, UNDO_FLIP_TIME);
+    this.window.onload = () => {
+      this.window.setTimeout(() => {
+        GameManager.initGame();
+        if (sessionStorage.getItem('lock_grid') === '1' && sessionStorage.getItem('pixle_id') === this.pixle_id.toString()) return;
+        // Undo flip --> Grid will be flipped over
+        this.pixGridComponent.flipWholePixle(true);
+        sessionStorage.setItem('lock_grid', '1');
+        sessionStorage.setItem('pixle_id', this.pixle_id.toString());
+      }, UNDO_FLIP_TIME);
+    };
   }
 
   /**
