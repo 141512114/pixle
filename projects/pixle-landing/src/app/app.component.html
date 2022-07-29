@@ -13,7 +13,7 @@
             </svg>
           </a>
         </div>
-        <div class="open-side-menu-wrapper navbar-link-wrapper">
+        <div class="d-flex align-items-center p-1 open-side-menu-wrapper navbar-link-wrapper">
           <button #toggle_side_menu_btn (click)="toggleSideMenu()" aria-label="Settings menu"
                   class="rounded-3 open-side-menu" title="Open the settings menu" type="button">
           <span class="open-icon">
@@ -48,7 +48,7 @@
     <router-outlet></router-outlet>
   </main>
   <!-- Footer -->
-  <footer id="main-footer">
+  <footer class="position-relative w-100 h-auto" id="main-footer">
     <nav class="container">
       <div class="position-relative d-inline-block list-cols">
         <ul class="position-relative mb-4 mb-md-0">

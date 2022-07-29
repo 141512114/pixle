@@ -81,9 +81,6 @@ header {
     padding: 0 6px;
 
     .navbar-link-wrapper {
-      @include flexbox();
-      padding: 5px;
-
       a,
       button {
         font-size: 20px;
@@ -135,9 +132,6 @@ header {
 }
 
 footer {
-  position: relative;
-  width: 100%;
-  height: auto;
   margin: 32px 0 0;
   padding: 45px 0;
 

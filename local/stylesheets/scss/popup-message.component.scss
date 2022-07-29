@@ -5,9 +5,7 @@
 
 // popup-message component stylesheet
 .component-popup-message {
-  position: relative;
   top: 0;
-  width: 100%;
   opacity: 1;
   transition: top 750ms, opacity 550ms, visibility 550ms;
   pointer-events: all;
@@ -27,9 +25,7 @@
 
   p {
     max-height: 135px;
-    height: auto;
     font-size: 15px;
-    overflow: auto;
     overflow-x: hidden;
   }
 

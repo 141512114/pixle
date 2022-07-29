@@ -6,12 +6,9 @@
 
 // side-menu component stylesheet
 .component-side-menu {
-  @include flexbox();
   top: 0;
   left: 0;
   right: 0;
-  width: 100%;
-  height: 100%;
   padding: 65px 0;
   background-color: var(--default-theme-two, map.get($default-color-palette, 2));
   transition: top 475ms, opacity 400ms;
@@ -27,8 +24,6 @@
 }
 
 .settings-wrapper {
-  height: auto;
-  overflow: auto;
   overflow-x: hidden;
 
   @media only screen and (max-height: 800px) {
