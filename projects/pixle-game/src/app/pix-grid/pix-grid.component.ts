@@ -147,7 +147,6 @@ export class PixGridComponent implements OnInit, AfterViewInit {
       // If window is getting resized on y-axis
       if (grid_buffer_element.offsetWidth < grid_wrapper_element.offsetWidth || real_height_of_buffer <= grid_inner_element.offsetHeight) {
         grid_inner_new_width = this.calculateWidthOfGridBufferElementViaWindowHeight();
-        console.log(grid_inner_new_width);
       }
       this.prev_window_height = this.window.innerHeight;
     } else if (this.prev_window_width === 0 || this.prev_window_width != this.window.innerWidth) {
