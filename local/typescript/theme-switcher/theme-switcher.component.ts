@@ -1,6 +1,6 @@
 import {Component, Inject} from '@angular/core';
 import {DOCUMENT} from '@angular/common';
-import {HelperFunctionsService} from '../abstract/services/helper-functions.service';
+import {HelperFunctionsService} from '@abstract/services/helper-functions.service';
 
 @Component({
   selector: 'app-theme-switcher',

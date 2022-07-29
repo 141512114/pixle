@@ -1,6 +1,6 @@
 import {AfterViewInit, Component, ElementRef, EventEmitter, Input, Output, ViewChild} from '@angular/core';
-import {IPopUp} from '../interface/popup-message.interface';
-import {AbstractHtmlElement} from '../abstract/abstract.html-element';
+import {IPopUp} from '@interface/popup-message.interface';
+import {AbstractHtmlElement} from '@abstract/abstract.html-element';
 
 const DEFAULT_MSG: IPopUp = {
   headline: 'Hmm..., this isn\'t supposed to be shown already...',
