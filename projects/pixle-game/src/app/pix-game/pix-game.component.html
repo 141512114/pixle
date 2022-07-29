@@ -3,7 +3,7 @@
     <div class="row align-items-end g-0 h-100 playground-wrapper">
       <div class="col p-0">
         <div class="position-relative p-0 playground-grid-wrapper">
-          <ng-container *ngIf="cookie_consent">
+          <ng-container *ngIf="cookie_consent || cookie_popup_is_closed">
             <div *ngIf="pixle_image.length > 0" class="w-100 h-100 p-0 pix-grid-wrapper">
               <app-pix-grid [grid_image]="pixle_image" [grid_image_id]="pixle_id"></app-pix-grid>
             </div>

@@ -5,6 +5,7 @@
 
 // popup-message component stylesheet
 .component-popup-message {
+  width: 100%;
   top: 0;
   opacity: 1;
   transition: top 750ms, opacity 550ms, visibility 550ms;
