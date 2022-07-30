@@ -1,11 +1,7 @@
-import {BehaviorSubject} from 'rxjs';
-
 /**
  * This class acts as the manager for every pixle-solving game
  */
 export class GameManager {
-  public static cookie_consent: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
-
   public static pixle_solved: boolean = false;
   public static game_started: boolean = false;
 

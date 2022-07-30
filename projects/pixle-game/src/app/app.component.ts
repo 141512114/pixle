@@ -3,7 +3,6 @@ import {DOCUMENT} from '@angular/common';
 import {WINDOW} from '@typescript/window-injection.token';
 import {SideMenuComponent} from '@typescript/side-menu/side-menu.component';
 import {faGear, faQuestionCircle, faXmark, IconDefinition} from '@fortawesome/free-solid-svg-icons';
-import {HelperFunctionsService} from '@abstract/services/helper-functions.service';
 
 export const STYLESHEETS_PATH: string = '../../stylesheets/css/';
 
@@ -36,11 +35,6 @@ export class AppComponent implements OnInit, AfterViewInit {
         this.removeTouchClass();
       }, false);
     });
-    // Get the stored theme data, if available, and "restore" the previous settings
-    let previous_theme: string | null = HelperFunctionsService.getCookie('last_theme');
-    if (previous_theme != null) {
-      this.document.body.dataset['theme'] = previous_theme;
-    }
   }
 
   ngAfterViewInit() {

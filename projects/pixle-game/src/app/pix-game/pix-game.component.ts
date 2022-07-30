@@ -75,7 +75,7 @@ export class PixGameComponent implements OnInit, AfterViewChecked {
   @ViewChild(PixGridUiComponent) private pixGridUiComponent!: PixGridUiComponent;
 
   constructor(private router: Router, private location: Location, @Inject(DOCUMENT) private document: Document, @Inject(WINDOW) private readonly window: Window) {
-    GameManager.cookie_consent.subscribe(value => {
+    HelperFunctionsService.cookie_consent.subscribe(value => {
       this.cookie_consent = value;
     });
   }
@@ -98,13 +98,18 @@ export class PixGameComponent implements OnInit, AfterViewChecked {
 
   ngOnInit(): void {
     // Check if a cookie has been created to skip the cookie notification
-    let cookie_consent_given: string | null = HelperFunctionsService.getCookie('cookie_consent');
+    let cookie_consent_given: string | null = HelperFunctionsService.getRawCookie('cookie_consent');
     if (cookie_consent_given === 'false' || cookie_consent_given == null) {
       this.cookie_popup_is_closed = false;
-      GameManager.cookie_consent.next(false);
+      HelperFunctionsService.cookie_consent.next(false);
     } else if (cookie_consent_given === 'true') {
       this.cookie_popup_is_closed = true;
-      GameManager.cookie_consent.next(true);
+      HelperFunctionsService.cookie_consent.next(true);
+    }
+    // Get the stored theme data, if available, and "restore" the previous settings
+    let previous_theme: string | null = HelperFunctionsService.getCookie('last_theme');
+    if (previous_theme != null) {
+      this.document.body.dataset['theme'] = previous_theme;
     }
     // Search for the pixle which is due today
     this.searchRandomPixleArt();
@@ -150,7 +155,7 @@ export class PixGameComponent implements OnInit, AfterViewChecked {
    * @param paket
    */
   public receivePopupHasBeenClosed(paket: boolean = false): void {
-    GameManager.cookie_consent.next(paket);
+    HelperFunctionsService.cookie_consent.next(paket);
     this.cookie_popup_is_closed = this.cookie_alert.popup_is_closed;
     HelperFunctionsService.createCookie('cookie_consent', String(paket));
     // Start the game

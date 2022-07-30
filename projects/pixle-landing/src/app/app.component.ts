@@ -1,4 +1,12 @@
-import {AfterViewInit, Component, ElementRef, Inject, OnInit, ViewChild, ViewEncapsulation} from '@angular/core';
+import {
+  AfterViewInit,
+  Component,
+  ElementRef,
+  Inject,
+  OnInit,
+  ViewChild,
+  ViewEncapsulation
+} from '@angular/core';
 import {HelperFunctionsService} from '@abstract/services/helper-functions.service';
 import {DOCUMENT} from '@angular/common';
 import {faGear, faXmark, IconDefinition} from '@fortawesome/free-solid-svg-icons';
@@ -38,17 +46,17 @@ export class AppComponent implements OnInit, AfterViewInit {
   }
 
   ngOnInit() {
-    // Get the stored theme data, if available, and "restore" the previous settings
-    let previous_theme: string | null = HelperFunctionsService.getCookie('last_theme');
-    if (previous_theme != null) {
-      this.document.body.dataset['theme'] = previous_theme;
-    }
     // Check if the consent to the cookie usage has already been given
-    let cookie_consent_given: string | null = HelperFunctionsService.getCookie('cookie_consent');
+    let cookie_consent_given: string | null = HelperFunctionsService.getRawCookie('cookie_consent');
     if (cookie_consent_given === 'false' || cookie_consent_given == null) {
       HelperFunctionsService.cookie_consent.next(false);
     } else if (cookie_consent_given === 'true') {
       HelperFunctionsService.cookie_consent.next(true);
+    }
+    // Get the stored theme data, if available, and "restore" the previous settings
+    let previous_theme: string | null = HelperFunctionsService.getCookie('last_theme');
+    if (previous_theme != null) {
+      this.document.body.dataset['theme'] = previous_theme;
     }
   }
 

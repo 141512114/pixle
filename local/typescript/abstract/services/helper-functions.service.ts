@@ -1,10 +1,12 @@
 import {Injectable} from '@angular/core';
-import {GameManager} from '../../../../projects/pixle-game/src/app/pix-game/game.manager';
+import {BehaviorSubject} from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class HelperFunctionsService {
+  public static cookie_consent: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+
   /**
    * Convert any two-dimensional array into a one-dimensional array
    *
@@ -124,7 +126,7 @@ export class HelperFunctionsService {
    */
   public static createCookie(item: string, value: string): void {
     if (item === '' || value === '') return;
-    if (HelperFunctionsService.isLocalStorageAvailable()) {
+    if (HelperFunctionsService.cookie_consent.value && HelperFunctionsService.isLocalStorageAvailable()) {
       localStorage.setItem(item, value);
     } else {
       if (HelperFunctionsService.isSessionStorageAvailable()) {
@@ -151,11 +153,34 @@ export class HelperFunctionsService {
    * @param item
    */
   public static getCookie(item: string): string | null {
+    if (HelperFunctionsService.cookie_consent.value) {
+      return HelperFunctionsService.getRawCookie(item);
+    } else {
+      return HelperFunctionsService.getSessionCookie(item);
+    }
+  }
+
+  /**
+   * Get a cookie item (raw, cookie consent is not required)
+   *
+   * @param item
+   */
+  public static getRawCookie(item: string): string | null {
+    if (HelperFunctionsService.isLocalStorageAvailable() && localStorage.getItem(item) != null) {
+      return localStorage.getItem(item);
+    } else {
+      return HelperFunctionsService.getSessionCookie(item);
+    }
+  }
+
+  /**
+   * Get a session cookie item
+   *
+   * @param item
+   */
+  public static getSessionCookie(item: string): string | null {
     if (HelperFunctionsService.isSessionStorageAvailable() && sessionStorage.getItem(item) != null) {
       return sessionStorage.getItem(item);
-    }
-    if (GameManager.cookie_consent && HelperFunctionsService.isLocalStorageAvailable() && localStorage.getItem(item) != null) {
-      return localStorage.getItem(item);
     }
     return null;
   }

@@ -73,8 +73,8 @@ main .main-background {
   &.close {
     user-select: none;
     pointer-events: none;
-    opacity: 0;
+    opacity: 0 !important;
     display: none !important;
-    visibility: hidden;
+    visibility: hidden !important;
   }
 }
