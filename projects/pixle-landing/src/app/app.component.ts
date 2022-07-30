@@ -1,12 +1,4 @@
-import {
-  AfterViewInit,
-  Component,
-  ElementRef,
-  Inject,
-  OnInit,
-  ViewChild,
-  ViewEncapsulation
-} from '@angular/core';
+import {AfterViewInit, Component, ElementRef, Inject, OnInit, ViewChild, ViewEncapsulation} from '@angular/core';
 import {HelperFunctionsService} from '@abstract/services/helper-functions.service';
 import {DOCUMENT} from '@angular/common';
 import {faGear, faXmark, IconDefinition} from '@fortawesome/free-solid-svg-icons';
