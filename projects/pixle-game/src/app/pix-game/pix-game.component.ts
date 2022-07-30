@@ -1,4 +1,4 @@
-import {AfterViewInit, Component, Inject, OnInit, ViewChild} from '@angular/core';
+import {AfterViewChecked, Component, Inject, OnInit, ViewChild} from '@angular/core';
 import {DOCUMENT, Location} from '@angular/common';
 import {
   CODEPOINT_GREENSQUARE,
@@ -56,7 +56,7 @@ const UNDO_FLIP_TIME: number = 1575;
   templateUrl: './pix-game.component.html',
   styleUrls: [STYLESHEETS_PATH + 'pix-game.component.min.css']
 })
-export class PixGameComponent implements OnInit, AfterViewInit {
+export class PixGameComponent implements OnInit, AfterViewChecked {
   pixle_arts: IPixle[] = PixleList; // <-- pulled database
   pixle_id: number = -1;
   pixle_image: string[][] = [];
@@ -68,13 +68,14 @@ export class PixGameComponent implements OnInit, AfterViewInit {
   cookie_consent: boolean = false;
   cookie_popup_is_closed: boolean = true;
   private current_date: Date = new Date();
+  private countdown_start: any;
   @ViewChild('match_status') private match_status_msg!: PopupMessageComponent;
   @ViewChild('cookie_alert') private cookie_alert!: PopupMessageComponent;
   @ViewChild(PixGridComponent) private pixGridComponent!: PixGridComponent;
   @ViewChild(PixGridUiComponent) private pixGridUiComponent!: PixGridUiComponent;
 
   constructor(private router: Router, private location: Location, @Inject(DOCUMENT) private document: Document, @Inject(WINDOW) private readonly window: Window) {
-    HelperFunctionsService.cookie_consent.subscribe(value => {
+    GameManager.cookie_consent.subscribe(value => {
       this.cookie_consent = value;
     });
   }
@@ -100,27 +101,25 @@ export class PixGameComponent implements OnInit, AfterViewInit {
     let cookie_consent_given: string | null = HelperFunctionsService.getCookie('cookie_consent');
     if (cookie_consent_given === 'false' || cookie_consent_given == null) {
       this.cookie_popup_is_closed = false;
-      HelperFunctionsService.cookie_consent.next(false);
+      GameManager.cookie_consent.next(false);
     } else if (cookie_consent_given === 'true') {
       this.cookie_popup_is_closed = true;
-      HelperFunctionsService.cookie_consent.next(true);
+      GameManager.cookie_consent.next(true);
     }
     // Search for the pixle which is due today
     this.searchRandomPixleArt();
+
+    this.window.addEventListener('load', () => {
+      if (!this.cookie_consent && !this.cookie_popup_is_closed) return;
+      this.initGame();
+    });
   }
 
-  ngAfterViewInit(): void {
+  ngAfterViewChecked() {
     // If the consent has not been given to the usage of cookies --> show alert
     if (!this.cookie_consent && !this.cookie_popup_is_closed) {
       this.sendMatchMessage(COOKIE_NOTIF_MSG, this.cookie_alert);
-      return;
     }
-    // Otherwise, continue with the actual game
-    if (this.pixle_image.length <= 0) {
-      this.sendMatchMessage(MISSING_PIXLE_MSG);
-      return;
-    }
-    this.startGame();
   }
 
   /**
@@ -133,9 +132,15 @@ export class PixGameComponent implements OnInit, AfterViewInit {
     this.router.onSameUrlNavigation = 'reload';
     // Reload component --> redirect to same url but do not reuse old one
     await this.router.navigateByUrl('/', {skipLocationChange: true}).then(() => {
-      this.router.navigate([absolute_path]);
+      // Reset the start countdown
+      this.window.clearTimeout(this.countdown_start);
+      // Reset the game (static properties)
       GameManager.resetGame();
-      HelperFunctionsService.cookie_consent.next(false);
+      // Reload the game component
+      this.router.navigate([absolute_path]);
+      // Initialize the game again
+      if (!this.cookie_consent && !this.cookie_popup_is_closed) return;
+      this.initGame();
     });
   }
 
@@ -145,15 +150,11 @@ export class PixGameComponent implements OnInit, AfterViewInit {
    * @param paket
    */
   public receivePopupHasBeenClosed(paket: boolean = false): void {
-    HelperFunctionsService.cookie_consent.next(paket);
+    GameManager.cookie_consent.next(paket);
     this.cookie_popup_is_closed = this.cookie_alert.popup_is_closed;
     HelperFunctionsService.createCookie('cookie_consent', String(paket));
     // Start the game
-    if (this.pixle_image.length <= 0) {
-      this.sendMatchMessage(MISSING_PIXLE_MSG);
-      return;
-    }
-    this.startGame();
+    this.initGame();
   }
 
   /**
@@ -177,6 +178,20 @@ export class PixGameComponent implements OnInit, AfterViewInit {
   }
 
   /**
+   * Initialize the game
+   *
+   * @private
+   */
+  private initGame(): void {
+    // Check if a pixle image is available
+    if (this.pixle_image.length <= 0) {
+      this.sendMatchMessage(MISSING_PIXLE_MSG);
+      return;
+    }
+    this.startGame();
+  }
+
+  /**
    * Start the game
    * Show the pixle at the beginning for a set duration
    * Hide it, if the timer is over
@@ -184,16 +199,14 @@ export class PixGameComponent implements OnInit, AfterViewInit {
    * @private
    */
   private startGame(): void {
-    this.window.onload = () => {
-      this.window.setTimeout(() => {
-        GameManager.initGame();
-        if (sessionStorage.getItem('lock_grid') === '1' && sessionStorage.getItem('pixle_id') === this.pixle_id.toString()) return;
-        // Undo flip --> Grid will be flipped over
-        this.pixGridComponent.flipWholePixle(true);
-        sessionStorage.setItem('lock_grid', '1');
-        sessionStorage.setItem('pixle_id', this.pixle_id.toString());
-      }, UNDO_FLIP_TIME);
-    };
+    this.countdown_start = setTimeout(() => {
+      GameManager.initGame();
+      if (sessionStorage.getItem('lock_grid') === '1' && sessionStorage.getItem('pixle_id') === this.pixle_id.toString()) return;
+      // Undo flip --> Grid will be flipped over
+      this.pixGridComponent.flipWholePixle(true);
+      sessionStorage.setItem('lock_grid', '1');
+      sessionStorage.setItem('pixle_id', this.pixle_id.toString());
+    }, UNDO_FLIP_TIME);
   }
 
   /**

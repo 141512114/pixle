@@ -1,12 +1,10 @@
 import {Injectable} from '@angular/core';
-import {BehaviorSubject} from 'rxjs';
+import {GameManager} from '../../../../projects/pixle-game/src/app/pix-game/game.manager';
 
 @Injectable({
   providedIn: 'root'
 })
 export class HelperFunctionsService {
-  public static cookie_consent: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
-
   /**
    * Convert any two-dimensional array into a one-dimensional array
    *
@@ -156,7 +154,7 @@ export class HelperFunctionsService {
     if (HelperFunctionsService.isSessionStorageAvailable() && sessionStorage.getItem(item) != null) {
       return sessionStorage.getItem(item);
     }
-    if (HelperFunctionsService.cookie_consent && HelperFunctionsService.isLocalStorageAvailable() && localStorage.getItem(item) != null) {
+    if (GameManager.cookie_consent && HelperFunctionsService.isLocalStorageAvailable() && localStorage.getItem(item) != null) {
       return localStorage.getItem(item);
     }
     return null;
