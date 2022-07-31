@@ -47,7 +47,7 @@ export class PixHeroTileComponent extends AbstractHtmlElement implements OnInit,
    */
   public doFlip(): void {
     let element: HTMLElement = this.tile_content_wrapper.nativeElement;
-    this.removeClassFromHTMLElement(element, this.do_flip_class);
+    this.addClassToHTMLElement(element, this.do_flip_class);
   }
 
   /**
@@ -55,7 +55,7 @@ export class PixHeroTileComponent extends AbstractHtmlElement implements OnInit,
    */
   public undoFlip(): void {
     let element: HTMLElement = this.tile_content_wrapper.nativeElement;
-    this.addClassToHTMLElement(element, this.do_flip_class);
+    this.removeClassFromHTMLElement(element, this.do_flip_class);
   }
 
   /**
