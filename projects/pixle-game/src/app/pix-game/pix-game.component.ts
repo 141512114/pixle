@@ -126,7 +126,9 @@ export class PixGameComponent implements OnInit, AfterViewInit {
       this.sendMatchMessage(COOKIE_NOTIF_MSG, this.cookie_alert);
       return;
     }
-    this.initGame();
+    if (GameManager.game_reloaded) {
+      this.initGame();
+    }
   }
 
   /**
@@ -137,14 +139,12 @@ export class PixGameComponent implements OnInit, AfterViewInit {
     let absolute_path: string = decodeURI(this.location.path());
     this.router.routeReuseStrategy.shouldReuseRoute = () => false;
     // Reload component --> redirect to same url but do not reuse old one
-    await this.router.navigateByUrl('/', {skipLocationChange: true}).then(() => {
-      // Reset the start countdown
+    GameManager.game_reloaded = await this.router.navigateByUrl('/', {skipLocationChange: true}).then(() => {
       this.window.clearTimeout(this.countdown_start);
-      // Reload the game component
-      this.router.navigate([absolute_path]);
       this.router.navigated = false;
-      // Reset the game (static properties)
       GameManager.resetGame();
+      // Reload the game component
+      return this.router.navigate([absolute_path]);
     });
   }
 
@@ -193,6 +193,7 @@ export class PixGameComponent implements OnInit, AfterViewInit {
       return;
     }
     this.startGame();
+    GameManager.game_reloaded = false;
   }
 
   /**
