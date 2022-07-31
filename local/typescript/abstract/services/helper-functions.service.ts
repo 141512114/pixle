@@ -206,4 +206,43 @@ export class HelperFunctionsService {
   private static padTo2Digits(num: number) {
     return num.toString().padStart(2, '0');
   }
+
+  /**
+   * Browser support tool
+   * The event listener 'transitionend' as many variations across all browsers
+   * This tool checks them all and chooses which one works / fits best
+   */
+  public static transitionEndEventName(): any {
+    let el: HTMLElement = document.createElement('div');
+    let transitions: any = {
+      'transition': 'transitionend',
+      'OTransition': 'otransitionend',  // oTransitionEnd in very old Opera
+      'MozTransition': 'transitionend',
+      'WebkitTransition': 'webkitTransitionEnd'
+    };
+    let i: any;
+    for (i in transitions) {
+      if (transitions.hasOwnProperty(i) && el.style[i] !== undefined) {
+        return transitions[i];
+      }
+    }
+  }
+
+  /**
+   * Add event listener to a specified element.
+   * This function helps to support other browsers.
+   *
+   * @param element
+   * @param event
+   * @param callback
+   */
+  public static addEventListenerToElement(element: any, event: any, callback: any): void {
+    if (typeof element.addEventListener != undefined) {
+      element.addEventListener(event, callback, false);
+    } else if (typeof element.attachEvent != undefined) {
+      element.attachEvent('on' + event, callback);
+    } else {
+      element['on' + event] = callback;
+    }
+  }
 }

@@ -3,6 +3,7 @@ import {DOCUMENT} from '@angular/common';
 import {WINDOW} from '@typescript/window-injection.token';
 import {SideMenuComponent} from '@typescript/side-menu/side-menu.component';
 import {faGear, faQuestionCircle, faXmark, IconDefinition} from '@fortawesome/free-solid-svg-icons';
+import {HelperFunctionsService} from '@abstract/services/helper-functions.service';
 
 export const STYLESHEETS_PATH: string = '../../stylesheets/css/';
 
@@ -27,19 +28,19 @@ export class AppComponent implements OnInit, AfterViewInit {
 
   ngOnInit() {
     // Add several event listeners, which help detect touch input
-    this.window.addEventListener('touchstart', () => {
+    HelperFunctionsService.addEventListenerToElement(this.window, 'touchstart', () => {
       this.addTouchClass();
-    }, false);
+    });
     ['mouseover', 'touchend', 'touchcancel'].forEach(event => {
-      this.window.addEventListener(event, () => {
+      HelperFunctionsService.addEventListenerToElement(this.window, event, () => {
         this.removeTouchClass();
-      }, false);
+      });
     });
   }
 
   ngAfterViewInit() {
     // Calculate viewport height --> alternative to css vh unit
-    this.window.addEventListener('resize', () => {
+    HelperFunctionsService.addEventListenerToElement(this.window, 'resize', () => {
       this.addViewportHeightProperty();
     });
   }

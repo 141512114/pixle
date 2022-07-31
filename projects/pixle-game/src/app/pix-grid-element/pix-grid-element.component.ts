@@ -62,19 +62,19 @@ export class PixGridElementComponent extends AbstractHtmlElement implements OnIn
     switch (this.grid_element_type) {
       case 1:
         // Emit signal to outer component --> send twa class of the emoji
-        this.component_grid_element.nativeElement.addEventListener('click', () => {
+        HelperFunctionsService.addEventListenerToElement(this.component_grid_element.nativeElement, 'click', () => {
           this.sendTWAEmojiClass.emit(this.twa_emoji_class_front_face);
-        }, false);
+        });
         break;
       case 0:
       default:
         // On click: change emoji
-        this.component_grid_element.nativeElement.addEventListener('click', () => {
+        HelperFunctionsService.addEventListenerToElement(this.component_grid_element.nativeElement, 'click', () => {
           this.revealOnClick(GameManager.chosen_emoji);
-        }, false);
+        });
         // If any transition on this element ends --> call this event
-        let transitionEnd = GameManager.transitionEndEventName();
-        this.component_grid_element.nativeElement.addEventListener(transitionEnd, () => {
+        let transitionEnd = HelperFunctionsService.transitionEndEventName();
+        HelperFunctionsService.addEventListenerToElement(this.component_grid_element.nativeElement, transitionEnd, () => {
           if (GameManager.pixle_solved || !GameManager.game_started) return;
           let element: HTMLElement = this.user_interactive.nativeElement;
           if (!element.classList.contains(this.do_flip_class)) {
@@ -84,7 +84,7 @@ export class PixGridElementComponent extends AbstractHtmlElement implements OnIn
               HelperFunctionsService.unlockElement(element);
             }
           }
-        }, false);
+        });
         break;
     }
   }

@@ -2,6 +2,7 @@ import {AfterViewInit, Component, ElementRef, Input, OnInit, ViewChild} from '@a
 import {STYLESHEETS_PATH} from '../app.component';
 import {WHITE_QUESTIONMARK} from '@typescript/emoji.database';
 import {AbstractHtmlElement} from '@abstract/abstract.html-element';
+import {HelperFunctionsService} from '@abstract/services/helper-functions.service';
 
 @Component({
   selector: 'app-pix-hero-tile',
@@ -28,17 +29,17 @@ export class PixHeroTileComponent extends AbstractHtmlElement implements OnInit,
   ngAfterViewInit(): void {
     this.setElementIcon(this.pixle_emoji, true);
     ['mouseenter', 'touchstart'].forEach(event => {
-      this.tile_content_wrapper.nativeElement.addEventListener(event, () => {
+      HelperFunctionsService.addEventListenerToElement(this.tile_content_wrapper.nativeElement, event, () => {
         this.doFlip();
         clearTimeout(this.pixle_tile_timer);
-      }, false);
+      });
     });
     ['mouseleave', 'touchend', 'touchcancel'].forEach(event => {
-      this.tile_content_wrapper.nativeElement.addEventListener(event, () => {
+      HelperFunctionsService.addEventListenerToElement(this.tile_content_wrapper.nativeElement, event, () => {
         this.pixle_tile_timer = setTimeout(() => {
           this.undoFlip();
         }, 350);
-      }, false);
+      });
     });
   }
 

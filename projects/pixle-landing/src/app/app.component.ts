@@ -38,13 +38,11 @@ export class AppComponent implements OnInit, AfterViewInit {
   }
 
   ngOnInit() {
-    // Check if the consent to the cookie usage has already been given
+    // Check if the consent to the cookie usage has been given
     let cookie_consent_given: string | null = HelperFunctionsService.getRawCookie('cookie_consent');
-    if (cookie_consent_given === 'false' || cookie_consent_given == null) {
-      HelperFunctionsService.cookie_consent.next(false);
-    } else if (cookie_consent_given === 'true') {
-      HelperFunctionsService.cookie_consent.next(true);
-    }
+    let cookie_consent_bool: boolean = false;
+    if (cookie_consent_given != null) cookie_consent_bool = JSON.parse(cookie_consent_given.toLowerCase());
+    HelperFunctionsService.cookie_consent.next(cookie_consent_bool);
     // Get the stored theme data, if available, and "restore" the previous settings
     let previous_theme: string | null = HelperFunctionsService.getCookie('last_theme');
     if (previous_theme != null) {

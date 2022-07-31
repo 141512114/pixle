@@ -99,13 +99,10 @@ export class PixGameComponent implements OnInit, AfterViewInit {
   ngOnInit(): void {
     // Check if a cookie has been created to skip the cookie notification
     let cookie_consent_given: string | null = HelperFunctionsService.getRawCookie('cookie_consent');
-    if (cookie_consent_given === 'false' || cookie_consent_given == null) {
-      this.cookie_popup_is_closed = false;
-      HelperFunctionsService.cookie_consent.next(false);
-    } else if (cookie_consent_given === 'true') {
-      this.cookie_popup_is_closed = true;
-      HelperFunctionsService.cookie_consent.next(true);
-    }
+    let cookie_consent_bool: boolean = false;
+    if (cookie_consent_given != null) cookie_consent_bool = JSON.parse(cookie_consent_given.toLowerCase());
+    this.cookie_popup_is_closed = cookie_consent_bool;
+    HelperFunctionsService.cookie_consent.next(cookie_consent_bool);
     // Get the stored theme data, if available, and "restore" the previous settings
     let previous_theme: string | null = HelperFunctionsService.getCookie('last_theme');
     if (previous_theme != null) {
@@ -114,7 +111,7 @@ export class PixGameComponent implements OnInit, AfterViewInit {
     // Search for the pixle which is due today
     this.searchRandomPixleArt();
 
-    this.window.addEventListener('load', () => {
+    HelperFunctionsService.addEventListenerToElement(this.window, 'load', () => {
       if (!this.cookie_consent && !this.cookie_popup_is_closed) return;
       this.initGame();
     });

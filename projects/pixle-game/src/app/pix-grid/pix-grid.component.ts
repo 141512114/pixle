@@ -44,7 +44,7 @@ export class PixGridComponent implements OnInit, AfterViewInit {
     if (this.grid_image.length <= 0) return;
     this.grid_image_width = this.grid_image[0].length;
     this.grid_image_height = this.grid_image.length;
-    this.window.addEventListener('resize', () => {
+    HelperFunctionsService.addEventListenerToElement(this.window, 'resize', () => {
       this.setInitialSizes();
     });
   }
