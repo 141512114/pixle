@@ -129,9 +129,7 @@ export class HelperFunctionsService {
     if (HelperFunctionsService.cookie_consent.value && HelperFunctionsService.isLocalStorageAvailable()) {
       localStorage.setItem(item, value);
     } else {
-      if (HelperFunctionsService.isSessionStorageAvailable()) {
-        sessionStorage.setItem(item, value);
-      }
+      HelperFunctionsService.createSessionCookie(item, value);
     }
   }
 
@@ -170,6 +168,19 @@ export class HelperFunctionsService {
       return localStorage.getItem(item);
     } else {
       return HelperFunctionsService.getSessionCookie(item);
+    }
+  }
+
+  /**
+   * Create a session cookie item only
+   *
+   * @param item
+   * @param value
+   */
+  public static createSessionCookie(item: string, value: string): void {
+    if (item === '' || value === '') return;
+    if (HelperFunctionsService.isSessionStorageAvailable()) {
+      sessionStorage.setItem(item, value);
     }
   }
 

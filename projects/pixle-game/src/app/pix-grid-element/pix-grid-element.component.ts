@@ -95,7 +95,7 @@ export class PixGridElementComponent extends AbstractHtmlElement implements OnIn
   public selectThisEmoji(): void {
     if (this.grid_element_type !== 1) return;
     let element: HTMLElement = this.user_interactive.nativeElement;
-    this.removeClassFromHTMLElement(element, this.selected_class);
+    this.addClassToHTMLElement(element, this.selected_class);
   }
 
   /**
@@ -104,7 +104,7 @@ export class PixGridElementComponent extends AbstractHtmlElement implements OnIn
   public unselectThisEmoji(): void {
     if (this.grid_element_type !== 1) return;
     let element: HTMLElement = this.user_interactive.nativeElement;
-    this.addClassToHTMLElement(element, this.selected_class);
+    this.removeClassFromHTMLElement(element, this.selected_class);
   }
 
   /**
@@ -125,7 +125,7 @@ export class PixGridElementComponent extends AbstractHtmlElement implements OnIn
     let element: HTMLElement = this.user_interactive.nativeElement;
     // Show correct answer before flipping the grid element
     this.showCorrectAnswer();
-    this.removeClassFromHTMLElement(element, this.do_flip_class);
+    this.addClassToHTMLElement(element, this.do_flip_class);
     HelperFunctionsService.lockElement(element);
   }
 
@@ -135,7 +135,7 @@ export class PixGridElementComponent extends AbstractHtmlElement implements OnIn
   public undoFlip(): void {
     if (this.grid_element_type !== 0) return;
     let element: HTMLElement = this.user_interactive.nativeElement;
-    this.addClassToHTMLElement(element, this.do_flip_class);
+    this.removeClassFromHTMLElement(element, this.do_flip_class);
     if (!this.pixle_tile_solved) {
       this.setElementIcon(this.pixle_emoji_default);
     }

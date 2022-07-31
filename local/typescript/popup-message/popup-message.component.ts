@@ -46,7 +46,7 @@ export class PopupMessageComponent extends AbstractHtmlElement implements AfterV
    * Open the popup
    */
   public openPopup(): void {
-    this.addClassToHTMLElement(this.msg_container.nativeElement);
+    this.removeClassFromHTMLElement(this.msg_container.nativeElement, 'close');
     this.popup_is_closed = false;
   }
 
@@ -56,7 +56,7 @@ export class PopupMessageComponent extends AbstractHtmlElement implements AfterV
    * @param output
    */
   public closePopup(output: boolean = true): void {
-    this.removeClassFromHTMLElement(this.msg_container.nativeElement);
+    this.addClassToHTMLElement(this.msg_container.nativeElement, 'close');
     this.popup_is_closed = true;
     this.sendPopupHasBeenClosed.emit(output);
   }

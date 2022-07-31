@@ -14,6 +14,7 @@ import {STYLESHEETS_PATH} from '../app.component';
 import {DOCUMENT} from '@angular/common';
 import {WINDOW} from '@typescript/window-injection.token';
 import {GameManager} from '../pix-game/game.manager';
+import {HelperFunctionsService} from '@abstract/services/helper-functions.service';
 
 // Timer / Offset
 const ROW_OFFSET: number = 355;
@@ -52,7 +53,8 @@ export class PixGridComponent implements OnInit, AfterViewInit {
     this.window.setTimeout(() => {
       this.setInitialSizes();
     }, 10);
-    if (sessionStorage.getItem('lock_grid') === '1' && sessionStorage.getItem('pixle_id') === this.grid_image_id.toString()) return;
+    if (HelperFunctionsService.getSessionCookie('lock_grid') === '1' &&
+      HelperFunctionsService.getSessionCookie('pixle_id') === this.grid_image_id.toString()) return;
     this.flipWholePixle(false, false);
   }
 

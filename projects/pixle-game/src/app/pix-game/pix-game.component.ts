@@ -1,4 +1,4 @@
-import {AfterViewChecked, Component, Inject, OnInit, ViewChild} from '@angular/core';
+import {AfterViewInit, Component, Inject, OnInit, ViewChild} from '@angular/core';
 import {DOCUMENT, Location} from '@angular/common';
 import {
   CODEPOINT_GREENSQUARE,
@@ -56,7 +56,7 @@ const UNDO_FLIP_TIME: number = 1575;
   templateUrl: './pix-game.component.html',
   styleUrls: [STYLESHEETS_PATH + 'pix-game.component.min.css']
 })
-export class PixGameComponent implements OnInit, AfterViewChecked {
+export class PixGameComponent implements OnInit, AfterViewInit {
   pixle_arts: IPixle[] = PixleList; // <-- pulled database
   pixle_id: number = -1;
   pixle_image: string[][] = [];
@@ -120,11 +120,13 @@ export class PixGameComponent implements OnInit, AfterViewChecked {
     });
   }
 
-  ngAfterViewChecked() {
+  ngAfterViewInit() {
     // If the consent has not been given to the usage of cookies --> show alert
     if (!this.cookie_consent && !this.cookie_popup_is_closed) {
       this.sendMatchMessage(COOKIE_NOTIF_MSG, this.cookie_alert);
+      return;
     }
+    this.initGame();
   }
 
   /**
@@ -134,18 +136,15 @@ export class PixGameComponent implements OnInit, AfterViewChecked {
     if (this.validating) return;
     let absolute_path: string = decodeURI(this.location.path());
     this.router.routeReuseStrategy.shouldReuseRoute = () => false;
-    this.router.onSameUrlNavigation = 'reload';
     // Reload component --> redirect to same url but do not reuse old one
     await this.router.navigateByUrl('/', {skipLocationChange: true}).then(() => {
       // Reset the start countdown
       this.window.clearTimeout(this.countdown_start);
-      // Reset the game (static properties)
-      GameManager.resetGame();
       // Reload the game component
       this.router.navigate([absolute_path]);
-      // Initialize the game again
-      if (!this.cookie_consent && !this.cookie_popup_is_closed) return;
-      this.initGame();
+      this.router.navigated = false;
+      // Reset the game (static properties)
+      GameManager.resetGame();
     });
   }
 
@@ -206,11 +205,11 @@ export class PixGameComponent implements OnInit, AfterViewChecked {
   private startGame(): void {
     this.countdown_start = setTimeout(() => {
       GameManager.initGame();
-      if (sessionStorage.getItem('lock_grid') === '1' && sessionStorage.getItem('pixle_id') === this.pixle_id.toString()) return;
+      if (HelperFunctionsService.getSessionCookie('lock_grid') === '1' && HelperFunctionsService.getSessionCookie('pixle_id') === this.pixle_id.toString()) return;
       // Undo flip --> Grid will be flipped over
       this.pixGridComponent.flipWholePixle(true);
-      sessionStorage.setItem('lock_grid', '1');
-      sessionStorage.setItem('pixle_id', this.pixle_id.toString());
+      HelperFunctionsService.createSessionCookie('lock_grid', '1');
+      HelperFunctionsService.createSessionCookie('pixle_id', this.pixle_id.toString());
     }, UNDO_FLIP_TIME);
   }
 
