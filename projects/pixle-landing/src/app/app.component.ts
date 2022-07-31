@@ -88,12 +88,12 @@ export class AppComponent implements OnInit, AfterViewInit {
     let show_class: string = 'toggle';
 
     if (this.sideMenuComponent.active) {
-      this.sideMenuComponent.removeClassFromHTMLElement(side_menu_element);
+      this.sideMenuComponent.addClassToHTMLElement(side_menu_element, 'close');
       if (toggle_side_menu_element.classList.contains(show_class)) {
         toggle_side_menu_element.classList.remove(show_class);
       }
     } else {
-      this.sideMenuComponent.addClassToHTMLElement(side_menu_element);
+      this.sideMenuComponent.removeClassFromHTMLElement(side_menu_element, 'close');
       if (!toggle_side_menu_element.classList.contains(show_class)) {
         toggle_side_menu_element.classList.add(show_class);
       }
