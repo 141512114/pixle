@@ -197,17 +197,6 @@ export class HelperFunctionsService {
   }
 
   /**
-   * Add a zero to any number below 10
-   *
-   * @param num
-   * @return Modified number as a string
-   * @private
-   */
-  private static padTo2Digits(num: number) {
-    return num.toString().padStart(2, '0');
-  }
-
-  /**
    * Browser support tool
    * The event listener 'transitionend' as many variations across all browsers
    * This tool checks them all and chooses which one works / fits best
@@ -244,5 +233,16 @@ export class HelperFunctionsService {
     } else {
       element['on' + event] = callback;
     }
+  }
+
+  /**
+   * Add a zero to any number below 10
+   *
+   * @param num
+   * @return Modified number as a string
+   * @private
+   */
+  private static padTo2Digits(num: number) {
+    return num.toString().padStart(2, '0');
   }
 }
