@@ -1,27 +1,31 @@
 <section class="container-fluid position-relative h-100 p-0 component-pix-game">
-  <div class="container position-relative h-100 p-0 pix-game-wrapper">
-    <div class="d-flex flex-column g-0 h-100 playground-wrapper">
-      <div class="position-relative flex-grow-1 w-100 h-100 p-0 playground-grid-wrapper">
-        <ng-container *ngIf="cookie_consent || cookie_popup_is_closed">
-          <div *ngIf="pixle_image.length > 0" class="w-100 h-100 p-0 pix-grid-wrapper">
-            <app-pix-grid [grid_image]="pixle_image" [grid_image_id]="pixle_id"></app-pix-grid>
-          </div>
-          <div class="container-fluid w-100 pix-popup-wrapper match-status-popup">
-            <app-popup-message #match_status></app-popup-message>
-          </div>
-        </ng-container>
-        <ng-container *ngIf="cookie_popup_is_closed === false">
-          <div class="container-fluid pix-popup-wrapper cookie-alert-popup">
-            <app-popup-message #cookie_alert (sendPopupHasBeenClosed)="receivePopupHasBeenClosed($event)"
-                               [popup_type]="1"></app-popup-message>
-          </div>
-        </ng-container>
-      </div>
-      <div class="position-relative playground-ui-wrapper">
+  <div class="container position-relative d-flex justify-content-center h-100 p-0 pix-game-wrapper">
+    <table class="table position-relative p-0 h-100 playground-wrapper">
+      <tr align="center" class="position-relative h-100">
+        <td class="position-relative h-100 overflow-hidden playground-grid-wrapper">
+          <ng-container *ngIf="cookie_consent || cookie_popup_is_closed">
+            <div *ngIf="pixle_image.length > 0" class="w-100 h-100 p-0 pix-grid-wrapper">
+              <app-pix-grid [grid_image]="pixle_image" [grid_image_id]="pixle_id"></app-pix-grid>
+            </div>
+            <div class="container-fluid p-0 pix-popup-wrapper match-status-popup">
+              <app-popup-message #match_status></app-popup-message>
+            </div>
+          </ng-container>
+          <ng-container *ngIf="cookie_popup_is_closed === false">
+            <div class="container-fluid p-0 pix-popup-wrapper cookie-alert-popup">
+              <app-popup-message #cookie_alert (sendPopupHasBeenClosed)="receivePopupHasBeenClosed($event)"
+                                 [popup_type]="1"></app-popup-message>
+            </div>
+          </ng-container>
+        </td>
+      </tr>
+      <tr align="center" class="position-relative h-auto">
+        <td class="position-relative playground-ui-wrapper">
         <app-pix-grid-ui (sendReloadRequest)="receiveReloadRequest()"
                          (sendValidationRequest)="receiveValidationRequest()"
                          [emoji_list]="pixle_emoji_list" [pixle_share_result]="pixle_share_result"></app-pix-grid-ui>
-      </div>
-    </div>
+        </td>
+      </tr>
+    </table>
   </div>
 </section>
