@@ -15,6 +15,11 @@ document.onreadystatechange = () => {
         main_navbar.classList.add(do_not_show_class);
       }
     };
+
+    // Pixle countdown
+    /* window.setInterval(() => {
+      this.setPixleCountdown();
+    }, 1000); */
   }
 }
 
@@ -23,4 +28,21 @@ function scrollToHowToGuide() {
   let scrollDiv = document.getElementById('how-to-play').offsetTop + section_welcome.offsetHeight;
   let newScrollTop = scrollDiv - 70;
   window.scrollTo({top: newScrollTop, behavior: 'smooth'});
+}
+
+function setPixleCountdown() {
+  let date_now = new Date();
+  let date_tomorrow = new Date(date_now);
+  date_tomorrow.setUTCDate(date_tomorrow.getUTCDate() + 1);
+  date_tomorrow.setHours(0, 0, 0, 0);
+
+  let date_diff = date_tomorrow.getTime() - date_now.getTime();
+  let hours = Math.floor((date_diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+  let minutes = Math.floor((date_diff % (1000 * 60 * 60)) / (1000 * 60));
+  let seconds = Math.floor((date_diff % (1000 * 60)) / 1000);
+
+  let pixle_countdown_html = document.getElementById('pixle-countdown');
+  pixle_countdown_html.querySelector('p span.hours').innerHTML = (hours < 10) ? '0' + hours : hours.toString();
+  pixle_countdown_html.querySelector('p span.minutes').innerHTML = (minutes < 10) ? '0' + minutes : minutes.toString();
+  pixle_countdown_html.querySelector('p span.seconds').innerHTML = (seconds < 10) ? '0' + seconds : seconds.toString();
 }
