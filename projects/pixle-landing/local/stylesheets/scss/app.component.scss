@@ -19,10 +19,6 @@ header {
   .navbar-head {
     pointer-events: all;
   }
-
-  .navbar-content {
-    flex: 1;
-  }
 }
 
 section {
@@ -66,7 +62,6 @@ main .main-background {
   right: 0;
   bottom: 0;
   @include flexbox();
-  height: 100%;
   background-color: rgba(black, .45);
   z-index: 9999;
 

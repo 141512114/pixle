@@ -108,14 +108,10 @@ section#about {
     }
   }
 
-  .how-to-description,
   .how-to-description p {
     position: relative;
-    z-index: 10;
-  }
-
-  .how-to-description p {
     padding: 0 7px;
+    z-index: 10;
   }
 
   .how-to-picture {

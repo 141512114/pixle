@@ -15,8 +15,6 @@
   transition: transform 635ms, background-color 300ms;
 
   div {
-    width: 100%;
-    height: 100%;
     @include vertical-align(middle);
   }
 
