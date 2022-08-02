@@ -70,10 +70,14 @@ section#about {
 
   .description {
     hyphens: auto;
-    text-align: justify;
+    text-align: left;
 
     .share-via-mail {
       hyphens: none;
+    }
+
+    @media only screen and (min-width: $breakpoint_xsm) {
+      text-align: justify;
     }
   }
 
