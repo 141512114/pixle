@@ -71,6 +71,10 @@ section#about {
   .description {
     hyphens: auto;
     text-align: justify;
+
+    .share-via-mail {
+      hyphens: none;
+    }
   }
 
   .how-to-steps-wrapper .numbered-steps {
