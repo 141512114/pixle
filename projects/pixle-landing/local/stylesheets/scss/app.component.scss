@@ -3,7 +3,6 @@
 @import '../../../../../local/stylesheets/mixins/variables';
 @import '../../../../../local/stylesheets/mixins/themes';
 @import '../../../../../local/stylesheets/mixins/mixins';
-@import '../../../../../local/stylesheets/mixins/responsive';
 
 // app component stylesheet
 html,
@@ -23,6 +22,8 @@ header {
 }
 
 #main-navbar {
+  top: 0;
+  left: 0;
   transition: opacity 300ms, visibility 300ms;
   z-index: 999;
 }
