@@ -17,9 +17,10 @@ document.onreadystatechange = () => {
     };
 
     // Pixle countdown
-    /* window.setInterval(() => {
+    this.setPixleCountdown();
+    window.setInterval(() => {
       this.setPixleCountdown();
-    }, 1000); */
+    }, 1000);
   }
 }
 
@@ -41,8 +42,12 @@ function setPixleCountdown() {
   let minutes = Math.floor((date_diff % (1000 * 60 * 60)) / (1000 * 60));
   let seconds = Math.floor((date_diff % (1000 * 60)) / 1000);
 
-  let pixle_countdown_html = document.getElementById('pixle-countdown');
-  pixle_countdown_html.querySelector('p span.hours').innerHTML = (hours < 10) ? '0' + hours : hours.toString();
-  pixle_countdown_html.querySelector('p span.minutes').innerHTML = (minutes < 10) ? '0' + minutes : minutes.toString();
-  pixle_countdown_html.querySelector('p span.seconds').innerHTML = (seconds < 10) ? '0' + seconds : seconds.toString();
+  const pixle_countdown_html = document.getElementById('pixle-countdown');
+  const pixle_countdown_progress = pixle_countdown_html.querySelector('div.pixle-countdown-progress');
+
+  pixle_countdown_progress.style.width = ((date_now.getHours() / 24) + (date_now.getMinutes() / 60 / 24) + (date_now.getSeconds() / 60 / 60 / 24)) * 100 + '%';
+
+  pixle_countdown_html.querySelector('span.hours').innerHTML = (hours < 10) ? '0' + hours : hours.toString();
+  pixle_countdown_html.querySelector('span.minutes').innerHTML = (minutes < 10) ? '0' + minutes : minutes.toString();
+  pixle_countdown_html.querySelector('span.seconds').innerHTML = (seconds < 10) ? '0' + seconds : seconds.toString();
 }
