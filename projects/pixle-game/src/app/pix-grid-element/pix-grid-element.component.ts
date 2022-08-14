@@ -78,11 +78,10 @@ export class PixGridElementComponent extends AbstractHtmlElement implements OnIn
           if (GameManager.pixle_solved || !GameManager.game_started) return;
           let element: HTMLElement = this.user_interactive.nativeElement;
           if (!element.classList.contains(this.do_flip_class)) {
+            if (this.pixle_tile_lives <= 0 || this.pixle_tile_solved) return;
             // Reset backface of grid element
             this.showCorrectAnswer(false);
-            if (this.pixle_tile_lives > 0 && !this.pixle_tile_solved) {
-              HelperFunctionsService.unlockElement(element);
-            }
+            HelperFunctionsService.unlockElement(element);
           }
         });
         break;
@@ -136,9 +135,8 @@ export class PixGridElementComponent extends AbstractHtmlElement implements OnIn
     if (this.grid_element_type !== 0 || (this.pixle_tile_solved || this.pixle_tile_lives <= 0)) return;
     let element: HTMLElement = this.user_interactive.nativeElement;
     this.removeClassFromHTMLElement(element, this.do_flip_class);
-    if (!this.pixle_tile_solved) {
-      this.setElementIcon(this.pixle_emoji_default);
-    }
+    if (this.pixle_tile_solved) return;
+    this.setElementIcon(this.pixle_emoji_default);
     // Second part is executed in an event listener
     // The listener is set right at the beginning of this components lifespan
   }
