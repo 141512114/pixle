@@ -79,8 +79,8 @@ export class PixGridElementComponent extends AbstractHtmlElement implements OnIn
           let element: HTMLElement = this.user_interactive.nativeElement;
           if (!element.classList.contains(this.do_flip_class)) {
             // Reset backface of grid element
-            this.showCorrectAnswer(true);
-            if (this.pixle_tile_lives > 0) {
+            this.showCorrectAnswer(false);
+            if (this.pixle_tile_lives > 0 && !this.pixle_tile_solved) {
               HelperFunctionsService.unlockElement(element);
             }
           }
@@ -133,7 +133,7 @@ export class PixGridElementComponent extends AbstractHtmlElement implements OnIn
    * Reverse flipped grid element
    */
   public undoFlip(): void {
-    if (this.grid_element_type !== 0) return;
+    if (this.grid_element_type !== 0 || (this.pixle_tile_solved || this.pixle_tile_lives <= 0)) return;
     let element: HTMLElement = this.user_interactive.nativeElement;
     this.removeClassFromHTMLElement(element, this.do_flip_class);
     if (!this.pixle_tile_solved) {
@@ -182,11 +182,11 @@ export class PixGridElementComponent extends AbstractHtmlElement implements OnIn
   /**
    * Show the correct answer
    *
-   * @param hide
+   * @param show
    * @private
    */
-  private showCorrectAnswer(hide: boolean = false): void {
+  private showCorrectAnswer(show: boolean = true): void {
     if (this.grid_element_type !== 0) return;
-    this.twa_emoji_class_back_face = hide ? this.pixle_emoji_default : this.pixle_emoji;
+    this.twa_emoji_class_back_face = show ? this.pixle_emoji : this.pixle_emoji_default;
   }
 }
