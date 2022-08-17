@@ -17,13 +17,13 @@
     }
   }
 
-  @media only screen and (min-height: 435px) {
+  @media only screen and (min-height: 435px) and (min-width: 320px) {
     &.gridw-5 {
       max-width: 52px;
     }
   }
 
-  @media only screen and (min-height: 500px) {
+  @media only screen and (min-height: 500px) and (min-width: 320px) {
     &.gridw-5 {
       max-width: 54px;
     }

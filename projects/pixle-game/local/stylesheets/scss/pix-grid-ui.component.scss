@@ -6,9 +6,14 @@
 
 // pix-grid-ui component stylesheet
 .component-pix-grid-ui {
+  width: 100vw;
   margin: 0 auto;
   border-radius: 8px 8px 0 0;
   background-color: var(--default-theme-three, map.get($default-color-palette, 3));
+
+  @media only screen and (min-width: $breakpoint_xsm) {
+    width: 100%;
+  }
 }
 
 .pix-col-item {

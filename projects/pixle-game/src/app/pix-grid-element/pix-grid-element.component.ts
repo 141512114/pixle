@@ -75,12 +75,12 @@ export class PixGridElementComponent extends AbstractHtmlElement implements OnIn
         // If any transition on this element ends --> call this event
         let transitionEnd = HelperFunctionsService.transitionEndEventName();
         HelperFunctionsService.addEventListenerToElement(this.component_grid_element.nativeElement, transitionEnd, () => {
-          if (GameManager.pixle_solved || !GameManager.game_started) return;
+          if (GameManager.pixle_solved || this.pixle_tile_solved) return;
           let element: HTMLElement = this.user_interactive.nativeElement;
           if (!element.classList.contains(this.do_flip_class)) {
-            if (this.pixle_tile_lives <= 0 || this.pixle_tile_solved) return;
             // Reset backface of grid element
             this.showCorrectAnswer(false);
+            if (!GameManager.game_started) return;
             HelperFunctionsService.unlockElement(element);
           }
         });
@@ -132,10 +132,9 @@ export class PixGridElementComponent extends AbstractHtmlElement implements OnIn
    * Reverse flipped grid element
    */
   public undoFlip(): void {
-    if (this.grid_element_type !== 0 || (this.pixle_tile_solved || this.pixle_tile_lives <= 0)) return;
+    if (this.grid_element_type !== 0 || this.pixle_tile_solved) return;
     let element: HTMLElement = this.user_interactive.nativeElement;
     this.removeClassFromHTMLElement(element, this.do_flip_class);
-    if (this.pixle_tile_solved) return;
     this.setElementIcon(this.pixle_emoji_default);
     // Second part is executed in an event listener
     // The listener is set right at the beginning of this components lifespan

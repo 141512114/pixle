@@ -6,15 +6,11 @@
   width: 100vw;
   margin: 0 auto;
 
-  @media only screen and (min-width: $breakpoint_mm) {
-    width: 375px;
-  }
-
-  @media only screen and (min-width: $breakpoint_xxxsm) {
+  @media only screen and (min-width: $breakpoint_xsm) {
     width: 450px;
   }
 
-  @media only screen and (min-width: $breakpoint_xmd) {
+  @media only screen and (min-width: $breakpoint_xxsm) {
     width: 500px;
   }
 }
