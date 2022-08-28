@@ -4,7 +4,7 @@
     <div #grid_inner class="w-100 h-auto pix-grid-inner">
       <div *ngFor="let row of grid_image" class="row justify-content-center g-0 position-relative w-100 pix-grid-row">
         <div *ngFor="let col of row"
-             class="col-{{12/grid_image_width}} pix-col-item gridw-{{grid_image_width}} gridh-{{grid_image_height}}">
+             class="{{(12/grid_image_width) % 1 == 0 ? 'col-' + (12/grid_image_width) : ''}} pix-col-item gridw-{{grid_image_width}} gridh-{{grid_image_height}}">
           <app-pix-grid-element [pixle_emoji]="col"></app-pix-grid-element>
         </div>
       </div>
