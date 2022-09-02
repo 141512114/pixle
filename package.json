@@ -14,7 +14,8 @@
     "prerender": "ng run pixle-landing:prerender"
   },
   "overrides": {
-    "glob-parent": "6.0.2"
+    "glob-parent": "6.0.2",
+    "terser": "5.15.0"
   },
   "private": true,
   "dependencies": {
