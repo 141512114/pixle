@@ -13,7 +13,7 @@ Their difficulty does vary from day to day, and can be quite nerve-braking at ti
 To solve a puzzle, the player has to place the emojis on their correct tiles or positions, 
 shown to him at the beginning of the game and after each failed try.
 
-### Generation of puzzles in _Pixle_
+### The creation of puzzles in _Pixle_
 Puzzles in the game _Pixle_ are generated ahead of time and stored inside a small database or array.
 This array only contains the necessary ids of the used emojis and a date on which the specific
 puzzle goes public.\
