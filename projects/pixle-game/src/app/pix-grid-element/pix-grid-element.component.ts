@@ -62,15 +62,19 @@ export class PixGridElementComponent extends AbstractHtmlElement implements OnIn
     switch (this.grid_element_type) {
       case 1:
         // Emit signal to outer component --> send twa class of the emoji
-        HelperFunctionsService.addEventListenerToElement(this.component_grid_element.nativeElement, 'click', () => {
-          this.sendTWAEmojiClass.emit(this.twa_emoji_class_front_face);
+        ['click', 'touchstart'].forEach(event => {
+          HelperFunctionsService.addEventListenerToElement(this.component_grid_element.nativeElement, event, () => {
+            this.sendTWAEmojiClass.emit(this.twa_emoji_class_front_face);
+          });
         });
         break;
       case 0:
       default:
         // On click: change emoji
-        HelperFunctionsService.addEventListenerToElement(this.component_grid_element.nativeElement, 'click', () => {
-          this.revealOnClick(GameManager.chosen_emoji);
+        ['click', 'touchstart'].forEach(event => {
+          HelperFunctionsService.addEventListenerToElement(this.component_grid_element.nativeElement, event, () => {
+            this.revealOnClick(GameManager.chosen_emoji);
+          });
         });
         // If any transition on this element ends --> call this event
         let transitionEnd = HelperFunctionsService.transitionEndEventName();
