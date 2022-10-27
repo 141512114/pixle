@@ -99,8 +99,7 @@ export class PixGameComponent implements OnInit, AfterViewInit {
   ngOnInit(): void {
     // Check if a cookie has been created to skip the cookie notification
     let cookie_consent_given: string | null = HelperFunctionsService.getRawCookie('cookie_consent');
-    let cookie_consent_bool: boolean = false;
-    if (cookie_consent_given != null) cookie_consent_bool = JSON.parse(cookie_consent_given.toLowerCase());
+    let cookie_consent_bool: boolean = (cookie_consent_given === null) ? false : JSON.parse(cookie_consent_given.toLowerCase());
     this.cookie_popup_is_closed = cookie_consent_bool;
     HelperFunctionsService.cookie_consent.next(cookie_consent_bool);
     // Get the stored theme data, if available, and "restore" the previous settings
