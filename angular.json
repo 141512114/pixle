@@ -29,7 +29,12 @@
               "projects/pixle-game/src/assets",
               "projects/pixle-game/src/manifest.webmanifest",
               "projects/pixle-game/src/sitemap.xml",
-              "projects/pixle-game/src/robots.txt"
+              "projects/pixle-game/src/robots.txt",
+              {
+                "glob": "**/*",
+                "input": "local/svg/twemoji",
+                "output": "/twemoji/svg/"
+              }
             ],
             "styles": [
               "node_modules/@fortawesome/fontawesome-free/css/solid.min.css",
@@ -160,7 +165,12 @@
               "projects/pixle-landing/src/assets",
               "projects/pixle-landing/src/local",
               "projects/pixle-landing/src/sitemap.xml",
-              "projects/pixle-landing/src/robots.txt"
+              "projects/pixle-landing/src/robots.txt",
+              {
+                "glob": "**/*",
+                "input": "local/svg/twemoji",
+                "output": "/twemoji/svg/"
+              }
             ],
             "styles": [
               "node_modules/@fortawesome/fontawesome-free/css/solid.min.css",
