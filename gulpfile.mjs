@@ -42,8 +42,12 @@ async function clearStyles(pattern) {
 }
 
 // Tasks to clear styles
-gulp.task('clear-css', () => clearStyles(STYLES_DEL_PATTERN));
-gulp.task('clear-bootstrap', () => clearStyles(BOOTSTRAP_DEL_PATTERN));
+gulp.task('clear-css', async function() {
+  await clearStyles(STYLES_DEL_PATTERN);
+});
+gulp.task('clear-bootstrap', async function() {
+  await clearStyles(BOOTSTRAP_DEL_PATTERN);
+});
 
 // Function to compile SCSS to CSS
 async function compileCSS(source, dest) {
