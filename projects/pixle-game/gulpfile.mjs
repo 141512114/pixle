@@ -1,12 +1,8 @@
 /* jshint node: true */
 
-/*
-
-Variables: ------------------------------------------------------
-
-*/
-
 import gulp from 'gulp';
+import path from 'path';
+import { fileURLToPath } from 'url';
 import rename from 'gulp-rename';
 import dartSass from 'sass';
 import gulpSass from 'gulp-sass';
@@ -15,137 +11,118 @@ import sourcemaps from 'gulp-sourcemaps';
 import autoprefixer from 'gulp-autoprefixer';
 import svgmin from 'gulp-svgmin';
 import plumber from 'gulp-plumber';
-import {deleteAsync} from 'del';
+import { deleteAsync } from 'del';
 
 const sass = gulpSass(dartSass);
 
+// Define __dirname for ES modules
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
 /*
-
 Paths: ----------------------------------------------------------
-
 */
 
-const PIXLE_GAME_SRC_PATH = './src/';
-const PIXLE_GAME_ASSETS_PATH = PIXLE_GAME_SRC_PATH + 'assets/';
-
-const DEV_SRC_PATH = './local/';
+const PIXLE_GAME_SRC_PATH = `${__dirname}/src/`;
+const PIXLE_GAME_ASSETS_PATH = `${PIXLE_GAME_SRC_PATH}assets/`;
+const DEV_SRC_PATH = `${__dirname}/local/`;
 
 // SVG paths
-const PIXLE_GAME_SVG_FOLDER = PIXLE_GAME_ASSETS_PATH + 'svg/';
+const PIXLE_GAME_SVG_FOLDER = `${PIXLE_GAME_ASSETS_PATH}svg/`;
 
 // Style paths
-const STYLES_SRC_FILES = DEV_SRC_PATH + 'stylesheets/scss/**/!(_*)*.scss';
-const PIXLE_GAME_STYLES_MIN_DEST_PATH = PIXLE_GAME_SRC_PATH + 'stylesheets/css/';
+const STYLES_SRC_FILES = `${DEV_SRC_PATH}stylesheets/scss/**/!(_*)*.scss`;
+const PIXLE_GAME_STYLES_MIN_DEST_PATH = `${PIXLE_GAME_SRC_PATH}stylesheets/css/`;
 
 // Stylesheets deletion pattern
 const STYLES_DEL_PATTERN = [
-  PIXLE_GAME_STYLES_MIN_DEST_PATH + '**/*',
-  '!' + PIXLE_GAME_SRC_PATH + 'stylesheets/.gitkeep',
-  '!' + PIXLE_GAME_SRC_PATH + 'stylesheets/README.md'
+  `${PIXLE_GAME_STYLES_MIN_DEST_PATH}**/*`,
+  `!${PIXLE_GAME_SRC_PATH}stylesheets/.gitkeep`,
+  `!${PIXLE_GAME_SRC_PATH}stylesheets/README.md`
 ];
 
 /*
-
 Clear assets/stylesheets folder: --------------------------------
-
 */
 
-async function clear_styles(pattern) {
-  const deletedFilePaths = await deleteAsync(pattern);
-  console.log('Deleted files:\n', deletedFilePaths.join('\n'));
-  console.log('\n');
+function clearStyles(pattern) {
+  return deleteAsync(pattern).then(deletedFilePaths => {
+    console.log('Deleted files:\n', deletedFilePaths.join('\n'));
+  });
 }
 
-gulp.task('clear', () => clear_styles(STYLES_DEL_PATTERN));
+gulp.task('clear', () => clearStyles(STYLES_DEL_PATTERN));
 
 /*
-
 Convert to CSS: -------------------------------------------------
-
 */
 
-async function to_css(source, dest) {
+async function toCSS(source, dest) {
   'use strict';
-  return await new Promise((resolve) => {
-    gulp.src(source)
-      .pipe(plumber())
-      .pipe(sourcemaps.init({loadMaps: true}))
-      .pipe(sass().on('error', sass.logError))
-      .pipe(autoprefixer())
-      .pipe(sourcemaps.write('./'))
-      .pipe(gulp.dest(dest))
-      .on('end', resolve);
-  });
+  return gulp.src(source)
+    .pipe(plumber())
+    .pipe(sourcemaps.init({ loadMaps: true }))
+    .pipe(sass(null, false).on('error', sass.logError))
+    .pipe(autoprefixer())
+    .pipe(sourcemaps.write('./'))
+    .pipe(gulp.dest(dest));
 }
 
 /*
-
 Uglify / Clean CSS: ----------------------------------------------
-
 */
 
-async function uglify(dest) {
+async function uglifyCSS(dest) {
   'use strict';
-  return await new Promise((resolve) => {
-    gulp.src(dest + '**/!(*.min).css')
-      .pipe(plumber())
-      .pipe(cleanCSS({debug: true, compatibility: 'ie8'}, function (details) {
-        console.log('Original Size : ' + details.name + ': ' + details.stats.originalSize + ' bytes');
-        console.log('Minified Size : ' + details.name + ': ' + details.stats.minifiedSize + ' bytes');
-      }))
-      .pipe(rename(function (path) {
-        if (!path.extname.endsWith('.map')) {
-          path.basename += '.min';
-        }
-      }))
-      .pipe(gulp.dest(dest))
-      .on('end', resolve);
-  });
+  return gulp.src(`${dest}**/!(*.min).css`)
+    .pipe(plumber())
+    .pipe(cleanCSS({ debug: true, compatibility: 'ie8' }, (details) => {
+      console.log('Original Size : ' + details.name + ': ' + details.stats.originalSize + ' bytes');
+      console.log('Minified Size : ' + details.name + ': ' + details.stats.minifiedSize + ' bytes');
+    }))
+    .pipe(rename((path) => {
+      if (!path.extname.endsWith('.map')) {
+        path.basename += '.min';
+      }
+    }))
+    .pipe(gulp.dest(dest));
 }
 
 /*
-
 Compress normal stylesheets: -------------------------------------
-
 */
 
-gulp.task('default-stylesheets', async function () {
-  await to_css(STYLES_SRC_FILES, PIXLE_GAME_STYLES_MIN_DEST_PATH).then(() =>
-    uglify(PIXLE_GAME_STYLES_MIN_DEST_PATH)
-  );
+gulp.task('default-stylesheets', () => {
+  return toCSS(STYLES_SRC_FILES, PIXLE_GAME_STYLES_MIN_DEST_PATH)
+    .then(() => uglifyCSS(PIXLE_GAME_STYLES_MIN_DEST_PATH));
 });
 
 /*
-
-/*
-
-Compress svg files: ----------------------------------------------
-
+Compress SVG files: ----------------------------------------------
 */
 
-gulp.task('svg-compress', async function () {
-  gulp.src(PIXLE_GAME_SVG_FOLDER + '**/*.svg')
+gulp.task('svg-compress', () => {
+  return gulp.src(`${PIXLE_GAME_SVG_FOLDER}**/*.svg`)
     .pipe(plumber())
     .pipe(svgmin())
     .pipe(gulp.dest(PIXLE_GAME_SVG_FOLDER));
 });
 
 /*
-
 Compress Task: ---------------------------------------------------
-
 */
 
 gulp.task('compress', gulp.series('clear', 'default-stylesheets'));
 
+export default function (localGulp) {
+  localGulp.task('pixle-game-compress', gulp.series('clear', 'default-stylesheets'));
+};
+
 /*
-
 Default Task: ----------------------------------------------------
-
 */
 
-gulp.task('watch', function () {
-  'use strict';
+gulp.task('watch', () => {
   gulp.watch(STYLES_SRC_FILES, gulp.series('compress'));
 });
 
