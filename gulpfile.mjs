@@ -108,7 +108,7 @@ await loadGulpTasks(path.resolve(__dirname, 'projects/pixle-game/gulpfile.mjs'))
 await loadGulpTasks(path.resolve(__dirname, 'projects/pixle-landing/gulpfile.mjs'));
 
 // Task to combine all compress tasks
-gulp.task('everything', gulp.series('combined', gulp.task('pixle-game-compress'), gulp.task('pixle-landing-compress')));
+gulp.task('everything', gulp.series('combined', 'pixle-game-compress', 'pixle-landing-compress'));
 
 // Default task to watch stylesheets
 gulp.task('watch', () => {
