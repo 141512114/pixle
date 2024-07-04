@@ -39,7 +39,7 @@ jobs:
 
     - name: Run npm i and create a pixle database
       run: |
-          npm i
+          npm i --legacy-peer-deps
           gulp everything && gulp
           npm run pixles
 
