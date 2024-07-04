@@ -12,7 +12,7 @@ jobs:
 
     strategy:
       matrix:
-        node-version: [14.x, 16.x, 18.x]
+        node-version: [18.x]
 
     steps:
     - uses: actions/checkout@v4
@@ -39,7 +39,7 @@ jobs:
 
     - name: Run npm i and create a pixle database
       run: |
-          npm i
+          npm i --legacy-peer-deps
           gulp everything && gulp
           npm run pixles
 
