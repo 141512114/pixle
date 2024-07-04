@@ -45,13 +45,15 @@ const STYLES_DEL_PATTERN = [
 Clear assets/stylesheets folder: --------------------------------
 */
 
-function clearStyles(pattern) {
+async function clearStyles(pattern) {
   return deleteAsync(pattern).then(deletedFilePaths => {
     console.log('Deleted files:\n', deletedFilePaths.join('\n'));
   });
 }
 
-gulp.task('clear', () => clearStyles(STYLES_DEL_PATTERN));
+gulp.task('clear', async function() {
+  await clearStyles(STYLES_DEL_PATTERN);
+});
 
 /*
 Convert to CSS: -------------------------------------------------

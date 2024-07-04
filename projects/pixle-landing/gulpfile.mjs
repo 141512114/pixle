@@ -75,8 +75,12 @@ async function clearFiles(pattern) {
   console.log('Deleted files:\n', deletedFilePaths.join('\n'));
 }
 
-gulp.task('clear-css', () => clearFiles(STYLES_DEL_PATTERN));
-gulp.task('clear-js', () => clearFiles(JAVASCRIPT_DEL_PATTERN));
+gulp.task('clear-css', async function() {
+  await clearFiles(STYLES_DEL_PATTERN);
+});
+gulp.task('clear-js', async function() {
+  await clearFiles(JAVASCRIPT_DEL_PATTERN);
+});
 
 /*
 Convert to CSS: -------------------------------------------------
