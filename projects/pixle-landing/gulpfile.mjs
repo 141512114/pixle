@@ -71,15 +71,18 @@ Clear assets/stylesheets folder: --------------------------------
 */
 
 async function clearFiles(pattern) {
-  const deletedFilePaths = await deleteAsync(pattern);
-  console.log('Deleted files:\n', deletedFilePaths.join('\n'));
+  return deleteAsync(pattern).then(deletedFilePaths => {
+    console.log('Deleted files:\n', deletedFilePaths.join('\n'));
+  });
 }
 
 gulp.task('clear-css', async function() {
   await clearFiles(STYLES_DEL_PATTERN);
+  return console.log("Clearing css files...");
 });
 gulp.task('clear-js', async function() {
   await clearFiles(JAVASCRIPT_DEL_PATTERN);
+  return console.log("Clearing js files...");
 });
 
 /*

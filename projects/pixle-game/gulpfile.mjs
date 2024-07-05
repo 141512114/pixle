@@ -53,6 +53,7 @@ async function clearStyles(pattern) {
 
 gulp.task('clear', async function() {
   await clearStyles(STYLES_DEL_PATTERN);
+  return console.log("Clearing files...");
 });
 
 /*
