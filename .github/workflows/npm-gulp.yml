@@ -12,7 +12,7 @@ jobs:
 
     strategy:
       matrix:
-        node-version: [18.x]
+        node-version: [18.x, 19.x, 20.x]
 
     steps:
     - uses: actions/checkout@v4
@@ -32,6 +32,11 @@ jobs:
           ${{ runner.os }}-build-
           ${{ runner.os }}-
 
+    - name: Install necessary packages
+      run: |
+        sudo apt-get install g++ build-essential
+        npm install -g node-gyp
+
     - name: Use Node.js ${{ matrix.node-version }}
       uses: actions/setup-node@v3
       with:
@@ -40,11 +45,15 @@ jobs:
     - name: Run npm i and create a pixle database
       run: |
           npm i --legacy-peer-deps
-          gulp everything
+          gulp combined
           npm run pixles
 
     - name: Run build pixle-game command
-      run: npm run build pixle-game
+      run: |
+        gulp pixle-game-compress
+        npm run build pixle-game
         
     - name: Run build:ssr command
-      run: npm run build:ssr
+      run: |
+        gulp pixle-landing-compress
+        npm run build:ssr
