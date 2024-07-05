@@ -5,6 +5,7 @@
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build",
+    "cleanup": "ng clean",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
     "pixles": "ts-node local/pixle-generator/pixle-generator.ts",
