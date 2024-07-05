@@ -119,21 +119,21 @@ async function loadGulpTasks(gulpfilePath) {
   }
 }
 
-// Wrap loadGulpTasks in a Gulp task
-gulp.task('load-pixle-game-tasks', async function() {
+// Async function to load all external tasks
+async function loadAllExternalTasks() {
+  console.log("Loading gulp tasks from external projects...");
   await loadGulpTasks(path.resolve(__dirname, 'projects/pixle-game/gulpfile.mjs'));
-});
-
-gulp.task('load-pixle-landing-tasks', async function() {
   await loadGulpTasks(path.resolve(__dirname, 'projects/pixle-landing/gulpfile.mjs'));
-});
+  console.log("All external tasks loaded.");
+}
+
+// Load external tasks before defining the 'everything' task
+await loadAllExternalTasks();
 
 // Define the 'everything' task to combine all compress tasks
 gulp.task('everything', gulp.series(
   'combined',
-  'load-pixle-game-tasks',
   'pixle-game-compress',
-  'load-pixle-landing-tasks',
   'pixle-landing-compress'
 ));
 
