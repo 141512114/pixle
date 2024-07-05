@@ -119,7 +119,7 @@ function uglify(dest) {
 Compress normal stylesheets: -------------------------------------
 */
 
-gulp.task('default-stylesheets', async () => {
+gulp.task('default-stylesheets', async function() {
   await toCSS(STYLES_SRC_FILES, PIXLE_LANDING_STYLES_MIN_DEST_PATH);
   await uglify(PIXLE_LANDING_STYLES_MIN_DEST_PATH);
 });

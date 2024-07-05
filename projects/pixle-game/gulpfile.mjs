@@ -94,7 +94,7 @@ async function uglifyCSS(dest) {
 Compress normal stylesheets: -------------------------------------
 */
 
-gulp.task('default-stylesheets', () => {
+gulp.task('default-stylesheets', async function() {
   return toCSS(STYLES_SRC_FILES, PIXLE_GAME_STYLES_MIN_DEST_PATH)
     .then(() => uglifyCSS(PIXLE_GAME_STYLES_MIN_DEST_PATH));
 });
