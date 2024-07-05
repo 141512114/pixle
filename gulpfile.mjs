@@ -37,16 +37,19 @@ const BOOTSTRAP_DEL_PATTERN = [
 
 // Function to clear styles
 async function clearStyles(pattern) {
-  const deletedFilePaths = await deleteAsync(pattern);
-  console.log('Deleted files:\n', deletedFilePaths.join('\n'));
+  return deleteAsync(pattern).then(deletedFilePaths => {
+    console.log('Deleted files:\n', deletedFilePaths.join('\n'));
+  });
 }
 
 // Tasks to clear styles
 gulp.task('clear-css', async function() {
   await clearStyles(STYLES_DEL_PATTERN);
+  return console.log("Clearing css files...");
 });
 gulp.task('clear-bootstrap', async function() {
   await clearStyles(BOOTSTRAP_DEL_PATTERN);
+  return console.log("Clearing bootstrap files...");
 });
 
 // Function to compile SCSS to CSS
