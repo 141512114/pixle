@@ -40,7 +40,12 @@
               "node_modules/@fortawesome/fontawesome-free/css/solid.min.css",
               "local/stylesheets/css/twemoji-amazing.min.css",
               "local/stylesheets/css/bootstrap/bootstrap.min.css",
-              "local/stylesheets/css/styles.min.css"
+              "local/stylesheets/css/styles.min.css",
+              "projects/pixle-game/src/stylesheets/css/app.component.min.css",
+              "projects/pixle-game/src/stylesheets/css/pix-game.component.min.css",
+              "projects/pixle-game/src/stylesheets/css/pix-grid-element.component.min.css",
+              "projects/pixle-game/src/stylesheets/css/pix-grid-ui.component.min.css",
+              "projects/pixle-game/src/stylesheets/css/pix-grid.component.min.css"
             ],
             "scripts": [],
             "serviceWorker": true,
@@ -133,7 +138,12 @@
               "node_modules/@fortawesome/fontawesome-free/css/solid.min.css",
               "local/stylesheets/css/twemoji-amazing.min.css",
               "local/stylesheets/css/bootstrap/bootstrap.min.css",
-              "local/stylesheets/css/styles.min.css"
+              "local/stylesheets/css/styles.min.css",
+              "projects/pixle-game/src/stylesheets/css/app.component.min.css",
+              "projects/pixle-game/src/stylesheets/css/pix-game.component.min.css",
+              "projects/pixle-game/src/stylesheets/css/pix-grid-element.component.min.css",
+              "projects/pixle-game/src/stylesheets/css/pix-grid-ui.component.min.css",
+              "projects/pixle-game/src/stylesheets/css/pix-grid.component.min.css"
             ],
             "scripts": []
           }
@@ -176,7 +186,11 @@
               "node_modules/@fortawesome/fontawesome-free/css/solid.min.css",
               "local/stylesheets/css/twemoji-amazing.min.css",
               "local/stylesheets/css/bootstrap/bootstrap.min.css",
-              "local/stylesheets/css/styles.min.css"
+              "local/stylesheets/css/styles.min.css",
+              "projects/pixle-landing/src/stylesheets/css/app.component.min.css",
+              "projects/pixle-landing/src/stylesheets/css/pix-hero-grid.component.min.css",
+              "projects/pixle-landing/src/stylesheets/css/pix-hero-title.component.min.css",
+              "projects/pixle-landing/src/stylesheets/css/pix-home.component.min.css"
             ],
             "scripts": []
           },
@@ -266,7 +280,11 @@
               "node_modules/@fortawesome/fontawesome-free/css/solid.min.css",
               "local/stylesheets/css/twemoji-amazing.min.css",
               "local/stylesheets/css/bootstrap/bootstrap.min.css",
-              "local/stylesheets/css/styles.min.css"
+              "local/stylesheets/css/styles.min.css",
+              "projects/pixle-landing/src/stylesheets/css/app.component.min.css",
+              "projects/pixle-landing/src/stylesheets/css/pix-hero-grid.component.min.css",
+              "projects/pixle-landing/src/stylesheets/css/pix-hero-title.component.min.css",
+              "projects/pixle-landing/src/stylesheets/css/pix-home.component.min.css"
             ],
             "scripts": []
           }
@@ -334,7 +352,6 @@
       }
     }
   },
-  "defaultProject": "pixle-game",
   "cli": {
     "analytics": "b7293f7a-73a0-4c89-922b-64a10c2cc3a5"
   }
