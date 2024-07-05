@@ -119,11 +119,23 @@ async function loadGulpTasks(gulpfilePath) {
   }
 }
 
-await loadGulpTasks(path.resolve(__dirname, 'projects/pixle-game/gulpfile.mjs'));
-await loadGulpTasks(path.resolve(__dirname, 'projects/pixle-landing/gulpfile.mjs'));
+// Wrap loadGulpTasks in a Gulp task
+gulp.task('load-pixle-game-tasks', async function() {
+  await loadGulpTasks(path.resolve(__dirname, 'projects/pixle-game/gulpfile.mjs'));
+});
 
-// Task to combine all compress tasks
-gulp.task('everything', gulp.series('combined', 'pixle-game-compress', 'pixle-landing-compress'));
+gulp.task('load-pixle-landing-tasks', async function() {
+  await loadGulpTasks(path.resolve(__dirname, 'projects/pixle-landing/gulpfile.mjs'));
+});
+
+// Define the 'everything' task to combine all compress tasks
+gulp.task('everything', gulp.series(
+  'combined',
+  'load-pixle-game-tasks',
+  'pixle-game-compress',
+  'load-pixle-landing-tasks',
+  'pixle-landing-compress'
+));
 
 // Default task to watch stylesheets
 gulp.task('watch', () => {
