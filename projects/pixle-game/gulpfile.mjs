@@ -60,8 +60,7 @@ gulp.task('clear', async function() {
 Convert to CSS: -------------------------------------------------
 */
 
-async function toCSS(source, dest) {
-  'use strict';
+function toCSS(source, dest) {
   return gulp.src(source)
     .pipe(plumber())
     .pipe(sourcemaps.init({ loadMaps: true }))
@@ -75,8 +74,7 @@ async function toCSS(source, dest) {
 Uglify / Clean CSS: ----------------------------------------------
 */
 
-async function uglifyCSS(dest) {
-  'use strict';
+function uglifyCSS(dest) {
   return gulp.src(`${dest}**/!(*.min).css`)
     .pipe(plumber())
     .pipe(cleanCSS({ debug: true, compatibility: 'ie8' }, (details) => {
@@ -95,9 +93,9 @@ async function uglifyCSS(dest) {
 Compress normal stylesheets: -------------------------------------
 */
 
-gulp.task('default-stylesheets', async function() {
-  return toCSS(STYLES_SRC_FILES, PIXLE_GAME_STYLES_MIN_DEST_PATH)
-    .then(() => uglifyCSS(PIXLE_GAME_STYLES_MIN_DEST_PATH));
+gulp.task('default-stylesheets', () => {
+  toCSS(STYLES_SRC_FILES, PIXLE_GAME_STYLES_MIN_DEST_PATH);
+  uglifyCSS(PIXLE_GAME_STYLES_MIN_DEST_PATH);
 });
 
 /*

@@ -88,20 +88,20 @@ async function minifyCSS(source, dest) {
 // Task to compile default stylesheets
 gulp.task('default-stylesheets', gulp.series(
   async function() {
-    await compileCSS(STYLES_SRC_FILES, STYLES_MIN_DEST_PATH);
+    return await compileCSS(STYLES_SRC_FILES, STYLES_MIN_DEST_PATH);
   },
   async function(){
-    await minifyCSS([path.join(STYLES_MIN_DEST_PATH, '**', '!(*.min).css'), '!' + path.join(BOOTSTRAP_MIN_DEST_PATH, '**/*')], STYLES_MIN_DEST_PATH);
+    return await minifyCSS([path.join(STYLES_MIN_DEST_PATH, '**', '!(*.min).css'), '!' + path.join(BOOTSTRAP_MIN_DEST_PATH, '**/*')], STYLES_MIN_DEST_PATH);
   }
 ));
 
 // Task to compile bootstrap stylesheets
 gulp.task('bootstrap-stylesheets', gulp.series(
   async function() {
-    await compileCSS(BOOTSTRAP_SRC_FILES, BOOTSTRAP_MIN_DEST_PATH);
+    return await compileCSS(BOOTSTRAP_SRC_FILES, BOOTSTRAP_MIN_DEST_PATH);
   },
   async function() {
-    await minifyCSS(path.join(BOOTSTRAP_MIN_DEST_PATH, '**', '!(*.min).css'), BOOTSTRAP_MIN_DEST_PATH);
+    return await minifyCSS(path.join(BOOTSTRAP_MIN_DEST_PATH, '**', '!(*.min).css'), BOOTSTRAP_MIN_DEST_PATH);
   }
 ));
 
