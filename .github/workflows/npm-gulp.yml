@@ -41,7 +41,7 @@ jobs:
       run: |
         sudo apt-get install g++ build-essential
         npm install -g node-gyp
-        npm install style-loader css-loader --save-dev
+        npm install style-loader css-loader --save-dev --legacy-peer-deps
 
     - name: Clear npm cache and verify its integrity
       run: |
