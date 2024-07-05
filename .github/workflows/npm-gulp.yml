@@ -32,20 +32,24 @@ jobs:
           ${{ runner.os }}-build-
           ${{ runner.os }}-
 
-    - name: Install necessary packages
-      run: |
-        sudo apt-get install g++ build-essential
-        npm install -g node-gyp
-
     - name: Use Node.js ${{ matrix.node-version }}
       uses: actions/setup-node@v3
       with:
         node-version: ${{ matrix.node-version }}
 
+    - name: Install necessary packages
+      run: |
+        sudo apt-get install g++ build-essential
+        npm install -g node-gyp
+        npm install style-loader css-loader --save-dev
+
+    - name: Clear npm cache and verify its integrity
+      run: |
+          npm run cleanup
+
     - name: Run npm i, create a pixle database and clean up the cache and any artifacts
       run: |
           npm i --legacy-peer-deps
-          npm run cleanup
           gulp combined
           npm run pixles
 
