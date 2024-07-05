@@ -43,9 +43,12 @@ Thumbs.db
 
 # Other
 /local/stylesheets/css/bootstrap/
-/local/stylesheets/css/
-/projects/pixle-game/src/stylesheets/css/
-/projects/pixle-landing/src/stylesheets/css/
+/local/stylesheets/css/**/*
+!/local/stylesheets/css/.gitkeep
+/projects/pixle-game/src/stylesheets/css/**/*
+!/projects/pixle-game/src/stylesheets/css/.gitkeep
+/projects/pixle-landing/src/stylesheets/css/**/*
+!/projects/pixle-landing/src/stylesheets/css/.gitkeep
 /builds/
 /local/stylesheets/backup/
 /projects/pixle-game/src/app/database/pixle-arts.database.json
