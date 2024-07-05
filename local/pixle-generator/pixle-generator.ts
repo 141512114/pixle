@@ -101,7 +101,7 @@ function generateNewPixle(pixle_date: any, pixle_id: number = 0): void {
  * Create the file which stores all pixles
  */
 function createPixleDatabaseFile(): void {
-  const path_name: string = './local/pixle-generator/database/';
+  const path_name: string = './projects/pixle-game/src/app/database/';
   const file_name: string = 'pixle-arts.database.json';
   const json_content: string = JSON.stringify(pixle_master_list);
   fs.writeFile(path_name + file_name, json_content, 'utf8', function (err) {
