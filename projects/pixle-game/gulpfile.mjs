@@ -62,6 +62,7 @@ Convert to CSS: -------------------------------------------------
 
 async function toCSS(source, dest) {
   'use strict';
+  console.log("Convert scss files to css files...");
   return gulp.src(source)
     .pipe(plumber())
     .pipe(sourcemaps.init({ loadMaps: true }))
@@ -77,11 +78,12 @@ Uglify / Clean CSS: ----------------------------------------------
 
 async function uglifyCSS(dest) {
   'use strict';
+  console.log("Minify css files...");
   return gulp.src(`${dest}**/!(*.min).css`)
     .pipe(plumber())
-    .pipe(cleanCSS({ debug: true, compatibility: 'ie8' }, (details) => {
-      console.log('Original Size : ' + details.name + ': ' + details.stats.originalSize + ' bytes');
-      console.log('Minified Size : ' + details.name + ': ' + details.stats.minifiedSize + ' bytes');
+    .pipe(cleanCSS({ debug: true }, (details) => {
+      console.log(`Original Size : ${details.name} : ${details.stats.originalSize} bytes`);
+      console.log(`Minified Size : ${details.name} : ${details.stats.minifiedSize} bytes`);
     }))
     .pipe(rename((path) => {
       if (!path.extname.endsWith('.map')) {
