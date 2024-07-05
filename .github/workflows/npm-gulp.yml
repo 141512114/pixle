@@ -42,9 +42,10 @@ jobs:
       with:
         node-version: ${{ matrix.node-version }}
 
-    - name: Run npm i and create a pixle database
+    - name: Run npm i, create a pixle database and clean up the cache and any artifacts
       run: |
           npm i --legacy-peer-deps
+          npm run cleanup
           gulp combined
           npm run pixles
 
