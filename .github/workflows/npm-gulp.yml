@@ -41,15 +41,14 @@ jobs:
       run: |
         sudo apt-get install g++ build-essential
         npm install -g node-gyp
-        npm install style-loader css-loader --save-dev --legacy-peer-deps
+        npm i --legacy-peer-deps && npm install style-loader css-loader --save-dev
 
     - name: Clear npm cache and verify its integrity
       run: |
           npm run cleanup
 
-    - name: Run npm i, create a pixle database and clean up the cache and any artifacts
+    - name: Create a pixle database and clean up the cache and any artifacts
       run: |
-          npm i --legacy-peer-deps
           gulp combined
           npm run pixles
 
