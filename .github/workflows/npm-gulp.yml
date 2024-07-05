@@ -52,12 +52,14 @@ jobs:
           gulp combined
           npm run pixles
 
+    - name: Generate the pixle game stylesheets
+      run: gulp pixle-game-compress
+
     - name: Run build pixle-game command
-      run: |
-        gulp pixle-game-compress
-        npm run build pixle-game
+      run: npm run build pixle-game
+
+    - name: Generate the pixle landing stylesheets
+      run: gulp pixle-landing-compress
         
     - name: Run build:ssr command
-      run: |
-        gulp pixle-landing-compress
-        npm run build:ssr
+      run: npm run build:ssr
