@@ -79,18 +79,21 @@ Uglify / Clean CSS: ----------------------------------------------
 async function uglifyCSS(dest) {
   'use strict';
   console.log("Minify css files...");
-  return gulp.src(`${dest}**/!(*.min).css`)
-    .pipe(plumber())
-    .pipe(cleanCSS({ debug: true }, (details) => {
-      console.log(`Original Size : ${details.name} : ${details.stats.originalSize} bytes`);
-      console.log(`Minified Size : ${details.name} : ${details.stats.minifiedSize} bytes`);
-    }))
-    .pipe(rename((path) => {
-      if (!path.extname.endsWith('.map')) {
-        path.basename += '.min';
-      }
-    }))
-    .pipe(gulp.dest(dest));
+  return new Promise((resolve) => {
+    gulp.src(`${dest}**/!(*.min).css`)
+      .pipe(plumber())
+      .pipe(cleanCSS({ debug: true }, (details) => {
+        console.log(`Original Size : ${details.name} : ${details.stats.originalSize} bytes`);
+        console.log(`Minified Size : ${details.name} : ${details.stats.minifiedSize} bytes`);
+      }))
+      .pipe(rename((path) => {
+        if (!path.extname.endsWith('.map')) {
+          path.basename += '.min';
+        }
+      }))
+      .pipe(gulp.dest(dest))
+      .on('end', resolve);
+  });
 }
 
 /*
