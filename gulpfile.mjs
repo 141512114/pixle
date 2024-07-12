@@ -71,9 +71,9 @@ async function minifyCSS(source, dest) {
   return new Promise((resolve) => {
     gulp.src(source)
       .pipe(plumber())
-      .pipe(cleanCSS({ debug: true, compatibility: 'ie8' }, (details) => {
-        console.log('Original Size : ' + details.name + ': ' + details.stats.originalSize + ' bytes');
-        console.log('Minified Size : ' + details.name + ': ' + details.stats.minifiedSize + ' bytes');
+      .pipe(cleanCSS({ debug: true }, (details) => {
+        console.log(`Original Size : ${details.name} : ${details.stats.originalSize} bytes`);
+        console.log(`Minified Size : ${details.name} : ${details.stats.minifiedSize} bytes`);
       }))
       .pipe(rename((path) => {
         if (!path.extname.endsWith('.map')) {
