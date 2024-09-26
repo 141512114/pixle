@@ -36,7 +36,7 @@
     "@fortawesome/fontawesome-svg-core": "^6.5.2",
     "@fortawesome/free-solid-svg-icons": "^6.5.2",
     "@nguniversal/express-engine": "^16.2.0",
-    "express": "^4.19.2",
+    "express": "^4.21.0",
     "gulp-cli": "^3.0.0",
     "rxjs": "^7.8.1",
     "tslib": "^2.6.3",
