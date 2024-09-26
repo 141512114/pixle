@@ -55,11 +55,17 @@ jobs:
     - name: Generate the pixle game stylesheets
       run: gulp pixle-game-compress
 
-    - name: Run build pixle-game command
-      run: npm run build pixle-game
+    - name: Run the application pixle-game
+      run: npm run start
+
+    # - name: Run build pixle-game command
+    #   run: npm run build pixle-game
 
     - name: Generate the pixle landing stylesheets
       run: gulp pixle-landing-compress
+
+    - name: Run the homepage of pixle
+      run: npm run prerender
         
-    - name: Run build:ssr command
-      run: npm run build:ssr
+    # - name: Run build:ssr command
+    #   run: npm run build:ssr
