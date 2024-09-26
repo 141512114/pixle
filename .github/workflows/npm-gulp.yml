@@ -56,7 +56,7 @@ jobs:
       run: gulp pixle-game-compress
 
     - name: Run the application pixle-game
-      run: npm run start
+      run: npm run start pixle-game
 
     # - name: Run build pixle-game command
     #   run: npm run build pixle-game
