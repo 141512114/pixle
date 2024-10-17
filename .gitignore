@@ -1,4 +1,4 @@
-# See https://docs.github.com/get-started/getting-started-with-git/ignoring-files for more about ignoring files.
+# See http://help.github.com/ignore-files/ for more about ignoring files.
 
 # Compiled output
 /dist
@@ -40,3 +40,22 @@ testem.log
 # System files
 .DS_Store
 Thumbs.db
+
+# Other
+/local/stylesheets/css/bootstrap/
+/local/stylesheets/css/**/*
+!/local/stylesheets/css/.gitkeep
+/projects/pixle-game/src/stylesheets/css/**/*
+!/projects/pixle-game/src/stylesheets/css/.gitkeep
+/projects/pixle-landing/src/stylesheets/css/**/*
+!/projects/pixle-landing/src/stylesheets/css/.gitkeep
+/builds/
+/local/stylesheets/backup/
+/projects/pixle-game/src/app/database/pixle-arts.database.json
+/local/pixle-generator/database/
+/projects/pixle-game/src/analytics/index.php
+/projects/pixle-landing/src/analytics/index.php
+/projects/pixle-game/src/assets/important/imprint.html
+/projects/pixle-landing/src/assets/important/imprint.html
+/projects/pixle-landing/src/assets/important/privacy-policy.html
+/local/svg/twemoji/

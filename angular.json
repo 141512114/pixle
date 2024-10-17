@@ -27,6 +27,8 @@
             "tsConfig": "projects/pixle-game/tsconfig.app.json",
             "inlineStyleLanguage": "scss",
             "assets": [
+              "projects/pixle-game/src/.htaccess",
+              "projects/pixle-game/src/analytics",
               "projects/pixle-game/src/assets",
               {
                 "glob": "**/*",
@@ -45,10 +47,15 @@
             },
             "scripts": [
               "node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"
-            ]
+            ],
+            "serviceWorker": "ngsw-config.json"
           },
           "configurations": {
             "production": {
+              "index": {
+                "input": "projects/pixle-game/src/index.prod.html",
+                "output": "index.html"
+              },
               "budgets": [
                 {
                   "type": "initial",
@@ -97,6 +104,8 @@
             "tsConfig": "projects/pixle-game/tsconfig.spec.json",
             "inlineStyleLanguage": "scss",
             "assets": [
+              "projects/pixle-game/src/.htaccess",
+              "projects/pixle-game/src/analytics",
               "projects/pixle-game/src/assets",
               {
                 "glob": "**/*",
