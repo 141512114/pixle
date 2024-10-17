@@ -1,0 +1,9 @@
+<div class="position-relative h-100 overflow-hidden component-pix-hero-grid">
+  <div class="d-flex justify-content-center align-items-end flex-column m-0 p-0 py-3 h-100 pix-grid-wrapper">
+    <div *ngFor="let row of grid_image" class="row g-0 w-auto pix-grid-row">
+      <div *ngFor="let col of row" class="col-{{12/grid_image_width}} pix-col-item">
+        <app-pix-hero-tile [pixle_emoji]="col"></app-pix-hero-tile>
+      </div>
+    </div>
+  </div>
+</div>

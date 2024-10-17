@@ -46,5 +46,5 @@ jobs:
     - name: Run build pixle-game command
       run: npm run build pixle-game
 
-    # - name: Run build:ssr command
-    #   run: npm run build:ssr
+    - name: Run build pixle-landing command
+      run: npm run build pixle-landing

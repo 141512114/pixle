@@ -1,0 +1,330 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+  <meta content="no-cache, no-store, must-revalidate" http-equiv="Cache-Control"/>
+  <meta content="no-cache" http-equiv="Pragma"/>
+  <meta content="0" http-equiv="Expires"/>
+  <meta content="width=device-width, height=device-height, initial-scale=1.0, maximum-scale=2.0, minimum-scale=1.0"
+        name="viewport"/>
+  <title>Pixle - A puzzle game inspired by Wordle and Picross</title>
+  <base href="/"/>
+  <meta content="Nani Games" name="author"/>
+  <meta
+    content="Pixle is a puzzle game inspired by Wordle and Picross. Daily pixle puzzles keep you challenged and thrilled to train your memory."
+    name="description"/>
+  <meta content="Pixle - A puzzle game inspired by Wordle and Picross" property="og:title"/>
+  <meta content="https://www.pixle.gg/" property="og:url"/>
+  <meta
+    content="Pixle is a puzzle game inspired by Wordle and Picross. Daily pixle puzzles keep you challenged and thrilled to train your memory."
+    property="og:description"/>
+  <meta content="summary_large_image" property="twitter:card"/>
+  <meta content="https://www.pixle.gg/" property="twitter:domain"/>
+  <meta
+    content="pixle, wordle, picross, puzzle, brain, training, emojis, emoji, emoticons, pictures, riddles, casual, angular, web app, app"
+    name="keywords"/>
+  <link as="font" crossorigin="anonymous" href="assets/fonts/OpenSans/OpenSans-Bold.ttf" rel="preload"
+        type="font/ttf"/>
+  <link as="font" crossorigin="anonymous" href="assets/fonts/OpenSans/OpenSans-Medium.ttf" rel="preload"
+        type="font/ttf"/>
+  <link href="favicon.ico" rel="icon shortcut" type="image/x-icon"/>
+  <link href="assets/apple-touch-icon.png" rel="apple-touch-icon"/>
+  <style>
+    .lds-grid-wrapper {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      width: 100%;
+      height: 100%;
+      background-color: #08080C;
+      z-index: 9999;
+    }
+
+    .lds-grid {
+      display: inline-block;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 80px;
+      height: 80px;
+    }
+
+    .lds-grid div {
+      position: absolute;
+      width: 16px;
+      height: 16px;
+      border-radius: 50%;
+      background: #fff;
+      animation: lds-grid 1.2s linear infinite;
+    }
+
+    .lds-grid div:nth-child(1) {
+      top: 8px;
+      left: 8px;
+      animation-delay: 0s;
+    }
+
+    .lds-grid div:nth-child(2) {
+      top: 8px;
+      left: 32px;
+      animation-delay: -0.4s;
+    }
+
+    .lds-grid div:nth-child(3) {
+      top: 8px;
+      left: 56px;
+      animation-delay: -0.8s;
+    }
+
+    .lds-grid div:nth-child(4) {
+      top: 32px;
+      left: 8px;
+      animation-delay: -0.4s;
+    }
+
+    .lds-grid div:nth-child(5) {
+      top: 32px;
+      left: 32px;
+      animation-delay: -0.8s;
+    }
+
+    .lds-grid div:nth-child(6) {
+      top: 32px;
+      left: 56px;
+      animation-delay: -1.2s;
+    }
+
+    .lds-grid div:nth-child(7) {
+      top: 56px;
+      left: 8px;
+      animation-delay: -0.8s;
+    }
+
+    .lds-grid div:nth-child(8) {
+      top: 56px;
+      left: 32px;
+      animation-delay: -1.2s;
+    }
+
+    .lds-grid div:nth-child(9) {
+      top: 56px;
+      left: 56px;
+      animation-delay: -1.6s;
+    }
+
+    @keyframes lds-grid {
+      0%, 100% {
+        opacity: 1;
+      }
+      50% {
+        opacity: 0.5;
+      }
+    }
+  </style>
+  <script type="text/javascript">
+    if (history.scrollRestoration) {
+      history.scrollRestoration = 'manual';
+    } else {
+      window.onbeforeunload = () => {
+        window.scrollTo(0, 0);
+      }
+    }
+  </script>
+</head>
+<body class="position-relative" data-theme="default">
+<div id="twitter-wjs"></div>
+<app-root></app-root>
+<div class="lds-grid-wrapper">
+  <div class="lds-grid">
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+  </div>
+</div>
+<svg height="0" id="svg-backlog-root" style="display:none;visibility:hidden;" version="1.1" viewBox="0 0 0 0" width="0"
+     x="0px" xmlns="http://www.w3.org/2000/svg" y="0px">
+  <style type="text/css">
+    .st2 {
+      fill: none;
+      stroke: #B5B5B6;
+      stroke-width: 7;
+      stroke-miterlimit: 10;
+    }
+
+    .st3 {
+      fill: #DCDBDB;
+      stroke: #DCDBDB;
+      stroke-width: 5;
+      stroke-miterlimit: 10;
+    }
+
+    .st4 {
+      fill: #EF3B39;
+    }
+
+    .st5 {
+      fill: #993333;
+    }
+
+    .st8 {
+      fill: #996699;
+    }
+
+    .st9 {
+      fill: #663366;
+    }
+  </style>
+  <defs>
+    <g id="nani-logo-duotone">
+      <g class="theme-colors__6">
+        <rect height="72.6" style="opacity:.6;"
+              transform="matrix(0.7071 -0.7071 0.7071 0.7071 -86.5117 110.6123)" width="25.7" x="77.4" y="123.4"/>
+        <rect height="72.6" transform="matrix(0.7071 -0.7071 0.7071 0.7071 -104.6551 103.0971)"
+              width="25.7" x="59.3" y="141.6"/>
+      </g>
+      <path class="theme-colors__5" d="M135,11.1c-5.5-5.5-14.5-5.5-20,0L11.1,115c-5.5,5.5-5.5,14.5,0,20l26.3,26.3L125,73.7l51.3,51.3l-87.6,87.6
+        l26.3,26.3c5.5,5.5,14.5,5.5,20,0L238.9,135c5.5-5.5,5.5-14.5,0-20L135,11.1z M137.8,216.9l-8.5,8.5c-2.4,2.4-6.2,2.4-8.6,0
+        l-8.5-8.5c-2.4-2.4-2.4-6.2,0-8.6l8.5-8.5c2.4-2.4,6.2-2.4,8.6,0l8.5,8.5C140.2,210.7,140.2,214.5,137.8,216.9z"/>
+    </g>
+    <g id="nani-logo-duotone-only-strokes">
+      <g class="theme-colors__6__stroke">
+        <rect height="72.6" style="opacity:.6;"
+              transform="matrix(0.7071 -0.7071 0.7071 0.7071 -86.5117 110.6123)" width="25.7" x="77.4" y="123.4"/>
+        <rect height="72.6" transform="matrix(0.7071 -0.7071 0.7071 0.7071 -104.6551 103.0971)"
+              width="25.7" x="59.3" y="141.6"/>
+      </g>
+      <path class="theme-colors__5__stroke" d="M135,11.1c-5.5-5.5-14.5-5.5-20,0L11.1,115c-5.5,5.5-5.5,14.5,0,20l26.3,26.3L125,73.7l51.3,51.3l-87.6,87.6
+        l26.3,26.3c5.5,5.5,14.5,5.5,20,0L238.9,135c5.5-5.5,5.5-14.5,0-20L135,11.1z M137.8,216.9l-8.5,8.5c-2.4,2.4-6.2,2.4-8.6,0
+        l-8.5-8.5c-2.4-2.4-2.4-6.2,0-8.6l8.5-8.5c2.4-2.4,6.2-2.4,8.6,0l8.5,8.5C140.2,210.7,140.2,214.5,137.8,216.9z"/>
+    </g>
+    <!-- Pixle grid graphics. Used in the step-by-step guide on the landing page -->
+    <g id="pixle-grid-graphic">
+      <g>
+        <path class="theme-colors__4" d="M190.8,197.1H59.2c-15.8,0-28.5-12.8-28.5-28.5V37c0-15.8,12.8-28.5,28.5-28.5h131.6
+		      c15.8,0,28.5,12.8,28.5,28.5v131.6C219.3,184.4,206.5,197.1,190.8,197.1z"/>
+        <g class="theme-colors__3">
+          <path d="M125,102.8H30.7V35.6c0-15,12.1-27.1,27.1-27.1H125V102.8z"/>
+          <path d="M190.8,197.1H125v-94.3h94.3v65.8C219.3,184.4,206.5,197.1,190.8,197.1z"/>
+        </g>
+      </g>
+      <g id="pixle-grid-ui-graphic">
+        <path class="theme-colors__4" d="M189.1,241.5H60.9c-3.8,0-6.8-3.1-6.8-6.8v-9.8c0-3.8,3.1-6.8,6.8-6.8h128.3
+		      c3.8,0,6.8,3.1,6.8,6.8v9.8C196,238.5,192.9,241.5,189.1,241.5z"/>
+        <path class="theme-colors__3" d="M125,241.5H60.9c-3.8,0-6.8-3.1-6.8-6.8v-9.8c0-3.8,3.1-6.8,6.8-6.8H125V241.5z"/>
+      </g>
+    </g>
+    <g id="pixle-grid-with-content-graphic">
+      <use xlink:href="#pixle-grid-graphic"></use>
+      <g>
+        <g>
+          <path class="st2"
+                d="M172.2,145.6l0,24.7c-13.5,0-24.7-11.1-24.7-24.7c0-13.5,11.1-24.7,24.7-24.7c13.5,0,24.7,11.1,24.7,24.7H172.2z"/>
+          <circle class="st3" cx="172.2" cy="170.3" r="8.7"/>
+        </g>
+        <g>
+          <path class="st2"
+                d="M77.8,51.3l0,24.7c-13.5,0-24.7-11.1-24.7-24.7c0-13.5,11.1-24.7,24.7-24.7s24.7,11.1,24.7,24.7H77.8z"/>
+          <circle class="st3" cx="77.8" cy="76" r="8.7"/>
+        </g>
+      </g>
+      <g>
+        <g>
+          <rect class="st4" height="54.9" width="54.9" x="144.7" y="28.2"/>
+          <path class="st5" d="M199.6,83.1h-54.9v-1.3c0-15.2,12.3-27.5,27.5-27.5h0c15.2,0,27.5,12.3,27.5,27.5V83.1z"/>
+        </g>
+        <g>
+          <rect class="st4" height="54.9" width="54.9" x="50.4" y="123.1"/>
+          <path class="st5" d="M105.3,178H50.4v-1.3c0-15.2,12.3-27.5,27.5-27.5h0c15.2,0,27.5,12.3,27.5,27.5V178z"/>
+        </g>
+      </g>
+    </g>
+    <g id="pixle-empty-losing-grid-graphic">
+      <g>
+        <g>
+          <path class="status-colors__3" d="M190.8,197.1H59.2c-15.8,0-28.5-12.8-28.5-28.5V37c0-15.8,12.8-28.5,28.5-28.5h131.6
+		        c15.8,0,28.5,12.8,28.5,28.5v131.6C219.3,184.4,206.5,197.1,190.8,197.1z"/>
+          <g>
+            <path class="status-colors__2" d="M125,102.8H30.7V35.6c0-15,12.1-27.1,27.1-27.1H125V102.8z"/>
+            <path class="status-colors__4" d="M190.8,197.1H125v-94.3h94.3v65.8C219.3,184.4,206.5,197.1,190.8,197.1z"/>
+          </g>
+        </g>
+        <use xlink:href="#pixle-grid-ui-graphic"></use>
+      </g>
+      <g>
+        <g>
+          <path class="st2"
+                d="M172.2,51.3l0,24.7c-13.5,0-24.7-11.1-24.7-24.7c0-13.5,11.1-24.7,24.7-24.7c13.5,0,24.7,11.1,24.7,24.7H172.2z"/>
+          <circle class="st3" cx="172.2" cy="76" r="8.7"/>
+        </g>
+        <g>
+          <path class="st2"
+                d="M77.8,145.6l0,24.7c-13.5,0-24.7-11.1-24.7-24.7c0-13.5,11.1-24.7,24.7-24.7s24.7,11.1,24.7,24.7H77.8z"/>
+          <circle class="st3" cx="77.8" cy="170.3" r="8.7"/>
+        </g>
+        <g>
+          <path class="st2"
+                d="M77.8,51.3l0,24.7c-13.5,0-24.7-11.1-24.7-24.7c0-13.5,11.1-24.7,24.7-24.7s24.7,11.1,24.7,24.7H77.8z"/>
+          <circle class="st3" cx="77.8" cy="76" r="8.7"/>
+        </g>
+        <g>
+          <path class="st2"
+                d="M172.2,145.6l0,24.7c-13.5,0-24.7-11.1-24.7-24.7c0-13.5,11.1-24.7,24.7-24.7c13.5,0,24.7,11.1,24.7,24.7H172.2z"/>
+          <circle class="st3" cx="172.2" cy="170.3" r="8.7"/>
+        </g>
+      </g>
+    </g>
+    <g id="pixle-grid-solved-graphic">
+      <g>
+        <g>
+          <path class="status-colors__1" d="M190.8,197.1H59.2c-15.8,0-28.5-12.8-28.5-28.5V37c0-15.8,12.8-28.5,28.5-28.5h131.6
+		        c15.8,0,28.5,12.8,28.5,28.5v131.6C219.3,184.4,206.5,197.1,190.8,197.1z"/>
+          <g>
+            <path class="status-colors__1__dark" d="M125,102.8H30.7V35.6c0-15,12.1-27.1,27.1-27.1H125V102.8z"/>
+            <path class="status-colors__1__dark"
+                  d="M190.8,197.1H125v-94.3h94.3v65.8C219.3,184.4,206.5,197.1,190.8,197.1z"/>
+          </g>
+        </g>
+        <use xlink:href="#pixle-grid-ui-graphic"></use>
+      </g>
+      <g>
+        <g>
+          <rect class="st4" height="54.9" width="54.9" x="50.4" y="28.2"/>
+          <path class="st5" d="M105.3,83.1H50.4v-1.3c0-15.2,12.3-27.5,27.5-27.5h0c15.2,0,27.5,12.3,27.5,27.5V83.1z"/>
+        </g>
+        <g>
+          <rect class="st4" height="54.9" width="54.9" x="144.7" y="123.1"/>
+          <path class="st5" d="M199.6,178h-54.9v-1.3c0-15.2,12.3-27.5,27.5-27.5h0c15.2,0,27.5,12.3,27.5,27.5V178z"/>
+        </g>
+        <g>
+          <polygon class="st8" points="77.8,121.8 50.1,176.7 105.5,176.7"/>
+          <path class="st9" d="M62.6,152L62.6,152c-5.7,11.3,2.5,24.7,15.2,24.7h0c12.7,0,20.9-13.4,15.2-24.7l0,0
+				    C86.8,139.5,68.9,139.5,62.6,152z"/>
+        </g>
+        <g>
+          <polygon class="st8" points="172.2,26.9 144.5,81.8 199.9,81.8"/>
+          <path class="st9" d="M156.9,57.1L156.9,57.1c-5.7,11.3,2.5,24.7,15.2,24.7h0c12.7,0,20.9-13.4,15.2-24.7l0,0
+				    C181.1,44.6,163.2,44.6,156.9,57.1z"/>
+        </g>
+      </g>
+    </g>
+  </defs>
+</svg>
+<noscript>Please enable JavaScript to continue using this application.</noscript>
+<script src="assets/js/main-min.js" type="text/javascript"></script>
+<script type="text/javascript">
+  window.onload = function () {
+    let spinner = document.querySelector('div.lds-grid-wrapper');
+    document.body.removeChild(spinner);
+  };
+</script>
+</body>
+</html>
