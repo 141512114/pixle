@@ -1,4 +1,11 @@
-import { Component, Inject, OnInit, AfterViewInit } from '@angular/core';
+import {
+  ViewChild,
+  Component,
+  Inject,
+  OnInit,
+  AfterViewInit,
+  ElementRef,
+} from '@angular/core';
 import { DOCUMENT } from '@angular/common';
 import { WINDOW } from '@typescript/window-injection.token';
 import { HelperFunctionsService } from '@abstract/services/helper-functions.service';
@@ -8,6 +15,7 @@ import {
   faXmark,
   IconDefinition,
 } from '@fortawesome/free-solid-svg-icons';
+import { SideMenuComponent } from '@typescript/side-menu/side-menu.component';
 
 export const SUPPORT_EMAIL: string = 'support@nani-games.net';
 
@@ -23,6 +31,8 @@ export class AppComponent implements OnInit, AfterViewInit {
   iconCloseSideMenu: IconDefinition = faXmark;
   iconHelpGuide: IconDefinition = faQuestionCircle;
   isTouchTimer: any;
+  @ViewChild(SideMenuComponent) private sideMenuComponent!: SideMenuComponent;
+  @ViewChild('toggle_side_menu_btn') private toggle_side_menu_btn!: ElementRef;
 
   constructor(
     @Inject(DOCUMENT) private document: Document,
@@ -60,6 +70,33 @@ export class AppComponent implements OnInit, AfterViewInit {
         this.addViewportHeightProperty();
       },
     );
+  }
+
+  /**
+   * Toggle (open or close) the side menu
+   */
+  public toggleSideMenu(): void {
+    let side_menu_element: HTMLElement =
+      this.sideMenuComponent.side_menu.nativeElement;
+    let toggle_side_menu_element: HTMLElement =
+      this.toggle_side_menu_btn.nativeElement;
+    let show_class: string = 'toggle';
+
+    if (this.sideMenuComponent.active) {
+      this.sideMenuComponent.addClassToHTMLElement(side_menu_element, 'close');
+      if (toggle_side_menu_element.classList.contains(show_class)) {
+        toggle_side_menu_element.classList.remove(show_class);
+      }
+    } else {
+      this.sideMenuComponent.removeClassFromHTMLElement(
+        side_menu_element,
+        'close',
+      );
+      if (!toggle_side_menu_element.classList.contains(show_class)) {
+        toggle_side_menu_element.classList.add(show_class);
+      }
+    }
+    this.sideMenuComponent.active = !this.sideMenuComponent.active;
   }
 
   /**
