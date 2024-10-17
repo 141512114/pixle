@@ -30,11 +30,12 @@
               "projects/pixle-game/src/assets",
               {
                 "glob": "**/*",
-                "input": "public",
+                "input": "projects/pixle-game/public",
                 "output": "/"
               }
             ],
             "styles": [
+              "local/stylesheets/twemoji-amazing.scss",
               "node_modules/bootstrap/scss/bootstrap.scss",
               "node_modules/bootstrap-icons/font/bootstrap-icons.css",
               "projects/pixle-game/src/styles.scss"
@@ -51,8 +52,8 @@
               "budgets": [
                 {
                   "type": "initial",
-                  "maximumWarning": "500kB",
-                  "maximumError": "1MB"
+                  "maximumWarning": "3MB",
+                  "maximumError": "5MB"
                 },
                 {
                   "type": "anyComponentStyle",
@@ -99,11 +100,12 @@
               "projects/pixle-game/src/assets",
               {
                 "glob": "**/*",
-                "input": "public",
+                "input": "projects/pixle-game/public",
                 "output": "/"
               }
             ],
             "styles": [
+              "local/stylesheets/twemoji-amazing.scss",
               "node_modules/bootstrap/scss/bootstrap.scss",
               "node_modules/bootstrap-icons/font/bootstrap-icons.css",
               "projects/pixle-game/src/styles.scss"

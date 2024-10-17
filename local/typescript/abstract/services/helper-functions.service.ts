@@ -1,11 +1,13 @@
-import {Injectable} from '@angular/core';
-import {BehaviorSubject} from 'rxjs';
+import { Injectable } from '@angular/core';
+import { BehaviorSubject } from 'rxjs';
+import { PIXLE_ICONS } from '@typescript/emoji.database';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class HelperFunctionsService {
-  public static cookie_consent: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+  public static cookie_consent: BehaviorSubject<boolean> =
+    new BehaviorSubject<boolean>(false);
 
   /**
    * Convert any two-dimensional array into a one-dimensional array
@@ -38,6 +40,48 @@ export class HelperFunctionsService {
   }
 
   /**
+   * Get the list of emojis used in the pixle
+   *
+   * @return {boolean} Operation successful
+   * @private
+   */
+  public static getEmojiList(pixle_tiles: string[][]): string[] {
+    if (pixle_tiles.length <= 0) return [];
+    let pixle_convert: string[] =
+      HelperFunctionsService.twoDimensionalArrayToOneDimensional(pixle_tiles);
+    let temp_twa_emoji_classes: string[] = [];
+    for (let i: number = 0; i < pixle_convert.length; i++) {
+      for (let j: number = pixle_convert.length - 1; j > 0; j--) {
+        // Make absolutely sure that both picked entries are the exact same (or not)
+        if (pixle_convert[j] === pixle_convert[i]) {
+          let twa_emoji_class: string = pixle_convert[i];
+          // Check if there already exists this exact emoji code point in the temporary array
+          if (temp_twa_emoji_classes.includes(twa_emoji_class)) break;
+          temp_twa_emoji_classes.push(twa_emoji_class);
+        }
+      }
+    }
+
+    return temp_twa_emoji_classes;
+  }
+
+  /**
+   * Get the emoji by its id --> search it in the emoji collection
+   * Return an array of codepoints
+   *
+   * @param emoji_ids
+   * @return {string[]} Array of strings --> twa emoji classes
+   */
+  public static getEmojisFromListById(emoji_ids: number[] = []): string[] {
+    let temp_twa_emoji_classes: string[] = [];
+    for (let i: number = 0; i < emoji_ids.length; i++) {
+      let twa_emoji_class: string = PIXLE_ICONS[emoji_ids[i]];
+      temp_twa_emoji_classes.push(twa_emoji_class);
+    }
+    return temp_twa_emoji_classes;
+  }
+
+  /**
    * Makes an array of numbers which helps to use *ngFor as a normal for loop
    *
    * @param i
@@ -58,7 +102,8 @@ export class HelperFunctionsService {
    * @param element
    */
   public static lockElement(element: HTMLElement): void {
-    if ((element == undefined || null) || (element.classList.contains('locked'))) return;
+    if (element == undefined || null || element.classList.contains('locked'))
+      return;
     element.classList.add('locked');
   }
 
@@ -68,7 +113,8 @@ export class HelperFunctionsService {
    * @param element
    */
   public static unlockElement(element: HTMLElement): void {
-    if ((element == undefined || null) || (!element.classList.contains('locked'))) return;
+    if (element == undefined || null || !element.classList.contains('locked'))
+      return;
     element.classList.remove('locked');
   }
 
@@ -126,7 +172,10 @@ export class HelperFunctionsService {
    */
   public static createCookie(item: string, value: string): void {
     if (item === '' || value === '') return;
-    if (HelperFunctionsService.cookie_consent.value && HelperFunctionsService.isLocalStorageAvailable()) {
+    if (
+      HelperFunctionsService.cookie_consent.value &&
+      HelperFunctionsService.isLocalStorageAvailable()
+    ) {
       localStorage.setItem(item, value);
     } else {
       HelperFunctionsService.createSessionCookie(item, value);
@@ -140,7 +189,10 @@ export class HelperFunctionsService {
    */
   public static deleteCookie(item: string): void {
     if (item === '') return;
-    if (HelperFunctionsService.isLocalStorageAvailable() && localStorage.getItem(item) != null) {
+    if (
+      HelperFunctionsService.isLocalStorageAvailable() &&
+      localStorage.getItem(item) != null
+    ) {
       localStorage.removeItem(item);
     }
   }
@@ -164,7 +216,10 @@ export class HelperFunctionsService {
    * @param item
    */
   public static getRawCookie(item: string): string | null {
-    if (HelperFunctionsService.isLocalStorageAvailable() && localStorage.getItem(item) != null) {
+    if (
+      HelperFunctionsService.isLocalStorageAvailable() &&
+      localStorage.getItem(item) != null
+    ) {
       return localStorage.getItem(item);
     } else {
       return HelperFunctionsService.getSessionCookie(item);
@@ -190,7 +245,10 @@ export class HelperFunctionsService {
    * @param item
    */
   public static getSessionCookie(item: string): string | null {
-    if (HelperFunctionsService.isSessionStorageAvailable() && sessionStorage.getItem(item) != null) {
+    if (
+      HelperFunctionsService.isSessionStorageAvailable() &&
+      sessionStorage.getItem(item) != null
+    ) {
       return sessionStorage.getItem(item);
     }
     return null;
@@ -204,10 +262,10 @@ export class HelperFunctionsService {
   public static transitionEndEventName(): any {
     let el: HTMLElement = document.createElement('div');
     let transitions: any = {
-      'transition': 'transitionend',
-      'OTransition': 'otransitionend',  // oTransitionEnd in very old Opera
-      'MozTransition': 'transitionend',
-      'WebkitTransition': 'webkitTransitionEnd'
+      transition: 'transitionend',
+      OTransition: 'otransitionend', // oTransitionEnd in very old Opera
+      MozTransition: 'transitionend',
+      WebkitTransition: 'webkitTransitionEnd',
     };
     let i: any;
     for (i in transitions) {
@@ -225,7 +283,11 @@ export class HelperFunctionsService {
    * @param event
    * @param callback
    */
-  public static addEventListenerToElement(element: any, event: any, callback: any): void {
+  public static addEventListenerToElement(
+    element: any,
+    event: any,
+    callback: any,
+  ): void {
     if (typeof element.addEventListener != undefined) {
       element.addEventListener(event, callback, false);
     } else if (typeof element.attachEvent != undefined) {

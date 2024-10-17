@@ -9,12 +9,14 @@ import {
   IconDefinition,
 } from '@fortawesome/free-solid-svg-icons';
 
+export const SUPPORT_EMAIL: string = 'support@nani-games.net';
+
 const COOLDOWN_TOUCH: number = 75;
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['../stylesheets/scss/app.component.scss'],
+  styleUrls: ['./app.component.scss'],
 })
 export class AppComponent implements OnInit, AfterViewInit {
   iconOpenSideMenu: IconDefinition = faGear;
@@ -24,7 +26,7 @@ export class AppComponent implements OnInit, AfterViewInit {
 
   constructor(
     @Inject(DOCUMENT) private document: Document,
-    @Inject(WINDOW) private readonly window: Window
+    @Inject(WINDOW) private readonly window: Window,
   ) {
     this.addViewportHeightProperty();
   }
@@ -36,7 +38,7 @@ export class AppComponent implements OnInit, AfterViewInit {
       'touchstart',
       () => {
         this.addTouchClass();
-      }
+      },
     );
     ['mouseover', 'touchend', 'touchcancel'].forEach((event) => {
       HelperFunctionsService.addEventListenerToElement(
@@ -44,7 +46,7 @@ export class AppComponent implements OnInit, AfterViewInit {
         event,
         () => {
           this.removeTouchClass();
-        }
+        },
       );
     });
   }
@@ -56,7 +58,7 @@ export class AppComponent implements OnInit, AfterViewInit {
       'resize',
       () => {
         this.addViewportHeightProperty();
-      }
+      },
     );
   }
 

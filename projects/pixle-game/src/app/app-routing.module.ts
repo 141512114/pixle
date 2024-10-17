@@ -4,8 +4,8 @@ import { PixGameComponent } from './pix-game/pix-game.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/game', pathMatch: 'full' },
-  { path: '**', redirectTo: '/game' },
   { path: 'game', component: PixGameComponent },
+  { path: '**', redirectTo: '/game' },
 ];
 
 @NgModule({
