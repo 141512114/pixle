@@ -1,0 +1,133 @@
+@use "sass:map";
+@use "sass:math";
+
+@import 'mixins/variables';
+@import 'mixins/themes';
+
+// pix-grid-ui component stylesheet
+.component-pix-grid-ui {
+  width: 100vw;
+  margin: 0 auto;
+  border-radius: 8px 8px 0 0;
+  background-color: var(--default-theme-three, map.get($default-color-palette, 3));
+
+  @media only screen and (min-width: $breakpoint_xsm) {
+    width: 100%;
+  }
+}
+
+.pix-col-item {
+  width: 65px;
+  height: 65px;
+  font-size: calc(1em + 2.85vmin);
+
+  &:first-child {
+    margin-left: auto;
+  }
+
+  &:last-child {
+    margin-right: auto;
+  }
+}
+
+.pix-grid-ui-wrapper,
+.pix-social-share-wrapper {
+  $padding_vertical: 12px;
+  padding: $padding_vertical 0 math.div($padding_vertical, 2);
+
+  .pix-emoji-list-scroll-wrapper,
+  .pix-social-share-list {
+    padding-bottom: math.div($padding_vertical, 2);
+  }
+}
+
+.pix-emoji-list,
+.pix-social-share-wrapper {
+  top: 0;
+  transition: top 750ms, opacity 550ms, visibility 550ms;
+  user-select: none;
+}
+
+.pix-emoji-list-content-wrapper {
+  width: fit-content;
+}
+
+.pix-social-share-wrapper {
+  position: absolute;
+  top: 80px;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  opacity: 0;
+  pointer-events: none;
+  visibility: hidden;
+
+  .bigger-icon {
+    font-size: 28px;
+  }
+
+  .pix-social-share-list {
+    margin: 0 auto;
+  }
+}
+
+.pix-grid-ui-wrapper.switch-ui {
+  .pix-emoji-list {
+    top: -80px;
+    opacity: 0;
+    pointer-events: none;
+    visibility: hidden;
+  }
+
+  .pix-social-share-wrapper {
+    top: 0;
+    opacity: 1;
+    pointer-events: all;
+    visibility: visible;
+  }
+}
+
+.validate-button-wrapper,
+.reload-pix-button-wrapper {
+  vertical-align: bottom;
+
+  button {
+    padding: 12px 0;
+    font-size: 18px;
+  }
+}
+
+@media only screen and (min-width: $breakpoint_sm) {
+  .pix-social-share-wrapper .bigger-icon {
+    font-size: 30px;
+  }
+
+  .pix-col-item {
+    font-size: calc(1em + 2.2vmin);
+  }
+}
+
+@media only screen and (min-width: $breakpoint_xsm) {
+  .pix-col-item {
+    font-size: calc(.75em + 2.1vmin);
+  }
+}
+
+@media only screen and (min-width: $breakpoint_xxxsm) {
+  .pix-col-item {
+    width: 70px;
+    height: 70px;
+    padding: 4px;
+  }
+}
+
+@media only screen and (min-width: $breakpoint_xmd) {
+  .pix-col-item {
+    width: 75px;
+    height: 75px;
+  }
+
+  .pix-emoji-list-scroll-wrapper {
+    overflow-x: hidden;
+  }
+}

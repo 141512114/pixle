@@ -1,0 +1,17 @@
+<div #component_grid_element class="position-relative w-100 h-100 component-pix-grid-element">
+  <svg class="w-100 h-auto square-placeholder" viewBox="0 0 1 1"></svg>
+  <div #user_interactive
+       [ngClass]="{'highlight-btn--grid-element flip-element': grid_element_type===0, 'highlight-btn': grid_element_type===1}"
+       class="w-100 h-100 rounded-3 grid-element-inner emoji-wrapper" data-grid-element-status="3">
+    <div *ngIf="grid_element_type===0" class="back-face">
+      <p class="m-0 p-0 emoji">
+        <i class="twa {{twa_emoji_class_back_face}}"></i>
+      </p>
+    </div>
+    <div class="front-face">
+      <p class="m-0 p-0 emoji">
+        <i class="twa {{twa_emoji_class_front_face}}"></i>
+      </p>
+    </div>
+  </div>
+</div>

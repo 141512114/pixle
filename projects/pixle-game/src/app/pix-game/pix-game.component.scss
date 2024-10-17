@@ -1,0 +1,30 @@
+@import 'mixins/mixins';
+@import 'mixins/responsive';
+
+// pix-game component stylesheet
+.playground-wrapper {
+  width: 100vw;
+  margin: 0 auto;
+
+  @media only screen and (min-width: $breakpoint_xsm) {
+    width: 450px;
+  }
+
+  @media only screen and (min-width: $breakpoint_xxsm) {
+    width: 500px;
+  }
+
+  .playground-grid-wrapper,
+  .pix-grid-wrapper {
+    background: none;
+  }
+}
+
+.pix-popup-wrapper {
+  pointer-events: none;
+  background: none;
+}
+
+.match-status-popup {
+  @include alignment_old();
+}
