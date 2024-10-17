@@ -1,0 +1,58 @@
+@use "sass:map";
+
+// Color maps
+$neo-palette: (
+  1: #0F1020,
+  2: #381E71,
+  3: #553894,
+  4: #7353BA,
+  5: #ECB9F3,
+  6: #F870FF
+);
+
+$vibe-palette: (
+  1: #22162B,
+  2: #3D1B4B,
+  3: #58356E,
+  4: #724F92,
+  5: #E23C5D,
+  6: #F6BE13
+);
+
+$pop-palette: (
+  1: #0039A3,
+  2: #004FE0,
+  3: #338BFF,
+  4: #85D4FF,
+  5: #E788A6,
+  6: #CB2A5D
+);
+
+$we-do-trolling-palette: (
+  1: #70A2FF,
+  2: #99BDFF,
+  3: #ADD1FF,
+  4: #D6F1FF,
+  5: #FFFFFF,
+  6: #F1BBCC
+);
+
+$volcano-palette: (
+  1: #5E2308,
+  2: #151513,
+  3: #201F1D,
+  4: #403D39,
+  5: #FFFAEB,
+  6: #A99E89
+);
+
+$cold-palette: (
+  1: #08080C,
+  2: #131B2A,
+  3: #243756,
+  4: #335184,
+  5: #E4EBF1,
+  6: #1EC29C
+);
+
+$default-color-palette: $cold-palette !default;

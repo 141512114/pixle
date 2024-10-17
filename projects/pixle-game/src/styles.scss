@@ -1,0 +1,268 @@
+@use "sass:map";
+
+@import 'mixins/bottleneck';
+
+// Default classes
+.company-logo {
+  padding: 10px 0 10px 5px;
+
+  a {
+    background: none;
+
+    &:hover {
+      cursor: pointer;
+      background: none;
+    }
+  }
+}
+
+// Default settings
+* {
+  margin: 0;
+  padding: 0;
+
+  scrollbar-width: thin !important;
+}
+
+*::selection {
+  color: white;
+  background-color: var(--default-theme-six, map.get($default-color-palette, 6));
+}
+
+html,
+body {
+  width: 100%;
+  height: 100vh;
+  height: -webkit-fill-available;
+  height: calc(var(--vh, 1vh) * 100);
+  max-height: 100vh;
+  max-height: -webkit-fill-available;
+  max-height: calc(var(--vh, 1vh) * 100);
+  background-color: var(--default-theme-one, map.get($default-color-palette, 1));
+  overflow-y: auto;
+}
+
+body.startTouch {
+  @include highlight_btn_mixin;
+}
+
+header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.navbar {
+  padding: 7px 0;
+  user-select: none;
+  background-color: var(--default-theme-three, map.get($default-color-palette, 3));
+  z-index: 9999;
+
+  .game-title {
+    margin: 0;
+    padding: 4px 0;
+    text-align: center;
+    letter-spacing: 2px;
+    pointer-events: none;
+  }
+
+  .header-ui-wrapper {
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    @include flexbox(space-between, unset, row);
+    padding: 0 6px;
+
+    .navbar-link-wrapper {
+
+      a,
+      button {
+        font-size: 20px;
+        padding: 2px 12px;
+
+        span {
+          display: none;
+          width: 24px;
+          visibility: hidden;
+
+          &.open-icon {
+            display: block;
+            visibility: visible;
+          }
+        }
+
+        &.toggle {
+          span.open-icon {
+            display: none;
+            visibility: hidden;
+          }
+
+          span.close-icon {
+            display: block;
+            visibility: visible;
+          }
+        }
+
+        @media only screen and (min-width: $breakpoint_xxsm) {
+          font-size: 22px;
+          padding: 2px 15px;
+        }
+
+        @media only screen and (min-width: $breakpoint_xmd) {
+          font-size: 24px;
+          padding: 2px 17px;
+        }
+      }
+    }
+
+    @media only screen and (min-width: $breakpoint_md) {
+      padding: 0 10px;
+    }
+
+    @media only screen and (min-width: $breakpoint_xmd) {
+      padding: 0 13px;
+    }
+  }
+}
+
+footer {
+  margin: 32px 0 0;
+  padding: 45px 0;
+
+  nav {
+    .list-cols ul {
+      display: inline-block;
+      margin-right: 36px;
+      vertical-align: top;
+
+      &:last-child {
+        margin-right: 0;
+      }
+    }
+
+    @media only screen and (min-width: $breakpoint_xxxsm) {
+      @include flexbox(space-between, center, row);
+    }
+  }
+
+  nav ul {
+    margin: 0;
+    padding: 0;
+
+    li {
+      display: block;
+      margin-bottom: 12px;
+
+      &:last-child {
+        margin-bottom: 0;
+      }
+    }
+  }
+
+  .company-logo {
+    height: 100px;
+  }
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+p,
+a {
+  font-weight: 400;
+  text-align: left;
+}
+
+h1,
+.h1,
+h2,
+.h2,
+h3,
+.h3,
+h4,
+.h4,
+h5,
+.h5 {
+  font-family: $main-header;
+  color: $default-headline-color;
+}
+
+p,
+a {
+  font-family: $main-font;
+  color: $default-text-color;
+}
+
+a,
+li {
+  list-style: none;
+  text-decoration: none;
+}
+
+input,
+textarea,
+button {
+  padding: 4px 10px;
+  font-family: $main-font;
+  font-size: 14px;
+  font-weight: 400;
+  outline: none;
+
+  @media only screen and (min-width: $breakpoint_xxsm) {
+    padding: 4px 11px;
+    font-size: 16px;
+  }
+
+  @media only screen and (min-width: $breakpoint_xmd) {
+    padding: 4px 12px;
+    font-size: 18px;
+  }
+}
+
+a,
+button {
+  border: none;
+  font-family: $main-ui;
+  color: var(--default-theme-two, map.get($default-color-palette, 2));
+  background-color: var(--default-theme-four, map.get($default-color-palette, 4));
+  transition: color 200ms, background-color 200ms;
+
+  &.invert-colors {
+    color: var(--default-theme-four, map.get($default-color-palette, 4));
+    background-color: var(--default-theme-two, map.get($default-color-palette, 2));
+  }
+
+  &.share-on-twitter {
+    color: white;
+    background-color: #1DA1F2;
+  }
+
+  &.share-on-whatsapp,
+  &.share-on-any {
+    color: white;
+    background-color: #25D366;
+  }
+
+  &.share-via-mail {
+    color: var(--default-theme-six, map.get($default-color-palette, 6));
+    background-color: transparent;
+  }
+
+  @extend .highlight-btn;
+}
+
+input:focus,
+input:active,
+textarea:focus,
+textarea:active,
+button:focus {
+  outline: none;
+}

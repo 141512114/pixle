@@ -1,0 +1,343 @@
+@use "sass:map";
+
+// Status
+.status-colors {
+  &__1 {
+    fill: map.get($status-palette, 1);
+
+    &__dark {
+      fill: #329e7d;
+    }
+  }
+
+  &__2 {
+    fill: map.get($status-palette, 2);
+  }
+
+  &__3 {
+    fill: map.get($status-palette, 3);
+  }
+
+  &__4 {
+    fill: map.get($status-palette, 4);
+  }
+}
+
+// Themes
+.theme-colors {
+  $stroke_width: 3px;
+
+  &__1 {
+    $color: var(--default-theme-one, map.get($default-color-palette, 1));
+
+    fill: $color;
+
+    &__stroke {
+      fill: none;
+      stroke: $color;
+      stroke-width: $stroke_width;
+    }
+  }
+
+  &__2 {
+    $color: var(--default-theme-two, map.get($default-color-palette, 2));
+
+    fill: $color;
+
+    &__stroke {
+      fill: none;
+      stroke: $color;
+      stroke-width: $stroke_width;
+    }
+  }
+
+  &__3 {
+    $color: var(--default-theme-three, map.get($default-color-palette, 3));
+
+    fill: $color;
+
+    &__stroke {
+      fill: none;
+      stroke: $color;
+      stroke-width: $stroke_width;
+    }
+  }
+
+  &__4 {
+    $color: var(--default-theme-four, map.get($default-color-palette, 4));
+
+    fill: $color;
+
+    &__stroke {
+      fill: none;
+      stroke: $color;
+      stroke-width: $stroke_width;
+    }
+  }
+
+  &__5 {
+    $color: var(--default-theme-five, map.get($default-color-palette, 5));
+
+    fill: $color;
+
+    &__stroke {
+      fill: none;
+      stroke: $color;
+      stroke-width: $stroke_width;
+    }
+  }
+
+  &__6 {
+    $color: var(--default-theme-six, map.get($default-color-palette, 6));
+
+    fill: $color;
+
+    &__stroke {
+      fill: none;
+      stroke: $color;
+      stroke-width: $stroke_width;
+    }
+  }
+}
+
+// Default
+.locked {
+  user-select: none !important;
+  pointer-events: none !important;
+  cursor: default !important;
+
+  &:hover,
+  &:focus,
+  &:active {
+    cursor: default !important;
+  }
+}
+
+.do-not-show {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.horizontal-scroll-wrapper {
+  overflow-x: auto;
+  overflow-y: hidden;
+  -webkit-overflow-scrolling: touch;
+  white-space: nowrap;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+.selected {
+  background-color: var(--default-theme-six) !important;
+}
+
+@mixin highlight_btn_mixin() {
+  .highlight-btn {
+    &:not(.locked) {
+      &:hover,
+      &:active {
+        cursor: pointer;
+        color: var(--default-theme-two, map.get($default-color-palette, 2));
+        background-color: var(--default-theme-six, map.get($default-color-palette, 6));
+      }
+    }
+
+    &--grid-element:not(.locked) {
+      &:hover,
+      &:active {
+        cursor: pointer;
+        background-color: var(--default-theme-three, map.get($default-color-palette, 3));
+
+        &[data-grid-element-status="2"] {
+          background-color: rgba(map.get($status-palette, 2), $background-color-alpha-focused);
+        }
+
+        &[data-grid-element-status="1"] {
+          background-color: rgba(map.get($status-palette, 3), $background-color-alpha-focused);
+        }
+      }
+    }
+  }
+}
+
+@media (hover: hover) and (pointer: fine) {
+  @include highlight_btn_mixin;
+}
+
+.description a {
+  padding: 2px 3px;
+  color: var(--default-theme-six, map.get($default-color-palette, 6));
+  background-color: transparent;
+}
+
+.link-is-button {
+  display: inline-block;
+  padding: 6px 14px;
+  font-size: 18px;
+  user-select: none;
+
+  &__sm {
+    @extend .link-is-button;
+    padding: 5px 12px;
+    font-size: 16px;
+  }
+
+  @media only screen and (min-width: $breakpoint_sm) {
+    font-size: 21px;
+
+    &__sm {
+      font-size: 18px;
+    }
+  }
+
+  @media only screen and (min-width: $breakpoint_xxxsm) {
+    padding: 7px 21px;
+
+    &__sm {
+      padding: 6px 18px;
+    }
+  }
+}
+
+.pix-col-item {
+  display: inline-block;
+  max-width: 75px;
+  margin: 0 3px 0 0;
+  padding: 4px;
+  flex: 0 0 auto;
+  font-size: calc(1.15em + 2.85vmin);
+  vertical-align: top;
+
+  &:last-child {
+    margin-right: 0;
+  }
+
+  @media only screen and (max-width: 300px) {
+    font-size: calc(1em + 2.85vmin);
+  }
+
+  @media only screen and (min-width: $breakpoint_sm) {
+    max-width: 85px;
+    font-size: calc(1.35em + 2.5vmin);
+  }
+
+  @media only screen and (min-width: $breakpoint_xsm) {
+    font-size: calc(1.25em + 2.2vmin);
+  }
+
+  @media only screen and (min-width: $breakpoint_xxxsm) {
+    margin-right: 6px;
+    padding: 5px;
+    font-size: calc(1em + 2.1vmin);
+  }
+
+  @media only screen and (min-width: $breakpoint_md) {
+    font-size: calc(.9em + 2vmin);
+  }
+}
+
+.pix-social-share-list {
+  .share-item-wrapper-any {
+    max-width: unset;
+  }
+
+  .share-item-wrapper {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    background-color: var(--default-theme-four, map.get($default-color-palette, 4));
+    overflow: hidden;
+
+    a,
+    button {
+      @include flexbox($dir: row);
+      width: 100%;
+      height: 100%;
+    }
+
+    button {
+      font-size: 16px;
+      padding: 0 24px;
+
+      span {
+        display: inline-block;
+        margin-right: 8px;
+
+        &:last-child {
+          margin-right: 0;
+        }
+      }
+    }
+
+    @media only screen and (min-width: $breakpoint_sm) {
+      button {
+        font-size: 18px;
+      }
+    }
+  }
+}
+
+.pix-copied-badge {
+  position: absolute;
+  top: -65px;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 9px 21px;
+  background-color: var(--default-theme-six, map.get($default-color-palette, 6));
+  user-select: none;
+  pointer-events: none;
+  transition: opacity 450ms, visibility 450ms;
+
+  span {
+    font-family: $main-ui;
+    font-size: 18px;
+    color: var(--default-theme-one, map.get($default-color-palette, 1));
+  }
+
+  &.close {
+    opacity: 0;
+    pointer-events: none;
+    visibility: hidden;
+  }
+}
+
+// Effects
+.flip-element {
+  position: relative;
+  transform-style: preserve-3d;
+  transform-origin: center;
+  transition: transform 635ms;
+
+  .front-face,
+  .back-face {
+    position: relative;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
+    transform-style: preserve-3d;
+    transform-origin: center;
+    user-select: none;
+    z-index: 20;
+  }
+
+  .back-face {
+    position: absolute;
+    transform: rotateX(180deg);
+    pointer-events: none;
+    z-index: 30;
+  }
+
+  &.do-flip {
+    transform: rotateX(-180deg);
+
+    .front-face {
+      pointer-events: none;
+    }
+  }
+}

@@ -1,0 +1,13 @@
+<svg viewBox="0 0 40.61 8.75" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <style>.cls-1 {
+      fill: black;
+      opacity: .4;
+    }</style>
+  </defs>
+  <path class="cls-1" d="M4,1.92V8H1.66V1.92H0V0H5.64V1.92Z"/>
+  <path class="cls-1" d="M13.12,0V8H10.67V4.89H8.79V8H6.34V0H8.79V2.94h1.88V0Z"/>
+  <path class="cls-1" d="M20.53,6.09V8h-6V0h6V1.85H16.92V3h2.92V4.78H16.92V6.09Z"/>
+  <path class="cls-1" d="M30.2,0V8H27.92V2.28L26.44,8H24.88L23.34,2.28V8H21.5V0h3.21l1.16,4.25L27,0Z"/>
+  <path class="cls-1" d="M37.61,6.09V8h-6V0h6V1.85H34V3h2.92V4.78H34V6.09Z"/>
+</svg>
