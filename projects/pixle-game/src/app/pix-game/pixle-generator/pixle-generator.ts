@@ -135,9 +135,14 @@ export default function initPixleGenerator(): IPixle {
   seed = getSeedFromDate();
   random = seededRandom(seed);
 
-  const startDate: Date = new Date();
-  startDate.setUTCHours(0, 0, 0, 0);
-  startDate.setUTCDate(startDate.getUTCDate());
+  // Get the id of the pixle by counting the days since the initial date
+  const timeDiff =
+    new Date().getTime() - new Date('2024-10-18T00:00:00Z').getTime();
+  const pixleId = Math.floor(timeDiff / (1000 * 3600 * 24));
 
-  return generateNewPixle(startDate.toJSON());
+  const pixleDate: Date = new Date();
+  pixleDate.setUTCHours(0, 0, 0, 0);
+  pixleDate.setUTCDate(pixleDate.getUTCDate());
+
+  return generateNewPixle(pixleDate.toJSON(), pixleId);
 }
