@@ -26,10 +26,10 @@ export class PixHeroGridComponent implements OnInit {
    */
   private searchRandomPixleArt(): void {
     let temp_pixle_image: string[][] = [];
-    let row_count: number = 4;
-    for (let i: number = 0; i < row_count; i++) {
+    const rowCount: number = 4;
+    for (let i: number = 0; i < rowCount; i++) {
       let temp_row_of_image: string[] = [];
-      for (let j: number = 0; j < row_count; j++) {
+      for (let j: number = 0; j < rowCount; j++) {
         let rnd: number = HelperFunctionsService.generateRandomInteger(
           PIXLE_ICONS.length - 1,
         );

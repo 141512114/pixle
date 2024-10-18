@@ -6,6 +6,7 @@ import {
   Input,
   OnInit,
   QueryList,
+  Renderer2,
   ViewChild,
   ViewChildren,
 } from '@angular/core';
@@ -14,9 +15,12 @@ import { DOCUMENT } from '@angular/common';
 import { WINDOW } from '@typescript/window-injection.token';
 import { GameManager } from '../pix-game/game.manager';
 import { HelperFunctionsService } from '@abstract/services/helper-functions.service';
+import * as CookieService from '@abstract/composables/cookies';
 
 // Timer / Offset
 const ROW_OFFSET: number = 355;
+
+const MIN_GRID_WIDTH: number = 135;
 
 @Component({
   selector: 'app-pix-grid',
@@ -39,6 +43,7 @@ export class PixGridComponent implements OnInit, AfterViewInit {
   constructor(
     @Inject(DOCUMENT) private document: Document,
     @Inject(WINDOW) private readonly window: Window,
+    private renderer: Renderer2,
   ) {}
 
   ngOnInit(): void {
@@ -59,8 +64,8 @@ export class PixGridComponent implements OnInit, AfterViewInit {
       this.setInitialSizes();
     }, 10);
     if (
-      HelperFunctionsService.getSessionCookie('lock_grid') === '1' &&
-      HelperFunctionsService.getSessionCookie('pixle_id') ===
+      CookieService.getSessionCookie('lock_grid') === '1' &&
+      CookieService.getSessionCookie('pixle_id') ===
         this.grid_image_id.toString()
     )
       return;
@@ -83,7 +88,7 @@ export class PixGridComponent implements OnInit, AfterViewInit {
     reverse: boolean = true,
   ): void {
     if (GameManager.pixle_solved) return;
-    let temp_pix_grid_comps: PixGridElementComponent[] =
+    const temp_pix_grid_comps: PixGridElementComponent[] =
       this.pixle_emoji_input.toArray();
     let current_grid_row: number = 0;
     this.checkGridRowTimers();
@@ -92,7 +97,7 @@ export class PixGridComponent implements OnInit, AfterViewInit {
       if (row_num >= this.grid_image_height) return false;
       let solved_tiles_count: number = 0;
       for (let i: number = 0; i < this.grid_image_width; i++) {
-        let current_grid_column: number = this.grid_image_width * row_num + i;
+        const current_grid_column: number = this.grid_image_width * row_num + i;
         if (temp_pix_grid_comps[current_grid_column].pixle_tile_solved) {
           solved_tiles_count++;
           continue;
@@ -134,7 +139,7 @@ export class PixGridComponent implements OnInit, AfterViewInit {
    * But they must all have finished their task
    */
   public checkGridRowTimers(): void {
-    let grid_image_row_timer: number[] = this.grid_image_row_timer;
+    const grid_image_row_timer: number[] = this.grid_image_row_timer;
     if (grid_image_row_timer.length <= 0) return;
     for (let i = 0; i < grid_image_row_timer.length; i++) {
       if (grid_image_row_timer[i] != null) {
@@ -150,51 +155,55 @@ export class PixGridComponent implements OnInit, AfterViewInit {
    * @private
    */
   private setInitialSizes(): void {
-    let grid_wrapper_element: HTMLElement = this.grid_wrapper.nativeElement;
-    let grid_buffer_element: HTMLElement = this.grid_buffer.nativeElement;
-    let grid_inner_element: HTMLElement = this.grid_inner.nativeElement;
+    const gridWrapperElement = this.grid_wrapper.nativeElement as HTMLElement;
+    const gridBufferElement = this.grid_buffer.nativeElement as HTMLElement;
+    const gridInnerElement = this.grid_inner.nativeElement as HTMLElement;
 
-    let padding_top: number = parseInt(
-      this.window.getComputedStyle(grid_buffer_element, null).paddingTop,
-    );
-    let padding_bottom: number = parseInt(
-      this.window.getComputedStyle(grid_buffer_element, null).paddingBottom,
-    );
-    let padding_offset: number = padding_top + padding_bottom;
-    let real_height_of_buffer: number =
-      grid_buffer_element.offsetHeight - padding_offset;
+    // Cache computed styles and dimensions
+    const gridBufferStyles = this.window.getComputedStyle(gridBufferElement);
+    const gridWrapperStyles = this.window.getComputedStyle(gridWrapperElement);
 
-    let grid_inner_new_width: number = grid_buffer_element.offsetWidth;
+    const paddingTop = parseInt(gridBufferStyles.paddingTop, 10) || 0;
+    const paddingBottom = parseInt(gridBufferStyles.paddingBottom, 10) || 0;
+    const paddingLeft = parseInt(gridWrapperStyles.paddingLeft, 10) || 0;
+    const paddingRight = parseInt(gridWrapperStyles.paddingRight, 10) || 0;
+
+    const paddingOffset = paddingTop + paddingBottom;
+    const realHeightOfBuffer = gridBufferElement.offsetHeight - paddingOffset;
+
+    let gridInnerNewWidth = gridBufferElement.offsetWidth;
+
+    // Optimize window resize logic
     if (
       this.prev_window_height === 0 ||
       this.prev_window_height != this.window.innerHeight
     ) {
       // If window is getting resized on y-axis
       if (
-        grid_buffer_element.offsetWidth < grid_wrapper_element.offsetWidth ||
-        real_height_of_buffer <= grid_inner_element.offsetHeight
+        gridBufferElement.offsetWidth < gridWrapperElement.offsetWidth ||
+        realHeightOfBuffer <= gridInnerElement.offsetHeight
       ) {
-        grid_inner_new_width =
+        gridInnerNewWidth =
           this.calculateWidthOfGridBufferElementViaWindowHeight();
       }
       this.prev_window_height = this.window.innerHeight;
     }
 
-    let padding_left: number = parseInt(
-      this.window.getComputedStyle(grid_wrapper_element, null).paddingLeft,
-    );
-    let padding_right: number = parseInt(
-      this.window.getComputedStyle(grid_wrapper_element, null).paddingRight,
+    // Calculate the clamped width
+    const maxGridWidth =
+      gridWrapperElement.offsetWidth - (paddingLeft + paddingRight);
+    const clampedGridInnerWidth = HelperFunctionsService.clampValue(
+      gridInnerNewWidth,
+      MIN_GRID_WIDTH,
+      maxGridWidth,
     );
 
-    let min: number = 135;
-    let max: number =
-      grid_wrapper_element.offsetWidth - (padding_left + padding_right);
-    let clamp_grid_inner_width: number = Math.min(
-      Math.max(grid_inner_new_width, min),
-      max,
+    // Use Renderer2 for DOM manipulation
+    this.renderer.setStyle(
+      gridBufferElement,
+      'width',
+      `${clampedGridInnerWidth}px`,
     );
-    grid_buffer_element.style.width = clamp_grid_inner_width + 'px';
   }
 
   /**
@@ -204,10 +213,10 @@ export class PixGridComponent implements OnInit, AfterViewInit {
    * @private
    */
   private calculateWidthOfGridBufferElementViaWindowHeight(): number {
-    let grid_buffer_element: HTMLElement = this.grid_buffer.nativeElement;
-    let ui_wrapper_element: HTMLElement | null =
+    const grid_buffer_element: HTMLElement = this.grid_buffer.nativeElement;
+    const ui_wrapper_element: HTMLElement | null =
       this.document.getElementById('pix-grid-ui');
-    let header_element: HTMLElement | null =
+    const header_element: HTMLElement | null =
       this.document.getElementById('main-navbar');
 
     if (
@@ -218,21 +227,21 @@ export class PixGridComponent implements OnInit, AfterViewInit {
     )
       return grid_buffer_element.offsetWidth;
 
-    let padding_top: number = parseInt(
+    const padding_top: number = parseInt(
       this.window.getComputedStyle(grid_buffer_element, null).paddingTop,
     );
-    let padding_bottom: number = parseInt(
+    const padding_bottom: number = parseInt(
       this.window.getComputedStyle(grid_buffer_element, null).paddingBottom,
     );
     let padding_offset: number = padding_top + padding_bottom;
 
-    let window_inner_height: number =
+    const window_inner_height: number =
       this.window.innerHeight - header_element.offsetHeight;
-    let relative_ui_wrapper_height_per: number =
+    const relative_ui_wrapper_height_per: number =
       ui_wrapper_element.offsetHeight / window_inner_height;
-    let relative_grid_wrapper_height: number =
+    const relative_grid_wrapper_height: number =
       window_inner_height * (1 - relative_ui_wrapper_height_per);
-    let new_grid_buffer_width: number =
+    const new_grid_buffer_width: number =
       (relative_grid_wrapper_height / this.grid_image_height) *
         this.grid_image_width -
       padding_offset;

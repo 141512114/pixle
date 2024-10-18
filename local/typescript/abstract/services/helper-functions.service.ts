@@ -1,14 +1,10 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
 import { PIXLE_ICONS } from '@typescript/emoji.database';
 
 @Injectable({
   providedIn: 'root',
 })
 export class HelperFunctionsService {
-  public static cookie_consent: BehaviorSubject<boolean> =
-    new BehaviorSubject<boolean>(false);
-
   /**
    * Convert any two-dimensional array into a one-dimensional array
    *
@@ -134,127 +130,6 @@ export class HelperFunctionsService {
   }
 
   /**
-   * Check if the local storage of the browser is available
-   *
-   * @return Availability of the local storage (boolean)
-   */
-  public static isLocalStorageAvailable() {
-    try {
-      localStorage.setItem('check', 'availability');
-      localStorage.removeItem('check');
-      return true;
-    } catch (e) {
-      return false;
-    }
-  }
-
-  /**
-   * Check if the session storage of the browser is available
-   *
-   * @return Availability of the session storage (boolean)
-   */
-  public static isSessionStorageAvailable() {
-    try {
-      sessionStorage.setItem('check', 'availability');
-      sessionStorage.removeItem('check');
-      return true;
-    } catch (e) {
-      return false;
-    }
-  }
-
-  /**
-   * Create a cookie item
-   * Make sure the user has given his consent to the usage of cookies
-   *
-   * @param item
-   * @param value
-   */
-  public static createCookie(item: string, value: string): void {
-    if (item === '' || value === '') return;
-    if (
-      HelperFunctionsService.cookie_consent.value &&
-      HelperFunctionsService.isLocalStorageAvailable()
-    ) {
-      localStorage.setItem(item, value);
-    } else {
-      HelperFunctionsService.createSessionCookie(item, value);
-    }
-  }
-
-  /**
-   * Delete a cookie item from the local storage
-   *
-   * @param item
-   */
-  public static deleteCookie(item: string): void {
-    if (item === '') return;
-    if (
-      HelperFunctionsService.isLocalStorageAvailable() &&
-      localStorage.getItem(item) != null
-    ) {
-      localStorage.removeItem(item);
-    }
-  }
-
-  /**
-   * Get a cookie item
-   *
-   * @param item
-   */
-  public static getCookie(item: string): string | null {
-    if (HelperFunctionsService.cookie_consent.value) {
-      return HelperFunctionsService.getRawCookie(item);
-    } else {
-      return HelperFunctionsService.getSessionCookie(item);
-    }
-  }
-
-  /**
-   * Get a cookie item (raw, cookie consent is not required)
-   *
-   * @param item
-   */
-  public static getRawCookie(item: string): string | null {
-    if (
-      HelperFunctionsService.isLocalStorageAvailable() &&
-      localStorage.getItem(item) != null
-    ) {
-      return localStorage.getItem(item);
-    } else {
-      return HelperFunctionsService.getSessionCookie(item);
-    }
-  }
-
-  /**
-   * Create a session cookie item only
-   *
-   * @param item
-   * @param value
-   */
-  public static createSessionCookie(item: string, value: string): void {
-    if (item === '' || value === '') return;
-    if (HelperFunctionsService.isSessionStorageAvailable()) {
-      sessionStorage.setItem(item, value);
-    }
-  }
-
-  /**
-   * Get a session cookie item
-   *
-   * @param item
-   */
-  public static getSessionCookie(item: string): string | null {
-    if (
-      HelperFunctionsService.isSessionStorageAvailable() &&
-      sessionStorage.getItem(item) != null
-    ) {
-      return sessionStorage.getItem(item);
-    }
-    return null;
-  }
-
-  /**
    * Browser support tool
    * The event listener 'transitionend' as many variations across all browsers
    * This tool checks them all and chooses which one works / fits best
@@ -295,6 +170,17 @@ export class HelperFunctionsService {
     } else {
       element['on' + event] = callback;
     }
+  }
+
+  /**
+   * Clamp any value to a minimum and maximum value
+   *
+   * @param value
+   * @param min
+   * @param max
+   */
+  public static clampValue(value: number, min: number, max: number): number {
+    return Math.min(Math.max(value, min), max);
   }
 
   /**

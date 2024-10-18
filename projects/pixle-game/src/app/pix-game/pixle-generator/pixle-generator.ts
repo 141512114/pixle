@@ -2,8 +2,6 @@ import { IPixle } from '@interface/pixle.interface';
 import { PIXLE_ICONS } from '@typescript/emoji.database';
 import { MASTER_PATTERNS } from './pixle-pattern-list';
 
-let pixle_master_list: IPixle[] = [];
-
 /**
  * Generate a random integer between two limiter values --> min and max
  * The parameter min is by default 0
@@ -74,9 +72,9 @@ function chooseRandomPattern(): number[][] {
  * @return Array of icons / emojis
  */
 function chooseRandomIcons(pattern: number[][]): number[] {
-  const max_icon_count: number = getMaximumIconCount(pattern);
+  const maxIconCount: number = getMaximumIconCount(pattern);
   let chosen_icons: number[] = [];
-  for (let i = 0; i < max_icon_count; i++) {
+  for (let i = 0; i < maxIconCount; i++) {
     let current_chosen_icon: number = generateRandomInteger(
       PIXLE_ICONS.length - 1,
     );
@@ -96,12 +94,12 @@ function chooseRandomIcons(pattern: number[][]): number[] {
  */
 function generateNewPixle(pixle_date: any, pixle_id: number = 0): IPixle {
   const pattern: number[][] = chooseRandomPattern();
-  const chosen_icons: number[] = chooseRandomIcons(pattern);
+  const chosenIcons: number[] = chooseRandomIcons(pattern);
 
   return {
     id: pixle_id,
     date: pixle_date,
-    tiles: generateNewPattern(pattern, chosen_icons),
+    tiles: generateNewPattern(pattern, chosenIcons),
   };
 }
 
@@ -109,9 +107,9 @@ function generateNewPixle(pixle_date: any, pixle_id: number = 0): IPixle {
  * Initialize the pixle generator
  */
 export default function initPixleGenerator(): IPixle {
-  let start_date: Date = new Date();
-  start_date.setUTCHours(0, 0, 0, 0);
-  start_date.setUTCDate(start_date.getUTCDate());
+  const startDate: Date = new Date();
+  startDate.setUTCHours(0, 0, 0, 0);
+  startDate.setUTCDate(startDate.getUTCDate());
 
-  return generateNewPixle(start_date.toJSON());
+  return generateNewPixle(startDate.toJSON());
 }

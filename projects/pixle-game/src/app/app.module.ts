@@ -11,6 +11,8 @@ import { PixGameComponent } from './pix-game/pix-game.component';
 import { PixGridComponent } from './pix-grid/pix-grid.component';
 import { PixGridElementComponent } from './pix-grid-element/pix-grid-element.component';
 import { PixGridUiComponent } from './pix-grid-ui/pix-grid-ui.component';
+import { RouteReuseStrategy } from '@angular/router';
+import { CustomRouteReuseStrategy } from './custom-route-reuse-strategy';
 
 @NgModule({
   declarations: [
@@ -28,7 +30,9 @@ import { PixGridUiComponent } from './pix-grid-ui/pix-grid-ui.component';
     FontAwesomeModule,
     SharedModule,
   ],
-  providers: [],
+  providers: [
+    { provide: RouteReuseStrategy, useClass: CustomRouteReuseStrategy },
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

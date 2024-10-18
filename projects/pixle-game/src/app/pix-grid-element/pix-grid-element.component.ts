@@ -113,7 +113,7 @@ export class PixGridElementComponent
    */
   public selectThisEmoji(): void {
     if (this.grid_element_type !== 1) return;
-    let element: HTMLElement = this.user_interactive.nativeElement;
+    const element = this.user_interactive.nativeElement as HTMLElement;
     this.addClassToHTMLElement(element, this.selected_class);
   }
 
@@ -122,7 +122,7 @@ export class PixGridElementComponent
    */
   public unselectThisEmoji(): void {
     if (this.grid_element_type !== 1) return;
-    let element: HTMLElement = this.user_interactive.nativeElement;
+    const element = this.user_interactive.nativeElement as HTMLElement;
     this.removeClassFromHTMLElement(element, this.selected_class);
   }
 
@@ -146,7 +146,7 @@ export class PixGridElementComponent
    */
   public doFlip(): void {
     if (this.grid_element_type !== 0) return;
-    let element: HTMLElement = this.user_interactive.nativeElement;
+    const element = this.user_interactive.nativeElement as HTMLElement;
     // Show correct answer before flipping the grid element
     this.showCorrectAnswer();
     this.addClassToHTMLElement(element, this.do_flip_class);
@@ -158,7 +158,7 @@ export class PixGridElementComponent
    */
   public undoFlip(): void {
     if (this.grid_element_type !== 0 || this.pixle_tile_solved) return;
-    let element: HTMLElement = this.user_interactive.nativeElement;
+    const element = this.user_interactive.nativeElement as HTMLElement;
     this.removeClassFromHTMLElement(element, this.do_flip_class);
     this.setElementIcon(this.pixle_emoji_default);
     // Second part is executed in an event listener
@@ -177,21 +177,22 @@ export class PixGridElementComponent
       this.pixle_tile_lives <= 0
     )
       return;
-    let grid_native_element: HTMLElement = this.user_interactive.nativeElement;
+    const gridNativeElement = this.user_interactive
+      .nativeElement as HTMLElement;
     if (!solved) {
       this.pixle_tile_lives--;
       // Add class which represents the current health status
-      grid_native_element.dataset['gridElementStatus'] =
+      gridNativeElement.dataset['gridElementStatus'] =
         this.pixle_tile_lives.toString();
       if (this.pixle_tile_lives <= 0) {
         this.undoFlip();
-        HelperFunctionsService.lockElement(grid_native_element);
+        HelperFunctionsService.lockElement(gridNativeElement);
       } else {
         this.doFlip();
       }
     } else {
-      grid_native_element.dataset['gridElementStatus'] = 'solved';
-      HelperFunctionsService.lockElement(grid_native_element);
+      gridNativeElement.dataset['gridElementStatus'] = 'solved';
+      HelperFunctionsService.lockElement(gridNativeElement);
     }
     this.pixle_tile_solved = solved;
   }

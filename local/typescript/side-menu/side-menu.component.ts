@@ -5,7 +5,7 @@ import {
   ViewEncapsulation,
 } from '@angular/core';
 import { AbstractHtmlElement } from '@abstract/abstract.html-element';
-import { HelperFunctionsService } from '@abstract/services/helper-functions.service';
+import * as CookieService from '@abstract/composables/cookies';
 
 @Component({
   encapsulation: ViewEncapsulation.None,
@@ -18,7 +18,7 @@ export class SideMenuComponent extends AbstractHtmlElement {
   @ViewChild('side_menu') public side_menu!: ElementRef;
 
   public clearAllCookies(): void {
-    HelperFunctionsService.deleteCookie('cookie_consent');
-    HelperFunctionsService.deleteCookie('last_theme');
+    CookieService.deleteCookie('cookie_consent');
+    CookieService.deleteCookie('last_theme');
   }
 }

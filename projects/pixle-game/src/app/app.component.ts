@@ -72,28 +72,29 @@ export class AppComponent implements OnInit, AfterViewInit {
     );
   }
 
+  // noinspection DuplicatedCode
   /**
    * Toggle (open or close) the side menu
    */
   public toggleSideMenu(): void {
-    let side_menu_element: HTMLElement =
-      this.sideMenuComponent.side_menu.nativeElement;
-    let toggle_side_menu_element: HTMLElement =
-      this.toggle_side_menu_btn.nativeElement;
-    let show_class: string = 'toggle';
+    const sideMenuElement = this.sideMenuComponent.side_menu
+      .nativeElement as HTMLElement;
+    const toggleSideMenuElement = this.toggle_side_menu_btn
+      .nativeElement as HTMLElement;
+    const showClass: string = 'toggle';
 
     if (this.sideMenuComponent.active) {
-      this.sideMenuComponent.addClassToHTMLElement(side_menu_element, 'close');
-      if (toggle_side_menu_element.classList.contains(show_class)) {
-        toggle_side_menu_element.classList.remove(show_class);
+      this.sideMenuComponent.addClassToHTMLElement(sideMenuElement, 'close');
+      if (toggleSideMenuElement.classList.contains(showClass)) {
+        toggleSideMenuElement.classList.remove(showClass);
       }
     } else {
       this.sideMenuComponent.removeClassFromHTMLElement(
-        side_menu_element,
+        sideMenuElement,
         'close',
       );
-      if (!toggle_side_menu_element.classList.contains(show_class)) {
-        toggle_side_menu_element.classList.add(show_class);
+      if (!toggleSideMenuElement.classList.contains(showClass)) {
+        toggleSideMenuElement.classList.add(showClass);
       }
     }
     this.sideMenuComponent.active = !this.sideMenuComponent.active;
@@ -106,7 +107,7 @@ export class AppComponent implements OnInit, AfterViewInit {
    * @private
    */
   private addViewportHeightProperty(): void {
-    let vh = this.window.innerHeight * 0.01;
+    const vh: number = this.window.innerHeight * 0.01;
     this.document.documentElement.style.setProperty('--vh', `${vh}px`);
   }
 
@@ -132,14 +133,14 @@ export class AppComponent implements OnInit, AfterViewInit {
    */
   private addTouchClass(): void {
     this.window.clearTimeout(this.isTouchTimer);
-    let body_element: HTMLElement = this.document.body;
+    const bodyElement = this.document.body as HTMLElement;
     if (
       this.hasTouch() === false ||
       null ||
-      body_element.classList.contains('startTouch')
+      bodyElement.classList.contains('startTouch')
     )
       return;
-    body_element.classList.add('startTouch');
+    bodyElement.classList.add('startTouch');
   }
 
   /**
@@ -149,9 +150,9 @@ export class AppComponent implements OnInit, AfterViewInit {
    */
   private removeTouchClass(): void {
     this.isTouchTimer = setTimeout(() => {
-      let body_element: HTMLElement = this.document.body;
-      if (!body_element.classList.contains('startTouch')) return;
-      body_element.classList.remove('startTouch');
+      const bodyElement = this.document.body as HTMLElement;
+      if (!bodyElement.classList.contains('startTouch')) return;
+      bodyElement.classList.remove('startTouch');
     }, COOLDOWN_TOUCH);
   }
 }

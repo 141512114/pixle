@@ -99,11 +99,11 @@ export class PixGridUiComponent extends AbstractHtmlElement {
    * Copy pixle content to the clipboard
    */
   public copyToClipboard(): void {
-    let pixle_url: string = 'https://www.pixle.gg/';
-    let msg_to_copy: string = this.pixle_share_result + '\n' + pixle_url;
-    if (this.clipboard.copy(msg_to_copy)) {
+    const pixleUrl: string = 'https://www.pixle.gg/';
+    const msgToCopy: string = this.pixle_share_result + '\n' + pixleUrl;
+    if (this.clipboard.copy(msgToCopy)) {
       this.window.clearTimeout(this.copied_badge_timer);
-      let copied_badge_element: HTMLElement = this.copied_badge.nativeElement;
+      const copied_badge_element: HTMLElement = this.copied_badge.nativeElement;
       this.removeClassFromHTMLElement(copied_badge_element, 'close');
       this.copied_badge_timer = setTimeout(() => {
         this.addClassToHTMLElement(copied_badge_element, 'close');
@@ -127,12 +127,12 @@ export class PixGridUiComponent extends AbstractHtmlElement {
    * Toggle one or the other
    */
   public switchUiElements(): void {
-    let ui_wrapper_element: HTMLElement = this.ui_wrapper.nativeElement;
-    let close_class: string = 'switch-ui';
-    if (!ui_wrapper_element.classList.contains(close_class)) {
-      ui_wrapper_element.classList.add(close_class);
+    const uiWrapperElement: HTMLElement = this.ui_wrapper.nativeElement;
+    const closeClass: string = 'switch-ui';
+    if (!uiWrapperElement.classList.contains(closeClass)) {
+      uiWrapperElement.classList.add(closeClass);
     } else {
-      ui_wrapper_element.classList.remove(close_class);
+      uiWrapperElement.classList.remove(closeClass);
     }
   }
 
@@ -142,10 +142,10 @@ export class PixGridUiComponent extends AbstractHtmlElement {
    * @private
    */
   private selectCurrentChosenEmoji(): void {
-    let emoji_emitter_list: PixGridElementComponent[] =
+    const emojiEmitterList: PixGridElementComponent[] =
       this.pixle_emoji_output.toArray();
-    for (let i = 0; i < emoji_emitter_list.length; i++) {
-      let current_entry: PixGridElementComponent = emoji_emitter_list[i];
+    for (let i = 0; i < emojiEmitterList.length; i++) {
+      const current_entry: PixGridElementComponent = emojiEmitterList[i];
       if (
         current_entry.twa_emoji_class_front_face !== GameManager.chosen_emoji
       ) {

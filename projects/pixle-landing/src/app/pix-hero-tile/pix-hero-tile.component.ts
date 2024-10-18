@@ -63,7 +63,7 @@ export class PixHeroTileComponent
    * Flip grid element
    */
   public doFlip(): void {
-    let element: HTMLElement = this.tile_content_wrapper.nativeElement;
+    const element = this.tile_content_wrapper.nativeElement as HTMLElement;
     this.addClassToHTMLElement(element, this.do_flip_class);
   }
 
@@ -71,7 +71,7 @@ export class PixHeroTileComponent
    * Reverse flipped grid element
    */
   public undoFlip(): void {
-    let element: HTMLElement = this.tile_content_wrapper.nativeElement;
+    const element = this.tile_content_wrapper.nativeElement as HTMLElement;
     this.removeClassFromHTMLElement(element, this.do_flip_class);
   }
 
