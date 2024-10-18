@@ -8,7 +8,6 @@ import {
 import { Router } from '@angular/router';
 import { DOCUMENT, Location } from '@angular/common';
 import { WINDOW } from '@typescript/window-injection.token';
-import { HelperFunctionsService } from '@abstract/services/helper-functions.service';
 import * as CookieService from '@abstract/composables/cookies';
 import { GameManager } from './game.manager';
 import { PopupMessageComponent } from '@typescript/popup-message/popup-message.component';
@@ -63,13 +62,22 @@ export class PixGameComponent implements OnInit, AfterViewInit {
   }
 
   /**
-   * Start the game
-   * Show the pixle at the beginning for a set duration
-   * Hide it, if the timer is over
+   * Initialize the game
    *
    * @private
    */
-  private startGame(): void {
+  private initGame(): void {
+    // Check if a pixle image is available
+    if (GameManager.pixle_image.length <= 0) {
+      this.sendMatchMessage(MISSING_PIXLE_MSG);
+      return;
+    }
+
+    /*
+     * Start the game
+     * Show the pixle at the beginning for a set duration
+     * Hide it, if the timer is over
+     */
     this.countdown_start = setTimeout(() => {
       GameManager.initGame();
       if (
@@ -86,20 +94,7 @@ export class PixGameComponent implements OnInit, AfterViewInit {
         GameManager.pixle_id.toString(),
       );
     }, UNDO_FLIP_TIME);
-  }
 
-  /**
-   * Initialize the game
-   *
-   * @private
-   */
-  private initGame(): void {
-    // Check if a pixle image is available
-    if (GameManager.pixle_image.length <= 0) {
-      this.sendMatchMessage(MISSING_PIXLE_MSG);
-      return;
-    }
-    this.startGame();
     GameManager.game_reloaded = false;
   }
 
@@ -123,15 +118,6 @@ export class PixGameComponent implements OnInit, AfterViewInit {
       this.document.body.dataset['theme'] = previousTheme;
     }
     GameManager.generatePixle();
-
-    HelperFunctionsService.addEventListenerToElement(
-      this.window,
-      'load',
-      () => {
-        if (!this.cookie_consent && !this.cookie_popup_is_closed) return;
-        this.initGame();
-      },
-    );
   }
 
   ngAfterViewInit() {
@@ -140,9 +126,7 @@ export class PixGameComponent implements OnInit, AfterViewInit {
       this.sendMatchMessage(COOKIE_NOTIF_MSG, this.cookie_alert);
       return;
     }
-    if (GameManager.game_reloaded) {
-      this.initGame();
-    }
+    this.initGame();
   }
 
   /**
@@ -176,7 +160,6 @@ export class PixGameComponent implements OnInit, AfterViewInit {
         console.error(error);
         return false;
       });
-    console.log(GameManager.game_reloaded);
   }
 
   /**

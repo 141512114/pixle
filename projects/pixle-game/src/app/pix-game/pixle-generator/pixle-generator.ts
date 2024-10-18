@@ -3,6 +3,31 @@ import { PIXLE_ICONS } from '@typescript/emoji.database';
 import { MASTER_PATTERNS } from './pixle-pattern-list';
 
 /**
+ * Random seed generator
+ *
+ * @param seed
+ */
+function seededRandom(seed: number): () => number {
+  return function () {
+    const x = Math.sin(seed++) * 10000;
+    return x - Math.floor(x);
+  };
+}
+
+/**
+ * Generate a seed out of the current date
+ */
+function getSeedFromDate(): number {
+  const today = new Date();
+  return (
+    today.getFullYear() * 10000 + (today.getMonth() + 1) * 100 + today.getDate()
+  );
+}
+
+let seed = getSeedFromDate();
+let random = seededRandom(seed);
+
+/**
  * Generate a random integer between two limiter values --> min and max
  * The parameter min is by default 0
  *
@@ -11,7 +36,7 @@ import { MASTER_PATTERNS } from './pixle-pattern-list';
  * @return Random integer
  */
 function generateRandomInteger(max: number, min: number = 0): number {
-  return Math.floor(Math.random() * (max - min + 1) + min);
+  return Math.floor(random() * (max - min + 1) + min);
 }
 
 /**
@@ -107,6 +132,9 @@ function generateNewPixle(pixle_date: any, pixle_id: number = 0): IPixle {
  * Initialize the pixle generator
  */
 export default function initPixleGenerator(): IPixle {
+  seed = getSeedFromDate();
+  random = seededRandom(seed);
+
   const startDate: Date = new Date();
   startDate.setUTCHours(0, 0, 0, 0);
   startDate.setUTCDate(startDate.getUTCDate());

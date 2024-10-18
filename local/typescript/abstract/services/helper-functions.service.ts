@@ -115,21 +115,6 @@ export class HelperFunctionsService {
   }
 
   /**
-   * Format a given date and remove the hours, minutes and seconds
-   * Only keep the day, month and year
-   *
-   * @param date
-   * @return Formatted date
-   */
-  public static formatDate(date: Date) {
-    return [
-      date.getFullYear(),
-      HelperFunctionsService.padTo2Digits(date.getMonth() + 1),
-      HelperFunctionsService.padTo2Digits(date.getDate()),
-    ].join('-');
-  }
-
-  /**
    * Browser support tool
    * The event listener 'transitionend' as many variations across all browsers
    * This tool checks them all and chooses which one works / fits best
@@ -181,16 +166,5 @@ export class HelperFunctionsService {
    */
   public static clampValue(value: number, min: number, max: number): number {
     return Math.min(Math.max(value, min), max);
-  }
-
-  /**
-   * Add a zero to any number below 10
-   *
-   * @param num
-   * @return Modified number as a string
-   * @private
-   */
-  private static padTo2Digits(num: number) {
-    return num.toString().padStart(2, '0');
   }
 }
