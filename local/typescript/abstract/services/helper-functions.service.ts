@@ -1,12 +1,10 @@
-import {Injectable} from '@angular/core';
-import {BehaviorSubject} from 'rxjs';
+import { Injectable } from '@angular/core';
+import { PIXLE_ICONS } from '@typescript/emoji.database';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class HelperFunctionsService {
-  public static cookie_consent: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
-
   /**
    * Convert any two-dimensional array into a one-dimensional array
    *
@@ -38,6 +36,48 @@ export class HelperFunctionsService {
   }
 
   /**
+   * Get the list of emojis used in the pixle
+   *
+   * @return {boolean} Operation successful
+   * @private
+   */
+  public static getEmojiList(pixle_tiles: string[][]): string[] {
+    if (pixle_tiles.length <= 0) return [];
+    let pixle_convert: string[] =
+      HelperFunctionsService.twoDimensionalArrayToOneDimensional(pixle_tiles);
+    let temp_twa_emoji_classes: string[] = [];
+    for (let i: number = 0; i < pixle_convert.length; i++) {
+      for (let j: number = pixle_convert.length - 1; j > 0; j--) {
+        // Make absolutely sure that both picked entries are the exact same (or not)
+        if (pixle_convert[j] === pixle_convert[i]) {
+          let twa_emoji_class: string = pixle_convert[i];
+          // Check if there already exists this exact emoji code point in the temporary array
+          if (temp_twa_emoji_classes.includes(twa_emoji_class)) break;
+          temp_twa_emoji_classes.push(twa_emoji_class);
+        }
+      }
+    }
+
+    return temp_twa_emoji_classes;
+  }
+
+  /**
+   * Get the emoji by its id --> search it in the emoji collection
+   * Return an array of codepoints
+   *
+   * @param emoji_ids
+   * @return {string[]} Array of strings --> twa emoji classes
+   */
+  public static getEmojisFromListById(emoji_ids: number[] = []): string[] {
+    let temp_twa_emoji_classes: string[] = [];
+    for (let i: number = 0; i < emoji_ids.length; i++) {
+      let twa_emoji_class: string = PIXLE_ICONS[emoji_ids[i]];
+      temp_twa_emoji_classes.push(twa_emoji_class);
+    }
+    return temp_twa_emoji_classes;
+  }
+
+  /**
    * Makes an array of numbers which helps to use *ngFor as a normal for loop
    *
    * @param i
@@ -58,7 +98,8 @@ export class HelperFunctionsService {
    * @param element
    */
   public static lockElement(element: HTMLElement): void {
-    if ((element == undefined || null) || (element.classList.contains('locked'))) return;
+    if (element == undefined || null || element.classList.contains('locked'))
+      return;
     element.classList.add('locked');
   }
 
@@ -68,132 +109,9 @@ export class HelperFunctionsService {
    * @param element
    */
   public static unlockElement(element: HTMLElement): void {
-    if ((element == undefined || null) || (!element.classList.contains('locked'))) return;
+    if (element == undefined || null || !element.classList.contains('locked'))
+      return;
     element.classList.remove('locked');
-  }
-
-  /**
-   * Format a given date and remove the hours, minutes and seconds
-   * Only keep the day, month and year
-   *
-   * @param date
-   * @return Formatted date
-   */
-  public static formatDate(date: Date) {
-    return [
-      date.getFullYear(),
-      HelperFunctionsService.padTo2Digits(date.getMonth() + 1),
-      HelperFunctionsService.padTo2Digits(date.getDate()),
-    ].join('-');
-  }
-
-  /**
-   * Check if the local storage of the browser is available
-   *
-   * @return Availability of the local storage (boolean)
-   */
-  public static isLocalStorageAvailable() {
-    try {
-      localStorage.setItem('check', 'availability');
-      localStorage.removeItem('check');
-      return true;
-    } catch (e) {
-      return false;
-    }
-  }
-
-  /**
-   * Check if the session storage of the browser is available
-   *
-   * @return Availability of the session storage (boolean)
-   */
-  public static isSessionStorageAvailable() {
-    try {
-      sessionStorage.setItem('check', 'availability');
-      sessionStorage.removeItem('check');
-      return true;
-    } catch (e) {
-      return false;
-    }
-  }
-
-  /**
-   * Create a cookie item
-   * Make sure the user has given his consent to the usage of cookies
-   *
-   * @param item
-   * @param value
-   */
-  public static createCookie(item: string, value: string): void {
-    if (item === '' || value === '') return;
-    if (HelperFunctionsService.cookie_consent.value && HelperFunctionsService.isLocalStorageAvailable()) {
-      localStorage.setItem(item, value);
-    } else {
-      HelperFunctionsService.createSessionCookie(item, value);
-    }
-  }
-
-  /**
-   * Delete a cookie item from the local storage
-   *
-   * @param item
-   */
-  public static deleteCookie(item: string): void {
-    if (item === '') return;
-    if (HelperFunctionsService.isLocalStorageAvailable() && localStorage.getItem(item) != null) {
-      localStorage.removeItem(item);
-    }
-  }
-
-  /**
-   * Get a cookie item
-   *
-   * @param item
-   */
-  public static getCookie(item: string): string | null {
-    if (HelperFunctionsService.cookie_consent.value) {
-      return HelperFunctionsService.getRawCookie(item);
-    } else {
-      return HelperFunctionsService.getSessionCookie(item);
-    }
-  }
-
-  /**
-   * Get a cookie item (raw, cookie consent is not required)
-   *
-   * @param item
-   */
-  public static getRawCookie(item: string): string | null {
-    if (HelperFunctionsService.isLocalStorageAvailable() && localStorage.getItem(item) != null) {
-      return localStorage.getItem(item);
-    } else {
-      return HelperFunctionsService.getSessionCookie(item);
-    }
-  }
-
-  /**
-   * Create a session cookie item only
-   *
-   * @param item
-   * @param value
-   */
-  public static createSessionCookie(item: string, value: string): void {
-    if (item === '' || value === '') return;
-    if (HelperFunctionsService.isSessionStorageAvailable()) {
-      sessionStorage.setItem(item, value);
-    }
-  }
-
-  /**
-   * Get a session cookie item
-   *
-   * @param item
-   */
-  public static getSessionCookie(item: string): string | null {
-    if (HelperFunctionsService.isSessionStorageAvailable() && sessionStorage.getItem(item) != null) {
-      return sessionStorage.getItem(item);
-    }
-    return null;
   }
 
   /**
@@ -204,10 +122,10 @@ export class HelperFunctionsService {
   public static transitionEndEventName(): any {
     let el: HTMLElement = document.createElement('div');
     let transitions: any = {
-      'transition': 'transitionend',
-      'OTransition': 'otransitionend',  // oTransitionEnd in very old Opera
-      'MozTransition': 'transitionend',
-      'WebkitTransition': 'webkitTransitionEnd'
+      transition: 'transitionend',
+      OTransition: 'otransitionend', // oTransitionEnd in very old Opera
+      MozTransition: 'transitionend',
+      WebkitTransition: 'webkitTransitionEnd',
     };
     let i: any;
     for (i in transitions) {
@@ -225,7 +143,11 @@ export class HelperFunctionsService {
    * @param event
    * @param callback
    */
-  public static addEventListenerToElement(element: any, event: any, callback: any): void {
+  public static addEventListenerToElement(
+    element: any,
+    event: any,
+    callback: any,
+  ): void {
     if (typeof element.addEventListener != undefined) {
       element.addEventListener(event, callback, false);
     } else if (typeof element.attachEvent != undefined) {
@@ -236,13 +158,13 @@ export class HelperFunctionsService {
   }
 
   /**
-   * Add a zero to any number below 10
+   * Clamp any value to a minimum and maximum value
    *
-   * @param num
-   * @return Modified number as a string
-   * @private
+   * @param value
+   * @param min
+   * @param max
    */
-  private static padTo2Digits(num: number) {
-    return num.toString().padStart(2, '0');
+  public static clampValue(value: number, min: number, max: number): number {
+    return Math.min(Math.max(value, min), max);
   }
 }

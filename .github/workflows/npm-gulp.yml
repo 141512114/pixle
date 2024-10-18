@@ -1,10 +1,10 @@
-name: NodeJS with Gulp
+name: NodeJS
 
 on:
   push:
-    branches: [ "master" ]
+    branches: [ "master", "rework" ]
   pull_request:
-    branches: [ "master" ]
+    branches: [ "master", "rework" ]
 
 jobs:
   build:
@@ -17,7 +17,7 @@ jobs:
     steps:
     - uses: actions/checkout@v4
 
-    # The following lines will Cache the npm modules when running the test  
+    # The following lines will Cache the npm modules when running the test
     # so the actions will be faster
     - name: Cache node modules
       uses: actions/cache@v2
@@ -38,28 +38,13 @@ jobs:
         node-version: ${{ matrix.node-version }}
 
     - name: Install necessary packages
-      run: |
-        sudo apt-get install g++ build-essential
-        npm install -g node-gyp
-        npm i --legacy-peer-deps
+      run: npm i
 
     - name: Clear npm cache and verify its integrity
-      run: |
-          npm run cleanup
+      run: npm run cleanup
 
-    - name: Create a pixle database and clean up the cache and any artifacts
-      run: |
-          gulp combined
-          npm run pixles
+    - name: Run build pixle-game command
+      run: npm run build pixle-game
 
-    - name: Generate the pixle game stylesheets
-      run: gulp pixle-game-compress
-
-    # - name: Run build pixle-game command
-    #   run: npm run build pixle-game
-
-    - name: Generate the pixle landing stylesheets
-      run: gulp pixle-landing-compress
-        
-    # - name: Run build:ssr command
-    #   run: npm run build:ssr
+    - name: Run build pixle-landing command
+      run: npm run build pixle-landing

@@ -2,7 +2,7 @@
   <ul class="m-0 p-0 theme-switcher-wrapper">
     <ng-container *ngFor="let theme of ['Neo', 'Vibe', 'Pop', 'Volcano', 'Cold', 'Troll']">
       <li class="theme-list-item">
-        <button (click)="changeTheme(theme.toLowerCase())" [attr.aria-label]="theme + 'theme'" class="btn rounded-3"
+        <button (click)="changeTheme(theme.toLowerCase())" [attr.aria-label]="theme + 'theme'" class="rounded-3"
                 type="button">{{theme}}</button>
       </li>
     </ng-container>

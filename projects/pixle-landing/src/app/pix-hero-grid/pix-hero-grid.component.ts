@@ -1,20 +1,18 @@
-import {Component, OnInit} from '@angular/core';
-import {HelperFunctionsService} from '@abstract/services/helper-functions.service';
-import {STYLESHEETS_PATH} from '../app.component';
-import {PIXLE_ICONS} from '@typescript/emoji.database';
+import { Component, OnInit } from '@angular/core';
+import { HelperFunctionsService } from '@abstract/services/helper-functions.service';
+import { PIXLE_ICONS } from '@typescript/emoji.database';
 
 @Component({
   selector: 'app-pix-hero-grid',
   templateUrl: './pix-hero-grid.component.html',
-  styleUrls: [STYLESHEETS_PATH + 'pix-hero-grid.component.min.css']
+  styleUrls: ['./pix-hero-grid.component.scss'],
 })
 export class PixHeroGridComponent implements OnInit {
   grid_image: string[][] = [];
   grid_image_width: number = 0;
   grid_image_height: number = 0;
 
-  constructor() {
-  }
+  constructor() {}
 
   ngOnInit(): void {
     this.searchRandomPixleArt();
@@ -28,11 +26,13 @@ export class PixHeroGridComponent implements OnInit {
    */
   private searchRandomPixleArt(): void {
     let temp_pixle_image: string[][] = [];
-    let row_count: number = 4;
-    for (let i: number = 0; i < row_count; i++) {
+    const rowCount: number = 4;
+    for (let i: number = 0; i < rowCount; i++) {
       let temp_row_of_image: string[] = [];
-      for (let j: number = 0; j < row_count; j++) {
-        let rnd: number = HelperFunctionsService.generateRandomInteger(PIXLE_ICONS.length - 1);
+      for (let j: number = 0; j < rowCount; j++) {
+        let rnd: number = HelperFunctionsService.generateRandomInteger(
+          PIXLE_ICONS.length - 1,
+        );
         temp_row_of_image.push(PIXLE_ICONS[rnd]);
       }
       temp_pixle_image.push(temp_row_of_image);

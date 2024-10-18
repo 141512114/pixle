@@ -1,26 +1,37 @@
-import {AfterViewInit, Component, ElementRef, Inject, OnInit, ViewChild, ViewEncapsulation} from '@angular/core';
-import {HelperFunctionsService} from '@abstract/services/helper-functions.service';
-import {DOCUMENT} from '@angular/common';
-import {faGear, faXmark, IconDefinition} from '@fortawesome/free-solid-svg-icons';
-import {SideMenuComponent} from '@typescript/side-menu/side-menu.component';
-import {IPopUp} from '@interface/popup-message.interface';
-import {PopupMessageComponent} from '@typescript/popup-message/popup-message.component';
-
-export const STYLESHEETS_PATH: string = '../../stylesheets/css/';
+import {
+  AfterViewInit,
+  Component,
+  ElementRef,
+  Inject,
+  OnInit,
+  ViewChild,
+  ViewEncapsulation,
+} from '@angular/core';
+import * as CookieService from '@abstract/composables/cookies';
+import { DOCUMENT } from '@angular/common';
+import {
+  faGear,
+  faXmark,
+  IconDefinition,
+} from '@fortawesome/free-solid-svg-icons';
+import { SideMenuComponent } from '@typescript/side-menu/side-menu.component';
+import { IPopUp } from '@interface/popup-message.interface';
+import { PopupMessageComponent } from '@typescript/popup-message/popup-message.component';
 
 // Cookie notification
 const COOKIE_NOTIF_MSG: IPopUp = {
   headline: 'Cookie alert!',
   subline: '',
-  message_body: 'We are required to inform you about the usage of cookies on our website. These are required' +
-    ' and used in order to save applied settings. Closing this notification means you agree with the usage of cookies.'
+  message_body:
+    'We are required to inform you about the usage of cookies on our website. These are required' +
+    ' and used in order to save applied settings. Closing this notification means you agree with the usage of cookies.',
 };
 
 @Component({
   encapsulation: ViewEncapsulation.None,
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['../stylesheets/css/app.component.min.css']
+  styleUrls: ['./app.component.scss'],
 })
 export class AppComponent implements OnInit, AfterViewInit {
   cookie_consent: boolean = false;
@@ -32,19 +43,25 @@ export class AppComponent implements OnInit, AfterViewInit {
   @ViewChild('toggle_side_menu_btn') private toggle_side_menu_btn!: ElementRef;
 
   constructor(@Inject(DOCUMENT) private document: Document) {
-    HelperFunctionsService.cookie_consent.subscribe(value => {
+    CookieService.cookie_consent.subscribe((value) => {
       this.cookie_consent = value;
     });
   }
 
   ngOnInit() {
-    // Check if the consent to the cookie usage has been given
-    let cookie_consent_given: string | null = HelperFunctionsService.getRawCookie('cookie_consent');
-    let cookie_consent_bool: boolean = false;
-    if (cookie_consent_given != null) cookie_consent_bool = JSON.parse(cookie_consent_given.toLowerCase());
-    HelperFunctionsService.cookie_consent.next(cookie_consent_bool);
+    // Check if the consent to cookie usage has been given
+    const cookieConsentGiven = CookieService.getRawCookie('cookie_consent');
+    let cookie_consent_bool = false;
+
+    if (cookieConsentGiven) {
+      cookie_consent_bool = this.parseCookieConsent(cookieConsentGiven);
+    }
+
+    // Notify cookie consent status via service
+    CookieService.cookie_consent.next(cookie_consent_bool);
+
     // Get the stored theme data, if available, and "restore" the previous settings
-    let previous_theme: string | null = HelperFunctionsService.getCookie('last_theme');
+    const previous_theme: string | null = CookieService.getCookie('last_theme');
     if (previous_theme != null) {
       this.document.body.dataset['theme'] = previous_theme;
     }
@@ -61,8 +78,8 @@ export class AppComponent implements OnInit, AfterViewInit {
    */
   public receivePopupHasBeenClosed(paket: boolean = false): void {
     this.closeCookieAlert();
-    HelperFunctionsService.cookie_consent.next(paket);
-    HelperFunctionsService.createCookie('cookie_consent', String(paket));
+    CookieService.cookie_consent.next(paket);
+    CookieService.createCookie('cookie_consent', String(paket));
   }
 
   /**
@@ -71,32 +88,55 @@ export class AppComponent implements OnInit, AfterViewInit {
    * @param msg_object
    */
   public sendCookieAlert(msg_object: IPopUp): void {
-    let popup_msg: PopupMessageComponent = this.cookie_alert;
-    popup_msg.writeNewMessage(msg_object);
-    popup_msg.openPopup();
+    const popupMsg: PopupMessageComponent = this.cookie_alert;
+    popupMsg.writeNewMessage(msg_object);
+    popupMsg.openPopup();
     this.openCookieAlert();
   }
 
+  // noinspection DuplicatedCode
   /**
    * Toggle (open or close) the side menu
    */
   public toggleSideMenu(): void {
-    let side_menu_element: HTMLElement = this.sideMenuComponent.side_menu.nativeElement;
-    let toggle_side_menu_element: HTMLElement = this.toggle_side_menu_btn.nativeElement;
-    let show_class: string = 'toggle';
+    const sideMenuElement = this.sideMenuComponent.side_menu
+      .nativeElement as HTMLElement;
+    const toggleSideMenuElement = this.toggle_side_menu_btn
+      .nativeElement as HTMLElement;
+    const showClass: string = 'toggle';
 
     if (this.sideMenuComponent.active) {
-      this.sideMenuComponent.addClassToHTMLElement(side_menu_element, 'close');
-      if (toggle_side_menu_element.classList.contains(show_class)) {
-        toggle_side_menu_element.classList.remove(show_class);
+      this.sideMenuComponent.addClassToHTMLElement(sideMenuElement, 'close');
+      if (toggleSideMenuElement.classList.contains(showClass)) {
+        toggleSideMenuElement.classList.remove(showClass);
       }
     } else {
-      this.sideMenuComponent.removeClassFromHTMLElement(side_menu_element, 'close');
-      if (!toggle_side_menu_element.classList.contains(show_class)) {
-        toggle_side_menu_element.classList.add(show_class);
+      this.sideMenuComponent.removeClassFromHTMLElement(
+        sideMenuElement,
+        'close',
+      );
+      if (!toggleSideMenuElement.classList.contains(showClass)) {
+        toggleSideMenuElement.classList.add(showClass);
       }
     }
     this.sideMenuComponent.active = !this.sideMenuComponent.active;
+  }
+
+  /**
+   * Parse the value of the cookie consent storage item
+   * Only boolean
+   *
+   * @param cookieConsent
+   * @private
+   */
+  private parseCookieConsent(cookieConsent: string): boolean {
+    try {
+      // Parsing as boolean; if invalid, default to false
+      return JSON.parse(cookieConsent.toLowerCase());
+    } catch (error) {
+      console.error('Error parsing cookie consent:', error);
+      return false;
+    }
   }
 
   /**
@@ -105,7 +145,7 @@ export class AppComponent implements OnInit, AfterViewInit {
    * @private
    */
   private openCookieAlert(): void {
-    let element: HTMLElement = this.cookie_alert_html.nativeElement;
+    const element = this.cookie_alert_html.nativeElement as HTMLElement;
     if (!element.classList.contains('close')) return;
     element.classList.remove('close');
   }
@@ -116,7 +156,7 @@ export class AppComponent implements OnInit, AfterViewInit {
    * @private
    */
   private closeCookieAlert(): void {
-    let element: HTMLElement = this.cookie_alert_html.nativeElement;
+    const element = this.cookie_alert_html.nativeElement as HTMLElement;
     if (element.classList.contains('close')) return;
     element.classList.add('close');
   }

@@ -1,15 +1,24 @@
-import {AfterViewInit, Component, ElementRef, Input, OnInit, ViewChild} from '@angular/core';
-import {STYLESHEETS_PATH} from '../app.component';
-import {WHITE_QUESTIONMARK} from '@typescript/emoji.database';
-import {AbstractHtmlElement} from '@abstract/abstract.html-element';
-import {HelperFunctionsService} from '@abstract/services/helper-functions.service';
+import {
+  AfterViewInit,
+  Component,
+  ElementRef,
+  Input,
+  OnInit,
+  ViewChild,
+} from '@angular/core';
+import { WHITE_QUESTIONMARK } from '@typescript/emoji.database';
+import { AbstractHtmlElement } from '@abstract/abstract.html-element';
+import { HelperFunctionsService } from '@abstract/services/helper-functions.service';
 
 @Component({
   selector: 'app-pix-hero-tile',
   templateUrl: './pix-hero-tile.component.html',
-  styleUrls: [STYLESHEETS_PATH + 'pix-hero-tile.component.min.css']
+  styleUrls: ['./pix-hero-tile.component.scss'],
 })
-export class PixHeroTileComponent extends AbstractHtmlElement implements OnInit, AfterViewInit {
+export class PixHeroTileComponent
+  extends AbstractHtmlElement
+  implements OnInit, AfterViewInit
+{
   @Input() pixle_emoji: string = '';
   pixle_twa_emoji_class: string = '';
   pixle_emoji_default: string = WHITE_QUESTIONMARK;
@@ -20,26 +29,33 @@ export class PixHeroTileComponent extends AbstractHtmlElement implements OnInit,
   private do_flip_class: any = 'do-flip';
 
   constructor() {
-    super()
+    super();
   }
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
 
   ngAfterViewInit(): void {
     this.setElementIcon(this.pixle_emoji, true);
-    ['mouseenter', 'touchstart'].forEach(event => {
-      HelperFunctionsService.addEventListenerToElement(this.tile_content_wrapper.nativeElement, event, () => {
-        this.doFlip();
-        clearTimeout(this.pixle_tile_timer);
-      });
+    ['mouseenter', 'touchstart'].forEach((event) => {
+      HelperFunctionsService.addEventListenerToElement(
+        this.tile_content_wrapper.nativeElement,
+        event,
+        () => {
+          this.doFlip();
+          clearTimeout(this.pixle_tile_timer);
+        },
+      );
     });
-    ['mouseleave', 'touchend', 'touchcancel'].forEach(event => {
-      HelperFunctionsService.addEventListenerToElement(this.tile_content_wrapper.nativeElement, event, () => {
-        this.pixle_tile_timer = setTimeout(() => {
-          this.undoFlip();
-        }, 350);
-      });
+    ['mouseleave', 'touchend', 'touchcancel'].forEach((event) => {
+      HelperFunctionsService.addEventListenerToElement(
+        this.tile_content_wrapper.nativeElement,
+        event,
+        () => {
+          this.pixle_tile_timer = setTimeout(() => {
+            this.undoFlip();
+          }, 350);
+        },
+      );
     });
   }
 
@@ -47,7 +63,7 @@ export class PixHeroTileComponent extends AbstractHtmlElement implements OnInit,
    * Flip grid element
    */
   public doFlip(): void {
-    let element: HTMLElement = this.tile_content_wrapper.nativeElement;
+    const element = this.tile_content_wrapper.nativeElement as HTMLElement;
     this.addClassToHTMLElement(element, this.do_flip_class);
   }
 
@@ -55,7 +71,7 @@ export class PixHeroTileComponent extends AbstractHtmlElement implements OnInit,
    * Reverse flipped grid element
    */
   public undoFlip(): void {
-    let element: HTMLElement = this.tile_content_wrapper.nativeElement;
+    const element = this.tile_content_wrapper.nativeElement as HTMLElement;
     this.removeClassFromHTMLElement(element, this.do_flip_class);
   }
 
@@ -66,8 +82,15 @@ export class PixHeroTileComponent extends AbstractHtmlElement implements OnInit,
    * @param update
    * @private
    */
-  private setElementIcon(twa_emoji_class: string = '', update: boolean = false): void {
-    if (twa_emoji_class === '' || (twa_emoji_class !== '' && this.pixle_twa_emoji_class === twa_emoji_class)) return;
+  private setElementIcon(
+    twa_emoji_class: string = '',
+    update: boolean = false,
+  ): void {
+    if (
+      twa_emoji_class === '' ||
+      (twa_emoji_class !== '' && this.pixle_twa_emoji_class === twa_emoji_class)
+    )
+      return;
     this.pixle_twa_emoji_class = twa_emoji_class;
     if (!update) return;
     this.twa_emoji_class_back_face = this.pixle_twa_emoji_class;

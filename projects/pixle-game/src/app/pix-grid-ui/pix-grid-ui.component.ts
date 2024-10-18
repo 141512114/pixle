@@ -7,24 +7,24 @@ import {
   Output,
   QueryList,
   ViewChild,
-  ViewChildren
+  ViewChildren,
 } from '@angular/core';
-import {Clipboard} from '@angular/cdk/clipboard';
-import {STYLESHEETS_PATH} from '../app.component';
-import {HelperFunctionsService} from '@abstract/services/helper-functions.service';
-import {PixGridElementComponent} from '../pix-grid-element/pix-grid-element.component';
-import {GameManager} from '../pix-game/game.manager';
-import {faClipboard, faLink} from '@fortawesome/free-solid-svg-icons';
-import {WINDOW} from '@typescript/window-injection.token';
-import {AbstractHtmlElement} from '@abstract/abstract.html-element';
+import { Clipboard } from '@angular/cdk/clipboard';
+import { HelperFunctionsService } from '@abstract/services/helper-functions.service';
+import { PixGridElementComponent } from '../pix-grid-element/pix-grid-element.component';
+import { GameManager } from '../pix-game/game.manager';
+import { faClipboard, faLink } from '@fortawesome/free-solid-svg-icons';
+import { WINDOW } from '@typescript/window-injection.token';
+import { AbstractHtmlElement } from '@abstract/abstract.html-element';
 
 @Component({
   selector: 'app-pix-grid-ui',
   templateUrl: './pix-grid-ui.component.html',
-  styleUrls: [STYLESHEETS_PATH + 'pix-grid-ui.component.min.css']
+  styleUrls: ['./pix-grid-ui.component.scss'],
 })
 export class PixGridUiComponent extends AbstractHtmlElement {
-  @ViewChildren(PixGridElementComponent) public pixle_emoji_output!: QueryList<PixGridElementComponent>;
+  @ViewChildren(PixGridElementComponent)
+  public pixle_emoji_output!: QueryList<PixGridElementComponent>;
   @Input() emoji_list: string[] = [];
   @Input() pixle_share_result: string = 'Not quite there yet!';
   @Output() sendValidationRequest: EventEmitter<any> = new EventEmitter<any>();
@@ -36,7 +36,10 @@ export class PixGridUiComponent extends AbstractHtmlElement {
   private windowNavigator;
   private copied_badge_timer: any = -1;
 
-  constructor(@Inject(WINDOW) private readonly window: Window, private clipboard: Clipboard) {
+  constructor(
+    @Inject(WINDOW) private readonly window: Window,
+    private clipboard: Clipboard,
+  ) {
     super();
     this.windowNavigator = this.window.navigator;
   }
@@ -74,15 +77,18 @@ export class PixGridUiComponent extends AbstractHtmlElement {
   public shareOnSocialMedia(): void {
     // Check if device can share / has the api
     if (this.windowNavigator.share) {
-      this.windowNavigator.share({
-        text: this.pixle_share_result + '\n',
-        title: 'Can you solve this pixle?',
-        url: 'https://www.pixle.gg/'
-      }).then(() => {
-        console.log('Successful share');
-      }).catch((error) => {
-        console.log('Error sharing', error);
-      });
+      this.windowNavigator
+        .share({
+          text: this.pixle_share_result + '\n',
+          title: 'Can you solve this pixle?',
+          url: 'https://www.pixle.gg/',
+        })
+        .then(() => {
+          console.log('Successful share');
+        })
+        .catch((error) => {
+          console.log('Error sharing', error);
+        });
     } else {
       // If not, just copy the content
       this.copyToClipboard();
@@ -93,11 +99,11 @@ export class PixGridUiComponent extends AbstractHtmlElement {
    * Copy pixle content to the clipboard
    */
   public copyToClipboard(): void {
-    let pixle_url: string = 'https://www.pixle.gg/';
-    let msg_to_copy: string = this.pixle_share_result + '\n' + pixle_url;
-    if (this.clipboard.copy(msg_to_copy)) {
+    const pixleUrl: string = 'https://www.pixle.gg/';
+    const msgToCopy: string = this.pixle_share_result + '\n' + pixleUrl;
+    if (this.clipboard.copy(msgToCopy)) {
       this.window.clearTimeout(this.copied_badge_timer);
-      let copied_badge_element: HTMLElement = this.copied_badge.nativeElement;
+      const copied_badge_element: HTMLElement = this.copied_badge.nativeElement;
       this.removeClassFromHTMLElement(copied_badge_element, 'close');
       this.copied_badge_timer = setTimeout(() => {
         this.addClassToHTMLElement(copied_badge_element, 'close');
@@ -121,12 +127,12 @@ export class PixGridUiComponent extends AbstractHtmlElement {
    * Toggle one or the other
    */
   public switchUiElements(): void {
-    let ui_wrapper_element: HTMLElement = this.ui_wrapper.nativeElement;
-    let close_class: string = 'switch-ui';
-    if (!ui_wrapper_element.classList.contains(close_class)) {
-      ui_wrapper_element.classList.add(close_class);
+    const uiWrapperElement: HTMLElement = this.ui_wrapper.nativeElement;
+    const closeClass: string = 'switch-ui';
+    if (!uiWrapperElement.classList.contains(closeClass)) {
+      uiWrapperElement.classList.add(closeClass);
     } else {
-      ui_wrapper_element.classList.remove(close_class);
+      uiWrapperElement.classList.remove(closeClass);
     }
   }
 
@@ -136,10 +142,13 @@ export class PixGridUiComponent extends AbstractHtmlElement {
    * @private
    */
   private selectCurrentChosenEmoji(): void {
-    let emoji_emitter_list: PixGridElementComponent[] = this.pixle_emoji_output.toArray();
-    for (let i = 0; i < emoji_emitter_list.length; i++) {
-      let current_entry: PixGridElementComponent = emoji_emitter_list[i];
-      if (current_entry.twa_emoji_class_front_face !== GameManager.chosen_emoji) {
+    const emojiEmitterList: PixGridElementComponent[] =
+      this.pixle_emoji_output.toArray();
+    for (let i = 0; i < emojiEmitterList.length; i++) {
+      const current_entry: PixGridElementComponent = emojiEmitterList[i];
+      if (
+        current_entry.twa_emoji_class_front_face !== GameManager.chosen_emoji
+      ) {
         current_entry.unselectThisEmoji();
         continue;
       }

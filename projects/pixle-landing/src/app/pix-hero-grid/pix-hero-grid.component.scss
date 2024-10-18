@@ -1,0 +1,11 @@
+@import 'mixins/mixins';
+
+// pix-hero-grid component stylesheet
+.pix-grid-wrapper {
+  margin: 0 auto;
+  min-width: 135px;
+}
+
+.pix-col-item {
+  margin: 0;
+}

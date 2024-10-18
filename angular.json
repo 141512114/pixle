@@ -8,6 +8,9 @@
       "schematics": {
         "@schematics/angular:application": {
           "strict": true
+        },
+        "@schematics/angular:component": {
+          "style": "scss"
         }
       },
       "root": "projects/pixle-game",
@@ -15,41 +18,42 @@
       "prefix": "app",
       "architect": {
         "build": {
-          "builder": "@angular-devkit/build-angular:browser",
+          "builder": "@angular-devkit/build-angular:application",
           "options": {
             "outputPath": "dist/pixle-game",
             "index": "projects/pixle-game/src/index.html",
-            "main": "projects/pixle-game/src/main.ts",
-            "polyfills": "projects/pixle-game/src/polyfills.ts",
+            "browser": "projects/pixle-game/src/main.ts",
+            "polyfills": [
+              "zone.js",
+              "@angular/localize/init"
+            ],
             "tsConfig": "projects/pixle-game/tsconfig.app.json",
+            "inlineStyleLanguage": "scss",
             "assets": [
-              "projects/pixle-game/src/favicon.ico",
               "projects/pixle-game/src/.htaccess",
               "projects/pixle-game/src/analytics",
               "projects/pixle-game/src/assets",
-              "projects/pixle-game/src/manifest.webmanifest",
-              "projects/pixle-game/src/sitemap.xml",
-              "projects/pixle-game/src/robots.txt",
               {
                 "glob": "**/*",
-                "input": "local/svg/twemoji",
-                "output": "/twemoji/svg/"
+                "input": "projects/pixle-game/public",
+                "output": "/"
               }
             ],
             "styles": [
-              "node_modules/@fortawesome/fontawesome-free/css/solid.min.css",
-              "local/stylesheets/css/twemoji-amazing.min.css",
-              "local/stylesheets/css/bootstrap/bootstrap.min.css",
-              "local/stylesheets/css/styles.min.css",
-              "projects/pixle-game/src/stylesheets/css/app.component.min.css",
-              "projects/pixle-game/src/stylesheets/css/pix-game.component.min.css",
-              "projects/pixle-game/src/stylesheets/css/pix-grid-element.component.min.css",
-              "projects/pixle-game/src/stylesheets/css/pix-grid-ui.component.min.css",
-              "projects/pixle-game/src/stylesheets/css/pix-grid.component.min.css"
+              "local/stylesheets/twemoji-amazing.scss",
+              "node_modules/bootstrap/scss/bootstrap.scss",
+              "node_modules/bootstrap-icons/font/bootstrap-icons.css",
+              "local/stylesheets/styles.scss"
             ],
-            "scripts": [],
-            "serviceWorker": true,
-            "ngswConfigPath": "ngsw-config.json"
+            "stylePreprocessorOptions": {
+              "includePaths": [
+                "local/stylesheets"
+              ]
+            },
+            "scripts": [
+              "node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"
+            ],
+            "serviceWorker": "ngsw-config.json"
           },
           "configurations": {
             "production": {
@@ -60,42 +64,21 @@
               "budgets": [
                 {
                   "type": "initial",
-                  "maximumWarning": "2mb",
-                  "maximumError": "5mb"
+                  "maximumWarning": "3MB",
+                  "maximumError": "5MB"
                 },
                 {
                   "type": "anyComponentStyle",
-                  "maximumWarning": "2kb",
-                  "maximumError": "4kb"
+                  "maximumWarning": "2kB",
+                  "maximumError": "4kB"
                 }
               ],
-              "fileReplacements": [
-                {
-                  "replace": "projects/pixle-game/src/environments/environment.ts",
-                  "with": "projects/pixle-game/src/environments/environment.prod.ts"
-                }
-              ],
-              "outputHashing": "all",
-              "buildOptimizer": true,
-              "optimization": {
-                "scripts": true,
-                "styles": {
-                  "minify": true,
-                  "inlineCritical": false
-                },
-                "fonts": false
-              },
-              "vendorChunk": false,
-              "namedChunks": false,
-              "sourceMap": false
+              "outputHashing": "all"
             },
             "development": {
-              "buildOptimizer": true,
-              "optimization": true,
-              "vendorChunk": true,
+              "optimization": false,
               "extractLicenses": false,
-              "sourceMap": true,
-              "namedChunks": true
+              "sourceMap": true
             }
           },
           "defaultConfiguration": "production"
@@ -104,48 +87,49 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "pixle-game:build:production"
+              "buildTarget": "pixle-game:build:production"
             },
             "development": {
-              "browserTarget": "pixle-game:build:development"
+              "buildTarget": "pixle-game:build:development"
             }
           },
           "defaultConfiguration": "development"
         },
         "extract-i18n": {
-          "builder": "@angular-devkit/build-angular:extract-i18n",
-          "options": {
-            "browserTarget": "pixle-game:build"
-          }
+          "builder": "@angular-devkit/build-angular:extract-i18n"
         },
         "test": {
           "builder": "@angular-devkit/build-angular:karma",
           "options": {
-            "main": "projects/pixle-game/src/test.ts",
-            "polyfills": "projects/pixle-game/src/polyfills.ts",
+            "polyfills": [
+              "zone.js",
+              "zone.js/testing",
+              "@angular/localize/init"
+            ],
             "tsConfig": "projects/pixle-game/tsconfig.spec.json",
-            "karmaConfig": "projects/pixle-game/karma.conf.js",
+            "inlineStyleLanguage": "scss",
             "assets": [
-              "projects/pixle-game/src/favicon.ico",
               "projects/pixle-game/src/.htaccess",
               "projects/pixle-game/src/analytics",
               "projects/pixle-game/src/assets",
-              "projects/pixle-game/src/manifest.webmanifest",
-              "projects/pixle-game/src/sitemap.xml",
-              "projects/pixle-game/src/robots.txt"
+              {
+                "glob": "**/*",
+                "input": "projects/pixle-game/public",
+                "output": "/"
+              }
             ],
             "styles": [
-              "node_modules/@fortawesome/fontawesome-free/css/solid.min.css",
-              "local/stylesheets/css/twemoji-amazing.min.css",
-              "local/stylesheets/css/bootstrap/bootstrap.min.css",
-              "local/stylesheets/css/styles.min.css",
-              "projects/pixle-game/src/stylesheets/css/app.component.min.css",
-              "projects/pixle-game/src/stylesheets/css/pix-game.component.min.css",
-              "projects/pixle-game/src/stylesheets/css/pix-grid-element.component.min.css",
-              "projects/pixle-game/src/stylesheets/css/pix-grid-ui.component.min.css",
-              "projects/pixle-game/src/stylesheets/css/pix-grid.component.min.css"
+              "local/stylesheets/twemoji-amazing.scss",
+              "node_modules/bootstrap/scss/bootstrap.scss",
+              "node_modules/bootstrap-icons/font/bootstrap-icons.css",
+              "local/stylesheets/styles.scss"
             ],
-            "scripts": []
+            "stylePreprocessorOptions": {
+              "includePaths": ["local/stylesheets"]
+            },
+            "scripts": [
+              "node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"
+            ]
           }
         }
       }
@@ -155,6 +139,9 @@
       "schematics": {
         "@schematics/angular:application": {
           "strict": true
+        },
+        "@schematics/angular:component": {
+          "style": "scss"
         }
       },
       "root": "projects/pixle-landing",
@@ -167,32 +154,34 @@
             "outputPath": "dist/pixle-landing/browser",
             "index": "projects/pixle-landing/src/index.html",
             "main": "projects/pixle-landing/src/main.ts",
-            "polyfills": "projects/pixle-landing/src/polyfills.ts",
+            "polyfills": [
+              "zone.js",
+              "@angular/localize/init"
+            ],
             "tsConfig": "projects/pixle-landing/tsconfig.app.json",
             "assets": [
               "projects/pixle-landing/src/favicon.ico",
-              "projects/pixle-landing/src/.htaccess",
               "projects/pixle-landing/src/assets",
-              "projects/pixle-landing/src/local",
-              "projects/pixle-landing/src/sitemap.xml",
-              "projects/pixle-landing/src/robots.txt",
               {
                 "glob": "**/*",
-                "input": "local/svg/twemoji",
-                "output": "/twemoji/svg/"
+                "input": "projects/pixle-landing/public",
+                "output": "/"
               }
             ],
             "styles": [
-              "node_modules/@fortawesome/fontawesome-free/css/solid.min.css",
-              "local/stylesheets/css/twemoji-amazing.min.css",
-              "local/stylesheets/css/bootstrap/bootstrap.min.css",
-              "local/stylesheets/css/styles.min.css",
-              "projects/pixle-landing/src/stylesheets/css/app.component.min.css",
-              "projects/pixle-landing/src/stylesheets/css/pix-hero-grid.component.min.css",
-              "projects/pixle-landing/src/stylesheets/css/pix-hero-title.component.min.css",
-              "projects/pixle-landing/src/stylesheets/css/pix-home.component.min.css"
+              "local/stylesheets/twemoji-amazing.scss",
+              "node_modules/bootstrap/scss/bootstrap.scss",
+              "node_modules/bootstrap-icons/font/bootstrap-icons.css",
+              "local/stylesheets/styles.scss"
             ],
-            "scripts": []
+            "stylePreprocessorOptions": {
+              "includePaths": [
+                "local/stylesheets"
+              ]
+            },
+            "scripts": [
+              "node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"
+            ]
           },
           "configurations": {
             "production": {
@@ -247,10 +236,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "pixle-landing:build:production"
+              "buildTarget": "pixle-landing:build:production"
             },
             "development": {
-              "browserTarget": "pixle-landing:build:development"
+              "buildTarget": "pixle-landing:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -258,35 +247,42 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "pixle-landing:build"
+            "buildTarget": "pixle-landing:build"
           }
         },
         "test": {
           "builder": "@angular-devkit/build-angular:karma",
           "options": {
             "main": "projects/pixle-landing/src/test.ts",
-            "polyfills": "projects/pixle-landing/src/polyfills.ts",
+            "polyfills": [
+              "zone.js",
+              "@angular/localize/init"
+            ],
             "tsConfig": "projects/pixle-landing/tsconfig.spec.json",
             "karmaConfig": "projects/pixle-landing/karma.conf.js",
             "assets": [
-              "projects/pixle-landing/src/favicon.ico",
               "projects/pixle-landing/src/.htaccess",
               "projects/pixle-landing/src/assets",
-              "projects/pixle-landing/src/local",
-              "projects/pixle-landing/src/sitemap.xml",
-              "projects/pixle-landing/src/robots.txt"
+              {
+                "glob": "**/*",
+                "input": "projects/pixle-landing/public",
+                "output": "/"
+              }
             ],
             "styles": [
-              "node_modules/@fortawesome/fontawesome-free/css/solid.min.css",
-              "local/stylesheets/css/twemoji-amazing.min.css",
-              "local/stylesheets/css/bootstrap/bootstrap.min.css",
-              "local/stylesheets/css/styles.min.css",
-              "projects/pixle-landing/src/stylesheets/css/app.component.min.css",
-              "projects/pixle-landing/src/stylesheets/css/pix-hero-grid.component.min.css",
-              "projects/pixle-landing/src/stylesheets/css/pix-hero-title.component.min.css",
-              "projects/pixle-landing/src/stylesheets/css/pix-home.component.min.css"
+              "local/stylesheets/twemoji-amazing.scss",
+              "node_modules/bootstrap/scss/bootstrap.scss",
+              "node_modules/bootstrap-icons/font/bootstrap-icons.css",
+              "local/stylesheets/styles.scss"
             ],
-            "scripts": []
+            "stylePreprocessorOptions": {
+              "includePaths": [
+                "local/stylesheets"
+              ]
+            },
+            "scripts": [
+              "node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"
+            ]
           }
         },
         "server": {
@@ -320,11 +316,11 @@
           "builder": "@nguniversal/builders:ssr-dev-server",
           "configurations": {
             "development": {
-              "browserTarget": "pixle-landing:build:development",
+              "buildTarget": "pixle-landing:build:development",
               "serverTarget": "pixle-landing:server:development"
             },
             "production": {
-              "browserTarget": "pixle-landing:build:production",
+              "buildTarget": "pixle-landing:build:production",
               "serverTarget": "pixle-landing:server:production"
             }
           },
@@ -339,11 +335,11 @@
           },
           "configurations": {
             "production": {
-              "browserTarget": "pixle-landing:build:production",
+              "buildTarget": "pixle-landing:build:production",
               "serverTarget": "pixle-landing:server:production"
             },
             "development": {
-              "browserTarget": "pixle-landing:build:development",
+              "buildTarget": "pixle-landing:build:development",
               "serverTarget": "pixle-landing:server:development"
             }
           },
@@ -351,8 +347,5 @@
         }
       }
     }
-  },
-  "cli": {
-    "analytics": "b7293f7a-73a0-4c89-922b-64a10c2cc3a5"
   }
 }

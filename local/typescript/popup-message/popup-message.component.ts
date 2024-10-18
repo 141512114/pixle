@@ -1,19 +1,30 @@
-import {AfterViewInit, Component, ElementRef, EventEmitter, Input, Output, ViewChild} from '@angular/core';
-import {IPopUp} from '@interface/popup-message.interface';
-import {AbstractHtmlElement} from '@abstract/abstract.html-element';
+import {
+  AfterViewInit,
+  Component,
+  ElementRef,
+  EventEmitter,
+  Input,
+  Output,
+  ViewChild,
+} from '@angular/core';
+import { IPopUp } from '@interface/popup-message.interface';
+import { AbstractHtmlElement } from '@abstract/abstract.html-element';
 
 const DEFAULT_MSG: IPopUp = {
-  headline: 'Hmm..., this isn\'t supposed to be shown already...',
+  headline: "Hmm..., this isn't supposed to be shown already...",
   subline: '',
-  message_body: 'Did you try something??'
+  message_body: 'Did you try something??',
 };
 
 @Component({
   selector: 'app-popup-message',
   templateUrl: './popup-message.component.html',
-  styleUrls: ['../../stylesheets/css/popup-message.component.min.css']
+  styleUrls: ['./popup-message.component.scss'],
 })
-export class PopupMessageComponent extends AbstractHtmlElement implements AfterViewInit {
+export class PopupMessageComponent
+  extends AbstractHtmlElement
+  implements AfterViewInit
+{
   popup_is_closed: boolean = false;
   @ViewChild('msg_container') public msg_container!: ElementRef;
   /*
@@ -22,7 +33,8 @@ export class PopupMessageComponent extends AbstractHtmlElement implements AfterV
     1 => agreement popup
    */
   @Input() popup_type: number = 0;
-  @Output() sendPopupHasBeenClosed: EventEmitter<boolean> = new EventEmitter<boolean>();
+  @Output() sendPopupHasBeenClosed: EventEmitter<boolean> =
+    new EventEmitter<boolean>();
   @ViewChild('msg_headline') private msg_headline!: ElementRef;
   @ViewChild('msg_description') private msg_description!: ElementRef;
 
