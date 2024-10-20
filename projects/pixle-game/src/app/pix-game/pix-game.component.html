@@ -13,7 +13,7 @@
             </div>
           </ng-container>
           <ng-container *ngIf="!cookie_popup_is_closed">
-            <div class="container-fluid p-0 pix-popup-wrapper cookie-alert-popup">
+            <div class="container-fluid d-flex align-items-center h-100 p-0 pix-popup-wrapper cookie-alert-popup">
               <app-popup-message #cookie_alert (sendPopupHasBeenClosed)="receivePopupHasBeenClosed($event)"
                                  [popup_type]="1"></app-popup-message>
             </div>
