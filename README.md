@@ -1,6 +1,9 @@
 # Official Repository of the web-based game _Pixle_
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 13.2.5.
+This project was first generated with [Angular CLI](https://github.com/angular/angular-cli) version 13.2.5.
+Since then much has changed which now has been noticed and brought into this project. _Pixle_ has been updated
+and newly generated with [Angular CLI](https://github.com/angular/angular-cli) version 18.2.9. All packages have been
+reviewed and either upgraded or, because of their lack of support, removed entirely from the project.
 
 ## Introduction
 
