@@ -17,7 +17,7 @@ To solve a puzzle, the player has to place the emojis on their correct tiles or 
 shown to him at the beginning of the game and after each failed try.
 
 ### The creation of puzzles in _Pixle_
-Puzzles in the game _Pixle_ are generated ahead of time and stored inside a small database or array.
+~~Puzzles in the game _Pixle_ are generated ahead of time and stored inside a small database or array.
 This array only contains the necessary ids of the used emojis and a date on which the specific
 puzzle goes public.\
 Puzzles or _pixles_, as we like to call them, aren't fully, randomly generated.
@@ -25,7 +25,11 @@ They always use one of the many, already given patterns.
 This way it is ensured that the player won't feel discouraged or uncomfortable while solving a pixle.
 It creates a certain familiarity, which helps to bond the player to the game.
 The player now knows certain patterns and recognizes them upon seeing a newly revealed pixle,
-which encourages him to keep playing and train his memory.
+which encourages him to keep playing and train his memory.~~
+
+Puzzles are now created dynamically each new day. A database for all available emoji icons and possible patterns still
+exists and is used in the creation process. To guarantee consistency across all players,
+the current date and time are used as a seed, determining the puzzle's generation process.
 
 ## First steps
 
