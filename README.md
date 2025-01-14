@@ -1,18 +1,18 @@
 # Official Repository of the web-based game _Pixle_
 
 This project was first generated with [Angular CLI](https://github.com/angular/angular-cli) version 13.2.5.
-Since then much has changed which now has been noticed and brought into this project. _Pixle_ has been updated
+Since then much has changed which has now been noticed and brought into this project. _Pixle_ has been updated
 and newly generated with [Angular CLI](https://github.com/angular/angular-cli) version 18.2.9. All packages have been
 reviewed and either upgraded or, because of their lack of support, removed entirely from the project.
 
 ## Introduction
 
-This is the official repository of the web-based game _Pixle_. The game is developed and published by Nani Games.
-Lead Developer and Designer is Nolan Bjarne Schiemann, Co-Founder of Nani Games.
+This is the official repository of the web-based game _Pixle_. The game is developed and published by the
+developer Nolan Bjarne Schiemann.
 
-Wordle, Picross and typical nonograms inspired the creation and development of the web-game _Pixle_.
-The player solves puzzles on a daily-basis and each day challenges himself to solve a new and randomly generated puzzle.
-Their difficulty does vary from day to day, and can be quite nerve-braking at times.
+Wordle, Picross and typical nonograms have influenced the development of the web-game _Pixle_.
+The player challenges himself to solve a newly generated puzzle each day.
+Their difficulty varies and can be quite nerve-wrecking at times.
 To solve a puzzle, the player has to place the emojis on their correct tiles or positions,
 shown to him at the beginning of the game and after each failed try.
 
@@ -20,16 +20,16 @@ shown to him at the beginning of the game and after each failed try.
 ~~Puzzles in the game _Pixle_ are generated ahead of time and stored inside a small database or array.
 This array only contains the necessary ids of the used emojis and a date on which the specific
 puzzle goes public.\
-Puzzles or _pixles_, as we like to call them, aren't fully, randomly generated.
+Puzzles or _pixles_, as I like to call them, aren't fully, randomly generated.
 They always use one of the many, already given patterns.
 This way it is ensured that the player won't feel discouraged or uncomfortable while solving a pixle.
-It creates a certain familiarity, which helps to bond the player to the game.
-The player now knows certain patterns and recognizes them upon seeing a newly revealed pixle,
-which encourages him to keep playing and train his memory.~~
+It creates a certain familiarity, which helps bonding to the game.
+Learning patterns can help recognizing them upon seeing a newly revealed pixle,
+which encourages to keep playing and train the brain.~~
 
-Puzzles are now created dynamically each new day. A database for all available emoji icons and possible patterns still
-exists and is used in the creation process. To guarantee consistency across all players,
-the current date and time are used as a seed, determining the puzzle's generation process.
+Puzzles are now created dynamically on each new day. Databases for all available emoji icons and possible patterns are 
+still in use creation process. To guarantee consistency across all players,
+the current date and time are used as a seed, determining the puzzles creation process.
 
 ## First steps
 
