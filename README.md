@@ -1,39 +1,34 @@
 # Official Repository of the web-based game _Pixle_
 
-This project was first generated with [Angular CLI](https://github.com/angular/angular-cli) version 13.2.5.
-Since then much has changed which has now been noticed and brought into this project. _Pixle_ has been updated
+This project was first generated with [Angular CLI](https://github.com/angular/angular-cli) version 13.2.5.\
+Much has changed since then which has now been noticed and brought into this project. _Pixle_ has been updated
 and newly generated with [Angular CLI](https://github.com/angular/angular-cli) version 18.2.9. All packages have been
 reviewed and either upgraded or, because of their lack of support, removed entirely from the project.
 
 ## Introduction
 
-This is the official repository of the web-based game _Pixle_. The game is developed and published by the
-developer Nolan Bjarne Schiemann.
+This is the official repository of the web-based game _Pixle_.\
+The game is developed and published by the developer Nolan Bjarne Schiemann.
 
-Wordle, Picross and typical nonograms have influenced the development of the web-game _Pixle_.
-The player challenges himself to solve a newly generated puzzle each day.
-Their difficulty varies and can be quite nerve-wrecking at times.
-To solve a puzzle, the player has to place the emojis on their correct tiles or positions,
-shown to him at the beginning of the game and after each failed try.
+Wordle, Picross and typical nonograms have influenced the development of the web-game _Pixle_.\
+The player challenges themselves to solve a newly generated puzzle each day, with varying difficulty levels that can sometimes be quite nerve-wracking.\
+To solve a puzzle, the player must place the emojis on their correct tiles or positions, as shown at the start of the game and after each failed attempt.
 
 ### The creation of puzzles in _Pixle_
 ~~Puzzles in the game _Pixle_ are generated ahead of time and stored inside a small database or array.
-This array only contains the necessary ids of the used emojis and a date on which the specific
-puzzle goes public.\
-Puzzles or _pixles_, as I like to call them, aren't fully, randomly generated.
-They always use one of the many, already given patterns.
-This way it is ensured that the player won't feel discouraged or uncomfortable while solving a pixle.
+This array only contains the necessary ids of the used emojis and a date on which the specific puzzle goes public.\
+Puzzles or _pixles_, as I like to call them, aren't fully, randomly generated. They always use one of the many, already given patterns.
+This way it is ensured that the player won't feel discouraged or uncomfortable while solving a pixle.\
 It creates a certain familiarity, which helps bonding to the game.
-Learning patterns can help recognizing them upon seeing a newly revealed pixle,
-which encourages to keep playing and train the brain.~~
+Learning patterns can help recognizing them upon seeing a newly revealed pixle, which encourages to keep playing and train the brain.~~
 
 Puzzles are now created dynamically on each new day. Databases for all available emoji icons and possible patterns are 
-still in use creation process. To guarantee consistency across all players,
-the current date and time are used as a seed, determining the puzzles creation process.
+still in use in the creation process.\
+To ensure consistency across all players, the current date and time are used as a seed to determine the puzzle creation process.
 
 ## First steps
 
-Gulp has been removed and is no longer needed. This project is ready to go!
+Gulp has been removed and is no longer needed. This project is ready to go!\
 Well, you do have to run the command `npm i` at some point though... .
 
 ## Development server
