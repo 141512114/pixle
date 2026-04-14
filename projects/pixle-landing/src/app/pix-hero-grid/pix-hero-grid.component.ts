@@ -6,6 +6,7 @@ import { PIXLE_ICONS } from '@typescript/emoji.database';
   selector: 'app-pix-hero-grid',
   templateUrl: './pix-hero-grid.component.html',
   styleUrls: ['./pix-hero-grid.component.scss'],
+  standalone: false,
 })
 export class PixHeroGridComponent implements OnInit {
   grid_image: string[][] = [];

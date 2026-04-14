@@ -1,9 +1,10 @@
 @use "sass:map";
 
-@import 'mixins/variables';
-@import 'mixins/fonts';
-@import 'mixins/themes';
-@import 'mixins/mixins';
+@use 'mixins/variables' as *;
+@use 'mixins/fonts' as *;
+@use 'mixins/themes' as *;
+@use 'mixins/mixins' as *;
+@use 'mixins/responsive' as *;
 
 // pix-home component stylesheet
 section#welcome {

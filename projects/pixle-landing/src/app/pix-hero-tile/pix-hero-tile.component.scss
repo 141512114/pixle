@@ -1,7 +1,7 @@
 @use "sass:map";
 
-@import 'mixins/themes';
-@import 'mixins/mixins';
+@use 'mixins/themes' as *;
+@use 'mixins/mixins' as *;
 
 // pix-hero-tile component stylesheet
 .grid-element-inner {

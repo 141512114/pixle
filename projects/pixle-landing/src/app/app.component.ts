@@ -32,6 +32,7 @@ const COOKIE_NOTIF_MSG: IPopUp = {
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
+  standalone: false,
 })
 export class AppComponent implements OnInit, AfterViewInit {
   cookie_consent: boolean = false;

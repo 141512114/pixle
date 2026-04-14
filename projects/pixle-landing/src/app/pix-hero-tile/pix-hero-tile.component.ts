@@ -14,6 +14,7 @@ import { HelperFunctionsService } from '@abstract/services/helper-functions.serv
   selector: 'app-pix-hero-tile',
   templateUrl: './pix-hero-tile.component.html',
   styleUrls: ['./pix-hero-tile.component.scss'],
+  standalone: false,
 })
 export class PixHeroTileComponent
   extends AbstractHtmlElement
