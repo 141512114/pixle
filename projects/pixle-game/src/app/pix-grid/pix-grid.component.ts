@@ -26,6 +26,7 @@ const MIN_GRID_WIDTH: number = 135;
   selector: 'app-pix-grid',
   templateUrl: './pix-grid.component.html',
   styleUrls: ['./pix-grid.component.scss'],
+  standalone: false,
 })
 export class PixGridComponent implements OnInit, AfterViewInit {
   @ViewChildren(PixGridElementComponent)

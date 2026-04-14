@@ -37,6 +37,7 @@ const UNDO_FLIP_TIME: number = 1575;
   selector: 'app-pix-game',
   templateUrl: './pix-game.component.html',
   styleUrls: ['./pix-game.component.scss'],
+  standalone: false,
 })
 export class PixGameComponent implements OnInit, AfterViewInit {
   pixle_share_result: string = '';

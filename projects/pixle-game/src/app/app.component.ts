@@ -25,6 +25,7 @@ const COOLDOWN_TOUCH: number = 75;
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
+  standalone: false,
 })
 export class AppComponent implements OnInit, AfterViewInit {
   iconOpenSideMenu: IconDefinition = faGear;

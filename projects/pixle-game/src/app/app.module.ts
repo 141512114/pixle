@@ -13,6 +13,7 @@ import { PixGridElementComponent } from './pix-grid-element/pix-grid-element.com
 import { PixGridUiComponent } from './pix-grid-ui/pix-grid-ui.component';
 import { RouteReuseStrategy } from '@angular/router';
 import { CustomRouteReuseStrategy } from './custom-route-reuse-strategy';
+import {ClipboardModule} from '@angular/cdk/clipboard';
 
 @NgModule({
   declarations: [
@@ -29,6 +30,7 @@ import { CustomRouteReuseStrategy } from './custom-route-reuse-strategy';
     NgbModule,
     FontAwesomeModule,
     SharedModule,
+    ClipboardModule,
   ],
   providers: [
     { provide: RouteReuseStrategy, useClass: CustomRouteReuseStrategy },

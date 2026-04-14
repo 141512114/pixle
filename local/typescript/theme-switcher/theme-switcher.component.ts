@@ -6,6 +6,7 @@ import * as CookieService from '@abstract/composables/cookies';
   selector: 'app-theme-switcher',
   templateUrl: './theme-switcher.component.html',
   styleUrls: [],
+  standalone: false,
 })
 export class ThemeSwitcherComponent {
   constructor(@Inject(DOCUMENT) private document: Document) {}

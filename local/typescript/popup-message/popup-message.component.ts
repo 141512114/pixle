@@ -20,6 +20,7 @@ const DEFAULT_MSG: IPopUp = {
   selector: 'app-popup-message',
   templateUrl: './popup-message.component.html',
   styleUrls: ['./popup-message.component.scss'],
+  standalone: false,
 })
 export class PopupMessageComponent
   extends AbstractHtmlElement

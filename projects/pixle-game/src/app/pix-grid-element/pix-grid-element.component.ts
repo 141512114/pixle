@@ -19,6 +19,7 @@ import { AbstractHtmlElement } from '@abstract/abstract.html-element';
   selector: 'app-pix-grid-element',
   templateUrl: './pix-grid-element.component.html',
   styleUrls: ['./pix-grid-element.component.scss'],
+  standalone: false,
 })
 export class PixGridElementComponent
   extends AbstractHtmlElement
