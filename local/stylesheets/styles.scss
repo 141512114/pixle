@@ -1,6 +1,13 @@
 @use "sass:map";
 
-@import 'mixins/bottleneck';
+@use 'mixins/bottleneck';
+@use "mixins/classes";
+@use "mixins/fonts";
+@use "mixins/mixins";
+@use "mixins/responsive";
+@use "mixins/themes";
+@use "mixins/variables";
+
 
 // Default classes
 .company-logo {
@@ -26,7 +33,7 @@
 
 *::selection {
   color: white;
-  background-color: var(--default-theme-six, map.get($default-color-palette, 6));
+  background-color: var(--default-theme-six, map.get(themes.$default-color-palette, 6));
 }
 
 html,
@@ -38,12 +45,12 @@ body {
   max-height: 100vh;
   max-height: -webkit-fill-available;
   max-height: calc(var(--vh, 1vh) * 100);
-  background-color: var(--default-theme-one, map.get($default-color-palette, 1));
+  background-color: var(--default-theme-one, map.get(themes.$default-color-palette, 1));
   overflow-y: auto;
 }
 
 body.startTouch {
-  @include highlight_btn_mixin;
+  @include classes.highlight_btn_mixin;
 }
 
 header {
@@ -59,7 +66,7 @@ header {
 .navbar {
   padding: 7px 0;
   user-select: none;
-  background-color: var(--default-theme-three, map.get($default-color-palette, 3));
+  background-color: var(--default-theme-three, map.get(themes.$default-color-palette, 3));
   z-index: 9999;
 
   .game-title {
@@ -76,7 +83,7 @@ header {
     left: 0;
     bottom: 0;
     right: 0;
-    @include flexbox(space-between, unset, row);
+    @include mixins.flexbox(space-between, unset, row);
     padding: 0 6px;
 
     .navbar-link-wrapper {
@@ -109,23 +116,23 @@ header {
           }
         }
 
-        @media only screen and (min-width: $breakpoint_xxsm) {
+        @media only screen and (min-width: responsive.$breakpoint_xxsm) {
           font-size: 22px;
           padding: 2px 15px;
         }
 
-        @media only screen and (min-width: $breakpoint_xmd) {
+        @media only screen and (min-width: responsive.$breakpoint_xmd) {
           font-size: 24px;
           padding: 2px 17px;
         }
       }
     }
 
-    @media only screen and (min-width: $breakpoint_md) {
+    @media only screen and (min-width: responsive.$breakpoint_md) {
       padding: 0 10px;
     }
 
-    @media only screen and (min-width: $breakpoint_xmd) {
+    @media only screen and (min-width: responsive.$breakpoint_xmd) {
       padding: 0 13px;
     }
   }
@@ -146,8 +153,8 @@ footer {
       }
     }
 
-    @media only screen and (min-width: $breakpoint_xxxsm) {
-      @include flexbox(space-between, center, row);
+    @media only screen and (min-width: responsive.$breakpoint_xxxsm) {
+      @include mixins.flexbox(space-between, center, row);
     }
   }
 
@@ -191,14 +198,14 @@ h4,
 .h4,
 h5,
 .h5 {
-  font-family: $main-header;
-  color: $default-headline-color;
+  font-family: fonts.$main-header;
+  color: variables.$default-headline-color;
 }
 
 p,
 a {
-  font-family: $main-font;
-  color: $default-text-color;
+  font-family: fonts.$main-font;
+  color: variables.$default-text-color;
 }
 
 a,
@@ -211,17 +218,17 @@ input,
 textarea,
 button {
   padding: 4px 10px;
-  font-family: $main-font;
+  font-family: fonts.$main-font;
   font-size: 14px;
   font-weight: 400;
   outline: none;
 
-  @media only screen and (min-width: $breakpoint_xxsm) {
+  @media only screen and (min-width: responsive.$breakpoint_xxsm) {
     padding: 4px 11px;
     font-size: 16px;
   }
 
-  @media only screen and (min-width: $breakpoint_xmd) {
+  @media only screen and (min-width: responsive.$breakpoint_xmd) {
     padding: 4px 12px;
     font-size: 18px;
   }
@@ -230,14 +237,14 @@ button {
 a,
 button {
   border: none;
-  font-family: $main-ui;
-  color: var(--default-theme-two, map.get($default-color-palette, 2));
-  background-color: var(--default-theme-four, map.get($default-color-palette, 4));
+  font-family: fonts.$main-ui;
+  color: var(--default-theme-two, map.get(themes.$default-color-palette, 2));
+  background-color: var(--default-theme-four, map.get(themes.$default-color-palette, 4));
   transition: color 200ms, background-color 200ms;
 
   &.invert-colors {
-    color: var(--default-theme-four, map.get($default-color-palette, 4));
-    background-color: var(--default-theme-two, map.get($default-color-palette, 2));
+    color: var(--default-theme-four, map.get(themes.$default-color-palette, 4));
+    background-color: var(--default-theme-two, map.get(themes.$default-color-palette, 2));
   }
 
   &.share-on-twitter {
@@ -252,7 +259,7 @@ button {
   }
 
   &.share-via-mail {
-    color: var(--default-theme-six, map.get($default-color-palette, 6));
+    color: var(--default-theme-six, map.get(themes.$default-color-palette, 6));
     background-color: transparent;
   }
 

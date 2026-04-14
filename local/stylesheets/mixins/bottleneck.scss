@@ -1,12 +1,12 @@
 @use "sass:map";
 
 // Settings
-@import 'fonts';
-@import 'themes';
-@import 'responsive';
-@import 'variables';
-@import 'mixins';
-@import 'materials';
+@use 'fonts';
+@use 'themes';
+@use 'responsive';
+@use 'variables';
+@use 'mixins';
+@use 'materials';
 
 // Content
-@import 'classes';
+@use 'classes';

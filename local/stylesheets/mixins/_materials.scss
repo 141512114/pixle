@@ -1,8 +1,8 @@
 @use "sass:map";
 
-@import 'themes';
+@use 'themes';
 
-@mixin theme_setup($theme: $default-color-palette) {
+@mixin theme_setup($theme: themes.$default-color-palette) {
   --default-theme-one: #{map.get($theme, 1)};
   --default-theme-two: #{map.get($theme, 2)};
   --default-theme-three: #{map.get($theme, 3)};
@@ -16,22 +16,22 @@ body {
   @include theme_setup();
 
   &[data-theme="neo"] {
-    @include theme_setup($neo-palette);
+    @include theme_setup(themes.$neo-palette);
   }
 
   &[data-theme="vibe"] {
-    @include theme_setup($vibe-palette);
+    @include theme_setup(themes.$vibe-palette);
   }
 
   &[data-theme="pop"] {
-    @include theme_setup($pop-palette);
+    @include theme_setup(themes.$pop-palette);
   }
 
   &[data-theme="volcano"] {
-    @include theme_setup($volcano-palette);
+    @include theme_setup(themes.$volcano-palette);
   }
 
   &[data-theme="troll"] {
-    @include theme_setup($we-do-trolling-palette);
+    @include theme_setup(themes.$we-do-trolling-palette);
   }
 }
