@@ -1,5 +1,6 @@
-@use 'mixins/variables';
-@use 'mixins/mixins';
+@use 'mixins/variables' as *;
+@use 'mixins/mixins' as *;
+@use 'mixins/responsive' as *;
 
 // pix-grid component stylesheet
 .component-pix-grid .pix-col-item {

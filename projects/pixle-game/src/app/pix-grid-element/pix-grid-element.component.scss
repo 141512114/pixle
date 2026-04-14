@@ -1,8 +1,8 @@
 @use "sass:map";
 
-@use 'mixins/themes';
-@use 'mixins/variables';
-@use 'mixins/mixins';
+@use 'mixins/themes' as *;
+@use 'mixins/variables' as *;
+@use 'mixins/mixins' as *;
 
 // pix-grid-element component stylesheet
 .grid-element-inner {

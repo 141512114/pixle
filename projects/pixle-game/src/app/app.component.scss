@@ -1,7 +1,7 @@
 @use "sass:map";
 
-@use 'mixins/themes';
-@use 'mixins/mixins';
+@use 'mixins/themes' as *;
+@use 'mixins/mixins' as *;
 
 // app component stylesheet
 main {

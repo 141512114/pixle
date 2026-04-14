@@ -1,5 +1,5 @@
-@use 'mixins/mixins';
-@use 'mixins/responsive';
+@use 'mixins/mixins' as *;
+@use 'mixins/responsive' as *;
 
 // pix-game component stylesheet
 .playground-wrapper {

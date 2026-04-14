@@ -1,8 +1,8 @@
 @use "sass:map";
 
-@import '../../stylesheets/mixins/themes';
-@import '../../stylesheets/mixins/mixins';
-@import '../../stylesheets/mixins/responsive';
+@use '../../stylesheets/mixins/themes' as *;
+@use '../../stylesheets/mixins/mixins' as *;
+@use '../../stylesheets/mixins/responsive' as *;
 
 // side-menu component stylesheet
 .component-side-menu {

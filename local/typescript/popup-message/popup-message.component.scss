@@ -1,7 +1,8 @@
 @use "sass:map";
 
-@import '../../stylesheets/mixins/themes';
-@import '../../stylesheets/mixins/variables';
+@use '../../stylesheets/mixins/themes' as *;
+@use '../../stylesheets/mixins/variables' as *;
+@use '../../stylesheets/mixins/responsive' as *;
 
 // popup-message component stylesheet
 .component-popup-message {

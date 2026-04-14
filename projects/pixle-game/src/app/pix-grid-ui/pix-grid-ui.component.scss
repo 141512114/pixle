@@ -1,8 +1,9 @@
 @use "sass:map";
 @use "sass:math";
 
-@use 'mixins/variables';
-@use 'mixins/themes';
+@use 'mixins/variables' as *;
+@use 'mixins/themes' as *;
+@use 'mixins/responsive' as *;
 
 // pix-grid-ui component stylesheet
 .component-pix-grid-ui {
