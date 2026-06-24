@@ -9,6 +9,7 @@ import {
   Output,
   ViewChild,
 } from '@angular/core';
+import { CommonModule } from '@angular/common';
 import { WHITE_QUESTIONMARK } from '@typescript/emoji.database';
 import { HelperFunctionsService } from '@abstract/services/helper-functions.service';
 import { WINDOW } from '@typescript/window-injection.token';
@@ -19,7 +20,8 @@ import { AbstractHtmlElement } from '@abstract/abstract.html-element';
   selector: 'app-pix-grid-element',
   templateUrl: './pix-grid-element.component.html',
   styleUrls: ['./pix-grid-element.component.scss'],
-  standalone: false,
+  standalone: true,
+  imports: [CommonModule],
 })
 export class PixGridElementComponent
   extends AbstractHtmlElement

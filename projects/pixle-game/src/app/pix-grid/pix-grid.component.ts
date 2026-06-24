@@ -10,8 +10,8 @@ import {
   ViewChild,
   ViewChildren,
 } from '@angular/core';
+import { CommonModule, DOCUMENT } from '@angular/common';
 import { PixGridElementComponent } from '../pix-grid-element/pix-grid-element.component';
-import { DOCUMENT } from '@angular/common';
 import { WINDOW } from '@typescript/window-injection.token';
 import { GameManager } from '../pix-game/game.manager';
 import { HelperFunctionsService } from '@abstract/services/helper-functions.service';
@@ -26,7 +26,8 @@ const MIN_GRID_WIDTH: number = 135;
   selector: 'app-pix-grid',
   templateUrl: './pix-grid.component.html',
   styleUrls: ['./pix-grid.component.scss'],
-  standalone: false,
+  standalone: true,
+  imports: [CommonModule, PixGridElementComponent],
 })
 export class PixGridComponent implements OnInit, AfterViewInit {
   @ViewChildren(PixGridElementComponent)

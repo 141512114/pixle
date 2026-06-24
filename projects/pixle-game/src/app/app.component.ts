@@ -5,9 +5,8 @@ import {
   OnInit,
   AfterViewInit,
   ElementRef,
-  CommonModule,
 } from '@angular/core';
-import { DOCUMENT } from '@angular/common';
+import { CommonModule, DOCUMENT } from '@angular/common';
 import { WINDOW } from '@typescript/window-injection.token';
 import { HelperFunctionsService } from '@abstract/services/helper-functions.service';
 import {

@@ -9,6 +9,7 @@ import {
   ViewChild,
   ViewChildren,
 } from '@angular/core';
+import { CommonModule } from '@angular/common';
 import {HelperFunctionsService} from '@abstract/services/helper-functions.service';
 import {PixGridElementComponent} from '../pix-grid-element/pix-grid-element.component';
 import {GameManager} from '../pix-game/game.manager';
@@ -16,12 +17,15 @@ import {faClipboard, faLink} from '@fortawesome/free-solid-svg-icons';
 import {WINDOW} from '@typescript/window-injection.token';
 import {AbstractHtmlElement} from '@abstract/abstract.html-element';
 import {Clipboard} from '@angular/cdk/clipboard';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { ClipboardModule } from '@angular/cdk/clipboard';
 
 @Component({
   selector: 'app-pix-grid-ui',
   templateUrl: './pix-grid-ui.component.html',
   styleUrls: ['./pix-grid-ui.component.scss'],
-  standalone: false,
+  standalone: true,
+  imports: [CommonModule, FontAwesomeModule, ClipboardModule, PixGridElementComponent],
 })
 export class PixGridUiComponent extends AbstractHtmlElement {
   @ViewChildren(PixGridElementComponent)

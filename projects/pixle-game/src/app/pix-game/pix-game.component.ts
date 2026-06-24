@@ -6,7 +6,7 @@ import {
   ViewChild,
 } from '@angular/core';
 import { Router } from '@angular/router';
-import { DOCUMENT, Location } from '@angular/common';
+import { DOCUMENT, Location, CommonModule } from '@angular/common';
 import { WINDOW } from '@typescript/window-injection.token';
 import * as CookieService from '@abstract/composables/cookies';
 import { GameManager } from './game.manager';
@@ -37,7 +37,14 @@ const UNDO_FLIP_TIME: number = 1575;
   selector: 'app-pix-game',
   templateUrl: './pix-game.component.html',
   styleUrls: ['./pix-game.component.scss'],
-  standalone: false,
+  standalone: true,
+  imports: [
+    CommonModule,
+    PopupMessageComponent,
+    PixGridComponent,
+    PixGridUiComponent,
+    PixGridElementComponent,
+  ],
 })
 export class PixGameComponent implements OnInit, AfterViewInit {
   pixle_share_result: string = '';
