@@ -1,12 +1,13 @@
 import { Component, Inject } from '@angular/core';
-import { DOCUMENT } from '@angular/common';
+import { DOCUMENT, CommonModule } from '@angular/common';
 import * as CookieService from '@abstract/composables/cookies';
 
 @Component({
   selector: 'app-theme-switcher',
   templateUrl: './theme-switcher.component.html',
   styleUrls: [],
-  standalone: false,
+  standalone: true,
+  imports: [CommonModule],
 })
 export class ThemeSwitcherComponent {
   constructor(@Inject(DOCUMENT) private document: Document) {}

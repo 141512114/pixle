@@ -6,12 +6,13 @@ import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 
 @NgModule({
-  exports: [SideMenuComponent, PopupMessageComponent],
-  imports: [CommonModule, RouterModule],
-  declarations: [
+  imports: [
+    CommonModule,
+    RouterModule,
     SideMenuComponent,
-    ThemeSwitcherComponent,
     PopupMessageComponent,
+    ThemeSwitcherComponent,
   ],
+  exports: [SideMenuComponent, PopupMessageComponent, ThemeSwitcherComponent],
 })
 export class SharedModule {}

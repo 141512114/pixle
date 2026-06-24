@@ -4,15 +4,18 @@ import {
   ViewChild,
   ViewEncapsulation,
 } from '@angular/core';
+import { CommonModule } from '@angular/common';
 import { AbstractHtmlElement } from '@abstract/abstract.html-element';
 import * as CookieService from '@abstract/composables/cookies';
+import { ThemeSwitcherComponent } from '../theme-switcher/theme-switcher.component';
 
 @Component({
   encapsulation: ViewEncapsulation.None,
   selector: 'app-side-menu',
   templateUrl: './side-menu.component.html',
   styleUrls: ['./side-menu.component.scss'],
-  standalone: false,
+  standalone: true,
+  imports: [CommonModule, ThemeSwitcherComponent],
 })
 export class SideMenuComponent extends AbstractHtmlElement {
   active: boolean = false;

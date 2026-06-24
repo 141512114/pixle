@@ -7,6 +7,7 @@ import {
   Output,
   ViewChild,
 } from '@angular/core';
+import { CommonModule } from '@angular/common';
 import { IPopUp } from '@interface/popup-message.interface';
 import { AbstractHtmlElement } from '@abstract/abstract.html-element';
 
@@ -20,7 +21,8 @@ const DEFAULT_MSG: IPopUp = {
   selector: 'app-popup-message',
   templateUrl: './popup-message.component.html',
   styleUrls: ['./popup-message.component.scss'],
-  standalone: false,
+  standalone: true,
+  imports: [CommonModule],
 })
 export class PopupMessageComponent
   extends AbstractHtmlElement

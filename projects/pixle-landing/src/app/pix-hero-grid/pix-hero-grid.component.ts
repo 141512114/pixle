@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { CommonModule } from '@angular/common';
 import { HelperFunctionsService } from '@abstract/services/helper-functions.service';
 import { PIXLE_ICONS } from '@typescript/emoji.database';
 
@@ -6,7 +7,8 @@ import { PIXLE_ICONS } from '@typescript/emoji.database';
   selector: 'app-pix-hero-grid',
   templateUrl: './pix-hero-grid.component.html',
   styleUrls: ['./pix-hero-grid.component.scss'],
-  standalone: false,
+  standalone: true,
+  imports: [CommonModule],
 })
 export class PixHeroGridComponent implements OnInit {
   grid_image: string[][] = [];

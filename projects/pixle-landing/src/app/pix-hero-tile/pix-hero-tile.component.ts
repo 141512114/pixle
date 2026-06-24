@@ -6,6 +6,7 @@ import {
   OnInit,
   ViewChild,
 } from '@angular/core';
+import { CommonModule } from '@angular/common';
 import { WHITE_QUESTIONMARK } from '@typescript/emoji.database';
 import { AbstractHtmlElement } from '@abstract/abstract.html-element';
 import { HelperFunctionsService } from '@abstract/services/helper-functions.service';
@@ -14,7 +15,8 @@ import { HelperFunctionsService } from '@abstract/services/helper-functions.serv
   selector: 'app-pix-hero-tile',
   templateUrl: './pix-hero-tile.component.html',
   styleUrls: ['./pix-hero-tile.component.scss'],
-  standalone: false,
+  standalone: true,
+  imports: [CommonModule],
 })
 export class PixHeroTileComponent
   extends AbstractHtmlElement

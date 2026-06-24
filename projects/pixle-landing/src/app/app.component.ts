@@ -8,7 +8,7 @@ import {
   ViewEncapsulation,
 } from '@angular/core';
 import * as CookieService from '@abstract/composables/cookies';
-import { DOCUMENT } from '@angular/common';
+import { DOCUMENT, CommonModule } from '@angular/common';
 import {
   faGear,
   faXmark,
@@ -17,6 +17,9 @@ import {
 import { SideMenuComponent } from '@typescript/side-menu/side-menu.component';
 import { IPopUp } from '@interface/popup-message.interface';
 import { PopupMessageComponent } from '@typescript/popup-message/popup-message.component';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { AppRoutingModule } from './app-routing.module';
 
 // Cookie notification
 const COOKIE_NOTIF_MSG: IPopUp = {
@@ -32,7 +35,15 @@ const COOKIE_NOTIF_MSG: IPopUp = {
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
-  standalone: false,
+  standalone: true,
+  imports: [
+    CommonModule,
+    AppRoutingModule,
+    SideMenuComponent,
+    PopupMessageComponent,
+    FontAwesomeModule,
+    NgbModule,
+  ],
 })
 export class AppComponent implements OnInit, AfterViewInit {
   cookie_consent: boolean = false;
