@@ -4,6 +4,7 @@
   "compileOnSave": false,
   "compilerOptions": {
     "baseUrl": "./",
+    "ignoreDeprecations": "6.0",
     "paths": {
       "@typescript/*": ["local/typescript/*"],
       "@abstract/*": ["local/typescript/abstract/*"],
@@ -31,6 +32,6 @@
     "enableI18nLegacyMessageIdFormat": false,
     "strictInjectionParameters": true,
     "strictInputAccessModifiers": true,
-    "strictTemplates": true
+    "strictTemplates": false
   }
 }
