@@ -285,66 +285,6 @@
             ]
           }
         },
-        "server": {
-          "builder": "@angular-devkit/build-angular:server",
-          "options": {
-            "outputPath": "dist/pixle-landing/server",
-            "main": "projects/pixle-landing/server.ts",
-            "tsConfig": "projects/pixle-landing/tsconfig.server.json"
-          },
-          "configurations": {
-            "production": {
-              "outputHashing": "media",
-              "fileReplacements": [
-                {
-                  "replace": "projects/pixle-landing/src/environments/environment.ts",
-                  "with": "projects/pixle-landing/src/environments/environment.prod.ts"
-                }
-              ],
-              "optimization": true,
-              "sourceMap": false
-            },
-            "development": {
-              "optimization": true,
-              "sourceMap": true,
-              "extractLicenses": false
-            }
-          },
-          "defaultConfiguration": "production"
-        },
-        "serve-ssr": {
-          "builder": "@nguniversal/builders:ssr-dev-server",
-          "configurations": {
-            "development": {
-              "buildTarget": "pixle-landing:build:development",
-              "serverTarget": "pixle-landing:server:development"
-            },
-            "production": {
-              "buildTarget": "pixle-landing:build:production",
-              "serverTarget": "pixle-landing:server:production"
-            }
-          },
-          "defaultConfiguration": "development"
-        },
-        "prerender": {
-          "builder": "@nguniversal/builders:prerender",
-          "options": {
-            "routes": [
-              "/"
-            ]
-          },
-          "configurations": {
-            "production": {
-              "buildTarget": "pixle-landing:build:production",
-              "serverTarget": "pixle-landing:server:production"
-            },
-            "development": {
-              "buildTarget": "pixle-landing:build:development",
-              "serverTarget": "pixle-landing:server:development"
-            }
-          },
-          "defaultConfiguration": "production"
-        }
       }
     }
   },
