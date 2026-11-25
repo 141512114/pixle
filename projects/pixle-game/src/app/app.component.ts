@@ -159,7 +159,6 @@ export class AppComponent implements OnInit, AfterViewInit {
     const bodyElement = this.document.body as HTMLElement;
     if (
       this.hasTouch() === false ||
-      null ||
       bodyElement.classList.contains('startTouch')
     )
       return;

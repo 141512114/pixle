@@ -36,29 +36,12 @@ export class HelperFunctionsService {
   }
 
   /**
-   * Get the list of emojis used in the pixle
+   * Get the list of distinct emojis used in the pixle (in order of first appearance)
    *
-   * @return {boolean} Operation successful
-   * @private
+   * @return Array of twa emoji classes
    */
   public static getEmojiList(pixle_tiles: string[][]): string[] {
-    if (pixle_tiles.length <= 0) return [];
-    let pixle_convert: string[] =
-      HelperFunctionsService.twoDimensionalArrayToOneDimensional(pixle_tiles);
-    let temp_twa_emoji_classes: string[] = [];
-    for (let i: number = 0; i < pixle_convert.length; i++) {
-      for (let j: number = pixle_convert.length - 1; j > 0; j--) {
-        // Make absolutely sure that both picked entries are the exact same (or not)
-        if (pixle_convert[j] === pixle_convert[i]) {
-          let twa_emoji_class: string = pixle_convert[i];
-          // Check if there already exists this exact emoji code point in the temporary array
-          if (temp_twa_emoji_classes.includes(twa_emoji_class)) break;
-          temp_twa_emoji_classes.push(twa_emoji_class);
-        }
-      }
-    }
-
-    return temp_twa_emoji_classes;
+    return [...new Set(pixle_tiles.flat())];
   }
 
   /**
@@ -98,7 +81,7 @@ export class HelperFunctionsService {
    * @param element
    */
   public static lockElement(element: HTMLElement): void {
-    if (element == undefined || null || element.classList.contains('locked'))
+    if (element == null || element.classList.contains('locked'))
       return;
     element.classList.add('locked');
   }
@@ -109,7 +92,7 @@ export class HelperFunctionsService {
    * @param element
    */
   public static unlockElement(element: HTMLElement): void {
-    if (element == undefined || null || !element.classList.contains('locked'))
+    if (element == null || !element.classList.contains('locked'))
       return;
     element.classList.remove('locked');
   }
@@ -148,9 +131,9 @@ export class HelperFunctionsService {
     event: any,
     callback: any,
   ): void {
-    if (typeof element.addEventListener != undefined) {
+    if (typeof element.addEventListener === 'function') {
       element.addEventListener(event, callback, false);
-    } else if (typeof element.attachEvent != undefined) {
+    } else if (typeof element.attachEvent === 'function') {
       element.attachEvent('on' + event, callback);
     } else {
       element['on' + event] = callback;
