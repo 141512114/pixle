@@ -8,7 +8,7 @@ describe('PixGameComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [PixGameComponent]
+      imports: [PixGameComponent]
     })
       .compileComponents();
   });

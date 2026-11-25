@@ -2,7 +2,8 @@
 
 This project was first generated with [Angular CLI](https://github.com/angular/angular-cli) version 13.2.5.\
 Much has changed since then which has now been noticed and brought into this project. _Pixle_ has been updated
-and newly generated with [Angular CLI](https://github.com/angular/angular-cli) version 18.2.9. All packages have been
+and newly generated with [Angular CLI](https://github.com/angular/angular-cli) version 18.2.9 and is
+now maintained on Angular 22. All packages have been
 reviewed and either upgraded or, because of their lack of support, removed entirely from the project.
 
 ## Introduction
@@ -33,11 +34,16 @@ Well, you do have to run the command `npm i` at some point though... .
 
 ## Development server
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+Run `ng serve pixle-game` (or `ng serve pixle-landing`) for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
 
 ## Code scaffolding
 
 Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+
+## Running unit tests
+
+Run `npm test` to execute the unit tests of both projects with [Vitest](https://vitest.dev/).\
+Use `ng test pixle-game` or `ng test pixle-landing` to run a single project in watch mode.
 
 ## Build
 
@@ -45,4 +51,4 @@ Run `ng build [project-name]` to build the project. The build artifacts will be 
 
 ## Further help
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.dev/cli) page.

@@ -8,7 +8,7 @@ describe('PixHeroTileComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [PixHeroTileComponent]
+      imports: [PixHeroTileComponent]
     })
       .compileComponents();
   });
