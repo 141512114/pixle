@@ -1,9 +1,8 @@
-import { Injectable } from '@angular/core';
 import { PIXLE_ICONS } from '@typescript/emoji.database';
 
-@Injectable({
-  providedIn: 'root',
-})
+/**
+ * Small helpers shared by both apps (static only, nothing to inject)
+ */
 export class HelperFunctionsService {
   /**
    * Generate a random integer between two limiter values --> min and max
@@ -62,28 +61,6 @@ export class HelperFunctionsService {
     if (element == null || !element.classList.contains('locked'))
       return;
     element.classList.remove('locked');
-  }
-
-  /**
-   * Add event listener to a specified element.
-   * This function helps to support other browsers.
-   *
-   * @param element
-   * @param event
-   * @param callback
-   */
-  public static addEventListenerToElement(
-    element: any,
-    event: any,
-    callback: any,
-  ): void {
-    if (typeof element.addEventListener === 'function') {
-      element.addEventListener(event, callback, false);
-    } else if (typeof element.attachEvent === 'function') {
-      element.attachEvent('on' + event, callback);
-    } else {
-      element['on' + event] = callback;
-    }
   }
 
   /**

@@ -6,17 +6,6 @@
 
 // pix-home component stylesheet
 section#welcome {
-  .hero-background {
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    user-select: none;
-    pointer-events: none;
-    z-index: 1;
-  }
-
   .greeting {
     z-index: 99;
   }

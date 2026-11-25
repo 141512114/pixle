@@ -12,7 +12,6 @@ import { PixGridElementComponent } from '../pix-grid-element/pix-grid-element.co
 import { GameManager } from '../pix-game/game.manager';
 import { faClipboard, faLink } from '@fortawesome/free-solid-svg-icons';
 import { WINDOW } from '@typescript/window-injection.token';
-import { AbstractHtmlElement } from '@abstract/abstract.html-element';
 import { Clipboard } from '@angular/cdk/clipboard';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
@@ -22,7 +21,7 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
   styleUrls: ['./pix-grid-ui.component.scss'],
   imports: [FontAwesomeModule, PixGridElementComponent],
 })
-export class PixGridUiComponent extends AbstractHtmlElement {
+export class PixGridUiComponent {
   public readonly pixle_emoji_output = viewChildren(PixGridElementComponent);
   readonly emoji_list = input<string[]>([]);
   readonly pixle_share_result = input<string>('Not quite there yet!');
@@ -39,7 +38,6 @@ export class PixGridUiComponent extends AbstractHtmlElement {
   private copied_badge_timer: number = -1;
 
   constructor() {
-    super();
     inject(DestroyRef).onDestroy(() =>
       this.window.clearTimeout(this.copied_badge_timer),
     );
@@ -102,9 +100,9 @@ export class PixGridUiComponent extends AbstractHtmlElement {
     if (this.clipboard.copy(msgToCopy)) {
       this.window.clearTimeout(this.copied_badge_timer);
       const copied_badge_element: HTMLElement = this.copied_badge().nativeElement;
-      this.removeClassFromHTMLElement(copied_badge_element, 'close');
+      copied_badge_element.classList.remove('close');
       this.copied_badge_timer = this.window.setTimeout(() => {
-        this.addClassToHTMLElement(copied_badge_element, 'close');
+        copied_badge_element.classList.add('close');
       }, 2000);
     }
   }
@@ -125,14 +123,7 @@ export class PixGridUiComponent extends AbstractHtmlElement {
    * Toggle one or the other
    */
   public switchUiElements(): void {
-    const uiWrapperElement = this.ui_wrapper()?.nativeElement;
-    if (uiWrapperElement == null) return;
-    const closeClass: string = 'switch-ui';
-    if (!uiWrapperElement.classList.contains(closeClass)) {
-      uiWrapperElement.classList.add(closeClass);
-    } else {
-      uiWrapperElement.classList.remove(closeClass);
-    }
+    this.ui_wrapper()?.nativeElement.classList.toggle('switch-ui');
   }
 
   /**

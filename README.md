@@ -1,10 +1,8 @@
 # Official Repository of the web-based game _Pixle_
 
-This project was first generated with [Angular CLI](https://github.com/angular/angular-cli) version 13.2.5.\
-Much has changed since then which has now been noticed and brought into this project. _Pixle_ has been updated
-and newly generated with [Angular CLI](https://github.com/angular/angular-cli) version 18.2.9 and is
-now maintained on Angular 22. All packages have been
-reviewed and either upgraded or, because of their lack of support, removed entirely from the project.
+_Pixle_ is built with [Angular](https://angular.dev) 22 (standalone components, signals, no zone.js).
+The repository contains two apps: the game (`projects/pixle-game`) and its landing page
+(`projects/pixle-landing`). Code and styles shared by both live in `local/`.
 
 ## Introduction
 
@@ -16,21 +14,16 @@ The player challenges themselves to solve a newly generated puzzle each day, wit
 To solve a puzzle, the player must place the emojis on their correct tiles or positions, as shown at the start of the game and after each failed attempt.
 
 ### The creation of puzzles in _Pixle_
-~~Puzzles in the game _Pixle_ are generated ahead of time and stored inside a small database or array.
-This array only contains the necessary ids of the used emojis and a date on which the specific puzzle goes public.\
-Puzzles or _pixles_, as I like to call them, aren't fully, randomly generated. They always use one of the many, already given patterns.
-This way it is ensured that the player won't feel discouraged or uncomfortable while solving a pixle.\
-It creates a certain familiarity, which helps bonding to the game.
-Learning patterns can help recognizing them upon seeing a newly revealed pixle, which encourages to keep playing and train the brain.~~
-
-Puzzles are now created dynamically on each new day. Databases for all available emoji icons and possible patterns are 
-still in use in the creation process.\
-To ensure consistency across all players, the current date and time are used as a seed to determine the puzzle creation process.
+Puzzles, or _pixles_, are generated on each new day. The current date is used as the seed, so every player
+gets the same puzzle on the same day.\
+Pixles aren't fully random: they always start from one of the hand-made patterns. Recognisable shapes keep the
+player from feeling discouraged and make a pixle memorable. To keep them from being learned by heart, the
+generator mutates the patterns (mirror, rotate, combine two patterns, recolour areas), with a difficulty that
+rises over the week, and then fills them with randomly chosen emojis.
 
 ## First steps
 
-Gulp has been removed and is no longer needed. This project is ready to go!\
-Well, you do have to run the command `npm i` at some point though... .
+Run `npm i` to install the dependencies.
 
 ## Development server
 

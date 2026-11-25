@@ -31,6 +31,24 @@ describe('AppComponent (game)', () => {
       ?.componentInstance;
   }
 
+  it('opens and closes the side menu with the settings button', async () => {
+    const fixture = TestBed.createComponent(AppComponent);
+    await fixture.whenStable();
+    const element: HTMLElement = fixture.nativeElement;
+    const button = element.querySelector<HTMLElement>('button.open-side-menu')!;
+    const sideMenu = element.querySelector<HTMLElement>('.component-side-menu')!;
+
+    expect(sideMenu.classList).toContain('close');
+
+    button.click();
+    expect(sideMenu.classList).not.toContain('close');
+    expect(button.classList).toContain('toggle');
+
+    button.click();
+    expect(sideMenu.classList).toContain('close');
+    expect(button.classList).not.toContain('toggle');
+  });
+
   it('redirects / to /game and renders the game', async () => {
     const fixture = TestBed.createComponent(AppComponent);
     fixture.detectChanges();

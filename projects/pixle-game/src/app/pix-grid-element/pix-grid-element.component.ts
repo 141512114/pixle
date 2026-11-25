@@ -11,7 +11,6 @@ import {
 import { WHITE_QUESTIONMARK } from '@typescript/emoji.database';
 import { HelperFunctionsService } from '@abstract/services/helper-functions.service';
 import { GameManager } from '../pix-game/game.manager';
-import { AbstractHtmlElement } from '@abstract/abstract.html-element';
 
 @Component({
   selector: 'app-pix-grid-element',
@@ -19,7 +18,6 @@ import { AbstractHtmlElement } from '@abstract/abstract.html-element';
   styleUrls: ['./pix-grid-element.component.scss'],
 })
 export class PixGridElementComponent
-  extends AbstractHtmlElement
   implements OnInit
 {
   readonly pixle_emoji = input<string>(''); // <-- stores the correct answer
@@ -100,10 +98,7 @@ export class PixGridElementComponent
    */
   public selectThisEmoji(): void {
     if (this.grid_element_type() !== 1) return;
-    this.addClassToHTMLElement(
-      this.user_interactive().nativeElement,
-      this.selected_class,
-    );
+    this.user_interactive().nativeElement.classList.add(this.selected_class);
   }
 
   /**
@@ -111,10 +106,7 @@ export class PixGridElementComponent
    */
   public unselectThisEmoji(): void {
     if (this.grid_element_type() !== 1) return;
-    this.removeClassFromHTMLElement(
-      this.user_interactive().nativeElement,
-      this.selected_class,
-    );
+    this.user_interactive().nativeElement.classList.remove(this.selected_class);
   }
 
   /**
@@ -140,7 +132,7 @@ export class PixGridElementComponent
     const element = this.user_interactive().nativeElement;
     // Show correct answer before flipping the grid element
     this.showCorrectAnswer();
-    this.addClassToHTMLElement(element, this.do_flip_class);
+    element.classList.add(this.do_flip_class);
     HelperFunctionsService.lockElement(element);
   }
 
@@ -149,10 +141,7 @@ export class PixGridElementComponent
    */
   public undoFlip(): void {
     if (this.grid_element_type() !== 0 || this.pixle_tile_solved) return;
-    this.removeClassFromHTMLElement(
-      this.user_interactive().nativeElement,
-      this.do_flip_class,
-    );
+    this.user_interactive().nativeElement.classList.remove(this.do_flip_class);
     this.setElementIcon(this.pixle_emoji_default);
     // Second part is executed in an event listener
     // The listener is set right at the beginning of this components lifespan

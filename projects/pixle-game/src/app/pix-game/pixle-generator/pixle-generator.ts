@@ -201,7 +201,7 @@ function chooseRandomIcons(pattern: number[][]): number[] {
  * @param pixle_id
  */
 function generateNewPixle(
-  pixle_date: any,
+  pixle_date: string,
   pixle_id: number,
   level: DifficultyLevel,
 ): IPixle {

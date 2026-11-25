@@ -4,7 +4,6 @@ import {
   viewChild,
   ViewEncapsulation,
 } from '@angular/core';
-import { AbstractHtmlElement } from '@abstract/abstract.html-element';
 import * as CookieService from '@abstract/composables/cookies';
 import { PIXLE_LINKS, PIXLE_REPOSITORY_URL } from '@typescript/pixle-links';
 import { ThemeSwitcherComponent } from '../theme-switcher/theme-switcher.component';
@@ -16,7 +15,7 @@ import { ThemeSwitcherComponent } from '../theme-switcher/theme-switcher.compone
   styleUrls: ['./side-menu.component.scss'],
   imports: [ThemeSwitcherComponent],
 })
-export class SideMenuComponent extends AbstractHtmlElement {
+export class SideMenuComponent {
   active: boolean = false;
   readonly links = PIXLE_LINKS;
   readonly repository_url = PIXLE_REPOSITORY_URL;

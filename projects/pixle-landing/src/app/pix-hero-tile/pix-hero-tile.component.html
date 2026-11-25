@@ -1,10 +1,11 @@
 <div class="position-relative w-100 h-100 component-pix-hero-tile">
   <svg class="w-100 h-auto square-placeholder" viewBox="0 0 1 1"></svg>
-  <div #tile_content_wrapper
+  <div (mouseenter)="doFlip()" (mouseleave)="undoFlip()" (touchcancel)="undoFlip()" (touchend)="undoFlip()"
+       (touchstart)="doFlip()" [class.do-flip]="flipped()"
        class="w-100 h-100 rounded-3 highlight-btn--grid-element flip-element grid-element-inner emoji-wrapper">
     <div class="w-100 h-100 back-face">
       <p class="p-0 m-0 emoji">
-        <i class="twa {{ twa_emoji_class_back_face() }}"></i>
+        <i class="twa {{ pixle_emoji() }}"></i>
       </p>
     </div>
     <div class="w-100 h-100 front-face">

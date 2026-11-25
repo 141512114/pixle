@@ -5,7 +5,6 @@
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build",
-    "cleanup": "npm cache clear --force && npm cache verify",
     "watch": "ng build --watch --configuration development",
     "test": "ng test pixle-game --watch=false && ng test pixle-landing --watch=false"
   },

@@ -1,14 +1,11 @@
 import {
-  AfterViewInit,
   Component,
   DOCUMENT,
   ElementRef,
   inject,
-  OnInit,
   viewChild,
 } from '@angular/core';
 import { WINDOW } from '@typescript/window-injection.token';
-import { HelperFunctionsService } from '@abstract/services/helper-functions.service';
 import {
   faGear,
   faQuestionCircle,
@@ -30,7 +27,7 @@ const COOLDOWN_TOUCH: number = 75;
   styleUrls: ['./app.component.scss'],
   imports: [RouterOutlet, FontAwesomeModule, SideMenuComponent],
 })
-export class AppComponent implements OnInit, AfterViewInit {
+export class AppComponent {
   readonly links = PIXLE_LINKS;
   readonly iconOpenSideMenu: IconDefinition = faGear;
   readonly iconCloseSideMenu: IconDefinition = faXmark;
@@ -43,38 +40,13 @@ export class AppComponent implements OnInit, AfterViewInit {
   private readonly window = inject(WINDOW);
 
   constructor() {
-    this.addViewportHeightProperty();
-  }
-
-  ngOnInit() {
-    // Add several event listeners, which help detect touch input
-    HelperFunctionsService.addEventListenerToElement(
-      this.window,
-      'touchstart',
-      () => {
-        this.addTouchClass();
-      },
-    );
-    ['mouseover', 'touchend', 'touchcancel'].forEach((event) => {
-      HelperFunctionsService.addEventListenerToElement(
-        this.window,
-        event,
-        () => {
-          this.removeTouchClass();
-        },
-      );
-    });
-  }
-
-  ngAfterViewInit() {
-    // Calculate viewport height --> alternative to css vh unit
-    HelperFunctionsService.addEventListenerToElement(
-      this.window,
-      'resize',
-      () => {
-        this.addViewportHeightProperty();
-      },
-    );
+    // Detect touch input. Native listeners: they only toggle a body class, so no change
+    // detection is needed; the root component lives as long as the page.
+    const passive = { passive: true };
+    this.window.addEventListener('touchstart', () => this.addTouchClass(), passive);
+    for (const event of ['mouseover', 'touchend', 'touchcancel']) {
+      this.window.addEventListener(event, () => this.removeTouchClass(), passive);
+    }
   }
 
   // noinspection DuplicatedCode
@@ -83,33 +55,10 @@ export class AppComponent implements OnInit, AfterViewInit {
    */
   public toggleSideMenu(): void {
     const sideMenuComponent = this.sideMenuComponent();
-    const sideMenuElement = sideMenuComponent.side_menu().nativeElement;
-    const toggleSideMenuElement = this.toggle_side_menu_btn().nativeElement;
-    const showClass: string = 'toggle';
-
-    if (sideMenuComponent.active) {
-      sideMenuComponent.addClassToHTMLElement(sideMenuElement, 'close');
-      if (toggleSideMenuElement.classList.contains(showClass)) {
-        toggleSideMenuElement.classList.remove(showClass);
-      }
-    } else {
-      sideMenuComponent.removeClassFromHTMLElement(sideMenuElement, 'close');
-      if (!toggleSideMenuElement.classList.contains(showClass)) {
-        toggleSideMenuElement.classList.add(showClass);
-      }
-    }
-    sideMenuComponent.active = !sideMenuComponent.active;
-  }
-
-  /**
-   * Add a css property / variable which will "replace" the css unit vh
-   * Using this variable is much more reliable and mobile-friendly
-   *
-   * @private
-   */
-  private addViewportHeightProperty(): void {
-    const vh: number = this.window.innerHeight * 0.01;
-    this.document.documentElement.style.setProperty('--vh', `${vh}px`);
+    const active = !sideMenuComponent.active;
+    sideMenuComponent.side_menu().nativeElement.classList.toggle('close', !active);
+    this.toggle_side_menu_btn().nativeElement.classList.toggle('toggle', active);
+    sideMenuComponent.active = active;
   }
 
   /**
@@ -129,30 +78,19 @@ export class AppComponent implements OnInit, AfterViewInit {
 
   /**
    * Add a touch indicator class to the body element
-   *
-   * @private
    */
   private addTouchClass(): void {
     this.window.clearTimeout(this.isTouchTimer);
-    const bodyElement = this.document.body;
-    if (
-      this.hasTouch() === false ||
-      bodyElement.classList.contains('startTouch')
-    )
-      return;
-    bodyElement.classList.add('startTouch');
+    if (this.hasTouch() === false) return;
+    this.document.body.classList.add('startTouch');
   }
 
   /**
    * Remove the touch indicator class from the body element
-   *
-   * @private
    */
   private removeTouchClass(): void {
     this.isTouchTimer = this.window.setTimeout(() => {
-      const bodyElement = this.document.body;
-      if (!bodyElement.classList.contains('startTouch')) return;
-      bodyElement.classList.remove('startTouch');
+      this.document.body.classList.remove('startTouch');
     }, COOLDOWN_TOUCH);
   }
 }
