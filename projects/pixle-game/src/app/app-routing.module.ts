@@ -2,7 +2,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { NgModule } from '@angular/core';
 import { PixGameComponent } from './pix-game/pix-game.component';
 
-const routes: Routes = [
+export const routes: Routes = [
   { path: '', redirectTo: '/game', pathMatch: 'full' },
   { path: 'game', component: PixGameComponent },
   { path: '**', redirectTo: '/game' },

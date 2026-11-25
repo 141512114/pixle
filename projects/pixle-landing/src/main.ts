@@ -1,16 +1,12 @@
 import {bootstrapApplication} from '@angular/platform-browser';
-import {provideClientHydration} from '@angular/platform-browser';
-
+import {provideRouter} from '@angular/router';
 import {AppComponent} from './app/app.component';
-import {environment} from '../../pixle-game/src/environments/environment';
-import {enableProdMode} from '@angular/core';
-
-if (environment.production) {
-  enableProdMode();
-}
+import {routes} from './app/app-routing.module';
 
 bootstrapApplication(AppComponent, {
   providers: [
-    provideClientHydration(),
+    // The router must be provided here (root injector). Importing RouterModule.forRoot
+    // into a standalone component creates a second router and breaks navigation (NG04007).
+    provideRouter(routes),
   ],
 }).catch(err => console.error(err));

@@ -18,7 +18,7 @@ import {
 import { SideMenuComponent } from '@typescript/side-menu/side-menu.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { SharedModule } from '@typescript/shared.module';
-import { AppRoutingModule } from './app-routing.module';
+import { RouterOutlet } from '@angular/router';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { PixGameComponent } from './pix-game/pix-game.component';
 import { PixGridComponent } from './pix-grid/pix-grid.component';
@@ -37,7 +37,7 @@ const COOLDOWN_TOUCH: number = 75;
   standalone: true,
   imports: [
     CommonModule,
-    AppRoutingModule,
+    RouterOutlet,
     NgbModule,
     FontAwesomeModule,
     SharedModule,

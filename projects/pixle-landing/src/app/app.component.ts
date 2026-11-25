@@ -19,7 +19,7 @@ import { IPopUp } from '@interface/popup-message.interface';
 import { PopupMessageComponent } from '@typescript/popup-message/popup-message.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { AppRoutingModule } from './app-routing.module';
+import { RouterOutlet } from '@angular/router';
 
 // Cookie notification
 const COOKIE_NOTIF_MSG: IPopUp = {
@@ -38,7 +38,7 @@ const COOKIE_NOTIF_MSG: IPopUp = {
   standalone: true,
   imports: [
     CommonModule,
-    AppRoutingModule,
+    RouterOutlet,
     SideMenuComponent,
     PopupMessageComponent,
     FontAwesomeModule,
