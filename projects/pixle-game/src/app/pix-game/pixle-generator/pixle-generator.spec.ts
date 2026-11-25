@@ -1,5 +1,5 @@
 import initPixleGenerator, { mutatePattern } from './pixle-generator';
-import { isValidMutation, normalize } from './pattern-mutations';
+import { isValidMutation, mirror, normalize, rotate } from './pattern-mutations';
 import { levelForDate } from './difficulty';
 import { MASTER_PATTERNS } from './pixle-pattern-list';
 import { PIXLE_ICONS } from '@typescript/emoji.database';
@@ -77,6 +77,23 @@ describe('initPixleGenerator', () => {
     }
     console.info(`fallbacks: ${fallbacks} of ${days}`);
     expect(fallbacks).toBeLessThan(days * 0.05);
+  });
+
+  it('never serves a plain (mirrored or rotated) original from Wednesday on', () => {
+    const originals = new Set<string>();
+    for (const p of MASTER_PATTERNS) {
+      for (const m of [p, mirror(p, 'horizontal')]) {
+        for (const t of [m, rotate(m, 1), rotate(m, 2), rotate(m, 3)]) {
+          originals.add(JSON.stringify(normalize(t)));
+        }
+      }
+    }
+    for (let i = 0; i < 3 * 365; i++) {
+      const pixle = pixleAt(new Date(2024, 9, 18 + i, 12));
+      if (pixle.difficulty >= 3) {
+        expect(originals.has(JSON.stringify(normalize(pixle.tiles)))).toBe(false);
+      }
+    }
   });
 
   it('terminates with level 1 when nothing passes validation', () => {

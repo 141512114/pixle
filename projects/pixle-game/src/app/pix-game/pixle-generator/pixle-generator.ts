@@ -123,6 +123,21 @@ function buildCandidate(
 }
 
 /**
+ * All originals in every orientation (mirrored and rotated), normalized and serialized
+ */
+function originalShapes(patterns: Pattern[]): Set<string> {
+  const shapes = new Set<string>();
+  for (const p of patterns) {
+    for (const m of [p, mirror(p, 'horizontal')]) {
+      for (const t of [m, rotate(m, 1), rotate(m, 2), rotate(m, 3)]) {
+        shapes.add(JSON.stringify(normalize(t)));
+      }
+    }
+  }
+  return shapes;
+}
+
+/**
  * Mutate a pattern according to the difficulty level. Invalid results are retried, then the
  * next easier level is used; level 1 returns an original pattern unchanged.
  *
@@ -135,6 +150,8 @@ export function mutatePattern(
   random: Random,
   patterns: Pattern[] = MASTER_PATTERNS,
 ): { tiles: Pattern; level: DifficultyLevel } {
+  // From level 3 on a puzzle has to be more than a turned original
+  const originals = originalShapes(patterns);
   for (let current = level; current >= 2; current--) {
     const minSize = DIFFICULTY_SETTINGS[current as DifficultyLevel].minBaseSize;
     const candidates = patterns.filter(
@@ -144,7 +161,11 @@ export function mutatePattern(
 
     for (let attempt = 0; attempt < ATTEMPTS_PER_LEVEL; attempt++) {
       const tiles = buildCandidate(current as DifficultyLevel, candidates, random);
-      if (tiles && isValidMutation(tiles, current)) {
+      if (
+        tiles &&
+        isValidMutation(tiles, current) &&
+        (current < 3 || !originals.has(JSON.stringify(tiles)))
+      ) {
         return { tiles, level: current as DifficultyLevel };
       }
     }
