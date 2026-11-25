@@ -1,10 +1,12 @@
 import {
   AfterViewInit,
   Component,
+  DestroyRef,
   DOCUMENT,
   ElementRef,
   inject,
   OnInit,
+  signal,
   viewChild,
   ViewEncapsulation,
 } from '@angular/core';
@@ -21,6 +23,8 @@ import { IPopUp } from '@interface/popup-message.interface';
 import { PopupMessageComponent } from '@typescript/popup-message/popup-message.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { RouterOutlet } from '@angular/router';
+import { WINDOW } from '@typescript/window-injection.token';
+import { getPixleCountdown } from './pixle-countdown';
 
 // Cookie notification
 const COOKIE_NOTIF_MSG: IPopUp = {
@@ -42,6 +46,8 @@ const COOKIE_NOTIF_MSG: IPopUp = {
     PopupMessageComponent,
     FontAwesomeModule,
   ],
+  // Host listener: removed automatically when the component is destroyed
+  host: { '(window:scroll)': 'updateNavbarVisibility()' },
 })
 export class AppComponent implements OnInit, AfterViewInit {
   readonly cookie_consent = toSignal(CookieService.cookie_consent, {
@@ -57,7 +63,27 @@ export class AppComponent implements OnInit, AfterViewInit {
     viewChild.required<ElementRef<HTMLElement>>('cookie_alert_html');
   private readonly toggle_side_menu_btn =
     viewChild.required<ElementRef<HTMLElement>>('toggle_side_menu_btn');
+  readonly countdown = signal(getPixleCountdown());
+  // The navbar appears once the player has scrolled past the welcome section
+  readonly navbar_visible = signal<boolean>(false);
   private readonly document = inject(DOCUMENT);
+  private readonly window = inject(WINDOW);
+
+  constructor() {
+    const timer = this.window.setInterval(
+      () => this.countdown.set(getPixleCountdown()),
+      1000,
+    );
+    inject(DestroyRef).onDestroy(() => this.window.clearInterval(timer));
+  }
+
+  public updateNavbarVisibility(): void {
+    const welcome = this.document.getElementById('welcome');
+    if (welcome == null) return;
+    this.navbar_visible.set(
+      this.window.scrollY > welcome.offsetTop + welcome.offsetHeight,
+    );
+  }
 
   ngOnInit() {
     // Check if the consent to cookie usage has been given

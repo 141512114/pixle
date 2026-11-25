@@ -2,20 +2,21 @@
   <!-- Header -->
   <header class="h-100">
     <div class="position-absolute w-100 h-auto" id="pixle-countdown">
-      <div class="position-absolute h-100 pixle-countdown-progress"></div>
+      <div class="position-absolute h-100 pixle-countdown-progress" [style.width.%]="countdown().progress"></div>
       <div class="position-relative d-flex justify-content-center w-100 h-auto pixle-countdown-time">
         <a class="h6 m-0 p-0 py-2 w-100 text-center game-title" title="The remaining time until a new pixle arrives"
            [attr.href]="links.game || null" aria-label="Pixle countdown" rel="noopener">
           Next pixle in:
           <span class="countdown">
-            <span class="hours">99</span>h
-            <span class="minutes">99</span>m
-            <span class="seconds">99</span>s
+            <span class="hours">{{ countdown().hours }}</span>h
+            <span class="minutes">{{ countdown().minutes }}</span>m
+            <span class="seconds">{{ countdown().seconds }}</span>s
           </span>
         </a>
       </div>
     </div>
-    <div class="position-relative d-flex flex-column h-100 do-not-show" id="main-navbar">
+    <div [class.do-not-show]="!navbar_visible()" class="position-relative d-flex flex-column h-100"
+         id="main-navbar">
       <div class="position-relative navbar navbar-head">
         <div class="w-100 h-100 header-ui-wrapper">
           <div class="w-auto d-block company-logo">
