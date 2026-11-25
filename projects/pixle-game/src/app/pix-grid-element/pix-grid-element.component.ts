@@ -1,5 +1,4 @@
 import {
-  AfterViewInit,
   Component,
   ElementRef,
   OnInit,
@@ -20,7 +19,7 @@ import { AbstractHtmlElement } from '@abstract/abstract.html-element';
 })
 export class PixGridElementComponent
   extends AbstractHtmlElement
-  implements OnInit, AfterViewInit
+  implements OnInit
 {
   readonly pixle_emoji = input<string>(''); // <-- stores the correct answer
   /**
@@ -37,8 +36,6 @@ export class PixGridElementComponent
   // and the view has to follow (zoneless change detection)
   readonly twa_emoji_class_front_face = signal<string>(WHITE_QUESTIONMARK);
   readonly twa_emoji_class_back_face = signal<string>(WHITE_QUESTIONMARK);
-  private readonly component_grid_element =
-    viewChild.required<ElementRef<HTMLElement>>('component_grid_element');
   private readonly user_interactive =
     viewChild.required<ElementRef<HTMLElement>>('user_interactive');
   private readonly do_flip_class: string = 'do-flip';
@@ -57,50 +54,36 @@ export class PixGridElementComponent
     }
   }
 
-  ngAfterViewInit(): void {
-    const gridElement = this.component_grid_element().nativeElement;
-    // Check which type this grid element has
-    switch (this.grid_element_type()) {
-      case 1:
-        // Emit signal to outer component --> send twa class of the emoji
-        ['click', 'touchstart'].forEach((event) => {
-          HelperFunctionsService.addEventListenerToElement(
-            gridElement,
-            event,
-            () => {
-              this.sendTWAEmojiClass.emit(this.twa_emoji_class_front_face());
-            },
-          );
-        });
-        break;
-      case 0:
-      default:
-        // On click: change emoji
-        ['click', 'touchstart'].forEach((event) => {
-          HelperFunctionsService.addEventListenerToElement(
-            gridElement,
-            event,
-            () => {
-              this.revealOnClick(GameManager.chosen_emoji);
-            },
-          );
-        });
-        // If any transition on this element ends --> call this event
-        HelperFunctionsService.addEventListenerToElement(
-          gridElement,
-          HelperFunctionsService.transitionEndEventName(),
-          () => {
-            if (GameManager.pixle_solved || this.pixle_tile_solved) return;
-            const element = this.user_interactive().nativeElement;
-            if (!element.classList.contains(this.do_flip_class)) {
-              // Reset backface of grid element
-              this.showCorrectAnswer(false);
-              if (!GameManager.game_started) return;
-              HelperFunctionsService.unlockElement(element);
-            }
-          },
-        );
-        break;
+  /**
+   * Click (or tap) on the tile
+   * Emitter: send the twa class of the emoji to the outer component
+   * Receiver: place the emoji currently held by the player
+   * Only click is used: touchstart would also fire when the player just starts scrolling
+   */
+  public onTileClick(): void {
+    if (this.grid_element_type() === 1) {
+      this.sendTWAEmojiClass.emit(this.twa_emoji_class_front_face());
+    } else {
+      this.revealOnClick(GameManager.chosen_emoji);
+    }
+  }
+
+  /**
+   * A transition on this tile has ended --> finish the "undo flip" of a receiver tile
+   */
+  public onTransitionEnd(): void {
+    if (
+      this.grid_element_type() !== 0 ||
+      GameManager.pixle_solved ||
+      this.pixle_tile_solved
+    )
+      return;
+    const element = this.user_interactive().nativeElement;
+    if (!element.classList.contains(this.do_flip_class)) {
+      // Reset backface of grid element
+      this.showCorrectAnswer(false);
+      if (!GameManager.game_started) return;
+      HelperFunctionsService.unlockElement(element);
     }
   }
 
