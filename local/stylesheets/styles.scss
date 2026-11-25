@@ -100,9 +100,11 @@ header {
         font-size: 20px;
         padding: 2px 12px;
 
+        // No fixed width: FontAwesome draws icons 1.25em wide, so a fixed box let the icon
+        // overflow to the right as the font size grows. Gear and xmark share that width,
+        // so the button keeps its size when it switches icons.
         span {
           display: none;
-          width: 24px;
           visibility: hidden;
 
           &.open-icon {
