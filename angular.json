@@ -41,13 +41,16 @@
             ],
             "styles": [
               "local/stylesheets/twemoji.scss",
-              "node_modules/bootstrap/dist/css/bootstrap.min.css",
+              "local/stylesheets/bootstrap.scss",
               "local/stylesheets/styles.scss"
             ],
             "stylePreprocessorOptions": {
               "includePaths": [
                 "local/stylesheets"
-              ]
+              ],
+              "sass": {
+                "silenceDeprecations": ["import"]
+              }
             },
             "serviceWorker": "ngsw-config.json"
           },
@@ -139,13 +142,16 @@
             ],
             "styles": [
               "local/stylesheets/twemoji.scss",
-              "node_modules/bootstrap/dist/css/bootstrap.min.css",
+              "local/stylesheets/bootstrap.scss",
               "local/stylesheets/styles.scss"
             ],
             "stylePreprocessorOptions": {
               "includePaths": [
                 "local/stylesheets"
-              ]
+              ],
+              "sass": {
+                "silenceDeprecations": ["import"]
+              }
             },
             "browser": "projects/pixle-landing/src/main.ts",
             "inlineStyleLanguage": "scss"

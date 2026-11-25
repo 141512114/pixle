@@ -1,0 +1,46 @@
+// Only the parts of Bootstrap that Pixle uses.
+// Add a module or utility here when a template starts using one of its classes.
+
+// Configuration
+@import "bootstrap/scss/functions";
+@import "bootstrap/scss/variables";
+@import "bootstrap/scss/variables-dark";
+@import "bootstrap/scss/maps";
+@import "bootstrap/scss/mixins";
+@import "bootstrap/scss/utilities";
+
+// Utility classes used in the templates (e.g. d-flex, mt-3, w-100, rounded-3)
+$utilities: map-get-multiple(
+  $utilities,
+  (
+    "align-items",
+    "background-color",
+    "display",
+    "flex-direction",
+    "flex-grow",
+    "flex-wrap",
+    "height",
+    "justify-content",
+    "margin",
+    "margin-bottom",
+    "margin-top",
+    "overflow",
+    "padding",
+    "padding-x",
+    "padding-y",
+    "position",
+    "rounded",
+    "text-align",
+    "width",
+  )
+);
+
+// Layout & components
+@import "bootstrap/scss/root";
+@import "bootstrap/scss/reboot";
+@import "bootstrap/scss/type";
+@import "bootstrap/scss/containers";
+@import "bootstrap/scss/grid";
+
+// Utilities
+@import "bootstrap/scss/utilities/api";
