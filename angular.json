@@ -23,9 +23,6 @@
             "outputPath": "dist/pixle-game",
             "index": "projects/pixle-game/src/index.html",
             "browser": "projects/pixle-game/src/main.ts",
-            "polyfills": [
-              "zone.js"
-            ],
             "tsConfig": "projects/pixle-game/tsconfig.app.json",
             "inlineStyleLanguage": "scss",
             "assets": [
@@ -124,9 +121,6 @@
           "options": {
             "outputPath": "dist/pixle-landing",
             "index": "projects/pixle-landing/src/index.html",
-            "polyfills": [
-              "zone.js"
-            ],
             "tsConfig": "projects/pixle-landing/tsconfig.app.json",
             "assets": [
               "projects/pixle-landing/src/.htaccess",
