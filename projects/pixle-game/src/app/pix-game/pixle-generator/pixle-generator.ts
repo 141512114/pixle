@@ -1,6 +1,22 @@
 import { IPixle } from '@interface/pixle.interface';
 import { PIXLE_ICONS } from '@typescript/emoji.database';
 import { MASTER_PATTERNS } from './pixle-pattern-list';
+import {
+  combine,
+  countPlaceholders,
+  isValidMutation,
+  mirror,
+  normalize,
+  Pattern,
+  Random,
+  randomInt,
+  recolour,
+  rotate,
+} from './pattern-mutations';
+import { DIFFICULTY_SETTINGS, DifficultyLevel, levelForDate } from './difficulty';
+
+/** Attempts per difficulty level before falling back to the next easier one */
+const ATTEMPTS_PER_LEVEL = 20;
 
 /**
  * Random seed generator
@@ -36,26 +52,7 @@ let random = seededRandom(seed);
  * @return Random integer
  */
 function generateRandomInteger(max: number, min: number = 0): number {
-  return Math.floor(random() * (max - min + 1) + min);
-}
-
-/**
- * Get the maximum icon count which is possible inside a given pattern
- *
- * @param pattern
- * @return Maximum icon count possible
- */
-function getMaximumIconCount(pattern: number[][]): number {
-  if (pattern === undefined) return 0;
-  let total_count: number[] = [];
-  for (let i = 0; i < pattern.length; i++) {
-    for (let j = 0; j < pattern[i].length; j++) {
-      if (total_count.length <= 0 || !total_count.includes(pattern[i][j])) {
-        total_count.push(pattern[i][j]);
-      }
-    }
-  }
-  return total_count.length;
+  return randomInt(random, max, min);
 }
 
 /**
@@ -80,14 +77,100 @@ function generateNewPattern(
   return new_pattern;
 }
 
+const sameSize = (a: Pattern, b: Pattern): boolean =>
+  a.length === b.length && a[0].length === b[0].length;
+
 /**
- * Choose a random pattern from the master list
- *
- * @return Chosen pattern
+ * Mirror the pattern or rotate it by 90, 180 or 270 degrees
  */
-function chooseRandomPattern(): number[][] {
-  const rand: number = generateRandomInteger(MASTER_PATTERNS.length - 1);
-  return MASTER_PATTERNS[rand];
+function mirrorOrRotate(p: Pattern, random: Random): Pattern {
+  switch (randomInt(random, 4)) {
+    case 0:
+      return mirror(p, 'horizontal');
+    case 1:
+      return mirror(p, 'vertical');
+    default:
+      return rotate(p, randomInt(random, 3, 1) as 1 | 2 | 3);
+  }
+}
+
+/**
+ * One attempt to build a pattern of the given level, or null if no second pattern of the
+ * same size exists for combining
+ */
+function buildCandidate(
+  level: DifficultyLevel,
+  candidates: Pattern[],
+  random: Random,
+): Pattern | null {
+  const settings = DIFFICULTY_SETTINGS[level];
+  const base = candidates[randomInt(random, candidates.length - 1)];
+  let p = settings.mirrorOrRotate ? mirrorOrRotate(base, random) : base;
+
+  if (settings.combine) {
+    let q = candidates[randomInt(random, candidates.length - 1)];
+    if (!sameSize(p, q)) q = rotate(q, 1);
+    if (!sameSize(p, q)) {
+      const matching = candidates.filter((c) => c !== base && sameSize(p, c));
+      if (matching.length === 0) return null;
+      q = matching[randomInt(random, matching.length - 1)];
+    }
+    p = combine(p, q, random);
+  }
+
+  for (let i = 0; i < settings.recolourings; i++) p = recolour(p, random);
+  return normalize(p);
+}
+
+/**
+ * All originals in every orientation (mirrored and rotated), normalized and serialized
+ */
+function originalShapes(patterns: Pattern[]): Set<string> {
+  const shapes = new Set<string>();
+  for (const p of patterns) {
+    for (const m of [p, mirror(p, 'horizontal')]) {
+      for (const t of [m, rotate(m, 1), rotate(m, 2), rotate(m, 3)]) {
+        shapes.add(JSON.stringify(normalize(t)));
+      }
+    }
+  }
+  return shapes;
+}
+
+/**
+ * Mutate a pattern according to the difficulty level. Invalid results are retried, then the
+ * next easier level is used; level 1 returns an original pattern unchanged.
+ *
+ * @param level
+ * @param random
+ * @param patterns
+ */
+export function mutatePattern(
+  level: DifficultyLevel,
+  random: Random,
+  patterns: Pattern[] = MASTER_PATTERNS,
+): { tiles: Pattern; level: DifficultyLevel } {
+  // From level 3 on a puzzle has to be more than a turned original
+  const originals = originalShapes(patterns);
+  for (let current = level; current >= 2; current--) {
+    const minSize = DIFFICULTY_SETTINGS[current as DifficultyLevel].minBaseSize;
+    const candidates = patterns.filter(
+      (p) => p.length >= minSize && p[0].length >= minSize,
+    );
+    if (candidates.length === 0) continue;
+
+    for (let attempt = 0; attempt < ATTEMPTS_PER_LEVEL; attempt++) {
+      const tiles = buildCandidate(current as DifficultyLevel, candidates, random);
+      if (
+        tiles &&
+        isValidMutation(tiles, current) &&
+        (current < 3 || !originals.has(JSON.stringify(tiles)))
+      ) {
+        return { tiles, level: current as DifficultyLevel };
+      }
+    }
+  }
+  return { tiles: patterns[randomInt(random, patterns.length - 1)], level: 1 };
 }
 
 /**
@@ -97,7 +180,7 @@ function chooseRandomPattern(): number[][] {
  * @return Array of icons / emojis
  */
 function chooseRandomIcons(pattern: number[][]): number[] {
-  const maxIconCount: number = getMaximumIconCount(pattern);
+  const maxIconCount: number = countPlaceholders(pattern);
   let chosen_icons: number[] = [];
   for (let i = 0; i < maxIconCount; i++) {
     let current_chosen_icon: number = generateRandomInteger(
@@ -117,14 +200,19 @@ function chooseRandomIcons(pattern: number[][]): number[] {
  * @param pixle_date
  * @param pixle_id
  */
-function generateNewPixle(pixle_date: any, pixle_id: number = 0): IPixle {
-  const pattern: number[][] = chooseRandomPattern();
-  const chosenIcons: number[] = chooseRandomIcons(pattern);
+function generateNewPixle(
+  pixle_date: any,
+  pixle_id: number,
+  level: DifficultyLevel,
+): IPixle {
+  const mutation = mutatePattern(level, random);
+  const chosenIcons: number[] = chooseRandomIcons(mutation.tiles);
 
   return {
     id: pixle_id,
     date: pixle_date,
-    tiles: generateNewPattern(pattern, chosenIcons),
+    tiles: generateNewPattern(mutation.tiles, chosenIcons),
+    difficulty: mutation.level,
   };
 }
 
@@ -148,5 +236,9 @@ export default function initPixleGenerator(): IPixle {
     (todayAsUTC - Date.UTC(2024, 9, 18)) / (1000 * 3600 * 24),
   );
 
-  return generateNewPixle(new Date(todayAsUTC).toJSON(), pixleId);
+  return generateNewPixle(
+    new Date(todayAsUTC).toJSON(),
+    pixleId,
+    levelForDate(today),
+  );
 }
