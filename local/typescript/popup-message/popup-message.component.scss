@@ -1,5 +1,3 @@
-@use "sass:map";
-
 @use '../../stylesheets/mixins/themes' as *;
 @use '../../stylesheets/mixins/variables' as *;
 @use '../../stylesheets/mixins/responsive' as *;
@@ -22,7 +20,7 @@
 
   .popup-wrapper {
     padding: 20px;
-    background-color: var(--default-theme-three, map.get($default-color-palette, 3));
+    background-color: theme-color(3);
   }
 
   p {

@@ -1,6 +1,4 @@
-@use "sass:map";
-
-@use 'mixins/bottleneck';
+@use "mixins/materials";
 @use "mixins/classes";
 @use "mixins/fonts";
 @use "mixins/mixins";
@@ -33,7 +31,7 @@
 
 *::selection {
   color: white;
-  background-color: var(--default-theme-six, map.get(themes.$default-color-palette, 6));
+  background-color: themes.theme-color(6);
 }
 
 html,
@@ -45,7 +43,7 @@ body {
   max-height: 100vh;
   max-height: -webkit-fill-available;
   max-height: calc(var(--vh, 1vh) * 100);
-  background-color: var(--default-theme-one, map.get(themes.$default-color-palette, 1));
+  background-color: themes.theme-color(1);
   overflow-y: auto;
 }
 
@@ -66,7 +64,7 @@ header {
 .navbar {
   padding: 7px 0;
   user-select: none;
-  background-color: var(--default-theme-three, map.get(themes.$default-color-palette, 3));
+  background-color: themes.theme-color(3);
   z-index: 9999;
 
   .game-title {
@@ -238,28 +236,22 @@ a,
 button {
   border: none;
   font-family: fonts.$main-ui;
-  color: var(--default-theme-two, map.get(themes.$default-color-palette, 2));
-  background-color: var(--default-theme-four, map.get(themes.$default-color-palette, 4));
+  color: themes.theme-color(2);
+  background-color: themes.theme-color(4);
   transition: color 200ms, background-color 200ms;
 
   &.invert-colors {
-    color: var(--default-theme-four, map.get(themes.$default-color-palette, 4));
-    background-color: var(--default-theme-two, map.get(themes.$default-color-palette, 2));
+    color: themes.theme-color(4);
+    background-color: themes.theme-color(2);
   }
 
-  &.share-on-twitter {
-    color: white;
-    background-color: #1DA1F2;
-  }
-
-  &.share-on-whatsapp,
   &.share-on-any {
     color: white;
     background-color: #25D366;
   }
 
   &.share-via-mail {
-    color: var(--default-theme-six, map.get(themes.$default-color-palette, 6));
+    color: themes.theme-color(6);
     background-color: transparent;
   }
 

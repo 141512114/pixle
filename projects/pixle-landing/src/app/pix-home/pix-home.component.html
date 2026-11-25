@@ -10,14 +10,16 @@
           </p>
         </div>
         <div class="row g-0 m-0 p-0 link-buffer">
-          <div class="col">
-            <a aria-label="Click to accept your daily challenge!" class="link-is-button mb-2"
-               href="https://play.pixle.gg/"
-               rel="noopener" title="Try yourself by solving the pixle of today!">
-              Challenge yourself today!
-            </a>
-          </div>
-          <div class="d-block w-100"></div>
+          @if (links.game) {
+            <div class="col">
+              <a aria-label="Click to accept your daily challenge!" class="link-is-button mb-2"
+                 [href]="links.game"
+                 rel="noopener" title="Try yourself by solving the pixle of today!">
+                Challenge yourself today!
+              </a>
+            </div>
+            <div class="d-block w-100"></div>
+          }
           <div class="col">
             <button aria-label="Click to visit the how-to guide" class="link-is-button__sm"
                     onclick="scrollToHowToGuide()" title="Click to visit the how-to guide" type="button">
@@ -51,10 +53,12 @@
           puzzles!</strong><br/>
           Pixle is now available on the web and we challenge you to solve the puzzle of today!
         </p>
-        <a aria-label="Click to play Pixle now!" class="mt-2 link-is-button__sm" href="https://play.pixle.gg/"
-           rel="noopener" title="Click to play Pixle now!">
-          Play Pixle today!
-        </a>
+        @if (links.game) {
+          <a aria-label="Click to play Pixle now!" class="mt-2 link-is-button__sm" [href]="links.game"
+             rel="noopener" title="Click to play Pixle now!">
+            Play Pixle today!
+          </a>
+        }
       </div>
     </div>
     <div class="position-relative about-sections">
@@ -144,8 +148,12 @@
               And that's it! Now you know everything about Pixle and its pixles!<br/>
               <strong>Challenges are waiting</strong>, don't let them bother you for too long.
               Challenge yourself and friends today by
-              <a aria-label="Challenges are waiting, play Pixle now!" title="Challenges are waiting, play Pixle now!"
-                 href="https://play.pixle.gg/" rel="noopener">playing Pixle!</a>
+              @if (links.game) {
+                <a aria-label="Challenges are waiting, play Pixle now!" title="Challenges are waiting, play Pixle now!"
+                   [href]="links.game" rel="noopener">playing Pixle!</a>
+              } @else {
+                playing Pixle!
+              }
             </p>
           </div>
           <div class="w-100 d-block"></div>
@@ -182,13 +190,13 @@
             Don't forget to check out the public
             <a aria-label="Check out the official GitHub repository of Pixle"
                title="Check out the official GitHub repository of Pixle"
-               href="https://github.com/KoolerNolan/pixle" rel="noopener" target="_blank">GitHub repository</a>
+               href="https://github.com/141512114/pixle" rel="noopener" target="_blank">GitHub repository</a>
             of Pixle, if you want to dig even deeper.
           </p>
         </div>
         <div class="d-block m-0 p-0">
           <a aria-label="Click to visit the official GitHub repository" class="mt-2 link-is-button__sm"
-             href="https://github.com/KoolerNolan/pixle"
+             href="https://github.com/141512114/pixle"
              rel="noopener" target="_blank"
              title="Visit the official GitHub repository">
             Visit the GitHub repository

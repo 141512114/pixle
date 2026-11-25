@@ -16,6 +16,7 @@ import {
   IconDefinition,
 } from '@fortawesome/free-solid-svg-icons';
 import { SideMenuComponent } from '@typescript/side-menu/side-menu.component';
+import { PIXLE_LINKS } from '@typescript/pixle-links';
 import { IPopUp } from '@interface/popup-message.interface';
 import { PopupMessageComponent } from '@typescript/popup-message/popup-message.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
@@ -46,6 +47,7 @@ export class AppComponent implements OnInit, AfterViewInit {
   readonly cookie_consent = toSignal(CookieService.cookie_consent, {
     requireSync: true,
   });
+  readonly links = PIXLE_LINKS;
   readonly iconOpenSideMenu: IconDefinition = faGear;
   readonly iconCloseSideMenu: IconDefinition = faXmark;
   private readonly sideMenuComponent = viewChild.required(SideMenuComponent);

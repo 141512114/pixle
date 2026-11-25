@@ -7,5 +7,3 @@ User-agent: spies
 Disallow: /
 Disallow: /assets/important/imprint.html
 Disallow: /assets/important/privacy-policy.html
-
-Sitemap: https://www.pixle.gg/sitemap.xml

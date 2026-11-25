@@ -1,5 +1,3 @@
-@use "sass:map";
-
 @use 'mixins/themes' as *;
 @use 'mixins/mixins' as *;
 
@@ -16,11 +14,11 @@ main {
 
   .mobile-landscape-popup-wrapper {
     padding: 11px 21px;
-    background-color: var(--default-theme-four, map.get($default-color-palette, 4));
+    background-color: theme-color(4);
 
     p {
       font-size: calc(1em + 1.65vmin);
-      color: var(--default-theme-one, map.get($default-color-palette, 1));
+      color: theme-color(1);
     }
   }
 }
