@@ -27,12 +27,12 @@ import { RouterOutlet } from '@angular/router';
 import { WINDOW } from '@typescript/window-injection.token';
 import { getPixleCountdown } from './pixle-countdown';
 
-// Cookie notification
+// Storage notice: describes exactly what is stored (see local/typescript/abstract/composables/cookies.ts)
 const COOKIE_NOTIF_MSG: IPopUp = {
-  headline: 'Cookie alert!',
+  headline: 'Saving your settings',
   message_body:
-    'We are required to inform you about the usage of cookies on our website. These are required' +
-    ' and used in order to save applied settings. Closing this notification means you agree with the usage of cookies.',
+    "Pixle doesn't use cookies or tracking. If you agree, it keeps your theme and this choice " +
+    "in your browser's storage. If you decline, they are forgotten as soon as you close the tab.",
 };
 
 @Component({
