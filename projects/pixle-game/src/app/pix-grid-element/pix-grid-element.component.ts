@@ -1,5 +1,6 @@
 import {
   Component,
+  computed,
   ElementRef,
   OnInit,
   input,
@@ -36,6 +37,13 @@ export class PixGridElementComponent
   // and the view has to follow (zoneless change detection)
   readonly twa_emoji_class_front_face = signal<string>(WHITE_QUESTIONMARK);
   readonly twa_emoji_class_back_face = signal<string>(WHITE_QUESTIONMARK);
+  // Accessible name, the emoji itself is only a background image (e.g. "twa-red-heart" -> "red heart")
+  readonly tile_label = computed(() => {
+    const emoji = this.twa_emoji_class_front_face()
+      .replace(/^twa-/, '')
+      .replaceAll('-', ' ');
+    return this.grid_element_type() === 1 ? `Choose ${emoji}` : `Tile: ${emoji}`;
+  });
   private readonly user_interactive =
     viewChild.required<ElementRef<HTMLElement>>('user_interactive');
   private readonly do_flip_class: string = 'do-flip';

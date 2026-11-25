@@ -219,7 +219,6 @@ button {
   font-family: fonts.$main-font;
   font-size: 14px;
   font-weight: 400;
-  outline: none;
 
   @media only screen and (min-width: responsive.$breakpoint_xxsm) {
     padding: 4px 11px;
@@ -258,10 +257,13 @@ button {
   @extend .highlight-btn;
 }
 
-input:focus,
-input:active,
-textarea:focus,
-textarea:active,
-button:focus {
-  outline: none;
+// Keyboard focus: a white ring inside a dark one stays visible on every theme background.
+// :focus-visible only shows it for keyboard navigation, not for mouse or touch
+:focus-visible {
+  @include mixins.focus-ring;
+}
+
+// Buttons filling a clipping (overflow: hidden) wrapper: draw the ring inside instead
+.share-item-wrapper :focus-visible {
+  @include mixins.focus-ring($inset: true);
 }
