@@ -2,7 +2,7 @@
   <ul class="m-0 p-0 theme-switcher-wrapper">
     @for (theme of themes; track theme) {
       <li class="theme-list-item">
-        <button (click)="changeTheme(theme.toLowerCase())" [attr.aria-label]="theme + 'theme'" class="rounded-3"
+        <button (click)="changeTheme(theme.toLowerCase())" [attr.aria-label]="theme + ' theme'" class="rounded-3"
                 type="button">{{theme}}</button>
       </li>
     }
