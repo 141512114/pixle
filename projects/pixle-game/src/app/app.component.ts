@@ -17,14 +17,7 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 import { SideMenuComponent } from '@typescript/side-menu/side-menu.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { SharedModule } from '@typescript/shared.module';
-import { AppRoutingModule } from './app-routing.module';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { PixGameComponent } from './pix-game/pix-game.component';
-import { PixGridComponent } from './pix-grid/pix-grid.component';
-import { PixGridElementComponent } from './pix-grid-element/pix-grid-element.component';
-import { PixGridUiComponent } from './pix-grid-ui/pix-grid-ui.component';
-import { ClipboardModule } from '@angular/cdk/clipboard';
+import { RouterOutlet } from '@angular/router';
 
 export const SUPPORT_EMAIL: string = 'support@nani-games.net';
 
@@ -37,16 +30,9 @@ const COOLDOWN_TOUCH: number = 75;
   standalone: true,
   imports: [
     CommonModule,
-    AppRoutingModule,
-    NgbModule,
+    RouterOutlet,
     FontAwesomeModule,
-    SharedModule,
     SideMenuComponent,
-    PixGameComponent,
-    PixGridComponent,
-    PixGridElementComponent,
-    PixGridUiComponent,
-    ClipboardModule,
   ],
 })
 export class AppComponent implements OnInit, AfterViewInit {
@@ -159,7 +145,6 @@ export class AppComponent implements OnInit, AfterViewInit {
     const bodyElement = this.document.body as HTMLElement;
     if (
       this.hasTouch() === false ||
-      null ||
       bodyElement.classList.contains('startTouch')
     )
       return;

@@ -118,7 +118,7 @@
  # Other
  ExpiresByType text/css "access plus 1 month"
  ExpiresByType text/javascript "access plus 1 month"
- ExpiresByType text/html "access plus 1 month"
+ ExpiresByType text/html "access plus 0 seconds"
  ExpiresByType application/javascript "access plus 1 month"
  ExpiresByType image/gif "access plus 1 month"
  ExpiresByType image/jpeg "access plus 1 month"
@@ -137,6 +137,14 @@
    Header set Cache-Control "max-age=216000, private"
   </FilesMatch>
  </IfModule>
+</IfModule>
+
+# Never cache the app shell and service worker files, otherwise users keep
+# running an outdated build (with stale chunk hashes) after a deploy
+<IfModule mod_headers.c>
+  <FilesMatch "^(index\.html|ngsw\.json|ngsw-worker\.js|manifest\.webmanifest)$">
+    Header set Cache-Control "no-cache, must-revalidate"
+  </FilesMatch>
 </IfModule>
 
 RewriteEngine On

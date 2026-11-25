@@ -8,7 +8,7 @@ describe('PixLandingComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [PixHomeComponent]
+      imports: [PixHomeComponent]
     })
       .compileComponents();
   });

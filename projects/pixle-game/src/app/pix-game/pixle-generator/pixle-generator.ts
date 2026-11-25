@@ -135,14 +135,18 @@ export default function initPixleGenerator(): IPixle {
   seed = getSeedFromDate();
   random = seededRandom(seed);
 
-  // Get the id of the pixle by counting the days since the initial date
-  const timeDiff =
-    new Date().getTime() - new Date('2024-10-18T00:00:00Z').getTime();
-  const pixleId = Math.floor(timeDiff / (1000 * 3600 * 24));
+  // Get the id of the pixle by counting the days since the initial date.
+  // Uses the local calendar date, exactly like the seed, so the id and the
+  // puzzle always change together at local midnight.
+  const today = new Date();
+  const todayAsUTC = Date.UTC(
+    today.getFullYear(),
+    today.getMonth(),
+    today.getDate(),
+  );
+  const pixleId = Math.round(
+    (todayAsUTC - Date.UTC(2024, 9, 18)) / (1000 * 3600 * 24),
+  );
 
-  const pixleDate: Date = new Date();
-  pixleDate.setUTCHours(0, 0, 0, 0);
-  pixleDate.setUTCDate(pixleDate.getUTCDate());
-
-  return generateNewPixle(pixleDate.toJSON(), pixleId);
+  return generateNewPixle(new Date(todayAsUTC).toJSON(), pixleId);
 }

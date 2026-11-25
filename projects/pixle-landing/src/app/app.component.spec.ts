@@ -1,29 +1,41 @@
-import {TestBed} from '@angular/core/testing';
-import {RouterTestingModule} from '@angular/router/testing';
-import {AppComponent} from './app.component';
+import { TestBed } from '@angular/core/testing';
+import { Router } from '@angular/router';
+import { AppComponent } from './app.component';
+import { appConfig } from './app.config';
 
-describe('AppComponent', () => {
+describe('AppComponent (landing)', () => {
   beforeEach(async () => {
+    localStorage.clear();
+    sessionStorage.clear();
     await TestBed.configureTestingModule({
-      imports: [
-        RouterTestingModule
-      ],
-      declarations: [
-        AppComponent
-      ],
+      imports: [AppComponent],
+      providers: appConfig.providers,
     }).compileComponents();
   });
 
-  it('should create the app', () => {
-    const fixture = TestBed.createComponent(AppComponent);
-    const app = fixture.componentInstance;
-    expect(app).toBeTruthy();
-  });
-
-  it('should render title', () => {
+  async function renderAt(url: string) {
     const fixture = TestBed.createComponent(AppComponent);
     fixture.detectChanges();
-    const compiled = fixture.nativeElement as HTMLElement;
-    expect(compiled.querySelector('.content span')?.textContent).toContain('pixle-landing app is running!');
+    await TestBed.inject(Router).navigateByUrl(url);
+    await fixture.whenStable();
+    fixture.detectChanges();
+    return fixture;
+  }
+
+  it('should create the app', () => {
+    const fixture = TestBed.createComponent(AppComponent);
+    expect(fixture.componentInstance).toBeTruthy();
+  });
+
+  it('redirects / to /home and renders the home page', async () => {
+    const fixture = await renderAt('/');
+    expect(TestBed.inject(Router).url).toBe('/home');
+    expect(fixture.nativeElement.querySelector('app-pix-home')).not.toBeNull();
+  });
+
+  it('redirects unknown urls to /home', async () => {
+    const fixture = await renderAt('/does-not-exist');
+    expect(TestBed.inject(Router).url).toBe('/home');
+    expect(fixture.nativeElement.querySelector('app-pix-home')).not.toBeNull();
   });
 });

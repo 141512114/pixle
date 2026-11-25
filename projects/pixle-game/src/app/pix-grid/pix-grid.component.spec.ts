@@ -8,7 +8,7 @@ describe('PixGridComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [PixGridComponent]
+      imports: [PixGridComponent]
     })
       .compileComponents();
   });

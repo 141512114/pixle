@@ -43,7 +43,6 @@ const UNDO_FLIP_TIME: number = 1575;
     PopupMessageComponent,
     PixGridComponent,
     PixGridUiComponent,
-    PixGridElementComponent,
   ],
 })
 export class PixGameComponent implements OnInit, AfterViewInit {

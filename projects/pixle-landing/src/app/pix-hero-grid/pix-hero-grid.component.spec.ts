@@ -8,7 +8,7 @@ describe('PixHeroGridComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [PixHeroGridComponent]
+      imports: [PixHeroGridComponent]
     })
       .compileComponents();
   });

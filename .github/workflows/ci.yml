@@ -1,4 +1,4 @@
-name: NodeJS
+name: CI
 
 on:
   push:
@@ -10,7 +10,7 @@ permissions:
   contents: read
 
 jobs:
-  build:
+  build-and-test:
     runs-on: ubuntu-latest
 
     strategy:
@@ -30,10 +30,8 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      # Falls du wirklich einen Cleanup brauchst, besser explizit definieren
-      # sonst eher weglassen, weil npm ci bereits "clean" ist
-      # - name: Cleanup (optional)
-      #   run: npm run cleanup
+      - name: Test
+        run: npm test
 
       - name: Build pixle-game
         run: npm run build pixle-game
