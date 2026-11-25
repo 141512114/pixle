@@ -158,6 +158,7 @@
             ],
             "tsConfig": "projects/pixle-landing/tsconfig.app.json",
             "assets": [
+              "projects/pixle-landing/src/.htaccess",
               "projects/pixle-landing/src/favicon.ico",
               "projects/pixle-landing/src/assets",
               {
