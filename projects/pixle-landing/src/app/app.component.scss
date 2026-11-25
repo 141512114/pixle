@@ -34,7 +34,8 @@ header {
 
   .pixle-countdown-progress {
     max-width: 100%;
-    background-color: #329e7d;
+    // Text runs across the bar: its shade keeps the countdown readable in every theme
+    background-color: theme-text(progress-bar);
     z-index: 10;
   }
 

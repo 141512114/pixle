@@ -72,6 +72,9 @@ $text-light: #FFFFFF;
 $text-soft: #DEDEDE;
 $text-dark: #10121A;
 
+// Base color of progress bars (e.g. the countdown on the landing page)
+$progress-color: #329e7d;
+
 // Text colors of a palette, each one chosen to stay readable (WCAG AA) on its background.
 // The candidates are ordered by preference, so a theme keeps its look wherever it is readable.
 @function theme-text-colors($p) {
@@ -91,6 +94,12 @@ $text-dark: #10121A;
     button-text: contrast.readable(map.get($p, 4), (map.get($p, 2), map.get($p, 1), $text-light, $text-dark)),
     button-hover-text: contrast.readable(map.get($p, 6), (map.get($p, 2), map.get($p, 1), $text-light, $text-dark)),
     invert-text: contrast.readable(map.get($p, 2), (map.get($p, 4), map.get($p, 5), $text-light, $text-dark)),
+    // Progress bar behind text on the page (color 1): the closest shade of $progress-color
+    // on which both the body text and the headline color of the page stay readable
+    progress-bar: contrast.readable(
+      (map.get($tokens, text-on-one), map.get($tokens, headline-on-one)),
+      contrast.shades($progress-color)
+    ),
   ));
 }
 

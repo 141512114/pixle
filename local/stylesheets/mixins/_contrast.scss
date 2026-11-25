@@ -35,6 +35,27 @@ $min-contrast: 4.5 !default;
   @return $lowest;
 }
 
+// Round to whole 8-bit channels, so the contrast is checked on the color the browser renders
+@function _to-hex-color($color) {
+  @return rgb(
+    math.round(color.channel($color, "red", $space: rgb)),
+    math.round(color.channel($color, "green", $space: rgb)),
+    math.round(color.channel($color, "blue", $space: rgb))
+  );
+}
+
+// $color followed by ever darker and lighter shades of it (alternating),
+// so readable() picks the smallest change that is readable
+@function shades($color, $step: 6%, $count: 16) {
+  $list: ($color,);
+  @for $i from 1 through $count {
+    $amount: math.min($step * $i, 100%);
+    $list: list.append($list, _to-hex-color(color.scale($color, $lightness: -$amount, $space: hsl)), comma);
+    $list: list.append($list, _to-hex-color(color.scale($color, $lightness: $amount, $space: hsl)), comma);
+  }
+  @return $list;
+}
+
 // First of $candidates (in order of preference) that is readable on all $backgrounds.
 // Falls back to the candidate with the highest contrast if none reaches $min-contrast.
 @function readable($backgrounds, $candidates) {
