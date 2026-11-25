@@ -1,8 +1,11 @@
 import {
+  combine,
   countPlaceholders,
   isValidMutation,
   mirror,
   normalize,
+  recolour,
+  reducePlaceholders,
   rotate,
 } from './pattern-mutations';
 
@@ -153,5 +156,79 @@ describe('isValidMutation', () => {
         2,
       ),
     ).toBe(false);
+  });
+});
+
+describe('combine, reducePlaceholders and recolour', () => {
+  const seq = (...values: number[]) => {
+    let i = 0;
+    return () => values[i++ % values.length];
+  };
+  const A = [
+    [0, 0, 0, 0],
+    [0, 0, 0, 0],
+    [1, 1, 1, 1],
+    [1, 1, 1, 1],
+  ];
+  const B = [
+    [0, 1, 0, 1],
+    [0, 1, 0, 1],
+    [0, 1, 0, 1],
+    [0, 1, 0, 1],
+  ];
+
+  it('combine keeps the size and stays normalized with <= 5 placeholders', () => {
+    for (const r of [0, 0.3, 0.6, 0.99]) {
+      const c = combine(A, B, seq(r, 0.5));
+      expect(c.length).toBe(4);
+      expect(c.every((row) => row.length === 4)).toBe(true);
+      expect(c).toEqual(normalize(c));
+      expect(countPlaceholders(c)).toBeLessThanOrEqual(5);
+    }
+  });
+
+  it('combine takes tiles from both patterns', () => {
+    const c = combine(A, B, seq(0, 0.5)); // first split option: row boundary
+    expect(c).not.toEqual(normalize(A));
+    expect(c).not.toEqual(normalize(B));
+  });
+
+  it('combine rejects different sizes', () =>
+    expect(() => combine(A, [[0, 1]], seq(0))).toThrow());
+
+  it('reducePlaceholders merges the smallest placeholder into a neighbour', () =>
+    expect(
+      reducePlaceholders(
+        [
+          [0, 0, 1],
+          [0, 0, 1],
+          [2, 2, 2],
+        ],
+        2,
+      ),
+    ).toEqual([
+      [0, 0, 0],
+      [0, 0, 0],
+      [1, 1, 1],
+    ]));
+
+  it('recolour changes exactly one connected region and keeps size', () => {
+    const r = recolour(A, seq(0, 0, 0.9, 0));
+    expect(r.length).toBe(4);
+    const before = normalize(A).flat();
+    expect(r.flat().filter((v, i) => v !== before[i]).length).toBeGreaterThan(0);
+    expect(r).toEqual(normalize(r));
+  });
+
+  it('recolour never exceeds 5 placeholders', () => {
+    const five = [
+      [0, 0, 1, 1, 4],
+      [0, 0, 1, 1, 4],
+      [2, 2, 3, 3, 3],
+      [2, 2, 3, 3, 3],
+    ];
+    for (const x of [0, 0.2, 0.4, 0.6, 0.8]) {
+      expect(countPlaceholders(recolour(five, seq(x, 0.1, 0.1, x)))).toBeLessThanOrEqual(5);
+    }
   });
 });

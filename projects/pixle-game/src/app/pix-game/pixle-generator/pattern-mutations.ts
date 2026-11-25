@@ -92,3 +92,108 @@ export function isValidMutation(p: Pattern, level: number): boolean {
     row.every((value, c) => neighbours(p, r, c).some(([nr, nc]) => p[nr][nc] === value)),
   );
 }
+
+/**
+ * Combine two patterns of the same size: the grid is split along a row boundary, a column
+ * boundary or a checkerboard of 2×2 blocks; part one comes from a, part two from b
+ */
+export function combine(a: Pattern, b: Pattern, random: Random): Pattern {
+  const rows = a.length;
+  const cols = a[0].length;
+  if (b.length !== rows || b.some((row) => row.length !== cols)) {
+    throw new Error('combine: patterns must have the same size');
+  }
+
+  const offset = countPlaceholders(a);
+  const mode = randomInt(random, 2);
+  const boundary =
+    mode === 0 ? randomInt(random, rows - 1, 1) : randomInt(random, cols - 1, 1);
+  const fromA = (r: number, c: number): boolean => {
+    if (mode === 0) return r < boundary;
+    if (mode === 1) return c < boundary;
+    return ((r >> 1) + (c >> 1)) % 2 === 0;
+  };
+
+  const combined = a.map((row, r) =>
+    row.map((value, c) => (fromA(r, c) ? value : b[r][c] + offset)),
+  );
+  return reducePlaceholders(normalize(combined), MAX_PLACEHOLDERS);
+}
+
+/**
+ * Merge the placeholder with the fewest tiles into the placeholder it touches most often,
+ * until at most max placeholders are left
+ */
+export function reducePlaceholders(p: Pattern, max: number): Pattern {
+  let result = normalize(p);
+  while (countPlaceholders(result) > max) {
+    const sizes = new Map<number, number>();
+    result.flat().forEach((v) => sizes.set(v, (sizes.get(v) ?? 0) + 1));
+    const smallest = [...sizes.entries()].sort((x, y) => x[1] - y[1] || x[0] - y[0])[0][0];
+
+    const touches = new Map<number, number>();
+    result.forEach((row, r) =>
+      row.forEach((value, c) => {
+        if (value !== smallest) return;
+        for (const [nr, nc] of neighbours(result, r, c)) {
+          const other = result[nr][nc];
+          if (other !== smallest) touches.set(other, (touches.get(other) ?? 0) + 1);
+        }
+      }),
+    );
+    const target =
+      [...touches.entries()].sort((x, y) => y[1] - x[1] || x[0] - y[0])[0]?.[0] ??
+      [...sizes.keys()].find((v) => v !== smallest)!;
+
+    result = normalize(result.map((row) => row.map((v) => (v === smallest ? target : v))));
+  }
+  return result;
+}
+
+/**
+ * Connected regions (4-neighbourhood) of one placeholder
+ */
+function regionsOf(p: Pattern, placeholder: number): [number, number][][] {
+  const seen = p.map((row) => row.map(() => false));
+  const regions: [number, number][][] = [];
+  p.forEach((row, r) =>
+    row.forEach((value, c) => {
+      if (value !== placeholder || seen[r][c]) return;
+      const region: [number, number][] = [];
+      const stack: [number, number][] = [[r, c]];
+      seen[r][c] = true;
+      while (stack.length > 0) {
+        const [cr, cc] = stack.pop()!;
+        region.push([cr, cc]);
+        for (const [nr, nc] of neighbours(p, cr, cc)) {
+          if (!seen[nr][nc] && p[nr][nc] === placeholder) {
+            seen[nr][nc] = true;
+            stack.push([nr, nc]);
+          }
+        }
+      }
+      regions.push(region);
+    }),
+  );
+  return regions;
+}
+
+/**
+ * Give one connected region of a placeholder a different placeholder: a new one
+ * (if fewer than 5 exist) or another existing one
+ */
+export function recolour(p: Pattern, random: Random): Pattern {
+  const source = normalize(p);
+  const count = countPlaceholders(source);
+  const placeholder = randomInt(random, count - 1);
+  const regions = regionsOf(source, placeholder);
+  const region = regions[randomInt(random, regions.length - 1)];
+
+  const others = Array.from({ length: count }, (_, i) => i).filter((v) => v !== placeholder);
+  const useNew = count < MAX_PLACEHOLDERS && (others.length === 0 || random() < 0.5);
+  const target = useNew ? count : others[randomInt(random, others.length - 1)];
+
+  const result = source.map((row) => [...row]);
+  for (const [r, c] of region) result[r][c] = target;
+  return normalize(result);
+}
