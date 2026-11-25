@@ -3,5 +3,3 @@ Allow: /
 
 User-agent: spies
 Disallow: /
-
-Sitemap: https://play.pixle.gg/sitemap.xml

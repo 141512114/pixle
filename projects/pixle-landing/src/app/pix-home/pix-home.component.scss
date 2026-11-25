@@ -1,5 +1,3 @@
-@use "sass:map";
-
 @use 'mixins/variables' as *;
 @use 'mixins/fonts' as *;
 @use 'mixins/themes' as *;
@@ -99,7 +97,7 @@ section#about {
           width: auto;
           font-family: $main-ui;
           font-size: 148px;
-          color: var(--default-theme-two, map.get($default-color-palette, 2));
+          color: theme-color(2);
           user-select: none;
           pointer-events: none;
           opacity: .85;

@@ -148,9 +148,9 @@
 </IfModule>
 
 RewriteEngine On
-# www to non-www
-RewriteCond %{HTTP_HOST} ^www\.pixle\.gg$ [NC]
-RewriteRule ^(.*)$ http://pixle.gg/$1 [L,R=301]
+# www to non-www (any domain)
+RewriteCond %{HTTP_HOST} ^www\.(.+)$ [NC]
+RewriteRule ^(.*)$ https://%1/$1 [L,R=301]
 # http to https
 RewriteCond %{SERVER_PORT} !^443$
 RewriteRule (.*) https://%{HTTP_HOST}/$1 [R=301,L]

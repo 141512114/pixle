@@ -13,12 +13,14 @@
                     </a>
                 </div>
                 <div class="d-flex align-items-center flex-row p-1 navbar-link-wrapper">
-                    <div class="how-to-guide-wrapper px-1">
-                        <a aria-label="Click to visit the how-to guide" class="d-block rounded-3"
-                            href="https://pixle.gg/home/#how-to-play" title="Click to visit the how-to guide">
-                            <fa-icon [icon]="iconHelpGuide"></fa-icon>
-                        </a>
-                    </div>
+                    @if (links.howToPlay) {
+                        <div class="how-to-guide-wrapper px-1">
+                            <a aria-label="Click to visit the how-to guide" class="d-block rounded-3"
+                                [href]="links.howToPlay" title="Click to visit the how-to guide">
+                                <fa-icon [icon]="iconHelpGuide"></fa-icon>
+                            </a>
+                        </div>
+                    }
                     <div class="open-side-menu-wrapper px-1">
                         <button #toggle_side_menu_btn (click)="toggleSideMenu()" aria-label="Settings menu" class="rounded-3 open-side-menu"
                             title="Open the settings menu" type="button">

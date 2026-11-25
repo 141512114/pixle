@@ -12,31 +12,16 @@
   right: 0;
   bottom: 0;
   border: 2px solid transparent;
-  background-color: var(--default-theme-four, map.get($default-color-palette, 4));
+  background-color: theme-color(4);
   transition: transform 635ms, background-color 300ms;
 
-  &[data-grid-element-status="solved"] {
-    $status-color: map.get($status-palette, 1);
-    border-color: $status-color;
-    background-color: rgba($status-color, $background-color-alpha-unfocused);
-  }
-
-  &[data-grid-element-status="2"] {
-    $status-color: map.get($status-palette, 2);
-    border-color: $status-color;
-    background-color: rgba($status-color, $background-color-alpha-unfocused);
-  }
-
-  &[data-grid-element-status="1"] {
-    $status-color: map.get($status-palette, 3);
-    border-color: $status-color;
-    background-color: rgba($status-color, $background-color-alpha-unfocused);
-  }
-
-  &[data-grid-element-status="0"] {
-    $status-color: map.get($status-palette, 4);
-    border-color: $status-color;
-    background-color: rgba($status-color, $background-color-alpha-unfocused);
+  // grid element status -> status palette index
+  @each $status, $index in ("solved": 1, "2": 2, "1": 3, "0": 4) {
+    &[data-grid-element-status="#{$status}"] {
+      $status-color: map.get($status-palette, $index);
+      border-color: $status-color;
+      background-color: rgba($status-color, $background-color-alpha-unfocused);
+    }
   }
 
   div {

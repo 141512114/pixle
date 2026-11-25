@@ -63,7 +63,7 @@ export class PixGridUiComponent extends AbstractHtmlElement {
         .share({
           text: this.pixle_share_result() + '\n',
           title: 'Can you solve this pixle?',
-          url: 'https://www.pixle.gg/',
+          url: this.getPixleUrl(),
         })
         .then(() => {
           console.log('Successful share');
@@ -78,11 +78,19 @@ export class PixGridUiComponent extends AbstractHtmlElement {
   }
 
   /**
+   * Link shared together with the result: the address the game is running on
+   * (Pixle is not bound to a fixed domain)
+   */
+  private getPixleUrl(): string {
+    return this.window.document.baseURI;
+  }
+
+  /**
    * Copy pixle content to the clipboard
    */
   public copyToClipboard(): void {
-    const pixleUrl: string = 'https://www.pixle.gg/';
-    const msgToCopy: string = this.pixle_share_result() + '\n' + pixleUrl;
+    const msgToCopy: string =
+      this.pixle_share_result() + '\n' + this.getPixleUrl();
     if (this.clipboard.copy(msgToCopy)) {
       this.window.clearTimeout(this.copied_badge_timer);
       const copied_badge_element: HTMLElement = this.copied_badge().nativeElement;

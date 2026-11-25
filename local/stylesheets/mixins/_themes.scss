@@ -56,3 +56,11 @@ $cold-palette: (
 );
 
 $default-color-palette: $cold-palette !default;
+
+// Names of the CSS custom properties holding the colors of the active theme (see _materials.scss)
+$theme-color-names: (1: one, 2: two, 3: three, 4: four, 5: five, 6: six);
+
+// Color n of the active theme, falls back to the default palette
+@function theme-color($n) {
+  @return var(--default-theme-#{map.get($theme-color-names, $n)}, #{map.get($default-color-palette, $n)});
+}

@@ -1,0 +1,468 @@
+@charset "UTF-8";
+/*
+Subset of twemoji-amazing (https://github.com/SebastianAigner/twemoji-amazing),
+reduced to the emojis Pixle actually uses (see local/typescript/emoji.database.ts).
+To add an emoji: copy its class from twemoji-amazing and the matching SVG from
+https://github.com/jdecked/twemoji (assets/svg) into local/twemoji/svg.
+The graphics are licensed under the CC-BY 4.0: https://github.com/twitter/twemoji
+*/
+
+/* .twa preamble from https://ellekasai.github.io/twemoji-awesome/, licensed under MIT: https://ellekasai.mit-license.org/ */
+.twa {
+  display: inline-block;
+  height: 1em;
+  width: 1em;
+  margin: 0 .05em 0 .1em;
+  vertical-align: -0.1em;
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: 1em 1em;
+}
+
+.twa-a-button-blood-type {
+  background-image: url("/twemoji/svg/1f170.svg");
+}
+
+.twa-ab-button-blood-type {
+  background-image: url("/twemoji/svg/1f18e.svg");
+}
+
+.twa-b-button-blood-type {
+  background-image: url("/twemoji/svg/1f171.svg");
+}
+
+.twa-bank {
+  background-image: url("/twemoji/svg/1f3e6.svg");
+}
+
+.twa-battery {
+  background-image: url("/twemoji/svg/1f50b.svg");
+}
+
+.twa-bell {
+  background-image: url("/twemoji/svg/1f514.svg");
+}
+
+.twa-blue-book {
+  background-image: url("/twemoji/svg/1f4d8.svg");
+}
+
+.twa-blue-circle {
+  background-image: url("/twemoji/svg/1f535.svg");
+}
+
+.twa-blue-heart {
+  background-image: url("/twemoji/svg/1f499.svg");
+}
+
+.twa-blue-square {
+  background-image: url("/twemoji/svg/1f7e6.svg");
+}
+
+.twa-brick {
+  background-image: url("/twemoji/svg/1f9f1.svg");
+}
+
+.twa-calendar {
+  background-image: url("/twemoji/svg/1f4c5.svg");
+}
+
+.twa-camera {
+  background-image: url("/twemoji/svg/1f4f7.svg");
+}
+
+.twa-cherry-blossom {
+  background-image: url("/twemoji/svg/1f338.svg");
+}
+
+.twa-classical-building {
+  background-image: url("/twemoji/svg/1f3db.svg");
+}
+
+.twa-closed-book {
+  background-image: url("/twemoji/svg/1f4d5.svg");
+}
+
+.twa-coin {
+  background-image: url("/twemoji/svg/1fa99.svg");
+}
+
+.twa-computer-disk {
+  background-image: url("/twemoji/svg/1f4bd.svg");
+}
+
+.twa-crystal-ball {
+  background-image: url("/twemoji/svg/1f52e.svg");
+}
+
+.twa-desktop-computer {
+  background-image: url("/twemoji/svg/1f5a5.svg");
+}
+
+.twa-down-arrow {
+  background-image: url("/twemoji/svg/2b07.svg");
+}
+
+.twa-down-left-arrow {
+  background-image: url("/twemoji/svg/2199.svg");
+}
+
+.twa-down-right-arrow {
+  background-image: url("/twemoji/svg/2198.svg");
+}
+
+.twa-dvd {
+  background-image: url("/twemoji/svg/1f4c0.svg");
+}
+
+.twa-eight-o-clock {
+  background-image: url("/twemoji/svg/1f557.svg");
+}
+
+.twa-eight-thirty {
+  background-image: url("/twemoji/svg/1f563.svg");
+}
+
+.twa-eleven-o-clock {
+  background-image: url("/twemoji/svg/1f55a.svg");
+}
+
+.twa-eleven-thirty {
+  background-image: url("/twemoji/svg/1f566.svg");
+}
+
+.twa-film-frames {
+  background-image: url("/twemoji/svg/1f39e.svg");
+}
+
+.twa-five-o-clock {
+  background-image: url("/twemoji/svg/1f554.svg");
+}
+
+.twa-five-thirty {
+  background-image: url("/twemoji/svg/1f560.svg");
+}
+
+.twa-floppy-disk {
+  background-image: url("/twemoji/svg/1f4be.svg");
+}
+
+.twa-four-o-clock {
+  background-image: url("/twemoji/svg/1f553.svg");
+}
+
+.twa-four-thirty {
+  background-image: url("/twemoji/svg/1f55f.svg");
+}
+
+.twa-framed-picture {
+  background-image: url("/twemoji/svg/1f5bc.svg");
+}
+
+.twa-gear {
+  background-image: url("/twemoji/svg/2699.svg");
+}
+
+.twa-gem-stone {
+  background-image: url("/twemoji/svg/1f48e.svg");
+}
+
+.twa-green-book {
+  background-image: url("/twemoji/svg/1f4d7.svg");
+}
+
+.twa-green-circle {
+  background-image: url("/twemoji/svg/1f7e2.svg");
+}
+
+.twa-green-heart {
+  background-image: url("/twemoji/svg/1f49a.svg");
+}
+
+.twa-green-square {
+  background-image: url("/twemoji/svg/1f7e9.svg");
+}
+
+.twa-headstone {
+  background-image: url("/twemoji/svg/1faa6.svg");
+}
+
+.twa-hospital {
+  background-image: url("/twemoji/svg/1f3e5.svg");
+}
+
+.twa-hotel {
+  background-image: url("/twemoji/svg/1f3e8.svg");
+}
+
+.twa-house {
+  background-image: url("/twemoji/svg/1f3e0.svg");
+}
+
+.twa-infinity {
+  background-image: url("/twemoji/svg/267e.svg");
+}
+
+.twa-laptop {
+  background-image: url("/twemoji/svg/1f4bb.svg");
+}
+
+.twa-left-arrow {
+  background-image: url("/twemoji/svg/2b05.svg");
+}
+
+.twa-magnet {
+  background-image: url("/twemoji/svg/1f9f2.svg");
+}
+
+.twa-moai {
+  background-image: url("/twemoji/svg/1f5ff.svg");
+}
+
+.twa-mount-fuji {
+  background-image: url("/twemoji/svg/1f5fb.svg");
+}
+
+.twa-mountain {
+  background-image: url("/twemoji/svg/26f0.svg");
+}
+
+.twa-musical-note {
+  background-image: url("/twemoji/svg/1f3b5.svg");
+}
+
+.twa-nine-o-clock {
+  background-image: url("/twemoji/svg/1f558.svg");
+}
+
+.twa-nine-thirty {
+  background-image: url("/twemoji/svg/1f564.svg");
+}
+
+.twa-o-button-blood-type {
+  background-image: url("/twemoji/svg/1f17e.svg");
+}
+
+.twa-office-building {
+  background-image: url("/twemoji/svg/1f3e2.svg");
+}
+
+.twa-ok-button {
+  background-image: url("/twemoji/svg/1f197.svg");
+}
+
+.twa-one-o-clock {
+  background-image: url("/twemoji/svg/1f550.svg");
+}
+
+.twa-one-thirty {
+  background-image: url("/twemoji/svg/1f55c.svg");
+}
+
+.twa-optical-disk {
+  background-image: url("/twemoji/svg/1f4bf.svg");
+}
+
+.twa-orange-book {
+  background-image: url("/twemoji/svg/1f4d9.svg");
+}
+
+.twa-orange-circle {
+  background-image: url("/twemoji/svg/1f7e0.svg");
+}
+
+.twa-orange-heart {
+  background-image: url("/twemoji/svg/1f9e1.svg");
+}
+
+.twa-orange-square {
+  background-image: url("/twemoji/svg/1f7e7.svg");
+}
+
+.twa-package {
+  background-image: url("/twemoji/svg/1f4e6.svg");
+}
+
+.twa-peace-symbol {
+  background-image: url("/twemoji/svg/262e.svg");
+}
+
+.twa-pill {
+  background-image: url("/twemoji/svg/1f48a.svg");
+}
+
+.twa-post-office {
+  background-image: url("/twemoji/svg/1f3e4.svg");
+}
+
+.twa-printer {
+  background-image: url("/twemoji/svg/1f5a8.svg");
+}
+
+.twa-purple-circle {
+  background-image: url("/twemoji/svg/1f7e3.svg");
+}
+
+.twa-purple-heart {
+  background-image: url("/twemoji/svg/1f49c.svg");
+}
+
+.twa-purple-square {
+  background-image: url("/twemoji/svg/1f7ea.svg");
+}
+
+.twa-red-circle {
+  background-image: url("/twemoji/svg/1f534.svg");
+}
+
+.twa-red-heart {
+  background-image: url("/twemoji/svg/2764.svg");
+}
+
+.twa-red-paper-lantern {
+  background-image: url("/twemoji/svg/1f3ee.svg");
+}
+
+.twa-red-square {
+  background-image: url("/twemoji/svg/1f7e5.svg");
+}
+
+.twa-ribbon {
+  background-image: url("/twemoji/svg/1f380.svg");
+}
+
+.twa-right-arrow {
+  background-image: url("/twemoji/svg/27a1.svg");
+}
+
+.twa-roll-of-paper {
+  background-image: url("/twemoji/svg/1f9fb.svg");
+}
+
+.twa-seven-o-clock {
+  background-image: url("/twemoji/svg/1f556.svg");
+}
+
+.twa-seven-thirty {
+  background-image: url("/twemoji/svg/1f562.svg");
+}
+
+.twa-shopping-cart {
+  background-image: url("/twemoji/svg/1f6d2.svg");
+}
+
+.twa-six-o-clock {
+  background-image: url("/twemoji/svg/1f555.svg");
+}
+
+.twa-six-thirty {
+  background-image: url("/twemoji/svg/1f561.svg");
+}
+
+.twa-speaker-high-volume {
+  background-image: url("/twemoji/svg/1f50a.svg");
+}
+
+.twa-speaker-low-volume {
+  background-image: url("/twemoji/svg/1f508.svg");
+}
+
+.twa-speaker-medium-volume {
+  background-image: url("/twemoji/svg/1f509.svg");
+}
+
+.twa-stadium {
+  background-image: url("/twemoji/svg/1f3df.svg");
+}
+
+.twa-television {
+  background-image: url("/twemoji/svg/1f4fa.svg");
+}
+
+.twa-ten-o-clock {
+  background-image: url("/twemoji/svg/1f559.svg");
+}
+
+.twa-ten-thirty {
+  background-image: url("/twemoji/svg/1f565.svg");
+}
+
+.twa-thread {
+  background-image: url("/twemoji/svg/1f9f5.svg");
+}
+
+.twa-three-o-clock {
+  background-image: url("/twemoji/svg/1f552.svg");
+}
+
+.twa-three-thirty {
+  background-image: url("/twemoji/svg/1f55e.svg");
+}
+
+.twa-toilet {
+  background-image: url("/twemoji/svg/1f6bd.svg");
+}
+
+.twa-twelve-o-clock {
+  background-image: url("/twemoji/svg/1f55b.svg");
+}
+
+.twa-twelve-thirty {
+  background-image: url("/twemoji/svg/1f567.svg");
+}
+
+.twa-two-o-clock {
+  background-image: url("/twemoji/svg/1f551.svg");
+}
+
+.twa-two-thirty {
+  background-image: url("/twemoji/svg/1f55d.svg");
+}
+
+.twa-up-arrow {
+  background-image: url("/twemoji/svg/2b06.svg");
+}
+
+.twa-up-button {
+  background-image: url("/twemoji/svg/1f199.svg");
+}
+
+.twa-up-left-arrow {
+  background-image: url("/twemoji/svg/2196.svg");
+}
+
+.twa-up-right-arrow {
+  background-image: url("/twemoji/svg/2197.svg");
+}
+
+.twa-videocassette {
+  background-image: url("/twemoji/svg/1f4fc.svg");
+}
+
+.twa-volcano {
+  background-image: url("/twemoji/svg/1f30b.svg");
+}
+
+.twa-white-question-mark {
+  background-image: url("/twemoji/svg/2754.svg");
+}
+
+.twa-window {
+  background-image: url("/twemoji/svg/1fa9f.svg");
+}
+
+.twa-wrapped-gift {
+  background-image: url("/twemoji/svg/1f381.svg");
+}
+
+.twa-yarn {
+  background-image: url("/twemoji/svg/1f9f6.svg");
+}
+
+.twa-yellow-circle {
+  background-image: url("/twemoji/svg/1f7e1.svg");
+}
+
+.twa-yellow-square {
+  background-image: url("/twemoji/svg/1f7e8.svg");
+}

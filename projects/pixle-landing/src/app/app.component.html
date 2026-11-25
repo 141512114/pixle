@@ -5,7 +5,7 @@
       <div class="position-absolute h-100 pixle-countdown-progress"></div>
       <div class="position-relative d-flex justify-content-center w-100 h-auto pixle-countdown-time">
         <a class="h6 m-0 p-0 py-2 w-100 text-center game-title" title="The remaining time until a new pixle arrives"
-           href="https://play.pixle.gg/" aria-label="Pixle countdown" rel="noopener">
+           [attr.href]="links.game || null" aria-label="Pixle countdown" rel="noopener">
           Next pixle in:
           <span class="countdown">
             <span class="hours">99</span>h
@@ -68,16 +68,18 @@
     <nav class="container">
       <div class="position-relative d-inline-block list-cols">
         <ul class="position-relative mb-4 mb-md-0">
-          <li>
-            <a aria-label="Click to play Pixle now!" class="link-is-button__sm" href="https://play.pixle.gg/"
-               rel="noopener"
-               target="_blank" title="Play Pixle today!">
-              Play Pixle today!
-            </a>
-          </li>
+          @if (links.game) {
+            <li>
+              <a aria-label="Click to play Pixle now!" class="link-is-button__sm" [href]="links.game"
+                 rel="noopener"
+                 target="_blank" title="Play Pixle today!">
+                Play Pixle today!
+              </a>
+            </li>
+          }
           <li>
             <a aria-label="Click to visit the official GitHub repository" class="link-is-button__sm"
-               href="https://github.com/KoolerNolan/pixle" rel="noopener"
+               href="https://github.com/141512114/pixle" rel="noopener"
                target="_blank" title="Don't miss to take a look at the official GitHub repository">
               GitHub repository
             </a>

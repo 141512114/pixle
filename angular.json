@@ -32,10 +32,15 @@
                 "glob": "**/*",
                 "input": "projects/pixle-game/public",
                 "output": "/"
+              },
+              {
+                "glob": "**/*",
+                "input": "local/twemoji",
+                "output": "/twemoji"
               }
             ],
             "styles": [
-              "local/stylesheets/twemoji-amazing.scss",
+              "local/stylesheets/twemoji.scss",
               "node_modules/bootstrap/dist/css/bootstrap.min.css",
               "local/stylesheets/styles.scss"
             ],
@@ -129,10 +134,15 @@
                 "glob": "**/*",
                 "input": "projects/pixle-landing/public",
                 "output": "/"
+              },
+              {
+                "glob": "**/*",
+                "input": "local/twemoji",
+                "output": "/twemoji"
               }
             ],
             "styles": [
-              "local/stylesheets/twemoji-amazing.scss",
+              "local/stylesheets/twemoji.scss",
               "node_modules/bootstrap/dist/css/bootstrap.min.css",
               "local/stylesheets/styles.scss"
             ],

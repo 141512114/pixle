@@ -1,5 +1,3 @@
-@use "sass:map";
-
 @use 'mixins/themes' as *;
 @use 'mixins/mixins' as *;
 
@@ -11,7 +9,7 @@
   right: 0;
   bottom: 0;
   border: 2px solid transparent;
-  background-color: var(--default-theme-four, map.get($default-color-palette, 4));
+  background-color: theme-color(4);
   transition: transform 635ms, background-color 300ms;
 
   div {
