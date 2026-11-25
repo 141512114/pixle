@@ -25,12 +25,13 @@ import { PixGridUiComponent } from '../pix-grid-ui/pix-grid-ui.component';
 import { PixGridComponent } from '../pix-grid/pix-grid.component';
 import { PixGridElementComponent } from '../pix-grid-element/pix-grid-element.component';
 
-// Cookie notification
+// Storage notice: describes exactly what is stored (see local/typescript/abstract/composables/cookies.ts)
 const COOKIE_NOTIF_MSG: IPopUp = {
-  headline: 'Cookie alert!',
+  headline: 'Saving your settings',
   message_body:
-    'We are required to inform you about the usage of cookies on our web application. These are required' +
-    ' and used to store information about the current match and applied game settings. Closing this notification means you agree with the usage of cookies.',
+    "Pixle doesn't use cookies or tracking. If you agree, it keeps your theme and this choice " +
+    "in your browser's storage. If you decline, they are forgotten as soon as you close the tab.<br>" +
+    "The current match is always kept until you close the tab, so a reload won't reveal the solution again.",
 };
 
 // Timer

@@ -50,15 +50,15 @@ export function createCookie(item: string, value: string): void {
 }
 
 /**
- * Delete a cookie item from the local storage
+ * Delete a cookie item from the local and the session storage
+ * (without consent, items are kept in the session storage, see createCookie)
  *
  * @param item
  */
 export function deleteCookie(item: string): void {
   if (item === '') return;
-  if (isLocalStorageAvailable() && localStorage.getItem(item) != null) {
-    localStorage.removeItem(item);
-  }
+  if (isLocalStorageAvailable()) localStorage.removeItem(item);
+  if (isSessionStorageAvailable()) sessionStorage.removeItem(item);
 }
 
 /**
