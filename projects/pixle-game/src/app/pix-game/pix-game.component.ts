@@ -1,12 +1,15 @@
 import {
   AfterViewInit,
   Component,
-  Inject,
+  DOCUMENT,
+  inject,
   OnInit,
-  ViewChild,
+  signal,
+  viewChild,
 } from '@angular/core';
+import { toSignal } from '@angular/core/rxjs-interop';
 import { Router } from '@angular/router';
-import { DOCUMENT, Location, CommonModule } from '@angular/common';
+import { Location } from '@angular/common';
 import { WINDOW } from '@typescript/window-injection.token';
 import * as CookieService from '@abstract/composables/cookies';
 import { GameManager } from './game.manager';
@@ -37,36 +40,31 @@ const UNDO_FLIP_TIME: number = 1575;
   selector: 'app-pix-game',
   templateUrl: './pix-game.component.html',
   styleUrls: ['./pix-game.component.scss'],
-  standalone: true,
   imports: [
-    CommonModule,
     PopupMessageComponent,
     PixGridComponent,
     PixGridUiComponent,
   ],
 })
 export class PixGameComponent implements OnInit, AfterViewInit {
-  pixle_share_result: string = '';
+  readonly pixle_share_result = signal<string>('');
+  readonly cookie_consent = toSignal(CookieService.cookie_consent, {
+    requireSync: true,
+  });
+  readonly cookie_popup_is_closed = signal<boolean>(true);
   validating: boolean = false;
-  cookie_consent: boolean = false;
-  cookie_popup_is_closed: boolean = true;
-  private countdown_start: any;
-  @ViewChild('match_status') private match_status_msg!: PopupMessageComponent;
-  @ViewChild('cookie_alert') private cookie_alert!: PopupMessageComponent;
-  @ViewChild(PixGridComponent) private pixGridComponent!: PixGridComponent;
-  @ViewChild(PixGridUiComponent)
-  private pixGridUiComponent!: PixGridUiComponent;
-
-  constructor(
-    private router: Router,
-    private location: Location,
-    @Inject(DOCUMENT) private document: Document,
-    @Inject(WINDOW) private readonly window: Window,
-  ) {
-    CookieService.cookie_consent.subscribe((value) => {
-      this.cookie_consent = value;
-    });
-  }
+  private countdown_start: number = -1;
+  // These elements are only rendered depending on the cookie consent state
+  private readonly match_status_msg =
+    viewChild<PopupMessageComponent>('match_status');
+  private readonly cookie_alert =
+    viewChild<PopupMessageComponent>('cookie_alert');
+  private readonly pixGridComponent = viewChild(PixGridComponent);
+  private readonly pixGridUiComponent = viewChild.required(PixGridUiComponent);
+  private readonly router = inject(Router);
+  private readonly location = inject(Location);
+  private readonly document = inject(DOCUMENT);
+  private readonly window = inject(WINDOW);
 
   /**
    * Initialize the game
@@ -85,7 +83,7 @@ export class PixGameComponent implements OnInit, AfterViewInit {
      * Show the pixle at the beginning for a set duration
      * Hide it, if the timer is over
      */
-    this.countdown_start = setTimeout(() => {
+    this.countdown_start = this.window.setTimeout(() => {
       GameManager.initGame();
       if (
         CookieService.getSessionCookie('lock_grid') === '1' &&
@@ -94,7 +92,7 @@ export class PixGameComponent implements OnInit, AfterViewInit {
       )
         return;
       // Undo flip --> Grid will be flipped over
-      this.pixGridComponent.flipWholePixle(true);
+      this.pixGridComponent()?.flipWholePixle(true);
       CookieService.createSessionCookie('lock_grid', '1');
       CookieService.createSessionCookie(
         'pixle_id',
@@ -114,7 +112,7 @@ export class PixGameComponent implements OnInit, AfterViewInit {
     if (cookieConsentGiven) {
       cookie_consent_bool = this.parseCookieConsent(cookieConsentGiven);
     }
-    this.cookie_popup_is_closed = cookie_consent_bool;
+    this.cookie_popup_is_closed.set(cookie_consent_bool);
 
     // Notify cookie consent status via service
     CookieService.cookie_consent.next(cookie_consent_bool);
@@ -129,8 +127,9 @@ export class PixGameComponent implements OnInit, AfterViewInit {
 
   ngAfterViewInit() {
     // If the consent has not been given to the usage of cookies --> show alert
-    if (!this.cookie_consent && !this.cookie_popup_is_closed) {
-      this.sendMatchMessage(COOKIE_NOTIF_MSG, this.cookie_alert);
+    const cookieAlert = this.cookie_alert();
+    if (!this.cookie_consent() && !this.cookie_popup_is_closed() && cookieAlert) {
+      this.sendMatchMessage(COOKIE_NOTIF_MSG, cookieAlert);
       return;
     }
     this.initGame();
@@ -176,7 +175,7 @@ export class PixGameComponent implements OnInit, AfterViewInit {
    */
   public receivePopupHasBeenClosed(paket: boolean = false): void {
     CookieService.cookie_consent.next(paket);
-    this.cookie_popup_is_closed = this.cookie_alert.popup_is_closed;
+    this.cookie_popup_is_closed.set(this.cookie_alert()?.popup_is_closed ?? true);
     CookieService.createCookie('cookie_consent', String(paket));
     // Start the game
     this.initGame();
@@ -190,11 +189,11 @@ export class PixGameComponent implements OnInit, AfterViewInit {
    */
   public sendMatchMessage(
     msg_object: IPopUp,
-    popup_element: PopupMessageComponent = this.match_status_msg,
+    popup_element: PopupMessageComponent | undefined = this.match_status_msg(),
   ): void {
-    const popupMsg: PopupMessageComponent = popup_element;
-    popupMsg.writeNewMessage(msg_object);
-    popupMsg.openPopup();
+    if (popup_element == null) return;
+    popup_element.writeNewMessage(msg_object);
+    popup_element.openPopup();
   }
 
   /**
@@ -204,17 +203,19 @@ export class PixGameComponent implements OnInit, AfterViewInit {
    * @private
    */
   private validatePixle(): void {
+    const pixGridComponent = this.pixGridComponent();
     if (
       !GameManager.game_started ||
       GameManager.pixle_solved ||
-      this.validating
+      this.validating ||
+      pixGridComponent == null
     )
       return;
-    this.pixGridComponent.checkGridRowTimers();
+    pixGridComponent.checkGridRowTimers();
     this.validating = true;
 
-    const tempPixGridComps: PixGridElementComponent[] =
-      this.pixGridComponent.pixle_emoji_input.toArray();
+    const tempPixGridComps: readonly PixGridElementComponent[] =
+      pixGridComponent.pixle_emoji_input();
     let total_count: number = 0,
       failed_count: number = 0;
     // Check every pixle tile if its valid --> emoji at the exact same position as in the original pixle
@@ -225,7 +226,7 @@ export class PixGameComponent implements OnInit, AfterViewInit {
         let one_pixle_tile: PixGridElementComponent =
           tempPixGridComps[currentColumn];
         if (
-          one_pixle_tile.twa_emoji_class_front_face !==
+          one_pixle_tile.twa_emoji_class_front_face() !==
           GameManager.pixle_image[i][j]
         ) {
           one_pixle_tile.updateTileStatus(false);
@@ -256,13 +257,13 @@ export class PixGameComponent implements OnInit, AfterViewInit {
       } else {
         // Player didn't win yet --> reset flip-state of some tiles
         this.window.setTimeout(() => {
-          this.pixGridComponent.flipWholePixle(true);
+          pixGridComponent.flipWholePixle(true);
           this.validating = false;
         }, UNDO_FLIP_TIME);
         return;
       }
     }
-    this.pixGridUiComponent.switchUiElements();
+    this.pixGridUiComponent().switchUiElements();
     this.validating = false;
   }
 
@@ -272,8 +273,10 @@ export class PixGameComponent implements OnInit, AfterViewInit {
    * @private
    */
   private generateShareMessage(): void {
-    this.pixle_share_result = GameManager.generateShareMessage(
-      this.pixGridComponent.pixle_emoji_input.toArray(),
+    const pixGridComponent = this.pixGridComponent();
+    if (pixGridComponent == null) return;
+    this.pixle_share_result.set(
+      GameManager.generateShareMessage([...pixGridComponent.pixle_emoji_input()]),
     );
   }
 

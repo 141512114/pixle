@@ -1,21 +1,18 @@
 import { Component, OnInit } from '@angular/core';
-import { CommonModule } from '@angular/common';
 import { HelperFunctionsService } from '@abstract/services/helper-functions.service';
 import { PIXLE_ICONS } from '@typescript/emoji.database';
+import { PixHeroTileComponent } from '../pix-hero-tile/pix-hero-tile.component';
 
 @Component({
   selector: 'app-pix-hero-grid',
   templateUrl: './pix-hero-grid.component.html',
   styleUrls: ['./pix-hero-grid.component.scss'],
-  standalone: true,
-  imports: [CommonModule],
+  imports: [PixHeroTileComponent],
 })
 export class PixHeroGridComponent implements OnInit {
   grid_image: string[][] = [];
   grid_image_width: number = 0;
   grid_image_height: number = 0;
-
-  constructor() {}
 
   ngOnInit(): void {
     this.searchRandomPixleArt();

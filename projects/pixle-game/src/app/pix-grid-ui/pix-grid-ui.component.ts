@@ -1,64 +1,41 @@
 import {
   Component,
   ElementRef,
-  EventEmitter,
-  Inject,
-  Input,
-  Output,
-  QueryList,
-  ViewChild,
-  ViewChildren,
+  inject,
+  input,
+  output,
+  viewChild,
+  viewChildren,
 } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import {HelperFunctionsService} from '@abstract/services/helper-functions.service';
-import {PixGridElementComponent} from '../pix-grid-element/pix-grid-element.component';
-import {GameManager} from '../pix-game/game.manager';
-import {faClipboard, faLink} from '@fortawesome/free-solid-svg-icons';
-import {WINDOW} from '@typescript/window-injection.token';
-import {AbstractHtmlElement} from '@abstract/abstract.html-element';
-import {Clipboard} from '@angular/cdk/clipboard';
+import { PixGridElementComponent } from '../pix-grid-element/pix-grid-element.component';
+import { GameManager } from '../pix-game/game.manager';
+import { faClipboard, faLink } from '@fortawesome/free-solid-svg-icons';
+import { WINDOW } from '@typescript/window-injection.token';
+import { AbstractHtmlElement } from '@abstract/abstract.html-element';
+import { Clipboard } from '@angular/cdk/clipboard';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { ClipboardModule } from '@angular/cdk/clipboard';
 
 @Component({
   selector: 'app-pix-grid-ui',
   templateUrl: './pix-grid-ui.component.html',
   styleUrls: ['./pix-grid-ui.component.scss'],
-  standalone: true,
-  imports: [CommonModule, FontAwesomeModule, ClipboardModule, PixGridElementComponent],
+  imports: [FontAwesomeModule, PixGridElementComponent],
 })
 export class PixGridUiComponent extends AbstractHtmlElement {
-  @ViewChildren(PixGridElementComponent)
-  public pixle_emoji_output!: QueryList<PixGridElementComponent>;
-  @Input() emoji_list: string[] = [];
-  @Input() pixle_share_result: string = 'Not quite there yet!';
-  @Output() sendValidationRequest: EventEmitter<any> = new EventEmitter<any>();
-  @Output() sendReloadRequest: EventEmitter<any> = new EventEmitter<any>();
-  iconShareAny = faLink;
-  iconShareCopy = faClipboard;
-  @ViewChild('ui_wrapper') private ui_wrapper!: ElementRef;
-  @ViewChild('copied_badge') private copied_badge!: ElementRef;
-  private windowNavigator;
-  private copied_badge_timer: any = -1;
-
-  constructor(
-    @Inject(WINDOW) private readonly window: Window,
-    @Inject(Clipboard) private clipboard: Clipboard,
-  ) {
-    super();
-    this.windowNavigator = this.window.navigator;
-  }
-
-  /**
-   * Helper function
-   * Makes an array of numbers which helps to use *ngFor as a normal for loop
-   *
-   * @param i
-   * @return {number[]} Array of numbers
-   */
-  public counter(i: number): number[] {
-    return HelperFunctionsService.makeForLoopCount(i);
-  }
+  public readonly pixle_emoji_output = viewChildren(PixGridElementComponent);
+  readonly emoji_list = input<string[]>([]);
+  readonly pixle_share_result = input<string>('Not quite there yet!');
+  readonly sendValidationRequest = output<void>();
+  readonly sendReloadRequest = output<void>();
+  readonly iconShareAny = faLink;
+  readonly iconShareCopy = faClipboard;
+  // Only rendered while there are emojis to choose from
+  private readonly ui_wrapper = viewChild<ElementRef<HTMLElement>>('ui_wrapper');
+  private readonly copied_badge =
+    viewChild.required<ElementRef<HTMLElement>>('copied_badge');
+  private readonly window = inject(WINDOW);
+  private readonly clipboard = inject(Clipboard);
+  private copied_badge_timer: number = -1;
 
   /**
    * Request validation of the pixle grid
@@ -81,10 +58,10 @@ export class PixGridUiComponent extends AbstractHtmlElement {
    */
   public shareOnSocialMedia(): void {
     // Check if device can share / has the api
-    if (this.windowNavigator.share) {
-      this.windowNavigator
+    if (this.window.navigator.share) {
+      this.window.navigator
         .share({
-          text: this.pixle_share_result + '\n',
+          text: this.pixle_share_result() + '\n',
           title: 'Can you solve this pixle?',
           url: 'https://www.pixle.gg/',
         })
@@ -105,12 +82,12 @@ export class PixGridUiComponent extends AbstractHtmlElement {
    */
   public copyToClipboard(): void {
     const pixleUrl: string = 'https://www.pixle.gg/';
-    const msgToCopy: string = this.pixle_share_result + '\n' + pixleUrl;
+    const msgToCopy: string = this.pixle_share_result() + '\n' + pixleUrl;
     if (this.clipboard.copy(msgToCopy)) {
       this.window.clearTimeout(this.copied_badge_timer);
-      const copied_badge_element: HTMLElement = this.copied_badge.nativeElement;
+      const copied_badge_element: HTMLElement = this.copied_badge().nativeElement;
       this.removeClassFromHTMLElement(copied_badge_element, 'close');
-      this.copied_badge_timer = setTimeout(() => {
+      this.copied_badge_timer = this.window.setTimeout(() => {
         this.addClassToHTMLElement(copied_badge_element, 'close');
       }, 2000);
     }
@@ -132,7 +109,8 @@ export class PixGridUiComponent extends AbstractHtmlElement {
    * Toggle one or the other
    */
   public switchUiElements(): void {
-    const uiWrapperElement: HTMLElement = this.ui_wrapper.nativeElement;
+    const uiWrapperElement = this.ui_wrapper()?.nativeElement;
+    if (uiWrapperElement == null) return;
     const closeClass: string = 'switch-ui';
     if (!uiWrapperElement.classList.contains(closeClass)) {
       uiWrapperElement.classList.add(closeClass);
@@ -147,12 +125,12 @@ export class PixGridUiComponent extends AbstractHtmlElement {
    * @private
    */
   private selectCurrentChosenEmoji(): void {
-    const emojiEmitterList: PixGridElementComponent[] =
-      this.pixle_emoji_output.toArray();
+    const emojiEmitterList: readonly PixGridElementComponent[] =
+      this.pixle_emoji_output();
     for (let i = 0; i < emojiEmitterList.length; i++) {
       const current_entry: PixGridElementComponent = emojiEmitterList[i];
       if (
-        current_entry.twa_emoji_class_front_face !== GameManager.chosen_emoji
+        current_entry.twa_emoji_class_front_face() !== GameManager.chosen_emoji
       ) {
         current_entry.unselectThisEmoji();
         continue;

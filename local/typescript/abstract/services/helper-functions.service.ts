@@ -6,24 +6,6 @@ import { PIXLE_ICONS } from '@typescript/emoji.database';
 })
 export class HelperFunctionsService {
   /**
-   * Convert any two-dimensional array into a one-dimensional array
-   *
-   * @param array
-   * @return Converted two-dimensional array
-   */
-  public static twoDimensionalArrayToOneDimensional(array: any[][]): any[] {
-    // Make sure a pixle tile array was assigned
-    if (array.length <= 0) return [];
-    let pixle_convert: any[] = [];
-    for (let i: number = 0; i < array.length; i++) {
-      for (let j: number = 0; j < array[0].length; j++) {
-        pixle_convert.push(array[i][j]);
-      }
-    }
-    return pixle_convert;
-  }
-
-  /**
    * Generate a random integer between two limiter values --> min and max
    * The parameter min is by default 0
    *
@@ -58,21 +40,6 @@ export class HelperFunctionsService {
       temp_twa_emoji_classes.push(twa_emoji_class);
     }
     return temp_twa_emoji_classes;
-  }
-
-  /**
-   * Makes an array of numbers which helps to use *ngFor as a normal for loop
-   *
-   * @param i
-   * @return Array of numbers
-   */
-  public static makeForLoopCount(i: number): number[] {
-    let ceil: number = Math.ceil(i);
-    let number_list: number[] = [];
-    for (let i = 0; i < ceil; i++) {
-      number_list.push(i);
-    }
-    return number_list;
   }
 
   /**

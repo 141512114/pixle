@@ -2,11 +2,11 @@ import {
   AfterViewInit,
   Component,
   ElementRef,
-  Input,
+  input,
   OnInit,
-  ViewChild,
+  signal,
+  viewChild,
 } from '@angular/core';
-import { CommonModule } from '@angular/common';
 import { WHITE_QUESTIONMARK } from '@typescript/emoji.database';
 import { AbstractHtmlElement } from '@abstract/abstract.html-element';
 import { HelperFunctionsService } from '@abstract/services/helper-functions.service';
@@ -15,20 +15,19 @@ import { HelperFunctionsService } from '@abstract/services/helper-functions.serv
   selector: 'app-pix-hero-tile',
   templateUrl: './pix-hero-tile.component.html',
   styleUrls: ['./pix-hero-tile.component.scss'],
-  standalone: true,
-  imports: [CommonModule],
 })
 export class PixHeroTileComponent
   extends AbstractHtmlElement
   implements OnInit, AfterViewInit
 {
-  @Input() pixle_emoji: string = '';
+  readonly pixle_emoji = input<string>('');
   pixle_twa_emoji_class: string = '';
-  pixle_emoji_default: string = WHITE_QUESTIONMARK;
-  twa_emoji_class_back_face: string = this.pixle_emoji_default;
-  pixle_tile_timer: any = -1;
-  @ViewChild('tile_content_wrapper') private tile_content_wrapper!: ElementRef;
-  @ViewChild('display_emoji') private display_emoji!: ElementRef;
+  readonly pixle_emoji_default: string = WHITE_QUESTIONMARK;
+  // Signal, because it is set after the view has been initialized (zoneless)
+  readonly twa_emoji_class_back_face = signal<string>(WHITE_QUESTIONMARK);
+  pixle_tile_timer: number = -1;
+  private readonly tile_content_wrapper =
+    viewChild.required<ElementRef<HTMLElement>>('tile_content_wrapper');
   private do_flip_class: any = 'do-flip';
 
   constructor() {
@@ -38,10 +37,10 @@ export class PixHeroTileComponent
   ngOnInit(): void {}
 
   ngAfterViewInit(): void {
-    this.setElementIcon(this.pixle_emoji, true);
+    this.setElementIcon(this.pixle_emoji(), true);
     ['mouseenter', 'touchstart'].forEach((event) => {
       HelperFunctionsService.addEventListenerToElement(
-        this.tile_content_wrapper.nativeElement,
+        this.tile_content_wrapper().nativeElement,
         event,
         () => {
           this.doFlip();
@@ -51,10 +50,10 @@ export class PixHeroTileComponent
     });
     ['mouseleave', 'touchend', 'touchcancel'].forEach((event) => {
       HelperFunctionsService.addEventListenerToElement(
-        this.tile_content_wrapper.nativeElement,
+        this.tile_content_wrapper().nativeElement,
         event,
         () => {
-          this.pixle_tile_timer = setTimeout(() => {
+          this.pixle_tile_timer = window.setTimeout(() => {
             this.undoFlip();
           }, 350);
         },
@@ -66,7 +65,7 @@ export class PixHeroTileComponent
    * Flip grid element
    */
   public doFlip(): void {
-    const element = this.tile_content_wrapper.nativeElement as HTMLElement;
+    const element = this.tile_content_wrapper().nativeElement as HTMLElement;
     this.addClassToHTMLElement(element, this.do_flip_class);
   }
 
@@ -74,7 +73,7 @@ export class PixHeroTileComponent
    * Reverse flipped grid element
    */
   public undoFlip(): void {
-    const element = this.tile_content_wrapper.nativeElement as HTMLElement;
+    const element = this.tile_content_wrapper().nativeElement as HTMLElement;
     this.removeClassFromHTMLElement(element, this.do_flip_class);
   }
 
@@ -96,6 +95,6 @@ export class PixHeroTileComponent
       return;
     this.pixle_twa_emoji_class = twa_emoji_class;
     if (!update) return;
-    this.twa_emoji_class_back_face = this.pixle_twa_emoji_class;
+    this.twa_emoji_class_back_face.set(this.pixle_twa_emoji_class);
   }
 }

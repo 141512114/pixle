@@ -2,17 +2,14 @@ import {
   AfterViewInit,
   Component,
   ElementRef,
-  EventEmitter,
-  Inject,
-  Input,
   OnInit,
-  Output,
-  ViewChild,
+  input,
+  output,
+  signal,
+  viewChild,
 } from '@angular/core';
-import { CommonModule } from '@angular/common';
 import { WHITE_QUESTIONMARK } from '@typescript/emoji.database';
 import { HelperFunctionsService } from '@abstract/services/helper-functions.service';
-import { WINDOW } from '@typescript/window-injection.token';
 import { GameManager } from '../pix-game/game.manager';
 import { AbstractHtmlElement } from '@abstract/abstract.html-element';
 
@@ -20,42 +17,38 @@ import { AbstractHtmlElement } from '@abstract/abstract.html-element';
   selector: 'app-pix-grid-element',
   templateUrl: './pix-grid-element.component.html',
   styleUrls: ['./pix-grid-element.component.scss'],
-  standalone: true,
-  imports: [CommonModule],
 })
 export class PixGridElementComponent
   extends AbstractHtmlElement
   implements OnInit, AfterViewInit
 {
-  @Input() pixle_emoji: string = ''; // <-- stores the correct answer
+  readonly pixle_emoji = input<string>(''); // <-- stores the correct answer
   /**
    * Different grid element types:
    * 0 => Receiver
    * 1 => Emitter
    */
-  @Input() grid_element_type: number = 0;
-  @Output() sendTWAEmojiClass: EventEmitter<string> =
-    new EventEmitter<string>();
-  pixle_emoji_default: string = WHITE_QUESTIONMARK;
+  readonly grid_element_type = input<number>(0);
+  readonly sendTWAEmojiClass = output<string>();
+  readonly pixle_emoji_default: string = WHITE_QUESTIONMARK;
   pixle_tile_lives: number = 3;
   pixle_tile_solved: boolean = false;
-  twa_emoji_class_front_face: string = this.pixle_emoji_default;
-  twa_emoji_class_back_face: string = this.pixle_emoji_default;
-  @ViewChild('component_grid_element')
-  private component_grid_element!: ElementRef;
-  @ViewChild('user_interactive') private user_interactive!: ElementRef;
-  private do_flip_class: any = 'do-flip';
-  private selected_class: any = 'selected';
-
-  constructor(@Inject(WINDOW) private readonly window: Window) {
-    super();
-  }
+  // Signals, because they are changed from native event listeners and timers
+  // and the view has to follow (zoneless change detection)
+  readonly twa_emoji_class_front_face = signal<string>(WHITE_QUESTIONMARK);
+  readonly twa_emoji_class_back_face = signal<string>(WHITE_QUESTIONMARK);
+  private readonly component_grid_element =
+    viewChild.required<ElementRef<HTMLElement>>('component_grid_element');
+  private readonly user_interactive =
+    viewChild.required<ElementRef<HTMLElement>>('user_interactive');
+  private readonly do_flip_class: string = 'do-flip';
+  private readonly selected_class: string = 'selected';
 
   ngOnInit(): void {
     // Check which type this grid element has
-    switch (this.grid_element_type) {
+    switch (this.grid_element_type()) {
       case 1:
-        this.setElementIcon(this.pixle_emoji);
+        this.setElementIcon(this.pixle_emoji());
         break;
       case 0:
       default:
@@ -65,16 +58,17 @@ export class PixGridElementComponent
   }
 
   ngAfterViewInit(): void {
+    const gridElement = this.component_grid_element().nativeElement;
     // Check which type this grid element has
-    switch (this.grid_element_type) {
+    switch (this.grid_element_type()) {
       case 1:
         // Emit signal to outer component --> send twa class of the emoji
         ['click', 'touchstart'].forEach((event) => {
           HelperFunctionsService.addEventListenerToElement(
-            this.component_grid_element.nativeElement,
+            gridElement,
             event,
             () => {
-              this.sendTWAEmojiClass.emit(this.twa_emoji_class_front_face);
+              this.sendTWAEmojiClass.emit(this.twa_emoji_class_front_face());
             },
           );
         });
@@ -84,7 +78,7 @@ export class PixGridElementComponent
         // On click: change emoji
         ['click', 'touchstart'].forEach((event) => {
           HelperFunctionsService.addEventListenerToElement(
-            this.component_grid_element.nativeElement,
+            gridElement,
             event,
             () => {
               this.revealOnClick(GameManager.chosen_emoji);
@@ -92,13 +86,12 @@ export class PixGridElementComponent
           );
         });
         // If any transition on this element ends --> call this event
-        let transitionEnd = HelperFunctionsService.transitionEndEventName();
         HelperFunctionsService.addEventListenerToElement(
-          this.component_grid_element.nativeElement,
-          transitionEnd,
+          gridElement,
+          HelperFunctionsService.transitionEndEventName(),
           () => {
             if (GameManager.pixle_solved || this.pixle_tile_solved) return;
-            let element: HTMLElement = this.user_interactive.nativeElement;
+            const element = this.user_interactive().nativeElement;
             if (!element.classList.contains(this.do_flip_class)) {
               // Reset backface of grid element
               this.showCorrectAnswer(false);
@@ -115,18 +108,22 @@ export class PixGridElementComponent
    * Select this emoji and element
    */
   public selectThisEmoji(): void {
-    if (this.grid_element_type !== 1) return;
-    const element = this.user_interactive.nativeElement as HTMLElement;
-    this.addClassToHTMLElement(element, this.selected_class);
+    if (this.grid_element_type() !== 1) return;
+    this.addClassToHTMLElement(
+      this.user_interactive().nativeElement,
+      this.selected_class,
+    );
   }
 
   /**
    * Unselect this emoji and element
    */
   public unselectThisEmoji(): void {
-    if (this.grid_element_type !== 1) return;
-    const element = this.user_interactive.nativeElement as HTMLElement;
-    this.removeClassFromHTMLElement(element, this.selected_class);
+    if (this.grid_element_type() !== 1) return;
+    this.removeClassFromHTMLElement(
+      this.user_interactive().nativeElement,
+      this.selected_class,
+    );
   }
 
   /**
@@ -136,7 +133,7 @@ export class PixGridElementComponent
    */
   public revealOnClick(twa_emoji_class: string = ''): void {
     if (
-      this.grid_element_type !== 0 ||
+      this.grid_element_type() !== 0 ||
       this.pixle_tile_solved ||
       this.pixle_tile_lives <= 0
     )
@@ -148,8 +145,8 @@ export class PixGridElementComponent
    * Flip grid element
    */
   public doFlip(): void {
-    if (this.grid_element_type !== 0) return;
-    const element = this.user_interactive.nativeElement as HTMLElement;
+    if (this.grid_element_type() !== 0) return;
+    const element = this.user_interactive().nativeElement;
     // Show correct answer before flipping the grid element
     this.showCorrectAnswer();
     this.addClassToHTMLElement(element, this.do_flip_class);
@@ -160,9 +157,11 @@ export class PixGridElementComponent
    * Reverse flipped grid element
    */
   public undoFlip(): void {
-    if (this.grid_element_type !== 0 || this.pixle_tile_solved) return;
-    const element = this.user_interactive.nativeElement as HTMLElement;
-    this.removeClassFromHTMLElement(element, this.do_flip_class);
+    if (this.grid_element_type() !== 0 || this.pixle_tile_solved) return;
+    this.removeClassFromHTMLElement(
+      this.user_interactive().nativeElement,
+      this.do_flip_class,
+    );
     this.setElementIcon(this.pixle_emoji_default);
     // Second part is executed in an event listener
     // The listener is set right at the beginning of this components lifespan
@@ -175,13 +174,12 @@ export class PixGridElementComponent
    */
   public updateTileStatus(solved: boolean): void {
     if (
-      this.grid_element_type !== 0 ||
+      this.grid_element_type() !== 0 ||
       this.pixle_tile_solved ||
       this.pixle_tile_lives <= 0
     )
       return;
-    const gridNativeElement = this.user_interactive
-      .nativeElement as HTMLElement;
+    const gridNativeElement = this.user_interactive().nativeElement;
     if (!solved) {
       this.pixle_tile_lives--;
       // Add class which represents the current health status
@@ -207,13 +205,8 @@ export class PixGridElementComponent
    * @private
    */
   private setElementIcon(twa_emoji_class: string = ''): void {
-    if (
-      twa_emoji_class === '' ||
-      (twa_emoji_class !== '' &&
-        this.twa_emoji_class_front_face === twa_emoji_class)
-    )
-      return;
-    this.twa_emoji_class_front_face = twa_emoji_class;
+    if (twa_emoji_class === '') return;
+    this.twa_emoji_class_front_face.set(twa_emoji_class);
   }
 
   /**
@@ -223,9 +216,9 @@ export class PixGridElementComponent
    * @private
    */
   private showCorrectAnswer(show: boolean = true): void {
-    if (this.grid_element_type !== 0) return;
-    this.twa_emoji_class_back_face = show
-      ? this.pixle_emoji
-      : this.pixle_emoji_default;
+    if (this.grid_element_type() !== 0) return;
+    this.twa_emoji_class_back_face.set(
+      show ? this.pixle_emoji() : this.pixle_emoji_default,
+    );
   }
 }
