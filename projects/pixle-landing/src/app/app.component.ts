@@ -29,7 +29,6 @@ import { getPixleCountdown } from './pixle-countdown';
 // Cookie notification
 const COOKIE_NOTIF_MSG: IPopUp = {
   headline: 'Cookie alert!',
-  subline: '',
   message_body:
     'We are required to inform you about the usage of cookies on our website. These are required' +
     ' and used in order to save applied settings. Closing this notification means you agree with the usage of cookies.',
@@ -137,26 +136,12 @@ export class AppComponent implements OnInit, AfterViewInit {
    */
   public toggleSideMenu(): void {
     const sideMenuComponent = this.sideMenuComponent();
-    const sideMenuElement = sideMenuComponent.side_menu().nativeElement;
-    const toggleSideMenuElement = this.toggle_side_menu_btn().nativeElement;
-    const showClass: string = 'toggle';
-
-    if (sideMenuComponent.active) {
-      sideMenuComponent.addClassToHTMLElement(sideMenuElement, 'close');
-      if (toggleSideMenuElement.classList.contains(showClass)) {
-        toggleSideMenuElement.classList.remove(showClass);
-      }
-    } else {
-      sideMenuComponent.removeClassFromHTMLElement(
-        sideMenuElement,
-        'close',
-      );
-      if (!toggleSideMenuElement.classList.contains(showClass)) {
-        toggleSideMenuElement.classList.add(showClass);
-      }
-    }
-    sideMenuComponent.active = !sideMenuComponent.active;
+    const active = !sideMenuComponent.active;
+    sideMenuComponent.side_menu().nativeElement.classList.toggle('close', !active);
+    this.toggle_side_menu_btn().nativeElement.classList.toggle('toggle', active);
+    sideMenuComponent.active = active;
   }
+
 
   /**
    * Parse the value of the cookie consent storage item

@@ -7,11 +7,9 @@ import {
   viewChild,
 } from '@angular/core';
 import { IPopUp } from '@interface/popup-message.interface';
-import { AbstractHtmlElement } from '@abstract/abstract.html-element';
 
 const DEFAULT_MSG: IPopUp = {
   headline: "Hmm..., this isn't supposed to be shown already...",
-  subline: '',
   message_body: 'Did you try something??',
 };
 
@@ -21,7 +19,6 @@ const DEFAULT_MSG: IPopUp = {
   styleUrls: ['./popup-message.component.scss'],
 })
 export class PopupMessageComponent
-  extends AbstractHtmlElement
   implements AfterViewInit
 {
   popup_is_closed: boolean = false;
@@ -59,7 +56,7 @@ export class PopupMessageComponent
    * Open the popup
    */
   public openPopup(): void {
-    this.removeClassFromHTMLElement(this.msg_container().nativeElement, 'close');
+    this.msg_container().nativeElement.classList.remove('close');
     this.popup_is_closed = false;
   }
 
@@ -69,7 +66,7 @@ export class PopupMessageComponent
    * @param output
    */
   public closePopup(output: boolean = true): void {
-    this.addClassToHTMLElement(this.msg_container().nativeElement, 'close');
+    this.msg_container().nativeElement.classList.add('close');
     this.popup_is_closed = true;
     this.sendPopupHasBeenClosed.emit(output);
   }
