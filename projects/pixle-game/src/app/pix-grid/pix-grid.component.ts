@@ -2,11 +2,11 @@ import {
   AfterViewInit,
   Component,
   computed,
+  DestroyRef,
   DOCUMENT,
   ElementRef,
   inject,
   input,
-  OnInit,
   Renderer2,
   viewChild,
   viewChildren,
@@ -27,8 +27,10 @@ const MIN_GRID_WIDTH: number = 135;
   templateUrl: './pix-grid.component.html',
   styleUrls: ['./pix-grid.component.scss'],
   imports: [PixGridElementComponent],
+  // Host listener: removed automatically when the component is destroyed (e.g. on reload)
+  host: { '(window:resize)': 'onWindowResize()' },
 })
-export class PixGridComponent implements OnInit, AfterViewInit {
+export class PixGridComponent implements AfterViewInit {
   public readonly pixle_emoji_input = viewChildren(PixGridElementComponent);
   readonly grid_image_id = input<number>(-1);
   readonly grid_image = input<string[][]>([]);
@@ -45,20 +47,22 @@ export class PixGridComponent implements OnInit, AfterViewInit {
   private readonly document = inject(DOCUMENT);
   private readonly window = inject(WINDOW);
   private readonly renderer = inject(Renderer2);
+  private initial_size_timer: number = -1;
 
-  ngOnInit(): void {
+  constructor() {
+    inject(DestroyRef).onDestroy(() => {
+      this.window.clearTimeout(this.initial_size_timer);
+      this.checkGridRowTimers();
+    });
+  }
+
+  public onWindowResize(): void {
     if (this.grid_image().length <= 0) return;
-    HelperFunctionsService.addEventListenerToElement(
-      this.window,
-      'resize',
-      () => {
-        this.setInitialSizes();
-      },
-    );
+    this.setInitialSizes();
   }
 
   ngAfterViewInit() {
-    this.window.setTimeout(() => {
+    this.initial_size_timer = this.window.setTimeout(() => {
       this.setInitialSizes();
     }, 10);
     if (

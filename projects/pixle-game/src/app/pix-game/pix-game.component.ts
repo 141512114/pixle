@@ -1,6 +1,7 @@
 import {
   AfterViewInit,
   Component,
+  DestroyRef,
   DOCUMENT,
   inject,
   OnInit,
@@ -54,6 +55,7 @@ export class PixGameComponent implements OnInit, AfterViewInit {
   readonly cookie_popup_is_closed = signal<boolean>(true);
   validating: boolean = false;
   private countdown_start: number = -1;
+  private undo_flip_timer: number = -1;
   // These elements are only rendered depending on the cookie consent state
   private readonly match_status_msg =
     viewChild<PopupMessageComponent>('match_status');
@@ -65,6 +67,14 @@ export class PixGameComponent implements OnInit, AfterViewInit {
   private readonly location = inject(Location);
   private readonly document = inject(DOCUMENT);
   private readonly window = inject(WINDOW);
+
+  constructor() {
+    // Pending timers must not touch the game after the component is gone (e.g. on reload)
+    inject(DestroyRef).onDestroy(() => {
+      this.window.clearTimeout(this.countdown_start);
+      this.window.clearTimeout(this.undo_flip_timer);
+    });
+  }
 
   /**
    * Initialize the game
@@ -256,7 +266,7 @@ export class PixGameComponent implements OnInit, AfterViewInit {
         this.generateShareMessage();
       } else {
         // Player didn't win yet --> reset flip-state of some tiles
-        this.window.setTimeout(() => {
+        this.undo_flip_timer = this.window.setTimeout(() => {
           pixGridComponent.flipWholePixle(true);
           this.validating = false;
         }, UNDO_FLIP_TIME);

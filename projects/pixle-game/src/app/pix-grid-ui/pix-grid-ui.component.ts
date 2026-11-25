@@ -1,5 +1,6 @@
 import {
   Component,
+  DestroyRef,
   ElementRef,
   inject,
   input,
@@ -36,6 +37,13 @@ export class PixGridUiComponent extends AbstractHtmlElement {
   private readonly window = inject(WINDOW);
   private readonly clipboard = inject(Clipboard);
   private copied_badge_timer: number = -1;
+
+  constructor() {
+    super();
+    inject(DestroyRef).onDestroy(() =>
+      this.window.clearTimeout(this.copied_badge_timer),
+    );
+  }
 
   /**
    * Request validation of the pixle grid
