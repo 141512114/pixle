@@ -70,8 +70,9 @@ export function neighbours(p: Pattern, row: number, col: number): [number, numbe
 
 /**
  * Check the rules every mutated pattern has to follow (see the design document):
- * rectangular, at most 5×5, 2 to 5 placeholders numbered without gaps, every tile touches
- * another tile with the same placeholder, level 6 needs at least 4 and level 7 exactly 5 placeholders
+ * rectangular, at most 5×5, 2 to 5 placeholders numbered without gaps, level 6 needs at least
+ * 4 and level 7 exactly 5 placeholders. From level 3 on no placeholder may cover a single tile.
+ * Scattered tiles are fine: the original patterns use them on purpose.
  */
 export function isValidMutation(p: Pattern, level: number): boolean {
   if (p.length === 0 || p.length > MAX_SIZE) return false;
@@ -88,9 +89,12 @@ export function isValidMutation(p: Pattern, level: number): boolean {
   if (level >= 7 && count !== 5) return false;
   if (level === 6 && count < 4) return false;
 
-  return p.every((row, r) =>
-    row.every((value, c) => neighbours(p, r, c).some(([nr, nc]) => p[nr][nc] === value)),
-  );
+  // Level 2 only mirrors or rotates an original, which stays as designed. Everything else
+  // must not leave an emoji on a single tile (e.g. cut off by combine)
+  if (level <= 2) return true;
+  const sizes = new Map<number, number>();
+  p.flat().forEach((value) => sizes.set(value, (sizes.get(value) ?? 0) + 1));
+  return [...sizes.values()].every((size) => size >= 2);
 }
 
 /**
@@ -179,18 +183,27 @@ function regionsOf(p: Pattern, placeholder: number): [number, number][][] {
 }
 
 /**
- * Give one connected region of a placeholder a different placeholder: a new one
+ * Give one connected region (at least 2 tiles) a different placeholder: a new one
  * (if fewer than 5 exist) or another existing one
  */
 export function recolour(p: Pattern, random: Random): Pattern {
   const source = normalize(p);
   const count = countPlaceholders(source);
-  const placeholder = randomInt(random, count - 1);
-  const regions = regionsOf(source, placeholder);
-  const region = regions[randomInt(random, regions.length - 1)];
+  // Only connected areas of at least 2 tiles are recoloured, so no new scattered tiles appear
+  const regions = Array.from({ length: count }, (_, i) => i).flatMap((placeholder) =>
+    regionsOf(source, placeholder)
+      .filter((region) => region.length >= 2)
+      .map((region) => ({ placeholder, region })),
+  );
+  if (regions.length === 0) return source;
+  const { placeholder, region } = regions[randomInt(random, regions.length - 1)];
 
   const others = Array.from({ length: count }, (_, i) => i).filter((v) => v !== placeholder);
-  const useNew = count < MAX_PLACEHOLDERS && (others.length === 0 || random() < 0.5);
+  // A region holding every tile of its placeholder would look the same with a new placeholder
+  const coversPlaceholder = region.length === source.flat().filter((v) => v === placeholder).length;
+  const useNew =
+    count < MAX_PLACEHOLDERS &&
+    (others.length === 0 || (!coversPlaceholder && random() < 0.5));
   const target = useNew ? count : others[randomInt(random, others.length - 1)];
 
   const result = source.map((row) => [...row]);

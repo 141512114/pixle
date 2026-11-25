@@ -78,13 +78,15 @@ The owner picked approach 1.
 - Same size as one of the existing patterns (a rotation of a non-square pattern swaps rows/columns;
   3×5 and 4×5-style wide grids are allowed).
 - At most 5 different placeholders, numbered 0..n-1 without gaps.
-- **Shape rule:** every placeholder covers at least 2 tiles, and each of its tiles touches (up, down,
-  left, right) at least one other tile with the same placeholder. This keeps images structured.
+- **Shape rule (revised with the owner during implementation):** only what the mutation creates is
+  checked. Scattered accents are part of the original art (23 of 30 originals have placeholders
+  without touching tiles), so they stay allowed. From level 3 on no placeholder may cover a single
+  tile (e.g. cut off by `combine`), and `recolour` only recolours connected areas of at least 2 tiles.
+  Level 2 (mirrored or rotated originals) needs no shape check.
 - At least 2 different placeholders.
 - Level 7 must have exactly 5 placeholders; level 6 must have at least 4.
 
-Level 1 returns the original pattern untouched, even if it breaks the shape rule (originals stay as
-designed).
+Level 1 returns the original pattern untouched (originals stay as designed).
 
 ## The operations
 
@@ -129,7 +131,7 @@ designed).
 
 ## Calls made while writing this (not decided by the owner)
 
-- Rules for mutated patterns (shape rule, placeholder limits, 20 attempts, fallback per level).
+- Placeholder limits, 20 attempts, fallback per level. (The shape rule was revised with the owner.)
 - Level 6/7 restricted to base patterns of at least 4×4.
 - Difficulty stored in `IPixle.difficulty`; indicator placed below the `Pixle` title in the game header.
 

@@ -86,7 +86,7 @@ describe('isValidMutation', () => {
       ),
     ).toBe(false));
 
-  it('rejects a placeholder whose tile touches no equal tile', () =>
+  it('accepts scattered tiles as long as the placeholder has a connected pair', () =>
     expect(
       isValidMutation(
         [
@@ -96,7 +96,43 @@ describe('isValidMutation', () => {
         ],
         3,
       ),
-    ).toBe(false));
+    ).toBe(true));
+
+  it('counts diagonal neighbours as a connected pair', () =>
+    expect(
+      isValidMutation(
+        [
+          [1, 0, 0],
+          [0, 1, 0],
+          [0, 0, 0],
+        ],
+        3,
+      ),
+    ).toBe(true));
+
+  it('accepts placeholders with only scattered tiles, like the originals', () =>
+    expect(
+      isValidMutation(
+        [
+          [1, 0, 1],
+          [0, 0, 0],
+          [0, 0, 0],
+        ],
+        3,
+      ),
+    ).toBe(true));
+
+  it('allows single tiles on level 2 (mirrored or rotated originals)', () =>
+    expect(
+      isValidMutation(
+        [
+          [0, 0, 1],
+          [0, 0, 0],
+          [0, 0, 0],
+        ],
+        2,
+      ),
+    ).toBe(true));
 
   it('rejects gaps in numbering', () =>
     expect(
@@ -218,6 +254,24 @@ describe('combine, reducePlaceholders and recolour', () => {
     const before = normalize(A).flat();
     expect(r.flat().filter((v, i) => v !== before[i]).length).toBeGreaterThan(0);
     expect(r).toEqual(normalize(r));
+  });
+
+  it('recolour never recolours a single tile', () => {
+    // placeholders 1 and 2 are single tiles; only the regions of 0 and 3 may change
+    const P = [
+      [0, 0, 1],
+      [0, 0, 2],
+      [3, 3, 3],
+    ];
+    for (const values of [
+      [0.3, 0, 0.9, 0.5],
+      [0.6, 0, 0.9, 0.1],
+      [0, 0, 0.1, 0],
+      [0.9, 0, 0.9, 0.9],
+    ]) {
+      const r = recolour(P, seq(...values));
+      expect(r[0][2]).not.toBe(r[1][2]);
+    }
   });
 
   it('recolour never exceeds 5 placeholders', () => {

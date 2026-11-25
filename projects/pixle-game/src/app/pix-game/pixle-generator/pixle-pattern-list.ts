@@ -1,9 +1,10 @@
 import * as patterns from './pixle-patterns.database';
+import { Pattern } from './pattern-mutations';
 
 /**
  * The master array list which contains all possible pixle patterns
  */
-export const MASTER_PATTERNS: any[] = [
+export const MASTER_PATTERNS: Pattern[] = [
   patterns.MOSAIC2PATTERN,
   patterns.TTOWERPATTERN,
   patterns.TWIRLPATTERN,
