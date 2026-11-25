@@ -13,6 +13,7 @@ import { Router } from '@angular/router';
 import { Location } from '@angular/common';
 import { WINDOW } from '@typescript/window-injection.token';
 import * as CookieService from '@abstract/composables/cookies';
+import { applyTheme } from '@typescript/theme';
 import { GameManager } from './game.manager';
 import { PopupMessageComponent } from '@typescript/popup-message/popup-message.component';
 import { IPopUp } from '@interface/popup-message.interface';
@@ -129,7 +130,7 @@ export class PixGameComponent implements OnInit, AfterViewInit {
     // Get the stored theme data, if available, and "restore" the previous settings
     const previousTheme: string | null = CookieService.getCookie('last_theme');
     if (previousTheme != null) {
-      this.document.body.dataset['theme'] = previousTheme;
+      applyTheme(this.document, previousTheme);
     }
     GameManager.generatePixle();
   }

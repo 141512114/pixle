@@ -1,5 +1,6 @@
 import { Component, DOCUMENT, inject } from '@angular/core';
 import * as CookieService from '@abstract/composables/cookies';
+import { applyTheme } from '@typescript/theme';
 
 @Component({
   selector: 'app-theme-switcher',
@@ -15,7 +16,7 @@ export class ThemeSwitcherComponent {
    * @param theme_name
    */
   public changeTheme(theme_name: string): void {
-    this.document.body.dataset['theme'] = theme_name;
+    applyTheme(this.document, theme_name);
     CookieService.createCookie('last_theme', theme_name);
   }
 }

@@ -12,6 +12,7 @@ import {
 } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
 import * as CookieService from '@abstract/composables/cookies';
+import { applyTheme } from '@typescript/theme';
 import {
   faGear,
   faXmark,
@@ -99,7 +100,7 @@ export class AppComponent implements OnInit, AfterViewInit {
     // Get the stored theme data, if available, and "restore" the previous settings
     const previous_theme: string | null = CookieService.getCookie('last_theme');
     if (previous_theme != null) {
-      this.document.body.dataset['theme'] = previous_theme;
+      applyTheme(this.document, previous_theme);
     }
   }
 
