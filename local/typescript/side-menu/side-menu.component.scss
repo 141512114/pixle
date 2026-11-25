@@ -8,7 +8,7 @@
   left: 0;
   right: 0;
   padding: 65px 0;
-  background-color: theme-color(2);
+  @include surface(2);
   transition: top 475ms, opacity 400ms;
   pointer-events: all;
   z-index: 99;

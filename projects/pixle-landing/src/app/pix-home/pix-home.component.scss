@@ -31,10 +31,10 @@ section#welcome {
 
     span {
       display: block;
-      color: white;
+      color: var(--fg-strong);
 
       &.add {
-        color: rgba($default-headline-color, .65);
+        opacity: .65;
       }
     }
 

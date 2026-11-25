@@ -6,6 +6,9 @@
   @each $n, $name in themes.$theme-color-names {
     --default-theme-#{$name}: #{map.get($theme, $n)};
   }
+  @each $token, $color in themes.theme-text-colors($theme) {
+    --default-theme-#{$token}: #{$color};
+  }
 }
 
 html,
