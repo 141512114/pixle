@@ -5,6 +5,16 @@
 @use 'mixins/mixins' as *;
 
 // pix-grid-element component stylesheet
+
+// The focusable host is covered by the tile, so the ring is drawn around the visible tile
+.component-pix-grid-element:focus-visible {
+  outline: none;
+  box-shadow: none;
+
+  .grid-element-inner {
+    @include focus-ring;
+  }
+}
 .grid-element-inner {
   position: absolute;
   top: 0;

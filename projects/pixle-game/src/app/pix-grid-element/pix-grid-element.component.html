@@ -1,5 +1,7 @@
 <div (click)="onTileClick()" (transitionend)="onTransitionEnd()"
-     class="position-relative w-100 h-100 component-pix-grid-element">
+     (keydown.enter)="onTileClick()" (keydown.space)="$event.preventDefault(); onTileClick()"
+     [attr.aria-label]="tile_label()" class="position-relative w-100 h-100 component-pix-grid-element"
+     role="button" tabindex="0">
   <svg class="w-100 h-auto square-placeholder" viewBox="0 0 1 1"></svg>
   <div #user_interactive
        [class.highlight-btn--grid-element]="grid_element_type() === 0"

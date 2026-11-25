@@ -43,6 +43,41 @@ describe('PixGridElementComponent', () => {
     expect(face('front-face')).toContain('twa-blue-heart');
   });
 
+  it('can be reached and used with the keyboard', async () => {
+    await create(0, 'twa-red-heart');
+    GameManager.chosen_emoji = 'twa-blue-heart';
+    const tile = (fixture.nativeElement as HTMLElement).querySelector<HTMLElement>(
+      '.component-pix-grid-element',
+    )!;
+
+    expect(tile.tabIndex).toBe(0);
+    expect(tile.getAttribute('role')).toBe('button');
+    expect(tile.getAttribute('aria-label')).toBe('Tile: white question mark');
+
+    tile.dispatchEvent(new KeyboardEvent('keydown', { key: 'Enter' }));
+    await fixture.whenStable();
+
+    expect(face('front-face')).toContain('twa-blue-heart');
+    expect(tile.getAttribute('aria-label')).toBe('Tile: blue heart');
+  });
+
+  it('selects its emoji with the space key on an emitter tile', async () => {
+    await create(1, 'twa-red-heart');
+    const emitted: string[] = [];
+    component.sendTWAEmojiClass.subscribe((value) => emitted.push(value));
+    const tile = (fixture.nativeElement as HTMLElement).querySelector<HTMLElement>(
+      '.component-pix-grid-element',
+    )!;
+
+    const space = new KeyboardEvent('keydown', { key: ' ', cancelable: true });
+    tile.dispatchEvent(space);
+
+    expect(emitted).toEqual(['twa-red-heart']);
+    // Space must not scroll the page
+    expect(space.defaultPrevented).toBe(true);
+    expect(tile.getAttribute('aria-label')).toBe('Choose red heart');
+  });
+
   it('reveals the correct answer when flipped', async () => {
     await create(0, 'twa-red-heart');
 
