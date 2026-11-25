@@ -3,9 +3,10 @@ import { SUPPORT_EMAIL } from '../app.component';
 
 export const MISSING_PIXLE_MSG: IPopUp = {
   headline: 'Missing pixle data!',
-  subline: 'There was a mistake retrieving a pixle from the database.',
+  subline: "Something went wrong while creating today's pixle.",
   message_body:
-    'If this issue occurs more often than it should, report it to the team.</br>' +
+    "Something went wrong while creating today's pixle.<br>" +
+    'If this keeps happening, please let us know:<br>' +
     '<a class="share-via-mail" href="mailto:' +
     SUPPORT_EMAIL +
     '">' +
@@ -16,11 +17,11 @@ export const SUCCESS_PIXLE_MSG: IPopUp = {
   headline: 'Congratulations!',
   subline: '',
   message_body:
-    "You've made it, keep going!</br>Challenge your friends and family by sharing your score.",
+    "You've made it, keep going!<br>Challenge your friends and family by sharing your score.",
 };
 export const FAILED_PIXLE_MSG: IPopUp = {
   headline: 'No way!',
   subline: '',
   message_body:
-    "This is it... . You've lost.</br>But i'm believing in you, hang in there!",
+    "That's it, you've lost.<br>But I believe in you, hang in there!",
 };
