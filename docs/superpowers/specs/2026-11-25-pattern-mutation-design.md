@@ -14,7 +14,6 @@ from getting discouraged. Mutation must therefore produce **new but structured**
 
 - New pictures every day, built by recombining and recolouring the existing patterns.
 - Difficulty rises over the week: Monday is easiest, Sunday hardest.
-- Players can see the day's difficulty in the shared result.
 - Same day → same puzzle for every player (deterministic from the date, as today).
 
 ## Non-goals
@@ -70,9 +69,8 @@ The owner picked approach 1.
   | Sat | 6 | combined + two areas recoloured, prefers 4–5 emojis |
   | Sun | 7 | combined, several recolourings, always 5 emojis |
 
-- Difficulty is appended as dots to the details line of the shared result (today `412/5/5`), e.g.
-  `412/5/5 · ●●●●●○○`. A header indicator below the title was built and then removed at the owner's
-  request after seeing it in the browser.
+- The difficulty is not shown to players at all (no header indicator, nothing in the share text).
+  Both were built first and removed at the owner's request.
 
 ## Rules for every mutated pattern (levels 2–7)
 
@@ -119,7 +117,6 @@ Level 1 returns the original pattern untouched (originals stay as designed).
 - `pixle-generator/pattern-mutations.ts`: the pure operations and the validator.
 - `pixle-generator/difficulty.ts`: weekday → level table.
 - `pixle-generator.ts`: uses both; the seeded random function is passed into the operations.
-- `GameManager` keeps the difficulty; `generateShareMessage` appends it.
 
 ## Testing
 

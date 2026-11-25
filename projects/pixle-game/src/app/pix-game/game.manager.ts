@@ -1,6 +1,4 @@
-import { signal } from '@angular/core';
 import initPixleGenerator from './pixle-generator/pixle-generator';
-import { difficultyDots } from './pixle-generator/difficulty';
 import { HelperFunctionsService } from '@abstract/services/helper-functions.service';
 import { PixGridElementComponent } from '../pix-grid-element/pix-grid-element.component';
 import {
@@ -23,8 +21,6 @@ export class GameManager {
   public static pixle_image: string[][] = [];
   public static pixle_image_width: number = 0;
   public static pixle_image_height: number = 0;
-  /** Difficulty of the current pixle (1 = Monday … 7 = Sunday), 0 until one was generated */
-  public static readonly difficulty = signal<number>(0);
   public static pixle_emoji_list: string[] = [];
 
   public static chosen_emoji: string = '';
@@ -58,7 +54,6 @@ export class GameManager {
     }
 
     this.pixle_id = pixle.id;
-    GameManager.difficulty.set(pixle.difficulty);
     this.pixle_image = temp_pixle_image;
     // Make sure a pixle tile array was assigned
     if (this.pixle_image.length <= 0) return;
@@ -87,9 +82,7 @@ export class GameManager {
       '/' +
       GameManager.pixle_image_width +
       '/' +
-      GameManager.pixle_image_height +
-      ' · ' +
-      difficultyDots(GameManager.difficulty());
+      GameManager.pixle_image_height;
     const share_result: string[] =
       this.generatePixleStatusMap(grid_elements_array);
     let pixle_status_map: string = '';

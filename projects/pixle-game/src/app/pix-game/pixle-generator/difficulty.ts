@@ -3,8 +3,6 @@
  */
 export type DifficultyLevel = 1 | 2 | 3 | 4 | 5 | 6 | 7;
 
-export const MAX_DIFFICULTY: DifficultyLevel = 7;
-
 export interface DifficultySettings {
   /** Mirror or rotate the base pattern */
   mirrorOrRotate: boolean;
@@ -31,11 +29,4 @@ export const DIFFICULTY_SETTINGS: Readonly<Record<DifficultyLevel, DifficultySet
  */
 export function levelForDate(date: Date): DifficultyLevel {
   return (((date.getDay() + 6) % 7) + 1) as DifficultyLevel;
-}
-
-/**
- * Difficulty as dots, e.g. level 5 → ●●●●●○○
- */
-export function difficultyDots(level: number): string {
-  return '●'.repeat(level) + '○'.repeat(MAX_DIFFICULTY - level);
 }
