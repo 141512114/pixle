@@ -28,7 +28,7 @@ header {
 }
 
 #pixle-countdown {
-  background-color: theme-color(1);
+  @include surface(1);
   pointer-events: all;
   z-index: 10;
 
@@ -44,12 +44,12 @@ header {
     a {
       background-color: transparent;
       font-family: "Open-Sans", sans-serif;
-      color: $default-text-color;
+      color: var(--fg);
     }
 
     span.countdown {
       font-family: "Open-Sans-Bold", sans-serif;
-      color: white;
+      color: var(--fg-strong);
     }
   }
 }

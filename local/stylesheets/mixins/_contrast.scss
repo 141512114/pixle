@@ -1,0 +1,54 @@
+@use "sass:color";
+@use "sass:list";
+@use "sass:math";
+
+// WCAG 2 minimum contrast for normal text
+$min-contrast: 4.5 !default;
+
+@function _linear($channel) {
+  $c: math.div($channel, 255);
+  @if $c <= 0.03928 {
+    @return math.div($c, 12.92);
+  }
+  @return math.pow(math.div($c + 0.055, 1.055), 2.4);
+}
+
+// Relative luminance (WCAG 2)
+@function luminance($color) {
+  @return 0.2126 * _linear(color.channel($color, "red", $space: rgb))
+    + 0.7152 * _linear(color.channel($color, "green", $space: rgb))
+    + 0.0722 * _linear(color.channel($color, "blue", $space: rgb));
+}
+
+@function contrast($a, $b) {
+  $la: luminance($a);
+  $lb: luminance($b);
+  @return math.div(math.max($la, $lb) + 0.05, math.min($la, $lb) + 0.05);
+}
+
+// Lowest contrast of $color against every color in $backgrounds
+@function _min-contrast($color, $backgrounds) {
+  $lowest: 21;
+  @each $bg in $backgrounds {
+    $lowest: math.min($lowest, contrast($color, $bg));
+  }
+  @return $lowest;
+}
+
+// First of $candidates (in order of preference) that is readable on all $backgrounds.
+// Falls back to the candidate with the highest contrast if none reaches $min-contrast.
+@function readable($backgrounds, $candidates) {
+  $best: list.nth($candidates, 1);
+  $best-contrast: 0;
+  @each $candidate in $candidates {
+    $c: _min-contrast($candidate, $backgrounds);
+    @if $c >= $min-contrast {
+      @return $candidate;
+    }
+    @if $c > $best-contrast {
+      $best: $candidate;
+      $best-contrast: $c;
+    }
+  }
+  @return $best;
+}

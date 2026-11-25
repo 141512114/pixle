@@ -14,11 +14,10 @@ main {
 
   .mobile-landscape-popup-wrapper {
     padding: 11px 21px;
-    background-color: theme-color(4);
+    @include surface(4);
 
     p {
       font-size: calc(1em + 1.65vmin);
-      color: theme-color(1);
     }
   }
 }

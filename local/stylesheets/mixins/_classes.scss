@@ -74,7 +74,7 @@
       &:hover,
       &:active {
         cursor: pointer;
-        color: themes.theme-color(2);
+        color: themes.theme-text(button-hover-text);
         background-color: themes.theme-color(6);
       }
     }
@@ -103,7 +103,7 @@
 
 .description a {
   padding: 2px 3px;
-  color: themes.theme-color(6);
+  color: var(--link);
   background-color: transparent;
 }
 
@@ -229,7 +229,7 @@
   span {
     font-family: fonts.$main-ui;
     font-size: 18px;
-    color: themes.theme-color(1);
+    color: themes.theme-text(button-hover-text);
   }
 
   &.close {

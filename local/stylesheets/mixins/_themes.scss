@@ -1,5 +1,7 @@
 @use "sass:map";
 
+@use "contrast";
+
 // Color maps
 $neo-palette: (
   1: #0F1020,
@@ -63,4 +65,47 @@ $theme-color-names: (1: one, 2: two, 3: three, 4: four, 5: five, 6: six);
 // Color n of the active theme, falls back to the default palette
 @function theme-color($n) {
   @return var(--default-theme-#{map.get($theme-color-names, $n)}, #{map.get($default-color-palette, $n)});
+}
+
+// Neutral text colors, used when no palette color is readable enough
+$text-light: #FFFFFF;
+$text-soft: #DEDEDE;
+$text-dark: #10121A;
+
+// Text colors of a palette, each one chosen to stay readable (WCAG AA) on its background.
+// The candidates are ordered by preference, so a theme keeps its look wherever it is readable.
+@function theme-text-colors($p) {
+  $tokens: ();
+  @each $n, $name in $theme-color-names {
+    $bg: map.get($p, $n);
+    $tokens: map.merge($tokens, (
+      // Body text and headlines on a surface of color n
+      text-on-#{$name}: contrast.readable($bg, ($text-soft, $text-light, $text-dark)),
+      headline-on-#{$name}: contrast.readable($bg, ($text-light, $text-dark)),
+      // Inline links (e.g. the support email)
+      link-on-#{$name}: contrast.readable($bg, (map.get($p, 6), map.get($p, 5), $text-light, $text-dark)),
+    ));
+  }
+  @return map.merge($tokens, (
+    // Buttons: color 4, hovered / selected: color 6, inverted: color 2
+    button-text: contrast.readable(map.get($p, 4), (map.get($p, 2), map.get($p, 1), $text-light, $text-dark)),
+    button-hover-text: contrast.readable(map.get($p, 6), (map.get($p, 2), map.get($p, 1), $text-light, $text-dark)),
+    invert-text: contrast.readable(map.get($p, 2), (map.get($p, 4), map.get($p, 5), $text-light, $text-dark)),
+  ));
+}
+
+// Text color token of the active theme (see theme-text-colors), falls back to the default palette
+@function theme-text($token) {
+  @return var(--default-theme-#{$token}, #{map.get(theme-text-colors($default-color-palette), $token)});
+}
+
+// Background of color n, with readable text for everything inside it.
+// No fallbacks needed: the variables are always defined on html / body (see _materials.scss)
+@mixin surface($n) {
+  $name: map.get($theme-color-names, $n);
+  --fg: var(--default-theme-text-on-#{$name});
+  --fg-strong: var(--default-theme-headline-on-#{$name});
+  --link: var(--default-theme-link-on-#{$name});
+  color: var(--fg);
+  background-color: var(--default-theme-#{$name});
 }
