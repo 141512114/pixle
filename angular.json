@@ -53,10 +53,6 @@
           },
           "configurations": {
             "production": {
-              "index": {
-                "input": "projects/pixle-game/src/index.prod.html",
-                "output": "index.html"
-              },
               "budgets": [
                 {
                   "type": "initial",
@@ -156,10 +152,6 @@
           },
           "configurations": {
             "production": {
-              "index": {
-                "input": "projects/pixle-landing/src/index.prod.html",
-                "output": "index.html"
-              },
               "budgets": [
                 {
                   "type": "initial",
