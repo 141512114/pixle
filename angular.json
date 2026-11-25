@@ -23,9 +23,6 @@
             "outputPath": "dist/pixle-game",
             "index": "projects/pixle-game/src/index.html",
             "browser": "projects/pixle-game/src/main.ts",
-            "polyfills": [
-              "zone.js"
-            ],
             "tsConfig": "projects/pixle-game/tsconfig.app.json",
             "inlineStyleLanguage": "scss",
             "assets": [
@@ -39,7 +36,7 @@
             ],
             "styles": [
               "local/stylesheets/twemoji-amazing.scss",
-              "node_modules/bootstrap/scss/bootstrap.scss",
+              "node_modules/bootstrap/dist/css/bootstrap.min.css",
               "local/stylesheets/styles.scss"
             ],
             "stylePreprocessorOptions": {
@@ -124,9 +121,6 @@
           "options": {
             "outputPath": "dist/pixle-landing",
             "index": "projects/pixle-landing/src/index.html",
-            "polyfills": [
-              "zone.js"
-            ],
             "tsConfig": "projects/pixle-landing/tsconfig.app.json",
             "assets": [
               "projects/pixle-landing/src/.htaccess",
@@ -139,7 +133,7 @@
             ],
             "styles": [
               "local/stylesheets/twemoji-amazing.scss",
-              "node_modules/bootstrap/scss/bootstrap.scss",
+              "node_modules/bootstrap/dist/css/bootstrap.min.css",
               "local/stylesheets/styles.scss"
             ],
             "stylePreprocessorOptions": {
@@ -164,8 +158,8 @@
                 },
                 {
                   "type": "anyComponentStyle",
-                  "maximumWarning": "2kB",
-                  "maximumError": "4kB"
+                  "maximumWarning": "4kB",
+                  "maximumError": "8kB"
                 }
               ],
               "outputHashing": "all"

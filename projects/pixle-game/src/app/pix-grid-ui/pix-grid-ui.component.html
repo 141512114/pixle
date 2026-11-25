@@ -2,14 +2,17 @@
   <div #copied_badge class="rounded-3 overflow-hidden pix-copied-badge close">
     <span>Copied!</span>
   </div>
-  <div #ui_wrapper *ngIf="emoji_list.length > 0" class="position-relative overflow-hidden pix-grid-ui-wrapper">
+  @if (emoji_list().length > 0) {
+  <div #ui_wrapper class="position-relative overflow-hidden pix-grid-ui-wrapper">
     <div class="position-relative d-flex justify-content-center pix-emoji-list">
       <div class="pix-emoji-list-scroll-wrapper horizontal-scroll-wrapper">
         <div class="px-2 pix-emoji-list-content-wrapper">
-          <div *ngFor="let j of counter(emoji_list.length)" class="pix-col-item">
-            <app-pix-grid-element (sendTWAEmojiClass)="receiveIconCodePoint($event)" [grid_element_type]="1"
-                                  [pixle_emoji]="emoji_list[j]"></app-pix-grid-element>
-          </div>
+          @for (emoji of emoji_list(); track $index) {
+            <div class="pix-col-item">
+              <app-pix-grid-element (sendTWAEmojiClass)="receiveIconCodePoint($event)" [grid_element_type]="1"
+                                    [pixle_emoji]="emoji"></app-pix-grid-element>
+            </div>
+          }
         </div>
       </div>
     </div>
@@ -34,6 +37,7 @@
       </div>
     </div>
   </div>
+  }
   <div class="mt-auto pix-control-wrapper">
     <div class="w-50 d-inline-block p-0 validate-button-wrapper">
       <button (click)="validatePixleOnClick()" aria-label="Flip all tiles" class="w-100 pix-validate-button"

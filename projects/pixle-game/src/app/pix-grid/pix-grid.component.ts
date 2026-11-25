@@ -1,16 +1,16 @@
 import {
   AfterViewInit,
   Component,
+  computed,
+  DOCUMENT,
   ElementRef,
-  Inject,
-  Input,
+  inject,
+  input,
   OnInit,
-  QueryList,
   Renderer2,
-  ViewChild,
-  ViewChildren,
+  viewChild,
+  viewChildren,
 } from '@angular/core';
-import { CommonModule, DOCUMENT } from '@angular/common';
 import { PixGridElementComponent } from '../pix-grid-element/pix-grid-element.component';
 import { WINDOW } from '@typescript/window-injection.token';
 import { GameManager } from '../pix-game/game.manager';
@@ -26,32 +26,28 @@ const MIN_GRID_WIDTH: number = 135;
   selector: 'app-pix-grid',
   templateUrl: './pix-grid.component.html',
   styleUrls: ['./pix-grid.component.scss'],
-  standalone: true,
-  imports: [CommonModule, PixGridElementComponent],
+  imports: [PixGridElementComponent],
 })
 export class PixGridComponent implements OnInit, AfterViewInit {
-  @ViewChildren(PixGridElementComponent)
-  public pixle_emoji_input!: QueryList<PixGridElementComponent>;
-  @Input() grid_image_id: number = -1;
-  @Input() grid_image: string[][] = [];
-  grid_image_width: number = 0;
-  grid_image_height: number = 0;
-  grid_image_row_timer: any[] = [];
-  @ViewChild('grid_wrapper') private grid_wrapper!: ElementRef;
-  @ViewChild('grid_buffer') private grid_buffer!: ElementRef;
-  @ViewChild('grid_inner') private grid_inner!: ElementRef;
+  public readonly pixle_emoji_input = viewChildren(PixGridElementComponent);
+  readonly grid_image_id = input<number>(-1);
+  readonly grid_image = input<string[][]>([]);
+  readonly grid_image_width = computed(() => this.grid_image()[0]?.length ?? 0);
+  readonly grid_image_height = computed(() => this.grid_image().length);
+  grid_image_row_timer: number[] = [];
+  private readonly grid_wrapper =
+    viewChild.required<ElementRef<HTMLElement>>('grid_wrapper');
+  private readonly grid_buffer =
+    viewChild.required<ElementRef<HTMLElement>>('grid_buffer');
+  private readonly grid_inner =
+    viewChild.required<ElementRef<HTMLElement>>('grid_inner');
   private prev_window_height: number = 0;
-
-  constructor(
-    @Inject(DOCUMENT) private document: Document,
-    @Inject(WINDOW) private readonly window: Window,
-    private renderer: Renderer2,
-  ) {}
+  private readonly document = inject(DOCUMENT);
+  private readonly window = inject(WINDOW);
+  private readonly renderer = inject(Renderer2);
 
   ngOnInit(): void {
-    if (this.grid_image.length <= 0) return;
-    this.grid_image_width = this.grid_image[0].length;
-    this.grid_image_height = this.grid_image.length;
+    if (this.grid_image().length <= 0) return;
     HelperFunctionsService.addEventListenerToElement(
       this.window,
       'resize',
@@ -68,7 +64,7 @@ export class PixGridComponent implements OnInit, AfterViewInit {
     if (
       CookieService.getSessionCookie('lock_grid') === '1' &&
       CookieService.getSessionCookie('pixle_id') ===
-        this.grid_image_id.toString()
+        this.grid_image_id().toString()
     )
       return;
     this.flipWholePixle(false, false);
@@ -90,16 +86,16 @@ export class PixGridComponent implements OnInit, AfterViewInit {
     reverse: boolean = true,
   ): void {
     if (GameManager.pixle_solved) return;
-    const temp_pix_grid_comps: PixGridElementComponent[] =
-      this.pixle_emoji_input.toArray();
+    const temp_pix_grid_comps: readonly PixGridElementComponent[] =
+      this.pixle_emoji_input();
     let current_grid_row: number = 0;
     this.checkGridRowTimers();
     // Instant / regular flip
     const flipWholeRow = (row_num: number = 0): boolean => {
-      if (row_num >= this.grid_image_height) return false;
+      if (row_num >= this.grid_image_height()) return false;
       let solved_tiles_count: number = 0;
-      for (let i: number = 0; i < this.grid_image_width; i++) {
-        const current_grid_column: number = this.grid_image_width * row_num + i;
+      for (let i: number = 0; i < this.grid_image_width(); i++) {
+        const current_grid_column: number = this.grid_image_width() * row_num + i;
         if (temp_pix_grid_comps[current_grid_column].pixle_tile_solved) {
           solved_tiles_count++;
           continue;
@@ -110,14 +106,14 @@ export class PixGridComponent implements OnInit, AfterViewInit {
           temp_pix_grid_comps[current_grid_column].doFlip();
         }
       }
-      return solved_tiles_count < this.grid_image_width;
+      return solved_tiles_count < this.grid_image_width();
     };
     // Delayed flip
     const delayFlip = (do_delay: boolean = false): void => {
-      if (current_grid_row >= this.grid_image_height) return;
+      if (current_grid_row >= this.grid_image_height()) return;
       if (do_delay) {
         this.grid_image_row_timer.push(
-          setTimeout(() => {
+          this.window.setTimeout(() => {
             current_grid_row++;
             delayFlip(flipWholeRow(current_grid_row));
           }, ROW_OFFSET),
@@ -130,7 +126,7 @@ export class PixGridComponent implements OnInit, AfterViewInit {
     if (delay_active) {
       delayFlip(flipWholeRow(current_grid_row));
     } else {
-      for (let i = 0; i < this.grid_image_height; i++) {
+      for (let i = 0; i < this.grid_image_height(); i++) {
         flipWholeRow(i);
       }
     }
@@ -141,7 +137,7 @@ export class PixGridComponent implements OnInit, AfterViewInit {
    * But they must all have finished their task
    */
   public checkGridRowTimers(): void {
-    const grid_image_row_timer: number[] = this.grid_image_row_timer;
+    const grid_image_row_timer = this.grid_image_row_timer;
     if (grid_image_row_timer.length <= 0) return;
     for (let i = 0; i < grid_image_row_timer.length; i++) {
       if (grid_image_row_timer[i] != null) {
@@ -157,9 +153,9 @@ export class PixGridComponent implements OnInit, AfterViewInit {
    * @private
    */
   private setInitialSizes(): void {
-    const gridWrapperElement = this.grid_wrapper.nativeElement as HTMLElement;
-    const gridBufferElement = this.grid_buffer.nativeElement as HTMLElement;
-    const gridInnerElement = this.grid_inner.nativeElement as HTMLElement;
+    const gridWrapperElement = this.grid_wrapper().nativeElement as HTMLElement;
+    const gridBufferElement = this.grid_buffer().nativeElement as HTMLElement;
+    const gridInnerElement = this.grid_inner().nativeElement as HTMLElement;
 
     // Cache computed styles and dimensions
     const gridBufferStyles = this.window.getComputedStyle(gridBufferElement);
@@ -215,18 +211,13 @@ export class PixGridComponent implements OnInit, AfterViewInit {
    * @private
    */
   private calculateWidthOfGridBufferElementViaWindowHeight(): number {
-    const grid_buffer_element: HTMLElement = this.grid_buffer.nativeElement;
+    const grid_buffer_element: HTMLElement = this.grid_buffer().nativeElement;
     const ui_wrapper_element: HTMLElement | null =
       this.document.getElementById('pix-grid-ui');
     const header_element: HTMLElement | null =
       this.document.getElementById('main-navbar');
 
-    if (
-      header_element == null ||
-      undefined ||
-      ui_wrapper_element == null ||
-      undefined
-    )
+    if (header_element == null || ui_wrapper_element == null)
       return grid_buffer_element.offsetWidth;
 
     const padding_top: number = parseInt(
@@ -244,8 +235,8 @@ export class PixGridComponent implements OnInit, AfterViewInit {
     const relative_grid_wrapper_height: number =
       window_inner_height * (1 - relative_ui_wrapper_height_per);
     const new_grid_buffer_width: number =
-      (relative_grid_wrapper_height / this.grid_image_height) *
-        this.grid_image_width -
+      (relative_grid_wrapper_height / this.grid_image_height()) *
+        this.grid_image_width() -
       padding_offset;
 
     grid_buffer_element.style.maxWidth = new_grid_buffer_width + 'px';

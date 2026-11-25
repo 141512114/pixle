@@ -1,10 +1,9 @@
 import {
   Component,
   ElementRef,
-  ViewChild,
+  viewChild,
   ViewEncapsulation,
 } from '@angular/core';
-import { CommonModule } from '@angular/common';
 import { AbstractHtmlElement } from '@abstract/abstract.html-element';
 import * as CookieService from '@abstract/composables/cookies';
 import { ThemeSwitcherComponent } from '../theme-switcher/theme-switcher.component';
@@ -14,12 +13,12 @@ import { ThemeSwitcherComponent } from '../theme-switcher/theme-switcher.compone
   selector: 'app-side-menu',
   templateUrl: './side-menu.component.html',
   styleUrls: ['./side-menu.component.scss'],
-  standalone: true,
-  imports: [CommonModule, ThemeSwitcherComponent],
+  imports: [ThemeSwitcherComponent],
 })
 export class SideMenuComponent extends AbstractHtmlElement {
   active: boolean = false;
-  @ViewChild('side_menu') public side_menu!: ElementRef;
+  public readonly side_menu =
+    viewChild.required<ElementRef<HTMLElement>>('side_menu');
 
   public clearAllCookies(): void {
     CookieService.deleteCookie('cookie_consent');

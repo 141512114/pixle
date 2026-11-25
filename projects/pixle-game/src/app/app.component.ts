@@ -1,12 +1,12 @@
 import {
-  ViewChild,
-  Component,
-  Inject,
-  OnInit,
   AfterViewInit,
+  Component,
+  DOCUMENT,
   ElementRef,
+  inject,
+  OnInit,
+  viewChild,
 } from '@angular/core';
-import { CommonModule, DOCUMENT } from '@angular/common';
 import { WINDOW } from '@typescript/window-injection.token';
 import { HelperFunctionsService } from '@abstract/services/helper-functions.service';
 import {
@@ -27,26 +27,20 @@ const COOLDOWN_TOUCH: number = 75;
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
-  standalone: true,
-  imports: [
-    CommonModule,
-    RouterOutlet,
-    FontAwesomeModule,
-    SideMenuComponent,
-  ],
+  imports: [RouterOutlet, FontAwesomeModule, SideMenuComponent],
 })
 export class AppComponent implements OnInit, AfterViewInit {
-  iconOpenSideMenu: IconDefinition = faGear;
-  iconCloseSideMenu: IconDefinition = faXmark;
-  iconHelpGuide: IconDefinition = faQuestionCircle;
-  isTouchTimer: any;
-  @ViewChild(SideMenuComponent) private sideMenuComponent!: SideMenuComponent;
-  @ViewChild('toggle_side_menu_btn') private toggle_side_menu_btn!: ElementRef;
+  readonly iconOpenSideMenu: IconDefinition = faGear;
+  readonly iconCloseSideMenu: IconDefinition = faXmark;
+  readonly iconHelpGuide: IconDefinition = faQuestionCircle;
+  isTouchTimer: number = -1;
+  private readonly sideMenuComponent = viewChild.required(SideMenuComponent);
+  private readonly toggle_side_menu_btn =
+    viewChild.required<ElementRef<HTMLElement>>('toggle_side_menu_btn');
+  private readonly document = inject(DOCUMENT);
+  private readonly window = inject(WINDOW);
 
-  constructor(
-    @Inject(DOCUMENT) private document: Document,
-    @Inject(WINDOW) private readonly window: Window,
-  ) {
+  constructor() {
     this.addViewportHeightProperty();
   }
 
@@ -86,27 +80,23 @@ export class AppComponent implements OnInit, AfterViewInit {
    * Toggle (open or close) the side menu
    */
   public toggleSideMenu(): void {
-    const sideMenuElement = this.sideMenuComponent.side_menu
-      .nativeElement as HTMLElement;
-    const toggleSideMenuElement = this.toggle_side_menu_btn
-      .nativeElement as HTMLElement;
+    const sideMenuComponent = this.sideMenuComponent();
+    const sideMenuElement = sideMenuComponent.side_menu().nativeElement;
+    const toggleSideMenuElement = this.toggle_side_menu_btn().nativeElement;
     const showClass: string = 'toggle';
 
-    if (this.sideMenuComponent.active) {
-      this.sideMenuComponent.addClassToHTMLElement(sideMenuElement, 'close');
+    if (sideMenuComponent.active) {
+      sideMenuComponent.addClassToHTMLElement(sideMenuElement, 'close');
       if (toggleSideMenuElement.classList.contains(showClass)) {
         toggleSideMenuElement.classList.remove(showClass);
       }
     } else {
-      this.sideMenuComponent.removeClassFromHTMLElement(
-        sideMenuElement,
-        'close',
-      );
+      sideMenuComponent.removeClassFromHTMLElement(sideMenuElement, 'close');
       if (!toggleSideMenuElement.classList.contains(showClass)) {
         toggleSideMenuElement.classList.add(showClass);
       }
     }
-    this.sideMenuComponent.active = !this.sideMenuComponent.active;
+    sideMenuComponent.active = !sideMenuComponent.active;
   }
 
   /**
@@ -142,7 +132,7 @@ export class AppComponent implements OnInit, AfterViewInit {
    */
   private addTouchClass(): void {
     this.window.clearTimeout(this.isTouchTimer);
-    const bodyElement = this.document.body as HTMLElement;
+    const bodyElement = this.document.body;
     if (
       this.hasTouch() === false ||
       bodyElement.classList.contains('startTouch')
@@ -157,8 +147,8 @@ export class AppComponent implements OnInit, AfterViewInit {
    * @private
    */
   private removeTouchClass(): void {
-    this.isTouchTimer = setTimeout(() => {
-      const bodyElement = this.document.body as HTMLElement;
+    this.isTouchTimer = this.window.setTimeout(() => {
+      const bodyElement = this.document.body;
       if (!bodyElement.classList.contains('startTouch')) return;
       bodyElement.classList.remove('startTouch');
     }, COOLDOWN_TOUCH);

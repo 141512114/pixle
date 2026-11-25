@@ -1,16 +1,13 @@
-import { Component, Inject } from '@angular/core';
-import { DOCUMENT, CommonModule } from '@angular/common';
+import { Component, DOCUMENT, inject } from '@angular/core';
 import * as CookieService from '@abstract/composables/cookies';
 
 @Component({
   selector: 'app-theme-switcher',
   templateUrl: './theme-switcher.component.html',
-  styleUrls: [],
-  standalone: true,
-  imports: [CommonModule],
 })
 export class ThemeSwitcherComponent {
-  constructor(@Inject(DOCUMENT) private document: Document) {}
+  readonly themes: string[] = ['Neo', 'Vibe', 'Pop', 'Volcano', 'Cold', 'Troll'];
+  private readonly document = inject(DOCUMENT);
 
   /**
    * Change theme of the game

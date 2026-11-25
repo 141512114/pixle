@@ -1,14 +1,15 @@
 import {
   AfterViewInit,
   Component,
+  DOCUMENT,
   ElementRef,
-  Inject,
+  inject,
   OnInit,
-  ViewChild,
+  viewChild,
   ViewEncapsulation,
 } from '@angular/core';
+import { toSignal } from '@angular/core/rxjs-interop';
 import * as CookieService from '@abstract/composables/cookies';
-import { DOCUMENT, CommonModule } from '@angular/common';
 import {
   faGear,
   faXmark,
@@ -34,9 +35,7 @@ const COOKIE_NOTIF_MSG: IPopUp = {
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
-  standalone: true,
   imports: [
-    CommonModule,
     RouterOutlet,
     SideMenuComponent,
     PopupMessageComponent,
@@ -44,19 +43,19 @@ const COOKIE_NOTIF_MSG: IPopUp = {
   ],
 })
 export class AppComponent implements OnInit, AfterViewInit {
-  cookie_consent: boolean = false;
-  iconOpenSideMenu: IconDefinition = faGear;
-  iconCloseSideMenu: IconDefinition = faXmark;
-  @ViewChild(SideMenuComponent) private sideMenuComponent!: SideMenuComponent;
-  @ViewChild('cookie_alert') private cookie_alert!: PopupMessageComponent;
-  @ViewChild('cookie_alert_html') private cookie_alert_html!: ElementRef;
-  @ViewChild('toggle_side_menu_btn') private toggle_side_menu_btn!: ElementRef;
-
-  constructor(@Inject(DOCUMENT) private document: Document) {
-    CookieService.cookie_consent.subscribe((value) => {
-      this.cookie_consent = value;
-    });
-  }
+  readonly cookie_consent = toSignal(CookieService.cookie_consent, {
+    requireSync: true,
+  });
+  readonly iconOpenSideMenu: IconDefinition = faGear;
+  readonly iconCloseSideMenu: IconDefinition = faXmark;
+  private readonly sideMenuComponent = viewChild.required(SideMenuComponent);
+  private readonly cookie_alert =
+    viewChild.required<PopupMessageComponent>('cookie_alert');
+  private readonly cookie_alert_html =
+    viewChild.required<ElementRef<HTMLElement>>('cookie_alert_html');
+  private readonly toggle_side_menu_btn =
+    viewChild.required<ElementRef<HTMLElement>>('toggle_side_menu_btn');
+  private readonly document = inject(DOCUMENT);
 
   ngOnInit() {
     // Check if the consent to cookie usage has been given
@@ -78,7 +77,7 @@ export class AppComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit() {
-    if (!this.cookie_consent) this.sendCookieAlert(COOKIE_NOTIF_MSG);
+    if (!this.cookie_consent()) this.sendCookieAlert(COOKIE_NOTIF_MSG);
   }
 
   /**
@@ -98,7 +97,7 @@ export class AppComponent implements OnInit, AfterViewInit {
    * @param msg_object
    */
   public sendCookieAlert(msg_object: IPopUp): void {
-    const popupMsg: PopupMessageComponent = this.cookie_alert;
+    const popupMsg: PopupMessageComponent = this.cookie_alert();
     popupMsg.writeNewMessage(msg_object);
     popupMsg.openPopup();
     this.openCookieAlert();
@@ -109,19 +108,18 @@ export class AppComponent implements OnInit, AfterViewInit {
    * Toggle (open or close) the side menu
    */
   public toggleSideMenu(): void {
-    const sideMenuElement = this.sideMenuComponent.side_menu
-      .nativeElement as HTMLElement;
-    const toggleSideMenuElement = this.toggle_side_menu_btn
-      .nativeElement as HTMLElement;
+    const sideMenuComponent = this.sideMenuComponent();
+    const sideMenuElement = sideMenuComponent.side_menu().nativeElement;
+    const toggleSideMenuElement = this.toggle_side_menu_btn().nativeElement;
     const showClass: string = 'toggle';
 
-    if (this.sideMenuComponent.active) {
-      this.sideMenuComponent.addClassToHTMLElement(sideMenuElement, 'close');
+    if (sideMenuComponent.active) {
+      sideMenuComponent.addClassToHTMLElement(sideMenuElement, 'close');
       if (toggleSideMenuElement.classList.contains(showClass)) {
         toggleSideMenuElement.classList.remove(showClass);
       }
     } else {
-      this.sideMenuComponent.removeClassFromHTMLElement(
+      sideMenuComponent.removeClassFromHTMLElement(
         sideMenuElement,
         'close',
       );
@@ -129,7 +127,7 @@ export class AppComponent implements OnInit, AfterViewInit {
         toggleSideMenuElement.classList.add(showClass);
       }
     }
-    this.sideMenuComponent.active = !this.sideMenuComponent.active;
+    sideMenuComponent.active = !sideMenuComponent.active;
   }
 
   /**
@@ -155,7 +153,7 @@ export class AppComponent implements OnInit, AfterViewInit {
    * @private
    */
   private openCookieAlert(): void {
-    const element = this.cookie_alert_html.nativeElement as HTMLElement;
+    const element = this.cookie_alert_html().nativeElement;
     if (!element.classList.contains('close')) return;
     element.classList.remove('close');
   }
@@ -166,7 +164,7 @@ export class AppComponent implements OnInit, AfterViewInit {
    * @private
    */
   private closeCookieAlert(): void {
-    const element = this.cookie_alert_html.nativeElement as HTMLElement;
+    const element = this.cookie_alert_html().nativeElement;
     if (element.classList.contains('close')) return;
     element.classList.add('close');
   }
