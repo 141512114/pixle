@@ -59,6 +59,11 @@ section#welcome {
 }
 
 section#about {
+  // Keeps the guide clear of the fixed navbar when scrolling to it
+  #how-to-play {
+    scroll-margin-top: 70px;
+  }
+
   .about-sections {
     margin-bottom: 5rem;
 
