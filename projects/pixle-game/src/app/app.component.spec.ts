@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { AppComponent } from './app.component';
 import { appConfig } from './app.config';
 import { PixGameComponent } from './pix-game/pix-game.component';
+import { GameManager } from './pix-game/game.manager';
 
 describe('AppComponent (game)', () => {
   beforeEach(async () => {
@@ -54,5 +55,18 @@ describe('AppComponent (game)', () => {
     expect(before).toBeDefined();
     expect(after).toBeDefined();
     expect(after).not.toBe(before);
+  });
+
+  it('shows the difficulty below the title once known', async () => {
+    GameManager.difficulty.set(0);
+    const fixture = TestBed.createComponent(AppComponent);
+    await fixture.whenStable();
+    expect(fixture.nativeElement.querySelector('.game-difficulty')).toBeNull();
+
+    GameManager.difficulty.set(3);
+    await fixture.whenStable();
+    expect(fixture.nativeElement.querySelector('.game-difficulty').textContent.trim()).toBe(
+      'Difficulty ●●●○○○○',
+    );
   });
 });
