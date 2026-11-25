@@ -31,7 +31,6 @@
             "inlineStyleLanguage": "scss",
             "assets": [
               "projects/pixle-game/src/.htaccess",
-              "projects/pixle-game/src/analytics",
               "projects/pixle-game/src/assets",
               {
                 "glob": "**/*",
@@ -110,7 +109,6 @@
             "inlineStyleLanguage": "scss",
             "assets": [
               "projects/pixle-game/src/.htaccess",
-              "projects/pixle-game/src/analytics",
               "projects/pixle-game/src/assets",
               {
                 "glob": "**/*",
