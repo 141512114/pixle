@@ -14,7 +14,7 @@ from getting discouraged. Mutation must therefore produce **new but structured**
 
 - New pictures every day, built by recombining and recolouring the existing patterns.
 - Difficulty rises over the week: Monday is easiest, Sunday hardest.
-- Players can see the day's difficulty in the game and in the shared result.
+- Players can see the day's difficulty in the shared result.
 - Same day → same puzzle for every player (deterministic from the date, as today).
 
 ## Non-goals
@@ -70,8 +70,9 @@ The owner picked approach 1.
   | Sat | 6 | combined + two areas recoloured, prefers 4–5 emojis |
   | Sun | 7 | combined, several recolourings, always 5 emojis |
 
-- Difficulty is shown below the title as dots, e.g. `Difficulty ●●●●●○○`, and appended to the details line
-  of the shared result (today `412/5/5`), e.g. `412/5/5 · ●●●●●○○`.
+- Difficulty is appended as dots to the details line of the shared result (today `412/5/5`), e.g.
+  `412/5/5 · ●●●●●○○`. A header indicator below the title was built and then removed at the owner's
+  request after seeing it in the browser.
 
 ## Rules for every mutated pattern (levels 2–7)
 
@@ -118,7 +119,7 @@ Level 1 returns the original pattern untouched (originals stay as designed).
 - `pixle-generator/pattern-mutations.ts`: the pure operations and the validator.
 - `pixle-generator/difficulty.ts`: weekday → level table.
 - `pixle-generator.ts`: uses both; the seeded random function is passed into the operations.
-- `GameManager` keeps the difficulty; the game header shows it; `generateShareMessage` appends it.
+- `GameManager` keeps the difficulty; `generateShareMessage` appends it.
 
 ## Testing
 
@@ -133,10 +134,9 @@ Level 1 returns the original pattern untouched (originals stay as designed).
 
 - Placeholder limits, 20 attempts, fallback per level. (The shape rule was revised with the owner.)
 - Level 6/7 restricted to base patterns of at least 4×4.
-- Difficulty stored in `IPixle.difficulty`; indicator placed below the `Pixle` title in the game header.
+- Difficulty stored in `IPixle.difficulty`.
 
 ## Left to the builder
 
 - Exact split strategies and probabilities inside `combine` and `recolour`.
-- The dot characters and styling of the difficulty indicator, as long as it reads as 1–7 of 7.
 - Whether the level table holds parameters (counts, probabilities) or a list of operations.

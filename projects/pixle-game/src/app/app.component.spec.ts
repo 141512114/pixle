@@ -57,16 +57,10 @@ describe('AppComponent (game)', () => {
     expect(after).not.toBe(before);
   });
 
-  it('shows the difficulty below the title once known', async () => {
-    GameManager.difficulty.set(0);
+  it('does not show the difficulty in the header', async () => {
+    GameManager.difficulty.set(3);
     const fixture = TestBed.createComponent(AppComponent);
     await fixture.whenStable();
-    expect(fixture.nativeElement.querySelector('.game-difficulty')).toBeNull();
-
-    GameManager.difficulty.set(3);
-    await fixture.whenStable();
-    expect(fixture.nativeElement.querySelector('.game-difficulty').textContent.trim()).toBe(
-      'Difficulty ●●●○○○○',
-    );
+    expect(fixture.nativeElement.textContent).not.toContain('Difficulty');
   });
 });

@@ -5,7 +5,6 @@ import {
   ElementRef,
   inject,
   OnInit,
-  computed,
   viewChild,
 } from '@angular/core';
 import { WINDOW } from '@typescript/window-injection.token';
@@ -18,8 +17,6 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 import { SideMenuComponent } from '@typescript/side-menu/side-menu.component';
 import { PIXLE_LINKS } from '@typescript/pixle-links';
-import { GameManager } from './pix-game/game.manager';
-import { difficultyDots } from './pix-game/pixle-generator/difficulty';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { RouterOutlet } from '@angular/router';
 
@@ -35,8 +32,6 @@ const COOLDOWN_TOUCH: number = 75;
 })
 export class AppComponent implements OnInit, AfterViewInit {
   readonly links = PIXLE_LINKS;
-  readonly difficulty = GameManager.difficulty;
-  readonly difficulty_dots = computed(() => difficultyDots(this.difficulty()));
   readonly iconOpenSideMenu: IconDefinition = faGear;
   readonly iconCloseSideMenu: IconDefinition = faXmark;
   readonly iconHelpGuide: IconDefinition = faQuestionCircle;
