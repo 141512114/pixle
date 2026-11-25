@@ -10,7 +10,6 @@ import { IPopUp } from '@interface/popup-message.interface';
 
 const DEFAULT_MSG: IPopUp = {
   headline: "Hmm..., this isn't supposed to be shown already...",
-  subline: '',
   message_body: 'Did you try something??',
 };
 

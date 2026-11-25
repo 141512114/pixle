@@ -47,6 +47,27 @@ export class AppComponent {
     for (const event of ['mouseover', 'touchend', 'touchcancel']) {
       this.window.addEventListener(event, () => this.removeTouchClass(), passive);
     }
+
+    // Browsers without dvh: provide the visible viewport height as --vh (see styles.scss),
+    // otherwise 100vh lets the browser bars cover the game on small displays
+    const supportsDvh =
+      typeof CSS !== 'undefined' &&
+      typeof CSS.supports === 'function' &&
+      CSS.supports('height', '100dvh');
+    if (!supportsDvh) {
+      this.setViewportHeightProperty();
+      this.window.addEventListener('resize', () => this.setViewportHeightProperty(), passive);
+    }
+  }
+
+  /**
+   * Store 1% of the visible viewport height in the css variable --vh
+   */
+  private setViewportHeightProperty(): void {
+    this.document.documentElement.style.setProperty(
+      '--vh',
+      `${this.window.innerHeight * 0.01}px`,
+    );
   }
 
   // noinspection DuplicatedCode

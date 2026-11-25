@@ -28,7 +28,6 @@ import { PixGridElementComponent } from '../pix-grid-element/pix-grid-element.co
 // Cookie notification
 const COOKIE_NOTIF_MSG: IPopUp = {
   headline: 'Cookie alert!',
-  subline: '',
   message_body:
     'We are required to inform you about the usage of cookies on our web application. These are required' +
     ' and used to store information about the current match and applied game settings. Closing this notification means you agree with the usage of cookies.',

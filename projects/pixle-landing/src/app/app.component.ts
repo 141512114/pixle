@@ -29,7 +29,6 @@ import { getPixleCountdown } from './pixle-countdown';
 // Cookie notification
 const COOKIE_NOTIF_MSG: IPopUp = {
   headline: 'Cookie alert!',
-  subline: '',
   message_body:
     'We are required to inform you about the usage of cookies on our website. These are required' +
     ' and used in order to save applied settings. Closing this notification means you agree with the usage of cookies.',
